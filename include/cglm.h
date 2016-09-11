@@ -13,7 +13,7 @@
 typedef float vec3[3];
 typedef float vec4[4];
 
-typedef float mat3[3];
+typedef vec3 mat3[3];
 typedef vec4 mat4[4];
 
 CGLM_INLINE
