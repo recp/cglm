@@ -44,6 +44,8 @@ glm_translate_z(mat4 m, float to) {
   m[3][2] += to;
 }
 
+/* move */
+
 CGLM_INLINE
 void
 glm_move(mat4 m, vec3 v) {
@@ -66,8 +68,26 @@ glm_move_y(mat4 m, float to) {
 
 CGLM_INLINE
 void
-glm_tmove_z(mat4 m, float to) {
+glm_move_z(mat4 m, float to) {
   m[3][2] = to;
+}
+
+/* scale */
+
+CGLM_INLINE
+void
+glm_scale(mat4 m, vec3 v, mat4 dest) {
+  dest[0][0] = m[0][0] * v[0];
+  dest[1][1] = m[1][1] * v[1];
+  dest[2][2] = m[2][2] * v[2];
+}
+
+CGLM_INLINE
+void
+glm_scale_self(mat4 m, vec3 v) {
+  m[0][0] *= v[0];
+  m[1][1] *= v[1];
+  m[2][2] *= v[2];
 }
 
 #endif /* cglm_affine_h */
