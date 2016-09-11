@@ -10,6 +10,7 @@
 
 #include "cglm.h"
 #include "cglm-mat-simd.h"
+#include <assert.h>
 
 #define GLM_MAT_IDENTITY_4F {1.0f, 0.0f, 0.0f, 0.0f,                          \
                              0.0f, 1.0f, 0.0f, 0.0f,                          \
@@ -62,6 +63,23 @@ glm_mat_mul4(mat4 m1, mat4 m2, mat4 dest) {
     glm_mat_mul4_impl(l, l, d);
 #endif
   }
+}
+
+CGLM_INLINE
+void
+glm_mat_mul4N(mat4 * __restrict matrices[], int len, mat4 dest) {
+  int i;
+
+  assert(len > 1 && "there must be least 2 matrices to go!");
+
+  glm_mat_mul4(*matrices[0],
+               *matrices[1],
+               dest);
+
+  for (i = 2; i < len; i++)
+    glm_mat_mul4(dest,
+                 *matrices[i],
+                 dest);
 }
 
 #endif /* cglm_mat_h */
