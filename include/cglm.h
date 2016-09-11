@@ -14,13 +14,13 @@ typedef float vec3[3];
 typedef float vec4[4];
 
 typedef float mat3[3];
-typedef float mat4[16];
+typedef vec4 mat4[4];
 
 CGLM_INLINE
 void
-glm_mat_mul4(float * __restrict m1,
-             float * __restrict m2,
-             float * __restrict dest);
+glm_mat_mul4(mat4 m1,
+             mat4 m2,
+             mat4 dest);
 
 #include "cglm-vec.h"
 #include "cglm-mat.h"

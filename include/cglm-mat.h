@@ -33,14 +33,30 @@
 
 CGLM_INLINE
 void
-glm_mat_mul4(float * __restrict m1,
-             float * __restrict m2,
-             float * __restrict dest) {
+glm_mat_mul4(mat4 m1, mat4 m2, mat4 dest) {
+  float * __restrict d;
+  float * __restrict l;
+
+  d = (float *)dest;
+  l = (float *)m1;
+
+  if (m1 != m2) {
+    float * __restrict r;
+
+    r = (float *)m2;
+
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  CGLM_MAT_MUL_SSE_4x4f(m1, m2, dest);
+    CGLM_MAT_MUL_SSE_4x4f(l, r, d);
 #else
-  glm_mat_mul4_impl(m1, m2, dest);
+    glm_mat_mul4_impl(l, r, d);
 #endif
+  } else {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+    CGLM_MAT_MUL_SSE_4x4f(l, l, d);
+#else
+    glm_mat_mul4_impl(l, l, d);
+#endif
+  }
 }
 
 #endif /* cglm_mat_h */
