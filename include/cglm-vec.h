@@ -54,4 +54,29 @@ glm_vec_normalize(vec3 vec, vec3 dest) {
   dest[2] = vec[2] / norm;
 }
 
+CGLM_INLINE
+void
+glm_vec_normalize_self(vec3 v) {
+  float norm;
+
+  norm = glm_vec_norm(v);
+
+  if (norm == 0.0f) {
+    v[0] = v[1] = v[2] = 0.0f;
+    return;
+  }
+
+  v[0] = v[0] / norm;
+  v[1] = v[1] / norm;
+  v[2] = v[2] / norm;
+}
+
+CGLM_INLINE
+void
+glm_vec_sub3(vec3 v1, vec3 v2, vec3 dest) {
+  dest[0] = v1[0] - v2[0];
+  dest[1] = v1[1] - v2[1];
+  dest[2] = v1[2] - v2[2];
+}
+
 #endif /* cglm_vec_h */
