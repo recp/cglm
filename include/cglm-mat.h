@@ -11,6 +11,11 @@
 #include "cglm.h"
 #include "cglm-mat-simd.h"
 
+#define GLM_MAT_IDENTITY_4F {1.0f, 0.0f, 0.0f, 0.0f,                          \
+                             0.0f, 1.0f, 0.0f, 0.0f,                          \
+                             0.0f, 0.0f, 1.0f, 0.0f,                          \
+                             0.0f, 0.0f, 0.0f, 1.0f}
+
 #define glm_mat_mul4_impl(l, r, d)                                            \
  do {                                                                         \
     d[0]  = l[0]  * r[0] + l[1]  * r[4] + l[2]  * r[8]  + l[3]  * r[12];      \
