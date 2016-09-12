@@ -90,4 +90,12 @@ glm_scale_self(mat4 m, vec3 v) {
   m[2][2] *= v[2];
 }
 
+CGLM_INLINE
+void
+glm_scale1_self(mat4 m, float s) {
+  m[0][0] *= s;
+  m[1][1] *= s;
+  m[2][2] *= s;
+}
+
 #endif /* cglm_affine_h */
