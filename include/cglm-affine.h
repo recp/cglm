@@ -12,71 +12,68 @@
 
 CGLM_INLINE
 void
-glm_translate(mat4 m, vec3 v, mat4 dest) {
-  dest[3][0] = m[3][0] + v[0];
-  dest[3][1] = m[3][1] + v[1];
-  dest[3][2] = m[3][2] + v[2];
+glm_translate_to(mat4 m, vec3 v, mat4 dest) {
+  vec3 v1;
+  vec3 v2;
+  vec3 v3;
+  mat4 t = GLM_MAT_IDENTITY_4F;
+
+  glm_vec_scale(t[0], v[0], v1);
+  glm_vec_scale(t[1], v[1], v2);
+  glm_vec_scale(t[2], v[2], v3);
+
+  glm_vec_add(v1, t[3], t[3]);
+  glm_vec_add(v2, t[3], t[3]);
+  glm_vec_add(v3, t[3], t[3]);
+
+  glm__memcpy(float, dest, t, sizeof(mat4));
 }
 
 CGLM_INLINE
 void
-glm_translate_self(mat4 m, vec3 v) {
-  m[3][0] += v[0];
-  m[3][1] += v[1];
-  m[3][2] += v[2];
+glm_translate(mat4 m, vec3 v) {
+  vec3 v1;
+  vec3 v2;
+  vec3 v3;
+
+  glm_vec_scale(m[0], v[0], v1);
+  glm_vec_scale(m[1], v[1], v2);
+  glm_vec_scale(m[2], v[2], v3);
+
+  glm_vec_add(v1, m[3], m[3]);
+  glm_vec_add(v2, m[3], m[3]);
+  glm_vec_add(v3, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_x(mat4 m, float to) {
-  m[3][0] += to;
+  vec3 v1;
+  glm_vec_scale(m[0], to, v1);
+  glm_vec_add(v1, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_y(mat4 m, float to) {
-  m[3][1] += to;
+  vec3 v1;
+  glm_vec_scale(m[1], to, v1);
+  glm_vec_add(v1, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_z(mat4 m, float to) {
-  m[3][2] += to;
-}
-
-/* move */
-
-CGLM_INLINE
-void
-glm_move(mat4 m, vec3 v) {
-  m[3][0] = v[0];
-  m[3][1] = v[1];
-  m[3][2] = v[2];
-}
-
-CGLM_INLINE
-void
-glm_move_x(mat4 m, float to) {
-  m[3][0] = to;
-}
-
-CGLM_INLINE
-void
-glm_move_y(mat4 m, float to) {
-  m[3][1] = to;
-}
-
-CGLM_INLINE
-void
-glm_move_z(mat4 m, float to) {
-  m[3][2] = to;
+  vec3 v1;
+  glm_vec_scale(m[2], to, v1);
+  glm_vec_add(v1, m[3], m[3]);
 }
 
 /* scale */
 
 CGLM_INLINE
 void
-glm_scale(mat4 m, vec3 v, mat4 dest) {
+glm_scale_to(mat4 m, vec3 v, mat4 dest) {
   dest[0][0] = m[0][0] * v[0];
   dest[1][1] = m[1][1] * v[1];
   dest[2][2] = m[2][2] * v[2];
@@ -84,7 +81,7 @@ glm_scale(mat4 m, vec3 v, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_scale_self(mat4 m, vec3 v) {
+glm_scale(mat4 m, vec3 v) {
   m[0][0] *= v[0];
   m[1][1] *= v[1];
   m[2][2] *= v[2];
@@ -92,7 +89,7 @@ glm_scale_self(mat4 m, vec3 v) {
 
 CGLM_INLINE
 void
-glm_scale1_self(mat4 m, float s) {
+glm_scale1(mat4 m, float s) {
   m[0][0] *= s;
   m[1][1] *= s;
   m[2][2] *= s;
