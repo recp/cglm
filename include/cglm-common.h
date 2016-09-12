@@ -16,15 +16,15 @@
 #  define CGLM_INLINE static inline __attribute((always_inline))
 #endif
 
-#define glm__memcpy(dest, src, size)                                          \
+#define glm__memcpy(type, dest, src, size)                                    \
   do {                                                                        \
-    int32_t *srci;                                                            \
-    int32_t *srci_end;                                                        \
-    int32_t *desti;                                                           \
+    type *srci;                                                               \
+    type *srci_end;                                                           \
+    type *desti;                                                              \
                                                                               \
-    srci     = (int32_t *)src;                                                \
-    srci_end = (int32_t *)((char *)srci + size);                              \
-    desti    = (int32_t *)dest;                                               \
+    srci     = (type *)src;                                                   \
+    srci_end = (type *)((char *)srci + size);                                 \
+    desti    = (type *)dest;                                                  \
                                                                               \
     while (srci != srci_end)                                                  \
       *desti++ = *srci++;                                                     \
