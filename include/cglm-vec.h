@@ -11,6 +11,23 @@
 #include "cglm.h"
 
 CGLM_INLINE
+void
+glm_vec_dup(vec3 a, vec3 dest) {
+  dest[0] = a[0];
+  dest[1] = a[1];
+  dest[2] = a[2];
+}
+
+CGLM_INLINE
+void
+glm_vec_dup4(vec4 a, vec4 dest) {
+  dest[0] = a[0];
+  dest[1] = a[1];
+  dest[2] = a[2];
+  dest[3] = a[3];
+}
+
+CGLM_INLINE
 float
 glm_vec_dot(vec3 a, vec3 b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];

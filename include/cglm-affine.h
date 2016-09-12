@@ -74,25 +74,23 @@ glm_translate_z(mat4 m, float to) {
 CGLM_INLINE
 void
 glm_scale_to(mat4 m, vec3 v, mat4 dest) {
-  dest[0][0] = m[0][0] * v[0];
-  dest[1][1] = m[1][1] * v[1];
-  dest[2][2] = m[2][2] * v[2];
+  glm_vec_scale(m[0], v[0], dest[0]);
+  glm_vec_scale(m[1], v[1], dest[1]);
+  glm_vec_scale(m[2], v[2], dest[2]);
+
+  glm_vec_dup(m[3], dest[3]);
 }
 
 CGLM_INLINE
 void
 glm_scale(mat4 m, vec3 v) {
-  m[0][0] *= v[0];
-  m[1][1] *= v[1];
-  m[2][2] *= v[2];
+  glm_scale_to(m, v, m);
 }
 
 CGLM_INLINE
 void
 glm_scale1(mat4 m, float s) {
-  m[0][0] *= s;
-  m[1][1] *= s;
-  m[2][2] *= s;
+  glm_scale_to(m, (vec3){s, s, s}, m);
 }
 
 CGLM_INLINE
