@@ -18,13 +18,13 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
   vec3 v3;
   mat4 t = GLM_MAT_IDENTITY_4F;
 
-  glm_vec_scale(t[0], v[0], v1);
-  glm_vec_scale(t[1], v[1], v2);
-  glm_vec_scale(t[2], v[2], v3);
+  glm_vec_scale4(t[0], v[0], v1);
+  glm_vec_scale4(t[1], v[1], v2);
+  glm_vec_scale4(t[2], v[2], v3);
 
-  glm_vec_add(v1, t[3], t[3]);
-  glm_vec_add(v2, t[3], t[3]);
-  glm_vec_add(v3, t[3], t[3]);
+  glm_vec_add4(v1, t[3], t[3]);
+  glm_vec_add4(v2, t[3], t[3]);
+  glm_vec_add4(v3, t[3], t[3]);
 
   glm__memcpy(float, dest, t, sizeof(mat4));
 }
@@ -36,37 +36,37 @@ glm_translate(mat4 m, vec3 v) {
   vec3 v2;
   vec3 v3;
 
-  glm_vec_scale(m[0], v[0], v1);
-  glm_vec_scale(m[1], v[1], v2);
-  glm_vec_scale(m[2], v[2], v3);
+  glm_vec_scale4(m[0], v[0], v1);
+  glm_vec_scale4(m[1], v[1], v2);
+  glm_vec_scale4(m[2], v[2], v3);
 
-  glm_vec_add(v1, m[3], m[3]);
-  glm_vec_add(v2, m[3], m[3]);
-  glm_vec_add(v3, m[3], m[3]);
+  glm_vec_add4(v1, m[3], m[3]);
+  glm_vec_add4(v2, m[3], m[3]);
+  glm_vec_add4(v3, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_x(mat4 m, float to) {
   vec3 v1;
-  glm_vec_scale(m[0], to, v1);
-  glm_vec_add(v1, m[3], m[3]);
+  glm_vec_scale4(m[0], to, v1);
+  glm_vec_add4(v1, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_y(mat4 m, float to) {
   vec3 v1;
-  glm_vec_scale(m[1], to, v1);
-  glm_vec_add(v1, m[3], m[3]);
+  glm_vec_scale4(m[1], to, v1);
+  glm_vec_add4(v1, m[3], m[3]);
 }
 
 CGLM_INLINE
 void
 glm_translate_z(mat4 m, float to) {
   vec3 v1;
-  glm_vec_scale(m[2], to, v1);
-  glm_vec_add(v1, m[3], m[3]);
+  glm_vec_scale4(m[2], to, v1);
+  glm_vec_add4(v1, m[3], m[3]);
 }
 
 /* scale */
@@ -74,11 +74,11 @@ glm_translate_z(mat4 m, float to) {
 CGLM_INLINE
 void
 glm_scale_to(mat4 m, vec3 v, mat4 dest) {
-  glm_vec_scale(m[0], v[0], dest[0]);
-  glm_vec_scale(m[1], v[1], dest[1]);
-  glm_vec_scale(m[2], v[2], dest[2]);
+  glm_vec_scale4(m[0], v[0], dest[0]);
+  glm_vec_scale4(m[1], v[1], dest[1]);
+  glm_vec_scale4(m[2], v[2], dest[2]);
 
-  glm_vec_dup(m[3], dest[3]);
+  glm_vec_dup4(m[3], dest[3]);
 }
 
 CGLM_INLINE
