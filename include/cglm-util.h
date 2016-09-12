@@ -26,7 +26,7 @@ glm_mat4_print(mat4   matrix,
 
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++)
-      fprintf(ostream, "\t%0.2f,", matrix[i][j]);;
+      fprintf(ostream, "\t%0.2f,", matrix[j][i]);;
 
     fprintf(ostream, "\n");
   }
