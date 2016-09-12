@@ -73,10 +73,59 @@ glm_vec_normalize_self(vec3 v) {
 
 CGLM_INLINE
 void
-glm_vec_sub3(vec3 v1, vec3 v2, vec3 dest) {
+glm_vec_add(vec3 v1, vec3 v2, vec3 dest) {
+  dest[0] = v1[0] + v2[0];
+  dest[1] = v1[1] + v2[1];
+  dest[2] = v1[2] + v2[2];
+}
+
+CGLM_INLINE
+void
+glm_vec_add4(vec4 v1, vec4 v2, vec4 dest) {
+  dest[0] = v1[0] + v2[0];
+  dest[1] = v1[1] + v2[1];
+  dest[2] = v1[2] + v2[2];
+  dest[3] = v1[3] + v2[3];
+}
+
+CGLM_INLINE
+void
+glm_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
   dest[0] = v1[0] - v2[0];
   dest[1] = v1[1] - v2[1];
   dest[2] = v1[2] - v2[2];
+}
+
+CGLM_INLINE
+void
+glm_vec_sub4(vec4 v1, vec4 v2, vec4 dest) {
+  dest[0] = v1[0] - v2[0];
+  dest[1] = v1[1] - v2[1];
+  dest[2] = v1[2] - v2[2];
+  dest[3] = v1[3] - v2[3];
+}
+
+CGLM_INLINE
+void
+glm_vec_scale(vec3 v, float s, vec3 dest) {
+  dest[0] = v[0] * s;
+  dest[1] = v[1] * s;
+  dest[2] = v[2] * s;
+}
+
+CGLM_INLINE
+void
+glm_vec_scale4(vec3 v, float s, vec3 dest) {
+  dest[0] = v[0] * s;
+  dest[1] = v[1] * s;
+  dest[2] = v[2] * s;
+  dest[3] = v[3] * s;
+}
+
+CGLM_INLINE
+void
+glm_vec_addvN(vec3 * __restrict vecs[], int len, vec3 dest) {
+  /* TODO: */
 }
 
 #endif /* cglm_vec_h */
