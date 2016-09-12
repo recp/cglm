@@ -56,7 +56,7 @@ glm_vec_norm(vec3 vec) {
 
 CGLM_INLINE
 void
-glm_vec_normalize(vec3 vec, vec3 dest) {
+glm_vec_normalize_to(vec3 vec, vec3 dest) {
   float norm;
 
   norm = glm_vec_norm(vec);
@@ -73,7 +73,7 @@ glm_vec_normalize(vec3 vec, vec3 dest) {
 
 CGLM_INLINE
 void
-glm_vec_normalize_self(vec3 v) {
+glm_vec_normalize(vec3 v) {
   float norm;
 
   norm = glm_vec_norm(v);

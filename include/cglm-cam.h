@@ -19,10 +19,10 @@ glm_lookat(vec3 eye,
   vec3 f, u, s;
 
   glm_vec_sub(center, eye, f);
-  glm_vec_normalize_self(f);
+  glm_vec_normalize(f);
 
   glm_vec_cross(f, up, s);
-  glm_vec_normalize_self(s);
+  glm_vec_normalize(s);
 
   glm_vec_cross(s, f, u);
 
