@@ -10,6 +10,7 @@
 
 #include "cglm.h"
 #include "cglm-intrin.h"
+#include <math.h>
 
 CGLM_INLINE
 void
@@ -56,7 +57,7 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 CGLM_INLINE
 float
 glm_vec_norm(vec3 vec) {
-  return sqrt(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
+  return sqrtf(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
 }
 
 CGLM_INLINE

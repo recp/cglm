@@ -9,6 +9,8 @@
 #define cglm_affine_h
 
 #include "cglm.h"
+#include "cglm-vec.h"
+#include <math.h>
 
 CGLM_INLINE
 void
@@ -100,8 +102,8 @@ glm_rotate_x(mat4 m, float rad, mat4 dest) {
   float sinVal;
   mat4  t = GLM_MAT_IDENTITY_4F;
 
-  cosVal = cos(rad);
-  sinVal = sin(rad);
+  cosVal = cosf(rad);
+  sinVal = sinf(rad);
 
   t[1][1] =  cosVal;
   t[1][2] =  sinVal;
@@ -118,8 +120,8 @@ glm_rotate_y(mat4 m, float rad, mat4 dest) {
   float sinVal;
   mat4  t = GLM_MAT_IDENTITY_4F;
 
-  cosVal = cos(rad);
-  sinVal = sin(rad);
+  cosVal = cosf(rad);
+  sinVal = sinf(rad);
 
   t[0][0] =  cosVal;
   t[0][2] = -sinVal;
@@ -136,8 +138,8 @@ glm_rotate_z(mat4 m, float rad, mat4 dest) {
   float sinVal;
   mat4  t = GLM_MAT_IDENTITY_4F;
 
-  cosVal = cos(rad);
-  sinVal = sin(rad);
+  cosVal = cosf(rad);
+  sinVal = sinf(rad);
 
   t[0][0] =  cosVal;
   t[0][1] =  sinVal;
