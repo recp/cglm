@@ -13,9 +13,9 @@
 CGLM_INLINE
 void
 glm_translate_to(mat4 m, vec3 v, mat4 dest) {
-  vec3 v1;
-  vec3 v2;
-  vec3 v3;
+  vec4 v1;
+  vec4 v2;
+  vec4 v3;
   mat4 t = GLM_MAT_IDENTITY_4F;
 
   glm_vec_scale4(t[0], v[0], v1);
@@ -32,9 +32,9 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
 CGLM_INLINE
 void
 glm_translate(mat4 m, vec3 v) {
-  vec3 v1;
-  vec3 v2;
-  vec3 v3;
+  vec4 v1;
+  vec4 v2;
+  vec4 v3;
 
   glm_vec_scale4(m[0], v[0], v1);
   glm_vec_scale4(m[1], v[1], v2);
@@ -48,7 +48,7 @@ glm_translate(mat4 m, vec3 v) {
 CGLM_INLINE
 void
 glm_translate_x(mat4 m, float to) {
-  vec3 v1;
+  vec4 v1;
   glm_vec_scale4(m[0], to, v1);
   glm_vec_add4(v1, m[3], m[3]);
 }
@@ -56,7 +56,7 @@ glm_translate_x(mat4 m, float to) {
 CGLM_INLINE
 void
 glm_translate_y(mat4 m, float to) {
-  vec3 v1;
+  vec4 v1;
   glm_vec_scale4(m[1], to, v1);
   glm_vec_add4(v1, m[3], m[3]);
 }
@@ -64,7 +64,7 @@ glm_translate_y(mat4 m, float to) {
 CGLM_INLINE
 void
 glm_translate_z(mat4 m, float to) {
-  vec3 v1;
+  vec4 v1;
   glm_vec_scale4(m[2], to, v1);
   glm_vec_add4(v1, m[3], m[3]);
 }
