@@ -75,25 +75,49 @@ glm_translate(mat4 m, vec3 v) {
 CGLM_INLINE
 void
 glm_translate_x(mat4 m, float to) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(m[3],
+               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
+                                     _mm_set1_ps(to)),
+                          _mm_load_ps(m[3])))
+  ;
+#else
   vec4 v1;
   glm_vec4_scale(m[0], to, v1);
   glm_vec4_add(v1, m[3], m[3]);
+#endif
 }
 
 CGLM_INLINE
 void
 glm_translate_y(mat4 m, float to) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(m[3],
+               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[1]),
+                                     _mm_set1_ps(to)),
+                          _mm_load_ps(m[3])))
+  ;
+#else
   vec4 v1;
   glm_vec4_scale(m[1], to, v1);
   glm_vec4_add(v1, m[3], m[3]);
+#endif
 }
 
 CGLM_INLINE
 void
 glm_translate_z(mat4 m, float to) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(m[3],
+               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
+                                     _mm_set1_ps(to)),
+                          _mm_load_ps(m[3])))
+  ;
+#else
   vec4 v1;
   glm_vec4_scale(m[2], to, v1);
   glm_vec4_add(v1, m[3], m[3]);
+#endif
 }
 
 /* scale */
