@@ -16,11 +16,7 @@ typedef float vec4[4];
 typedef vec3 mat3[3];
 typedef vec4 mat4[4];
 
-CGLM_INLINE
-void
-glm_mat_mul4(mat4 m1,
-             mat4 m2,
-             mat4 dest);
+typedef vec4 versor;
 
 #include "cglm-vec.h"
 #include "cglm-mat.h"
