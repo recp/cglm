@@ -9,6 +9,7 @@
 #define cglm_vec_h
 
 #include "cglm.h"
+#include "cglm-intrin.h"
 
 CGLM_INLINE
 void
@@ -20,11 +21,15 @@ glm_vec_dup(vec3 a, vec3 dest) {
 
 CGLM_INLINE
 void
-glm_vec_dup4(vec4 a, vec4 dest) {
-  dest[0] = a[0];
-  dest[1] = a[1];
-  dest[2] = a[2];
-  dest[3] = a[3];
+glm_vec4_dup(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_load_ps(v));
+#else
+  dest[0] = v[0];
+  dest[1] = v[1];
+  dest[2] = v[2];
+  dest[3] = v[3];
+#endif
 }
 
 CGLM_INLINE
@@ -98,11 +103,17 @@ glm_vec_add(vec3 v1, vec3 v2, vec3 dest) {
 
 CGLM_INLINE
 void
-glm_vec_add4(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_add(vec4 v1, vec4 v2, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest,
+               _mm_add_ps(_mm_load_ps(v1),
+                          _mm_load_ps(v2)));
+#else
   dest[0] = v1[0] + v2[0];
   dest[1] = v1[1] + v2[1];
   dest[2] = v1[2] + v2[2];
   dest[3] = v1[3] + v2[3];
+#endif
 }
 
 CGLM_INLINE
@@ -115,11 +126,17 @@ glm_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
 
 CGLM_INLINE
 void
-glm_vec_sub4(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_sub(vec4 v1, vec4 v2, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest,
+               _mm_sub_ps(_mm_load_ps(v1),
+                          _mm_load_ps(v2)));
+#else
   dest[0] = v1[0] - v2[0];
   dest[1] = v1[1] - v2[1];
   dest[2] = v1[2] - v2[2];
   dest[3] = v1[3] - v2[3];
+#endif
 }
 
 CGLM_INLINE
@@ -132,11 +149,17 @@ glm_vec_scale(vec3 v, float s, vec3 dest) {
 
 CGLM_INLINE
 void
-glm_vec_scale4(vec3 v, float s, vec3 dest) {
+glm_vec4_scale(vec4 v, float s, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest,
+               _mm_mul_ps(_mm_load_ps(v),
+                          _mm_set1_ps(s)));
+#else
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
   dest[2] = v[2] * s;
   dest[3] = v[3] * s;
+#endif
 }
 
 CGLM_INLINE
