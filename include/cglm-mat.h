@@ -169,4 +169,54 @@ glm_mat4_det(mat4 mat) {
   ;
 }
 
+CGLM_INLINE
+void
+glm_mat4_inv(mat4 mat, mat4 dest) {
+  float t[6];
+  float det;
+  float a, b, c, d,
+        e, f, g, h,
+        i, j, k, l,
+        m, n, o, p;
+
+  a = mat[0][0], b = mat[1][0], c = mat[2][0], d = mat[3][0],
+  e = mat[0][1], f = mat[1][1], g = mat[2][1], h = mat[3][1],
+  i = mat[0][2], j = mat[1][2], k = mat[2][2], l = mat[3][2],
+  m = mat[0][3], n = mat[1][3], o = mat[2][3], p = mat[3][3];
+
+  t[0] = k * p - o * l; t[1] = j * p - n * l; t[2] = j * o - n * k;
+  t[3] = i * p - m * l; t[4] = i * o - m * k; t[5] = i * n - m * j;
+
+  dest[0][0] =  f * t[0] - g * t[1] + h * t[2];
+  dest[1][0] =-(e * t[0] - g * t[3] + h * t[4]);
+  dest[2][0] =  e * t[1] - f * t[3] + h * t[5];
+  dest[3][0] =-(e * t[2] - f * t[4] + g * t[5]);
+
+  dest[0][1] =-(b * t[0] - c * t[1] + d * t[2]);
+  dest[1][1] =  a * t[0] - c * t[3] + d * t[4];
+  dest[2][1] =-(a * t[1] - b * t[3] + d * t[5]);
+  dest[3][1] =  a * t[2] - b * t[4] + c * t[5];
+
+  t[0] = g * p - o * h; t[1] = f * p - n * h; t[2] = f * o - n * g;
+  t[3] = e * p - m * h; t[4] = e * o - m * g; t[5] = e * n - m * f;
+
+  dest[0][2] =  b * t[0] - c * t[1] + d * t[2];
+  dest[1][2] =-(a * t[0] - c * t[3] + d * t[4]);
+  dest[2][2] =  a * t[1] - b * t[3] + d * t[5];
+  dest[3][2] =-(a * t[2] - b * t[4] + c * t[5]);
+
+  t[0] = g * l - k * h; t[1] = f * l - j * h; t[2] = f * k - j * g;
+  t[3] = e * l - i * h; t[4] = e * k - i * g; t[5] = e * j - i * f;
+
+  dest[0][3] =-(b * t[0] - c * t[1] + d * t[2]);
+  dest[1][3] =  a * t[0] - c * t[3] + d * t[4];
+  dest[2][3] =-(a * t[1] - b * t[3] + d * t[5]);
+  dest[3][3] =  a * t[2] - b * t[4] + c * t[5];
+
+  det = 1.0f / (a * dest[0][0] + b * dest[1][0]
+              + c * dest[2][0] + d * dest[3][0]);
+
+  glm_mat4_scale(dest, det);
+}
+
 #endif /* cglm_mat_h */
