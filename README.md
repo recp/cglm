@@ -22,13 +22,10 @@ This library is header only so you dont need link to application. All functions 
 
 Most of math functions are optimized manualy with SSE2 if available, if not? Dont worry there are non-sse versions of all operations
 
-Why manual? Because this will decrease *compile time* and some operations are faster than compiler optimization. 
-
-This library offers:
+This library provides:
 
 - Simple usage
 - Small memory usage
-- Fast compiling time
 - The codes are small and more readable than C++ templates, metafuncs
 - Optimized operations with SIMD and non-SIMD
 - Small code size
