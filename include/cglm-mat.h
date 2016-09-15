@@ -125,6 +125,19 @@ glm_mat_transpose_self(mat4 m) {
 }
 
 CGLM_INLINE
+void
+glm_mat4_scale(mat4 m, float s) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  CGLM_MAT_SCALE_SSE_4x4f(m, s);
+#else
+  m[0][0] *= s; m[0][1] *= s; m[0][2] *= s; m[0][3] *= s;
+  m[1][0] *= s; m[1][1] *= s; m[1][2] *= s; m[1][3] *= s;
+  m[2][0] *= s; m[2][1] *= s; m[2][2] *= s; m[2][3] *= s;
+  m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
+#endif
+}
+
+CGLM_INLINE
 float
 glm_mat4_det(mat4 mat) {
   float a, b, c, d,

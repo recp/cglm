@@ -48,4 +48,14 @@
       _mm_store_ps(D[3], r3);                                                 \
    } while (0)
 
+#define CGLM_MAT_SCALE_SSE_4x4f(M, S)                                         \
+   do {                                                                       \
+     __m128 xmm0;                                                             \
+     xmm0 = _mm_set1_ps(S);                                                   \
+     _mm_store_ps(M[0], _mm_mul_ps(_mm_load_ps(M[0]), xmm0));                 \
+     _mm_store_ps(M[1], _mm_mul_ps(_mm_load_ps(M[1]), xmm0));                 \
+     _mm_store_ps(M[2], _mm_mul_ps(_mm_load_ps(M[2]), xmm0));                 \
+     _mm_store_ps(M[3], _mm_mul_ps(_mm_load_ps(M[3]), xmm0));                 \
+   } while (0)
+
 #endif /* cglm_mat_sse_h */
