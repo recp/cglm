@@ -126,14 +126,20 @@ glm_mat_transpose_self(mat4 m) {
 
 CGLM_INLINE
 void
-glm_mat4_scale(mat4 m, float s) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  CGLM_MAT_SCALE_SSE_4x4f(m, s);
-#else
+glm_mat4_scale_p(mat4 m, float s) {
   m[0][0] *= s; m[0][1] *= s; m[0][2] *= s; m[0][3] *= s;
   m[1][0] *= s; m[1][1] *= s; m[1][2] *= s; m[1][3] *= s;
   m[2][0] *= s; m[2][1] *= s; m[2][2] *= s; m[2][3] *= s;
   m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
+}
+
+CGLM_INLINE
+void
+glm_mat4_scale(mat4 m, float s) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  CGLM_MAT_SCALE_SSE_4x4f(m, s);
+#else
+  glm_mat4_scale_p(m, s);
 #endif
 }
 
@@ -216,7 +222,7 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
   det = 1.0f / (a * dest[0][0] + b * dest[1][0]
               + c * dest[2][0] + d * dest[3][0]);
 
-  glm_mat4_scale(dest, det);
+  glm_mat4_scale_p(dest, det);
 }
 
 #endif /* cglm_mat_h */
