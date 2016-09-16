@@ -178,6 +178,9 @@ glm_mat4_det(mat4 mat) {
 CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat4_inv_see2(mat, dest);
+#else
   float t[6];
   float det;
   float a, b, c, d,
@@ -223,6 +226,7 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
               + c * dest[2][0] + d * dest[3][0]);
 
   glm_mat4_scale_p(dest, det);
+#endif
 }
 
 #endif /* cglm_mat_h */
