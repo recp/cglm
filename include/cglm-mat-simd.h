@@ -59,6 +59,42 @@
    } while (0)
 
 CGLM_INLINE
+float
+glm_mat4_det_sse2(mat4 mat) {
+  __m128 v0, dt, t0, t1, t2, t3, t4, r0, r1, r2, r3;
+
+  r0 = _mm_load_ps(mat[0]);
+  r1 = _mm_load_ps(mat[1]);
+  r2 = _mm_load_ps(mat[2]);
+  r3 = _mm_load_ps(mat[3]);
+
+  t3 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle1_ps(r2, 2, 1, 1, 0),
+                             _mm_shuffle1_ps(r3, 3, 3, 2, 3)),
+                  _mm_mul_ps(_mm_shuffle1_ps(r3, 2, 1, 1, 0),
+                             _mm_shuffle1_ps(r2, 3, 3, 2, 3)));
+
+  t4 = _mm_sub_ps(_mm_mul_ps(_mm_shuffle1_ps(r2, 0, 0, 0, 0),
+                             _mm_shuffle1_ps(r3, 2, 1, 2, 1)),
+                  _mm_mul_ps(_mm_shuffle1_ps(r3, 0, 0, 0, 0),
+                             _mm_shuffle1_ps(r2, 2, 1, 2, 1)));
+
+  t0 = _mm_shuffle1_ps(t3, 3, 3, 2, 1);
+  t1 = _mm_shuffle2_ps(t3, t4, 1, 1, 2, 0, 1, 0, 0, 3);
+  t2 = _mm_shuffle2_ps(t3, t4, 0, 1, 1, 1, 0, 2, 3, 3);
+
+  v0 = _mm_mul_ps(_mm_shuffle1_ps(r1, 1, 0, 0, 0), t0);
+  v0 = _mm_sub_ps(v0, _mm_mul_ps(_mm_shuffle1_ps(r1, 2, 2, 1, 1), t1));
+  v0 = _mm_add_ps(v0, _mm_mul_ps(_mm_shuffle1_ps(r1, 3, 3, 3, 2), t2));
+  v0 = _mm_xor_ps(v0, _mm_set_ps(0.f, -0.f, 0.f, -0.f));
+
+  dt = _mm_mul_ps(_mm_shuffle1_ps(r0, 0, 1, 2, 3), v0);
+  dt = _mm_add_ps(dt, _mm_shuffle1_ps(dt, 0, 1, 2, 3));
+  dt = _mm_add_ps(dt, _mm_shuffle1_ps(dt, 1, 3, 3, 1));
+
+  return _mm_cvtss_f32(dt);
+}
+
+CGLM_INLINE
 void
 glm_mat4_inv_see2(mat4 mat, mat4 dest) {
   __m128 v0, v1, v2, v3, dt, t0, t1, t2, t3, t4, r0, r1, r2, r3;

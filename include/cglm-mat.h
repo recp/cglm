@@ -146,33 +146,32 @@ glm_mat4_scale(mat4 m, float s) {
 CGLM_INLINE
 float
 glm_mat4_det(mat4 mat) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  return glm_mat4_det_sse2(mat);
+#else
+  float t[6];
   float a, b, c, d,
         e, f, g, h,
         i, j, k, l,
-        m, n, o, p
-  ;
-
-  float kp_ol, jp_nl, jo_nk,
-        jp_ml, io_mk, in_mj;
+        m, n, o, p;
 
   a = mat[0][0], b = mat[1][0], c = mat[2][0], d = mat[3][0],
   e = mat[0][1], f = mat[1][1], g = mat[2][1], h = mat[3][1],
   i = mat[0][2], j = mat[1][2], k = mat[2][2], l = mat[3][2],
-  m = mat[0][3], n = mat[1][3], o = mat[2][3], p = mat[3][3]
-  ;
+  m = mat[0][3], n = mat[1][3], o = mat[2][3], p = mat[3][3];
 
-  kp_ol = k * p - o * l;
-  jp_nl = j * p - n * l;
-  jo_nk = j * o - n * k;
-  jp_ml = i * p - m * l;
-  io_mk = i * o - m * k;
-  in_mj = i * n - m * j;
+  t[0] = k * p - o * l;
+  t[1] = j * p - n * l;
+  t[2] = j * o - n * k;
+  t[3] = i * p - m * l;
+  t[4] = i * o - m * k;
+  t[5] = i * n - m * j;
 
-  return   a * (f * kp_ol - g * jp_nl + h * jo_nk)
-         - b * (e * kp_ol - g * jp_ml + h * io_mk)
-         + c * (e * jp_nl - f * jp_ml + h * in_mj)
-         - d * (e * jo_nk - f * io_mk + g * in_mj)
-  ;
+  return   a * (f * t[0] - g * t[1] + h * t[2])
+         - b * (e * t[0] - g * t[3] + h * t[4])
+         + c * (e * t[1] - f * t[3] + h * t[5])
+         - d * (e * t[2] - f * t[4] + g * t[5]);
+#endif
 }
 
 CGLM_INLINE
