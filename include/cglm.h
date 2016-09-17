@@ -11,7 +11,7 @@
 #include "cglm-common.h"
 
 typedef float vec3[3];
-typedef float vec4[4];
+typedef CGLM_ALIGN(16) float vec4[4];
 
 typedef vec3 mat3[3];
 typedef vec4 mat4[4];
