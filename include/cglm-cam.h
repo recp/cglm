@@ -5,10 +5,79 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ TODO: GLdouble vs float ?
+ */
+
 #ifndef glm_vcam_h
 #define glm_vcam_h
 
 #include "cglm.h"
+#include <math.h>
+
+CGLM_INLINE
+void
+glm_frustum(float left,
+            float right,
+            float bottom,
+            float top,
+            float near,
+            float far,
+            mat4 dest) {
+  /* https://www.opengl.org/sdk/docs/man2/xhtml/glFrustum.xml */
+
+  glm__memzero(float, dest, sizeof(mat4));
+
+  dest[0][0] = 2.0f * near / (right - left);
+  dest[1][1] = 2.0f * near / (top - bottom);
+  dest[2][0] = (right + left) / (right - left);
+  dest[2][1] = (top + bottom) / (top - bottom);
+  dest[2][2] = -(far + near) / (far - near);
+  dest[2][3] = -1.0f;
+  dest[3][2] = -2.0f * far * near / (far - near);
+}
+
+CGLM_INLINE
+void
+glm_ortho(float left,
+          float right,
+          float bottom,
+          float top,
+          float near,
+          float far,
+          mat4 dest) {
+  /* https://www.opengl.org/sdk/docs/man2/xhtml/glOrtho.xml */
+
+  glm__memzero(float, dest, sizeof(mat4));
+
+  dest[0][0] = 2.0f / (right - left);
+  dest[1][1] = 2.0f / (top - bottom);
+  dest[2][2] =-2.0f / (far - near);
+  dest[3][0] =-(right + left) / (right - left);
+  dest[3][1] =-(top + bottom) / (top - bottom);
+  dest[3][2] =-(far + near) / (far - near);
+}
+
+CGLM_INLINE
+void
+glm_perspective(float fovy,
+                float aspect,
+                float near,
+                float far,
+                mat4 dest) {
+  /* https://www.opengl.org/sdk/docs/man2/xhtml/gluPerspective.xml */
+  float f;
+
+  glm__memzero(float, dest, sizeof(mat4));
+
+  f = cosf(fovy * 0.5f) / sinf(fovy * 0.5f);
+
+  dest[0][0] = f / aspect;
+  dest[1][1] = f;
+  dest[2][2] = (near + far) / (near - far);
+  dest[2][3] =-1.0f;
+  dest[3][2] = 2 * near * far  / (near - far);
+}
 
 CGLM_INLINE
 void

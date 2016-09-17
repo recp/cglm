@@ -32,16 +32,18 @@
       *desti++ = *srci++;                                                     \
   } while (0)
 
-#define glm__memzero(dest, size)                                              \
+#define glm__memset(type, dest, size, val)                                    \
   do {                                                                        \
-    int32_t *desti;                                                           \
-    int32_t *desti_end;                                                       \
+    type *desti;                                                              \
+    type *desti_end;                                                          \
                                                                               \
-    desti     = (int32_t *)dest;                                              \
-    desti_end = (int32_t *)((char *)desti + size);                            \
+    desti     = (type *)dest;                                                 \
+    desti_end = (type *)((char *)desti + size);                               \
                                                                               \
     while (desti != desti_end)                                                \
-      *desti++ = 0;                                                           \
+      *desti++ = val;                                                         \
   } while (0)
+
+#define glm__memzero(type, dest, size) glm__memset(type, dest, size, 0)
 
 #endif /* glm_common_h */
