@@ -54,13 +54,13 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
     CGLM_MAT_MUL_SSE_4x4f(l, r, d);
 #else
-    glm_mat_mul4_impl(l, r, d);
+    glm_mat4_mul_impl(l, r, d);
 #endif
   } else {
 #if defined( __SSE__ ) || defined( __SSE2__ )
     CGLM_MAT_MUL_SSE_4x4f(l, l, d);
 #else
-    glm_mat_mul4_impl(l, l, d);
+    glm_mat4_mul_impl(l, l, d);
 #endif
   }
 }
@@ -118,9 +118,9 @@ glm_mat4_transpose(mat4 m) {
 #else
   mat4 d;
 
-  glm_mat_transpose_to(m, d);
+  glm_mat4_transpose_to(m, d);
 
-  glm__memcpy(m, d, sizeof(mat4));
+  glm__memcpy(float, m, d, sizeof(mat4));
 #endif
 }
 
