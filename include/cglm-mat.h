@@ -12,10 +12,10 @@
 #include "cglm-mat-simd.h"
 #include <assert.h>
 
-#define GLM_MAT_IDENTITY_4F {1.0f, 0.0f, 0.0f, 0.0f,                          \
-                             0.0f, 1.0f, 0.0f, 0.0f,                          \
-                             0.0f, 0.0f, 1.0f, 0.0f,                          \
-                             0.0f, 0.0f, 0.0f, 1.0f}
+#define GLM_MAT4_IDENTITY (mat4){1.0f, 0.0f, 0.0f, 0.0f,                      \
+                                 0.0f, 1.0f, 0.0f, 0.0f,                      \
+                                 0.0f, 0.0f, 1.0f, 0.0f,                      \
+                                 0.0f, 0.0f, 0.0f, 1.0f}
 
 #define glm_mat4_mul_impl(l, r, d)                                            \
  do {                                                                         \

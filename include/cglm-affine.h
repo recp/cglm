@@ -15,7 +15,7 @@
 CGLM_INLINE
 void
 glm_translate_to(mat4 m, vec3 v, mat4 dest) {
-  mat4 t = GLM_MAT_IDENTITY_4F;
+  mat4 t = GLM_MAT4_IDENTITY;
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(dest[3],
@@ -149,7 +149,7 @@ void
 glm_rotate_x(mat4 m, float rad, mat4 dest) {
   float cosVal;
   float sinVal;
-  mat4  t = GLM_MAT_IDENTITY_4F;
+  mat4  t = GLM_MAT4_IDENTITY;
 
   cosVal = cosf(rad);
   sinVal = sinf(rad);
@@ -167,7 +167,7 @@ void
 glm_rotate_y(mat4 m, float rad, mat4 dest) {
   float cosVal;
   float sinVal;
-  mat4  t = GLM_MAT_IDENTITY_4F;
+  mat4  t = GLM_MAT4_IDENTITY;
 
   cosVal = cosf(rad);
   sinVal = sinf(rad);
@@ -185,7 +185,7 @@ void
 glm_rotate_z(mat4 m, float rad, mat4 dest) {
   float cosVal;
   float sinVal;
-  mat4  t = GLM_MAT_IDENTITY_4F;
+  mat4  t = GLM_MAT4_IDENTITY;
 
   cosVal = cosf(rad);
   sinVal = sinf(rad);
