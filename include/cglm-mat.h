@@ -84,7 +84,7 @@ glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_transpose(mat4 m, mat4 dest) {
+glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   CGLM_MAT_TRANSP_SSE_4x4f(m, dest);
 #else
@@ -112,13 +112,13 @@ glm_mat4_transpose(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_transpose_self(mat4 m) {
+glm_mat4_transpose(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   CGLM_MAT_TRANSP_SSE_4x4f(m, m);
 #else
   mat4 d;
 
-  glm_mat_transpose(m, d);
+  glm_mat_transpose_to(m, d);
 
   glm__memcpy(m, d, sizeof(mat4));
 #endif
