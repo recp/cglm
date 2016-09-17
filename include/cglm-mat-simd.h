@@ -61,7 +61,7 @@
 CGLM_INLINE
 void
 glm_mat4_inv_see2(mat4 mat, mat4 dest) {
-  __m128 v0, v1, v2, v3, dt, t0, t1, t2, t3, t4, r0, r1, r2, r3, r4;
+  __m128 v0, v1, v2, v3, dt, t0, t1, t2, t3, t4, r0, r1, r2, r3;
 
   r0 = _mm_load_ps(mat[0]);
   r1 = _mm_load_ps(mat[1]);
