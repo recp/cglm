@@ -159,7 +159,7 @@ glm_rotate_x(mat4 m, float rad, mat4 dest) {
   t[2][1] = -sinVal;
   t[2][2] =  cosVal;
 
-  glm_mat_mul4(t, m, dest);
+  glm_mat4_mul(t, m, dest);
 }
 
 CGLM_INLINE
@@ -177,7 +177,7 @@ glm_rotate_y(mat4 m, float rad, mat4 dest) {
   t[2][0] =  sinVal;
   t[2][2] =  cosVal;
 
-  glm_mat_mul4(t, m, dest);
+  glm_mat4_mul(t, m, dest);
 }
 
 CGLM_INLINE
@@ -195,7 +195,7 @@ glm_rotate_z(mat4 m, float rad, mat4 dest) {
   t[1][0] = -sinVal;
   t[1][1] =  cosVal;
 
-  glm_mat_mul4(t, m, dest);
+  glm_mat4_mul(t, m, dest);
 }
 
 #endif /* cglm_affine_h */

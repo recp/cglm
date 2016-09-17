@@ -17,7 +17,7 @@
                              0.0f, 0.0f, 1.0f, 0.0f,                          \
                              0.0f, 0.0f, 0.0f, 1.0f}
 
-#define glm_mat_mul4_impl(l, r, d)                                            \
+#define glm_mat4_mul_impl(l, r, d)                                            \
  do {                                                                         \
     d[0]  = l[0]  * r[0] + l[1]  * r[4] + l[2]  * r[8]  + l[3]  * r[12];      \
     d[1]  = l[0]  * r[1] + l[1]  * r[5] + l[2]  * r[9]  + l[3]  * r[13];      \
@@ -39,7 +39,7 @@
 
 CGLM_INLINE
 void
-glm_mat_mul4(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   float * __restrict d;
   float * __restrict l;
 
@@ -67,24 +67,24 @@ glm_mat_mul4(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat_mul4N(mat4 * __restrict matrices[], int len, mat4 dest) {
+glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
   int i;
 
   assert(len > 1 && "there must be least 2 matrices to go!");
 
-  glm_mat_mul4(*matrices[0],
+  glm_mat4_mul(*matrices[0],
                *matrices[1],
                dest);
 
   for (i = 2; i < len; i++)
-    glm_mat_mul4(dest,
+    glm_mat4_mul(dest,
                  *matrices[i],
                  dest);
 }
 
 CGLM_INLINE
 void
-glm_mat_transpose(mat4 m, mat4 dest) {
+glm_mat4_transpose(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   CGLM_MAT_TRANSP_SSE_4x4f(m, dest);
 #else
@@ -112,7 +112,7 @@ glm_mat_transpose(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat_transpose_self(mat4 m) {
+glm_mat4_transpose_self(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   CGLM_MAT_TRANSP_SSE_4x4f(m, m);
 #else
