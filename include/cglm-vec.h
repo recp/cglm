@@ -41,7 +41,7 @@ glm_vec_dot(vec3 a, vec3 b) {
 
 CGLM_INLINE
 float
-glm_vec_dot4(vec4 a, vec4 b) {
+glm_vec4_dot(vec4 a, vec4 b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
 }
 
@@ -58,6 +58,13 @@ CGLM_INLINE
 float
 glm_vec_norm(vec3 vec) {
   return sqrtf(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
+}
+
+CGLM_INLINE
+float
+glm_vec4_norm(vec3 vec) {
+  return sqrtf(vec[0] * vec[0] + vec[1] * vec[1]
+               + vec[2] * vec[2] + vec[3] * vec[3]);
 }
 
 CGLM_INLINE
@@ -92,6 +99,24 @@ glm_vec_normalize(vec3 v) {
   v[0] = v[0] / norm;
   v[1] = v[1] / norm;
   v[2] = v[2] / norm;
+}
+
+CGLM_INLINE
+void
+glm_vec4_normalize(vec4 v) {
+  float norm;
+
+  norm = glm_vec_norm(v);
+
+  if (norm == 0.0f) {
+    v[0] = v[1] = v[2] = v[3] = 0.0f;
+    return;
+  }
+
+  v[0] = v[0] / norm;
+  v[1] = v[1] / norm;
+  v[2] = v[2] / norm;
+  v[3] = v[3] / norm;
 }
 
 CGLM_INLINE
