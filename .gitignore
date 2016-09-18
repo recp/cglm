@@ -47,3 +47,4 @@ COPYING
 .idea/*
 *.VC.db
 cscope.*
+*-git-ignored-file.*
