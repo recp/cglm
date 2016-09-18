@@ -198,10 +198,10 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
         i, j, k, l,
         m, n, o, p;
 
-  a = mat[0][0], b = mat[1][0], c = mat[2][0], d = mat[3][0],
-  e = mat[0][1], f = mat[1][1], g = mat[2][1], h = mat[3][1],
-  i = mat[0][2], j = mat[1][2], k = mat[2][2], l = mat[3][2],
-  m = mat[0][3], n = mat[1][3], o = mat[2][3], p = mat[3][3];
+  a = mat[0][0], b = mat[0][1], c = mat[0][2], d = mat[0][3],
+  e = mat[1][0], f = mat[1][1], g = mat[1][2], h = mat[1][3],
+  i = mat[2][0], j = mat[2][1], k = mat[2][2], l = mat[2][3],
+  m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3];
 
   t[0] = k * p - o * l; t[1] = j * p - n * l; t[2] = j * o - n * k;
   t[3] = i * p - m * l; t[4] = i * o - m * k; t[5] = i * n - m * j;
