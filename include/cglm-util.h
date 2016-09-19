@@ -22,13 +22,18 @@ glm_mat4_print(mat4   matrix,
 #define m 4
 #define n 4
 
-  fprintf(ostream, "Matrix (%dx%d):\n", m, n);
+  fprintf(ostream, "Matrix (float%dx%d):\n", m, n);
 
   for (i = 0; i < m; i++) {
-    for (j = 0; j < n; j++)
-      fprintf(ostream, "\t%0.2f,", matrix[j][i]);;
+    fprintf(ostream, "\t|");
+    for (j = 0; j < n; j++) {
+      fprintf(ostream, "%0.4f", matrix[j][i]);;
 
-    fprintf(ostream, "\n");
+      if (j != n - 1)
+        fprintf(ostream, "\t");
+    }
+
+    fprintf(ostream, "|\n");
   }
 
   fprintf(ostream, "\n");
@@ -45,12 +50,16 @@ glm_vec4_print(vec4 vec,
 
 #define m 4
 
-  fprintf(ostream, "Vector (%d):\n", m);
+  fprintf(ostream, "Vector (float%d):\n\t|", m);
 
-  for (i = 0; i < m; i++)
-    fprintf(ostream, "\t%0.2f,", vec[i]);;
+  for (i = 0; i < m; i++) {
+    fprintf(ostream, "%0.4f", vec[i]);
 
-  fprintf(ostream, "\n");
+    if (i != m - 1)
+      fprintf(ostream, "\t");
+  }
+
+  fprintf(ostream, "|\n\n");
 
 #undef m
 }
@@ -63,12 +72,16 @@ glm_vec3_print(vec3 vec,
 
 #define m 3
 
-  fprintf(ostream, "Vector (%d):\n", m);
+  fprintf(ostream, "Vector (float%d):\n\t|", m);
 
-  for (i = 0; i < m; i++)
-    fprintf(ostream, "\t%0.2f,", vec[i]);;
+  for (i = 0; i < m; i++) {
+    fprintf(ostream, "%0.4f", vec[i]);
 
-  fprintf(ostream, "\n");
+    if (i != m - 1)
+      fprintf(ostream, "\t");
+  }
+
+  fprintf(ostream, "|\n\n");
 
 #undef m
 }
@@ -81,12 +94,16 @@ glm_versor_print(versor vec,
 
 #define m 4
 
-  fprintf(ostream, "Versor (%d):\n", m);
+  fprintf(ostream, "Versor (float%d):\n\t|", m);
 
-  for (i = 0; i < m; i++)
-    fprintf(ostream, "\t%0.2f,", vec[i]);;
+  for (i = 0; i < m; i++) {
+    fprintf(ostream, "%0.4f", vec[i]);
 
-  fprintf(ostream, "\n");
+    if (i != m - 1)
+      fprintf(ostream, "\t");
+  }
+
+  fprintf(ostream, "|\n\n");
 
 #undef m
 }
