@@ -189,7 +189,7 @@ CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat4_inv_see2(mat, dest);
+  glm_mat4_inv_sse2(mat, dest);
 #else
   float t[6];
   float det;

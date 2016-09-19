@@ -97,7 +97,7 @@ glm_mat4_det_sse2(mat4 mat) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_see2(mat4 mat, mat4 dest) {
+glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   __m128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
