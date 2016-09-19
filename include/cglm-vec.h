@@ -20,6 +20,13 @@ glm_vec_dup(vec3 a, vec3 dest) {
   dest[2] = a[2];
 }
 
+void
+glm_vec4_dup3(vec4 a, vec3 dest) {
+  dest[0] = a[0];
+  dest[1] = a[1];
+  dest[2] = a[2];
+}
+
 CGLM_INLINE
 void
 glm_vec4_dup(vec4 v, vec4 dest) {
