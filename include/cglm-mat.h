@@ -90,7 +90,7 @@ CGLM_INLINE
 void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  CGLM_MAT_TRANSP_SSE_4x4f(m, dest);
+  glm_mat4_transp_sse2(m, dest);
 #else
   dest[0][0] = m[0][0];
   dest[0][1] = m[1][0];
@@ -118,7 +118,7 @@ CGLM_INLINE
 void
 glm_mat4_transpose(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  CGLM_MAT_TRANSP_SSE_4x4f(m, m);
+  glm_mat4_transp_sse2(m, m);
 #else
   mat4 d;
 
@@ -141,7 +141,7 @@ CGLM_INLINE
 void
 glm_mat4_scale(mat4 m, float s) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  CGLM_MAT_SCALE_SSE_4x4f(m, s);
+  glm_mat4_scale_sse2(m, s);
 #else
   glm_mat4_scale_p(m, s);
 #endif

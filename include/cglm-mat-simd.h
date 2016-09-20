@@ -10,35 +10,35 @@
 
 #include "cglm-intrin.h"
 
-#define CGLM_MAT_TRANSP_SSE_4x4f(M, D)                                        \
-   do {                                                                       \
-      __m128 r0;                                                              \
-      __m128 r1;                                                              \
-      __m128 r2;                                                              \
-      __m128 r3;                                                              \
-                                                                              \
-      r0 = _mm_load_ps(M[0]);                                                 \
-      r1 = _mm_load_ps(M[1]);                                                 \
-      r2 = _mm_load_ps(M[2]);                                                 \
-      r3 = _mm_load_ps(M[3]);                                                 \
-                                                                              \
-      _MM_TRANSPOSE4_PS(r0, r1, r2, r3);                                      \
-                                                                              \
-      _mm_store_ps(D[0], r0);                                                 \
-      _mm_store_ps(D[1], r1);                                                 \
-      _mm_store_ps(D[2], r2);                                                 \
-      _mm_store_ps(D[3], r3);                                                 \
-   } while (0)
+CGLM_INLINE
+void
+glm_mat4_scale_sse2(mat4 m, float s){
+  __m128 x0;
+  x0 = _mm_set1_ps(s);
 
-#define CGLM_MAT_SCALE_SSE_4x4f(M, S)                                         \
-   do {                                                                       \
-     __m128 xmm0;                                                             \
-     xmm0 = _mm_set1_ps(S);                                                   \
-     _mm_store_ps(M[0], _mm_mul_ps(_mm_load_ps(M[0]), xmm0));                 \
-     _mm_store_ps(M[1], _mm_mul_ps(_mm_load_ps(M[1]), xmm0));                 \
-     _mm_store_ps(M[2], _mm_mul_ps(_mm_load_ps(M[2]), xmm0));                 \
-     _mm_store_ps(M[3], _mm_mul_ps(_mm_load_ps(M[3]), xmm0));                 \
-   } while (0)
+  _mm_store_ps(m[0], _mm_mul_ps(_mm_load_ps(m[0]), x0));
+  _mm_store_ps(m[1], _mm_mul_ps(_mm_load_ps(m[1]), x0));
+  _mm_store_ps(m[2], _mm_mul_ps(_mm_load_ps(m[2]), x0));
+  _mm_store_ps(m[3], _mm_mul_ps(_mm_load_ps(m[3]), x0));
+}
+
+CGLM_INLINE
+void
+glm_mat4_transp_sse2(mat4 m, mat4 dest){
+  __m128 r0, r1, r2, r3;
+
+  r0 = _mm_load_ps(m[0]);
+  r1 = _mm_load_ps(m[1]);
+  r2 = _mm_load_ps(m[2]);
+  r3 = _mm_load_ps(m[3]);
+
+  _MM_TRANSPOSE4_PS(r0, r1, r2, r3);
+
+  _mm_store_ps(dest[0], r0);
+  _mm_store_ps(dest[1], r1);
+  _mm_store_ps(dest[2], r2);
+  _mm_store_ps(dest[3], r3);
+}
 
 CGLM_INLINE
 void
