@@ -7,7 +7,7 @@
 
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
-
+#if defined( __SSE__ ) || defined( __SSE2__ )
 #include <xmmintrin.h>
 #include <emmintrin.h>
 
@@ -22,4 +22,5 @@
   _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),          \
                   z1, y1, x1, w1);
 
+#endif
 #endif /* cglm_intrin_h */

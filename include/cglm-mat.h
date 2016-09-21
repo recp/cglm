@@ -9,7 +9,7 @@
 #define cglm_mat_h
 
 #include "cglm.h"
-#include "cglm-mat-simd.h"
+#include "cglm-mat-simd-sse2.h"
 #include "cglm-mat-simd-avx.h"
 #include <assert.h>
 

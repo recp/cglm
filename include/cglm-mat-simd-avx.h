@@ -7,8 +7,8 @@
 
 #ifndef cglm_mat_simd_avx_h
 #define cglm_mat_simd_avx_h
-
 #ifdef __AVX__
+
 #include "cglm-intrin.h"
 #include <immintrin.h>
 

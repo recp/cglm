@@ -7,6 +7,7 @@
 
 #ifndef cglm_mat_sse_h
 #define cglm_mat_sse_h
+#if defined( __SSE__ ) || defined( __SSE2__ )
 
 #include "cglm-intrin.h"
 
@@ -258,4 +259,5 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   _mm_store_ps(dest[3], _mm_mul_ps(v3, x0));
 }
 
+#endif
 #endif /* cglm_mat_sse_h */
