@@ -10,6 +10,7 @@
 
 #include "cglm.h"
 #include "cglm-mat-simd.h"
+#include "cglm-mat-simd-avx.h"
 #include <assert.h>
 
 #define GLM_MAT4_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f,                      \
@@ -22,7 +23,9 @@
 CGLM_INLINE
 void
 glm_mat4_mul(mat4 l, mat4 r, mat4 d) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_mul_avx(l, r, d);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mul_sse2(l, r, d);
 #else
   d[0][0] = l[0][0] * r[0][0] + l[1][0] * r[0][1] +
