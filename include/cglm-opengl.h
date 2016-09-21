@@ -13,7 +13,7 @@
 CGLM_INLINE
 void
 glm_mat4_uniform(mat4 m, GLint location){
-  glUniformMatrix4fv(location, 1, GL_FALSE, (GLfloat *)m);
+  glUniformMatrix4fv(location, 1, GL_FALSE, m[0]);
 }
 
 #endif /* cglm_mat_opengl_h */
