@@ -25,8 +25,8 @@ glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
   y2 = _mm256_load_ps(m1[0]); /* h g f e d c b a */
   y3 = _mm256_load_ps(m1[2]); /* p o n m l k j i */
 
-  y4 = _mm256_permute2f128_ps(y0, y0, 0b00000011); /* d c b a h g f e */
-  y5 = _mm256_permute2f128_ps(y3, y1, 0b00000011); /* l k j i p o n m */
+  y4 = _mm256_permute2f128_ps(y2, y2, 0b00000011); /* d c b a h g f e */
+  y5 = _mm256_permute2f128_ps(y3, y3, 0b00000011); /* l k j i p o n m */
 
   /* f f f f a a a a */
   /* h h h h c c c c */
