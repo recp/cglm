@@ -22,6 +22,22 @@
 
 CGLM_INLINE
 void
+glm_mat4_dup(mat4 mat, mat4 dest) {
+#ifdef __AVX__
+  _mm256_store_ps(dest[0], _mm256_load_ps(mat[0]));
+  _mm256_store_ps(dest[2], _mm256_load_ps(mat[2]));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest[0], _mm_load_ps(mat[0]));
+  _mm_store_ps(dest[1], _mm_load_ps(mat[1]));
+  _mm_store_ps(dest[2], _mm_load_ps(mat[2]));
+  _mm_store_ps(dest[3], _mm_load_ps(mat[3]));
+#else
+  glm__memcpy(float, dest, mat, sizeof(mat4));
+#endif
+}
+
+CGLM_INLINE
+void
 glm_mat4_mul(mat4 l, mat4 r, mat4 d) {
 #ifdef __AVX__
   glm_mat4_mul_avx(l, r, d);
