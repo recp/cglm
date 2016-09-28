@@ -7,7 +7,17 @@
 
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
+
+#if defined( _WIN32 )
+#  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
+#    define __SSE2__
+#  elif _M_IX86_FP == 1
+#    define __SSE__
+#  endif
+#endif
+
 #if defined( __SSE__ ) || defined( __SSE2__ )
+
 #include <xmmintrin.h>
 #include <emmintrin.h>
 
