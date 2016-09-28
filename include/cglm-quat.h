@@ -45,7 +45,7 @@ glm_quat_normalize(versor q) {
   if (fabs(1.0f - sum) < 0.0001f)
     return;
 
-  norm = sqrt(sum);
+  norm = sqrtf(sum);
 
   q[0] = q[0] / norm;
   q[1] = q[1] / norm;

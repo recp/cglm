@@ -37,7 +37,7 @@ glm_quat_slerp_sse2(versor q,
     return;
   }
 
-  sinTheta = sqrt(1.0f - cosTheta * cosTheta);
+  sinTheta = sqrtf(1.0f - cosTheta * cosTheta);
 
   c = 1.0f - t;
 
@@ -51,9 +51,9 @@ glm_quat_slerp_sse2(versor q,
   }
 
   /* SLERP */
-  angle = acos(cosTheta);
-  a = sin(c * angle);
-  b = sin(t * angle);
+  angle = acosf(cosTheta);
+  a = sinf(c * angle);
+  b = sinf(t * angle);
 
   _mm_store_ps(dest,
                _mm_div_ps(_mm_add_ps(_mm_mul_ps(_mm_set1_ps(a),
