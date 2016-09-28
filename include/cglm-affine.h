@@ -141,7 +141,8 @@ glm_scale(mat4 m, vec3 v) {
 CGLM_INLINE
 void
 glm_scale1(mat4 m, float s) {
-  glm_scale_to(m, (vec3){s, s, s}, m);
+  vec3 v = { s, s, s };
+  glm_scale_to(m, v, m);
 }
 
 CGLM_INLINE
