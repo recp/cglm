@@ -5,6 +5,11 @@
  * Full license can be found in the LICENSE file
  */
 
+/*!
+ * Most of functions in this header are optimized manually with SIMD
+ * if available. You dont need to call/incude SIMD headers manually
+ */
+
 #ifndef cglm_mat_h
 #define cglm_mat_h
 
@@ -18,8 +23,15 @@
                                  0.0f, 0.0f, 1.0f, 0.0f,                      \
                                  0.0f, 0.0f, 0.0f, 1.0f}
 
+/* for C only */
 #define GLM_MAT4_IDENTITY (mat4)GLM_MAT4_IDENTITY_INIT
 
+/*!
+ * @brief copy all members of [mat] to [dest]
+ *
+ * @param[in]  mat  source
+ * @param[out] dest destination
+ */
 CGLM_INLINE
 void
 glm_mat4_dup(mat4 mat, mat4 dest) {
@@ -36,6 +48,20 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
 #endif
 }
 
+/*!
+ * @brief multiply m1 and m2 to dest
+ * 
+ * m1, m2 and dest matrices can be same matrix, it is possible to write this:
+ *
+ * @code
+ * mat4 m = GLM_MAT4_IDENTITY_INIT;
+ * glm_mat4_mul(m, m, m);
+ * @endcode
+ *
+ * @param[in]  m1   left matrix
+ * @param[in]  m2   right matrix
+ * @param[out] dest destination matrix
+ */
 CGLM_INLINE
 void
 glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
@@ -78,6 +104,25 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
 #endif
 }
 
+/*!
+ * @brief mupliply N mat4 matrices and store result in dest
+ *
+ * this function lets you multiply multiple (more than two or more...) matrices
+ * <br><br>multiplication will be done in loop, this may reduce instructions
+ * size but if <b>len</b> is too small then compiler may unroll whole loop,
+ * usage:
+ * @code
+ * mat m1, m2, m3, m4, res;
+ *
+ * glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4, res);
+ * @endcode
+ *
+ * @warning matrices parameter is pointer array not mat4 array!
+ *
+ * @param[in]  matrices mat4 * array
+ * @param[in]  len      matrices count
+ * @param[out] dest     result
+ */
 CGLM_INLINE
 void
 glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
@@ -95,6 +140,13 @@ glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
                  dest);
 }
 
+/*!
+ * @brief multiply mat4 with vec4 (column vector) and store in dest vector
+ *
+ * @param[in]  m    mat4 (left)
+ * @param[in]  v    vec4 (right, column vector)
+ * @param[out] dest vec4 (result, column vector)
+ */
 CGLM_INLINE
 void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
@@ -104,6 +156,14 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
   dest[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
 }
 
+/*!
+ * @brief transpose mat4 and store in dest
+ *
+ * source matrix will not be transposed unless dest is m
+ *
+ * @param m[in]     matrix
+ * @param dest[out] result
+ */
 CGLM_INLINE
 void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
@@ -132,6 +192,11 @@ glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #endif
 }
 
+/*!
+ * @brief tranpose mat4 and store result at same matrix
+ *
+ * @param[in, out] m source and dest
+ */
 CGLM_INLINE
 void
 glm_mat4_transpose(mat4 m) {
@@ -146,6 +211,14 @@ glm_mat4_transpose(mat4 m) {
 #endif
 }
 
+/*!
+ * @brief scale (multiply with scalar) matrix without simd optimization
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]      s scalar
+ */
 CGLM_INLINE
 void
 glm_mat4_scale_p(mat4 m, float s) {
@@ -155,6 +228,14 @@ glm_mat4_scale_p(mat4 m, float s) {
   m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
 }
 
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]      s scalar
+ */
 CGLM_INLINE
 void
 glm_mat4_scale(mat4 m, float s) {
@@ -165,6 +246,13 @@ glm_mat4_scale(mat4 m, float s) {
 #endif
 }
 
+/*!
+ * @brief mat4 determinant
+ *
+ * @param[in] mat matrix
+ *
+ * @return determinant
+ */
 CGLM_INLINE
 float
 glm_mat4_det(mat4 mat) {
@@ -197,6 +285,14 @@ glm_mat4_det(mat4 mat) {
 #endif
 }
 
+/*!
+ * @brief inverse mat4 and store in dest
+ *
+ * @todo this function could return existence of inverse (BOOL)
+ *
+ * @param[in]  mat  matrix
+ * @param[out] dest inverse matrix
+ */
 CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
