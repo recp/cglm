@@ -50,7 +50,7 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
 
 /*!
  * @brief multiply m1 and m2 to dest
- * 
+ *
  * m1, m2 and dest matrices can be same matrix, it is possible to write this:
  *
  * @code
@@ -170,25 +170,14 @@ glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
 #else
-  dest[0][0] = m[0][0];
-  dest[0][1] = m[1][0];
-  dest[0][2] = m[2][0];
-  dest[0][3] = m[3][0];
-
-  dest[1][0] = m[0][1];
-  dest[1][1] = m[1][1];
-  dest[1][2] = m[2][1];
-  dest[1][3] = m[3][1];
-
-  dest[2][0] = m[0][2];
-  dest[2][1] = m[1][2];
-  dest[2][2] = m[2][2];
-  dest[2][3] = m[3][2];
-
-  dest[3][0] = m[0][3];
-  dest[3][1] = m[1][3];
-  dest[3][2] = m[2][3];
-  dest[3][3] = m[3][3];
+  dest[0][0] = m[0][0]; dest[1][0] = m[0][1];
+  dest[0][1] = m[1][0]; dest[1][1] = m[1][1];
+  dest[0][2] = m[2][0]; dest[1][2] = m[2][1];
+  dest[0][3] = m[3][0]; dest[1][3] = m[3][1];
+  dest[2][0] = m[0][2]; dest[3][0] = m[0][3];
+  dest[2][1] = m[1][2]; dest[3][1] = m[1][3];
+  dest[2][2] = m[2][2]; dest[3][2] = m[2][3];
+  dest[2][3] = m[3][2]; dest[3][3] = m[3][3];
 #endif
 }
 
