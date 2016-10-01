@@ -37,6 +37,7 @@ glm_vec_dup(vec3 a, vec3 dest) {
  * @param[in]  a    source
  * @param[out] dest destination
  */
+CGLM_INLINE
 void
 glm_vec4_dup3(vec4 a, vec3 dest) {
   dest[0] = a[0];
