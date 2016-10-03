@@ -199,4 +199,49 @@ glm_rotate_z(mat4 m, float rad, mat4 dest) {
   glm_mat4_mul(t, m, dest);
 }
 
+CGLM_INLINE
+void
+glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
+  /* https://www.opengl.org/sdk/docs/man2/xhtml/glRotate.xml */
+
+  float c, s, x1c, y1c, z1c;
+
+#define x axis_ndc[0]
+#define y axis_ndc[1]
+#define z axis_ndc[2]
+
+  y1c = 1 - c;
+  x1c = y1c * x;
+  z1c = y1c * y;
+  y1c = y1c * z;
+
+  c = cosf(angle);
+  s = sinf(angle);
+
+  m[0][0] = x1c * x + c;
+  m[0][1] = x1c * y + z * s;
+  m[0][2] = x1c * z - y * s;
+  m[1][0] = x1c * y - z * s;
+
+  m[1][1] = y1c * y + c;
+
+  m[1][2] = z1c * y + x * s;
+  m[2][0] = z1c * x + y * s;
+  m[2][1] = z1c * y - x * s;
+  m[2][2] = z1c * z + c;
+
+#undef x
+#undef y
+#undef z
+}
+
+CGLM_INLINE
+void
+glm_rotate_make(mat4 m, float angle, vec3 axis) {
+  vec3 axis_ndc;
+
+  glm_vec_normalize_to(axis, axis_ndc);
+  glm_rotate_ndc_make(m, angle, axis_ndc);
+}
+
 #endif /* cglm_affine_h */
