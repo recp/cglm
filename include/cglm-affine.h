@@ -204,28 +204,28 @@ void
 glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
   /* https://www.opengl.org/sdk/docs/man2/xhtml/glRotate.xml */
 
-  float c, s, x1c, y1c, z1c;
+  float c, s, x1c, y1c, z1c, t;
 
 #define x axis_ndc[0]
 #define y axis_ndc[1]
 #define z axis_ndc[2]
 
-  y1c = 1 - c;
-  x1c = y1c * x;
-  z1c = y1c * y;
-  y1c = y1c * z;
-
   c = cosf(angle);
   s = sinf(angle);
+
+  t   = 1 - c;
+  x1c = t * x;
+  y1c = t * y;
+  z1c = t * z;
 
   m[0][0] = x1c * x + c;
   m[0][1] = x1c * y + z * s;
   m[0][2] = x1c * z - y * s;
   m[0][3] = 0.0f;
 
-  m[1][0] = x1c * y - z * s;
+  m[1][0] = y1c * x - z * s;
   m[1][1] = y1c * y + c;
-  m[1][2] = z1c * y + x * s;
+  m[1][2] = y1c * z + x * s;
   m[1][3] = 0.0f;
 
   m[2][0] = z1c * x + y * s;
