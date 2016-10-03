@@ -221,14 +221,22 @@ glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
   m[0][0] = x1c * x + c;
   m[0][1] = x1c * y + z * s;
   m[0][2] = x1c * z - y * s;
+  m[0][3] = 0.0f;
+
   m[1][0] = x1c * y - z * s;
-
   m[1][1] = y1c * y + c;
-
   m[1][2] = z1c * y + x * s;
+  m[1][3] = 0.0f;
+
   m[2][0] = z1c * x + y * s;
   m[2][1] = z1c * y - x * s;
   m[2][2] = z1c * z + c;
+  m[2][3] = 0.0f;
+
+  m[3][0] = 0.0f;
+  m[3][1] = 0.0f;
+  m[3][2] = 0.0f;
+  m[3][3] = 1.0f;
 
 #undef x
 #undef y
