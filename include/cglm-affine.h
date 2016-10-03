@@ -252,4 +252,40 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
   glm_rotate_ndc_make(m, angle, axis_ndc);
 }
 
+CGLM_INLINE
+void
+glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
+  mat4 rot;
+  vec4 v1, v2, v3;
+
+  glm_rotate_ndc_make(rot, angle, axis_ndc);
+
+  glm_vec4_scale(m[0], rot[0][0], v1);
+  glm_vec4_scale(m[1], rot[0][1], v2);
+  glm_vec4_scale(m[2], rot[0][2], v3);
+  glm_vec4_add(v1, v2, m[0]);
+  glm_vec4_add(v3, m[0], m[0]);
+
+  glm_vec4_scale(m[0], rot[1][0], v1);
+  glm_vec4_scale(m[1], rot[1][1], v2);
+  glm_vec4_scale(m[2], rot[1][2], v3);
+  glm_vec4_add(v1, v2, m[1]);
+  glm_vec4_add(v3, m[1], m[1]);
+
+  glm_vec4_scale(m[0], rot[2][0], v1);
+  glm_vec4_scale(m[1], rot[2][1], v2);
+  glm_vec4_scale(m[2], rot[2][2], v3);
+  glm_vec4_add(v1, v2, m[2]);
+  glm_vec4_add(v3, m[2], m[2]);
+}
+
+CGLM_INLINE
+void
+glm_rotate(mat4 m, float angle, vec3 axis) {
+  vec3 axis_ndc;
+
+  glm_vec_normalize_to(axis, axis_ndc);
+  glm_rotate_ndc(m, angle, axis_ndc);
+}
+
 #endif /* cglm_affine_h */
