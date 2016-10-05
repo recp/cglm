@@ -18,10 +18,10 @@
 #include "cglm-mat-simd-avx.h"
 #include <assert.h>
 
-#define GLM_MAT4_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f,                      \
-                                 0.0f, 1.0f, 0.0f, 0.0f,                      \
-                                 0.0f, 0.0f, 1.0f, 0.0f,                      \
-                                 0.0f, 0.0f, 0.0f, 1.0f}
+#define GLM_MAT4_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f, 0.0f},                    \
+                                 {0.0f, 1.0f, 0.0f, 0.0f},                    \
+                                 {0.0f, 0.0f, 1.0f, 0.0f},                    \
+                                 {0.0f, 0.0f, 0.0f, 1.0f}}
 
 /* for C only */
 #define GLM_MAT4_IDENTITY (mat4)GLM_MAT4_IDENTITY_INIT
