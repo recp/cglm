@@ -29,6 +29,21 @@
 /*!
  * @brief copy all members of [mat] to [dest]
  *
+ * matrix may not be aligned, u stands for unaligned, this may be useful when
+ * copying a matrix from external source e.g. asset importer...
+ *
+ * @param[in]  mat  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_mat4_udup(mat4 mat, mat4 dest) {
+  glm__memcpy(float, dest, mat, sizeof(mat4));
+}
+
+/*!
+ * @brief copy all members of [mat] to [dest]
+ *
  * @param[in]  mat  source
  * @param[out] dest destination
  */
@@ -44,7 +59,7 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
   _mm_store_ps(dest[2], _mm_load_ps(mat[2]));
   _mm_store_ps(dest[3], _mm_load_ps(mat[3]));
 #else
-  glm__memcpy(float, dest, mat, sizeof(mat4));
+  glm_mat4_udup(mat, dest);
 #endif
 }
 
