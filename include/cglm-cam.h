@@ -13,6 +13,7 @@
 #define glm_vcam_h
 
 #include "cglm.h"
+#include "cglm-platform.h"
 #include <math.h>
 
 CGLM_INLINE
@@ -77,6 +78,19 @@ glm_perspective(float fovy,
   dest[2][2] = (near + far) / (near - far);
   dest[2][3] =-1.0f;
   dest[3][2] = 2 * near * far  / (near - far);
+}
+
+CGLM_INLINE
+void
+glm_perspective_default(mat4 dest) {
+  GLint viewport[4];
+  glGetIntegerv(GL_VIEWPORT, viewport);
+
+  glm_perspective(M_PI_4,
+                  (float)viewport[2]/viewport[3],
+                  0.01f,
+                  100.0f,
+                  dest);
 }
 
 CGLM_INLINE
