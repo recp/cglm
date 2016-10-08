@@ -30,7 +30,7 @@
 
 #define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                 \
   _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),          \
-                  z1, y1, x1, w1);
+                  z1, y1, x1, w1)
 
 #endif
 #endif /* cglm_intrin_h */
