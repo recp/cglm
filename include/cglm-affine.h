@@ -10,6 +10,7 @@
 
 #include "cglm.h"
 #include "cglm-vec.h"
+#include "cglm-affine-mat.h"
 #include <math.h>
 
 CGLM_INLINE
