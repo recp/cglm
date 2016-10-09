@@ -92,6 +92,34 @@ glm_ortho_default(mat4 dest) {
 
 CGLM_INLINE
 void
+glm_ortho_default_s(float size, mat4 dest) {
+  GLint rect[4];
+  float aspectRatio;
+
+  glm_platfom_get_viewport_rect(rect);
+  aspectRatio = (float)rect[2]/rect[3];
+
+  if (rect[2] >= rect[3]) {
+    glm_ortho(-size * aspectRatio,
+               size * aspectRatio,
+              -size,
+               size,
+               size + 100.0f,
+              -size - 100.0f,
+               dest);
+  } else {
+    glm_ortho(-size,
+               size,
+              -size / aspectRatio,
+               size / aspectRatio,
+               size + 100.0f,
+              -size - 100.0f,
+               dest);
+  }
+}
+
+CGLM_INLINE
+void
 glm_perspective(float fovy,
                 float aspect,
                 float nearVal,
