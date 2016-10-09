@@ -8,6 +8,8 @@
 #ifndef cglm_platform_h
 #define cglm_platform_h
 
+#include "cglm-common.h"
+
 #ifdef __APPLE__
 #  include <OpenGL/gl3.h>
 #else
@@ -25,6 +27,23 @@ glUniformMatrix4fv(GLint location,
                    GLsizei count,
                    GLboolean transpose,
                    const GLfloat *value);
+
+extern
+void
+glGetIntegerv(GLenum pname, GLint *params);
 #endif
+
+CGLM_INLINE
+void
+glm_platform_uniform_mat4fv(int32_t location,
+                            const float *value) {
+  glUniformMatrix4fv(location, 1, GL_FALSE, value);
+}
+
+CGLM_INLINE
+void
+glm_platfom_get_viewport_rect(int32_t *rect) {
+  glGetIntegerv(GL_VIEWPORT, rect);
+}
 
 #endif /* cglm_platform_h */

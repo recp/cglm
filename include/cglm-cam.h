@@ -68,7 +68,7 @@ glm_ortho_default(mat4 dest) {
   GLint rect[4];
   float aspectRatio;
 
-  glGetIntegerv(GL_VIEWPORT, rect);
+  glm_platfom_get_viewport_rect(rect);
   aspectRatio = (float)rect[2]/rect[3];
 
   if (rect[2] >= rect[3]) {
@@ -114,11 +114,11 @@ glm_perspective(float fovy,
 CGLM_INLINE
 void
 glm_perspective_default(mat4 dest) {
-  GLint viewport[4];
-  glGetIntegerv(GL_VIEWPORT, viewport);
+  GLint rect[4];
+  glm_platfom_get_viewport_rect(rect);
   
   glm_perspective((float)M_PI_4,
-                  (float)viewport[2]/viewport[3],
+                  (float)rect[2]/rect[3],
                   0.01f,
                   100.0f,
                   dest);
