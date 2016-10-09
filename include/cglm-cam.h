@@ -65,7 +65,7 @@ glm_ortho(float left,
 CGLM_INLINE
 void
 glm_ortho_default(mat4 dest) {
-  GLint rect[4];
+  int32_t rect[4];
   float aspectRatio;
 
   glm_platfom_get_viewport_rect(rect);
@@ -93,7 +93,7 @@ glm_ortho_default(mat4 dest) {
 CGLM_INLINE
 void
 glm_ortho_default_s(float size, mat4 dest) {
-  GLint rect[4];
+  int32_t rect[4];
   float aspectRatio;
 
   glm_platfom_get_viewport_rect(rect);
@@ -142,7 +142,7 @@ glm_perspective(float fovy,
 CGLM_INLINE
 void
 glm_perspective_default(mat4 dest) {
-  GLint rect[4];
+  int32_t rect[4];
   glm_platfom_get_viewport_rect(rect);
   
   glm_perspective((float)M_PI_4,
