@@ -57,6 +57,7 @@ glm_ortho(float left,
   dest[3][0] =-(right + left) / (right - left);
   dest[3][1] =-(top + bottom) / (top - bottom);
   dest[3][2] =-(far + near) / (far - near);
+  dest[3][3] = 1.0f;
 }
 
 CGLM_INLINE
