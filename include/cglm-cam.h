@@ -65,7 +65,29 @@ glm_ortho(float left,
 CGLM_INLINE
 void
 glm_ortho_default(mat4 dest) {
-  glm_ortho(-1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f, dest);
+  GLint rect[4];
+  float aspectRatio;
+
+  glGetIntegerv(GL_VIEWPORT, rect);
+  aspectRatio = (float)rect[2]/rect[3];
+
+  if (rect[2] >= rect[3]) {
+    glm_ortho(-1.0f * aspectRatio,
+               1.0f * aspectRatio,
+              -1.0f,
+               1.0f,
+               100.0f,
+              -100.0f,
+               dest);
+  } else {
+    glm_ortho(-1.0f,
+               1.0f,
+              -1.0f / aspectRatio,
+               1.0f / aspectRatio,
+               100.0f,
+              -100.0f,
+               dest);
+  }
 }
 
 CGLM_INLINE
