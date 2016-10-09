@@ -12,6 +12,8 @@
 #ifndef glm_vcam_h
 #define glm_vcam_h
 
+#define _USE_MATH_DEFINES
+
 #include "cglm.h"
 #include "cglm-platform.h"
 #include <math.h>
@@ -22,20 +24,20 @@ glm_frustum(float left,
             float right,
             float bottom,
             float top,
-            float near,
-            float far,
+            float nearVal,
+            float farVal,
             mat4 dest) {
   /* https://www.opengl.org/sdk/docs/man2/xhtml/glFrustum.xml */
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  dest[0][0] = 2.0f * near / (right - left);
-  dest[1][1] = 2.0f * near / (top - bottom);
+  dest[0][0] = 2.0f * nearVal / (right - left);
+  dest[1][1] = 2.0f * nearVal / (top - bottom);
   dest[2][0] = (right + left) / (right - left);
   dest[2][1] = (top + bottom) / (top - bottom);
-  dest[2][2] = -(far + near) / (far - near);
+  dest[2][2] = -(farVal + nearVal) / (farVal - nearVal);
   dest[2][3] = -1.0f;
-  dest[3][2] = -2.0f * far * near / (far - near);
+  dest[3][2] = -2.0f * farVal * nearVal / (farVal - nearVal);
 }
 
 CGLM_INLINE
@@ -44,8 +46,8 @@ glm_ortho(float left,
           float right,
           float bottom,
           float top,
-          float near,
-          float far,
+          float nearVal,
+          float farVal,
           mat4 dest) {
   /* https://www.opengl.org/sdk/docs/man2/xhtml/glOrtho.xml */
 
@@ -53,19 +55,25 @@ glm_ortho(float left,
 
   dest[0][0] = 2.0f / (right - left);
   dest[1][1] = 2.0f / (top - bottom);
-  dest[2][2] =-2.0f / (far - near);
+  dest[2][2] =-2.0f / (farVal - nearVal);
   dest[3][0] =-(right + left) / (right - left);
   dest[3][1] =-(top + bottom) / (top - bottom);
-  dest[3][2] =-(far + near) / (far - near);
+  dest[3][2] =-(farVal + nearVal) / (farVal - nearVal);
   dest[3][3] = 1.0f;
+}
+
+CGLM_INLINE
+void
+glm_ortho_default(mat4 dest) {
+  glm_ortho(-1.0f, 1.0f, 1.0f, -1.0f, 1.0f, -1.0f, dest);
 }
 
 CGLM_INLINE
 void
 glm_perspective(float fovy,
                 float aspect,
-                float near,
-                float far,
+                float nearVal,
+                float farVal,
                 mat4 dest) {
   /* https://www.opengl.org/sdk/docs/man2/xhtml/gluPerspective.xml */
   float f;
@@ -76,9 +84,9 @@ glm_perspective(float fovy,
 
   dest[0][0] = f / aspect;
   dest[1][1] = f;
-  dest[2][2] = (near + far) / (near - far);
+  dest[2][2] = (nearVal + farVal) / (nearVal - farVal);
   dest[2][3] =-1.0f;
-  dest[3][2] = 2 * near * far  / (near - far);
+  dest[3][2] = 2 * nearVal * farVal / (nearVal - farVal);
 }
 
 CGLM_INLINE
@@ -86,8 +94,8 @@ void
 glm_perspective_default(mat4 dest) {
   GLint viewport[4];
   glGetIntegerv(GL_VIEWPORT, viewport);
-
-  glm_perspective(M_PI_4,
+  
+  glm_perspective((float)M_PI_4,
                   (float)viewport[2]/viewport[3],
                   0.01f,
                   100.0f,
