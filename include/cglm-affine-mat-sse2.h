@@ -28,11 +28,13 @@ glm_affine_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
                           _mm_mul_ps(_mm_shuffle1_ps1(r, 2), l2)));
+
   r = _mm_load_ps(m2[1]);
   _mm_store_ps(dest[1],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
                           _mm_mul_ps(_mm_shuffle1_ps1(r, 2), l2)));
+
   r = _mm_load_ps(m2[2]);
   _mm_store_ps(dest[2],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),

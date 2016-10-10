@@ -19,10 +19,10 @@ glm_affine_mul(mat4 m1, mat4 m2, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_affine_mul_sse2(m1, m2, dest);
 #else
-  float a00, a01, a02, a03,    b00, b01, b02, b03,
-        a10, a11, a12, a13,    b10, b11, b12, b13,
-        a20, a21, a22, a23,    b20, b21, b22, b23,
-        a30, a31, a32, a33,                   b33;
+  float a00, a01, a02, a03,    b00, b01, b02,
+        a10, a11, a12, a13,    b10, b11, b12,
+        a20, a21, a22, a23,    b20, b21, b22,
+        a30, a31, a32, a33,    b30, b31, b32, b33;
 
   a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
   a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
