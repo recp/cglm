@@ -13,6 +13,25 @@
 
 CGLM_INLINE
 void
+glm_mat4_pick3_sse2(mat4 mat, mat3 dest) {
+  __m128 x0, x1, x2, x3;
+
+  x0 = _mm_load_ps(mat[0]);
+  x1 = _mm_load_ps(mat[1]);
+  x2 = _mm_load_ps(mat[2]);
+
+  x3 = _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(0, 0, 2, 2));
+  x0 = _mm_shuffle_ps(x0, x3, _MM_SHUFFLE(2, 0, 1, 0));
+  x1 = _mm_shuffle_ps(x1, x2, _MM_SHUFFLE(1, 0, 2, 1));
+
+  _mm_storeu_ps(&dest[0][0], x0);
+  _mm_storeu_ps(&dest[1][1], x1);
+
+  dest[2][2] = mat[2][2];
+}
+
+CGLM_INLINE
+void
 glm_mat4_scale_sse2(mat4 m, float s){
   __m128 x0;
   x0 = _mm_set1_ps(s);
