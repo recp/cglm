@@ -11,12 +11,15 @@
 #include "cglm.h"
 #include "cglm-mat.h"
 #include "cglm-affine-mat-sse2.h"
+#include "cglm-affine-mat-avx.h"
 #include <assert.h>
 
 CGLM_INLINE
 void
 glm_affine_mul(mat4 m1, mat4 m2, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+    glm_affine_mul_avx(m1, m2, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_affine_mul_sse2(m1, m2, dest);
 #else
   float a00, a01, a02, a03,    b00, b01, b02,
