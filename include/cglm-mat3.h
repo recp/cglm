@@ -76,6 +76,63 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
 #endif
 }
 
+/*!
+ * @brief transpose mat3 and store in dest
+ *
+ * source matrix will not be transposed unless dest is m
+ *
+ * @param m[in]     matrix
+ * @param dest[out] result
+ */
+CGLM_INLINE
+void
+glm_mat3_transpose_to(mat3 m, mat3 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat3_transp_to_sse2(m, dest);
+#else
+  dest[0][0] = m[0][0];
+  dest[0][1] = m[1][0];
+  dest[0][2] = m[2][0];
+
+  dest[1][0] = m[0][1];
+  dest[1][1] = m[1][1];
+  dest[1][2] = m[2][1];
+
+  dest[2][0] = m[0][2];
+  dest[2][1] = m[1][2];
+  dest[2][2] = m[2][2];
+#endif
+}
+
+/*!
+ * @brief tranpose mat3 and store result in same matrix
+ *
+ * @param[in, out] m source and dest
+ */
+CGLM_INLINE
+void
+glm_mat3_transpose(mat3 m) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat3_transp_sse2(m);
+#else
+  mat3 tmp;
+
+  tmp[0][1] = m[1][0];
+  tmp[0][2] = m[2][0];
+  tmp[1][0] = m[0][1];
+  tmp[1][2] = m[2][1];
+  tmp[2][0] = m[0][2];
+  tmp[2][1] = m[1][2];
+
+  m[0][1] = tmp[0][1];
+  m[0][2] = tmp[0][2];
+  m[1][0] = tmp[1][0];
+  m[1][2] = tmp[1][2];
+  m[2][0] = tmp[2][0];
+  m[2][1] = tmp[2][1];
+#endif
+}
+
 CGLM_INLINE
 void
 glm_mat3_print(mat3 matrix,

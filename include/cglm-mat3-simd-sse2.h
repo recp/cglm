@@ -13,6 +13,66 @@
 
 CGLM_INLINE
 void
+glm_mat3_transp_to_sse2(mat3 m, mat3 dest){
+  __m128 x0, x1, x2, x3, x4;
+  /*
+   a b c d        a d g b
+   e f g h   ->   e h c f
+   j              j
+   */
+
+  /* d c b a */
+  /* h g f e */
+  x0 = _mm_loadu_ps(&m[0][0]);
+  x1 = _mm_loadu_ps(&m[1][1]);
+
+  /* g g b b */
+  /* a d g b */
+  x2 = _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 1, 1));
+  x3 = _mm_shuffle_ps(x0, x2, _MM_SHUFFLE(0, 2, 3, 0));
+
+  /* c c f f */
+  /* e h c f */
+  x2 = _mm_shuffle_ps(x1, x0, _MM_SHUFFLE(2, 2, 1, 1));
+  x4 = _mm_shuffle_ps(x1, x2, _MM_SHUFFLE(0, 2, 3, 0));
+
+  _mm_storeu_ps(&dest[0][0], x3);
+  _mm_storeu_ps(&dest[1][1], x4);
+
+  dest[2][2] = m[2][2];
+}
+
+CGLM_INLINE
+void
+glm_mat3_transp_sse2(mat3 m){
+  __m128 x0, x1, x2, x3, x4;
+  /*
+   a b c d        a d g b
+   e f g h   ->   e h c f
+   j              j
+   */
+
+  /* d c b a */
+  /* h g f e */
+  x0 = _mm_loadu_ps(&m[0][0]);
+  x1 = _mm_loadu_ps(&m[1][1]);
+
+  /* g g b b */
+  /* a d g b */
+  x2 = _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 1, 1));
+  x3 = _mm_shuffle_ps(x0, x2, _MM_SHUFFLE(0, 2, 3, 0));
+
+  /* c c f f */
+  /* e h c f */
+  x2 = _mm_shuffle_ps(x1, x0, _MM_SHUFFLE(2, 2, 1, 1));
+  x4 = _mm_shuffle_ps(x1, x2, _MM_SHUFFLE(0, 2, 3, 0));
+
+  _mm_storeu_ps(&m[0][0], x3);
+  _mm_storeu_ps(&m[1][1], x4);
+}
+
+CGLM_INLINE
+void
 glm_mat3_mul_sse2(mat3 m1, mat3 m2, mat3 dest) {
   __m128 l0, l1, l2;
   __m128 r0, r1, r2;
