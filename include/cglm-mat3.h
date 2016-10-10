@@ -133,6 +133,21 @@ glm_mat3_transpose(mat3 m) {
 #endif
 }
 
+/*!
+ * @brief multiply mat3 with vec3 (column vector) and store in dest vector
+ *
+ * @param[in]  m    mat3 (left)
+ * @param[in]  v    vec3 (right, column vector)
+ * @param[out] dest vec3 (result, column vector)
+ */
+CGLM_INLINE
+void
+glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
+  dest[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
+  dest[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
+  dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+}
+
 CGLM_INLINE
 void
 glm_mat3_print(mat3 matrix,
