@@ -136,4 +136,20 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
   dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
 }
 
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]      s scalar
+ */
+CGLM_INLINE
+void
+glm_mat3_scale(mat3 m, float s) {
+  m[0][0] *= s; m[0][1] *= s; m[0][2] *= s;
+  m[1][0] *= s; m[1][1] *= s; m[1][2] *= s;
+  m[2][0] *= s; m[2][1] *= s; m[2][2] *= s;
+}
+
 #endif /* cglm_mat3_h */
