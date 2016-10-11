@@ -44,6 +44,36 @@ glm_mat4_print(mat4   matrix,
 
 CGLM_INLINE
 void
+glm_mat3_print(mat3 matrix,
+               FILE * __restrict ostream) {
+  int i;
+  int j;
+
+#define m 3
+#define n 3
+
+  fprintf(ostream, "Matrix (float%dx%d):\n", m, n);
+
+  for (i = 0; i < m; i++) {
+    fprintf(ostream, "\t|");
+    for (j = 0; j < n; j++) {
+      fprintf(ostream, "%0.4f", matrix[j][i]);;
+
+      if (j != n - 1)
+        fprintf(ostream, "\t");
+    }
+
+    fprintf(ostream, "|\n");
+  }
+
+  fprintf(ostream, "\n");
+
+#undef m
+#undef n
+}
+
+CGLM_INLINE
+void
 glm_vec4_print(vec4 vec,
                FILE * __restrict ostream) {
   int i;

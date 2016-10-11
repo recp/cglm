@@ -148,34 +148,4 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
   dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
 }
 
-CGLM_INLINE
-void
-glm_mat3_print(mat3 matrix,
-               FILE * __restrict ostream) {
-  int i;
-  int j;
-
-#define m 3
-#define n 3
-
-  fprintf(ostream, "Matrix (float%dx%d):\n", m, n);
-
-  for (i = 0; i < m; i++) {
-    fprintf(ostream, "\t|");
-    for (j = 0; j < n; j++) {
-      fprintf(ostream, "%0.4f", matrix[j][i]);;
-
-      if (j != n - 1)
-        fprintf(ostream, "\t");
-    }
-
-    fprintf(ostream, "|\n");
-  }
-
-  fprintf(ostream, "\n");
-
-#undef m
-#undef n
-}
-
 #endif /* cglm_mat3_h */

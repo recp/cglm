@@ -20,6 +20,7 @@ typedef vec4 versor;
 
 #include "cglm-vec.h"
 #include "cglm-mat.h"
+#include "cglm-mat3.h"
 #include "cglm-util.h"
 #include "cglm-affine.h"
 #include "cglm-cam.h"
