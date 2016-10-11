@@ -64,7 +64,7 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
 }
 
 /*!
- * @brief copy top-left of mat4 to mat3
+ * @brief copy upper-left of mat4 to mat3
  *
  * @param[in]  mat  source
  * @param[out] dest destination
@@ -87,6 +87,28 @@ glm_mat4_pick3(mat4 mat, mat3 dest) {
   dest[2][1] = mat[2][1];
   dest[2][2] = mat[2][2];
 #endif
+}
+
+/*!
+ * @brief copy mat3 to mat4's upper-left
+ *
+ * @param[in]  mat  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_mat4_ins3(mat3 mat, mat4 dest) {
+  dest[0][0] = mat[0][0];
+  dest[0][1] = mat[0][1];
+  dest[0][2] = mat[0][2];
+
+  dest[1][0] = mat[1][0];
+  dest[1][1] = mat[1][1];
+  dest[1][2] = mat[1][2];
+
+  dest[2][0] = mat[2][0];
+  dest[2][1] = mat[2][1];
+  dest[2][2] = mat[2][2];
 }
 
 /*!
