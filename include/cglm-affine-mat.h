@@ -10,6 +10,7 @@
 
 #include "cglm.h"
 #include "cglm-mat.h"
+#include "cglm-mat3.h"
 #include "cglm-affine-mat-sse2.h"
 #include "cglm-affine-mat-avx.h"
 #include <assert.h>
@@ -56,6 +57,36 @@ glm_affine_mul(mat4 m1, mat4 m2, mat4 dest) {
   dest[3][1] = a01 * b30 + a11 * b31 + a21 * b32 + a31 * b33;
   dest[3][2] = a02 * b30 + a12 * b31 + a22 * b32 + a32 * b33;
   dest[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
+#endif
+}
+
+/*!
+ * @brief inverse orthonormal rotation + translation matrix (ridig-body)
+ *
+ * @code
+ * X = | R  T |   X' = | R' -R'T |
+ *     | 0  1 |        | 0     1 |
+ * @endcode
+ *
+ * @param[in,out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_affine_inv_tr(mat4 mat) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_affine_inv_tr_sse2(mat);
+#else
+  CGLM_ALIGN(16) mat3 r;
+  CGLM_ALIGN(16) vec3 t;
+
+  /* rotate */
+  glm_mat4_pick3t(mat, r);
+  glm_mat4_ins3(r, mat);
+
+  /* translate */
+  glm_mat3_mulv(r, mat[3], t);
+  glm_vec_flipsign(t);
+  glm_vec_dup(t, mat[3]);
 #endif
 }
 

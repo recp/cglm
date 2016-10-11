@@ -49,5 +49,31 @@ glm_affine_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 3), l3))));
 }
 
+CGLM_INLINE
+void
+glm_affine_inv_tr_sse2(mat4 mat) {
+  __m128 r0, r1, r2, r3, x0;
+
+  r0 = _mm_load_ps(mat[0]);
+  r1 = _mm_load_ps(mat[1]);
+  r2 = _mm_load_ps(mat[2]);
+  r3 = _mm_load_ps(mat[3]);
+
+  x0 = _mm_add_ps(_mm_mul_ps(r0, _mm_shuffle1_ps(r3, 0, 0, 0, 0)),
+                  _mm_mul_ps(r1, _mm_shuffle1_ps(r3, 1, 1, 1, 1)));
+  x0 = _mm_add_ps(x0, _mm_mul_ps(r2, _mm_shuffle1_ps(r3, 2, 2, 2, 2)));
+  x0 = _mm_xor_ps(x0, _mm_set1_ps(-0.f));
+
+  r3 = _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f);
+  x0 = _mm_add_ps(x0, r3);
+
+  _MM_TRANSPOSE4_PS(r0, r1, r2, r3);
+
+  _mm_store_ps(mat[0], r0);
+  _mm_store_ps(mat[1], r1);
+  _mm_store_ps(mat[2], r2);
+  _mm_store_ps(mat[3], x0);
+}
+
 #endif
 #endif /* cglm_affine_mat_sse2_h */
