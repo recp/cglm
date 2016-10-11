@@ -340,7 +340,9 @@ glm_mat4_det(mat4 mat) {
 /*!
  * @brief inverse mat4 and store in dest
  *
- * @todo this function could return existence of inverse (BOOL)
+ * this func uses reciprocal approximation without extra corrections 
+ * e.g Newton-Raphson. this should work faster than _precise, 
+ * to get precise value use _precise version
  *
  * @param[in]  mat  matrix
  * @param[out] dest inverse matrix
@@ -399,4 +401,26 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
 #endif
 }
 
+
+/*!
+ * @brief inverse mat4 precisely and store in dest
+ *
+ * this do same thing as glm_mat4_inv did. the only diff is this func uses
+ * division instead of reciprocal approximation. Due to division this might
+ * work slower than glm_mat4_inv
+ *
+ * @param[in]  mat  matrix
+ * @param[out] dest inverse matrix
+ */
+CGLM_INLINE
+void
+glm_mat4_inv_precise(mat4 mat, mat4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat4_inv_precise_sse2(mat, dest);
+#else
+  glm_mat4_inv_precise(mat, dest);
+#endif
+}
+
+#else
 #endif /* cglm_mat_h */
