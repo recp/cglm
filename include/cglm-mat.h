@@ -72,9 +72,6 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_pick3(mat4 mat, mat3 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat4_pick3_sse2(mat, dest);
-#else
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -86,7 +83,6 @@ glm_mat4_pick3(mat4 mat, mat3 dest) {
   dest[2][0] = mat[2][0];
   dest[2][1] = mat[2][1];
   dest[2][2] = mat[2][2];
-#endif
 }
 
 /*!

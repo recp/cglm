@@ -66,12 +66,10 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
   dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
   dest[0][2] = a02 * b00 + a12 * b01 + a22 * b02;
   dest[1][0] = a00 * b10 + a10 * b11 + a20 * b12;
-
   dest[1][1] = a01 * b10 + a11 * b11 + a21 * b12;
   dest[1][2] = a02 * b10 + a12 * b11 + a22 * b12;
   dest[2][0] = a00 * b20 + a10 * b21 + a20 * b22;
   dest[2][1] = a01 * b20 + a11 * b21 + a21 * b22;
-
   dest[2][2] = a02 * b20 + a12 * b21 + a22 * b22;
 #endif
 }
@@ -87,21 +85,15 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_transpose_to(mat3 m, mat3 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat3_transp_to_sse2(m, dest);
-#else
   dest[0][0] = m[0][0];
   dest[0][1] = m[1][0];
   dest[0][2] = m[2][0];
-
   dest[1][0] = m[0][1];
   dest[1][1] = m[1][1];
   dest[1][2] = m[2][1];
-
   dest[2][0] = m[0][2];
   dest[2][1] = m[1][2];
   dest[2][2] = m[2][2];
-#endif
 }
 
 /*!
@@ -112,9 +104,6 @@ glm_mat3_transpose_to(mat3 m, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_transpose(mat3 m) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat3_transp_sse2(m);
-#else
   mat3 tmp;
 
   tmp[0][1] = m[1][0];
@@ -130,7 +119,6 @@ glm_mat3_transpose(mat3 m) {
   m[1][2] = tmp[1][2];
   m[2][0] = tmp[2][0];
   m[2][1] = tmp[2][1];
-#endif
 }
 
 /*!
