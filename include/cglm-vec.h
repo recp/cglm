@@ -293,6 +293,42 @@ glm_vec_scale(vec3 v, float s, vec3 dest) {
 }
 
 /*!
+ * @brief flip sign of all vec3 members
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_flipsign(vec3 v) {
+  v[0] = -v[0];
+  v[1] = -v[1];
+  v[2] = -v[2];
+}
+
+/*!
+ * @brief flip sign of all vec4 members
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_flipsign(vec4 v) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_xor_ps(_mm_load_ps(v),
+                             _mm_set1_ps(-0.0f)));
+#else
+  v[0] = -v[0];
+  v[1] = -v[1];
+  v[2] = -v[2];
+  v[3] = -v[3];
+#endif
+}
+
+/*!
  * @brief multiply vec4 vector with scalar
  *
  * @param[in]  v    vector
