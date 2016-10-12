@@ -162,7 +162,6 @@ glm_mat3_scale(mat3 m, float s) {
 CGLM_INLINE
 float
 glm_mat3_det(mat3 mat) {
-  /* [square] det(A) = det(At) */
   float a, b, c,
         d, e, f,
         g, h, i;
