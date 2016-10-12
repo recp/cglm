@@ -27,10 +27,6 @@ glUniformMatrix4fv(GLint location,
                    GLsizei count,
                    GLboolean transpose,
                    const GLfloat *value);
-
-extern
-void
-glGetIntegerv(GLenum pname, GLint *params);
 #endif
 
 CGLM_INLINE
