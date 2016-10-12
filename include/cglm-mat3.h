@@ -153,6 +153,28 @@ glm_mat3_scale(mat3 m, float s) {
 }
 
 /*!
+ * @brief mat3 determinant
+ *
+ * @param[in] mat matrix
+ *
+ * @return determinant
+ */
+CGLM_INLINE
+float
+glm_mat3_det(mat3 mat) {
+  /* [square] det(A) = det(At) */
+  float a, b, c,
+        d, e, f,
+        g, h, i;
+
+  a = mat[0][0], b = mat[0][1], c = mat[0][2],
+  d = mat[1][0], e = mat[1][1], f = mat[1][2],
+  g = mat[2][0], h = mat[2][1], i = mat[2][2];
+
+  return a * (e * i - h * f) - d * (b * i - c * h) + g * (b * f - c * e);
+}
+
+/*!
  * @brief inverse mat3 and store in dest
  *
  * @param[in]  mat  matrix
