@@ -13,7 +13,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_uniform(mat4 m, int32_t location){
+glm_uniform(int32_t location, mat4 m) {
   glm_platform_uniform_mat4fv(location, m[0]);
 }
 
