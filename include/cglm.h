@@ -25,5 +25,6 @@ typedef vec4 versor;
 #include "cglm-affine.h"
 #include "cglm-cam.h"
 #include "cglm-quat.h"
+#include "cglm-euler.h"
 
 #endif /* glm_h */
