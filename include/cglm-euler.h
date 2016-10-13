@@ -15,7 +15,7 @@
  */
 CGLM_INLINE
 void
-glm_euler_angle(float yaw,
+glm_euler_zxy(float yaw,
                 float pitch,
                 float roll,
                 mat4 dest) {
@@ -27,13 +27,13 @@ glm_euler_angle(float yaw,
   sz = sinf(roll);  cz = cosf(roll);
 
   dest[0][0] = cy * cz - sx * sy * sz;
-  dest[0][1] = cy * sz + cz * sx * sy;
-  dest[0][2] =-cx * sy;
-  dest[1][0] =-cx * sz;
+  dest[1][0] = cy * sz + cz * sx * sy;
+  dest[2][0] =-cx * sy;
+  dest[0][1] =-cx * sz;
   dest[1][1] = cx * cz;
-  dest[1][2] = sx;
-  dest[2][0] = cz * sy + cy * sx * sz;
-  dest[2][1] = sy * sz - cy * cz * sx;
+  dest[2][1] = sx;
+  dest[0][2] = cz * sy + cy * sx * sz;
+  dest[1][2] = sy * sz - cy * cz * sx;
   dest[2][2] = cx * cy;
   dest[0][3] = 0.0f;
   dest[1][3] = 0.0f;
