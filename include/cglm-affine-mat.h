@@ -17,11 +17,11 @@
 
 CGLM_INLINE
 void
-glm_affine_mul(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul(mat4 m1, mat4 m2, mat4 dest) {
 #ifdef __AVX__
-    glm_affine_mul_avx(m1, m2, dest);
+  glm_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glm_affine_mul_sse2(m1, m2, dest);
+  glm_mul_sse2(m1, m2, dest);
 #else
   float a00, a01, a02, a03,    b00, b01, b02,
         a10, a11, a12, a13,    b10, b11, b12,
@@ -72,9 +72,9 @@ glm_affine_mul(mat4 m1, mat4 m2, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_affine_inv_tr(mat4 mat) {
+glm_inv_tr(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_affine_inv_tr_sse2(mat);
+  glm_inv_tr_sse2(mat);
 #else
   CGLM_ALIGN(16) mat3 r;
   CGLM_ALIGN(16) vec3 t;

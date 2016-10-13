@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_affine_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   __m128 l0, l1, l2, l3, r;
 
@@ -51,7 +51,7 @@ glm_affine_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_affine_inv_tr_sse2(mat4 mat) {
+glm_inv_tr_sse2(mat4 mat) {
   __m128 r0, r1, r2, r3, x0;
 
   r0 = _mm_load_ps(mat[0]);
