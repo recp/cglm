@@ -8,11 +8,12 @@
 #ifndef cglm_affine_mat_h
 #define cglm_affine_mat_h
 
-#include "cglm.h"
+#include "cglm-common.h"
 #include "cglm-mat.h"
 #include "cglm-mat3.h"
 #include "cglm-affine-mat-sse2.h"
 #include "cglm-affine-mat-avx.h"
+
 #include <assert.h>
 
 CGLM_INLINE

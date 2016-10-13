@@ -9,8 +9,8 @@
 #define cglm_affine_mat_sse2_h
 #if defined( __SSE__ ) || defined( __SSE2__ )
 
+#include "cglm-common.h"
 #include "cglm-intrin.h"
-#include "cglm.h"
 
 CGLM_INLINE
 void

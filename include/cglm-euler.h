@@ -8,7 +8,7 @@
 #ifndef cglm_euler_h
 #define cglm_euler_h
 
-#include "cglm.h"
+#include "cglm-common.h"
 
 /*!
  * @brief build rotation matrix from euler angles/yaw-pitch-roll (xyz)

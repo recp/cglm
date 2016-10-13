@@ -13,9 +13,10 @@
 #ifndef cglm_mat_h
 #define cglm_mat_h
 
-#include "cglm.h"
+#include "cglm-common.h"
 #include "cglm-mat-simd-sse2.h"
 #include "cglm-mat-simd-avx.h"
+
 #include <assert.h>
 
 #define GLM_MAT4_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f, 0.0f},                    \

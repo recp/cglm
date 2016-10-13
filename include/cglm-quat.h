@@ -8,11 +8,10 @@
 #ifndef cglm_quat_h
 #define cglm_quat_h
 
-#include "cglm.h"
-#include "cglm-vec.h"
+#include "cglm-common.h"
 #include "cglm-intrin.h"
 #include "cglm-quat-simd.h"
-#include <math.h>
+#include "cglm-vec.h"
 
 CGLM_INLINE
 void

@@ -8,6 +8,7 @@
 #ifndef cglm_quat_simd_h
 #define cglm_quat_simd_h
 
+#include "cglm-common.h"
 #include "cglm-intrin.h"
 
 CGLM_INLINE

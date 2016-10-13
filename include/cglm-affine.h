@@ -8,10 +8,9 @@
 #ifndef cglm_affine_h
 #define cglm_affine_h
 
-#include "cglm.h"
+#include "cglm-common.h"
 #include "cglm-vec.h"
 #include "cglm-affine-mat.h"
-#include <math.h>
 
 CGLM_INLINE
 void

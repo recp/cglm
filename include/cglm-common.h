@@ -5,17 +5,18 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef glm_common_h
-#define glm_common_h
+#ifndef cglm_common_h
+#define cglm_common_h
+
+#define _USE_MATH_DEFINES /* for windows */
 
 #include <stdint.h>
+#include <math.h>
 
 #if defined(_WIN32)
 #  define CGLM_INLINE __forceinline
-#  define CGLM_ALIGN(X) /* __declspec(align(X)) */
 #else
 #  define CGLM_INLINE static inline __attribute((always_inline))
-#  define CGLM_ALIGN(X) __attribute((aligned(X)))
 #endif
 
 #define glm__memcpy(type, dest, src, size)                                    \
@@ -46,4 +47,6 @@
 
 #define glm__memzero(type, dest, size) glm__memset(type, dest, size, 0)
 
-#endif /* glm_common_h */
+#include "cglm-types.h"
+
+#endif /* cglm_common_h */

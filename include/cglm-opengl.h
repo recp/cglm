@@ -8,8 +8,8 @@
 #ifndef cglm_mat_opengl_h
 #define cglm_mat_opengl_h
 
+#include "cglm-common.h"
 #include "cglm-platform.h"
-#include "cglm.h"
 
 CGLM_INLINE
 void

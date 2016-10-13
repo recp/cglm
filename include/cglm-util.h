@@ -8,7 +8,8 @@
 #ifndef cglm_util_h
 #define cglm_util_h
 
-#include "cglm.h"
+#include "cglm-common.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 

@@ -5,18 +5,11 @@
  * Full license can be found in the LICENSE file
  */
 
-/*
- TODO: GLdouble vs float ?
- */
+#ifndef cglm_vcam_h
+#define cglm_vcam_h
 
-#ifndef glm_vcam_h
-#define glm_vcam_h
-
-#define _USE_MATH_DEFINES
-
-#include "cglm.h"
+#include "cglm-common.h"
 #include "cglm-platform.h"
-#include <math.h>
 
 CGLM_INLINE
 void
@@ -186,4 +179,4 @@ glm_lookat(vec3 eye,
   dest[3][3] = 1;
 }
 
-#endif /* glm_vcam_h */
+#endif /* cglm_vcam_h */

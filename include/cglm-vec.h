@@ -13,9 +13,8 @@
 #ifndef cglm_vec_h
 #define cglm_vec_h
 
-#include "cglm.h"
+#include "cglm-common.h"
 #include "cglm-intrin.h"
-#include <math.h>
 
 /*!
  * @brief copy all members of [a] to [dest]
