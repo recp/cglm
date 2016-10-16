@@ -12,10 +12,11 @@
 #include "cglm-vec.h"
 #include "cglm-mat.h"
 #include "cglm-mat3.h"
-#include "cglm-util.h"
 #include "cglm-affine.h"
 #include "cglm-cam.h"
 #include "cglm-quat.h"
 #include "cglm-euler.h"
+#include "cglm-util.h"
+#include "cglm-io.h"
 
 #endif /* cglm_h */
