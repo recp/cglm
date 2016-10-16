@@ -206,4 +206,44 @@ glm_mat3_inv(mat3 mat, mat3 dest) {
   glm_mat3_scale(dest, det);
 }
 
+/*!
+ * @brief swap two matrix columns
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     col1 col1
+ * @param[in]     col2 col2
+ */
+CGLM_INLINE
+void
+glm_mat3_swap_col(mat3 mat, int col1, int col2) {
+  vec3 tmp;
+  glm_vec_dup(mat[col1], tmp);
+  glm_vec_dup(mat[col2], mat[col1]);
+  glm_vec_dup(tmp, mat[col2]);
+}
+
+/*!
+ * @brief swap two matrix rows
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     col1 col1
+ * @param[in]     col2 col2
+ */
+CGLM_INLINE
+void
+glm_mat3_swap_row(mat3 mat, int row1, int row2) {
+  vec3 tmp;
+  tmp[0] = mat[0][row1];
+  tmp[1] = mat[1][row1];
+  tmp[2] = mat[2][row1];
+
+  mat[0][row1] = mat[0][row2];
+  mat[1][row1] = mat[1][row2];
+  mat[2][row1] = mat[2][row2];
+
+  mat[0][row2] = tmp[0];
+  mat[1][row2] = tmp[1];
+  mat[2][row2] = tmp[2];
+}
+
 #endif /* cglm_mat3_h */

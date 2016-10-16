@@ -482,7 +482,7 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
 
   mat[0][row2] = tmp[0];
   mat[1][row2] = tmp[1];
-  mat[2][row2] = tmp[2];;
+  mat[2][row2] = tmp[2];
   mat[3][row2] = tmp[3];
 }
 
