@@ -443,5 +443,48 @@ glm_mat4_inv_precise(mat4 mat, mat4 dest) {
 #endif
 }
 
+/*!
+ * @brief swap two matrix columns
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     col1 col1
+ * @param[in]     col2 col2
+ */
+CGLM_INLINE
+void
+glm_mat4_swap_col(mat4 mat, int col1, int col2) {
+  vec4 tmp;
+  glm_vec4_dup(mat[col1], tmp);
+  glm_vec4_dup(mat[col2], mat[col1]);
+  glm_vec4_dup(tmp, mat[col2]);
+}
+
+/*!
+ * @brief swap two matrix rows
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     col1 col1
+ * @param[in]     col2 col2
+ */
+CGLM_INLINE
+void
+glm_mat4_swap_row(mat4 mat, int row1, int row2) {
+  vec4 tmp;
+  tmp[0] = mat[0][row1];
+  tmp[1] = mat[1][row1];
+  tmp[2] = mat[2][row1];
+  tmp[3] = mat[3][row1];
+
+  mat[0][row1] = mat[0][row2];
+  mat[1][row1] = mat[1][row2];
+  mat[2][row1] = mat[2][row2];
+  mat[3][row1] = mat[3][row2];
+
+  mat[0][row2] = tmp[0];
+  mat[1][row2] = tmp[1];
+  mat[2][row2] = tmp[2];;
+  mat[3][row2] = tmp[3];
+}
+
 #else
 #endif /* cglm_mat_h */
