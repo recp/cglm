@@ -69,16 +69,16 @@ glm_ortho_default(mat4 dest) {
                1.0f * aspectRatio,
               -1.0f,
                1.0f,
-               100.0f,
               -100.0f,
+               100.0f,
                dest);
   } else {
     glm_ortho(-1.0f,
                1.0f,
               -1.0f / aspectRatio,
                1.0f / aspectRatio,
-               100.0f,
               -100.0f,
+               100.0f,
                dest);
   }
 }
@@ -97,16 +97,16 @@ glm_ortho_default_s(float size, mat4 dest) {
                size * aspectRatio,
               -size,
                size,
-               size + 100.0f,
               -size - 100.0f,
+               size + 100.0f,
                dest);
   } else {
     glm_ortho(-size,
                size,
               -size / aspectRatio,
                size / aspectRatio,
-               size + 100.0f,
               -size - 100.0f,
+               size + 100.0f,
                dest);
   }
 }
