@@ -288,4 +288,94 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
   glm_rotate_ndc(m, angle, axis_ndc);
 }
 
+/*!
+ * @brief decompose translate matrix
+ *
+ * if you only need vector then just copy last vector of mat:
+ * glm_vec4_dup(m, translate_vector)
+ *
+ * @param[in]  m affine transform
+ * @param[out] t translation matrix
+ */
+CGLM_INLINE
+void
+glm_decompose_trans(mat4 m, mat4 t) {
+  mat4 tmp = GLM_MAT4_IDENTITY_INIT;
+  glm_vec4_dup(m[3], tmp[3]);
+  glm_mat4_dup(tmp, t);
+}
+
+/*!
+ * @brief decompose scale vector
+ *
+ * @param[in]  m affine transform
+ * @param[out] s scale vector (Sx, Sy, Sz)
+ */
+CGLM_INLINE
+void
+glm_decompose_scalev(mat4 m, vec3 s) {
+  s[0] = glm_vec_norm(m[0]);
+  s[1] = glm_vec_norm(m[1]);
+  s[2] = glm_vec_norm(m[2]);
+}
+
+/*!
+ * @brief decompose scale matrix
+ *
+ * @param[in]  m affine transform
+ * @param[out] s scale matrix
+ */
+CGLM_INLINE
+void
+glm_decompose_scale(mat4 m, mat4 s) {
+  mat4 tmp = GLM_MAT4_IDENTITY_INIT;
+  vec3 sv;
+
+  glm_decompose_scalev(m, sv);
+
+  tmp[0][0] = sv[0];
+  tmp[1][1] = sv[1];
+  tmp[2][2] = sv[2];
+
+  glm_mat4_dup(tmp, s);
+}
+
+/*!
+ * @brief decompose rotation matrix
+ *
+ * @param[in]  m affine transform
+ * @param[out] r rotation matrix
+ */
+CGLM_INLINE
+void
+glm_decompose_rotation(mat4 m, mat4 r) {
+  vec3 sv;
+  vec4 t = {0, 0, 0, 1};
+
+  glm_decompose_scalev(m, sv);
+
+  glm_mat4_dup(m, r);
+  glm_vec4_dup(t, r[3]);
+
+  glm_vec4_scale(r[0], 1.0f/sv[0], r[0]);
+  glm_vec4_scale(r[1], 1.0f/sv[1], r[1]);
+  glm_vec4_scale(r[2], 1.0f/sv[2], r[2]);
+}
+
+/*!
+ * @brief decompose affine transform into mat4
+ *
+ * @param[in]  m affine transfrom
+ * @param[out] t translate matrix
+ * @param[out] r rotate matrix
+ * @param[out] s scale matrix
+ */
+CGLM_INLINE
+void
+glm_decompose(mat4 m, mat4 t, mat4 r, mat4 s) {
+  glm_decompose_trans(m, t);
+  glm_decompose_scale(m, s);
+  glm_decompose_rotation(m, r);
+}
+
 #endif /* cglm_affine_h */
