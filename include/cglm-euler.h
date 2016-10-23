@@ -38,6 +38,9 @@ glm_euler(float yaw,
   dest[0][3] = 0.0f;
   dest[1][3] = 0.0f;
   dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
   dest[3][3] = 1.0f;
 }
 
@@ -69,6 +72,9 @@ glm_euler_zxy(float yaw,
   dest[0][3] = 0.0f;
   dest[1][3] = 0.0f;
   dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
   dest[3][3] = 1.0f;
 }
 
