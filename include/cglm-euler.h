@@ -27,13 +27,13 @@ glm_euler(float yaw,
   sz = sinf(roll);  cz = cosf(roll);
 
   dest[0][0] = cy * cz;
-  dest[0][1] = cz * sx * sy - cx * sz;
-  dest[0][2] = cx * cz * sy + sx * sz;
-  dest[1][0] = cy * sz;
-  dest[1][1] = cx* cz + sx * sy * sz;
-  dest[1][2] =-cz * sx + cx * sy * sz;
-  dest[2][0] =-sy;
-  dest[2][1] = cy * sx;
+  dest[0][1] = cz * sx * sy + cx * sz;
+  dest[0][2] =-cx * cz * sy + sx * sz;
+  dest[1][0] =-cy * sz;
+  dest[1][1] = cx * cz - sx * sy * sz;
+  dest[1][2] = cz * sx + cx * sy * sz;
+  dest[2][0] = sy;
+  dest[2][1] =-cy * sx;
   dest[2][2] = cx * cy;
   dest[0][3] = 0.0f;
   dest[1][3] = 0.0f;
