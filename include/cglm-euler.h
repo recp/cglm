@@ -11,7 +11,7 @@
 #include "cglm-common.h"
 
 /*!
- * @brief euler angles (in radian) for xyz sequence
+ * @brief euler angles (in radian) using xyz sequence
  *
  * @param[in]  m     affine transform
  * @param[out] pitch x
@@ -26,9 +26,24 @@ glm_euler_angles(mat4 m,
                  float * __restrict roll) {
   if (m[2][0] < 1.0f) {
     if (m[2][0] > -1.0f) {
-      *yaw   = asinf(m[2][0]);
-      *pitch = atan2f(-m[2][1], m[2][2]);
-      *roll  = atan2f(-m[1][0], m[0][0]);
+      float a[2][3];
+      int   path;
+
+      a[0][0] = asinf(m[2][0]);
+      a[1][0] = M_PI - a[0][0];
+
+      a[0][1] = atan2f(-m[2][1] / cosf(a[0][0]), m[2][2] / cosf(a[0][0]));
+      a[1][1] = atan2f(-m[2][1] / cosf(a[1][0]), m[2][2] / cosf(a[1][0]));
+
+      a[0][2] = atan2f(-m[1][0] / cosf(a[0][0]), m[0][0] / cosf(a[0][0]));
+      a[1][2] = atan2f(-m[1][0] / cosf(a[1][0]), m[0][0] / cosf(a[1][0]));
+
+      path = (fabsf(a[0][0]) + fabsf(a[0][1]) + fabsf(a[0][2])) >
+                (fabsf(a[1][0]) + fabsf(a[1][1]) + fabsf(a[1][2]));
+
+      *yaw   = a[path][0];
+      *pitch = a[path][1];
+      *roll  = a[path][2];
     } else {
       *yaw   = -M_PI_2;
       *pitch = -atan2(m[0][1], m[2][1]);
