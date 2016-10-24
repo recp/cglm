@@ -26,18 +26,18 @@ glm_euler_angles(mat4 m,
                  float * __restrict roll) {
   if (m[2][0] < 1.0f) {
     if (m[2][0] > -1.0f) {
-      float a[2][3];
+      vec3 a[2];
       float cy1, cy2;
       int   path;
 
-      a[0][0] = asinf(m[2][0]);
-      a[1][0] = M_PI - a[0][0];
+      a[0][1] = asinf(m[2][0]);
+      a[1][1] = M_PI - a[0][0];
 
-      cy1 = cosf(a[0][0]);
-      cy2 = cosf(a[1][0]);
+      cy1 = cosf(a[0][1]);
+      cy2 = cosf(a[1][1]);
 
-      a[0][1] = atan2f(-m[2][1] / cy1, m[2][2] / cy1);
-      a[1][1] = atan2f(-m[2][1] / cy2, m[2][2] / cy2);
+      a[0][0] = atan2f(-m[2][1] / cy1, m[2][2] / cy1);
+      a[1][0] = atan2f(-m[2][1] / cy2, m[2][2] / cy2);
 
       a[0][2] = atan2f(-m[1][0] / cy1, m[0][0] / cy1);
       a[1][2] = atan2f(-m[1][0] / cy2, m[0][0] / cy2);
@@ -45,18 +45,18 @@ glm_euler_angles(mat4 m,
       path = (fabsf(a[0][0]) + fabsf(a[0][1]) + fabsf(a[0][2])) >
                 (fabsf(a[1][0]) + fabsf(a[1][1]) + fabsf(a[1][2]));
 
-      *yaw   = a[path][0];
-      *pitch = a[path][1];
+      *pitch = a[path][0];
+      *yaw   = a[path][1];
       *roll  = a[path][2];
     } else {
-      *yaw   = -M_PI_2;
       *pitch = -atan2(m[0][1], m[2][1]);
-      *roll  = 0;
+      *yaw   = -M_PI_2;
+      *roll  = 0.0f;
     }
   } else {
-    *yaw   = M_PI_2;
     *pitch = atan2f(m[0][1], m[1][1]);
-    *roll  = 0;
+    *yaw   = M_PI_2;
+    *roll  = 0.0f;
   }
 }
 
