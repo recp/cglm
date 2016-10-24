@@ -45,6 +45,40 @@ glm_euler(float yaw,
 }
 
 /*!
+ * @brief build rotation matrix from euler angles (zyx)
+ */
+CGLM_INLINE
+void
+glm_euler_zyx(float yaw,
+              float pitch,
+              float roll,
+              mat4 dest) {
+  float cx, cy, cz,
+        sx, sy, sz;
+
+  sx = sinf(pitch); cx = cosf(pitch);
+  sy = sinf(yaw);   cy = cosf(yaw);
+  sz = sinf(roll);  cz = cosf(roll);
+
+  dest[0][0] = cy * cz;
+  dest[0][1] = cy * sz;
+  dest[0][2] =-sy;
+  dest[1][0] = cz * sx * sy - cx * sz;
+  dest[1][1] = cx * cz + sx * sy * sz;
+  dest[1][2] = cy * sx;
+  dest[2][0] = cx * cz * sy + sx * sz;
+  dest[2][1] =-cz * sx + cx * sy * sz;
+  dest[2][2] = cx * cy;
+  dest[0][3] = 0.0f;
+  dest[1][3] = 0.0f;
+  dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
+  dest[3][3] = 1.0f;
+}
+
+/*!
  * @brief build rotation matrix from euler angles (zxy)
  */
 CGLM_INLINE
