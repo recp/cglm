@@ -23,7 +23,7 @@ SOFTWARE.
 -
 
 This library [initially] used some [piece of] implementations
-(may include codes) from these open source projects:
+(may include codes) from these open source projects/resources:
 
 1. Affine Transforms
 The original glm repo (g-truc), url: https://github.com/g-truc/glm
@@ -44,3 +44,8 @@ LICENSE:
   Email: anton at antongerdelan dot net
   First version 27 Jan 2014
   Copyright Dr Anton Gerdelan, Trinity College Dublin, Ireland.
+
+3. Euler Angles
+  David Eberly
+  Geometric Tools, LLC http://www.geometrictools.com/
+  Copyright (c) 1998-2016. All Rights Reserved.
