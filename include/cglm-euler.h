@@ -42,12 +42,12 @@ glm_euler_angles(mat4 m,
 }
 
 /*!
- * @brief build rotation matrix from euler angles(xyz)/yaw-pitch-roll (Y-UP)
+ * @brief build rotation matrix from euler angles(xyz)
  */
 CGLM_INLINE
 void
-glm_euler(float yaw,
-          float pitch,
+glm_euler(float pitch,
+          float yaw,
           float roll,
           mat4 dest) {
   float cx, cy, cz,
