@@ -61,6 +61,49 @@ glm_euler_angles(mat4 m,
 }
 
 /*!
+ * @brief euler angles (in radian) using xyz sequence
+ *
+ * @param[in]  m affine transform
+ * @param[out] v angles vector [x, y, z]
+ */
+CGLM_INLINE
+void
+glm_euler_anglesv(mat4 m, vec3 v) {
+  if (m[2][0] < 1.0f) {
+    if (m[2][0] > -1.0f) {
+      vec3  a[2];
+      float cy1, cy2;
+      int   path;
+
+      a[0][1] = asinf(m[2][0]);
+      a[1][1] = M_PI - a[0][0];
+
+      cy1 = cosf(a[0][1]);
+      cy2 = cosf(a[1][1]);
+
+      a[0][0] = atan2f(-m[2][1] / cy1, m[2][2] / cy1);
+      a[1][0] = atan2f(-m[2][1] / cy2, m[2][2] / cy2);
+
+      a[0][2] = atan2f(-m[1][0] / cy1, m[0][0] / cy1);
+      a[1][2] = atan2f(-m[1][0] / cy2, m[0][0] / cy2);
+
+      path = (fabsf(a[0][0]) + fabsf(a[0][1]) + fabsf(a[0][2])) >
+               (fabsf(a[1][0]) + fabsf(a[1][1]) + fabsf(a[1][2]));
+
+      glm_vec_dup(a[path], v);
+    } else {
+      v[0] = -atan2(m[0][1], m[2][1]);
+      v[1] = -M_PI_2;
+      v[3] = 0.0f;
+    }
+  } else {
+    v[0] = atan2f(m[0][1], m[1][1]);
+    v[1] = M_PI_2;
+    v[2] = 0;
+  }
+}
+
+/*!
  * @brief build rotation matrix from euler angles(xyz)
  */
 CGLM_INLINE
