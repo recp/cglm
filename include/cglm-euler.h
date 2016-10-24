@@ -11,7 +11,38 @@
 #include "cglm-common.h"
 
 /*!
- * @brief build rotation matrix from euler angles/yaw-pitch-roll (xyz)
+ * @brief euler angles (in radian) for xyz sequence
+ *
+ * @param[in]  m     affine transform
+ * @param[out] pitch x
+ * @param[out] yaw   y
+ * @param[out] roll  z
+ */
+CGLM_INLINE
+void
+glm_euler_angles(mat4 m,
+                 float * __restrict pitch,
+                 float * __restrict yaw,
+                 float * __restrict roll) {
+  if (m[2][0] < 1.0f) {
+    if (m[2][0] > -1.0f) {
+      *yaw   = asinf(m[2][0]);
+      *pitch = atan2f(-m[2][1], m[2][2]);
+      *roll  = atan2f(-m[1][0], m[0][0]);
+    } else {
+      *yaw   = -M_PI_2;
+      *pitch = -atan2(m[0][1], m[2][1]);
+      *roll  = 0;
+    }
+  } else {
+    *yaw   = M_PI_2;
+    *pitch = atan2f(m[0][1], m[1][1]);
+    *roll  = 0;
+  }
+}
+
+/*!
+ * @brief build rotation matrix from euler angles(xyz)/yaw-pitch-roll (Y-UP)
  */
 CGLM_INLINE
 void
