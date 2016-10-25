@@ -31,7 +31,7 @@ glm_euler_angles(mat4 m,
       int   path;
 
       a[0][1] = asinf(m[2][0]);
-      a[1][1] = M_PI - a[0][0];
+      a[1][1] = M_PI - a[0][1];
 
       cy1 = cosf(a[0][1]);
       cy2 = cosf(a[1][1]);
@@ -76,7 +76,7 @@ glm_euler_anglesv(mat4 m, vec3 v) {
       int   path;
 
       a[0][1] = asinf(m[2][0]);
-      a[1][1] = M_PI - a[0][0];
+      a[1][1] = M_PI - a[0][1];
 
       cy1 = cosf(a[0][1]);
       cy2 = cosf(a[1][1]);
