@@ -1,0 +1,61 @@
+#******************************************************************************
+# Copyright (c), Recep Aslantas.                                              *
+#                                                                             *
+# MIT License (MIT), http://opensource.org/licenses/MIT                       *
+# Full license can be found in the LICENSE file                               *
+#                                                                             *
+#******************************************************************************
+
+ACLOCAL_AMFLAGS = -I m4
+
+AM_CFLAGS = -Wall \
+            -std=gnu99 \
+            -O3 \
+            -Wstrict-aliasing=2 \
+            -fstrict-aliasing \
+            -Wpedantic
+
+lib_LTLIBRARIES = libcglm.la
+libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
+
+nobase_include_HEADERS = include/cglm.h \
+                         include/cglm-call.h \
+                         include/cglm-cam.h \
+                         include/cglm-io.h \
+                         include/cglm-mat3.h \
+                         include/cglm-types.h \
+                         include/cglm-common.h \
+                         include/cglm-affine.h \
+                         include/cglm-vec.h \
+                         include/cglm-euler.h \
+                         include/cglm-util.h \
+                         include/cglm-quat.h \
+                         include/cglm-mat.h \
+                         include/cglm-affine-mat.h \
+                         include/cglm-platform.h \
+                         include/cglm-mat-simd-avx.h \
+                         include/cglm-affine-mat-avx.h \
+                         include/cglm-opengl.h \
+                         include/cglm-quat-simd.h \
+                         include/cglm-affine-mat-sse2.h \
+                         include/cglm-mat3-simd-sse2.h \
+                         include/cglm-mat-simd-sse2.h \
+                         include/cglm-intrin.h \
+                         include/call/cglmc-euler.h \
+                         include/call/cglmc-quat.h \
+                         include/call/cglmc-cam.h \
+                         include/call/cglmc-io.h \
+                         include/call/cglmc-affine.h \
+                         include/call/cglmc-vec.h \
+                         include/call/cglmc-mat3.h \
+                         include/call/cglmc-mat.h
+
+libcglm_la_SOURCES=\
+    src/cglm-euler.c \
+    src/clgm-affine.c \
+    src/cglm-io.c \
+    src/cglm-quat.c \
+    src/cglm-cam.c \
+    src/cglm-vec.c \
+    src/cglm-mat3.c \
+    src/cglm-mat.c

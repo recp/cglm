@@ -1,0 +1,53 @@
+/*
+ * Copyright (c), Recep Aslantas.
+ *
+ * MIT License (MIT), http://opensource.org/licenses/MIT
+ * Full license can be found in the LICENSE file
+ */
+
+#ifndef cglmc_mat3_h
+#define cglmc_mat3_h
+
+#include "../cglm.h"
+
+CGLM_EXPORT
+void
+glmc_mat3_dup(mat3 mat, mat3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3_transpose_to(mat3 m, mat3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3_transpose(mat3 m);
+
+CGLM_EXPORT
+void
+glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3_scale(mat3 m, float s);
+
+CGLM_EXPORT
+float
+glmc_mat3_det(mat3 mat);
+
+CGLM_EXPORT
+void
+glmc_mat3_inv(mat3 mat, mat3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3_swap_col(mat3 mat, int col1, int col2);
+
+CGLM_EXPORT
+void
+glmc_mat3_swap_row(mat3 mat, int row1, int row2);
+
+#endif /* cglmc_mat3_h */

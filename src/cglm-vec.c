@@ -1,0 +1,128 @@
+/*
+ * Copyright (c), Recep Aslantas.
+ *
+ * MIT License (MIT), http://opensource.org/licenses/MIT
+ * Full license can be found in the LICENSE file
+ */
+
+#include "../include/cglm.h"
+
+CGLM_EXPORT
+void
+glmc_vec_dup(vec3 a, vec3 dest) {
+  glm_vec_dup(a, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_dup3(vec4 a, vec3 dest) {
+  glm_vec4_dup3(a, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_dup(vec4 v, vec4 dest) {
+  glm_vec4_dup(v, dest);
+}
+
+CGLM_EXPORT
+float
+glmc_vec_dot(vec3 a, vec3 b) {
+  return glm_vec_dot(a, b);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_dot(vec4 a, vec4 b) {
+  return glm_vec4_dot(a, b);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_cross(vec3 a, vec3 b, vec3 d) {
+  glm_vec_cross(a, b, d);
+}
+
+CGLM_EXPORT
+float
+glmc_vec_norm(vec3 vec) {
+  return glm_vec_norm(vec);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_norm(vec4 vec) {
+  return glm_vec4_norm(vec);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_normalize_to(vec3 vec, vec3 dest) {
+  glm_vec_normalize_to(vec, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_normalize_to(vec4 vec, vec4 dest) {
+  glm_vec4_normalize_to(vec, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_normalize(vec3 v) {
+  glm_vec_normalize(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_normalize(vec4 v) {
+  glm_vec4_normalize(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_add(vec3 v1, vec3 v2, vec3 dest) {
+  glm_vec_add(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_add(vec4 v1, vec4 v2, vec4 dest) {
+  glm_vec4_add(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
+  glm_vec_sub(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_sub(vec4 v1, vec4 v2, vec4 dest) {
+  glm_vec4_sub(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_scale(vec3 v, float s, vec3 dest) {
+  glm_vec_scale(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_flipsign(vec3 v) {
+  glm_vec_flipsign(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_flipsign(vec4 v) {
+  glm_vec4_flipsign(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_scale(vec4 v, float s, vec4 dest) {
+  glm_vec4_scale(v, s, dest);
+}

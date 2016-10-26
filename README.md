@@ -20,28 +20,34 @@ The original glm library is for C++ only (templates, namespaces, classes...), th
 
 ##Features
 - general purpose matrix operations (mat4, mat3)
+- chain matrix multiplication (square only)
 - general purpose vector operations (cross, dot, ...)
 - affine transforms
+- matrix decomposition (extract rotation, scaling factor)
 - optimized affine transform matrices (mul, rigid-body inverse)
 - camera (lookat)
 - projections (ortho, perspective)
 - quaternions
-- euler angles / yaw-pitch-roll
+- euler angles / yaw-pitch-roll to matrix
+- extract euler angles
+- inline or pre-compiled function call
 
 <hr />
 
-This library is header only so you dont need link to application. All functions are marked inline (always_inline) so compiler probably will inline all these functions
+You have two option to call a function/operation: inline or library call (link)
+Almost all functions are marked inline (always_inline) so compiler probably will inline. 
+To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`. 
 
+```C
+  #include <cglm.h>        /* for inline */
+  #include <cglm-call.h>   /* for library call (this also includes cglm.h) */
+
+  mat4 rot, trans, rt;
+  /* ... */
+  glm_mul(trans, rot, rt);  /* inline */
+  glmc_mul(trans, rot, rt); /* call from library */
+```
 Most of math functions are optimized manualy with SSE2 if available, if not? Dont worry there are non-sse versions of all operations
-
-This library provides:
-
-- Simple usage
-- Small memory footprint
-- The codes are small and more readable than C++ templates, metafuncs
-- Optimized operations with SIMD and non-SIMD
-- All operations are inline (if compiler will do), no function call overhead
-- Chain matrix multiplication (square only)
 
 You can pass matrices and vectors as array to functions rather than get address.
 
@@ -69,8 +75,23 @@ glm_inv_tr(modelMat);
 ##License
 MIT. check the LICENSE file
 
-##Install
-Import the library to your include folder, thats it!
+## Build
+
+### Unix (Autotools)
+
+```text
+$ sh autogen.sh
+$ ./configure
+$ make
+$ make install
+$ [sudo] make install
+```
+
+### Windows (MSBuild)
+
+```text
+TODO:
+```
 
 ##Notes
 

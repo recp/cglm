@@ -14,8 +14,14 @@
 #include <math.h>
 
 #if defined(_WIN32)
+#  ifdef CGLM_DLL
+#    define CGLM_EXPORT __declspec(dllexport)
+#  else
+#    define CGLM_EXPORT __declspec(dllimport)
+#  endif
 #  define CGLM_INLINE __forceinline
 #else
+#  define CGLM_EXPORT __attribute__((visibility("default")))
 #  define CGLM_INLINE static inline __attribute((always_inline))
 #endif
 
