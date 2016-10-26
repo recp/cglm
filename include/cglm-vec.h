@@ -158,6 +158,30 @@ glm_vec_normalize_to(vec3 vec, vec3 dest) {
 }
 
 /*!
+ * @brief normalize vec4 to dest
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_normalize_to(vec4 vec, vec4 dest) {
+  float norm;
+
+  norm = glm_vec4_norm(vec);
+
+  if (norm == 0.0f) {
+    dest[0] = dest[1] = dest[2] = dest[3] == 0.0f;
+    return;
+  }
+
+  dest[0] = vec[0] / norm;
+  dest[1] = vec[1] / norm;
+  dest[2] = vec[2] / norm;
+  dest[3] = vec[3] / norm;
+}
+
+/*!
  * @brief normalize vec3 and store result in same vec
  *
  * @param[in, out] v vector
