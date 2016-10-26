@@ -290,102 +290,70 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
 }
 
 /*!
- * @brief decompose translate matrix
- *
- * if you only need vector then just copy last vector of mat:
- * glm_vec4_dup(m, translate_vector)
- *
- * @param[in]  m affine transform
- * @param[out] t translation matrix
- */
-CGLM_INLINE
-void
-glm_decompose_trans(mat4 m, mat4 t) {
-  mat4 tmp = GLM_MAT4_IDENTITY_INIT;
-  glm_vec4_dup(m[3], tmp[3]);
-  glm_mat4_dup(tmp, t);
-}
-
-/*!
  * @brief decompose scale vector
  *
  * @param[in]  m     affine transform
  * @param[out] s     scale vector (Sx, Sy, Sz)
- * @param[out] signs scale vector signs
  */
 CGLM_INLINE
 void
-glm_decompose_scalev(mat4 m, vec3 s, ivec3 signs) {
-  signs[0] = signs[1] = signs[2] = 1;
-
-  signs[0] = copysignf(signs[0], m[0][0] * m[0][1] * m[0][2]);
-  signs[1] = copysignf(signs[1], m[1][0] * m[1][1] * m[1][2]);
-  signs[2] = copysignf(signs[2], m[2][0] * m[2][1] * m[2][2]);
-
+glm_decompose_scalev(mat4 m, vec3 s) {
   s[0] = glm_vec_norm(m[0]);
   s[1] = glm_vec_norm(m[1]);
   s[2] = glm_vec_norm(m[2]);
 }
 
 /*!
- * @brief decompose scale matrix
- *
- * @param[in]  m affine transform
- * @param[out] s scale matrix
- */
-CGLM_INLINE
-void
-glm_decompose_scale(mat4 m, mat4 s) {
-  mat4  tmp = GLM_MAT4_IDENTITY_INIT;
-  vec3  sv;
-  ivec3 svs;
-
-  glm_decompose_scalev(m, sv, svs);
-
-  tmp[0][0] = sv[0];
-  tmp[1][1] = sv[1];
-  tmp[2][2] = sv[2];
-
-  glm_mat4_dup(tmp, s);
-}
-
-/*!
- * @brief decompose rotation matrix
+ * @brief decompose rotation matrix (mat4) and scale vector [Sx, Sy, Sz]
  *
  * @param[in]  m affine transform
  * @param[out] r rotation matrix
+ * @param[out] r scale matrix
  */
 CGLM_INLINE
 void
-glm_decompose_rotation(mat4 m, mat4 r) {
-  vec3  sv;
-  vec4  t = {0, 0, 0, 1};
-  ivec3 svs;
+glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
+  vec4 t = {0.0f, 0.0f, 0.0f, 1.0f};
+  vec3 v;
 
-  glm_decompose_scalev(m, sv, svs);
+  glm_vec4_dup(m[0], r[0]);
+  glm_vec4_dup(m[1], r[1]);
+  glm_vec4_dup(m[2], r[2]);
+  glm_vec4_dup(t,    r[3]);
 
-  glm_mat4_dup(m, r);
-  glm_vec4_dup(t, r[3]);
+  s[0] = glm_vec_norm(m[0]);
+  s[1] = glm_vec_norm(m[1]);
+  s[2] = glm_vec_norm(m[2]);
 
-  glm_vec4_scale(r[0], 1.0f/sv[0], r[0]);
-  glm_vec4_scale(r[1], 1.0f/sv[1], r[1]);
-  glm_vec4_scale(r[2], 1.0f/sv[2], r[2]);
+  glm_vec4_scale(r[0], 1.0f/s[0], r[0]);
+  glm_vec4_scale(r[1], 1.0f/s[1], r[1]);
+  glm_vec4_scale(r[2], 1.0f/s[2], r[2]);
+
+  glm_vec_cross(m[0], m[1], v);
+  if (glm_vec_dot(v, m[2]) < 0.0f) {
+    glm_vec4_scale(r[0], -1.0f, r[0]);
+    glm_vec4_scale(r[1], -1.0f, r[1]);
+    glm_vec4_scale(r[2], -1.0f, r[2]);
+
+    s[0] *= -1.0f;
+    s[1] *= -1.0f;
+    s[2] *= -1.0f;
+  }
 }
 
 /*!
- * @brief decompose affine transform into mat4
+ * @brief decompose affine transform
  *
  * @param[in]  m affine transfrom
- * @param[out] t translate matrix
- * @param[out] r rotate matrix
- * @param[out] s scale matrix
+ * @param[out] t translation vector
+ * @param[out] r rotation matrix (mat4)
+ * @param[out] s scaling vector [X, Y, Z]
  */
 CGLM_INLINE
 void
-glm_decompose(mat4 m, mat4 t, mat4 r, mat4 s) {
-  glm_decompose_trans(m, t);
-  glm_decompose_scale(m, s);
-  glm_decompose_rotation(m, r);
+glm_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
+  glm_vec4_dup(m[3], t);
+  glm_decompose_rs(m, r, s);
 }
 
 #endif /* cglm_affine_h */
