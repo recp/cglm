@@ -15,6 +15,7 @@
 #endif
 
 typedef float vec3[3];
+typedef int  ivec3[3];
 typedef CGLM_ALIGN(16) float vec4[4];
 
 typedef vec3 mat3[3];

@@ -11,6 +11,7 @@
 #include "cglm-common.h"
 #include "cglm-vec.h"
 #include "cglm-affine-mat.h"
+#include "cglm-util.h"
 
 CGLM_INLINE
 void
@@ -308,12 +309,19 @@ glm_decompose_trans(mat4 m, mat4 t) {
 /*!
  * @brief decompose scale vector
  *
- * @param[in]  m affine transform
- * @param[out] s scale vector (Sx, Sy, Sz)
+ * @param[in]  m     affine transform
+ * @param[out] s     scale vector (Sx, Sy, Sz)
+ * @param[out] signs scale vector signs
  */
 CGLM_INLINE
 void
-glm_decompose_scalev(mat4 m, vec3 s) {
+glm_decompose_scalev(mat4 m, vec3 s, ivec3 signs) {
+  signs[0] = signs[1] = signs[2] = 1;
+
+  signs[0] = copysignf(signs[0], m[0][0] * m[0][1] * m[0][2]);
+  signs[1] = copysignf(signs[1], m[1][0] * m[1][1] * m[1][2]);
+  signs[2] = copysignf(signs[2], m[2][0] * m[2][1] * m[2][2]);
+
   s[0] = glm_vec_norm(m[0]);
   s[1] = glm_vec_norm(m[1]);
   s[2] = glm_vec_norm(m[2]);
@@ -328,10 +336,11 @@ glm_decompose_scalev(mat4 m, vec3 s) {
 CGLM_INLINE
 void
 glm_decompose_scale(mat4 m, mat4 s) {
-  mat4 tmp = GLM_MAT4_IDENTITY_INIT;
-  vec3 sv;
+  mat4  tmp = GLM_MAT4_IDENTITY_INIT;
+  vec3  sv;
+  ivec3 svs;
 
-  glm_decompose_scalev(m, sv);
+  glm_decompose_scalev(m, sv, svs);
 
   tmp[0][0] = sv[0];
   tmp[1][1] = sv[1];
@@ -349,10 +358,11 @@ glm_decompose_scale(mat4 m, mat4 s) {
 CGLM_INLINE
 void
 glm_decompose_rotation(mat4 m, mat4 r) {
-  vec3 sv;
-  vec4 t = {0, 0, 0, 1};
+  vec3  sv;
+  vec4  t = {0, 0, 0, 1};
+  ivec3 svs;
 
-  glm_decompose_scalev(m, sv);
+  glm_decompose_scalev(m, sv, svs);
 
   glm_mat4_dup(m, r);
   glm_vec4_dup(t, r[3]);
