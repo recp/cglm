@@ -10,6 +10,17 @@
 
 #include "cglm-common.h"
 
+/*!
+ * @brief get sign of 32 bit integer as +1 or -1
+ *
+ * @param X integer value
+ */
+CGLM_INLINE
+int
+glm_sign(int val) {
+  return ((val >> 31) - (-val >> 31));
+}
+
 CGLM_INLINE
 float
 glm_rad(float deg) {
