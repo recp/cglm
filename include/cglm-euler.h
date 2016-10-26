@@ -11,6 +11,24 @@
 #include "cglm-common.h"
 
 /*!
+ * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
+ * vector then you can convert it to this enum by doing this:
+ * @code
+ * glm_euler_sq order;
+ * order = orderVec[0] | orderVec[1] << 2 | orderVec[2] << 4;
+ * @endcode
+ * you may need to explicit cast if required
+ */
+typedef enum glm_euler_sq {
+  GLM_EULER_XYZ = 0 << 0 | 1 << 2 | 2 << 4,
+  GLM_EULER_XZY = 0 << 0 | 2 << 2 | 1 << 4,
+  GLM_EULER_YZX = 1 << 0 | 2 << 2 | 0 << 4,
+  GLM_EULER_YXZ = 1 << 0 | 0 << 2 | 2 << 4,
+  GLM_EULER_ZXY = 2 << 0 | 0 << 2 | 1 << 4,
+  GLM_EULER_ZYX = 2 << 0 | 1 << 2 | 0 << 4
+} glm_euler_sq;
+
+/*!
  * @brief euler angles (in radian) using xyz sequence
  *
  * @param[in]  m affine transform
@@ -226,6 +244,105 @@ glm_euler_yxz(vec3 angles,
   dest[2][0] = cz * sy + cy * sx * sz;
   dest[2][1] =-cy * cz * sx + sy * sz;
   dest[2][2] = cx * cy;
+  dest[0][3] = 0.0f;
+  dest[1][3] = 0.0f;
+  dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
+  dest[3][3] = 1.0f;
+}
+
+/* TODO: too long for inline ? */
+CGLM_INLINE
+void
+glm_euler_by_order(vec3 angles, glm_euler_sq axis, mat4 dest) {
+  float cx, cy, cz,
+        sx, sy, sz;
+
+  float cycz, cysz, cysx, cxcy,
+        czsy, cxcz, czsx, cxsz,
+        sysz;
+
+  sx = sinf(angles[0]); cx = cosf(angles[0]);
+  sy = sinf(angles[1]); cy = cosf(angles[1]);
+  sz = sinf(angles[2]); cz = cosf(angles[2]);
+
+  cycz = cy * cz; cysz = cy * sz;
+  cysx = cy * sx; cxcy = cx * cy;
+  czsy = cz * sy; cxcz = cx * cz;
+  czsx = cz * sx; cxsz = cx * sz;
+  sysz = sy * sz;
+
+  switch (axis) {
+    case GLM_EULER_XYZ:
+      dest[0][0] = cycz;
+      dest[0][1] = cysz;
+      dest[0][2] =-sy;
+      dest[1][0] = czsx * sy - cxsz;
+      dest[1][1] = cxcz + sx * sysz;
+      dest[1][2] = cysx;
+      dest[2][0] = cx * czsy + sx * sz;
+      dest[2][1] =-czsx + cx * sysz;
+      dest[2][2] = cxcy;
+      break;
+    case GLM_EULER_XZY:
+      dest[0][0] = cycz;
+      dest[0][1] = sz;
+      dest[0][2] =-czsy;
+      dest[1][0] = sx * sy - cx * cysz;
+      dest[1][1] = cxcz;
+      dest[1][2] = cysx + cx * sysz;
+      dest[2][0] = cx * sy + cysx * sz;
+      dest[2][1] =-czsx;
+      dest[2][2] = cxcy - sx * sysz;
+      break;
+    case GLM_EULER_ZXY:
+      dest[0][0] = cycz + sx * sysz;
+      dest[0][1] = cxsz;
+      dest[0][2] =-czsy + cysx * sz;
+      dest[1][0] = czsx * sy - cysz;
+      dest[1][1] = cxcz;
+      dest[1][2] = cycz * sx + sysz;
+      dest[2][0] = cx * sy;
+      dest[2][1] =-sx;
+      dest[2][2] = cxcy;
+      break;
+    case GLM_EULER_ZYX:
+      dest[0][0] = cycz;
+      dest[0][1] = czsx * sy + cxsz;
+      dest[0][2] =-cx * czsy + sx * sz;
+      dest[1][0] =-cysz;
+      dest[1][1] = cxcz - sx * sysz;
+      dest[1][2] = czsx + cx * sysz;
+      dest[2][0] = sy;
+      dest[2][1] =-cysx;
+      dest[2][2] = cxcy;
+      break;
+    case GLM_EULER_YXZ:
+      dest[0][0] = cycz - sx * sysz;
+      dest[0][1] = czsx * sy + cysz;
+      dest[0][2] =-cx * sy;
+      dest[1][0] =-cxsz;
+      dest[1][1] = cxcz;
+      dest[1][2] = sx;
+      dest[2][0] = czsy + cysx * sz;
+      dest[2][1] =-cycz * sx + sysz;
+      dest[2][2] = cxcy;
+      break;
+    case GLM_EULER_YZX:
+      dest[0][0] = cycz;
+      dest[0][1] = sx * sy + cx * cysz;
+      dest[0][2] =-cx * sy + cysx * sz;
+      dest[1][0] =-sz;
+      dest[1][1] = cxcz;
+      dest[1][2] = czsx;
+      dest[2][0] = czsy;
+      dest[2][1] =-cysx + cx * sysz;
+      dest[2][2] = cxcy + sx * sysz;
+      break;
+  }
+
   dest[0][3] = 0.0f;
   dest[1][3] = 0.0f;
   dest[2][3] = 0.0f;
