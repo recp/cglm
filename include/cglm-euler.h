@@ -259,7 +259,6 @@ glm_euler_yxz(vec3 angles,
   dest[3][3] = 1.0f;
 }
 
-/* TODO: too long for inline ? */
 CGLM_INLINE
 void
 glm_euler_by_order(vec3 angles, glm_euler_sq axis, mat4 dest) {
