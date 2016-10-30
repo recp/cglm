@@ -245,8 +245,7 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
-  mat4 rot;
-  vec4 v1, v2, v3;
+  mat4 rot, tmp;
 
   glm_rotate_ndc_make(rot, angle, axis_ndc);
 
