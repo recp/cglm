@@ -50,4 +50,20 @@ glm_vec4_mulv(vec4 a, vec4 b, vec4 d) {
 #endif
 }
 
+CGLM_INLINE
+void
+glm_vec_broadcast(float val, vec3 d) {
+  d[0] = d[1] = d[2] = val;
+}
+
+CGLM_INLINE
+void
+glm_vec4_broadcast(float val, vec3 d) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(d, _mm_set1_ps(val));
+#else
+  d[0] = d[1] = d[2] = d[3] = val;
+#endif
+}
+
 #endif /* cglm_vec_ext_h */
