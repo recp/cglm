@@ -15,6 +15,7 @@
 
 #include "cglm-common.h"
 #include "cglm-intrin.h"
+#include "cglm-vec-ext.h"
 
 /*!
  * @brief copy all members of [a] to [dest]
