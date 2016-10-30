@@ -20,17 +20,21 @@ glm_frustum(float left,
             float nearVal,
             float farVal,
             mat4 dest) {
-  /* https://www.opengl.org/sdk/docs/man2/xhtml/glFrustum.xml */
+  float rl, tb, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  dest[0][0] = 2.0f * nearVal / (right - left);
-  dest[1][1] = 2.0f * nearVal / (top - bottom);
-  dest[2][0] = (right + left) / (right - left);
-  dest[2][1] = (top + bottom) / (top - bottom);
-  dest[2][2] = -(farVal + nearVal) / (farVal - nearVal);
+  rl = 1.0f / (right - left);
+  tb = 1.0f / (top - bottom);
+  fn = 1.0f / (farVal - nearVal);
+
+  dest[0][0] = 2.0f * nearVal * rl;
+  dest[1][1] = 2.0f * nearVal * tb;
+  dest[2][0] = (right + left) * rl;
+  dest[2][1] = (top + bottom) * tb;
+  dest[2][2] = -(farVal + nearVal) * fn;
   dest[2][3] = -1.0f;
-  dest[3][2] = -2.0f * farVal * nearVal / (farVal - nearVal);
+  dest[3][2] = -2.0f * farVal * nearVal * fn;
 }
 
 CGLM_INLINE
@@ -42,16 +46,20 @@ glm_ortho(float left,
           float nearVal,
           float farVal,
           mat4 dest) {
-  /* https://www.opengl.org/sdk/docs/man2/xhtml/glOrtho.xml */
+  float rl, tb, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  dest[0][0] = 2.0f / (right - left);
-  dest[1][1] = 2.0f / (top - bottom);
-  dest[2][2] =-2.0f / (farVal - nearVal);
-  dest[3][0] =-(right + left) / (right - left);
-  dest[3][1] =-(top + bottom) / (top - bottom);
-  dest[3][2] =-(farVal + nearVal) / (farVal - nearVal);
+  rl = 1.0f / (right - left);
+  tb = 1.0f / (top - bottom);
+  fn = 1.0f / (farVal - nearVal);
+
+  dest[0][0] = 2.0f * rl;
+  dest[1][1] = 2.0f * tb;
+  dest[2][2] =-2.0f * fn;
+  dest[3][0] =-(right + left) * rl;
+  dest[3][1] =-(top + bottom) * tb;
+  dest[3][2] =-(farVal + nearVal) * fn;
   dest[3][3] = 1.0f;
 }
 
@@ -118,18 +126,18 @@ glm_perspective(float fovy,
                 float nearVal,
                 float farVal,
                 mat4 dest) {
-  /* https://www.opengl.org/sdk/docs/man2/xhtml/gluPerspective.xml */
-  float f;
+  float f, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  f = cosf(fovy * 0.5f) / sinf(fovy * 0.5f);
+  f  = cosf(fovy * 0.5f) / sinf(fovy * 0.5f);
+  fn = 1.0f / (nearVal - farVal);
 
   dest[0][0] = f / aspect;
   dest[1][1] = f;
-  dest[2][2] = (nearVal + farVal) / (nearVal - farVal);
+  dest[2][2] = (nearVal + farVal) * fn;
   dest[2][3] =-1.0f;
-  dest[3][2] = 2 * nearVal * farVal / (nearVal - farVal);
+  dest[3][2] = 2 * nearVal * farVal * fn;
 }
 
 CGLM_INLINE
@@ -162,21 +170,19 @@ glm_lookat(vec3 eye,
   glm_vec_cross(s, f, u);
 
   dest[0][0] = s[0];
-  dest[1][0] = s[1];
-  dest[2][0] = s[2];
   dest[0][1] = u[0];
-  dest[1][1] = u[1];
-  dest[2][1] = u[2];
   dest[0][2] =-f[0];
+  dest[1][0] = s[1];
+  dest[1][1] = u[1];
   dest[1][2] =-f[1];
+  dest[2][0] = s[2];
+  dest[2][1] = u[2];
   dest[2][2] =-f[2];
   dest[3][0] =-glm_vec_dot(s, eye);
   dest[3][1] =-glm_vec_dot(u, eye);
   dest[3][2] = glm_vec_dot(f, eye);
-  dest[0][3] = 0;
-  dest[1][3] = 0;
-  dest[2][3] = 0;
-  dest[3][3] = 1;
+  dest[0][3] = dest[1][3] = dest[2][3] = 0.0f;
+  dest[3][3] = 1.0f;
 }
 
 #endif /* cglm_vcam_h */
