@@ -328,9 +328,7 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
     glm_vec4_scale(r[1], -1.0f, r[1]);
     glm_vec4_scale(r[2], -1.0f, r[2]);
 
-    s[0] *= -1.0f;
-    s[1] *= -1.0f;
-    s[2] *= -1.0f;
+    glm_vec_scale(s, -1.0f, s);
   }
 }
 
