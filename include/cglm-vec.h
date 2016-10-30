@@ -374,6 +374,17 @@ glm_vec4_scale(vec4 v, float s, vec4 dest) {
 #endif
 }
 
+/*!
+ * @brief angle betwen two vector
+ *
+ * @return angle as radians
+ */
+CGLM_INLINE
+float
+glm_vec_angle(vec3 v1, vec3 v2) {
+  return acosf(glm_vec_dot(v1, v2) / glm_vec_norm(v1) * glm_vec_norm(v2));
+}
+
 CGLM_INLINE
 void
 glm_vec_addvN(vec3 * __restrict vecs[], int len, vec3 dest) {
