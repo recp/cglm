@@ -33,4 +33,16 @@ glm_deg(float rad) {
   return rad * 180.0f / M_PI;
 }
 
+CGLM_INLINE
+void
+glm_make_rad(float *deg) {
+  *deg = *deg * M_PI / 180.0f;
+}
+
+CGLM_INLINE
+void
+glm_make_deg(float *rad) {
+  *rad = *rad * 180.0f / M_PI;
+}
+
 #endif /* cglm_util_h */
