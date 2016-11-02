@@ -215,7 +215,7 @@ glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
 
   glm_vec_scale(axis_ndc, v[0], m[0]);
   glm_vec_scale(axis_ndc, v[1], m[1]);
-  glm_vec_scale(axis_ndc, v[1], m[2]);
+  glm_vec_scale(axis_ndc, v[2], m[2]);
 
   m[0][0] += c;
   m[0][1] += vs[2];
