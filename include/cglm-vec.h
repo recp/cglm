@@ -136,53 +136,6 @@ glm_vec4_norm(vec4 vec) {
 }
 
 /*!
- * @brief normalize vec3 to dest
- *
- * @param[in]  vec  source
- * @param[out] dest destination
- */
-CGLM_INLINE
-void
-glm_vec_normalize_to(vec3 vec, vec3 dest) {
-  float norm;
-
-  norm = glm_vec_norm(vec);
-
-  if (norm == 0.0f) {
-    dest[0] = dest[1] = dest[2] = 0.0f;
-    return;
-  }
-
-  dest[0] = vec[0] / norm;
-  dest[1] = vec[1] / norm;
-  dest[2] = vec[2] / norm;
-}
-
-/*!
- * @brief normalize vec4 to dest
- *
- * @param[in]  vec  source
- * @param[out] dest destination
- */
-CGLM_INLINE
-void
-glm_vec4_normalize_to(vec4 vec, vec4 dest) {
-  float norm;
-
-  norm = glm_vec4_norm(vec);
-
-  if (norm == 0.0f) {
-    dest[0] = dest[1] = dest[2] = dest[3] == 0.0f;
-    return;
-  }
-
-  dest[0] = vec[0] / norm;
-  dest[1] = vec[1] / norm;
-  dest[2] = vec[2] / norm;
-  dest[3] = vec[3] / norm;
-}
-
-/*!
  * @brief add v2 vector to v1 vector store result in dest
  *
  * @param[in]  v1
@@ -367,6 +320,48 @@ glm_vec4_normalize(vec4 v) {
   }
 
   glm_vec4_scale(v, 1.0f / norm, v);
+}
+
+/*!
+ * @brief normalize vec3 to dest
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_normalize_to(vec3 vec, vec3 dest) {
+  float norm;
+
+  norm = glm_vec_norm(vec);
+
+  if (norm == 0.0f) {
+    dest[0] = dest[1] = dest[2] = 0.0f;
+    return;
+  }
+
+  glm_vec_scale(vec, 1.0f / norm, dest);
+}
+
+/*!
+ * @brief normalize vec4 to dest
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_normalize_to(vec4 vec, vec4 dest) {
+  float norm;
+
+  norm = glm_vec4_norm(vec);
+
+  if (norm == 0.0f) {
+    dest[0] = dest[1] = dest[2] = dest[3] == 0.0f;
+    return;
+  }
+
+  glm_vec4_scale(vec, 1.0f / norm, dest);
 }
 
 /*!
