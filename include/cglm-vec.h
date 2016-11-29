@@ -183,51 +183,6 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
 }
 
 /*!
- * @brief normalize vec3 and store result in same vec
- *
- * @param[in, out] v vector
- */
-CGLM_INLINE
-void
-glm_vec_normalize(vec3 v) {
-  float norm;
-
-  norm = glm_vec_norm(v);
-
-  if (norm == 0.0f) {
-    v[0] = v[1] = v[2] = 0.0f;
-    return;
-  }
-
-  v[0] = v[0] / norm;
-  v[1] = v[1] / norm;
-  v[2] = v[2] / norm;
-}
-
-/*!
- * @brief normalize vec4 and store result in same vec
- *
- * @param[in, out] v vector
- */
-CGLM_INLINE
-void
-glm_vec4_normalize(vec4 v) {
-  float norm;
-
-  norm = glm_vec_norm(v);
-
-  if (norm == 0.0f) {
-    v[0] = v[1] = v[2] = v[3] = 0.0f;
-    return;
-  }
-
-  v[0] = v[0] / norm;
-  v[1] = v[1] / norm;
-  v[2] = v[2] / norm;
-  v[3] = v[3] / norm;
-}
-
-/*!
  * @brief add v2 vector to v1 vector store result in dest
  *
  * @param[in]  v1
@@ -372,6 +327,46 @@ glm_vec4_scale(vec4 v, float s, vec4 dest) {
   dest[2] = v[2] * s;
   dest[3] = v[3] * s;
 #endif
+}
+
+/*!
+ * @brief normalize vec3 and store result in same vec
+ *
+ * @param[in, out] v vector
+ */
+CGLM_INLINE
+void
+glm_vec_normalize(vec3 v) {
+  float norm;
+
+  norm = glm_vec_norm(v);
+
+  if (norm == 0.0f) {
+    v[0] = v[1] = v[2] = 0.0f;
+    return;
+  }
+
+  glm_vec_scale(v, 1.0f / norm, v);
+}
+
+/*!
+ * @brief normalize vec4 and store result in same vec
+ *
+ * @param[in, out] v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_normalize(vec4 v) {
+  float norm;
+
+  norm = glm_vec4_norm(v);
+
+  if (norm == 0.0f) {
+    v[0] = v[1] = v[2] = v[3] = 0.0f;
+    return;
+  }
+
+  glm_vec4_scale(v, 1.0f / norm, v);
 }
 
 /*!
