@@ -15,17 +15,39 @@
 
 CGLM_INLINE
 void
-glm_quat_init(versor q,
-              float angle,
-              float x,
-              float y,
-              float z) {
-  q[0] = cosf(angle / 2.0f);
-  q[1] = sinf(angle / 2.0f) * x;
-  q[2] = sinf(angle / 2.0f) * y;
-  q[3] = sinf(angle / 2.0f) * z;
+glm_quat(versor q,
+         float  angle,
+         float  x,
+         float  y,
+         float  z) {
+  float a, c, s;
+
+  a = angle / 2.0f;
+  c = cosf(a);
+  s = sinf(a);
+
+  q[0] = c;
+  q[1] = s * x;
+  q[2] = s * y;
+  q[3] = s * z;
 }
 
+CGLM_INLINE
+void
+glm_quatv(versor q,
+          float  angle,
+          vec3   v) {
+  float a, c, s;
+
+  a = angle / 2.0f;
+  c = cosf(a);
+  s = sinf(a);
+
+  q[0] = c;
+  q[1] = s * v[0];
+  q[2] = s * v[1];
+  q[3] = s * v[2];
+}
 
 CGLM_INLINE
 float
