@@ -58,20 +58,15 @@ glm_quat_norm(versor q) {
 CGLM_INLINE
 void
 glm_quat_normalize(versor q) {
-  float sum, norm;
+  float sum;
 
   sum = q[0] * q[0] + q[1] * q[1]
-        + q[2] * q[2] + q[3] * q[3];
+          + q[2] * q[2] + q[3] * q[3];
 
   if (fabs(1.0f - sum) < 0.0001f)
     return;
 
-  norm = sqrtf(sum);
-
-  q[0] = q[0] / norm;
-  q[1] = q[1] / norm;
-  q[2] = q[2] / norm;
-  q[3] = q[3] / norm;
+  glm_vec4_scale(q, 1.0f / sqrtf(sum), q);
 }
 
 CGLM_INLINE
