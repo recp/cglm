@@ -155,6 +155,18 @@ glm_perspective_default(mat4 dest) {
 
 CGLM_INLINE
 void
+glm_perspective_resize(mat4 proj) {
+  int32_t rect[4];
+
+  if (proj[0][0] == 0)
+    return;
+
+  glm_platfom_get_viewport_rect(rect);
+  proj[0][0] = (float)proj[1][1] * rect[3] / rect[2];
+}
+
+CGLM_INLINE
+void
 glm_lookat(vec3 eye,
            vec3 center,
            vec3 up,
