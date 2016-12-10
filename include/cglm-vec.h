@@ -357,7 +357,7 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
   norm = glm_vec4_norm(vec);
 
   if (norm == 0.0f) {
-    dest[0] = dest[1] = dest[2] = dest[3] == 0.0f;
+    dest[0] = dest[1] = dest[2] = dest[3] = 0.0f;
     return;
   }
 
