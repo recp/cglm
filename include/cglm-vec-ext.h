@@ -70,13 +70,13 @@ glm_vec4_broadcast(float val, vec3 d) {
 CGLM_INLINE
 bool
 glm_vec_eq(vec3 v, float val) {
-  return v[0] == v[1] == v[2] == val;
+  return v[0] == val && v[0] == v[1] && v[0] == v[2];
 }
 
 CGLM_INLINE
 bool
 glm_vec4_eq(vec4 v, float val) {
-  return v[0] == v[1] == v[2] == v[3] == val;
+  return v[0] == val && v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
 }
 
 #endif /* cglm_vec_ext_h */
