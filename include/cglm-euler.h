@@ -43,8 +43,8 @@ glm_euler_order(char newOrder[3]) {
 CGLM_INLINE
 void
 glm_euler_angles(mat4 m, vec3 dest) {
-  if (m[2][0] < 1.0f) {
-    if (m[2][0] > -1.0f) {
+  if (m[0][2] < 1.0f) {
+    if (m[0][2] > -1.0f) {
       vec3  a[2];
       float cy1, cy2;
       int   path;
@@ -66,13 +66,13 @@ glm_euler_angles(mat4 m, vec3 dest) {
 
       glm_vec_dup(a[path], dest);
     } else {
-      dest[0] = -atan2(m[0][1], m[2][1]);
-      dest[1] = -M_PI_2;
-      dest[3] = 0.0f;
+      dest[0] = atan2(m[1][0], m[2][0]);
+      dest[1] = M_PI_2;
+      dest[2] = 0.0f;
     }
   } else {
-    dest[0] = atan2f(m[0][1], m[1][1]);
-    dest[1] = M_PI_2;
+    dest[0] = atan2f(-m[1][0], -m[2][0]);
+    dest[1] =-M_PI_2;
     dest[2] = 0.0f;
   }
 }

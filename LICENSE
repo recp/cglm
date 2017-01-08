@@ -49,3 +49,6 @@ LICENSE:
   David Eberly
   Geometric Tools, LLC http://www.geometrictools.com/
   Copyright (c) 1998-2016. All Rights Reserved.
+
+  Computing Euler angles from a rotation matrix (euler.pdf)
+  Gregory G. Slabaugh
