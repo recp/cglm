@@ -296,6 +296,23 @@ glm_decompose_scalev(mat4 m, vec3 s) {
 }
 
 /*!
+ * @brief returns true if matrix is uniform scaled. This is helpful for 
+ *        creating normal matrix.
+ *
+ * @param m[in] m
+ *
+ * @return boolean
+ */
+CGLM_INLINE
+bool
+glm_uniscaled(mat4 m) {
+  vec3 s;
+  glm_decompose_scalev(m, s);
+
+  return glm_vec_eq_all(s);
+}
+
+/*!
  * @brief decompose rotation matrix (mat4) and scale vector [Sx, Sy, Sz]
  *
  * @param[in]  m affine transform
