@@ -24,25 +24,25 @@ glm_sign(int val) {
 CGLM_INLINE
 float
 glm_rad(float deg) {
-  return deg * M_PI / 180.0f;
+  return deg * CGLM_PI / 180.0f;
 }
 
 CGLM_INLINE
 float
 glm_deg(float rad) {
-  return rad * 180.0f / M_PI;
+  return rad * 180.0f / CGLM_PI;
 }
 
 CGLM_INLINE
 void
 glm_make_rad(float *deg) {
-  *deg = *deg * M_PI / 180.0f;
+  *deg = *deg * CGLM_PI / 180.0f;
 }
 
 CGLM_INLINE
 void
 glm_make_deg(float *rad) {
-  *rad = *rad * 180.0f / M_PI;
+  *rad = *rad * 180.0f / CGLM_PI;
 }
 
 #endif /* cglm_util_h */

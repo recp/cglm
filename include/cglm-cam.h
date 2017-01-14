@@ -146,7 +146,7 @@ glm_perspective_default(mat4 dest) {
   int32_t rect[4];
   glm_platfom_get_viewport_rect(rect);
   
-  glm_perspective((float)M_PI_4,
+  glm_perspective((float)CGLM_PI_4,
                   (float)rect[2]/rect[3],
                   0.01f,
                   100.0f,
