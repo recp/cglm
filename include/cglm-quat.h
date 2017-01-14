@@ -159,9 +159,9 @@ glm_quat_slerp(versor q,
   }
 
   /* SLERP */
-  angle = acos(cosTheta);
-  a = sin(c * angle);
-  b = sin(t * angle);
+  angle = acosf(cosTheta);
+  a = sinf(c * angle);
+  b = sinf(t * angle);
 
   dest[0] = (q[0] * a + r[0] * b) / sinTheta;
   dest[1] = (q[1] * a + r[1] * b) / sinTheta;
