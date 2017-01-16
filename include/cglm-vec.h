@@ -418,4 +418,19 @@ glm_vec_rotate(vec3 v, float angle, vec3 axis) {
   glm_vec_add(v1, v3, v);
 }
 
+/*!
+ * @brief apply rotation matrix to vector
+ *
+ * @param[in]  m    affine matrix or rot matrix
+ * @param[in]  v    vector
+ * @param[out] dest rotated vector
+ */
+CGLM_INLINE
+void
+glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
+  dest[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
+  dest[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
+  dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+}
+
 #endif /* cglm_vec_h */
