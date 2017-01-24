@@ -82,6 +82,25 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 CGLM_INLINE
+void
+glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
+  __m128 x0, x1, x2;
+
+  x0 = _mm_load_ps(v);
+  x1 = _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
+                             _mm_shuffle1_ps1(x0, 0)),
+                  _mm_mul_ps(_mm_load_ps(m[1]),
+                             _mm_shuffle1_ps1(x0, 1)));
+
+  x2 = _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
+                             _mm_shuffle1_ps1(x0, 2)),
+                  _mm_mul_ps(_mm_load_ps(m[3]),
+                             _mm_shuffle1_ps1(x0, 3)));
+
+  _mm_store_ps(dest, _mm_add_ps(x1, x2));
+}
+
+CGLM_INLINE
 float
 glm_mat4_det_sse2(mat4 mat) {
   __m128 r0, r1, r2, r3, x0, x1, x2;

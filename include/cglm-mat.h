@@ -234,10 +234,16 @@ glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
-  dest[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2] + m[3][0] * v[3];
-  dest[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3];
-  dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3];
-  dest[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat4_mulv_sse2(m, v, dest);
+#else
+  vec4 res;
+  res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2] + m[3][0] * v[3];
+  res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3];
+  res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3];
+  res[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
+  glm_vec4_dup(res, dest);
+#endif
 }
 
 /*!
