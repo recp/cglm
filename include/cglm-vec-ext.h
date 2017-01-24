@@ -91,4 +91,56 @@ glm_vec4_eq_all(vec4 v) {
   return v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
 }
 
+CGLM_INLINE
+float
+glm_vec_max(vec3 v) {
+  float max;
+
+  max = v[0];
+  if (v[1] > max)
+    max = v[1];
+  if (v[2] > max)
+    max = v[2];
+
+  return max;
+}
+
+CGLM_INLINE
+float
+glm_vec_min(vec3 v) {
+  float min;
+
+  min = v[0];
+  if (v[1] < min)
+    min = v[1];
+  if (v[2] < min)
+    min = v[2];
+
+  return min;
+}
+
+CGLM_INLINE
+float
+glm_vec4_max(vec4 v) {
+  float max;
+
+  max = glm_vec_max(v);
+  if (v[3] > max)
+    max = v[3];
+
+  return max;
+}
+
+CGLM_INLINE
+float
+glm_vec4_min(vec4 v) {
+  float min;
+
+  min = glm_vec_max(v);
+  if (v[3] < min)
+    min = v[3];
+
+  return min;
+}
+
 #endif /* cglm_vec_ext_h */
