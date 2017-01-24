@@ -30,7 +30,7 @@ typedef enum glm_euler_sq {
 
 CGLM_INLINE
 glm_euler_sq
-glm_euler_order(char newOrder[3]) {
+glm_euler_order(int newOrder[3]) {
   return (glm_euler_sq)(newOrder[0] | newOrder[1] << 2 | newOrder[2] << 4);
 }
 
