@@ -372,7 +372,11 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
 CGLM_INLINE
 float
 glm_vec_angle(vec3 v1, vec3 v2) {
-  return acosf(glm_vec_dot(v1, v2) / glm_vec_norm(v1) * glm_vec_norm(v2));
+  float norm;
+  
+  /* maybe compiler generate approximation instruction (rcp) */
+  norm = 1.0f / (glm_vec_norm(v1) * glm_vec_norm(v2));
+  return acosf(glm_vec_dot(v1, v2) * norm);
 }
 
 CGLM_INLINE
