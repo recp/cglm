@@ -13,6 +13,15 @@
 #include "cglm-quat-simd.h"
 #include "cglm-vec.h"
 
+#define GLM_QUAT_IDENTITY_INIT  {0.0f, 0.0f, 0.0f, 1.0f}
+#define GLM_QUAT_IDENTITY       (versor){0.0f, 0.0f, 0.0f, 1.0f}
+
+CGLM_INLINE
+void
+glm_quat_identity(versor q) {
+  glm_vec4_dup(GLM_QUAT_IDENTITY, q);
+}
+
 CGLM_INLINE
 void
 glm_quat(versor q,
