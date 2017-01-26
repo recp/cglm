@@ -247,6 +247,23 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief multiply vector with mat4's mat3 part(rotation)
+ *
+ * @param[in]  m    mat4(affine transform)
+ * @param[in]  v    vec3
+ * @param[out] dest vec3
+ */
+CGLM_INLINE
+void
+glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest) {
+  vec3 res;
+  res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
+  res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
+  res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+  glm_vec_dup(res, dest);
+}
+
+/*!
  * @brief transpose mat4 and store in dest
  *
  * source matrix will not be transposed unless dest is m
