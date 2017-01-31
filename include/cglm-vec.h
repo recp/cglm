@@ -465,10 +465,16 @@ glm_vec_rotate(vec3 v, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
-  vec3 res;
-  res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
-  res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
-  res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+  vec3 res, x, y, z;
+
+  glm_vec_normalize_to(m[0], x);
+  glm_vec_normalize_to(m[1], y);
+  glm_vec_normalize_to(m[2], z);
+
+  res[0] = x[0] * v[0] + y[0] * v[1] + z[0] * v[2];
+  res[1] = x[1] * v[0] + y[1] * v[1] + z[1] * v[2];
+  res[2] = x[2] * v[0] + y[2] * v[1] + z[2] * v[2];
+
   glm_vec_dup(res, dest);
 }
 
