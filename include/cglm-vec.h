@@ -121,8 +121,8 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
  */
 CGLM_INLINE
 float
-glm_vec_norm2(vec3 vec) {
-  return vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2];
+glm_vec_norm2(vec3 v) {
+  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 }
 
 /*!
@@ -151,9 +151,8 @@ glm_vec_norm(vec3 vec) {
  */
 CGLM_INLINE
 float
-glm_vec4_norm2(vec4 vec) {
-  return vec[0] * vec[0] + vec[1] * vec[1]
-            + vec[2] * vec[2] + vec[3] * vec[3];
+glm_vec4_norm2(vec4 v) {
+  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
 }
 
 /*!
