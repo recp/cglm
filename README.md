@@ -21,7 +21,7 @@ The original glm library is for C++ only (templates, namespaces, classes...), th
 ##Features
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
-- general purpose vector operations (cross, dot, ...)
+- general purpose vector operations (cross, dot, rotate, proj, angle...)
 - affine transforms
 - matrix decomposition (extract rotation, scaling factor)
 - optimized affine transform matrices (mul, rigid-body inverse)
@@ -96,3 +96,4 @@ TODO:
 ##Notes
 
 - This library uses float types only, does not support Integers, Double... yet
+- If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
