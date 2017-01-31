@@ -109,6 +109,23 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 }
 
 /*!
+ * @brief norm * norm (magnitude) of vec
+ *
+ * we can use this func instead of calling norm * norm, because it would call 
+ * sqrtf fuction twice but with this func we can avoid func call, maybe this is 
+ * not good name for this func
+ *
+ * @param[in] vec vec
+ *
+ * @return norm * norm
+ */
+CGLM_INLINE
+float
+glm_vec_norm2(vec3 vec) {
+  return vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2];
+}
+
+/*!
  * @brief norm (magnitude) of vec3
  *
  * @param[in] vec
@@ -118,7 +135,25 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 CGLM_INLINE
 float
 glm_vec_norm(vec3 vec) {
-  return sqrtf(vec[0] * vec[0] + vec[1] * vec[1] + vec[2] * vec[2]);
+  return sqrtf(glm_vec_norm2(vec));
+}
+
+/*!
+ * @brief norm * norm (magnitude) of vec
+ *
+ * we can use this func instead of calling norm * norm, because it would call
+ * sqrtf fuction twice but with this func we can avoid func call, maybe this is
+ * not good name for this func
+ *
+ * @param[in] vec vec4
+ *
+ * @return norm * norm
+ */
+CGLM_INLINE
+float
+glm_vec4_norm2(vec4 vec) {
+  return vec[0] * vec[0] + vec[1] * vec[1]
+            + vec[2] * vec[2] + vec[3] * vec[3];
 }
 
 /*!
@@ -131,8 +166,7 @@ glm_vec_norm(vec3 vec) {
 CGLM_INLINE
 float
 glm_vec4_norm(vec4 vec) {
-  return sqrtf(vec[0] * vec[0] + vec[1] * vec[1]
-               + vec[2] * vec[2] + vec[3] * vec[3]);
+  return sqrtf(glm_vec4_norm2(vec));
 }
 
 /*!
