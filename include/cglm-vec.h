@@ -473,4 +473,19 @@ glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
   glm_vec_dup(res, dest);
 }
 
+/*!
+ * @brief project a vector onto b vector
+ *
+ * @param[in]  a
+ * @param[in]  b
+ * @param[out] dest projected vector
+ */
+CGLM_INLINE
+void
+glm_vec_proj(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_scale(b,
+                glm_vec_dot(a, b) / glm_vec_norm2(b),
+                dest);
+}
+
 #endif /* cglm_vec_h */
