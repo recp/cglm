@@ -81,6 +81,12 @@ glm_vec_eq_all(vec3 v) {
 
 CGLM_INLINE
 bool
+glm_vec_eqv(vec3 v1, vec3 v2) {
+  return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2];
+}
+
+CGLM_INLINE
+bool
 glm_vec4_eq(vec4 v, float val) {
   return v[0] == val && v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
 }
@@ -89,6 +95,12 @@ CGLM_INLINE
 bool
 glm_vec4_eq_all(vec4 v) {
   return v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
+}
+
+CGLM_INLINE
+bool
+glm_vec4_eqv(vec4 v1, vec4 v2) {
+  return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2] && v1[3] == v2[3];
 }
 
 CGLM_INLINE
