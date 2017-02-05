@@ -109,7 +109,7 @@ this will normalize vec and store normalized vector into `vec` but if you will s
 ```C
 glm_vec_normalize_to(vec, result);
 ```
-like this fuction you may see `_to` postfix, this functions store results to another variables and save temp memory
+like this function you may see `_to` postfix, this functions store results to another variables and save temp memory
 
 
 to call pre-compiled versions include header with `c` postfix, c means call. Pre-compiled versions are just wrappers.
@@ -121,7 +121,7 @@ this header will include all heaers with c postfix. You need to call functions w
 glmc_vec_normalize(vec);
 ```
 
-Fuction usage and parameters are documented inside related headers.
+Function usage and parameters are documented inside related headers.
 ##Notes
 
 - This library uses float types only, does not support Integers, Double... yet
