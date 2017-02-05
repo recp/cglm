@@ -118,7 +118,7 @@ to call pre-compiled versions include header with `c` postfix, c means call. Pre
 ```
 this header will include all heaers with c postfix. You need to call functions with c posfix:
 ```C
-glm_vec_normalize(vec);
+glmc_vec_normalize(vec);
 ```
 
 Fuction usage and parameters are documented inside related headers.
