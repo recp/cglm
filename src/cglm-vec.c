@@ -80,6 +80,18 @@ glmc_vec4_normalize(vec4 v) {
 }
 
 CGLM_EXPORT
+float
+glmc_vec_norm2(vec3 vec) {
+  return glm_vec_norm2(vec);
+}
+
+CGLM_EXPORT
+float
+glmc_vec4_norm2(vec4 vec) {
+  return glm_vec4_norm2(vec);
+}
+
+CGLM_EXPORT
 void
 glmc_vec_add(vec3 v1, vec3 v2, vec3 dest) {
   glm_vec_add(v1, v2, dest);
@@ -125,4 +137,28 @@ CGLM_EXPORT
 void
 glmc_vec4_scale(vec4 v, float s, vec4 dest) {
   glm_vec4_scale(v, s, dest);
+}
+
+CGLM_EXPORT
+float
+glmc_vec_angle(vec3 v1, vec3 v2) {
+  return glm_vec_angle(v1, v2);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_rotate(vec3 v, float angle, vec3 axis) {
+  glm_vec_rotate(v, angle, axis);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
+  glm_vec_rotate_m4(m, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_proj(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_proj(a, b, dest);
 }
