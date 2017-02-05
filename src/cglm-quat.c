@@ -9,12 +9,26 @@
 
 CGLM_EXPORT
 void
-glmc_quat_init(versor q,
+glmc_quat_identity(versor q) {
+  glm_quat_identity(q);
+}
+
+CGLM_EXPORT
+void
+glmc_quat(versor q,
                float angle,
                float x,
                float y,
                float z) {
-  glm_quat_init(q, angle, x, y, z);
+  glm_quat(q, angle, x, y, z);
+}
+
+CGLM_EXPORT
+void
+glmc_quatv(versor q,
+           float  angle,
+           vec3   v) {
+  glm_quatv(q, angle, v);
 }
 
 CGLM_EXPORT
