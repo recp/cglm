@@ -7,6 +7,9 @@
 
 #ifndef cglmc_mat_h
 #define cglmc_mat_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -78,4 +81,7 @@ CGLM_EXPORT
 void
 glmc_mat4_swap_row(mat4 mat, int row1, int row2);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_mat_h */

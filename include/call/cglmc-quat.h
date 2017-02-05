@@ -7,6 +7,9 @@
 
 #ifndef cglmc_quat_h
 #define cglmc_quat_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -55,4 +58,7 @@ glmc_quat_slerp(versor q,
                 float  t,
                 versor dest);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_quat_h */

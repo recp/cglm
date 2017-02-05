@@ -7,6 +7,9 @@
 
 #ifndef cglmc_affine_h
 #define cglmc_affine_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -82,4 +85,7 @@ CGLM_EXPORT
 void
 glmc_decompose(mat4 m, vec4 t, mat4 r, vec3 s);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_affine_h */

@@ -7,6 +7,9 @@
 
 #ifndef cglmc_cam_h
 #define cglmc_cam_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -45,4 +48,7 @@ glmc_lookat(vec3 eye,
             vec3 up,
             mat4 dest);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_cam_h */

@@ -7,6 +7,9 @@
 
 #ifndef cglm_vec_h
 #define cglm_vec_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -114,4 +117,7 @@ CGLM_EXPORT
 void
 glmc_vec_proj(vec3 a, vec3 b, vec3 dest);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglm_vec_h */

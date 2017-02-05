@@ -7,6 +7,9 @@
 
 #ifndef cglm_call_h
 #define cglm_call_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "cglm.h"
 #include "call/cglmc-vec.h"
@@ -18,4 +21,7 @@
 #include "call/cglmc-euler.h"
 #include "call/cglmc-io.h"
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglm_call_h */

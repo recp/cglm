@@ -7,6 +7,9 @@
 
 #ifndef cglmc_io_h
 #define cglmc_io_h
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "../cglm.h"
 
@@ -35,4 +38,7 @@ void
 glmc_versor_print(versor vec,
                   FILE * __restrict ostream);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_io_h */
