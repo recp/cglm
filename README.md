@@ -92,7 +92,36 @@ $ [sudo] make install
 ```text
 TODO:
 ```
+##How to use
+If you want to use inline versions of funcstions then; include main header
+```C
+#include <cglm.h>
+```
+the haeder will include all headers. Then call func you want e.g. rotate vector by axis:
+```C
+glm_vec_rotate(v1, glm_rad(45), (vec3){1.0f, 0.0f, 0.0f});
+```
+some functions are overloaded :) e.g you can normalize vector:
+```C
+glm_vec_normalize(vec);
+```
+this will normalize vec and store normalized vector into `vec` but if you will store normalized vector into another vector do this:
+```C
+glm_vec_normalize_to(vec, result);
+```
+like this fuction you may see `_to` postfix, this functions store results to another variables and save temp memory
 
+
+to call pre-compiled versions include header with `c` postfix, c means call. Pre-compiled versions are just wrappers.
+```C
+#include <cglm-call.h>
+```
+this header will include all heaers with c postfix. You need to call functions with c posfix:
+```C
+glm_vec_normalize(vec);
+```
+
+Fuction usage and parameters are documented inside related headers.
 ##Notes
 
 - This library uses float types only, does not support Integers, Double... yet
