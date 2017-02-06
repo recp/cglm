@@ -2,6 +2,10 @@
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__register`
 
+#### Note for C++ developers:
+If you don't aware about original GLM library yet, you may also want to look at:
+https://github.com/g-truc/glm
+
 
 <table>
   <tbody>
