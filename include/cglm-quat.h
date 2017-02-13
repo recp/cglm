@@ -9,9 +9,9 @@
 #define cglm_quat_h
 
 #include "cglm-common.h"
-#include "cglm-intrin.h"
-#include "cglm-quat-simd.h"
 #include "cglm-vec.h"
+#include "arch/simd/cglm-intrin.h"
+#include "arch/simd/cglm-quat-simd.h"
 
 #define GLM_QUAT_IDENTITY_INIT  {0.0f, 0.0f, 0.0f, 1.0f}
 #define GLM_QUAT_IDENTITY       (versor){0.0f, 0.0f, 0.0f, 1.0f}

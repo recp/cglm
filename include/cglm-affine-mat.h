@@ -11,8 +11,8 @@
 #include "cglm-common.h"
 #include "cglm-mat.h"
 #include "cglm-mat3.h"
-#include "cglm-affine-mat-sse2.h"
-#include "cglm-affine-mat-avx.h"
+#include "arch/simd/cglm-affine-mat-sse2.h"
+#include "arch/simd/cglm-affine-mat-avx.h"
 
 #include <assert.h>
 

@@ -14,8 +14,8 @@
 #define cglm_mat_h
 
 #include "cglm-common.h"
-#include "cglm-mat-simd-sse2.h"
-#include "cglm-mat-simd-avx.h"
+#include "arch/simd/cglm-mat-simd-sse2.h"
+#include "arch/simd/cglm-mat-simd-avx.h"
 
 #include <assert.h>
 

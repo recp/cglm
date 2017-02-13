@@ -9,7 +9,7 @@
 #define cglm_affine_mat_avx_h
 #ifdef __AVX__
 
-#include "cglm-common.h"
+#include "../../cglm-common.h"
 #include "cglm-intrin.h"
 
 #include <immintrin.h>

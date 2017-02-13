@@ -14,8 +14,8 @@
 #define cglm_vec_h
 
 #include "cglm-common.h"
-#include "cglm-intrin.h"
 #include "cglm-vec-ext.h"
+#include "arch/simd/cglm-intrin.h"
 
 /*!
  * @brief copy all members of [a] to [dest]

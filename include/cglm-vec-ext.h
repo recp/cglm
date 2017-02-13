@@ -13,7 +13,7 @@
 #define cglm_vec_ext_h
 
 #include "cglm-common.h"
-#include "cglm-intrin.h"
+#include "arch/simd/cglm-intrin.h"
 #include <stdbool.h>
 
 /*!

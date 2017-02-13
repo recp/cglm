@@ -33,14 +33,14 @@ nobase_include_HEADERS = include/cglm.h \
                          include/cglm-mat.h \
                          include/cglm-affine-mat.h \
                          include/cglm-platform.h \
-                         include/cglm-mat-simd-avx.h \
-                         include/cglm-affine-mat-avx.h \
                          include/cglm-opengl.h \
-                         include/cglm-quat-simd.h \
-                         include/cglm-affine-mat-sse2.h \
-                         include/cglm-mat3-simd-sse2.h \
-                         include/cglm-mat-simd-sse2.h \
-                         include/cglm-intrin.h \
+                         include/arch/simd/cglm-mat-simd-avx.h \
+                         include/arch/simd/cglm-affine-mat-avx.h \
+                         include/arch/simd/cglm-quat-simd.h \
+                         include/arch/simd/cglm-affine-mat-sse2.h \
+                         include/arch/simd/cglm-mat3-simd-sse2.h \
+                         include/arch/simd/cglm-mat-simd-sse2.h \
+                         include/arch/simd/cglm-intrin.h \
                          include/call/cglmc-euler.h \
                          include/call/cglmc-quat.h \
                          include/call/cglmc-cam.h \

@@ -9,7 +9,7 @@
 #define cglm_mat_sse_h
 #if defined( __SSE__ ) || defined( __SSE2__ )
 
-#include "cglm-common.h"
+#include "../../cglm-common.h"
 #include "cglm-intrin.h"
 
 CGLM_INLINE

@@ -9,7 +9,7 @@
 #define cglm_mat3_h
 
 #include "cglm-common.h"
-#include "cglm-mat3-simd-sse2.h"
+#include "arch/simd/cglm-mat3-simd-sse2.h"
 
 #define GLM_MAT3_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f},                          \
                                  {0.0f, 1.0f, 0.0f},                          \
