@@ -38,7 +38,7 @@
  */
 CGLM_INLINE
 void
-glm_mat4_udup(mat4 mat, mat4 dest) {
+glm_mat4_ucopy(mat4 mat, mat4 dest) {
   glm__memcpy(float, dest, mat, sizeof(mat4));
 }
 
@@ -50,7 +50,7 @@ glm_mat4_udup(mat4 mat, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4_dup(mat4 mat, mat4 dest) {
+glm_mat4_copy(mat4 mat, mat4 dest) {
 #ifdef __AVX__
   _mm256_store_ps(dest[0], _mm256_load_ps(mat[0]));
   _mm256_store_ps(dest[2], _mm256_load_ps(mat[2]));
@@ -60,7 +60,7 @@ glm_mat4_dup(mat4 mat, mat4 dest) {
   _mm_store_ps(dest[2], _mm_load_ps(mat[2]));
   _mm_store_ps(dest[3], _mm_load_ps(mat[3]));
 #else
-  glm_mat4_udup(mat, dest);
+  glm_mat4_ucopy(mat, dest);
 #endif
 }
 
@@ -242,7 +242,7 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
   res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2] + m[3][1] * v[3];
   res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2] * v[3];
   res[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
-  glm_vec4_dup(res, dest);
+  glm_vec4_copy(res, dest);
 #endif
 }
 
@@ -260,7 +260,7 @@ glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest) {
   res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
   res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
   res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
-  glm_vec_dup(res, dest);
+  glm_vec_copy(res, dest);
 }
 
 /*!
@@ -477,9 +477,9 @@ CGLM_INLINE
 void
 glm_mat4_swap_col(mat4 mat, int col1, int col2) {
   vec4 tmp;
-  glm_vec4_dup(mat[col1], tmp);
-  glm_vec4_dup(mat[col2], mat[col1]);
-  glm_vec4_dup(tmp, mat[col2]);
+  glm_vec4_copy(mat[col1], tmp);
+  glm_vec4_copy(mat[col2], mat[col1]);
+  glm_vec4_copy(tmp, mat[col2]);
 }
 
 /*!

@@ -19,7 +19,7 @@
 CGLM_INLINE
 void
 glm_quat_identity(versor q) {
-  glm_vec4_dup(GLM_QUAT_IDENTITY, q);
+  glm_vec4_copy(GLM_QUAT_IDENTITY, q);
 }
 
 CGLM_INLINE

@@ -130,7 +130,7 @@ glm_scale_to(mat4 m, vec3 v, mat4 dest) {
   glm_vec4_scale(m[1], v[1], dest[1]);
   glm_vec4_scale(m[2], v[2], dest[2]);
 
-  glm_vec4_dup(m[3], dest[3]);
+  glm_vec4_copy(m[3], dest[3]);
 }
 
 CGLM_INLINE
@@ -267,9 +267,9 @@ glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
   glm_vec4_scale(m[2], rot[2][2], tmp[0]);
   glm_vec4_add(tmp[3], tmp[0],    tmp[3]);
 
-  glm_vec4_dup(tmp[1], m[0]);
-  glm_vec4_dup(tmp[2], m[1]);
-  glm_vec4_dup(tmp[3], m[2]);
+  glm_vec4_copy(tmp[1], m[0]);
+  glm_vec4_copy(tmp[2], m[1]);
+  glm_vec4_copy(tmp[3], m[2]);
 }
 
 CGLM_INLINE
@@ -325,10 +325,10 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
   vec4 t = {0.0f, 0.0f, 0.0f, 1.0f};
   vec3 v;
 
-  glm_vec4_dup(m[0], r[0]);
-  glm_vec4_dup(m[1], r[1]);
-  glm_vec4_dup(m[2], r[2]);
-  glm_vec4_dup(t,    r[3]);
+  glm_vec4_copy(m[0], r[0]);
+  glm_vec4_copy(m[1], r[1]);
+  glm_vec4_copy(m[2], r[2]);
+  glm_vec4_copy(t,    r[3]);
 
   s[0] = glm_vec_norm(m[0]);
   s[1] = glm_vec_norm(m[1]);
@@ -359,7 +359,7 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
 CGLM_INLINE
 void
 glm_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
-  glm_vec4_dup(m[3], t);
+  glm_vec4_copy(m[3], t);
   glm_decompose_rs(m, r, s);
 }
 

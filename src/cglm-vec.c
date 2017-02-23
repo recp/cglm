@@ -9,20 +9,20 @@
 
 CGLM_EXPORT
 void
-glmc_vec_dup(vec3 a, vec3 dest) {
-  glm_vec_dup(a, dest);
+glmc_vec_copy(vec3 a, vec3 dest) {
+  glm_vec_copy(a, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_dup3(vec4 a, vec3 dest) {
-  glm_vec4_dup3(a, dest);
+glmc_vec4_copy3(vec4 a, vec3 dest) {
+  glm_vec4_copy3(a, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_dup(vec4 v, vec4 dest) {
-  glm_vec4_dup(v, dest);
+glmc_vec4_copy(vec4 v, vec4 dest) {
+  glm_vec4_copy(v, dest);
 }
 
 CGLM_EXPORT

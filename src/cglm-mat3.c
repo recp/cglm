@@ -9,8 +9,8 @@
 
 CGLM_EXPORT
 void
-glmc_mat3_dup(mat3 mat, mat3 dest) {
-  glm_mat3_dup(mat, dest);
+glmc_mat3_copy(mat3 mat, mat3 dest) {
+  glm_mat3_copy(mat, dest);
 }
 
 CGLM_EXPORT

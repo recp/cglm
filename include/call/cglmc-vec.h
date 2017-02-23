@@ -15,15 +15,15 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_vec_dup(vec3 a, vec3 dest);
+glmc_vec_copy(vec3 a, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_dup3(vec4 a, vec3 dest);
+glmc_vec4_copy3(vec4 a, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_dup(vec4 v, vec4 dest);
+glmc_vec4_copy(vec4 v, vec4 dest);
 
 CGLM_EXPORT
 float

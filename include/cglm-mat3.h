@@ -26,7 +26,7 @@
  */
 CGLM_INLINE
 void
-glm_mat3_dup(mat3 mat, mat3 dest) {
+glm_mat3_copy(mat3 mat, mat3 dest) {
   glm__memcpy(float, dest, mat, sizeof(mat3));
 }
 
@@ -217,9 +217,9 @@ CGLM_INLINE
 void
 glm_mat3_swap_col(mat3 mat, int col1, int col2) {
   vec3 tmp;
-  glm_vec_dup(mat[col1], tmp);
-  glm_vec_dup(mat[col2], mat[col1]);
-  glm_vec_dup(tmp, mat[col2]);
+  glm_vec_copy(mat[col1], tmp);
+  glm_vec_copy(mat[col2], mat[col1]);
+  glm_vec_copy(tmp, mat[col2]);
 }
 
 /*!

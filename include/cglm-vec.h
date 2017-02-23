@@ -25,7 +25,7 @@
  */
 CGLM_INLINE
 void
-glm_vec_dup(vec3 a, vec3 dest) {
+glm_vec_copy(vec3 a, vec3 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
   dest[2] = a[2];
@@ -39,7 +39,7 @@ glm_vec_dup(vec3 a, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_dup3(vec4 a, vec3 dest) {
+glm_vec4_copy3(vec4 a, vec3 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
   dest[2] = a[2];
@@ -53,7 +53,7 @@ glm_vec4_dup3(vec4 a, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_dup(vec4 v, vec4 dest) {
+glm_vec4_copy(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(dest, _mm_load_ps(v));
 #else
@@ -475,7 +475,7 @@ glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
   res[1] = x[1] * v[0] + y[1] * v[1] + z[1] * v[2];
   res[2] = x[2] * v[0] + y[2] * v[1] + z[2] * v[2];
 
-  glm_vec_dup(res, dest);
+  glm_vec_copy(res, dest);
 }
 
 /*!

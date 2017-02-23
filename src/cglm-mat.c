@@ -9,14 +9,14 @@
 
 CGLM_EXPORT
 void
-glmc_mat4_udup(mat4 mat, mat4 dest) {
-  glm_mat4_dup(mat, dest);
+glmc_mat4_ucopy(mat4 mat, mat4 dest) {
+  glm_mat4_copy(mat, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_mat4_dup(mat4 mat, mat4 dest) {
-  glm_mat4_dup(mat, dest);
+glmc_mat4_copy(mat4 mat, mat4 dest) {
+  glm_mat4_copy(mat, dest);
 }
 
 CGLM_EXPORT

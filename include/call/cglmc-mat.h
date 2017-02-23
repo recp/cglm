@@ -15,11 +15,11 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_mat4_udup(mat4 mat, mat4 dest);
+glmc_mat4_ucopy(mat4 mat, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_mat4_dup(mat4 mat, mat4 dest);
+glmc_mat4_copy(mat4 mat, mat4 dest);
 
 CGLM_EXPORT
 void

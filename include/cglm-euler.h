@@ -64,7 +64,7 @@ glm_euler_angles(mat4 m, vec3 dest) {
       path = (fabsf(a[0][0]) + fabsf(a[0][1]) + fabsf(a[0][2])) >=
                (fabsf(a[1][0]) + fabsf(a[1][1]) + fabsf(a[1][2]));
 
-      glm_vec_dup(a[path], dest);
+      glm_vec_copy(a[path], dest);
     } else {
       dest[0] = atan2f(m[1][0], m[2][0]);
       dest[1] = CGLM_PI_2;

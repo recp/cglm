@@ -15,7 +15,7 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_mat3_dup(mat3 mat, mat3 dest);
+glmc_mat3_copy(mat3 mat, mat3 dest);
 
 CGLM_EXPORT
 void

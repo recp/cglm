@@ -87,7 +87,7 @@ glm_inv_tr(mat4 mat) {
   /* translate */
   glm_mat3_mulv(r, mat[3], t);
   glm_vec_flipsign(t);
-  glm_vec_dup(t, mat[3]);
+  glm_vec_copy(t, mat[3]);
 #endif
 }
 
