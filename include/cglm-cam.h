@@ -10,6 +10,17 @@
 
 #include "cglm-common.h"
 
+/*!
+ * @brief set up perspective peprojection matrix
+ *
+ * @param[in]  left    viewport.left
+ * @param[in]  right   viewport.right
+ * @param[in]  bottom  viewport.bottom
+ * @param[in]  top     viewport.top
+ * @param[in]  nearVal near clipping plane
+ * @param[in]  farVal  far clipping plane
+ * @param[out] dest    result matrix
+ */
 CGLM_INLINE
 void
 glm_frustum(float left,
@@ -18,7 +29,7 @@ glm_frustum(float left,
             float top,
             float nearVal,
             float farVal,
-            mat4 dest) {
+            mat4  dest) {
   float rl, tb, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
@@ -36,6 +47,17 @@ glm_frustum(float left,
   dest[3][2] = -2.0f * farVal * nearVal * fn;
 }
 
+/*!
+ * @brief set up orthographic projection matrix
+ *
+ * @param[in]  left    viewport.left
+ * @param[in]  right   viewport.right
+ * @param[in]  bottom  viewport.bottom
+ * @param[in]  top     viewport.top
+ * @param[in]  nearVal near clipping plane
+ * @param[in]  farVal  far clipping plane
+ * @param[out] dest    result matrix
+ */
 CGLM_INLINE
 void
 glm_ortho(float left,
@@ -44,7 +66,7 @@ glm_ortho(float left,
           float top,
           float nearVal,
           float farVal,
-          mat4 dest) {
+          mat4  dest) {
   float rl, tb, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
@@ -62,13 +84,19 @@ glm_ortho(float left,
   dest[3][3] = 1.0f;
 }
 
+/*!
+ * @brief set up unit orthographic projection matrix
+ *
+ * @param[in]  aspect aspect ration ( width / height )
+ * @param[out] dest   result matrix
+ */
 CGLM_INLINE
 void
-glm_ortho_default(float aspectRatio,
+glm_ortho_default(float aspect,
 				  mat4  dest) {
-  if (aspectRatio >= 1.0f) {
-    glm_ortho(-1.0f * aspectRatio,
-               1.0f * aspectRatio,
+  if (aspect >= 1.0f) {
+    glm_ortho(-1.0f * aspect,
+               1.0f * aspect,
               -1.0f,
                1.0f,
               -100.0f,
@@ -79,21 +107,28 @@ glm_ortho_default(float aspectRatio,
 
   glm_ortho(-1.0f,
 			 1.0f,
-			-1.0f / aspectRatio,
-			 1.0f / aspectRatio,
+			-1.0f / aspect,
+			 1.0f / aspect,
 			-100.0f,
 			 100.0f,
 			 dest);
 }
 
+/*!
+ * @brief set up orthographic projection matrix with given CUBE size
+ *
+ * @param[in]  aspect aspect ratio ( width / height )
+ * @param[in]  size   cube size
+ * @param[out] dest   result matrix
+ */
 CGLM_INLINE
 void
-glm_ortho_default_s(float aspectRatio,
+glm_ortho_default_s(float aspect,
 					float size,
 					mat4  dest) {
-  if (aspectRatio >= 1.0f) {
-    glm_ortho(-size * aspectRatio,
-               size * aspectRatio,
+  if (aspect >= 1.0f) {
+    glm_ortho(-size * aspect,
+               size * aspect,
               -size,
                size,
               -size - 100.0f,
@@ -104,20 +139,29 @@ glm_ortho_default_s(float aspectRatio,
 
   glm_ortho(-size,
 			 size,
-			-size / aspectRatio,
-			 size / aspectRatio,
+			-size / aspect,
+			 size / aspect,
 			-size - 100.0f,
 			 size + 100.0f,
 			 dest);
 }
 
+/*!
+ * @brief set up perspective projection matrix
+ *
+ * @param[in]  fovy    field of view angle
+ * @param[in]  aspect  aspect ratio ( width / height )
+ * @param[in]  nearVal near clipping plane
+ * @param[in]  farVal  far clipping planes
+ * @param[out] dest    result matrix
+ */
 CGLM_INLINE
 void
 glm_perspective(float fovy,
                 float aspect,
                 float nearVal,
                 float farVal,
-                mat4 dest) {
+                mat4  dest) {
   float f, fn;
 
   glm__memzero(float, dest, sizeof(mat4));
@@ -132,26 +176,50 @@ glm_perspective(float fovy,
   dest[3][2] = 2 * nearVal * farVal * fn;
 }
 
+/*!
+ * @brief set up perspective projection matrix with default near/far 
+ *        and angle values
+ *
+ * @param[in]  aspect aspect ratio ( width / height )
+ * @param[out] dest   result matrix
+ */
 CGLM_INLINE
 void
-glm_perspective_default(float aspectRatio, mat4 dest) {
+glm_perspective_default(float aspect,
+						mat4  dest) {
   glm_perspective((float)CGLM_PI_4,
-                  aspectRatio,
+                  aspect,
                   0.01f,
                   100.0f,
                   dest);
 }
 
+/*!
+ * @brief resize perspective matrix by aspect ratio ( width / height )
+ *        this very make easy to resize proj matrix when window, viewport
+ *        reized
+ *
+ * @param[in]      aspect aspect ratio ( width / height )
+ * @param[in, out] proj   perspective projection matrix
+ */
 CGLM_INLINE
 void
-glm_perspective_resize(float aspectRatio,
+glm_perspective_resize(float aspect,
 					   mat4  proj) {
   if (proj[0][0] == 0)
     return;
 
-  proj[0][0] = proj[1][1] / aspectRatio;
+  proj[0][0] = proj[1][1] / aspect;
 }
 
+/*!
+ * @brief set up view matrix
+ *
+ * @param[in]  eye    eye vector
+ * @param[in]  center center vector
+ * @param[in]  up     up vector
+ * @param[out] dest   result matrix
+ */
 CGLM_INLINE
 void
 glm_lookat(vec3 eye,
