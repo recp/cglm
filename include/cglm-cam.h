@@ -93,7 +93,7 @@ glm_ortho(float left,
 CGLM_INLINE
 void
 glm_ortho_default(float aspect,
-				  mat4  dest) {
+                  mat4  dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-1.0f * aspect,
                1.0f * aspect,
@@ -106,12 +106,12 @@ glm_ortho_default(float aspect,
   }
 
   glm_ortho(-1.0f,
-			 1.0f,
-			-1.0f / aspect,
-			 1.0f / aspect,
-			-100.0f,
-			 100.0f,
-			 dest);
+             1.0f,
+            -1.0f / aspect,
+             1.0f / aspect,
+            -100.0f,
+             100.0f,
+             dest);
 }
 
 /*!
@@ -124,8 +124,8 @@ glm_ortho_default(float aspect,
 CGLM_INLINE
 void
 glm_ortho_default_s(float aspect,
-					float size,
-					mat4  dest) {
+                    float size,
+                    mat4  dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-size * aspect,
                size * aspect,
@@ -138,12 +138,12 @@ glm_ortho_default_s(float aspect,
   }
 
   glm_ortho(-size,
-			 size,
-			-size / aspect,
-			 size / aspect,
-			-size - 100.0f,
-			 size + 100.0f,
-			 dest);
+             size,
+            -size / aspect,
+             size / aspect,
+            -size - 100.0f,
+             size + 100.0f,
+             dest);
 }
 
 /*!
@@ -177,7 +177,7 @@ glm_perspective(float fovy,
 }
 
 /*!
- * @brief set up perspective projection matrix with default near/far 
+ * @brief set up perspective projection matrix with default near/far
  *        and angle values
  *
  * @param[in]  aspect aspect ratio ( width / height )
@@ -186,7 +186,7 @@ glm_perspective(float fovy,
 CGLM_INLINE
 void
 glm_perspective_default(float aspect,
-						mat4  dest) {
+                        mat4  dest) {
   glm_perspective((float)CGLM_PI_4,
                   aspect,
                   0.01f,
@@ -205,7 +205,7 @@ glm_perspective_default(float aspect,
 CGLM_INLINE
 void
 glm_perspective_resize(float aspect,
-					   mat4  proj) {
+                       mat4  proj) {
   if (proj[0][0] == 0)
     return;
 
