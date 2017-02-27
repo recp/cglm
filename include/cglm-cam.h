@@ -9,7 +9,6 @@
 #define cglm_vcam_h
 
 #include "cglm-common.h"
-#include "cglm-platform.h"
 
 CGLM_INLINE
 void
@@ -65,14 +64,9 @@ glm_ortho(float left,
 
 CGLM_INLINE
 void
-glm_ortho_default(mat4 dest) {
-  int32_t rect[4];
-  float aspectRatio;
-
-  glm_platfom_get_viewport_rect(rect);
-  aspectRatio = (float)rect[2]/rect[3];
-
-  if (rect[2] >= rect[3]) {
+glm_ortho_default(float aspectRatio,
+				  mat4  dest) {
+  if (aspectRatio >= 1.0f) {
     glm_ortho(-1.0f * aspectRatio,
                1.0f * aspectRatio,
               -1.0f,
@@ -80,27 +74,24 @@ glm_ortho_default(mat4 dest) {
               -100.0f,
                100.0f,
                dest);
-  } else {
-    glm_ortho(-1.0f,
-               1.0f,
-              -1.0f / aspectRatio,
-               1.0f / aspectRatio,
-              -100.0f,
-               100.0f,
-               dest);
+	return;
   }
+
+  glm_ortho(-1.0f,
+			 1.0f,
+			-1.0f / aspectRatio,
+			 1.0f / aspectRatio,
+			-100.0f,
+			 100.0f,
+			 dest);
 }
 
 CGLM_INLINE
 void
-glm_ortho_default_s(float size, mat4 dest) {
-  int32_t rect[4];
-  float aspectRatio;
-
-  glm_platfom_get_viewport_rect(rect);
-  aspectRatio = (float)rect[2]/rect[3];
-
-  if (rect[2] >= rect[3]) {
+glm_ortho_default_s(float aspectRatio,
+					float size,
+					mat4  dest) {
+  if (aspectRatio >= 1.0f) {
     glm_ortho(-size * aspectRatio,
                size * aspectRatio,
               -size,
@@ -108,15 +99,16 @@ glm_ortho_default_s(float size, mat4 dest) {
               -size - 100.0f,
                size + 100.0f,
                dest);
-  } else {
-    glm_ortho(-size,
-               size,
-              -size / aspectRatio,
-               size / aspectRatio,
-              -size - 100.0f,
-               size + 100.0f,
-               dest);
+	return;
   }
+
+  glm_ortho(-size,
+			 size,
+			-size / aspectRatio,
+			 size / aspectRatio,
+			-size - 100.0f,
+			 size + 100.0f,
+			 dest);
 }
 
 CGLM_INLINE
@@ -142,12 +134,9 @@ glm_perspective(float fovy,
 
 CGLM_INLINE
 void
-glm_perspective_default(mat4 dest) {
-  int32_t rect[4];
-  glm_platfom_get_viewport_rect(rect);
-  
+glm_perspective_default(float aspectRatio, mat4 dest) {
   glm_perspective((float)CGLM_PI_4,
-                  (float)rect[2]/rect[3],
+                  aspectRatio,
                   0.01f,
                   100.0f,
                   dest);
@@ -155,14 +144,12 @@ glm_perspective_default(mat4 dest) {
 
 CGLM_INLINE
 void
-glm_perspective_resize(mat4 proj) {
-  int32_t rect[4];
-
+glm_perspective_resize(float aspectRatio,
+					   mat4  proj) {
   if (proj[0][0] == 0)
     return;
 
-  glm_platfom_get_viewport_rect(rect);
-  proj[0][0] = (float)proj[1][1] * rect[3] / rect[2];
+  proj[0][0] = proj[1][1] / aspectRatio;
 }
 
 CGLM_INLINE

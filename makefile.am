@@ -32,8 +32,6 @@ nobase_include_HEADERS = include/cglm.h \
                          include/cglm-quat.h \
                          include/cglm-mat.h \
                          include/cglm-affine-mat.h \
-                         include/cglm-platform.h \
-                         include/cglm-opengl.h \
                          include/arch/simd/cglm-mat-simd-avx.h \
                          include/arch/simd/cglm-affine-mat-avx.h \
                          include/arch/simd/cglm-quat-simd.h \
