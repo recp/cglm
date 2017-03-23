@@ -59,7 +59,7 @@ glm_vec_broadcast(float val, vec3 d) {
 
 CGLM_INLINE
 void
-glm_vec4_broadcast(float val, vec3 d) {
+glm_vec4_broadcast(float val, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(d, _mm_set1_ps(val));
 #else
