@@ -148,7 +148,7 @@ float
 glm_vec4_min(vec4 v) {
   float min;
 
-  min = glm_vec_max(v);
+  min = glm_vec_min(v);
   if (v[3] < min)
     min = v[3];
 
