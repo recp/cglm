@@ -16,6 +16,7 @@
 #include "cglm-common.h"
 #include "cglm-vec-ext.h"
 #include "arch/simd/cglm-intrin.h"
+#include "cglm-util.h"
 
 /*!
  * @brief copy all members of [a] to [dest]
@@ -491,6 +492,23 @@ glm_vec_proj(vec3 a, vec3 b, vec3 dest) {
   glm_vec_scale(b,
                 glm_vec_dot(a, b) / glm_vec_norm2(b),
                 dest);
+}
+
+CGLM_INLINE
+float
+glm_vec_distance(vec3 v1, vec3 v2) {
+  return sqrtf(glm_pow2(v2[0] - v1[0])
+               + glm_pow2(v2[1] - v1[1])
+               + glm_pow2(v2[2] - v1[2]));
+}
+
+CGLM_INLINE
+float
+glm_vec4_distance(vec4 v1, vec4 v2) {
+  return sqrtf(glm_pow2(v2[0] - v1[0])
+               + glm_pow2(v2[1] - v1[1])
+               + glm_pow2(v2[2] - v1[2])
+               + glm_pow2(v2[3] - v1[3]));
 }
 
 #endif /* cglm_vec_h */

@@ -117,6 +117,14 @@ CGLM_EXPORT
 void
 glmc_vec_proj(vec3 a, vec3 b, vec3 dest);
 
+CGLM_EXPORT
+float
+glmc_vec_distance(vec3 v1, vec3 v2);
+
+CGLM_EXPORT
+float
+glmc_vec4_distance(vec4 v1, vec4 v2);
+
 #ifdef __cplusplus
 }
 #endif

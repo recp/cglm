@@ -45,4 +45,10 @@ glm_make_deg(float *rad) {
   *rad = *rad * 180.0f / CGLM_PI;
 }
 
+CGLM_INLINE
+float
+glm_pow2(float x) {
+  return x * x;
+}
+
 #endif /* cglm_util_h */
