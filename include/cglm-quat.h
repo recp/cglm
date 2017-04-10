@@ -31,7 +31,7 @@ glm_quat(versor q,
          float  z) {
   float a, c, s;
 
-  a = angle / 2.0f;
+  a = angle * 0.5f;
   c = cosf(a);
   s = sinf(a);
 
@@ -48,7 +48,7 @@ glm_quatv(versor q,
           vec3   v) {
   float a, c, s;
 
-  a = angle / 2.0f;
+  a = angle * 0.5f;
   c = cosf(a);
   s = sinf(a);
 
