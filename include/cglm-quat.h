@@ -99,23 +99,33 @@ CGLM_INLINE
 void
 glm_quat_mat4(versor q, mat4 dest) {
   float w, x, y, z;
+  float xx, yy, zz;
+  float xy, yz, xz;
+  float wx, wy, wz;
 
   w = q[0];
   x = q[1];
   y = q[2];
   z = q[3];
 
-  dest[0][0] = 1.0f - 2.0f * (y * y + z * z);
-  dest[0][1] = 2.0f * (x * y + w * z);
-  dest[0][2] = 2.0f * (x * z - w * y);
-  dest[0][3] = 0.0f;
-  dest[1][0] = 2.0f * (x * y - w * z);
-  dest[1][1] = 1.0f - 2.0f * (x * x + z * z);
-  dest[1][2] = 2.0f * (y * z + w * x);
+  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
+  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
+  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[0][1] = xy + wz;
+  dest[1][2] = yz + wx;
+  dest[2][0] = xz + wy;
+
+  dest[1][0] = xy - wz;
+  dest[2][1] = yz - wx;
+  dest[0][2] = xz - wy;
+
   dest[1][3] = 0.0f;
-  dest[2][0] = 2.0f * (x * z + w * y);
-  dest[2][1] = 2.0f * (y * z - w * x);
-  dest[2][2] = 1.0f - 2.0f * (x * x + y * y);
+  dest[0][3] = 0.0f;
   dest[2][3] = 0.0f;
   dest[3][0] = 0.0f;
   dest[3][1] = 0.0f;
