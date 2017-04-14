@@ -117,6 +117,10 @@ CGLM_EXPORT
 void
 glmc_vec_proj(vec3 a, vec3 b, vec3 dest);
 
+CGLM_INLINE
+void
+glmc_vec_center(vec3 v1, vec3 v2, vec3 dest);
+
 CGLM_EXPORT
 float
 glmc_vec_distance(vec3 v1, vec3 v2);

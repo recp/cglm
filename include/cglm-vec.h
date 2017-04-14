@@ -494,6 +494,21 @@ glm_vec_proj(vec3 a, vec3 b, vec3 dest) {
                 dest);
 }
 
+
+/**
+ * @brief find center point of two vector
+ *
+ * @param[in]  v1
+ * @param[in]  v2
+ * @param[out] dest center point
+ */
+CGLM_INLINE
+void
+glm_vec_center(vec3 v1, vec3 v2, vec3 dest) {
+  glm_vec_add(v1, v2, dest);
+  glm_vec_scale(dest, 0.5f, dest);
+}
+
 CGLM_INLINE
 float
 glm_vec_distance(vec3 v1, vec3 v2) {
