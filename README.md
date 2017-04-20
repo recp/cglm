@@ -130,3 +130,11 @@ Function usage and parameters are documented inside related headers.
 
 - This library uses float types only, does not support Integers, Double... yet
 - If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
+
+**TODO:** 
+- [ ] Unit tests
+- [ ] Unit tests for comparing cglm with glm results
+- [ ] Add version info
+- [ ] Unaligned operations (e.g. `glm_umat4_mul`)
+- [ ] Extra documentation 
+- [ ] ARM Neon Arch
