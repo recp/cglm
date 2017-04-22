@@ -39,8 +39,8 @@ https://github.com/g-truc/glm
 <hr />
 
 You have two option to call a function/operation: inline or library call (link)
-Almost all functions are marked inline (always_inline) so compiler probably will inline. 
-To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`. 
+Almost all functions are marked inline (always_inline) so compiler probably will inline.
+To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`.
 
 ```C
   #include <cglm.h>        /* for inline */
@@ -92,10 +92,19 @@ $ [sudo] make install
 ```
 
 ### Windows (MSBuild)
+Windows related build files, project files are located in `win` folder,
+make sure you are inside `cglm/win` folder.
+Code Analysis are enabled, it may take awhile to build
 
-```text
-TODO:
+```Powershell
+$ cd win
+$ .\build.bat
 ```
+if `msbuild` won't work (because of multi version VS) then try to build with `devenv`:
+```Powershell
+$ devenv cglm.sln /Build Release
+```
+
 ##How to use
 If you want to use inline versions of funcstions then; include main header
 ```C
