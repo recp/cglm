@@ -88,6 +88,8 @@ MIT. check the LICENSE file
 ### Unix (Autotools)
 
 ```text
+$ sh ./build-deps.sh # run only once (dependencies)
+$
 $ sh autogen.sh
 $ ./configure
 $ make
