@@ -1,0 +1,6 @@
+build_script:
+- ps: >-
+    cd win
+
+    .\build.bat
+

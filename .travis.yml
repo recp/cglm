@@ -1,0 +1,61 @@
+language: c
+
+os:
+  - linux
+  - osx
+
+sudo: required
+dist: trusty
+
+compiler:
+  - clang
+  - gcc
+
+matrix:
+  fast_finish: true
+  exclude:
+    # Skip GCC builds on macOS.
+    - os: osx
+      compiler: gcc
+  include:
+    # Additional GCC builds for code coverage.
+    - os: linux
+      compiler: gcc
+      env: CODE_COVERAGE=ON
+
+cache:
+  apt: true
+
+addons:
+  apt:
+    packages:
+      - clang-3.6
+      - lcov
+
+branches:
+  only:
+    - master
+
+before_install:
+  - pip install --user cpp-coveralls
+
+script:
+  - sh ./build-deps.sh
+  - sh ./autogen.sh
+  - if [[ "$CC" == "gcc" && "$CODE_COVERAGE" == "ON" ]]; then
+      ./configure CFLAGS="-ftest-coverage -fprofile-arcs";
+    else
+      ./configure;
+    fi
+  - make
+  - make check
+
+after_success:
+  - if [[ "$CC" == "gcc" && "$CODE_COVERAGE" == "ON" ]]; then
+      coveralls
+        --build-root .
+        --exclude lib
+        --exclude test
+        --gcov-options '\-lp'
+        --verbose;
+    fi
