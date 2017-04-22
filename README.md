@@ -1,4 +1,8 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
+[![Build Status](https://travis-ci.org/recp/cglm.svg?branch=master)](https://travis-ci.org/recp/cglm)
+[![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
+[![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__register`
 
@@ -22,7 +26,7 @@ https://github.com/g-truc/glm
   </tbody>
 </table>
 
-##Features
+## Features
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
 - general purpose vector operations (cross, dot, rotate, proj, angle...)
@@ -76,7 +80,7 @@ glm_mul(T, R, modelMat);
 glm_inv_tr(modelMat);
 ```
 
-##License
+## License
 MIT. check the LICENSE file
 
 ## Build
@@ -105,7 +109,7 @@ if `msbuild` won't work (because of multi version VS) then try to build with `de
 $ devenv cglm.sln /Build Release
 ```
 
-##How to use
+## How to use
 If you want to use inline versions of funcstions then; include main header
 ```C
 #include <cglm.h>
@@ -135,15 +139,15 @@ glmc_vec_normalize(vec);
 ```
 
 Function usage and parameters are documented inside related headers.
-##Notes
+## Notes
 
 - This library uses float types only, does not support Integers, Double... yet
 - If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
 
-**TODO:** 
+**TODO:**
 - [ ] Unit tests
 - [ ] Unit tests for comparing cglm with glm results
 - [ ] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
-- [ ] Extra documentation 
+- [ ] Extra documentation
 - [ ] ARM Neon Arch
