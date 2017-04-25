@@ -18,6 +18,20 @@ AM_CFLAGS = -Wall \
 lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 
+checkLDFLAGS = -L./.libs \
+               -L./test/lib/cmocka/build/src \
+               -lcmocka \
+               -lm \
+               -lcglm
+checkCFLAGS = -I./test/lib/cmocka/include \
+              -I./include
+
+check_PROGRAMS = test/test_mat4
+TESTS = $(check_PROGRAMS)
+
+test_test_mat4_LDFLAGS = $(checkLDFLAGS)
+test_test_mat4_CFLAGS  = $(checkCFLAGS)
+
 nobase_include_HEADERS = include/cglm.h \
                          include/cglm-call.h \
                          include/cglm-cam.h \
@@ -57,3 +71,5 @@ libcglm_la_SOURCES=\
     src/cglm-vec.c \
     src/cglm-mat3.c \
     src/cglm-mat.c
+
+test_test_mat4_SOURCES=test/src/test_mat4.c
