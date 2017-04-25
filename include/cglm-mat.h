@@ -24,8 +24,14 @@
                                  {0.0f, 0.0f, 1.0f, 0.0f},                    \
                                  {0.0f, 0.0f, 0.0f, 1.0f}}
 
+#define GLM_MAT4_ZERO_INIT      {{0.0f, 0.0f, 0.0f, 0.0f},                    \
+                                 {0.0f, 0.0f, 0.0f, 0.0f},                    \
+                                 {0.0f, 0.0f, 0.0f, 0.0f},                    \
+                                 {0.0f, 0.0f, 0.0f, 0.0f}}
+
 /* for C only */
 #define GLM_MAT4_IDENTITY (mat4)GLM_MAT4_IDENTITY_INIT
+#define GLM_MAT4_ZERO     (mat4)GLM_MAT4_ZERO_INIT
 
 /*!
  * @brief copy all members of [mat] to [dest]

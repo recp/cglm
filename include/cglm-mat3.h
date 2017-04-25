@@ -14,9 +14,14 @@
 #define GLM_MAT3_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f},                          \
                                  {0.0f, 1.0f, 0.0f},                          \
                                  {0.0f, 0.0f, 1.0f}}
+#define GLM_MAT3_ZERO_INIT      {{0.0f, 0.0f, 0.0f},                          \
+                                 {0.0f, 0.0f, 0.0f},                          \
+                                 {0.0f, 0.0f, 0.0f}}
+
 
 /* for C only */
 #define GLM_MAT3_IDENTITY (mat3)GLM_MAT3_IDENTITY_INIT
+#define GLM_MAT3_ZERO     (mat3)GLM_MAT3_ZERO_INIT
 
 /*!
  * @brief copy all members of [mat] to [dest]
