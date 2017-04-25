@@ -48,3 +48,7 @@ COPYING
 *.VC.db
 cscope.*
 *-git-ignored-file.*
+test/*.trs
+test/test_*
+*.log
+test-*
