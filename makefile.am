@@ -73,3 +73,6 @@ libcglm_la_SOURCES=\
     src/cglm-mat.c
 
 test_test_mat4_SOURCES=test/src/test_mat4.c
+
+all-local:
+	sh ./post-build.sh
