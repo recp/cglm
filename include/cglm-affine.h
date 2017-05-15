@@ -121,6 +121,13 @@ glm_translate_z(mat4 m, float to) {
 #endif
 }
 
+CGLM_INLINE
+void
+glm_translate_make(mat4 m, vec3 v) {
+  mat4 t = GLM_MAT4_IDENTITY_INIT;
+  glm_translate_to(t, v, m);
+}
+
 /* scale */
 
 CGLM_INLINE
@@ -131,6 +138,13 @@ glm_scale_to(mat4 m, vec3 v, mat4 dest) {
   glm_vec4_scale(m[2], v[2], dest[2]);
 
   glm_vec4_copy(m[3], dest[3]);
+}
+
+CGLM_INLINE
+void
+glm_scale_make(mat4 m, vec3 v) {
+  mat4 t = GLM_MAT4_IDENTITY_INIT;
+  glm_scale_to(t, v, m);
 }
 
 CGLM_INLINE
