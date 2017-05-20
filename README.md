@@ -6,6 +6,12 @@
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__register`
 
+#### Note for previous versions:
+
+- _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec_copy`
+- OpenGL related functions are dropped to make this lib platform/third-party independent
+- make sure you have latest version and feel free to report bugs, troubles
+
 #### Note for C++ developers:
 If you don't aware about original GLM library yet, you may also want to look at:
 https://github.com/g-truc/glm
