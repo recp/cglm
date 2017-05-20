@@ -163,7 +163,7 @@ glmc_vec_proj(vec3 a, vec3 b, vec3 dest) {
   glm_vec_proj(a, b, dest);
 }
 
-CGLM_INLINE
+CGLM_EXPORT
 void
 glmc_vec_center(vec3 v1, vec3 v2, vec3 dest) {
   glm_vec_center(v1, v2, dest);
