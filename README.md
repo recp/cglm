@@ -155,7 +155,7 @@ Function usage and parameters are documented inside related headers.
 **TODO:**
 - [ ] Unit tests
 - [ ] Unit tests for comparing cglm with glm results
-- [ ] Add version info
+- [x] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
 - [ ] Extra documentation
 - [ ] ARM Neon Arch

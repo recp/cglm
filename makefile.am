@@ -32,7 +32,8 @@ TESTS = $(check_PROGRAMS)
 test_test_mat4_LDFLAGS = $(checkLDFLAGS)
 test_test_mat4_CFLAGS  = $(checkCFLAGS)
 
-nobase_include_HEADERS = include/cglm.h \
+nobase_include_HEADERS = include/cglm-version.h \
+                         include/cglm.h \
                          include/cglm-call.h \
                          include/cglm-cam.h \
                          include/cglm-io.h \
