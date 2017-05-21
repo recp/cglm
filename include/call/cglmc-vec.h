@@ -96,15 +96,23 @@ glmc_vec_scale(vec3 v, float s, vec3 dest);
 
 CGLM_EXPORT
 void
+glmc_vec4_scale(vec4 v, float s, vec4 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_scale_as(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec4_scale_as(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
 glmc_vec_flipsign(vec3 v);
 
 CGLM_EXPORT
 void
 glmc_vec4_flipsign(vec4 v);
-
-CGLM_EXPORT
-void
-glmc_vec4_scale(vec4 v, float s, vec4 dest);
 
 CGLM_EXPORT
 float
