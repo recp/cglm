@@ -23,6 +23,9 @@
 #define GLM_MAT3_IDENTITY (mat3)GLM_MAT3_IDENTITY_INIT
 #define GLM_MAT3_ZERO     (mat3)GLM_MAT3_ZERO_INIT
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glm_mat3_dup(mat, dest) glm_mat3_copy(mat, dest)
+
 /*!
  * @brief copy all members of [mat] to [dest]
  *

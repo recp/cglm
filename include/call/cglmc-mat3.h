@@ -13,6 +13,9 @@ extern "C" {
 
 #include "../cglm.h"
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glmc_mat3_dup(mat, dest)  glmc_mat3_copy(mat, dest)
+
 CGLM_EXPORT
 void
 glmc_mat3_copy(mat3 mat, mat3 dest);

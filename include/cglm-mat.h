@@ -33,6 +33,10 @@
 #define GLM_MAT4_IDENTITY (mat4)GLM_MAT4_IDENTITY_INIT
 #define GLM_MAT4_ZERO     (mat4)GLM_MAT4_ZERO_INIT
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glm_mat4_udup(mat, dest) glm_mat4_ucopy(mat, dest)
+#define glm_mat4_dup(mat, dest)  glm_mat4_copy(mat, dest)
+
 /*!
  * @brief copy all members of [mat] to [dest]
  *

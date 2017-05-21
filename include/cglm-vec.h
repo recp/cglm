@@ -18,6 +18,11 @@
 #include "arch/simd/cglm-intrin.h"
 #include "cglm-util.h"
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glm_vec_dup(v, dest)   glm_vec_copy(v, dest)
+#define glm_vec4_dup3(v, dest) glm_vec4_copy3(v, dest)
+#define glm_vec4_dup(v, dest)  glm_vec4_copy(v, dest)
+
 /*!
  * @brief copy all members of [a] to [dest]
  *

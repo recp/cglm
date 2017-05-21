@@ -13,6 +13,10 @@ extern "C" {
 
 #include "../cglm.h"
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glmc_mat4_udup(mat, dest) glmc_mat4_ucopy(mat, dest)
+#define glmc_mat4_dup(mat, dest)  glmc_mat4_copy(mat, dest)
+
 CGLM_EXPORT
 void
 glmc_mat4_ucopy(mat4 mat, mat4 dest);
