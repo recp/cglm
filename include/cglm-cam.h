@@ -30,21 +30,22 @@ glm_frustum(float left,
             float nearVal,
             float farVal,
             mat4  dest) {
-  float rl, tb, fn;
+  float rl, tb, fn, nv;
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  rl = 1.0f / (right - left);
-  tb = 1.0f / (top - bottom);
-  fn = 1.0f / (farVal - nearVal);
+  rl = 1.0f / (right  - left);
+  tb = 1.0f / (top    - bottom);
+  fn =-1.0f / (farVal - nearVal);
+  nv = 2.0f * nearVal;
 
-  dest[0][0] = 2.0f * nearVal * rl;
-  dest[1][1] = 2.0f * nearVal * tb;
-  dest[2][0] = (right + left) * rl;
-  dest[2][1] = (top + bottom) * tb;
-  dest[2][2] = -(farVal + nearVal) * fn;
-  dest[2][3] = -1.0f;
-  dest[3][2] = -2.0f * farVal * nearVal * fn;
+  dest[0][0] = nv * rl;
+  dest[1][1] = nv * tb;
+  dest[2][0] = (right  + left)    * rl;
+  dest[2][1] = (top    + bottom)  * tb;
+  dest[2][2] = (farVal + nearVal) * fn;
+  dest[2][3] =-1.0f;
+  dest[3][2] = farVal * nv * fn;
 }
 
 /*!
@@ -71,16 +72,16 @@ glm_ortho(float left,
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  rl = 1.0f / (right - left);
-  tb = 1.0f / (top - bottom);
-  fn = 1.0f / (farVal - nearVal);
+  rl = 1.0f / (right  - left);
+  tb = 1.0f / (top    - bottom);
+  fn =-1.0f / (farVal - nearVal);
 
   dest[0][0] = 2.0f * rl;
   dest[1][1] = 2.0f * tb;
-  dest[2][2] =-2.0f * fn;
-  dest[3][0] =-(right + left) * rl;
-  dest[3][1] =-(top + bottom) * tb;
-  dest[3][2] =-(farVal + nearVal) * fn;
+  dest[2][2] = 2.0f * fn;
+  dest[3][0] =-(right  + left)    * rl;
+  dest[3][1] =-(top    + bottom)  * tb;
+  dest[3][2] = (farVal + nearVal) * fn;
   dest[3][3] = 1.0f;
 }
 
@@ -102,7 +103,7 @@ glm_ortho_default(float aspect,
               -100.0f,
                100.0f,
                dest);
-	return;
+	  return;
   }
 
   glm_ortho(-1.0f,
@@ -134,7 +135,7 @@ glm_ortho_default_s(float aspect,
               -size - 100.0f,
                size + 100.0f,
                dest);
-	return;
+	  return;
   }
 
   glm_ortho(-size,
@@ -166,14 +167,14 @@ glm_perspective(float fovy,
 
   glm__memzero(float, dest, sizeof(mat4));
 
-  f  = cosf(fovy * 0.5f) / sinf(fovy * 0.5f);
+  f  = 1.0f / tanf(fovy * 0.5f);
   fn = 1.0f / (nearVal - farVal);
 
   dest[0][0] = f / aspect;
   dest[1][1] = f;
   dest[2][2] = (nearVal + farVal) * fn;
   dest[2][3] =-1.0f;
-  dest[3][2] = 2 * nearVal * farVal * fn;
+  dest[3][2] = 2.0f * nearVal * farVal * fn;
 }
 
 /*!
@@ -206,7 +207,7 @@ CGLM_INLINE
 void
 glm_perspective_resize(float aspect,
                        mat4  proj) {
-  if (proj[0][0] == 0)
+  if (proj[0][0] == 0.0f)
     return;
 
   proj[0][0] = proj[1][1] / aspect;
