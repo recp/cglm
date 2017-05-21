@@ -32,36 +32,41 @@ TESTS = $(check_PROGRAMS)
 test_test_mat4_LDFLAGS = $(checkLDFLAGS)
 test_test_mat4_CFLAGS  = $(checkCFLAGS)
 
-nobase_include_HEADERS = include/cglm-version.h \
-                         include/cglm.h \
-                         include/cglm-call.h \
-                         include/cglm-cam.h \
-                         include/cglm-io.h \
-                         include/cglm-mat3.h \
-                         include/cglm-types.h \
-                         include/cglm-common.h \
-                         include/cglm-affine.h \
-                         include/cglm-vec.h \
-                         include/cglm-euler.h \
-                         include/cglm-util.h \
-                         include/cglm-quat.h \
-                         include/cglm-mat.h \
-                         include/cglm-affine-mat.h \
-                         include/arch/simd/cglm-mat-simd-avx.h \
+cglmdir=$(includedir)/cglm
+cglm_HEADERS = include/cglm-version.h \
+               include/cglm.h \
+               include/cglm-call.h \
+               include/cglm-cam.h \
+               include/cglm-io.h \
+               include/cglm-mat3.h \
+               include/cglm-types.h \
+               include/cglm-common.h \
+               include/cglm-affine.h \
+               include/cglm-vec.h \
+               include/cglm-euler.h \
+               include/cglm-util.h \
+               include/cglm-quat.h \
+               include/cglm-mat.h \
+               include/cglm-affine-mat.h
+
+cglm_arch_simddir=$(includedir)/cglm/arch/simd/
+cglm_arch_simd_HEADERS = include/arch/simd/cglm-mat-simd-avx.h \
                          include/arch/simd/cglm-affine-mat-avx.h \
                          include/arch/simd/cglm-quat-simd.h \
                          include/arch/simd/cglm-affine-mat-sse2.h \
                          include/arch/simd/cglm-mat3-simd-sse2.h \
                          include/arch/simd/cglm-mat-simd-sse2.h \
-                         include/arch/simd/cglm-intrin.h \
-                         include/call/cglmc-euler.h \
-                         include/call/cglmc-quat.h \
-                         include/call/cglmc-cam.h \
-                         include/call/cglmc-io.h \
-                         include/call/cglmc-affine.h \
-                         include/call/cglmc-vec.h \
-                         include/call/cglmc-mat3.h \
-                         include/call/cglmc-mat.h
+                         include/arch/simd/cglm-intrin.h
+
+cglm_calldir=$(includedir)/cglm/call
+cglm_call_HEADERS = include/call/cglmc-euler.h \
+                    include/call/cglmc-quat.h \
+                    include/call/cglmc-cam.h \
+                    include/call/cglmc-io.h \
+                    include/call/cglmc-affine.h \
+                    include/call/cglmc-vec.h \
+                    include/call/cglmc-mat3.h \
+                    include/call/cglmc-mat.h
 
 libcglm_la_SOURCES=\
     src/cglm-euler.c \

@@ -6,12 +6,15 @@
 # Full license can be found in the LICENSE file
 #
 
-cd `dirname "$0"`
+cd $(dirname "$0")
 
-if [ "`uname`" = "Darwin" ]; then
-  libtoolBin=$(which glibtoolize)
-  libtoolBinDir=$(dirname "${libtoolBin}")
-  ln -s $libtoolBin "${libtoolBinDir}/libtoolize"
+if [ "$(uname)" = "Darwin" ]; then
+libtoolBin=$(which glibtoolize)
+libtoolBinDir=$(dirname "${libtoolBin}")
+
+if [ ! -f "${libtoolBinDir}/libtoolize" ]; then
+ln -s $libtoolBin "${libtoolBinDir}/libtoolize"
+fi
 fi
 
 autoheader
