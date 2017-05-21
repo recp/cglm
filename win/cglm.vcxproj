@@ -192,6 +192,7 @@
     <ClInclude Include="..\include\cglm-util.h" />
     <ClInclude Include="..\include\cglm-vec-ext.h" />
     <ClInclude Include="..\include\cglm-vec.h" />
+    <ClInclude Include="..\include\cglm-version.h" />
     <ClInclude Include="..\include\cglm.h" />
     <ClInclude Include="..\src\config.h" />
   </ItemGroup>

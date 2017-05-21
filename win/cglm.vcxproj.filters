@@ -120,6 +120,9 @@
     <ClInclude Include="..\src\config.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm-version.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\cglm-cam.c">
