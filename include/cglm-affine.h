@@ -328,6 +328,7 @@ glm_uniscaled(mat4 m) {
 
 /*!
  * @brief decompose rotation matrix (mat4) and scale vector [Sx, Sy, Sz]
+ *        DON'T pass projected matrix here
  *
  * @param[in]  m affine transform
  * @param[out] r rotation matrix
@@ -352,18 +353,21 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
   glm_vec4_scale(r[1], 1.0f/s[1], r[1]);
   glm_vec4_scale(r[2], 1.0f/s[2], r[2]);
 
+  /* Note from Apple Open Source (asume that the matrix is orthonormal):
+     check for a coordinate system flip.  If the determinant
+     is -1, then negate the matrix and the scaling factors. */
   glm_vec_cross(m[0], m[1], v);
   if (glm_vec_dot(v, m[2]) < 0.0f) {
-    glm_vec4_scale(r[0], -1.0f, r[0]);
-    glm_vec4_scale(r[1], -1.0f, r[1]);
-    glm_vec4_scale(r[2], -1.0f, r[2]);
-
-    glm_vec_scale(s, -1.0f, s);
+    glm_vec4_flipsign(r[0]);
+    glm_vec4_flipsign(r[1]);
+    glm_vec4_flipsign(r[2]);
+    glm_vec_flipsign(s);
   }
 }
 
 /*!
- * @brief decompose affine transform
+ * @brief decompose affine transform, TODO: extract shear factors.
+ *        DON'T pass projected matrix here
  *
  * @param[in]  m affine transfrom
  * @param[out] t translation vector
