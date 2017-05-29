@@ -15,6 +15,12 @@ glmc_mat3_copy(mat3 mat, mat3 dest) {
 
 CGLM_EXPORT
 void
+glmc_mat3_identity(mat3 mat) {
+  glm_mat3_identity(mat);
+}
+
+CGLM_EXPORT
+void
 glmc_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
   glm_mat3_mul(m1, m2, dest);
 }

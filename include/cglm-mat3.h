@@ -39,6 +39,27 @@ glm_mat3_copy(mat3 mat, mat3 dest) {
 }
 
 /*!
+ * @brief make given matrix identity. It is identical with below,
+ *        but it is more easy to do that with this func especially for members
+ *        e.g. glm_mat3_identity(aStruct->aMatrix);
+ *
+ * @code
+ * glm_mat3_copy(GLM_MAT3_IDENTITY, mat); // C only
+ *
+ * // or
+ * mat3 mat = GLM_MAT3_IDENTITY_INIT;
+ * @endcode
+ *
+ * @param[in, out]  mat  destination
+ */
+CGLM_INLINE
+void
+glm_mat3_identity(mat3 mat) {
+  mat3 t = GLM_MAT3_IDENTITY_INIT;
+  glm_mat3_copy(t, mat);
+}
+
+/*!
  * @brief multiply m1 and m2 to dest
  *
  * m1, m2 and dest matrices can be same matrix, it is possible to write this:

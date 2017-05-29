@@ -75,6 +75,27 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 }
 
 /*!
+ * @brief make given matrix identity. It is identical with below, 
+ *        but it is more easy to do that with this func especially for members
+ *        e.g. glm_mat4_identity(aStruct->aMatrix);
+ *
+ * @code
+ * glm_mat4_copy(GLM_MAT4_IDENTITY, mat); // C only
+ *
+ * // or
+ * mat4 mat = GLM_MAT4_IDENTITY_INIT;
+ * @endcode
+ *
+ * @param[in, out]  mat  destination
+ */
+CGLM_INLINE
+void
+glm_mat4_identity(mat4 mat) {
+  mat4 t = GLM_MAT4_IDENTITY_INIT;
+  glm_mat4_copy(t, mat);
+}
+
+/*!
  * @brief copy upper-left of mat4 to mat3
  *
  * @param[in]  mat  source
