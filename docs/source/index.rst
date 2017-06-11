@@ -35,6 +35,7 @@ Also currently only **float** type is supported for most operations.
    :caption: Table Of Contents:
 
    build
+   getting_started
 
 Indices and tables
 ==================

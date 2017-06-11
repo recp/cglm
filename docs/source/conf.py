@@ -90,6 +90,16 @@ html_theme = 'alabaster'
 #
 # html_theme_options = {}
 
+html_theme_options = {
+    'github_banner': 'true',
+    'github_button': 'true',
+    'github_user': 'recp',
+    'github_repo': 'cglm',
+    'travis_button': 'true',
+    'show_related': 'true',
+    'fixed_sidebar': 'true'
+}
+
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
@@ -151,6 +161,3 @@ texinfo_documents = [
      author, 'cglm', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
