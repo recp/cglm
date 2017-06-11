@@ -15,6 +15,8 @@
 #include "cglm-common.h"
 #include "arch/simd/cglm-intrin.h"
 #include <stdbool.h>
+#include <math.h>
+#include <float.h>
 
 /*!
  * @brief multiplies individual items, just for convenient like SIMD
@@ -51,12 +53,24 @@ glm_vec4_mulv(vec4 a, vec4 b, vec4 d) {
 #endif
 }
 
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 void
 glm_vec_broadcast(float val, vec3 d) {
   d[0] = d[1] = d[2] = val;
 }
 
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 void
 glm_vec4_broadcast(float val, vec4 d) {
@@ -67,42 +81,151 @@ glm_vec4_broadcast(float val, vec4 d) {
 #endif
 }
 
+/*!
+ * @brief check if vector is equal to value (without epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 bool
 glm_vec_eq(vec3 v, float val) {
   return v[0] == val && v[0] == v[1] && v[0] == v[2];
 }
 
+/*!
+ * @brief check if vector is equal to value (with epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
+CGLM_INLINE
+bool
+glm_vec_eq_eps(vec4 v, float val) {
+  return fabsf(v[0] - val) <= FLT_EPSILON
+         && fabsf(v[1] - val) <= FLT_EPSILON
+         && fabsf(v[2] - val) <= FLT_EPSILON;
+}
+
+/*!
+ * @brief check if vectors members are equal (without epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 bool
 glm_vec_eq_all(vec3 v) {
   return v[0] == v[1] && v[0] == v[2];
 }
 
+/*!
+ * @brief check if vector is equal to another (without epsilon)
+ *
+ * @param v1 vector
+ * @param v2 vector
+ */
 CGLM_INLINE
 bool
 glm_vec_eqv(vec3 v1, vec3 v2) {
-  return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2];
+  return v1[0] == v2[0]
+        && v1[1] == v2[1]
+        && v1[2] == v2[2];
 }
 
+/*!
+ * @brief check if vector is equal to another (with epsilon)
+ *
+ * @param v1 vector
+ * @param v2 vector
+ */
+CGLM_INLINE
+bool
+glm_vec_eqv_eps(vec3 v1, vec3 v2) {
+  return fabsf(v1[0] - v2[0]) <= FLT_EPSILON
+         && fabsf(v1[1] - v2[1]) <= FLT_EPSILON
+         && fabsf(v1[2] - v2[2]) <= FLT_EPSILON;
+}
+
+/*!
+ * @brief check if vector is equal to value (without epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 bool
 glm_vec4_eq(vec4 v, float val) {
-  return v[0] == val && v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
+  return v[0] == val
+         && v[0] == v[1]
+         && v[0] == v[2]
+         && v[0] == v[3];
 }
 
+/*!
+ * @brief check if vector is equal to value (with epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
+CGLM_INLINE
+bool
+glm_vec4_eq_eps(vec4 v, float val) {
+  return fabsf(v[0] - val) <= FLT_EPSILON
+         && fabsf(v[1] - val) <= FLT_EPSILON
+         && fabsf(v[2] - val) <= FLT_EPSILON
+         && fabsf(v[3] - val) <= FLT_EPSILON;
+}
+
+/*!
+ * @brief check if vectors members are equal (without epsilon)
+ *
+ * @param val value
+ * @param d   dest
+ */
 CGLM_INLINE
 bool
 glm_vec4_eq_all(vec4 v) {
-  return v[0] == v[1] && v[0] == v[2] && v[0] == v[3];
+  return v[0] == v[1]
+         && v[0] == v[2]
+         && v[0] == v[3];
 }
 
+/*!
+ * @brief check if vector is equal to another (without epsilon)
+ *
+ * @param v1 vector
+ * @param v2 vector
+ */
 CGLM_INLINE
 bool
 glm_vec4_eqv(vec4 v1, vec4 v2) {
-  return v1[0] == v2[0] && v1[1] == v2[1] && v1[2] == v2[2] && v1[3] == v2[3];
+  return v1[0] == v2[0]
+         && v1[1] == v2[1]
+         && v1[2] == v2[2]
+         && v1[3] == v2[3];
 }
 
+/*!
+ * @brief check if vector is equal to another (with epsilon)
+ *
+ * @param v1 vector
+ * @param v2 vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_eqv_eps(vec3 v1, vec3 v2) {
+  return fabsf(v1[0] - v2[0]) <= FLT_EPSILON
+         && fabsf(v1[1] - v2[1]) <= FLT_EPSILON
+         && fabsf(v1[2] - v2[2]) <= FLT_EPSILON
+         && fabsf(v1[3] - v2[3]) <= FLT_EPSILON;
+}
+
+/*!
+ * @brief max value of vector
+ *
+ * @param v vector
+ */
 CGLM_INLINE
 float
 glm_vec_max(vec3 v) {
@@ -117,6 +240,11 @@ glm_vec_max(vec3 v) {
   return max;
 }
 
+/*!
+ * @brief min value of vector
+ *
+ * @param v vector
+ */
 CGLM_INLINE
 float
 glm_vec_min(vec3 v) {
@@ -131,6 +259,11 @@ glm_vec_min(vec3 v) {
   return min;
 }
 
+/*!
+ * @brief max value of vector
+ *
+ * @param v vector
+ */
 CGLM_INLINE
 float
 glm_vec4_max(vec4 v) {
@@ -143,6 +276,11 @@ glm_vec4_max(vec4 v) {
   return max;
 }
 
+/*!
+ * @brief min value of vector
+ *
+ * @param v vector
+ */
 CGLM_INLINE
 float
 glm_vec4_min(vec4 v) {
