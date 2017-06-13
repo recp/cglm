@@ -6,6 +6,11 @@
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__register`
 
+#### Documentation
+
+Almost all functions (inline versions) and parameters are documented inside related headers. <br />
+Complete documentation is in progress: http://cglm.readthedocs.io
+
 #### Note for previous versions:
 
 - _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec_copy`
