@@ -79,17 +79,13 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat3_mul_sse2(m1, m2, dest);
 #else
-  float a00, a01, a02,    b00, b01, b02,
-        a10, a11, a12,    b10, b11, b12,
-        a20, a21, a22,    b20, b21, b22;
+  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
+        a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
+        a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2],
 
-  a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
-  a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
-  a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2],
-
-  b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2],
-  b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2],
-  b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2],
+        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2],
+        b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2],
+        b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2],
 
   dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
   dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
@@ -191,13 +187,9 @@ glm_mat3_scale(mat3 m, float s) {
 CGLM_INLINE
 float
 glm_mat3_det(mat3 mat) {
-  float a, b, c,
-        d, e, f,
-        g, h, i;
-
-  a = mat[0][0], b = mat[0][1], c = mat[0][2],
-  d = mat[1][0], e = mat[1][1], f = mat[1][2],
-  g = mat[2][0], h = mat[2][1], i = mat[2][2];
+  float a = mat[0][0], b = mat[0][1], c = mat[0][2],
+        d = mat[1][0], e = mat[1][1], f = mat[1][2],
+        g = mat[2][0], h = mat[2][1], i = mat[2][2];
 
   return a * (e * i - h * f) - d * (b * i - c * h) + g * (b * f - c * e);
 }
@@ -212,13 +204,9 @@ CGLM_INLINE
 void
 glm_mat3_inv(mat3 mat, mat3 dest) {
   float det;
-  float a, b, c,
-        d, e, f,
-        g, h, i;
-
-  a = mat[0][0], b = mat[0][1], c = mat[0][2],
-  d = mat[1][0], e = mat[1][1], f = mat[1][2],
-  g = mat[2][0], h = mat[2][1], i = mat[2][2];
+  float a = mat[0][0], b = mat[0][1], c = mat[0][2],
+        d = mat[1][0], e = mat[1][1], f = mat[1][2],
+        g = mat[2][0], h = mat[2][1], i = mat[2][2];
 
   dest[0][0] =   e * i - f * h;
   dest[0][1] = -(b * i - h * c);
