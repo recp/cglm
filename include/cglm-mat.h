@@ -478,7 +478,7 @@ glm_mat4_inv_precise(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_precise_sse2(mat, dest);
 #else
-  glm_mat4_inv_precise(mat, dest);
+  glm_mat4_inv(mat, dest);
 #endif
 }
 
