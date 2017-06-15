@@ -7,6 +7,7 @@
 
 #ifndef cglm_quat_simd_h
 #define cglm_quat_simd_h
+#if defined( __SSE__ ) || defined( __SSE2__ )
 
 #include "../../cglm-common.h"
 #include "cglm-intrin.h"
@@ -64,4 +65,5 @@ glm_quat_slerp_sse2(versor q,
                           _mm_set1_ps(sinTheta)));
 }
 
+#endif
 #endif /* cglm_quat_simd_h */
