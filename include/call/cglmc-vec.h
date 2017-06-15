@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_vec_h
-#define cglm_vec_h
+#ifndef cglmc_vec_h
+#define cglmc_vec_h
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -116,7 +116,7 @@ glmc_vec4_flipsign(vec4 v);
 
 CGLM_EXPORT
 float
-glmc_vec_angle(vec3 v1, vec3 v2)
+glmc_vec_angle(vec3 v1, vec3 v2);
 
 CGLM_EXPORT
 void
@@ -130,7 +130,7 @@ CGLM_EXPORT
 void
 glmc_vec_proj(vec3 a, vec3 b, vec3 dest);
 
-CGLM_INLINE
+CGLM_EXPORT
 void
 glmc_vec_center(vec3 v1, vec3 v2, vec3 dest);
 
@@ -145,4 +145,4 @@ glmc_vec4_distance(vec4 v1, vec4 v2);
 #ifdef __cplusplus
 }
 #endif
-#endif /* cglm_vec_h */
+#endif /* cglmc_vec_h */

@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef glmc_euler_h
-#define glmc_euler_h
+#ifndef cglmc_euler_h
+#define cglmc_euler_h
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -48,4 +48,4 @@ glmc_euler_by_order(vec3 angles, glm_euler_sq axis, mat4 dest);
 #ifdef __cplusplus
 }
 #endif
-#endif /* glmc_euler_h */
+#endif /* cglmc_euler_h */
