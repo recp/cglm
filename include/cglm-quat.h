@@ -5,6 +5,23 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ Macros:
+   GLM_QUAT_IDENTITY_INIT
+   GLM_QUAT_IDENTITY
+
+ Functions:
+   CGLM_INLINE void  glm_quat_identity(versor q);
+   CGLM_INLINE void  glm_quat(versor q, float angle, float x, float y, float z);
+   CGLM_INLINE void  glm_quatv(versor q, float angle, vec3 v);
+   CGLM_INLINE float glm_quat_norm(versor q);
+   CGLM_INLINE void  glm_quat_normalize(versor q);
+   CGLM_INLINE float glm_quat_dot(versor q, versor r);
+   CGLM_INLINE void  glm_quat_mulv(versor q1, versor q2, versor dest);
+   CGLM_INLINE void  glm_quat_mat4(versor q, mat4 dest);
+   CGLM_INLINE void  glm_quat_slerp(versor q, versor r, float t, versor dest);
+ */
+
 #ifndef cglm_quat_h
 #define cglm_quat_h
 

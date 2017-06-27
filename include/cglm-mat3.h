@@ -5,6 +5,28 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ Macros:
+   GLM_MAT3_IDENTITY_INIT
+   GLM_MAT3_ZERO_INIT
+   GLM_MAT3_IDENTITY
+   GLM_MAT3_ZERO
+   glm_mat3_dup(mat, dest)
+
+ Functions:
+   CGLM_INLINE void  glm_mat3_copy(mat3 mat, mat3 dest);
+   CGLM_INLINE void  glm_mat3_identity(mat3 mat);
+   CGLM_INLINE void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
+   CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
+   CGLM_INLINE void  glm_mat3_transpose(mat3 m);
+   CGLM_INLINE void  glm_mat3_mulv(mat3 m, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_mat3_scale(mat3 m, float s);
+   CGLM_INLINE float glm_mat3_det(mat3 mat);
+   CGLM_INLINE void  glm_mat3_inv(mat3 mat, mat3 dest);
+   CGLM_INLINE void  glm_mat3_swap_col(mat3 mat, int col1, int col2);
+   CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
+ */
+
 #ifndef cglm_mat3_h
 #define cglm_mat3_h
 

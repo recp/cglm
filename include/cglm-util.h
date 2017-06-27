@@ -5,6 +5,16 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ Functions:
+   CGLM_INLINE int   glm_sign(int val);
+   CGLM_INLINE float glm_rad(float deg);
+   CGLM_INLINE float glm_deg(float rad);
+   CGLM_INLINE void  glm_make_rad(float *deg);
+   CGLM_INLINE void  glm_make_deg(float *rad);
+   CGLM_INLINE float glm_pow2(float x);
+ */
+
 #ifndef cglm_util_h
 #define cglm_util_h
 

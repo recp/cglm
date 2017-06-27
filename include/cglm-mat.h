@@ -10,6 +10,37 @@
  * if available. You dont need to call/incude SIMD headers manually
  */
 
+/*
+ Macros:
+   GLM_MAT4_IDENTITY_INIT
+   GLM_MAT4_ZERO_INIT
+   GLM_MAT4_IDENTITY
+   GLM_MAT4_ZERO
+   glm_mat4_udup(mat, dest)
+   glm_mat4_dup(mat, dest)
+
+ Functions:
+   CGLM_INLINE void  glm_mat4_ucopy(mat4 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_copy(mat4 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_identity(mat4 mat);
+   CGLM_INLINE void  glm_mat4_pick3(mat4 mat, mat3 dest);
+   CGLM_INLINE void  glm_mat4_pick3t(mat4 mat, mat3 dest);
+   CGLM_INLINE void  glm_mat4_ins3(mat3 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
+   CGLM_INLINE void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
+   CGLM_INLINE void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_mat4_transpose_to(mat4 m, mat4 dest);
+   CGLM_INLINE void  glm_mat4_transpose(mat4 m);
+   CGLM_INLINE void  glm_mat4_scale_p(mat4 m, float s);
+   CGLM_INLINE void  glm_mat4_scale(mat4 m, float s);
+   CGLM_INLINE float glm_mat4_det(mat4 mat);
+   CGLM_INLINE void  glm_mat4_inv(mat4 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_inv_precise(mat4 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
+   CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
+ */
+
 #ifndef cglm_mat_h
 #define cglm_mat_h
 

@@ -5,6 +5,34 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ Functions:
+   CGLM_INLINE void glm_frustum(float left,
+                                float right,
+                                float bottom,
+                                float top,
+                                float near,
+                                float far,
+                                mat4  dest);
+   CGLM_INLINE void glm_ortho(float left,
+                              float right,
+                              float bottom,
+                              float top,
+                              float near,
+                              float far,
+                              mat4  dest);
+   CGLM_INLINE void glm_ortho_default(float aspect, mat4  dest);
+   CGLM_INLINE void glm_ortho_default_s(float aspect, float size, mat4  dest);
+   CGLM_INLINE void glm_perspective(float fovy,
+                                    float aspect,
+                                    float near,
+                                    float far,
+                                    mat4  dest);
+   CGLM_INLINE void glm_perspective_default(float aspect, mat4  dest);
+   CGLM_INLINE void glm_perspective_resize(float aspect, mat4  proj);
+   CGLM_INLINE void glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest);
+ */
+
 #ifndef cglm_vcam_h
 #define cglm_vcam_h
 

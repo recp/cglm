@@ -5,6 +5,24 @@
  * Full license can be found in the LICENSE file
  */
 
+/*
+ Types:
+   enum glm_euler_sq
+ 
+ Functions:
+   CGLM_INLINE glm_euler_sq glm_euler_order(int newOrder[3]);
+   CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
+   CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_zyx(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_zxy(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_xzy(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_yzx(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_yxz(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_by_order(vec3         angles,
+                                       glm_euler_sq axis,
+                                       mat4         dest);
+ */
+
 #ifndef cglm_euler_h
 #define cglm_euler_h
 

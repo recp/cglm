@@ -9,6 +9,31 @@
  * @brief SIMD like functions
  */
 
+/*
+ Functions:
+ vec3:
+   CGLM_INLINE void  glm_vec_mulv(vec3 a, vec3 b, vec3 d);
+   CGLM_INLINE void  glm_vec_broadcast(float val, vec3 d);
+   CGLM_INLINE bool  glm_vec_eq(vec3 v, float val);
+   CGLM_INLINE bool  glm_vec_eq_eps(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec_eq_all(vec3 v);
+   CGLM_INLINE bool  glm_vec_eqv(vec3 v1, vec3 v2);
+   CGLM_INLINE bool  glm_vec_eqv_eps(vec3 v1, vec3 v2);
+   CGLM_INLINE float glm_vec_max(vec3 v);
+   CGLM_INLINE float glm_vec_min(vec3 v);
+
+ vec4:
+   CGLM_INLINE void  glm_vec4_mulv(vec4 a, vec4 b, vec4 d);
+   CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
+   CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
+   CGLM_INLINE bool  glm_vec4_eqv(vec4 v1, vec4 v2);
+   CGLM_INLINE bool  glm_vec4_eqv_eps(vec3 v1, vec3 v2);
+   CGLM_INLINE float glm_vec4_max(vec4 v);
+   CGLM_INLINE float glm_vec4_min(vec4 v);
+ */
+
 #ifndef cglm_vec_ext_h
 #define cglm_vec_ext_h
 

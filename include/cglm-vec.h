@@ -10,6 +10,49 @@
  * all functions without suffix are vec3 functions
  */
 
+/*
+ Macros:
+   glm_vec_dup(v, dest)
+   glm_vec4_dup3(v, dest)
+   glm_vec4_dup(v, dest)
+
+ Functions:
+ vec3:
+   CGLM_INLINE void  glm_vec_copy(vec3 a, vec3 dest);
+   CGLM_INLINE float glm_vec_dot(vec3 a, vec3 b);
+   CGLM_INLINE void  glm_vec_cross(vec3 a, vec3 b, vec3 d);
+   CGLM_INLINE float glm_vec_norm2(vec3 v);
+   CGLM_INLINE float glm_vec_norm(vec3 vec);
+   CGLM_INLINE void  glm_vec_add(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_sub(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_scale(vec3 v, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_scale_as(vec3 v, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_flipsign(vec3 v);
+   CGLM_INLINE void  glm_vec_normalize(vec3 v);
+   CGLM_INLINE void  glm_vec_normalize_to(vec3 vec, vec3 dest);
+   CGLM_INLINE float glm_vec_distance(vec3 v1, vec3 v2);
+   CGLM_INLINE float glm_vec_angle(vec3 v1, vec3 v2);
+   CGLM_INLINE void  glm_vec_rotate(vec3 v, float angle, vec3 axis);
+   CGLM_INLINE void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_proj(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_center(vec3 v1, vec3 v2, vec3 dest);
+
+ vec4:
+   CGLM_INLINE void  glm_vec4_copy3(vec4 a, vec3 dest);
+   CGLM_INLINE void  glm_vec4_copy(vec4 v, vec4 dest);
+   CGLM_INLINE float glm_vec4_dot(vec4 a, vec4 b);
+   CGLM_INLINE float glm_vec4_norm2(vec4 v);
+   CGLM_INLINE float glm_vec4_norm(vec4 vec);
+   CGLM_INLINE void  glm_vec4_add(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_sub(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_scale(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_scale_as(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_flipsign(vec4 v);
+   CGLM_INLINE void  glm_vec4_normalize(vec4 v);
+   CGLM_INLINE void  glm_vec4_normalize_to(vec4 vec, vec4 dest);
+   CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
+ */
+
 #ifndef cglm_vec_h
 #define cglm_vec_h
 
