@@ -325,8 +325,8 @@ glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest) {
  *
  * source matrix will not be transposed unless dest is m
  *
- * @param m[in]     matrix
- * @param dest[out] result
+ * @param[in]  m    matrix
+ * @param[out] dest result
  */
 CGLM_INLINE
 void
@@ -533,8 +533,8 @@ glm_mat4_swap_col(mat4 mat, int col1, int col2) {
  * @brief swap two matrix rows
  *
  * @param[in,out] mat  matrix
- * @param[in]     col1 col1
- * @param[in]     col2 col2
+ * @param[in]     row1 row1
+ * @param[in]     row2 row2
  */
 CGLM_INLINE
 void

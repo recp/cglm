@@ -126,8 +126,8 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
  *
  * source matrix will not be transposed unless dest is m
  *
- * @param m[in]     matrix
- * @param dest[out] result
+ * @param[in]  m     matrix
+ * @param[out] dest  result
  */
 CGLM_INLINE
 void
@@ -265,8 +265,8 @@ glm_mat3_swap_col(mat3 mat, int col1, int col2) {
  * @brief swap two matrix rows
  *
  * @param[in,out] mat  matrix
- * @param[in]     col1 col1
- * @param[in]     col2 col2
+ * @param[in]     row1 row1
+ * @param[in]     row2 row2
  */
 CGLM_INLINE
 void

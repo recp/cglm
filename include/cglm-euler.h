@@ -55,8 +55,8 @@ glm_euler_order(int newOrder[3]) {
 /*!
  * @brief euler angles (in radian) using xyz sequence
  *
- * @param[in]  m affine transform
- * @param[out] v angles vector [x, y, z]
+ * @param[in]  m    affine transform
+ * @param[out] dest angles vector [x, y, z]
  */
 CGLM_INLINE
 void

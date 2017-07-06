@@ -23,7 +23,7 @@
 /*!
  * @brief get sign of 32 bit integer as +1 or -1
  *
- * @param X integer value
+ * @param val integer value
  */
 CGLM_INLINE
 int

@@ -97,7 +97,7 @@ glm_vec4_copy3(vec4 a, vec3 dest) {
 /*!
  * @brief copy all members of [a] to [dest]
  *
- * @param[in]  a    source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE
@@ -116,8 +116,8 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 /*!
  * @brief vec3 dot product
  *
- * @param[in] a
- * @param[in] b
+ * @param[in] a vector1
+ * @param[in] b vector2
  *
  * @return dot product
  */
@@ -130,8 +130,8 @@ glm_vec_dot(vec3 a, vec3 b) {
 /*!
  * @brief vec4 dot product
  *
- * @param[in] a
- * @param[in] b
+ * @param[in] a vector1
+ * @param[in] b vector2
  *
  * @return dot product
  */
@@ -164,7 +164,7 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
  * sqrtf fuction twice but with this func we can avoid func call, maybe this is 
  * not good name for this func
  *
- * @param[in] vec vec
+ * @param[in] v vector
  *
  * @return norm * norm
  */
@@ -177,7 +177,7 @@ glm_vec_norm2(vec3 v) {
 /*!
  * @brief norm (magnitude) of vec3
  *
- * @param[in] vec
+ * @param[in] vec vector
  *
  * @return norm
  */
@@ -194,7 +194,7 @@ glm_vec_norm(vec3 vec) {
  * sqrtf fuction twice but with this func we can avoid func call, maybe this is
  * not good name for this func
  *
- * @param[in] vec vec4
+ * @param[in] v vec4
  *
  * @return norm * norm
  */
@@ -207,7 +207,7 @@ glm_vec4_norm2(vec4 v) {
 /*!
  * @brief norm (magnitude) of vec4
  *
- * @param[in] vec
+ * @param[in] vec vector
  *
  * @return norm
  */
@@ -220,8 +220,8 @@ glm_vec4_norm(vec4 vec) {
 /*!
  * @brief add v2 vector to v1 vector store result in dest
  *
- * @param[in]  v1
- * @param[in]  v2
+ * @param[in]  v1 vector1
+ * @param[in]  v2 vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
@@ -235,8 +235,8 @@ glm_vec_add(vec3 v1, vec3 v2, vec3 dest) {
 /*!
  * @brief add v2 vector to v1 vector store result in dest
  *
- * @param[in]  v1
- * @param[in]  v2
+ * @param[in]  v1 vector1
+ * @param[in]  v2 vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
@@ -257,8 +257,8 @@ glm_vec4_add(vec4 v1, vec4 v2, vec4 dest) {
 /*!
  * @brief subtract v2 vector from v1 vector store result in dest
  *
- * @param[in]  v1
- * @param[in]  v2
+ * @param[in]  v1 vector1
+ * @param[in]  v2 vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
@@ -272,8 +272,8 @@ glm_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
 /*!
  * @brief subtract v2 vector from v1 vector store result in dest
  *
- * @param[in]  v1
- * @param[in]  v2
+ * @param[in]  v1 vector1
+ * @param[in]  v2 vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
@@ -373,9 +373,7 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
 /*!
  * @brief flip sign of all vec3 members
  *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[in, out]  v  vector
  */
 CGLM_INLINE
 void
@@ -388,9 +386,7 @@ glm_vec_flipsign(vec3 v) {
 /*!
  * @brief flip sign of all vec4 members
  *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[in, out]  v  vector
  */
 CGLM_INLINE
 void
@@ -572,8 +568,8 @@ glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
 /*!
  * @brief project a vector onto b vector
  *
- * @param[in]  a
- * @param[in]  b
+ * @param[in]  a vector1
+ * @param[in]  b vector2
  * @param[out] dest projected vector
  */
 CGLM_INLINE
@@ -587,8 +583,8 @@ glm_vec_proj(vec3 a, vec3 b, vec3 dest) {
 /**
  * @brief find center point of two vector
  *
- * @param[in]  v1
- * @param[in]  v2
+ * @param[in]  v1 vector1
+ * @param[in]  v2 vector2
  * @param[out] dest center point
  */
 CGLM_INLINE
@@ -601,8 +597,8 @@ glm_vec_center(vec3 v1, vec3 v2, vec3 dest) {
 /**
  * @brief distance between two vectors
  *
- * @param[in] v1
- * @param[in] v2
+ * @param[in] v1 vector1
+ * @param[in] v2 vector2
  * @return returns distance
  */
 CGLM_INLINE
@@ -616,8 +612,8 @@ glm_vec_distance(vec3 v1, vec3 v2) {
 /**
  * @brief distance between two vectors
  *
- * @param[in] v1
- * @param[in] v2
+ * @param[in] v1 vector1
+ * @param[in] v2 vector2
  * @return returns distance
  */
 CGLM_INLINE

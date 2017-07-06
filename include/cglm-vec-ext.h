@@ -109,8 +109,8 @@ glm_vec4_broadcast(float val, vec4 d) {
 /*!
  * @brief check if vector is equal to value (without epsilon)
  *
+ * @param v   vector
  * @param val value
- * @param d   dest
  */
 CGLM_INLINE
 bool
@@ -121,8 +121,8 @@ glm_vec_eq(vec3 v, float val) {
 /*!
  * @brief check if vector is equal to value (with epsilon)
  *
+ * @param v   vector
  * @param val value
- * @param d   dest
  */
 CGLM_INLINE
 bool
@@ -135,8 +135,7 @@ glm_vec_eq_eps(vec4 v, float val) {
 /*!
  * @brief check if vectors members are equal (without epsilon)
  *
- * @param val value
- * @param d   dest
+ * @param v   vector
  */
 CGLM_INLINE
 bool
@@ -175,8 +174,8 @@ glm_vec_eqv_eps(vec3 v1, vec3 v2) {
 /*!
  * @brief check if vector is equal to value (without epsilon)
  *
+ * @param v   vector
  * @param val value
- * @param d   dest
  */
 CGLM_INLINE
 bool
@@ -190,8 +189,8 @@ glm_vec4_eq(vec4 v, float val) {
 /*!
  * @brief check if vector is equal to value (with epsilon)
  *
+ * @param v   vector
  * @param val value
- * @param d   dest
  */
 CGLM_INLINE
 bool
@@ -205,8 +204,7 @@ glm_vec4_eq_eps(vec4 v, float val) {
 /*!
  * @brief check if vectors members are equal (without epsilon)
  *
- * @param val value
- * @param d   dest
+ * @param v   vector
  */
 CGLM_INLINE
 bool
