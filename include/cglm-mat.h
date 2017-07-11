@@ -45,8 +45,18 @@
 #define cglm_mat_h
 
 #include "cglm-common.h"
-#include "arch/simd/cglm-mat-simd-sse2.h"
-#include "arch/simd/cglm-mat-simd-avx.h"
+
+#ifdef CGLM_SSE_FP
+#  include "arch/simd/cglm-mat-simd-sse2.h"
+#endif
+
+#ifdef CGLM_AVX_FP
+#  include "arch/simd/cglm-mat-simd-avx.h"
+#endif
+
+#ifdef CGLM_NEON_FP
+#  include "arch/simd/neon/mat4.h"
+#endif
 
 #include <assert.h>
 
@@ -215,6 +225,8 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   glm_mat4_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mul_sse2(m1, m2, dest);
+#elif defined( __ARM_NEON_FP )
+  glm_mat4_mul_neon(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
