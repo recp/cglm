@@ -19,8 +19,8 @@
 #include <float.h>
 #include <stdbool.h>
 
-#include <cglm.h>
-#include <cglm-call.h>
+#include <cglm/cglm.h>
+#include <cglm/call.h>
 
 void
 test_rand_mat4(mat4 dest);

@@ -18,6 +18,56 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\affine.c" />
+    <ClCompile Include="..\src\cam.c" />
+    <ClCompile Include="..\src\dllmain.c" />
+    <ClCompile Include="..\src\euler.c" />
+    <ClCompile Include="..\src\io.c" />
+    <ClCompile Include="..\src\mat3.c" />
+    <ClCompile Include="..\src\mat4.c" />
+    <ClCompile Include="..\src\quat.c" />
+    <ClCompile Include="..\src\vec3.c" />
+    <ClCompile Include="..\src\vec4.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\cglm\affine-mat.h" />
+    <ClInclude Include="..\include\cglm\affine.h" />
+    <ClInclude Include="..\include\cglm\call.h" />
+    <ClInclude Include="..\include\cglm\call\affine.h" />
+    <ClInclude Include="..\include\cglm\call\cam.h" />
+    <ClInclude Include="..\include\cglm\call\euler.h" />
+    <ClInclude Include="..\include\cglm\call\io.h" />
+    <ClInclude Include="..\include\cglm\call\mat3.h" />
+    <ClInclude Include="..\include\cglm\call\mat4.h" />
+    <ClInclude Include="..\include\cglm\call\quat.h" />
+    <ClInclude Include="..\include\cglm\call\vec3.h" />
+    <ClInclude Include="..\include\cglm\call\vec4.h" />
+    <ClInclude Include="..\include\cglm\cam.h" />
+    <ClInclude Include="..\include\cglm\cglm.h" />
+    <ClInclude Include="..\include\cglm\common.h" />
+    <ClInclude Include="..\include\cglm\euler.h" />
+    <ClInclude Include="..\include\cglm\io.h" />
+    <ClInclude Include="..\include\cglm\mat3.h" />
+    <ClInclude Include="..\include\cglm\mat4.h" />
+    <ClInclude Include="..\include\cglm\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\avx\affine.h" />
+    <ClInclude Include="..\include\cglm\simd\avx\mat4.h" />
+    <ClInclude Include="..\include\cglm\simd\intrin.h" />
+    <ClInclude Include="..\include\cglm\simd\neon\mat4.h" />
+    <ClInclude Include="..\include\cglm\simd\sse2\affine.h" />
+    <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
+    <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
+    <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
+    <ClInclude Include="..\include\cglm\types.h" />
+    <ClInclude Include="..\include\cglm\util.h" />
+    <ClInclude Include="..\include\cglm\vec3-ext.h" />
+    <ClInclude Include="..\include\cglm\vec3.h" />
+    <ClInclude Include="..\include\cglm\vec4-ext.h" />
+    <ClInclude Include="..\include\cglm\vec4.h" />
+    <ClInclude Include="..\include\cglm\version.h" />
+    <ClInclude Include="..\src\config.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{CA8BCAF9-CD25-4133-8F62-3D1449B5D2FC}</ProjectGuid>
@@ -162,51 +212,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\arch\simd\cglm-affine-mat-avx.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-affine-mat-sse2.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-intrin.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-mat-simd-avx.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-mat-simd-sse2.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-mat3-simd-sse2.h" />
-    <ClInclude Include="..\include\arch\simd\cglm-quat-simd.h" />
-    <ClInclude Include="..\include\call\cglmc-affine.h" />
-    <ClInclude Include="..\include\call\cglmc-cam.h" />
-    <ClInclude Include="..\include\call\cglmc-euler.h" />
-    <ClInclude Include="..\include\call\cglmc-io.h" />
-    <ClInclude Include="..\include\call\cglmc-mat.h" />
-    <ClInclude Include="..\include\call\cglmc-mat3.h" />
-    <ClInclude Include="..\include\call\cglmc-quat.h" />
-    <ClInclude Include="..\include\call\cglmc-vec.h" />
-    <ClInclude Include="..\include\cglm-affine-mat.h" />
-    <ClInclude Include="..\include\cglm-affine.h" />
-    <ClInclude Include="..\include\cglm-call.h" />
-    <ClInclude Include="..\include\cglm-cam.h" />
-    <ClInclude Include="..\include\cglm-common.h" />
-    <ClInclude Include="..\include\cglm-euler.h" />
-    <ClInclude Include="..\include\cglm-io.h" />
-    <ClInclude Include="..\include\cglm-mat.h" />
-    <ClInclude Include="..\include\cglm-mat3.h" />
-    <ClInclude Include="..\include\cglm-quat.h" />
-    <ClInclude Include="..\include\cglm-types.h" />
-    <ClInclude Include="..\include\cglm-util.h" />
-    <ClInclude Include="..\include\cglm-vec-ext.h" />
-    <ClInclude Include="..\include\cglm-vec.h" />
-    <ClInclude Include="..\include\cglm-version.h" />
-    <ClInclude Include="..\include\cglm.h" />
-    <ClInclude Include="..\src\config.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="..\src\cglm-cam.c" />
-    <ClCompile Include="..\src\cglm-euler.c" />
-    <ClCompile Include="..\src\cglm-io.c" />
-    <ClCompile Include="..\src\cglm-mat.c" />
-    <ClCompile Include="..\src\cglm-mat3.c" />
-    <ClCompile Include="..\src\cglm-quat.c" />
-    <ClCompile Include="..\src\cglm-vec.c" />
-    <ClCompile Include="..\src\clgm-affine.c" />
-    <ClCompile Include="..\src\dllmain.c" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,0 +1,23 @@
+/*
+ * Copyright (c), Recep Aslantas.
+ *
+ * MIT License (MIT), http://opensource.org/licenses/MIT
+ * Full license can be found in the LICENSE file
+ */
+
+#ifndef cglm_h
+#define cglm_h
+
+#include "common.h"
+#include "vec3.h"
+#include "vec4.h"
+#include "mat4.h"
+#include "mat3.h"
+#include "affine.h"
+#include "cam.h"
+#include "quat.h"
+#include "euler.h"
+#include "util.h"
+#include "io.h"
+
+#endif /* cglm_h */
