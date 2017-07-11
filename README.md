@@ -58,8 +58,8 @@ Almost all functions are marked inline (always_inline) so compiler probably will
 To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`.
 
 ```C
-  #include <cglm.h>        /* for inline */
-  #include <cglm-call.h>   /* for library call (this also includes cglm.h) */
+  #include <cglm/cglm.h>   /* for inline */
+  #include <cglm/call.h>   /* for library call (this also includes cglm.h) */
 
   mat4 rot, trans, rt;
   /* ... */
@@ -125,7 +125,7 @@ $ devenv cglm.sln /Build Release
 ## How to use
 If you want to use inline versions of funcstions then; include main header
 ```C
-#include <cglm.h>
+#include <cglm/cglm.h>
 ```
 the haeder will include all headers. Then call func you want e.g. rotate vector by axis:
 ```C
@@ -144,7 +144,7 @@ like this function you may see `_to` postfix, this functions store results to an
 
 to call pre-compiled versions include header with `c` postfix, c means call. Pre-compiled versions are just wrappers.
 ```C
-#include <cglm-call.h>
+#include <cglm/call.h>
 ```
 this header will include all heaers with c postfix. You need to call functions with c posfix:
 ```C
@@ -158,9 +158,9 @@ Function usage and parameters are documented inside related headers.
 - If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
 
 **TODO:**
-- [ ] Unit tests
+- [ ] Unit tests (In Progress)
 - [ ] Unit tests for comparing cglm with glm results
 - [x] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
 - [ ] Extra documentation
-- [ ] ARM Neon Arch
+- [ ] ARM Neon Arch (In Progress)
