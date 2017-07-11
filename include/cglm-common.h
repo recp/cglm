@@ -54,5 +54,6 @@
 #define glm__memzero(type, dest, size) glm__memset(type, dest, size, 0)
 
 #include "cglm-types.h"
+#include "arch/simd/cglm-intrin.h"
 
 #endif /* cglm_common_h */
