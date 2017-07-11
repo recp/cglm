@@ -52,3 +52,5 @@ test/*.trs
 test/test_*
 *.log
 test-*
+test/.libs/*
+test/tests

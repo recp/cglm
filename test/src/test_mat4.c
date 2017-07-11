@@ -5,18 +5,13 @@
  * Full license can be found in the LICENSE file
  */
 
-#include <time.h>
-#include <stdlib.h>
-#include <math.h>
-#include <float.h>
-
 #include "test_common.h"
 
 #define m 4
 #define n 4
 
 void
-test_mat4_mul(void **state) {
+test_mat4(void **state) {
   mat4  m1 = GLM_MAT4_IDENTITY_INIT;
   mat4  m2 = GLM_MAT4_IDENTITY_INIT;
   mat4  m3;
@@ -48,30 +43,9 @@ test_mat4_mul(void **state) {
     }
   }
 
-  for (i = 0; i < m; i++) {
-    for (j = 0; j < n; j++) {
-      for (k = 0; k < m; k++)
-        assert_true(fabsf(m3[i][j] - m4[i][j]) <= FLT_EPSILON);
-    }
-  }
+  test_assert_mat4_eq(m3, m4);
 
   /* test pre compiled */
   glmc_mat4_mul(m1, m2, m3);
-  for (i = 0; i < m; i++) {
-    for (j = 0; j < n; j++) {
-      for (k = 0; k < m; k++)
-        assert_true(fabsf(m3[i][j] - m4[i][j]) <= FLT_EPSILON);
-    }
-  }
-}
-
-int
-main(int argc, const char * argv[]) {
-  const struct CMUnitTest tests[] = {
-    cmocka_unit_test(test_mat4_mul)
-  };
-
-  return cmocka_run_group_tests(tests,
-                                NULL,
-                                NULL);
+  test_assert_mat4_eq(m3, m4);
 }

@@ -14,27 +14,18 @@
 #include <setjmp.h>
 #include <cmocka.h>
 #include <time.h>
+#include <stdlib.h>
+#include <math.h>
+#include <float.h>
+#include <stdbool.h>
 
 #include <cglm.h>
 #include <cglm-call.h>
 
-#define precision 0.00001f
-
-static
 void
 test_rand_mat4(mat4 dest);
 
-static
 void
-test_rand_mat4(mat4 dest) {
-  int i, j;
-
-  srand((unsigned int)time(NULL));
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < 4; j++) {
-      dest[i][j] = drand48();
-    }
-  }
-}
+test_assert_mat4_eq(mat4 m1, mat4 m2);
 
 #endif /* test_common_h */

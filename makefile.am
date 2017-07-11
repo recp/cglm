@@ -26,11 +26,11 @@ checkLDFLAGS = -L./.libs \
 checkCFLAGS = -I./test/lib/cmocka/include \
               -I./include
 
-check_PROGRAMS = test/test_mat4
+check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
 
-test_test_mat4_LDFLAGS = $(checkLDFLAGS)
-test_test_mat4_CFLAGS  = $(checkCFLAGS)
+test_tests_LDFLAGS = $(checkLDFLAGS)
+test_tests_CFLAGS  = $(checkCFLAGS)
 
 cglmdir=$(includedir)/cglm
 cglm_HEADERS = include/cglm-version.h \
@@ -78,7 +78,10 @@ libcglm_la_SOURCES=\
     src/cglm-mat3.c \
     src/cglm-mat.c
 
-test_test_mat4_SOURCES=test/src/test_mat4.c
+test_tests_SOURCES=\
+    test/src/test_common.c \
+    test/src/test_main.c \
+    test/src/test_mat4.c
 
 all-local:
 	sh ./post-build.sh
