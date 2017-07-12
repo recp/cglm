@@ -16,6 +16,7 @@ test_mat4(void **state) {
   mat4  m2 = GLM_MAT4_IDENTITY_INIT;
   mat4  m3;
   mat4  m4 = GLM_MAT4_ZERO_INIT;
+  mat4  m5;
   int   i, j, k;
 
   /* test identity matrix multiplication */
@@ -48,4 +49,32 @@ test_mat4(void **state) {
   /* test pre compiled */
   glmc_mat4_mul(m1, m2, m3);
   test_assert_mat4_eq(m3, m4);
+
+  /* test inverse precise */
+  glm_mat4_inv_precise(m3, m4);
+  glm_mat4_inv_precise(m4, m5);
+  test_assert_mat4_eq(m3, m5);
+
+  glmc_mat4_inv_precise(m3, m4);
+  glmc_mat4_inv_precise(m4, m5);
+  test_assert_mat4_eq(m3, m5);
+
+   /* test inverse rcp */
+  glm_mat4_inv(m3, m4);
+  glm_mat4_inv(m4, m5);
+  test_assert_mat4_eq(m3, m5);
+
+  glmc_mat4_inv(m3, m4);
+  glmc_mat4_inv(m4, m5);
+  test_assert_mat4_eq(m3, m5);
+
+  /* print */
+  glm_mat4_print(m3, stderr);
+  glm_mat4_print(m4, stderr);
+
+  /* test determinant */
+  assert_int_equal(glm_mat4_det(m1), glmc_mat4_det(m1));
+#if defined( __SSE2__ )
+  assert_int_equal(glmc_mat4_det(m1), glm_mat4_det_sse2(m1));
+#endif
 }
