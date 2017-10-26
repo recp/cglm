@@ -8,7 +8,7 @@
 #ifndef cglm_types_h
 #define cglm_types_h
 
-#if defined(_WIN32)
+#if defined(_MSC_VER)
 #  define CGLM_ALIGN(X) /* __declspec(align(X)) */
 #else
 #  define CGLM_ALIGN(X) __attribute((aligned(X)))
