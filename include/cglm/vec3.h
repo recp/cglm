@@ -25,6 +25,8 @@
    CGLM_INLINE void  glm_vec_scale(vec3 v, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_scale_as(vec3 v, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_flipsign(vec3 v);
+   CGLM_INLINE void  glm_vec_inv(vec3 v);
+   CGLM_INLINE void  glm_vec_inv_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec_normalize(vec3 v);
    CGLM_INLINE void  glm_vec_normalize_to(vec3 vec, vec3 dest);
    CGLM_INLINE float glm_vec_distance(vec3 v1, vec3 v2);
@@ -196,6 +198,30 @@ glm_vec_flipsign(vec3 v) {
   v[0] = -v[0];
   v[1] = -v[1];
   v[2] = -v[2];
+}
+
+/*!
+ * @brief make vector as inverse/opposite of itself
+ *
+ * @param[in, out]  v  vector
+ */
+CGLM_INLINE
+void
+glm_vec_inv(vec3 v) {
+  glm_vec_flipsign(v);
+}
+
+/*!
+ * @brief inverse/opposite vector
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_inv_to(vec3 v, vec3 dest) {
+  glm_vec_copy(v, dest);
+  glm_vec_flipsign(dest);
 }
 
 /*!

@@ -81,6 +81,18 @@ glmc_vec_flipsign(vec3 v) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec_inv(vec3 v) {
+  glm_vec_inv(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_inv_to(vec3 v, vec3 dest) {
+  glm_vec_inv_to(v, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec_angle(vec3 v1, vec3 v2) {
   return glm_vec_angle(v1, v2);

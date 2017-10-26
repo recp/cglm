@@ -26,6 +26,8 @@
    CGLM_INLINE void  glm_vec4_scale(vec4 v, float s, vec4 dest);
    CGLM_INLINE void  glm_vec4_scale_as(vec4 v, float s, vec4 dest);
    CGLM_INLINE void  glm_vec4_flipsign(vec4 v);
+   CGLM_INLINE void  glm_vec4_inv(vec4 v);
+   CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_normalize(vec4 v);
    CGLM_INLINE void  glm_vec4_normalize_to(vec4 vec, vec4 dest);
    CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
@@ -223,6 +225,30 @@ glm_vec4_flipsign(vec4 v) {
   v[2] = -v[2];
   v[3] = -v[3];
 #endif
+}
+
+/*!
+ * @brief make vector as inverse/opposite of itself
+ *
+ * @param[in, out]  v  vector
+ */
+CGLM_INLINE
+void
+glm_vec4_inv(vec4 v) {
+  glm_vec4_flipsign(v);
+}
+
+/*!
+ * @brief inverse/opposite vector
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_inv_to(vec4 v, vec4 dest) {
+  glm_vec4_copy(v, dest);
+  glm_vec4_flipsign(dest);
 }
 
 /*!

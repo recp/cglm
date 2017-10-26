@@ -81,6 +81,18 @@ glmc_vec4_flipsign(vec4 v) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec4_inv(vec4 v) {
+  glm_vec4_inv(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_inv_to(vec4 v, vec4 dest) {
+  glm_vec4_inv_to(v, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec4_distance(vec4 v1, vec4 v2) {
   return glm_vec4_distance(v1, v2);
