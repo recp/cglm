@@ -14,7 +14,11 @@
  Macros:
    glm_vec4_dup3(v, dest)
    glm_vec4_dup(v, dest)
-
+   GLM_VEC4_ONE_INIT
+   GLM_VEC4_BLACK_INIT
+   GLM_VEC4_ONE
+   GLM_VEC4_BLACK
+ 
  Functions:
    CGLM_INLINE void  glm_vec4_copy3(vec4 a, vec3 dest);
    CGLM_INLINE void  glm_vec4_copy(vec4 v, vec4 dest);
@@ -43,6 +47,12 @@
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_vec4_dup3(v, dest) glm_vec4_copy3(v, dest)
 #define glm_vec4_dup(v, dest)  glm_vec4_copy(v, dest)
+
+#define GLM_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
+#define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
+
+#define GLM_VEC4_ONE        (vec4)GLM_VEC4_ONE_INIT
+#define GLM_VEC4_BLACK      (vec4)GLM_VEC4_BLACK_INIT
 
 /*!
  * @brief copy first 3 members of [a] to [dest]

@@ -13,7 +13,9 @@
 /*
  Macros:
    glm_vec_dup(v, dest)
-
+   GLM_VEC3_ONE_INIT
+   GLM_VEC3_ONE
+ 
  Functions:
    CGLM_INLINE void  glm_vec_copy(vec3 a, vec3 dest);
    CGLM_INLINE float glm_vec_dot(vec3 a, vec3 b);
@@ -46,6 +48,9 @@
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_vec_dup(v, dest) glm_vec_copy(v, dest)
+
+#define GLM_VEC3_ONE_INIT  {1.0f, 1.0f, 1.0f}
+#define GLM_VEC3_ONE  (vec3)GLM_VEC3_ONE_INIT
 
 /*!
  * @brief copy all members of [a] to [dest]
