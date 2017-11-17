@@ -8,8 +8,6 @@
 
 void
 test_rand_mat4(mat4 dest) {
-  int i, j;
-
   glm_mat4_copy(GLM_MAT4_IDENTITY, dest);
   
   srand((unsigned int)time(NULL));
@@ -35,7 +33,7 @@ test_assert_mat4_eq(mat4 m1, mat4 m2) {
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       for (k = 0; k < m; k++)
-        assert_true(fabsf(m1[i][j] - m2[i][j]) <= FLT_EPSILON);
+        assert_true(fabsf(m1[i][j] - m2[i][j]) <= 0.00009);
     }
   }
 #undef m
