@@ -14,14 +14,14 @@ test_rand_mat4(mat4 dest) {
 
   /* random position */
   dest[3][0] = drand48();
-  dest[3][0] = drand48();
-  dest[3][0] = drand48();
+  dest[3][1] = drand48();
+  dest[3][2] = drand48();
   
   /* random rotatation around random axis with random angle */
   glm_rotate(dest, drand48(), (vec3){drand48(), drand48(), drand48()});
   
   /* random scale */
-  glm_scale(dest, (vec3){drand48(), drand48(), drand48()});
+  /* glm_scale(dest, (vec3){drand48(), drand48(), drand48()}); */
 }
 
 void
