@@ -28,4 +28,7 @@ test_rand_mat4(mat4 dest);
 void
 test_assert_mat4_eq(mat4 m1, mat4 m2);
 
+void
+test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps);
+
 #endif /* test_common_h */

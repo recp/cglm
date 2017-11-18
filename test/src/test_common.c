@@ -6,6 +6,9 @@
 #include "test_common.h"
 #include <stdlib.h>
 
+#define m 4
+#define n 4
+
 void
 test_rand_mat4(mat4 dest) {
   glm_mat4_copy(GLM_MAT4_IDENTITY, dest);
@@ -28,15 +31,22 @@ void
 test_assert_mat4_eq(mat4 m1, mat4 m2) {
   int i, j, k;
 
-#define m 4
-#define n 4
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       for (k = 0; k < m; k++)
-        assert_true(fabsf(m1[i][j] - m2[i][j]) <= 0.00009);
+        assert_true(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
     }
   }
-#undef m
-#undef n
 }
 
+void
+test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
+  int i, j, k;
+  
+  for (i = 0; i < m; i++) {
+    for (j = 0; j < n; j++) {
+      for (k = 0; k < m; k++)
+        assert_true(fabsf(m1[i][j] - m2[i][j]) <= eps);
+    }
+  }
+}

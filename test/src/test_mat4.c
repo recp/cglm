@@ -50,23 +50,37 @@ test_mat4(void **state) {
   glmc_mat4_mul(m1, m2, m3);
   test_assert_mat4_eq(m3, m4);
 
-  /* test inverse precise */
-  glm_mat4_inv_precise(m3, m4);
-  glm_mat4_inv_precise(m4, m5);
-  test_assert_mat4_eq(m3, m5);
+  for (i = 0; i < 100000; i++) {
+    test_rand_mat4(m3);
+    test_rand_mat4(m4);
+    
+    /* test inverse precise */
+    glm_mat4_inv_precise(m3, m4);
+    glm_mat4_inv_precise(m4, m5);
+    test_assert_mat4_eq(m3, m5);
+    
+    test_rand_mat4(m3);
+    test_rand_mat4(m4);
 
-  glmc_mat4_inv_precise(m3, m4);
-  glmc_mat4_inv_precise(m4, m5);
-  test_assert_mat4_eq(m3, m5);
-
-   /* test inverse rcp */
-  glm_mat4_inv(m3, m4);
-  glm_mat4_inv(m4, m5);
-  test_assert_mat4_eq(m3, m5);
-
-  glmc_mat4_inv(m3, m4);
-  glmc_mat4_inv(m4, m5);
-  test_assert_mat4_eq(m3, m5);
+    glmc_mat4_inv_precise(m3, m4);
+    glmc_mat4_inv_precise(m4, m5);
+    test_assert_mat4_eq(m3, m5);
+    
+    /* test inverse rcp */
+    test_rand_mat4(m3);
+    test_rand_mat4(m4);
+    
+    glm_mat4_inv(m3, m4);
+    glm_mat4_inv(m4, m5);
+    test_assert_mat4_eq2(m3, m5, 0.0009f);
+    
+    test_rand_mat4(m3);
+    test_rand_mat4(m4);
+    
+    glmc_mat4_inv(m3, m4);
+    glmc_mat4_inv(m4, m5);
+    test_assert_mat4_eq2(m3, m5, 0.0009f);
+  }
 
   /* print */
   glm_mat4_print(m3, stderr);
