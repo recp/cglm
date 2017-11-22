@@ -15,7 +15,10 @@
    glm_vec_dup(v, dest)
    GLM_VEC3_ONE_INIT
    GLM_VEC3_ONE
- 
+   GLM_YUP
+   GLM_ZUP
+   GLM_XUP
+
  Functions:
    CGLM_INLINE void  glm_vec_copy(vec3 a, vec3 dest);
    CGLM_INLINE float glm_vec_dot(vec3 a, vec3 b);
@@ -51,6 +54,10 @@
 
 #define GLM_VEC3_ONE_INIT  {1.0f, 1.0f, 1.0f}
 #define GLM_VEC3_ONE  (vec3)GLM_VEC3_ONE_INIT
+
+#define GLM_YUP  (vec3){0.0f, 1.0f, 0.0f}
+#define GLM_ZUP  (vec3){0.0f, 0.0f, 1.0f}
+#define GLM_XUP  (vec3){1.0f, 0.0f, 0.0f}
 
 /*!
  * @brief copy all members of [a] to [dest]
