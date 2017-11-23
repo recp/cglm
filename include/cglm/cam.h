@@ -294,8 +294,8 @@ void
 glm_persp_decomp_z(mat4 proj,
                    float * __restrict near,
                    float * __restrict far) {
-  *near = proj[3][2] / (proj[3][3] - 1);
-  *far  = proj[3][2] / (proj[3][3] + 1);
+  *near = proj[3][2] / (proj[2][2] - 1);
+  *far  = proj[3][2] / (proj[2][2] + 1);
 }
 
 /*!
@@ -307,7 +307,7 @@ glm_persp_decomp_z(mat4 proj,
 CGLM_INLINE
 void
 glm_persp_decomp_far(mat4 proj, float * __restrict far) {
-  *far = proj[3][2] / (proj[3][3] + 1);
+  *far = proj[3][2] / (proj[2][2] + 1);
 }
 
 /*!
@@ -319,6 +319,6 @@ glm_persp_decomp_far(mat4 proj, float * __restrict far) {
 CGLM_INLINE
 void
 glm_persp_decomp_near(mat4 proj, float * __restrict near) {
-  *near = proj[3][2] / (proj[3][3] - 1);
+  *near = proj[3][2] / (proj[2][2] - 1);
 }
 #endif /* cglm_vcam_h */
