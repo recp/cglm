@@ -281,4 +281,44 @@ glm_lookat(vec3 eye,
   dest[3][3] = 1.0f;
 }
 
+/*!
+ * @brief decomposes near and far values of perspective projection.
+ *        z stands for z axis (near / far axis)
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[out] near near
+ * @param[out] far  far
+ */
+CGLM_INLINE
+void
+glm_persp_decomp_z(mat4 proj,
+                   float * __restrict near,
+                   float * __restrict far) {
+  *near = proj[3][2] / (proj[3][3] - 1);
+  *far  = proj[3][2] / (proj[3][3] + 1);
+}
+
+/*!
+ * @brief decomposes far value of perspective projection.
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[out] far  far
+ */
+CGLM_INLINE
+void
+glm_persp_decomp_far(mat4 proj, float * __restrict far) {
+  *far = proj[3][2] / (proj[3][3] + 1);
+}
+
+/*!
+ * @brief decomposes near value of perspective projection.
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[out] near near
+ */
+CGLM_INLINE
+void
+glm_persp_decomp_near(mat4 proj, float * __restrict near) {
+  *near = proj[3][2] / (proj[3][3] - 1);
+}
 #endif /* cglm_vcam_h */
