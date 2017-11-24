@@ -31,6 +31,25 @@
    CGLM_INLINE void glm_perspective_default(float aspect, mat4  dest);
    CGLM_INLINE void glm_perspective_resize(float aspect, mat4  proj);
    CGLM_INLINE void glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest);
+   CGLM_INLINE void glm_persp_decomp(mat4 proj,
+                                     float * __restrict near,
+                                     float * __restrict far,
+                                     float * __restrict top,
+                                     float * __restrict bottom,
+                                     float * __restrict left,
+                                     float * __restrict right);
+   CGLM_INLINE void glm_persp_decompv(mat4  proj, float dest[6]);
+   CGLM_INLINE void glm_persp_decomp_x(mat4 proj,
+                                       float * __restrict left,
+                                       float * __restrict right);
+   CGLM_INLINE void glm_persp_decomp_y(mat4 proj,
+                                       float * __restrict top,
+                                       float * __restrict bottom);
+   CGLM_INLINE void glm_persp_decomp_z(mat4 proj,
+                                       float * __restrict near,
+                                       float * __restrict far);
+   CGLM_INLINE void glm_persp_decomp_far(mat4 proj, float * __restrict far);
+   CGLM_INLINE void glm_persp_decomp_near(mat4 proj, float * __restrict near);
  */
 
 #ifndef cglm_vcam_h
@@ -279,6 +298,88 @@ glm_lookat(vec3 eye,
   dest[3][2] = glm_vec_dot(f, eye);
   dest[0][3] = dest[1][3] = dest[2][3] = 0.0f;
   dest[3][3] = 1.0f;
+}
+
+/*!
+ * @brief decomposes frustum values of perspective projection.
+ *
+ * @param[in]  proj   perspective projection matrix
+ * @param[out] near   near
+ * @param[out] far    far
+ * @param[out] top    top
+ * @param[out] bottom bottom
+ * @param[out] left   left
+ * @param[out] right  right
+ */
+CGLM_INLINE
+void
+glm_persp_decomp(mat4 proj,
+                 float * __restrict near,
+                 float * __restrict far,
+                 float * __restrict top,
+                 float * __restrict bottom,
+                 float * __restrict left,
+                 float * __restrict right) {
+  *near   = proj[3][2] / (proj[2][2] - 1);
+  *far    = proj[3][2] / (proj[2][2] + 1);
+  *bottom = *near * (proj[2][1] - 1) / proj[1][1];
+  *top    = *near * (proj[2][1] + 1) / proj[1][1];
+  *left   = *near * (proj[2][0] - 1) / proj[0][0];
+  *right  = *near * (proj[2][0] + 1) / proj[0][0];
+}
+
+/*!
+ * @brief decomposes frustum values of perspective projection.
+ *        this makes easy to get all values at once
+ *
+ * @param[in]  proj   perspective projection matrix
+ * @param[out] dest   array
+ */
+CGLM_INLINE
+void
+glm_persp_decompv(mat4  proj, float dest[6]) {
+  glm_persp_decomp(proj, &dest[0], &dest[1], &dest[2],
+                         &dest[3], &dest[4], &dest[5]);
+}
+
+/*!
+ * @brief decomposes left and right values of perspective projection.
+ *        x stands for x axis (left / right axis)
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[out] left  left
+ * @param[out] right right
+ */
+CGLM_INLINE
+void
+glm_persp_decomp_x(mat4 proj,
+                   float * __restrict left,
+                   float * __restrict right) {
+  float near;
+
+  near    = proj[3][2] / (proj[3][3] - 1);
+  *left   = near * (proj[2][0] - 1) / proj[0][0];
+  *right  = near * (proj[2][0] + 1) / proj[0][0];
+}
+
+/*!
+ * @brief decomposes top and bottom values of perspective projection.
+ *        y stands for y axis (top / botom axis)
+ *
+ * @param[in]  proj   perspective projection matrix
+ * @param[out] top    top
+ * @param[out] bottom bottom
+ */
+CGLM_INLINE
+void
+glm_persp_decomp_y(mat4 proj,
+                   float * __restrict top,
+                   float * __restrict bottom) {
+  float near;
+
+  near    = proj[3][2] / (proj[3][3] - 1);
+  *bottom = near * (proj[2][1] - 1) / proj[1][1];
+  *top    = near * (proj[2][1] + 1) / proj[1][1];
 }
 
 /*!
