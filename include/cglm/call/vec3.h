@@ -96,6 +96,14 @@ CGLM_EXPORT
 float
 glmc_vec_distance(vec3 v1, vec3 v2);
 
+CGLM_EXPORT
+void
+glmc_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_minv(vec3 v1, vec3 v2, vec3 dest);
+
 #ifdef __cplusplus
 }
 #endif

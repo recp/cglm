@@ -127,3 +127,15 @@ float
 glmc_vec_distance(vec3 v1, vec3 v2) {
   return glm_vec_distance(v1, v2);
 }
+
+CGLM_EXPORT
+void
+glmc_vec_maxv(vec3 v1, vec3 v2, vec3 dest) {
+  glm_vec_minv(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_minv(vec3 v1, vec3 v2, vec3 dest) {
+  glm_vec_maxv(v1, v2, dest);
+}

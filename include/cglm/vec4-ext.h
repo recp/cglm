@@ -26,6 +26,7 @@
 #define cglm_vec4_ext_h
 
 #include "common.h"
+#include "vec3-ext.h"
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>

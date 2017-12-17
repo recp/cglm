@@ -40,6 +40,8 @@
    CGLM_INLINE void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec_proj(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_center(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
  */
 
 #ifndef cglm_vec3_h
@@ -400,6 +402,58 @@ glm_vec_distance(vec3 v1, vec3 v2) {
   return sqrtf(glm_pow2(v2[0] - v1[0])
                + glm_pow2(v2[1] - v1[1])
                + glm_pow2(v2[2] - v1[2]));
+}
+
+/*!
+ * @brief max values of vectors
+ *
+ * @param[in]  v1   vector1
+ * @param[in]  v2   vector2
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest) {
+  if (v1[0] > v2[0])
+    dest[0] = v1[0];
+  else
+    dest[0] = v2[0];
+
+  if (v1[1] > v2[1])
+    dest[1] = v1[1];
+  else
+    dest[1] = v2[1];
+
+  if (v1[2] > v2[2])
+    dest[2] = v1[2];
+  else
+    dest[2] = v2[2];
+}
+
+/*!
+ * @brief min values of vectors
+ *
+ * @param[in]  v1   vector1
+ * @param[in]  v2   vector2
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_minv(vec3 v1, vec3 v2, vec3 dest) {
+  if (v1[0] < v2[0])
+    dest[0] = v1[0];
+  else
+    dest[0] = v2[0];
+
+  if (v1[1] < v2[1])
+    dest[1] = v1[1];
+  else
+    dest[1] = v2[1];
+
+  if (v1[2] < v2[2])
+    dest[2] = v1[2];
+  else
+    dest[2] = v2[2];
 }
 
 #endif /* cglm_vec3_h */

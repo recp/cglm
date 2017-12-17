@@ -97,3 +97,15 @@ float
 glmc_vec4_distance(vec4 v1, vec4 v2) {
   return glm_vec4_distance(v1, v2);
 }
+
+CGLM_EXPORT
+void
+glmc_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
+  glm_vec4_minv(v1, v2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
+  glm_vec4_maxv(v1, v2, dest);
+}
