@@ -226,7 +226,7 @@ glm_vec_inv(vec3 v) {
 /*!
  * @brief inverse/opposite vector
  *
- * @param[in]  vec  source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE

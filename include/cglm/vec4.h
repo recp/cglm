@@ -251,7 +251,7 @@ glm_vec4_inv(vec4 v) {
 /*!
  * @brief inverse/opposite vector
  *
- * @param[in]  vec  source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE

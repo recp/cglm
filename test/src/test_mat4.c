@@ -70,8 +70,8 @@ test_mat4(void **state) {
     test_rand_mat4(m3);
     test_rand_mat4(m4);
     
-    glm_mat4_inv(m3, m4);
-    glm_mat4_inv(m4, m5);
+    glm_mat4_inv_fast(m3, m4);
+    glm_mat4_inv_fast(m4, m5);
     test_assert_mat4_eq2(m3, m5, 0.0009f);
     
     test_rand_mat4(m3);

@@ -36,7 +36,7 @@
    CGLM_INLINE void  glm_mat4_scale(mat4 m, float s);
    CGLM_INLINE float glm_mat4_det(mat4 mat);
    CGLM_INLINE void  glm_mat4_inv(mat4 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_inv_precise(mat4 mat, mat4 dest);
+   CGLM_INLINE void  glm_mat4_inv_fast(mat4 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
  */
@@ -77,6 +77,9 @@
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_mat4_udup(mat, dest) glm_mat4_ucopy(mat, dest)
 #define glm_mat4_dup(mat, dest)  glm_mat4_copy(mat, dest)
+
+/* DEPRECATED! default is precise now. */
+#define glm_mat4_inv_precise(mat, dest) glm_mat4_inv(mat, dest)
 
 /*!
  * @brief copy all members of [mat] to [dest]
@@ -448,10 +451,6 @@ glm_mat4_det(mat4 mat) {
 /*!
  * @brief inverse mat4 and store in dest
  *
- * this func uses reciprocal approximation without extra corrections 
- * e.g Newton-Raphson. this should work faster than _precise, 
- * to get precise value use _precise version
- *
  * @param[in]  mat  matrix
  * @param[out] dest inverse matrix
  */
@@ -504,22 +503,23 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
 #endif
 }
 
-
 /*!
- * @brief inverse mat4 precisely and store in dest
+ * @brief inverse mat4 and store in dest
  *
- * this do same thing as glm_mat4_inv did. the only diff is this func uses
- * division instead of reciprocal approximation. Due to division this might
- * work slower than glm_mat4_inv
+ * this func uses reciprocal approximation without extra corrections
+ * e.g Newton-Raphson. this should work faster than normal,
+ * to get more precise use glm_mat4_inv version.
+ *
+ * NOTE: You will lose precision, glm_mat4_inv is more accurate
  *
  * @param[in]  mat  matrix
  * @param[out] dest inverse matrix
  */
 CGLM_INLINE
 void
-glm_mat4_inv_precise(mat4 mat, mat4 dest) {
+glm_mat4_inv_fast(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat4_inv_precise_sse2(mat, dest);
+  glm_mat4_inv_fast_sse2(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
 #endif
