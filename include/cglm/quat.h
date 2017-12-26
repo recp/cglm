@@ -32,8 +32,8 @@
 #  include "simd/sse2/quat.h"
 #endif
 
-#define GLM_QUAT_IDENTITY_INIT  {0.0f, 0.0f, 0.0f, 1.0f}
-#define GLM_QUAT_IDENTITY       (versor){0.0f, 0.0f, 0.0f, 1.0f}
+#define GLM_QUAT_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f}
+#define GLM_QUAT_IDENTITY       (versor){1.0f, 0.0f, 0.0f, 0.0f}
 
 CGLM_INLINE
 void
