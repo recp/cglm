@@ -50,7 +50,11 @@ glmc_lookat(vec3 eye,
 
 CGLM_EXPORT
 void
-glmc_extract_planes(mat4 m, vec4 dest[6]);
+glmc_frustum_planes(mat4 m, vec4 dest[6]);
+
+CGLM_EXPORT
+void
+glmc_frustum_corners(mat4 invMat, vec4 dest[8]);
 
 #ifdef __cplusplus
 }

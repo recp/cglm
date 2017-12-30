@@ -50,7 +50,8 @@
                                        float * __restrict farVal);
    CGLM_INLINE void glm_persp_decomp_far(mat4 proj, float * __restrict farVal);
    CGLM_INLINE void glm_persp_decomp_near(mat4 proj, float *__restrict nearVal);
-   CGLM_INLINE void glm_extract_planes(mat4 m, vec4 dest[6]);
+   CGLM_INLINE void glm_frustum_planes(mat4 m, vec4 dest[6]);
+   CGLM_INLINE void glm_frustum_corners(mat4 invMat, vec4 dest[8]);
  */
 
 #ifndef cglm_vcam_h
@@ -444,7 +445,7 @@ glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
  */
 CGLM_INLINE
 void
-glm_extract_planes(mat4 m, vec4 dest[6]) {
+glm_frustum_planes(mat4 m, vec4 dest[6]) {
   mat4 t;
 
   glm_mat4_transpose_to(m, t);
