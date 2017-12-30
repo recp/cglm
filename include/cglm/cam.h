@@ -425,18 +425,17 @@ glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
   *nearVal = proj[3][2] / (proj[2][2] - 1);
 }
 
-
 /*!
  * @brief extracts view frustum planes
  *
  * planes' space:
  *  1- if m = proj:     View Space
- *  2- if m = projView: World Space
+ *  2- if m = viewProj: World Space
  *  3- if m = MVP:      Object Space
  *
- * You probably want to extract planes in world space so use projView as m
- * Computing projView:
- *   glm_mat4_mul(proj, view, projView);
+ * You probably want to extract planes in world space so use viewProj as m
+ * Computing viewProj:
+ *   glm_mat4_mul(proj, view, viewProj);
  *
  * Exracted planes order: [left, right, bottom, top, near, far]
  *
@@ -463,6 +462,44 @@ glm_extract_planes(mat4 m, vec4 dest[6]) {
   glm_plane_normalize(dest[3]);
   glm_plane_normalize(dest[4]);
   glm_plane_normalize(dest[5]);
+}
+
+/*!
+ * @brief extracts view frustum corners using clip-space coordinates
+ *
+ * corners' space:
+ *  1- if m = invViewProj: World Space
+ *  2- if m = invMVP:      Object Space
+ *
+ * You probably want to extract corners in world space so use invViewProj
+ * Computing invViewProj:
+ *   glm_mat4_mul(proj, view, viewProj);
+ *   ...
+ *   glm_mat4_inv(viewProj, invViewProj);
+ *
+ * @param[in]  invMat matrix (see brief)
+ * @param[out] dest   exracted view frustum corners (see brief)
+ */
+CGLM_INLINE
+void
+glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
+  glm_mat4_mulv(invMat, (vec4){-1.0f, -1.0f, -1.0f, 1.0f}, dest[0]);
+  glm_mat4_mulv(invMat, (vec4){-1.0f,  1.0f, -1.0f, 1.0f}, dest[1]);
+  glm_mat4_mulv(invMat, (vec4){ 1.0f, -1.0f, -1.0f, 1.0f}, dest[2]);
+  glm_mat4_mulv(invMat, (vec4){ 1.0f,  1.0f, -1.0f, 1.0f}, dest[3]);
+  glm_mat4_mulv(invMat, (vec4){-1.0f, -1.0f,  1.0f, 1.0f}, dest[4]);
+  glm_mat4_mulv(invMat, (vec4){-1.0f,  1.0f,  1.0f, 1.0f}, dest[5]);
+  glm_mat4_mulv(invMat, (vec4){ 1.0f, -1.0f,  1.0f, 1.0f}, dest[6]);
+  glm_mat4_mulv(invMat, (vec4){ 1.0f,  1.0f,  1.0f, 1.0f}, dest[7]);
+
+  glm_vec4_scale(dest[0], 1.0f / dest[0][3], dest[0]);
+  glm_vec4_scale(dest[1], 1.0f / dest[1][3], dest[1]);
+  glm_vec4_scale(dest[2], 1.0f / dest[2][3], dest[2]);
+  glm_vec4_scale(dest[3], 1.0f / dest[3][3], dest[3]);
+  glm_vec4_scale(dest[4], 1.0f / dest[4][3], dest[4]);
+  glm_vec4_scale(dest[5], 1.0f / dest[5][3], dest[5]);
+  glm_vec4_scale(dest[6], 1.0f / dest[6][3], dest[6]);
+  glm_vec4_scale(dest[7], 1.0f / dest[7][3], dest[7]);
 }
 
 #endif /* cglm_vcam_h */
