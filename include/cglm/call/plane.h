@@ -17,10 +17,6 @@ CGLM_EXPORT
 void
 glmc_plane_normalize(vec4 plane);
 
-CGLM_EXPORT
-void
-glmc_plane_extract(mat4 projView, vec4 dest[6]);
-
 #ifdef __cplusplus
 }
 #endif

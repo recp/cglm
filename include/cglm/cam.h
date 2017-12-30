@@ -50,12 +50,14 @@
                                        float * __restrict farVal);
    CGLM_INLINE void glm_persp_decomp_far(mat4 proj, float * __restrict farVal);
    CGLM_INLINE void glm_persp_decomp_near(mat4 proj, float *__restrict nearVal);
+   CGLM_INLINE void glm_extract_planes(mat4 m, vec4 dest[6]);
  */
 
 #ifndef cglm_vcam_h
 #define cglm_vcam_h
 
 #include "common.h"
+#include "plane.h"
 
 /*!
  * @brief set up perspective peprojection matrix
@@ -422,4 +424,45 @@ void
 glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
   *nearVal = proj[3][2] / (proj[2][2] - 1);
 }
+
+
+/*!
+ * @brief extracts view frustum planes
+ *
+ * planes' space:
+ *  1- if m = proj:     View Space
+ *  2- if m = projView: World Space
+ *  3- if m = MVP:      Object Space
+ *
+ * You probably want to extract planes in world space so use projView as m
+ * Computing projView:
+ *   glm_mat4_mul(proj, view, projView);
+ *
+ * Exracted planes order: [left, right, bottom, top, near, far]
+ *
+ * @param[in]  m    matrix (see brief)
+ * @param[out] dest exracted view frustum planes (see brief)
+ */
+CGLM_INLINE
+void
+glm_extract_planes(mat4 m, vec4 dest[6]) {
+  mat4 t;
+
+  glm_mat4_transpose_to(m, t);
+
+  glm_vec4_add(t[3], t[0], dest[0]); /* left   */
+  glm_vec4_sub(t[3], t[0], dest[1]); /* right  */
+  glm_vec4_add(t[3], t[1], dest[2]); /* bottom */
+  glm_vec4_sub(t[3], t[1], dest[3]); /* top    */
+  glm_vec4_add(t[3], t[2], dest[4]); /* near   */
+  glm_vec4_sub(t[3], t[2], dest[5]); /* far    */
+
+  glm_plane_normalize(dest[0]);
+  glm_plane_normalize(dest[1]);
+  glm_plane_normalize(dest[2]);
+  glm_plane_normalize(dest[3]);
+  glm_plane_normalize(dest[4]);
+  glm_plane_normalize(dest[5]);
+}
+
 #endif /* cglm_vcam_h */

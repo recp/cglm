@@ -52,3 +52,9 @@ LICENSE:
 
   Computing Euler angles from a rotation matrix (euler.pdf)
   Gregory G. Slabaugh
+
+4. Extracting Planes
+Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix
+Authors:
+  Gil Gribb (ggribb@ravensoft.com)
+  Klaus Hartmann (k_hartmann@osnabrueck.netsurf.de)

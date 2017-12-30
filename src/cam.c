@@ -66,3 +66,9 @@ glmc_lookat(vec3 eye,
             mat4 dest) {
   glm_lookat(eye, center, up, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_extract_planes(mat4 m, vec4 dest[6]) {
+  glm_extract_planes(m, dest);
+}

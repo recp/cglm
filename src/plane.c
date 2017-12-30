@@ -13,9 +13,3 @@ void
 glmc_plane_normalize(vec4 plane) {
   glm_plane_normalize(plane);
 }
-
-CGLM_EXPORT
-void
-glmc_plane_extract(mat4 projView, vec4 dest[6]) {
-  glm_plane_extract(projView, dest);
-}

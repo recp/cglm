@@ -48,6 +48,10 @@ glmc_lookat(vec3 eye,
             vec3 up,
             mat4 dest);
 
+CGLM_EXPORT
+void
+glmc_extract_planes(mat4 m, vec4 dest[6]);
+
 #ifdef __cplusplus
 }
 #endif
