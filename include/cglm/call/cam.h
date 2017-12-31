@@ -56,6 +56,10 @@ CGLM_EXPORT
 void
 glmc_frustum_corners(mat4 invMat, vec4 dest[8]);
 
+CGLM_EXPORT
+void
+glmc_frustum_center(vec4 corners[8], vec4 dest);
+
 #ifdef __cplusplus
 }
 #endif

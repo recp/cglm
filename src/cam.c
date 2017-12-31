@@ -78,3 +78,9 @@ void
 glmc_frustum_corners(mat4 invMat, vec4 dest[8]) {
   glm_frustum_corners(invMat, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_frustum_center(vec4 corners[8], vec4 dest) {
+  glm_frustum_center(corners, dest);
+}

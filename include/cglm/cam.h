@@ -503,4 +503,27 @@ glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
   glm_vec4_scale(dest[7], 1.0f / dest[7][3], dest[7]);
 }
 
+/*!
+ * @brief finds center of view frustum
+ *
+ * @param[in]  corners view frustum corners
+ * @param[out] dest    view frustum center
+ */
+CGLM_INLINE
+void
+glm_frustum_center(vec4 corners[8], vec4 dest) {
+  glm_vec4_broadcast(0.0f, dest);
+
+  glm_vec4_add(corners[0], dest, dest);
+  glm_vec4_add(corners[1], dest, dest);
+  glm_vec4_add(corners[2], dest, dest);
+  glm_vec4_add(corners[3], dest, dest);
+  glm_vec4_add(corners[4], dest, dest);
+  glm_vec4_add(corners[5], dest, dest);
+  glm_vec4_add(corners[6], dest, dest);
+  glm_vec4_add(corners[7], dest, dest);
+
+  glm_vec4_scale(dest, 0.125f, dest);
+}
+
 #endif /* cglm_vcam_h */
