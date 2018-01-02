@@ -50,6 +50,7 @@ https://github.com/g-truc/glm
 - euler angles / yaw-pitch-roll to matrix
 - extract euler angles
 - inline or pre-compiled function call
+- extract view frustum planes
 
 <hr />
 

@@ -17,6 +17,7 @@
 #include "cam.h"
 #include "quat.h"
 #include "euler.h"
+#include "plane.h"
 #include "util.h"
 #include "io.h"
 

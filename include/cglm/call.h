@@ -20,6 +20,7 @@ extern "C" {
 #include "call/cam.h"
 #include "call/quat.h"
 #include "call/euler.h"
+#include "call/plane.h"
 #include "call/io.h"
 
 #ifdef __cplusplus

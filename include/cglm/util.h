@@ -61,4 +61,20 @@ glm_pow2(float x) {
   return x * x;
 }
 
+CGLM_INLINE
+float
+glm_min(float a, float b) {
+  if (a < b)
+    return a;
+  return b;
+}
+
+CGLM_INLINE
+float
+glm_max(float a, float b) {
+  if (a > b)
+    return a;
+  return b;
+}
+
 #endif /* cglm_util_h */

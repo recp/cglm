@@ -48,6 +48,18 @@ glmc_lookat(vec3 eye,
             vec3 up,
             mat4 dest);
 
+CGLM_EXPORT
+void
+glmc_frustum_planes(mat4 m, vec4 dest[6]);
+
+CGLM_EXPORT
+void
+glmc_frustum_corners(mat4 invMat, vec4 dest[8]);
+
+CGLM_EXPORT
+void
+glmc_frustum_center(vec4 corners[8], vec4 dest);
+
 #ifdef __cplusplus
 }
 #endif
