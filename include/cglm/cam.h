@@ -484,23 +484,34 @@ glm_frustum_planes(mat4 m, vec4 dest[6]) {
 CGLM_INLINE
 void
 glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
-  glm_mat4_mulv(invMat, (vec4){-1.0f, -1.0f, -1.0f, 1.0f}, dest[0]);
-  glm_mat4_mulv(invMat, (vec4){-1.0f,  1.0f, -1.0f, 1.0f}, dest[1]);
-  glm_mat4_mulv(invMat, (vec4){ 1.0f, -1.0f, -1.0f, 1.0f}, dest[2]);
-  glm_mat4_mulv(invMat, (vec4){ 1.0f,  1.0f, -1.0f, 1.0f}, dest[3]);
-  glm_mat4_mulv(invMat, (vec4){-1.0f, -1.0f,  1.0f, 1.0f}, dest[4]);
-  glm_mat4_mulv(invMat, (vec4){-1.0f,  1.0f,  1.0f, 1.0f}, dest[5]);
-  glm_mat4_mulv(invMat, (vec4){ 1.0f, -1.0f,  1.0f, 1.0f}, dest[6]);
-  glm_mat4_mulv(invMat, (vec4){ 1.0f,  1.0f,  1.0f, 1.0f}, dest[7]);
+  vec4 c[8];
+  vec4 ndcCorners[8] = {
+    {-1.0f, -1.0f, -1.0f, 1.0f},
+    {-1.0f,  1.0f, -1.0f, 1.0f},
+    { 1.0f, -1.0f, -1.0f, 1.0f},
+    { 1.0f,  1.0f, -1.0f, 1.0f},
+    {-1.0f, -1.0f,  1.0f, 1.0f},
+    {-1.0f,  1.0f,  1.0f, 1.0f},
+    { 1.0f, -1.0f,  1.0f, 1.0f},
+    { 1.0f,  1.0f,  1.0f, 1.0f}
+  };
 
-  glm_vec4_scale(dest[0], 1.0f / dest[0][3], dest[0]);
-  glm_vec4_scale(dest[1], 1.0f / dest[1][3], dest[1]);
-  glm_vec4_scale(dest[2], 1.0f / dest[2][3], dest[2]);
-  glm_vec4_scale(dest[3], 1.0f / dest[3][3], dest[3]);
-  glm_vec4_scale(dest[4], 1.0f / dest[4][3], dest[4]);
-  glm_vec4_scale(dest[5], 1.0f / dest[5][3], dest[5]);
-  glm_vec4_scale(dest[6], 1.0f / dest[6][3], dest[6]);
-  glm_vec4_scale(dest[7], 1.0f / dest[7][3], dest[7]);
+  glm_mat4_mulv(invMat, ndcCorners[0], c[0]);
+  glm_mat4_mulv(invMat, ndcCorners[1], c[1]);
+  glm_mat4_mulv(invMat, ndcCorners[2], c[2]);
+  glm_mat4_mulv(invMat, ndcCorners[3], c[3]);
+  glm_mat4_mulv(invMat, ndcCorners[4], c[4]);
+  glm_mat4_mulv(invMat, ndcCorners[5], c[5]);
+  glm_mat4_mulv(invMat, ndcCorners[6], c[6]);
+  glm_mat4_mulv(invMat, ndcCorners[7], c[7]);
+
+  glm_vec4_scale(c[1], 1.0f / c[1][3], dest[1]);
+  glm_vec4_scale(c[2], 1.0f / c[2][3], dest[2]);
+  glm_vec4_scale(c[3], 1.0f / c[3][3], dest[3]);
+  glm_vec4_scale(c[4], 1.0f / c[4][3], dest[4]);
+  glm_vec4_scale(c[5], 1.0f / c[5][3], dest[5]);
+  glm_vec4_scale(c[6], 1.0f / c[6][3], dest[6]);
+  glm_vec4_scale(c[7], 1.0f / c[7][3], dest[7]);
 }
 
 /*!
@@ -512,18 +523,19 @@ glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
 CGLM_INLINE
 void
 glm_frustum_center(vec4 corners[8], vec4 dest) {
-  glm_vec4_broadcast(0.0f, dest);
+  vec4 center;
 
-  glm_vec4_add(corners[0], dest, dest);
-  glm_vec4_add(corners[1], dest, dest);
-  glm_vec4_add(corners[2], dest, dest);
-  glm_vec4_add(corners[3], dest, dest);
-  glm_vec4_add(corners[4], dest, dest);
-  glm_vec4_add(corners[5], dest, dest);
-  glm_vec4_add(corners[6], dest, dest);
-  glm_vec4_add(corners[7], dest, dest);
+  glm_vec4_copy(corners[0], center);
 
-  glm_vec4_scale(dest, 0.125f, dest);
+  glm_vec4_add(corners[1], center, center);
+  glm_vec4_add(corners[2], center, center);
+  glm_vec4_add(corners[3], center, center);
+  glm_vec4_add(corners[4], center, center);
+  glm_vec4_add(corners[5], center, center);
+  glm_vec4_add(corners[6], center, center);
+  glm_vec4_add(corners[7], center, center);
+
+  glm_vec4_scale(center, 0.125f, dest);
 }
 
 #endif /* cglm_vcam_h */

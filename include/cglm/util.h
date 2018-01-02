@@ -72,7 +72,7 @@ glm_min(float a, float b) {
 CGLM_INLINE
 float
 glm_max(float a, float b) {
-  if (a < b)
+  if (a > b)
     return a;
   return b;
 }
