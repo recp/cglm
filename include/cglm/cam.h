@@ -479,6 +479,32 @@ glm_persp_aspect(mat4 proj) {
 }
 
 /*!
+ * @brief returns aspect ratio of perspective projection
+ *
+ * if you don't have fovy then use glm_persp_fovy(proj) to get it
+ * or pass directly: glm_persp_sizes(proj, glm_persp_fovy(proj), sizes);
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[in]  fovy fovy (see brief)
+ * @param[out] dest sizes order: [Wnear, Hnear, Wfar, Hfar]
+ */
+CGLM_INLINE
+void
+glm_persp_sizes(mat4 proj, float fovy, vec4 dest) {
+  float t, a, nearVal, farVal;
+
+  t = 2.0f * tanf(fovy * 0.5f);
+  a = glm_persp_aspect(proj);
+
+  glm_persp_decomp_z(proj, &nearVal, &farVal);
+
+  dest[1]  = t * nearVal;
+  dest[3]  = t * farVal;
+  dest[0]  = a * dest[1];
+  dest[2]  = a * dest[3];
+}
+
+/*!
  * @brief extracts view frustum planes
  *
  * planes' space:

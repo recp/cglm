@@ -9,7 +9,8 @@
 
 void
 test_camera_decomp(void **state) {
-  mat4  proj;
+  mat4  proj, proj2;
+  vec4  sizes;
   float aspect, fovy, nearVal, farVal;
 
   aspect  = 0.782f;
@@ -21,5 +22,17 @@ test_camera_decomp(void **state) {
   assert_true(fabsf(aspect  - glm_persp_aspect(proj)) < FLT_EPSILON);
   assert_true(fabsf(fovy    - glm_persp_fovy(proj))   < FLT_EPSILON);
   assert_true(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < FLT_EPSILON);
+
+  glm_persp_sizes(proj, fovy, sizes);
+
+  glm_frustum(-sizes[0] * 0.5,
+               sizes[0] * 0.5,
+              -sizes[1] * 0.5,
+               sizes[1] * 0.5,
+               nearVal,
+               farVal,
+               proj2);
+
+  test_assert_mat4_eq(proj, proj2);
 }
 
