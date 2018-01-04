@@ -11,6 +11,9 @@ main(int argc, const char * argv[]) {
   const struct CMUnitTest tests[] = {
     /* mat4 */
     cmocka_unit_test(test_mat4),
+
+    /* camera */
+    cmocka_unit_test(test_camera_decomp)
   };
 
   return cmocka_run_group_tests(tests,
