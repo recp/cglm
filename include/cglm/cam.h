@@ -333,14 +333,14 @@ glm_persp_decomp(mat4 proj,
   m22 = proj[2][2];
   m32 = proj[3][2];
 
-  f = m32 / (m22 - 1);
-  n = m32 / (m22 + 1);
+  n = m32 / (m22 - 1);
+  f = m32 / (m22 + 1);
 
   n_m11 = n / m11;
   n_m00 = n / m00;
 
-  *nearVal = f;
-  *farVal  = n;
+  *nearVal = n;
+  *farVal  = f;
   *bottom  = n_m11 * (m21 - 1);
   *top     = n_m11 * (m21 + 1);
   *left    = n_m00 * (m20 - 1);
@@ -438,7 +438,7 @@ glm_persp_decomp_z(mat4 proj,
 CGLM_INLINE
 void
 glm_persp_decomp_far(mat4 proj, float * __restrict farVal) {
-  *farVal = proj[3][2] / (proj[2][2] + 1);
+  *farVal = proj[3][2] / (proj[2][2] + 1.0f);
 }
 
 /*!
@@ -450,7 +450,7 @@ glm_persp_decomp_far(mat4 proj, float * __restrict farVal) {
 CGLM_INLINE
 void
 glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
-  *nearVal = proj[3][2] / (proj[2][2] - 1);
+  *nearVal = proj[3][2] / (proj[2][2] - 1.0f);
 }
 
 /*!
