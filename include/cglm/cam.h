@@ -323,12 +323,28 @@ glm_persp_decomp(mat4 proj,
                  float * __restrict bottom,
                  float * __restrict left,
                  float * __restrict right) {
-  *nearVal = proj[3][2] / (proj[2][2] - 1);
-  *farVal  = proj[3][2] / (proj[2][2] + 1);
-  *bottom  = *nearVal * (proj[2][1] - 1) / proj[1][1];
-  *top     = *nearVal * (proj[2][1] + 1) / proj[1][1];
-  *left    = *nearVal * (proj[2][0] - 1) / proj[0][0];
-  *right   = *nearVal * (proj[2][0] + 1) / proj[0][0];
+  float m00, m11, m20, m21, m22, m32, n, f;
+  float n_m11, n_m00;
+
+  m00 = proj[0][0];
+  m11 = proj[1][1];
+  m20 = proj[2][0];
+  m21 = proj[2][1];
+  m22 = proj[2][2];
+  m32 = proj[3][2];
+
+  n = m32 / (m22 - 1.0f);
+  f = m32 / (m22 + 1.0f);
+
+  n_m11 = n / m11;
+  n_m00 = n / m00;
+
+  *nearVal = n;
+  *farVal  = f;
+  *bottom  = n_m11 * (m21 - 1.0f);
+  *top     = n_m11 * (m21 + 1.0f);
+  *left    = n_m00 * (m20 - 1.0f);
+  *right   = n_m00 * (m20 + 1.0f);
 }
 
 /*!
@@ -358,11 +374,14 @@ void
 glm_persp_decomp_x(mat4 proj,
                    float * __restrict left,
                    float * __restrict right) {
-  float nearVal;
+  float nearVal, m20, m00;
 
-  nearVal = proj[3][2] / (proj[3][3] - 1);
-  *left   = nearVal * (proj[2][0] - 1) / proj[0][0];
-  *right  = nearVal * (proj[2][0] + 1) / proj[0][0];
+  m00 = proj[0][0];
+  m20 = proj[2][0];
+
+  nearVal = proj[3][2] / (proj[3][3] - 1.0f);
+  *left   = nearVal * (m20 - 1.0f) / m00;
+  *right  = nearVal * (m20 + 1.0f) / m00;
 }
 
 /*!
@@ -378,11 +397,14 @@ void
 glm_persp_decomp_y(mat4 proj,
                    float * __restrict top,
                    float * __restrict bottom) {
-  float nearVal;
+  float nearVal, m21, m11;
 
-  nearVal = proj[3][2] / (proj[3][3] - 1);
-  *bottom = nearVal * (proj[2][1] - 1) / proj[1][1];
-  *top    = nearVal * (proj[2][1] + 1) / proj[1][1];
+  m21 = proj[2][1];
+  m11 = proj[1][1];
+
+  nearVal = proj[3][2] / (proj[3][3] - 1.0f);
+  *bottom = nearVal * (m21 - 1) / m11;
+  *top    = nearVal * (m21 + 1) / m11;
 }
 
 /*!
@@ -398,8 +420,13 @@ void
 glm_persp_decomp_z(mat4 proj,
                    float * __restrict nearVal,
                    float * __restrict farVal) {
-  *nearVal = proj[3][2] / (proj[2][2] - 1);
-  *farVal  = proj[3][2] / (proj[2][2] + 1);
+  float m32, m22;
+
+  m32 = proj[3][2];
+  m22 = proj[2][2];
+
+  *nearVal = m32 / (m22 - 1.0f);
+  *farVal  = m32 / (m22 + 1.0f);
 }
 
 /*!
@@ -411,7 +438,7 @@ glm_persp_decomp_z(mat4 proj,
 CGLM_INLINE
 void
 glm_persp_decomp_far(mat4 proj, float * __restrict farVal) {
-  *farVal = proj[3][2] / (proj[2][2] + 1);
+  *farVal = proj[3][2] / (proj[2][2] + 1.0f);
 }
 
 /*!
@@ -423,7 +450,58 @@ glm_persp_decomp_far(mat4 proj, float * __restrict farVal) {
 CGLM_INLINE
 void
 glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
-  *nearVal = proj[3][2] / (proj[2][2] - 1);
+  *nearVal = proj[3][2] / (proj[2][2] - 1.0f);
+}
+
+/*!
+ * @brief returns field of view angle along the Y-axis (in radians)
+ *
+ * if you need to degrees, use glm_deg to convert it or use this:
+ * fovy_deg = glm_deg(glm_persp_fovy(projMatrix))
+ *
+ * @param[in] proj perspective projection matrix
+ */
+CGLM_INLINE
+float
+glm_persp_fovy(mat4 proj) {
+  return 2.0f * atanf(1.0f / proj[1][1]);
+}
+
+/*!
+ * @brief returns aspect ratio of perspective projection
+ *
+ * @param[in] proj perspective projection matrix
+ */
+CGLM_INLINE
+float
+glm_persp_aspect(mat4 proj) {
+  return proj[1][1] / proj[0][0];
+}
+
+/*!
+ * @brief returns aspect ratio of perspective projection
+ *
+ * if you don't have fovy then use glm_persp_fovy(proj) to get it
+ * or pass directly: glm_persp_sizes(proj, glm_persp_fovy(proj), sizes);
+ *
+ * @param[in]  proj perspective projection matrix
+ * @param[in]  fovy fovy (see brief)
+ * @param[out] dest sizes order: [Wnear, Hnear, Wfar, Hfar]
+ */
+CGLM_INLINE
+void
+glm_persp_sizes(mat4 proj, float fovy, vec4 dest) {
+  float t, a, nearVal, farVal;
+
+  t = 2.0f * tanf(fovy * 0.5f);
+  a = glm_persp_aspect(proj);
+
+  glm_persp_decomp_z(proj, &nearVal, &farVal);
+
+  dest[1]  = t * nearVal;
+  dest[3]  = t * farVal;
+  dest[0]  = a * dest[1];
+  dest[2]  = a * dest[3];
 }
 
 /*!
@@ -485,7 +563,7 @@ CGLM_INLINE
 void
 glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
   vec4 c[8];
-  vec4 ndcCorners[8] = {
+  vec4 csCoords[8] = {
     {-1.0f, -1.0f, -1.0f, 1.0f},
     {-1.0f,  1.0f, -1.0f, 1.0f},
     { 1.0f, -1.0f, -1.0f, 1.0f},
@@ -496,14 +574,14 @@ glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
     { 1.0f,  1.0f,  1.0f, 1.0f}
   };
 
-  glm_mat4_mulv(invMat, ndcCorners[0], c[0]);
-  glm_mat4_mulv(invMat, ndcCorners[1], c[1]);
-  glm_mat4_mulv(invMat, ndcCorners[2], c[2]);
-  glm_mat4_mulv(invMat, ndcCorners[3], c[3]);
-  glm_mat4_mulv(invMat, ndcCorners[4], c[4]);
-  glm_mat4_mulv(invMat, ndcCorners[5], c[5]);
-  glm_mat4_mulv(invMat, ndcCorners[6], c[6]);
-  glm_mat4_mulv(invMat, ndcCorners[7], c[7]);
+  glm_mat4_mulv(invMat, csCoords[0], c[0]);
+  glm_mat4_mulv(invMat, csCoords[1], c[1]);
+  glm_mat4_mulv(invMat, csCoords[2], c[2]);
+  glm_mat4_mulv(invMat, csCoords[3], c[3]);
+  glm_mat4_mulv(invMat, csCoords[4], c[4]);
+  glm_mat4_mulv(invMat, csCoords[5], c[5]);
+  glm_mat4_mulv(invMat, csCoords[6], c[6]);
+  glm_mat4_mulv(invMat, csCoords[7], c[7]);
 
   glm_vec4_scale(c[1], 1.0f / c[1][3], dest[1]);
   glm_vec4_scale(c[2], 1.0f / c[2][3], dest[2]);
