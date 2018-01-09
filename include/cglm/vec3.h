@@ -42,6 +42,7 @@
    CGLM_INLINE void  glm_vec_center(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_ortho(vec3 v, vec3 dest);
  */
 
 #ifndef cglm_vec3_h
@@ -454,6 +455,20 @@ glm_vec_minv(vec3 v1, vec3 v2, vec3 dest) {
     dest[2] = v1[2];
   else
     dest[2] = v2[2];
+}
+
+/*!
+ * @brief possible orthogonal/perpendicular vector
+ *
+ * @param[in]  v    vector
+ * @param[out] dest orthogonal/perpendicular vector
+ */
+CGLM_INLINE
+void
+glm_vec_ortho(vec3 v, vec3 dest) {
+  dest[0] = v[1] - v[2];
+  dest[1] = v[2] - v[0];
+  dest[2] = v[0] - v[1];
 }
 
 #endif /* cglm_vec3_h */
