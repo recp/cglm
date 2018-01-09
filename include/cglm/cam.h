@@ -333,18 +333,18 @@ glm_persp_decomp(mat4 proj,
   m22 = proj[2][2];
   m32 = proj[3][2];
 
-  n = m32 / (m22 - 1);
-  f = m32 / (m22 + 1);
+  n = m32 / (m22 - 1.0f);
+  f = m32 / (m22 + 1.0f);
 
   n_m11 = n / m11;
   n_m00 = n / m00;
 
   *nearVal = n;
   *farVal  = f;
-  *bottom  = n_m11 * (m21 - 1);
-  *top     = n_m11 * (m21 + 1);
-  *left    = n_m00 * (m20 - 1);
-  *right   = n_m00 * (m20 + 1);
+  *bottom  = n_m11 * (m21 - 1.0f);
+  *top     = n_m11 * (m21 + 1.0f);
+  *left    = n_m00 * (m20 - 1.0f);
+  *right   = n_m00 * (m20 + 1.0f);
 }
 
 /*!
@@ -379,9 +379,9 @@ glm_persp_decomp_x(mat4 proj,
   m00 = proj[0][0];
   m20 = proj[2][0];
 
-  nearVal = proj[3][2] / (proj[3][3] - 1);
-  *left   = nearVal * (m20 - 1) / m00;
-  *right  = nearVal * (m20 + 1) / m00;
+  nearVal = proj[3][2] / (proj[3][3] - 1.0f);
+  *left   = nearVal * (m20 - 1.0f) / m00;
+  *right  = nearVal * (m20 + 1.0f) / m00;
 }
 
 /*!
@@ -402,7 +402,7 @@ glm_persp_decomp_y(mat4 proj,
   m21 = proj[2][1];
   m11 = proj[1][1];
 
-  nearVal = proj[3][2] / (proj[3][3] - 1);
+  nearVal = proj[3][2] / (proj[3][3] - 1.0f);
   *bottom = nearVal * (m21 - 1) / m11;
   *top    = nearVal * (m21 + 1) / m11;
 }
@@ -425,8 +425,8 @@ glm_persp_decomp_z(mat4 proj,
   m32 = proj[3][2];
   m22 = proj[2][2];
 
-  *nearVal = m32 / (m22 - 1);
-  *farVal  = m32 / (m22 + 1);
+  *nearVal = m32 / (m22 - 1.0f);
+  *farVal  = m32 / (m22 + 1.0f);
 }
 
 /*!
