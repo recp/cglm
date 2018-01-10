@@ -43,10 +43,15 @@ glmc_perspective(float fovy,
 
 CGLM_EXPORT
 void
-glmc_lookat(vec3 eye,
-            vec3 center,
-            vec3 up,
-            mat4 dest);
+glmc_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_look(vec3 eye, vec3 dir, vec3 up, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_look_any(vec3 eye, vec3 dir, mat4 dest);
 
 CGLM_EXPORT
 void

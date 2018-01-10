@@ -304,6 +304,43 @@ glm_lookat(vec3 eye,
 }
 
 /*!
+ * @brief set up view matrix
+ *
+ * convenient wrapper for lookat: if you only have direction not target self
+ * then this might be useful. Because you need to get target from direction.
+ *
+ * @param[in]  eye    eye vector
+ * @param[in]  dir    direction vector
+ * @param[in]  up     up vector
+ * @param[out] dest   result matrix
+ */
+CGLM_INLINE
+void
+glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
+  vec3 target;
+  glm_vec_add(eye, dir, target);
+  glm_lookat(eye, target, up, dest);
+}
+
+/*!
+ * @brief set up view matrix
+ *
+ * convenient wrapper for look: if you only have direction and if you don't
+ * care what UP vector is then this might be useful to create view matrix
+ *
+ * @param[in]  eye    eye vector
+ * @param[in]  dir    direction vector
+ * @param[out] dest   result matrix
+ */
+CGLM_INLINE
+void
+glm_look_any(vec3 eye, vec3 dir, mat4 dest) {
+  vec3 up;
+  glm_vec_ortho(dir, up);
+  glm_look(eye, dir, up, dest);
+}
+
+/*!
  * @brief decomposes frustum values of perspective projection.
  *
  * @param[in]  proj    perspective projection matrix
