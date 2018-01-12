@@ -88,7 +88,9 @@ libcglm_la_SOURCES=\
     src/vec3.c \
     src/vec4.c \
     src/mat3.c \
-    src/mat4.c
+    src/mat4.c \
+    src/plane.c \
+    src/frustum.c
 
 test_tests_SOURCES=\
     test/src/test_common.c \

@@ -21,6 +21,7 @@ extern "C" {
 #include "call/quat.h"
 #include "call/euler.h"
 #include "call/plane.h"
+#include "call/frustum.h"
 #include "call/io.h"
 
 #ifdef __cplusplus

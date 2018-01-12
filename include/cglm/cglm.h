@@ -15,6 +15,7 @@
 #include "mat3.h"
 #include "affine.h"
 #include "cam.h"
+#include "frustum.h"
 #include "quat.h"
 #include "euler.h"
 #include "plane.h"
