@@ -23,9 +23,11 @@
     <ClCompile Include="..\src\cam.c" />
     <ClCompile Include="..\src\dllmain.c" />
     <ClCompile Include="..\src\euler.c" />
+    <ClCompile Include="..\src\frustum.c" />
     <ClCompile Include="..\src\io.c" />
     <ClCompile Include="..\src\mat3.c" />
     <ClCompile Include="..\src\mat4.c" />
+    <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\quat.c" />
     <ClCompile Include="..\src\vec3.c" />
     <ClCompile Include="..\src\vec4.c" />
@@ -37,9 +39,11 @@
     <ClInclude Include="..\include\cglm\call\affine.h" />
     <ClInclude Include="..\include\cglm\call\cam.h" />
     <ClInclude Include="..\include\cglm\call\euler.h" />
+    <ClInclude Include="..\include\cglm\call\frustum.h" />
     <ClInclude Include="..\include\cglm\call\io.h" />
     <ClInclude Include="..\include\cglm\call\mat3.h" />
     <ClInclude Include="..\include\cglm\call\mat4.h" />
+    <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\quat.h" />
     <ClInclude Include="..\include\cglm\call\vec3.h" />
     <ClInclude Include="..\include\cglm\call\vec4.h" />
@@ -47,9 +51,11 @@
     <ClInclude Include="..\include\cglm\cglm.h" />
     <ClInclude Include="..\include\cglm\common.h" />
     <ClInclude Include="..\include\cglm\euler.h" />
+    <ClInclude Include="..\include\cglm\frustum.h" />
     <ClInclude Include="..\include\cglm\io.h" />
     <ClInclude Include="..\include\cglm\mat3.h" />
     <ClInclude Include="..\include\cglm\mat4.h" />
+    <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\quat.h" />
     <ClInclude Include="..\include\cglm\simd\avx\affine.h" />
     <ClInclude Include="..\include\cglm\simd\avx\mat4.h" />
@@ -73,7 +79,7 @@
     <ProjectGuid>{CA8BCAF9-CD25-4133-8F62-3D1449B5D2FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cglm</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

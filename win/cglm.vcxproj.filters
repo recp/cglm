@@ -66,6 +66,12 @@
     <ClCompile Include="..\src\vec4.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\frustum.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\plane.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -174,6 +180,18 @@
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\version.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\frustum.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\plane.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\frustum.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\plane.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>
