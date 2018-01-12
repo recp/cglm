@@ -334,7 +334,7 @@ glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look_any(vec3 eye, vec3 dir, mat4 dest) {
+glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
   vec3 up;
   glm_vec_ortho(dir, up);
   glm_look(eye, dir, up, dest);
