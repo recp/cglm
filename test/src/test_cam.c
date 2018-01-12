@@ -8,6 +8,23 @@
 #include "test_common.h"
 
 void
+test_camera_lookat(void **state) {
+  mat4  view1, view2;
+  vec3 center,
+       eye    = {0.024f, 14.6f, 67.04f},
+       dir    = {0.0f, 0.0f, -1.0f},
+       up     = {0.0f, 1.0f, 0.0f}
+  ;
+
+  glm_vec_add(eye, dir, center);
+  glm_lookat(eye, center, up, view1);
+
+  glm_look(eye, dir, up, view2);
+
+  test_assert_mat4_eq(view1, view2);
+}
+
+void
 test_camera_decomp(void **state) {
   mat4  proj, proj2;
   vec4  sizes;
@@ -35,4 +52,3 @@ test_camera_decomp(void **state) {
 
   test_assert_mat4_eq(proj, proj2);
 }
-

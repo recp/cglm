@@ -69,6 +69,18 @@ glmc_lookat(vec3 eye,
 
 CGLM_EXPORT
 void
+glmc_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
+  glm_look(eye, dir, up, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
+  glm_look_anyup(eye, dir, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_frustum_planes(mat4 m, vec4 dest[6]) {
   glm_frustum_planes(m, dest);
 }

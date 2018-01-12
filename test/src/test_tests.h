@@ -11,6 +11,9 @@ void test_mat4(void **state);
 
 /* camera */
 void
+test_camera_lookat(void **state);
+
+void
 test_camera_decomp(void **state);
 
 #endif /* test_tests_h */
