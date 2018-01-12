@@ -51,7 +51,7 @@ glmc_look(vec3 eye, vec3 dir, vec3 up, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_look_any(vec3 eye, vec3 dir, mat4 dest);
+glmc_look_anyup(vec3 eye, vec3 dir, mat4 dest);
 
 CGLM_EXPORT
 void
