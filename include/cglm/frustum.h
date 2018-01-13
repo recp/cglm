@@ -110,7 +110,7 @@ glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
   glm_mat4_mulv(invMat, csCoords[6], c[6]);
   glm_mat4_mulv(invMat, csCoords[7], c[7]);
 
-  glm_vec4_scale(c[0], 1.0f / c[1][3], dest[0]);
+  glm_vec4_scale(c[0], 1.0f / c[0][3], dest[0]);
   glm_vec4_scale(c[1], 1.0f / c[1][3], dest[1]);
   glm_vec4_scale(c[2], 1.0f / c[2][3], dest[2]);
   glm_vec4_scale(c[3], 1.0f / c[3][3], dest[3]);
