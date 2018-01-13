@@ -162,22 +162,71 @@ CGLM_INLINE
 void
 glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
   vec4 v;
+  vec3 min, max;
   int  i;
 
-  glm_vec_broadcast(0.0f, box[0]);
-  glm_vec_broadcast(0.0f, box[1]);
+  glm_vec_broadcast(0.0f, min);
+  glm_vec_broadcast(0.0f, max);
 
   for (i = 0; i < 8; i++) {
     glm_mat4_mulv(m, corners[i], v);
 
-    box[0][0] = glm_min(box[0][0], v[0]);
-    box[0][1] = glm_min(box[0][1], v[1]);
-    box[0][2] = glm_min(box[0][2], v[2]);
+    min[0] = glm_min(min[0], v[0]);
+    min[1] = glm_min(min[1], v[1]);
+    min[2] = glm_min(min[2], v[2]);
 
-    box[1][0] = glm_max(box[1][0], v[0]);
-    box[1][1] = glm_max(box[1][1], v[1]);
-    box[1][2] = glm_max(box[1][2], v[2]);
+    max[0] = glm_max(max[0], v[0]);
+    max[1] = glm_max(max[1], v[1]);
+    max[2] = glm_max(max[2], v[2]);
   }
+
+  glm_vec_copy(min, box[0]);
+  glm_vec_copy(max, box[1]);
+}
+
+/*!
+ * @brief finds planes corners which is between near and far planes (parallel)
+ *
+ * this will be helpful if you want to split a frustum e.g. CSM/PSSM. This will
+ * find planes' corners but you will need to one more plane.
+ * Actually you have it, it is near, far or created previously with this func ;)
+ *
+ * @param[in]  corners view  frustum corners
+ * @param[in]  splitDist     split distance
+ * @param[in]  farDist       far distance (zFar)
+ * @param[out] planeCorners  plane corners [LB, LT, RT, RB]
+ */
+CGLM_INLINE
+void
+glm_frustum_corners_at(vec4  corners[8],
+                       float splitDist,
+                       float farDist,
+                       vec4  planeCorners[4]) {
+  vec4  corner;
+  float dist, sc;
+
+  dist = glm_vec_distance(corners[4], corners[0]);
+  sc   = dist * (splitDist / farDist);
+
+  /* left bottom */
+  glm_vec4_sub(corners[4], corners[0], corner);
+  glm_vec4_scale_as(corner, sc, corner);
+  glm_vec4_add(corners[0], corner, planeCorners[0]);
+
+  /* left top */
+  glm_vec4_sub(corners[5], corners[1], corner);
+  glm_vec4_scale_as(corner, sc, corner);
+  glm_vec4_add(corners[1], corner, planeCorners[1]);
+
+  /* right top */
+  glm_vec4_sub(corners[6], corners[2], corner);
+  glm_vec4_scale_as(corner, sc, corner);
+  glm_vec4_add(corners[2], corner, planeCorners[2]);
+
+  /* right bottom */
+  glm_vec4_sub(corners[7], corners[3], corner);
+  glm_vec4_scale_as(corner, sc, corner);
+  glm_vec4_add(corners[3], corner, planeCorners[3]);
 }
 
 #endif /* cglm_frustum_h */
