@@ -21,6 +21,13 @@
 #define GLM_RTF 6
 #define GLM_RBF 7
 
+#define GLM_LEFT   0
+#define GLM_RIGHT  1
+#define GLM_BOTTOM 2
+#define GLM_TOP    3
+#define GLM_NEAR   4
+#define GLM_FAR    5
+
 /*!
  * @brief extracts view frustum planes
  *
