@@ -50,7 +50,9 @@ cglm_HEADERS = include/cglm/version.h \
                   include/cglm/euler.h \
                   include/cglm/util.h \
                   include/cglm/quat.h \
-                  include/cglm/affine-mat.h
+                  include/cglm/affine-mat.h \
+                  include/cglm/plane.h \
+                  include/cglm/frustum.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
