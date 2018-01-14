@@ -50,7 +50,9 @@ cglm_HEADERS = include/cglm/version.h \
                   include/cglm/euler.h \
                   include/cglm/util.h \
                   include/cglm/quat.h \
-                  include/cglm/affine-mat.h
+                  include/cglm/affine-mat.h \
+                  include/cglm/plane.h \
+                  include/cglm/frustum.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -61,7 +63,9 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/io.h \
                     include/cglm/call/cam.h \
                     include/cglm/call/quat.h \
-                    include/cglm/call/euler.h
+                    include/cglm/call/euler.h \
+                    include/cglm/call/plane.h \
+                    include/cglm/call/frustum.h
 
 cglm_simddir=$(includedir)/cglm/simd
 cglm_simd_HEADERS = include/cglm/simd/intrin.h
