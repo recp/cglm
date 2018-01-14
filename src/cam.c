@@ -78,21 +78,3 @@ void
 glmc_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
   glm_look_anyup(eye, dir, dest);
 }
-
-CGLM_EXPORT
-void
-glmc_frustum_planes(mat4 m, vec4 dest[6]) {
-  glm_frustum_planes(m, dest);
-}
-
-CGLM_EXPORT
-void
-glmc_frustum_corners(mat4 invMat, vec4 dest[8]) {
-  glm_frustum_corners(invMat, dest);
-}
-
-CGLM_EXPORT
-void
-glmc_frustum_center(vec4 corners[8], vec4 dest) {
-  glm_frustum_center(corners, dest);
-}
