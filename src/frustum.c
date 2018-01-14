@@ -31,3 +31,12 @@ void
 glmc_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
   glm_frustum_box(corners, m, box);
 }
+
+CGLM_EXPORT
+void
+glmc_frustum_corners_at(vec4  corners[8],
+                        float splitDist,
+                        float farDist,
+                        vec4  planeCorners[4]) {
+  glm_frustum_corners_at(corners, splitDist, farDist, planeCorners);
+}

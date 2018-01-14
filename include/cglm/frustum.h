@@ -11,15 +11,15 @@
 #include "common.h"
 #include "plane.h"
 
-#define GLM_LBN 0
-#define GLM_LTN 1
-#define GLM_RTN 2
-#define GLM_RBN 3
+#define GLM_LBN 0 /* left  bottom near */
+#define GLM_LTN 1 /* left  top    near */
+#define GLM_RTN 2 /* right top    near */
+#define GLM_RBN 3 /* right bottom near */
 
-#define GLM_LBF 4
-#define GLM_LTF 5
-#define GLM_RTF 6
-#define GLM_RBF 7
+#define GLM_LBF 4 /* left  bottom far  */
+#define GLM_LTF 5 /* left  top    far  */
+#define GLM_RTF 6 /* right top    far  */
+#define GLM_RBF 7 /* right bottom far  */
 
 #define GLM_LEFT   0
 #define GLM_RIGHT  1
@@ -27,6 +27,25 @@
 #define GLM_TOP    3
 #define GLM_NEAR   4
 #define GLM_FAR    5
+
+/* you can override clip space coords
+   but you have to provide all with same name
+   e.g.: define GLM_CSCOORD_LBN {0.0f, 0.0f, 1.0f, 1.0f} */
+#ifndef GLM_CUSTOM_CLIPSPACE
+
+/* near */
+#define GLM_CSCOORD_LBN {-1.0f, -1.0f, -1.0f, 1.0f}
+#define GLM_CSCOORD_LTN {-1.0f,  1.0f, -1.0f, 1.0f}
+#define GLM_CSCOORD_RTN { 1.0f,  1.0f, -1.0f, 1.0f}
+#define GLM_CSCOORD_RBN { 1.0f, -1.0f, -1.0f, 1.0f}
+
+/* far */
+#define GLM_CSCOORD_LBF {-1.0f, -1.0f,  1.0f, 1.0f}
+#define GLM_CSCOORD_LTF {-1.0f,  1.0f,  1.0f, 1.0f}
+#define GLM_CSCOORD_RTF { 1.0f,  1.0f,  1.0f, 1.0f}
+#define GLM_CSCOORD_RBF { 1.0f, -1.0f,  1.0f, 1.0f}
+
+#endif
 
 /*!
  * @brief extracts view frustum planes
@@ -97,15 +116,15 @@ glm_frustum_corners(mat4 invMat, vec4 dest[8]) {
 
   /* indexOf(nearCoord) = indexOf(farCoord) + 4 */
   vec4 csCoords[8] = {
-    {-1.0f, -1.0f, -1.0f, 1.0f}, /* GLM_LBN */
-    {-1.0f,  1.0f, -1.0f, 1.0f}, /* GLM_LTN */
-    { 1.0f,  1.0f, -1.0f, 1.0f}, /* GLM_RTN */
-    { 1.0f, -1.0f, -1.0f, 1.0f}, /* GLM_RBN */
+    GLM_CSCOORD_LBN,
+    GLM_CSCOORD_LTN,
+    GLM_CSCOORD_RTN,
+    GLM_CSCOORD_RBN,
 
-    {-1.0f, -1.0f,  1.0f, 1.0f}, /* GLM_LBF */
-    {-1.0f,  1.0f,  1.0f, 1.0f}, /* GLM_LTF */
-    { 1.0f,  1.0f,  1.0f, 1.0f}, /* GLM_RTF */
-    { 1.0f, -1.0f,  1.0f, 1.0f}  /* GLM_RBF */
+    GLM_CSCOORD_LBF,
+    GLM_CSCOORD_LTF,
+    GLM_CSCOORD_RTF,
+    GLM_CSCOORD_RBF
   };
 
   glm_mat4_mulv(invMat, csCoords[0], c[0]);
@@ -205,28 +224,29 @@ glm_frustum_corners_at(vec4  corners[8],
   vec4  corner;
   float dist, sc;
 
-  dist = glm_vec_distance(corners[4], corners[0]);
+  /* because distance and scale is same for all */
+  dist = glm_vec_distance(corners[GLM_RTF], corners[GLM_RTN]);
   sc   = dist * (splitDist / farDist);
 
   /* left bottom */
-  glm_vec4_sub(corners[4], corners[0], corner);
+  glm_vec4_sub(corners[GLM_LBF], corners[GLM_LBN], corner);
   glm_vec4_scale_as(corner, sc, corner);
-  glm_vec4_add(corners[0], corner, planeCorners[0]);
+  glm_vec4_add(corners[GLM_LBN], corner, planeCorners[0]);
 
   /* left top */
-  glm_vec4_sub(corners[5], corners[1], corner);
+  glm_vec4_sub(corners[GLM_LTF], corners[GLM_LTN], corner);
   glm_vec4_scale_as(corner, sc, corner);
-  glm_vec4_add(corners[1], corner, planeCorners[1]);
+  glm_vec4_add(corners[GLM_LTN], corner, planeCorners[1]);
 
   /* right top */
-  glm_vec4_sub(corners[6], corners[2], corner);
+  glm_vec4_sub(corners[GLM_RTF], corners[GLM_RTN], corner);
   glm_vec4_scale_as(corner, sc, corner);
-  glm_vec4_add(corners[2], corner, planeCorners[2]);
+  glm_vec4_add(corners[GLM_RTN], corner, planeCorners[2]);
 
   /* right bottom */
-  glm_vec4_sub(corners[7], corners[3], corner);
+  glm_vec4_sub(corners[GLM_RBF], corners[GLM_RBN], corner);
   glm_vec4_scale_as(corner, sc, corner);
-  glm_vec4_add(corners[3], corner, planeCorners[3]);
+  glm_vec4_add(corners[GLM_RBN], corner, planeCorners[3]);
 }
 
 #endif /* cglm_frustum_h */
