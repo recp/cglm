@@ -20,6 +20,7 @@
    GLM_VEC4_BLACK
  
  Functions:
+   CGLM_INLINE void  glm_vec4(vec3 v3, float last, vec4 dest);
    CGLM_INLINE void  glm_vec4_copy3(vec4 a, vec3 dest);
    CGLM_INLINE void  glm_vec4_copy(vec4 v, vec4 dest);
    CGLM_INLINE float glm_vec4_dot(vec4 a, vec4 b);
@@ -55,6 +56,22 @@
 
 #define GLM_VEC4_ONE        (vec4)GLM_VEC4_ONE_INIT
 #define GLM_VEC4_BLACK      (vec4)GLM_VEC4_BLACK_INIT
+
+/*!
+ * @brief init vec4 using vec3
+ *
+ * @param[in]  v3   vector3
+ * @param[in]  last last item
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4(vec3 v3, float last, vec4 dest) {
+  dest[0] = v3[0];
+  dest[1] = v3[1];
+  dest[2] = v3[2];
+  dest[3] = last;
+}
 
 /*!
  * @brief copy first 3 members of [a] to [dest]
