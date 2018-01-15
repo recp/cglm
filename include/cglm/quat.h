@@ -32,9 +32,27 @@
 #  include "simd/sse2/quat.h"
 #endif
 
-#define GLM_QUAT_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f}
-#define GLM_QUAT_IDENTITY       (versor){1.0f, 0.0f, 0.0f, 0.0f}
+/*
+ * IMPORTANT! cglm stores quat as [w, x, y, z]
+ *
+ * Possible changes (these may be changed in the future):
+ *  - versor is identity quat, we can define new type for quat.
+ *    it can't be quat or quaternion becuase someone can use that name for
+ *    variable name. maybe just vec4.
+ *  - it stores [w, x, y, z] but it may change to [x, y, z, w] if we get enough
+ *    feedback to change it.
+ *  - in general we use last param as dest, but this header used first param
+ *    as dest this may be changed but decided yet
+ */
 
+#define GLM_QUAT_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f}
+#define GLM_QUAT_IDENTITY       (versor)GLM_QUAT_IDENTITY_INIT
+
+/*!
+ * @brief makes given quat to identity
+ *
+ * @param[in, out]  q  quaternion
+ */
 CGLM_INLINE
 void
 glm_quat_identity(versor q) {
@@ -42,6 +60,15 @@ glm_quat_identity(versor q) {
   glm_vec4_copy(v, q);
 }
 
+/*!
+ * @brief creates NEW quaternion with individual axis components
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   angle angle (radians)
+ * @param[in]   x     axis.x
+ * @param[in]   y     axis.y
+ * @param[in]   z     axis.z
+ */
 CGLM_INLINE
 void
 glm_quat(versor q,
@@ -61,6 +88,13 @@ glm_quat(versor q,
   q[3] = s * z;
 }
 
+/*!
+ * @brief creates NEW quaternion with axis vector
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   angle angle (radians)
+ * @param[in]   v     axis
+ */
 CGLM_INLINE
 void
 glm_quatv(versor q,
@@ -78,12 +112,22 @@ glm_quatv(versor q,
   q[3] = s * v[2];
 }
 
+/*!
+ * @brief returns norm (magnitude) of quaternion
+ *
+ * @param[out]  q  quaternion
+ */
 CGLM_INLINE
 float
 glm_quat_norm(versor q) {
   return glm_vec4_norm(q);
 }
 
+/*!
+ * @brief normalize quaternion
+ *
+ * @param[in, out]  m  quaternion
+ */
 CGLM_INLINE
 void
 glm_quat_normalize(versor q) {
@@ -98,12 +142,25 @@ glm_quat_normalize(versor q) {
   glm_vec4_scale(q, 1.0f / sqrtf(sum), q);
 }
 
+/*!
+ * @brief dot product of two quaternion
+ *
+ * @param[in]  m  quaternion 1
+ * @param[in]  r  quaternion 2
+ */
 CGLM_INLINE
 float
 glm_quat_dot(versor q, versor r) {
   return glm_vec4_dot(q, r);
 }
 
+/*!
+ * @brief multiplies two quaternion and stores result in dest
+ *
+ * @param[in]   q1    quaternion 1
+ * @param[in]   q2    quaternion 2
+ * @param[out]  dest  result quaternion
+ */
 CGLM_INLINE
 void
 glm_quat_mulv(versor q1, versor q2, versor dest) {
@@ -115,6 +172,12 @@ glm_quat_mulv(versor q1, versor q2, versor dest) {
   glm_quat_normalize(dest);
 }
 
+/*!
+ * @brief convert quaternion to mat4
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix
+ */
 CGLM_INLINE
 void
 glm_quat_mat4(versor q, mat4 dest) {
@@ -153,6 +216,15 @@ glm_quat_mat4(versor q, mat4 dest) {
   dest[3][3] = 1.0f;
 }
 
+/*!
+ * @brief interpolates between two quaternions
+ *        using spherical linear interpolation (SLERP)
+ *
+ * @param[in]   q     from
+ * @param[in]   r     to
+ * @param[in]   t     amout
+ * @param[out]  dest  result quaternion
+ */
 CGLM_INLINE
 void
 glm_quat_slerp(versor q,
