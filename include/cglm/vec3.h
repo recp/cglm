@@ -44,6 +44,12 @@
    CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_ortho(vec3 v, vec3 dest);
+
+ Convenient:
+   CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
+   CGLM_INLINE float glm_dot(vec3 a, vec3 b);
+   CGLM_INLINE void  glm_normalize(vec3 v);
+   CGLM_INLINE void  glm_normalize_to(vec3 v, vec3 dest);
  */
 
 #ifndef cglm_vec3_h
@@ -515,6 +521,33 @@ CGLM_INLINE
 float
 glm_dot(vec3 a, vec3 b) {
   return glm_vec_dot(a, b);
+}
+
+/*!
+ * @brief normalize vec3 and store result in same vec
+ *
+ * this is just convenient wrapper
+ *
+ * @param[in, out] v vector
+ */
+CGLM_INLINE
+void
+glm_normalize(vec3 v) {
+  glm_vec_normalize(v);
+}
+
+/*!
+ * @brief normalize vec3 to dest
+ *
+ * this is just convenient wrapper
+ *
+ * @param[in]  vec  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_normalize_to(vec3 v, vec3 dest) {
+  glm_vec_normalize_to(v, dest);
 }
 
 #endif /* cglm_vec3_h */
