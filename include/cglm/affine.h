@@ -17,6 +17,7 @@
    CGLM_INLINE void glm_scale_make(mat4 m, vec3 v);
    CGLM_INLINE void glm_scale(mat4 m, vec3 v);
    CGLM_INLINE void glm_scale1(mat4 m, float s);
+   CGLM_INLINE void glm_scale_uni(mat4 m, float s);
    CGLM_INLINE void glm_rotate_x(mat4 m, float rad, mat4 dest);
    CGLM_INLINE void glm_rotate_y(mat4 m, float rad, mat4 dest);
    CGLM_INLINE void glm_rotate_z(mat4 m, float rad, mat4 dest);
@@ -38,6 +39,14 @@
 #include "affine-mat.h"
 #include "util.h"
 
+/*!
+ * @brief translate existing transform matrix by v vector
+ *        and store result in dest
+ *
+ * @param[in]  m    affine transfrom
+ * @param[in]  v    translate vector [x, y, z]
+ * @param[out] dest translated matrix
+ */
 CGLM_INLINE
 void
 glm_translate_to(mat4 m, vec3 v, mat4 dest) {
@@ -72,6 +81,13 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
 #endif
 }
 
+/*!
+ * @brief translate existing transform matrix by v vector
+ *        and stores result in same matrix
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       v  translate vector [x, y, z]
+ */
 CGLM_INLINE
 void
 glm_translate(mat4 m, vec3 v) {
@@ -98,6 +114,12 @@ glm_translate(mat4 m, vec3 v) {
 #endif
 }
 
+/*!
+ * @brief translate existing transform matrix by x factor
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       x  x factor
+ */
 CGLM_INLINE
 void
 glm_translate_x(mat4 m, float to) {
@@ -114,6 +136,12 @@ glm_translate_x(mat4 m, float to) {
 #endif
 }
 
+/*!
+ * @brief translate existing transform matrix by y factor
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       y  y factor
+ */
 CGLM_INLINE
 void
 glm_translate_y(mat4 m, float to) {
@@ -130,6 +158,12 @@ glm_translate_y(mat4 m, float to) {
 #endif
 }
 
+/*!
+ * @brief translate existing transform matrix by z factor
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       z  z factor
+ */
 CGLM_INLINE
 void
 glm_translate_z(mat4 m, float to) {
@@ -146,6 +180,12 @@ glm_translate_z(mat4 m, float to) {
 #endif
 }
 
+/*!
+ * @brief creates NEW translate transform matrix by v vector
+ *
+ * @param[out]  m  affine transfrom
+ * @param[in]   v  translate vector [x, y, z]
+ */
 CGLM_INLINE
 void
 glm_translate_make(mat4 m, vec3 v) {
@@ -153,8 +193,14 @@ glm_translate_make(mat4 m, vec3 v) {
   glm_translate_to(t, v, m);
 }
 
-/* scale */
-
+/*!
+ * @brief scale existing transform matrix by v vector
+ *        and store result in dest
+ *
+ * @param[in]  m    affine transfrom
+ * @param[in]  v    scale vector [x, y, z]
+ * @param[out] dest scaled matrix
+ */
 CGLM_INLINE
 void
 glm_scale_to(mat4 m, vec3 v, mat4 dest) {
@@ -165,6 +211,12 @@ glm_scale_to(mat4 m, vec3 v, mat4 dest) {
   glm_vec4_copy(m[3], dest[3]);
 }
 
+/*!
+ * @brief creates NEW scale matrix by v vector
+ *
+ * @param[out]  m  affine transfrom
+ * @param[in]   v  scale vector [x, y, z]
+ */
 CGLM_INLINE
 void
 glm_scale_make(mat4 m, vec3 v) {
@@ -172,12 +224,22 @@ glm_scale_make(mat4 m, vec3 v) {
   glm_scale_to(t, v, m);
 }
 
+/*!
+ * @brief scales existing transform matrix by v vector
+ *        and stores result in same matrix
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       v  scale vector [x, y, z]
+ */
 CGLM_INLINE
 void
 glm_scale(mat4 m, vec3 v) {
   glm_scale_to(m, v, m);
 }
 
+/*!
+ * @brief DEPRECATED! Use glm_scale_uni
+ */
 CGLM_INLINE
 void
 glm_scale1(mat4 m, float s) {
@@ -185,15 +247,37 @@ glm_scale1(mat4 m, float s) {
   glm_scale_to(m, v, m);
 }
 
+/*!
+ * @brief applies uniform scale to existing transform matrix v = [s, s, s]
+ *        and stores result in same matrix
+ *
+ * @param[in, out]  m  affine transfrom
+ * @param[in]       s  scale factor
+ */
 CGLM_INLINE
 void
-glm_rotate_x(mat4 m, float rad, mat4 dest) {
+glm_scale_uni(mat4 m, float s) {
+  vec3 v = { s, s, s };
+  glm_scale_to(m, v, m);
+}
+
+/*!
+ * @brief rotate existing transform matrix around X axis by angle
+ *        and store result in dest
+ *
+ * @param[in]   m      affine transfrom
+ * @param[in]   angle  angle (radians)
+ * @param[out]  dest   rotated matrix
+ */
+CGLM_INLINE
+void
+glm_rotate_x(mat4 m, float angle, mat4 dest) {
   float cosVal;
   float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
 
-  cosVal = cosf(rad);
-  sinVal = sinf(rad);
+  cosVal = cosf(angle);
+  sinVal = sinf(angle);
 
   t[1][1] =  cosVal;
   t[1][2] =  sinVal;
@@ -203,6 +287,14 @@ glm_rotate_x(mat4 m, float rad, mat4 dest) {
   glm_mat4_mul(m, t, dest);
 }
 
+/*!
+ * @brief rotate existing transform matrix around Y axis by angle
+ *        and store result in dest
+ *
+ * @param[in]   m      affine transfrom
+ * @param[in]   angle  angle (radians)
+ * @param[out]  dest   rotated matrix
+ */
 CGLM_INLINE
 void
 glm_rotate_y(mat4 m, float rad, mat4 dest) {
@@ -221,6 +313,14 @@ glm_rotate_y(mat4 m, float rad, mat4 dest) {
   glm_mat4_mul(m, t, dest);
 }
 
+/*!
+ * @brief rotate existing transform matrix around Z axis by angle
+ *        and store result in dest
+ *
+ * @param[in]   m      affine transfrom
+ * @param[in]   angle  angle (radians)
+ * @param[out]  dest   rotated matrix
+ */
 CGLM_INLINE
 void
 glm_rotate_z(mat4 m, float rad, mat4 dest) {
@@ -239,6 +339,15 @@ glm_rotate_z(mat4 m, float rad, mat4 dest) {
   glm_mat4_mul(m, t, dest);
 }
 
+/*!
+ * @brief creates NEW rotation matrix by angle and axis
+ *
+ * this name may change in the future. axis must be is normalized
+ *
+ * @param[out] m        affine transfrom
+ * @param[in]  angle    angle (radians)
+ * @param[in]  axis_ndc normalized axis
+ */
 CGLM_INLINE
 void
 glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
@@ -272,6 +381,15 @@ glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
   m[3][3] = 1.0f;
 }
 
+/*!
+ * @brief creates NEW rotation matrix by angle and axis
+ *
+ * this name may change in the future. axis must be is normalized
+ *
+ * @param[out] m     affine transfrom
+ * @param[in]  angle angle (radians)
+ * @param[in]  axis  axis
+ */
 CGLM_INLINE
 void
 glm_rotate_make(mat4 m, float angle, vec3 axis) {
@@ -281,6 +399,15 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
   glm_rotate_ndc_make(m, angle, axis_ndc);
 }
 
+/*!
+ * @brief rotate existing transform matrix around Z axis by angle and axis
+ *
+ * this name may change in the future, axis must be normalized.
+ *
+ * @param[in, out]  m         affine transfrom
+ * @param[in]       angle     angle (radians)
+ * @param[in]       axis_ndc  normalized axis
+ */
 CGLM_INLINE
 void
 glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
@@ -311,6 +438,13 @@ glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
   glm_vec4_copy(tmp[3], m[2]);
 }
 
+/*!
+ * @brief rotate existing transform matrix around Z axis by angle and axis
+ *
+ * @param[in, out]  m         affine transfrom
+ * @param[in]       angle     angle (radians)
+ * @param[in]       axis_ndc  axis
+ */
 CGLM_INLINE
 void
 glm_rotate(mat4 m, float angle, vec3 axis) {
