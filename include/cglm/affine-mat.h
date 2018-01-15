@@ -25,8 +25,22 @@
 #  include "simd/avx/affine.h"
 #endif
 
-#include <assert.h>
-
+/*!
+ * @brief this is similar to glm_mat4_mul but specialized to affine transform
+ *
+ * Matrix format should be:
+ *   R  R  R  X
+ *   R  R  R  Y
+ *   R  R  R  Z
+ *   0  0  0  W
+ *
+ * this reduces some multiplications. It should be faster than mat4_mul.
+ * if you are not sure about matrix format then DON'T use this! use mat4_mul
+ *
+ * @param[in]   m1    affine matrix 1
+ * @param[in]   m2    affine matrix 2
+ * @param[out]  dest  result matrix
+ */
 CGLM_INLINE
 void
 glm_mul(mat4 m1, mat4 m2, mat4 dest) {
