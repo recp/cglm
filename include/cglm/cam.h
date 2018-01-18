@@ -52,6 +52,9 @@
    CGLM_INLINE void glm_persp_decomp_near(mat4 proj, float *__restrict nearVal);
    CGLM_INLINE void glm_frustum_planes(mat4 m, vec4 dest[6]);
    CGLM_INLINE void glm_frustum_corners(mat4 invMat, vec4 dest[8]);
+   CGLM_INLINE glm_ortho_box(vec3 box[2], mat4 dest);
+   CGLM_INLINE void glm_ortho_boxp(vec3 box[2], float padding, mat4 dest);
+   CGLM_INLINE void glm_ortho_boxp(vec3 box[2], float padding, mat4 dest);
  */
 
 #ifndef cglm_vcam_h
@@ -133,6 +136,59 @@ glm_ortho(float left,
   dest[3][1] =-(top    + bottom)  * tb;
   dest[3][2] = (farVal + nearVal) * fn;
   dest[3][3] = 1.0f;
+}
+
+/*!
+ * @brief set up orthographic projection matrix using bounding box
+ *
+ * bounding box (AABB) must be in view space
+ *
+ * @param[in]  box   AABB
+ * @param[out] dest  result matrix
+ */
+CGLM_INLINE
+void
+glm_ortho_aabb(vec3 box[2], mat4 dest) {
+  glm_ortho(box[0][0],  box[1][0],
+            box[0][1],  box[1][1],
+           -box[1][2], -box[0][2],
+            dest);
+}
+
+/*!
+ * @brief set up orthographic projection matrix using bounding box
+ *
+ * bounding box (AABB) must be in view space
+ *
+ * @param[in]  box     AABB
+ * @param[in]  padding padding
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_ortho_aabb_p(vec3 box[2], float padding, mat4 dest) {
+  glm_ortho(box[0][0] - padding,    box[1][0] + padding,
+            box[0][1] - padding,    box[1][1] + padding,
+          -(box[1][2] + padding), -(box[0][2] - padding),
+            dest);
+}
+
+/*!
+ * @brief set up orthographic projection matrix using bounding box
+ *
+ * bounding box (AABB) must be in view space
+ *
+ * @param[in]  box     AABB
+ * @param[in]  padding padding for near and far
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest) {
+  glm_ortho(box[0][0],              box[1][0],
+            box[0][1],              box[1][1],
+          -(box[1][2] + padding), -(box[0][2] - padding),
+            dest);
 }
 
 /*!
