@@ -22,6 +22,7 @@ extern "C" {
 #include "call/euler.h"
 #include "call/plane.h"
 #include "call/frustum.h"
+#include "call/box.h"
 #include "call/io.h"
 
 #ifdef __cplusplus

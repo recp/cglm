@@ -72,6 +72,9 @@
     <ClCompile Include="..\src\plane.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\box.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -192,6 +195,12 @@
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\plane.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\box.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\box.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>

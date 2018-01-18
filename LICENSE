@@ -58,3 +58,8 @@ Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix
 Authors:
   Gil Gribb (ggribb@ravensoft.com)
   Klaus Hartmann (k_hartmann@osnabrueck.netsurf.de)
+
+5. Transform AABB
+Transform Axis Aligned Bounding Boxes:
+http://dev.theomader.com/transform-bounding-boxes/
+https://github.com/erich666/GraphicsGems/blob/master/gems/TransBox.c

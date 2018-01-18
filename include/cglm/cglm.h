@@ -19,6 +19,7 @@
 #include "quat.h"
 #include "euler.h"
 #include "plane.h"
+#include "box.h"
 #include "util.h"
 #include "io.h"
 
