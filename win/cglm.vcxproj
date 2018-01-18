@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affine.c" />
+    <ClCompile Include="..\src\box.c" />
     <ClCompile Include="..\src\cam.c" />
     <ClCompile Include="..\src\dllmain.c" />
     <ClCompile Include="..\src\euler.c" />
@@ -35,8 +36,10 @@
   <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
+    <ClInclude Include="..\include\cglm\box.h" />
     <ClInclude Include="..\include\cglm\call.h" />
     <ClInclude Include="..\include\cglm\call\affine.h" />
+    <ClInclude Include="..\include\cglm\call\box.h" />
     <ClInclude Include="..\include\cglm\call\cam.h" />
     <ClInclude Include="..\include\cglm\call\euler.h" />
     <ClInclude Include="..\include\cglm\call\frustum.h" />

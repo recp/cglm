@@ -332,9 +332,9 @@ CGLM_INLINE
 float
 glm_vec4_distance(vec4 v1, vec4 v2) {
   return sqrtf(glm_pow2(v2[0] - v1[0])
-               + glm_pow2(v2[1] - v1[1])
-               + glm_pow2(v2[2] - v1[2])
-               + glm_pow2(v2[3] - v1[3]));
+             + glm_pow2(v2[1] - v1[1])
+             + glm_pow2(v2[2] - v1[2])
+             + glm_pow2(v2[3] - v1[3]));
 }
 
 /*!
@@ -347,25 +347,10 @@ glm_vec4_distance(vec4 v1, vec4 v2) {
 CGLM_INLINE
 void
 glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
-  if (v1[0] > v2[0])
-    dest[0] = v1[0];
-  else
-    dest[0] = v2[0];
-
-  if (v1[1] > v2[1])
-    dest[1] = v1[1];
-  else
-    dest[1] = v2[1];
-
-  if (v1[2] > v2[2])
-    dest[2] = v1[2];
-  else
-    dest[2] = v2[2];
-
-  if (v1[3] > v2[3])
-    dest[3] = v1[3];
-  else
-    dest[3] = v2[3];
+  dest[0] = glm_max(v1[0], v2[0]);
+  dest[1] = glm_max(v1[1], v2[1]);
+  dest[2] = glm_max(v1[2], v2[2]);
+  dest[3] = glm_max(v1[3], v2[3]);
 }
 
 /*!
@@ -378,25 +363,10 @@ glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
-  if (v1[0] < v2[0])
-    dest[0] = v1[0];
-  else
-    dest[0] = v2[0];
-
-  if (v1[1] < v2[1])
-    dest[1] = v1[1];
-  else
-    dest[1] = v2[1];
-
-  if (v1[2] < v2[2])
-    dest[2] = v1[2];
-  else
-    dest[2] = v2[2];
-
-  if (v1[3] < v2[3])
-    dest[3] = v1[3];
-  else
-    dest[3] = v2[3];
+  dest[0] = glm_min(v1[0], v2[0]);
+  dest[1] = glm_min(v1[1], v2[1]);
+  dest[2] = glm_min(v1[2], v2[2]);
+  dest[3] = glm_min(v1[3], v2[3]);
 }
 
 #endif /* cglm_vec4_h */

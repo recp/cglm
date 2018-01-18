@@ -436,20 +436,9 @@ glm_vec_distance(vec3 v1, vec3 v2) {
 CGLM_INLINE
 void
 glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest) {
-  if (v1[0] > v2[0])
-    dest[0] = v1[0];
-  else
-    dest[0] = v2[0];
-
-  if (v1[1] > v2[1])
-    dest[1] = v1[1];
-  else
-    dest[1] = v2[1];
-
-  if (v1[2] > v2[2])
-    dest[2] = v1[2];
-  else
-    dest[2] = v2[2];
+  dest[0] = glm_max(v1[0], v2[0]);
+  dest[1] = glm_max(v1[1], v2[1]);
+  dest[2] = glm_max(v1[2], v2[2]);
 }
 
 /*!
@@ -462,20 +451,9 @@ glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec_minv(vec3 v1, vec3 v2, vec3 dest) {
-  if (v1[0] < v2[0])
-    dest[0] = v1[0];
-  else
-    dest[0] = v2[0];
-
-  if (v1[1] < v2[1])
-    dest[1] = v1[1];
-  else
-    dest[1] = v2[1];
-
-  if (v1[2] < v2[2])
-    dest[2] = v1[2];
-  else
-    dest[2] = v2[2];
+  dest[0] = glm_min(v1[0], v2[0]);
+  dest[1] = glm_min(v1[1], v2[1]);
+  dest[2] = glm_min(v1[2], v2[2]);
 }
 
 /*!
@@ -541,7 +519,7 @@ glm_normalize(vec3 v) {
  *
  * this is just convenient wrapper
  *
- * @param[in]  vec  source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE
