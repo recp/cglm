@@ -12,6 +12,7 @@
 
 #include <stdint.h>
 #include <math.h>
+#include <float.h>
 
 #if defined(_WIN32)
 #  ifdef CGLM_DLL
