@@ -45,7 +45,7 @@ glm_rad(float deg) {
 /*!
  * @brief convert radians to degree
  *
- * @param[in] deg angle in radians
+ * @param[in] rad angle in radians
  */
 CGLM_INLINE
 float

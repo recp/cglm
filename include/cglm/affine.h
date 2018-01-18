@@ -18,12 +18,12 @@
    CGLM_INLINE void glm_scale(mat4 m, vec3 v);
    CGLM_INLINE void glm_scale1(mat4 m, float s);
    CGLM_INLINE void glm_scale_uni(mat4 m, float s);
-   CGLM_INLINE void glm_rotate_x(mat4 m, float rad, mat4 dest);
-   CGLM_INLINE void glm_rotate_y(mat4 m, float rad, mat4 dest);
-   CGLM_INLINE void glm_rotate_z(mat4 m, float rad, mat4 dest);
+   CGLM_INLINE void glm_rotate_x(mat4 m, float angle, mat4 dest);
+   CGLM_INLINE void glm_rotate_y(mat4 m, float angle, mat4 dest);
+   CGLM_INLINE void glm_rotate_z(mat4 m, float angle, mat4 dest);
    CGLM_INLINE void glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc);
    CGLM_INLINE void glm_rotate_make(mat4 m, float angle, vec3 axis);
-   CGLM_INLINE void glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc);
+   CGLM_INLINE void glm_rotate_ndc(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_decompose_scalev(mat4 m, vec3 s);
    CGLM_INLINE bool glm_uniscaled(mat4 m);
@@ -122,16 +122,16 @@ glm_translate(mat4 m, vec3 v) {
  */
 CGLM_INLINE
 void
-glm_translate_x(mat4 m, float to) {
+glm_translate_x(mat4 m, float x) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
                _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
-                                     _mm_set1_ps(to)),
+                                     _mm_set1_ps(x)),
                           _mm_load_ps(m[3])))
   ;
 #else
   vec4 v1;
-  glm_vec4_scale(m[0], to, v1);
+  glm_vec4_scale(m[0], x, v1);
   glm_vec4_add(v1, m[3], m[3]);
 #endif
 }
@@ -144,16 +144,16 @@ glm_translate_x(mat4 m, float to) {
  */
 CGLM_INLINE
 void
-glm_translate_y(mat4 m, float to) {
+glm_translate_y(mat4 m, float y) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
                _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[1]),
-                                     _mm_set1_ps(to)),
+                                     _mm_set1_ps(y)),
                           _mm_load_ps(m[3])))
   ;
 #else
   vec4 v1;
-  glm_vec4_scale(m[1], to, v1);
+  glm_vec4_scale(m[1], y, v1);
   glm_vec4_add(v1, m[3], m[3]);
 #endif
 }
@@ -166,16 +166,16 @@ glm_translate_y(mat4 m, float to) {
  */
 CGLM_INLINE
 void
-glm_translate_z(mat4 m, float to) {
+glm_translate_z(mat4 m, float z) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
                _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
-                                     _mm_set1_ps(to)),
+                                     _mm_set1_ps(z)),
                           _mm_load_ps(m[3])))
   ;
 #else
   vec4 v1;
-  glm_vec4_scale(m[2], to, v1);
+  glm_vec4_scale(m[2], z, v1);
   glm_vec4_add(v1, m[3], m[3]);
 #endif
 }
@@ -297,13 +297,13 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_rotate_y(mat4 m, float rad, mat4 dest) {
+glm_rotate_y(mat4 m, float angle, mat4 dest) {
   float cosVal;
   float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
 
-  cosVal = cosf(rad);
-  sinVal = sinf(rad);
+  cosVal = cosf(angle);
+  sinVal = sinf(angle);
 
   t[0][0] =  cosVal;
   t[0][2] = -sinVal;
@@ -323,13 +323,13 @@ glm_rotate_y(mat4 m, float rad, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_rotate_z(mat4 m, float rad, mat4 dest) {
+glm_rotate_z(mat4 m, float angle, mat4 dest) {
   float cosVal;
   float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
 
-  cosVal = cosf(rad);
-  sinVal = sinf(rad);
+  cosVal = cosf(angle);
+  sinVal = sinf(angle);
 
   t[0][0] =  cosVal;
   t[0][1] =  sinVal;
@@ -441,9 +441,9 @@ glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
 /*!
  * @brief rotate existing transform matrix around Z axis by angle and axis
  *
- * @param[in, out]  m         affine transfrom
- * @param[in]       angle     angle (radians)
- * @param[in]       axis_ndc  axis
+ * @param[in, out]  m      affine transfrom
+ * @param[in]       angle  angle (radians)
+ * @param[in]       axis   axis
  */
 CGLM_INLINE
 void
@@ -457,8 +457,8 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
 /*!
  * @brief decompose scale vector
  *
- * @param[in]  m     affine transform
- * @param[out] s     scale vector (Sx, Sy, Sz)
+ * @param[in]  m  affine transform
+ * @param[out] s  scale vector (Sx, Sy, Sz)
  */
 CGLM_INLINE
 void

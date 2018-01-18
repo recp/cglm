@@ -126,7 +126,7 @@ glm_quat_norm(versor q) {
 /*!
  * @brief normalize quaternion
  *
- * @param[in, out]  m  quaternion
+ * @param[in, out]  q  quaternion
  */
 CGLM_INLINE
 void
@@ -145,7 +145,7 @@ glm_quat_normalize(versor q) {
 /*!
  * @brief dot product of two quaternion
  *
- * @param[in]  m  quaternion 1
+ * @param[in]  q  quaternion 1
  * @param[in]  r  quaternion 2
  */
 CGLM_INLINE
