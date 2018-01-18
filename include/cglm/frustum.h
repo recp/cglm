@@ -184,8 +184,8 @@ glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
   vec3 min, max;
   int  i;
 
-  glm_vec_broadcast(0.0f, min);
-  glm_vec_broadcast(0.0f, max);
+  glm_vec_broadcast(FLT_MAX, min);
+  glm_vec_broadcast(-FLT_MAX, max);
 
   for (i = 0; i < 8; i++) {
     glm_mat4_mulv(m, corners[i], v);
