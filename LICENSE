@@ -63,3 +63,7 @@ Authors:
 Transform Axis Aligned Bounding Boxes:
 http://dev.theomader.com/transform-bounding-boxes/
 https://github.com/erich666/GraphicsGems/blob/master/gems/TransBox.c
+
+6. Cull frustum
+http://www.txutxi.com/?p=584
+http://old.cescg.org/CESCG-2002/DSykoraJJelinek/
