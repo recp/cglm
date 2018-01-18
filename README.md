@@ -64,7 +64,8 @@ I realized that floating point errors may occur is some operaitons especially de
 - euler angles / yaw-pitch-roll to matrix
 - extract euler angles
 - inline or pre-compiled function call
-- extract view frustum planes
+- frustum (extract view frustum planes, corners...)
+- bounding box  (AABB in Frustum (culling), crop, merge...)
 
 <hr />
 

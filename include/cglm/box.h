@@ -136,7 +136,7 @@ glm_aabb_crop_until(vec3 box[2],
  */
 CGLM_INLINE
 bool
-glm_aabb_frustum(vec3 *box, vec4 planes[6]) {
+glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
   float *p, dp;
   int    i;
 
