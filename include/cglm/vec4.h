@@ -38,6 +38,7 @@
    CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
    CGLM_INLINE void  glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
  */
 
 #ifndef cglm_vec4_h
@@ -56,6 +57,12 @@
 
 #define GLM_VEC4_ONE        (vec4)GLM_VEC4_ONE_INIT
 #define GLM_VEC4_BLACK      (vec4)GLM_VEC4_BLACK_INIT
+
+#define GLM_XXXX GLM_SHUFFLE4(0, 0, 0, 0)
+#define GLM_YYYY GLM_SHUFFLE4(1, 1, 1, 1)
+#define GLM_ZZZZ GLM_SHUFFLE4(2, 2, 2, 2)
+#define GLM_WWWW GLM_SHUFFLE4(3, 3, 3, 3)
+#define GLM_WZYX GLM_SHUFFLE4(0, 1, 2, 3)
 
 /*!
  * @brief init vec4 using vec3
@@ -367,6 +374,28 @@ glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
   dest[1] = glm_min(v1[1], v2[1]);
   dest[2] = glm_min(v1[2], v2[2]);
   dest[3] = glm_min(v1[3], v2[3]);
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXXX, GLM_WZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_swizzle(vec4 v, int mask, vec4 dest) {
+  vec4 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+  t[2] = v[(mask & (3 << 4)) >> 4];
+  t[3] = v[(mask & (3 << 6)) >> 6];
+
+  glm_vec4_copy(t, dest);
 }
 
 #endif /* cglm_vec4_h */

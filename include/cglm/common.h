@@ -54,6 +54,9 @@
 
 #define glm__memzero(type, dest, size) glm__memset(type, dest, size, 0)
 
+#define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
+#define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
+
 #include "types.h"
 #include "simd/intrin.h"
 
