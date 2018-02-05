@@ -31,8 +31,14 @@ https://github.com/g-truc/glm
 #### Note for experienced developers:
 - Since I'm testing this library in my projects, sometimes bugs occurs; finding that bug[s] and making improvements would be more easy with multiple developer/contributor and their projects or knowledge. Consider to make some tests if you suspect something is wrong and any feedbacks, contributions and bug reports are always welcome. 
 
-#### Note for floating point errors:
-I realized that floating point errors may occur is some operaitons especially decomposing matrices. cglm will support double later but I will try yo fix these errors by learning floating points standarts in more details. Currently it is just in my TODOs. 
+#### Allocations? 
+`cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available. 
+
+#### Returning vector or matrix... ?
+Since almost all types are arrays and **C** doesn't allow returning arrays, so **cglm** doesn't support this feature. In the future *cglm* may use **struct** for some types for this purpose. 
+
+#### Other APIs like Vulkan, Metal, Dx? 
+Currently *cglm* uses default clip space configuration (-1, 1) for camera functions (perspective, extract corners...), in the future other clip space configurations will be supported
 
 <hr/>
 
@@ -167,7 +173,34 @@ this header will include all heaers with c postfix. You need to call functions w
 glmc_vec_normalize(vec);
 ```
 
-Function usage and parameters are documented inside related headers.
+Function usage and parameters are documented inside related headers. You may see same parameter passed twice in some examples like this:
+```C
+glm_mat4_mul(m1, m2, m1);
+
+/* or */
+glm_mat4_mul(m1, m1, m1);
+```
+the first two parameter are **[in]** and the last one is **[out]** parameter. After multiplied *m1* and *m2* the result is stored in *m1*. This is why we send *m1* twice. You may store result in different matrix, this just an example.
+
+## How to send matrix to OpenGL
+
+mat4 is array of vec4 and vec4 is array of floats. `glUniformMatrix4fv` functions accecpts `float*` as `value` (last param), so you can cast mat4 to float* or you can pass first column of matrix as beginning of memory of matrix:
+
+Option 1: Send first column
+```C
+glUniformMatrix4fv(location, 1, GL_FALSE, matrix[0]);
+
+/* array of matrices */
+glUniformMatrix4fv(location, 1, GL_FALSE, matrix[0][0]);
+```
+
+Option 2: Cast matrix to pointer type (also valid for multiple dimensional arrays)
+```C
+glUniformMatrix4fv(location, 1, GL_FALSE, (float *)matrix);
+```
+
+You can pass same way to another APIs e.g. Vulkan, DX... 
+
 ## Notes
 
 - This library uses float types only, does not support Integers, Double... yet
