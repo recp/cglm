@@ -16,8 +16,10 @@
    glm_vec4_dup(v, dest)
    GLM_VEC4_ONE_INIT
    GLM_VEC4_BLACK_INIT
+   GLM_VEC4_ZERO_INIT
    GLM_VEC4_ONE
    GLM_VEC4_BLACK
+   GLM_VEC4_ZERO
  
  Functions:
    CGLM_INLINE void  glm_vec4(vec3 v3, float last, vec4 dest);
@@ -53,9 +55,11 @@
 
 #define GLM_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
 #define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
+#define GLM_VEC4_ZERO_INIT  {0.0f, 0.0f, 0.0f, 0.0f}
 
 #define GLM_VEC4_ONE        (vec4)GLM_VEC4_ONE_INIT
 #define GLM_VEC4_BLACK      (vec4)GLM_VEC4_BLACK_INIT
+#define GLM_VEC4_ZERO       (vec4)GLM_VEC4_ZERO_INIT
 
 /*!
  * @brief init vec4 using vec3

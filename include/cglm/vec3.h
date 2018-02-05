@@ -14,7 +14,9 @@
  Macros:
    glm_vec_dup(v, dest)
    GLM_VEC3_ONE_INIT
+   GLM_VEC3_ZERO_INIT
    GLM_VEC3_ONE
+   GLM_VEC3_ZERO
    GLM_YUP
    GLM_ZUP
    GLM_XUP
@@ -62,8 +64,11 @@
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_vec_dup(v, dest) glm_vec_copy(v, dest)
 
-#define GLM_VEC3_ONE_INIT  {1.0f, 1.0f, 1.0f}
+#define GLM_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
+#define GLM_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
+
 #define GLM_VEC3_ONE  (vec3)GLM_VEC3_ONE_INIT
+#define GLM_VEC3_ZERO (vec3)GLM_VEC3_ZERO_INIT
 
 #define GLM_YUP  (vec3){0.0f, 1.0f, 0.0f}
 #define GLM_ZUP  (vec3){0.0f, 0.0f, 1.0f}
