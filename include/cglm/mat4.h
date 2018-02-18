@@ -71,8 +71,8 @@
                                  {0.0f, 0.0f, 0.0f, 0.0f}}
 
 /* for C only */
-#define GLM_MAT4_IDENTITY (mat4)GLM_MAT4_IDENTITY_INIT
-#define GLM_MAT4_ZERO     (mat4)GLM_MAT4_ZERO_INIT
+#define GLM_MAT4_IDENTITY ((mat4)GLM_MAT4_IDENTITY_INIT)
+#define GLM_MAT4_ZERO     ((mat4)GLM_MAT4_ZERO_INIT)
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_mat4_udup(mat, dest) glm_mat4_ucopy(mat, dest)

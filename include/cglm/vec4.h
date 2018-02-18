@@ -57,9 +57,9 @@
 #define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
 #define GLM_VEC4_ZERO_INIT  {0.0f, 0.0f, 0.0f, 0.0f}
 
-#define GLM_VEC4_ONE        (vec4)GLM_VEC4_ONE_INIT
-#define GLM_VEC4_BLACK      (vec4)GLM_VEC4_BLACK_INIT
-#define GLM_VEC4_ZERO       (vec4)GLM_VEC4_ZERO_INIT
+#define GLM_VEC4_ONE        ((vec4)GLM_VEC4_ONE_INIT)
+#define GLM_VEC4_BLACK      ((vec4)GLM_VEC4_BLACK_INIT)
+#define GLM_VEC4_ZERO       ((vec4)GLM_VEC4_ZERO_INIT)
 
 /*!
  * @brief init vec4 using vec3
