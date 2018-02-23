@@ -52,6 +52,7 @@
     <ClInclude Include="..\include\cglm\call\vec4.h" />
     <ClInclude Include="..\include\cglm\cam.h" />
     <ClInclude Include="..\include\cglm\cglm.h" />
+    <ClInclude Include="..\include\cglm\color.h" />
     <ClInclude Include="..\include\cglm\common.h" />
     <ClInclude Include="..\include\cglm\euler.h" />
     <ClInclude Include="..\include\cglm\frustum.h" />

@@ -203,5 +203,8 @@
     <ClInclude Include="..\include\cglm\box.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\color.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
