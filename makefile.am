@@ -53,7 +53,8 @@ cglm_HEADERS = include/cglm/version.h \
                   include/cglm/affine-mat.h \
                   include/cglm/plane.h \
                   include/cglm/frustum.h \
-                  include/cglm/box.h
+                  include/cglm/box.h \
+                  include/cglm/color.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \

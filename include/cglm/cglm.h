@@ -20,6 +20,7 @@
 #include "euler.h"
 #include "plane.h"
 #include "box.h"
+#include "color.h"
 #include "util.h"
 #include "io.h"
 
