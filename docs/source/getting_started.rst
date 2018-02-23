@@ -1,5 +1,9 @@
 Getting Started
 ================================
+.. image:: cglm-intro.png
+   :width: 492px 
+   :height: 297px
+   :align: center
 
 **cglm** uses **glm** prefix for all functions e.g. glm_lookat. You can see supported types in common header file:
 

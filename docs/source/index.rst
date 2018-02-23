@@ -9,7 +9,7 @@ Welcome to cglm's documentation!
 **cglm** is optimized 3D math library written in C99 (compatible with C89).
 It is similar to original **glm** library except this is mainly for **C**
 
-This library stores matrices as row-major order but in the future column-major
+This library stores matrices as column-major order but in the future row-major
 is considered to be supported as optional.
 
 Also currently only **float** type is supported for most operations.
@@ -28,7 +28,9 @@ Also currently only **float** type is supported for most operations.
 * euler angles / yaw-pitch-roll to matrix
 * extract euler angles
 * inline or pre-compiled function call
-* more features (todo)
+* frustum (extract view frustum planes, corners...)
+* bounding box (AABB in Frustum (culling), crop, merge...)
+
 
 .. toctree::
    :maxdepth: 2
