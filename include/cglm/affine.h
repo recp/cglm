@@ -384,7 +384,7 @@ glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
 /*!
  * @brief creates NEW rotation matrix by angle and axis
  *
- * this name may change in the future. axis must be is normalized
+ * axis will be normalized so you don't need to normalize it
  *
  * @param[out] m     affine transfrom
  * @param[in]  angle angle (radians)

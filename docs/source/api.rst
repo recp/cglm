@@ -27,3 +27,4 @@ Follow the :doc:`build` documentation for this
    :caption: API categories:
 
    mat4
+   affine
