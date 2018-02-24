@@ -38,6 +38,7 @@ Also currently only **float** type is supported for most operations.
 
    build
    getting_started
+   api
 
 Indices and tables
 ==================
