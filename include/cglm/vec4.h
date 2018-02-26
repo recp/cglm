@@ -20,7 +20,7 @@
    GLM_VEC4_ONE
    GLM_VEC4_BLACK
    GLM_VEC4_ZERO
- 
+
  Functions:
    CGLM_INLINE void  glm_vec4(vec3 v3, float last, vec4 dest);
    CGLM_INLINE void  glm_vec4_copy3(vec4 a, vec3 dest);

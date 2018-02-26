@@ -31,3 +31,5 @@ Follow the :doc:`build` documentation for this
    mat3
    vec3
    vec3-ext
+   vec4
+   vec4-ext
