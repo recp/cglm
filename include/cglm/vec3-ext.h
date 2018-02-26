@@ -14,7 +14,7 @@
    CGLM_INLINE void  glm_vec_mulv(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE void  glm_vec_broadcast(float val, vec3 d);
    CGLM_INLINE bool  glm_vec_eq(vec3 v, float val);
-   CGLM_INLINE bool  glm_vec_eq_eps(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec_eq_eps(vec3 v, float val);
    CGLM_INLINE bool  glm_vec_eq_all(vec3 v);
    CGLM_INLINE bool  glm_vec_eqv(vec3 v1, vec3 v2);
    CGLM_INLINE bool  glm_vec_eqv_eps(vec3 v1, vec3 v2);
@@ -77,7 +77,7 @@ glm_vec_eq(vec3 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec_eq_eps(vec4 v, float val) {
+glm_vec_eq_eps(vec3 v, float val) {
   return fabsf(v[0] - val) <= FLT_EPSILON
          && fabsf(v[1] - val) <= FLT_EPSILON
          && fabsf(v[2] - val) <= FLT_EPSILON;
