@@ -109,7 +109,7 @@ Functions documentation
       | *[in]*  **m2**    right matrix
       | *[out]* **dest**  destination matrix
 
-.. c:function:: glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest)
+.. c:function:: void glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest)
 
     mupliply N mat4 matrices and store result in dest
     | this function lets you multiply multiple (more than two or more...)

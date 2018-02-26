@@ -26,5 +26,6 @@ Follow the :doc:`build` documentation for this
    :maxdepth: 2
    :caption: API categories:
 
-   mat4
    affine
+   mat4
+   mat3
