@@ -30,3 +30,4 @@ Follow the :doc:`build` documentation for this
    mat4
    mat3
    vec3
+   vec3-ext
