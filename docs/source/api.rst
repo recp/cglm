@@ -29,3 +29,4 @@ Follow the :doc:`build` documentation for this
    affine
    mat4
    mat3
+   vec3

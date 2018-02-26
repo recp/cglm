@@ -135,8 +135,8 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 /*!
  * @brief norm * norm (magnitude) of vec
  *
- * we can use this func instead of calling norm * norm, because it would call 
- * sqrtf fuction twice but with this func we can avoid func call, maybe this is 
+ * we can use this func instead of calling norm * norm, because it would call
+ * sqrtf fuction twice but with this func we can avoid func call, maybe this is
  * not good name for this func
  *
  * @param[in] v vector
@@ -309,13 +309,16 @@ glm_vec_normalize_to(vec3 vec, vec3 dest) {
 /*!
  * @brief angle betwen two vector
  *
+ * @param[in] v1  vector1
+ * @param[in] v2  vector2
+ *
  * @return angle as radians
  */
 CGLM_INLINE
 float
 glm_vec_angle(vec3 v1, vec3 v2) {
   float norm;
-  
+
   /* maybe compiler generate approximation instruction (rcp) */
   norm = 1.0f / (glm_vec_norm(v1) * glm_vec_norm(v2));
   return acosf(glm_vec_dot(v1, v2) * norm);

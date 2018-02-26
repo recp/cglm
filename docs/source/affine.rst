@@ -57,7 +57,7 @@ Functions documentation
 
 .. c:function:: void  glm_translate(mat4 m, vec3 v)
 
-    translate existing transform matrix by v vector
+    translate existing transform matrix by *v* vector
     and stores result in same matrix
 
     Parameters:
@@ -74,7 +74,7 @@ Functions documentation
 
 .. c:function:: void  glm_translate_y(mat4 m, float y)
 
-    translate existing transform matrix by y factor
+    translate existing transform matrix by *y* factor
 
     Parameters:
       | *[in, out]* **m**  affine transfrom
@@ -82,7 +82,7 @@ Functions documentation
 
 .. c:function:: void  glm_translate_z(mat4 m, float z)
 
-    translate existing transform matrix by z factor
+    translate existing transform matrix by *z* factor
 
     Parameters:
       | *[in, out]* **m**  affine transfrom
@@ -90,7 +90,7 @@ Functions documentation
 
 .. c:function:: void  glm_translate_make(mat4 m, vec3 v)
 
-    creates NEW translate transform matrix by v vector
+    creates NEW translate transform matrix by *v* vector.
 
     Parameters:
       | *[in, out]* **m**  affine transfrom
@@ -98,7 +98,7 @@ Functions documentation
 
 .. c:function:: void  glm_scale_to(mat4 m, vec3 v, mat4 dest)
 
-    scale existing transform matrix by v vector and store result in dest
+    scale existing transform matrix by *v* vector and store result in dest
 
     Parameters:
       | *[in]*  **m**    affine transfrom
