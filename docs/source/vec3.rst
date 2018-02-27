@@ -67,7 +67,7 @@ Functions documentation
 
 .. c:function:: void  glm_vec_copy(vec3 a, vec3 dest)
 
-     copy all members of [a] to [dest]
+    copy all members of [a] to [dest]
 
     Parameters:
       | *[in]*  **a**     source

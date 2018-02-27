@@ -29,6 +29,7 @@ Follow the :doc:`build` documentation for this
    affine
    affine-mat
    cam
+   quat
    mat4
    mat3
    vec3
