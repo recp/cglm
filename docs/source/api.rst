@@ -27,6 +27,7 @@ Follow the :doc:`build` documentation for this
    :caption: API categories:
 
    affine
+   affine-mat
    cam
    mat4
    mat3
