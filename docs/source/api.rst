@@ -30,6 +30,7 @@ Follow the :doc:`build` documentation for this
    affine-mat
    cam
    quat
+   euler
    mat4
    mat3
    vec3
