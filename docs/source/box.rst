@@ -23,6 +23,7 @@ Functions:
 #. :c:func:`glm_aabb_merge`
 #. :c:func:`glm_aabb_crop`
 #. :c:func:`glm_aabb_crop_until`
+#. :c:func:`glm_aabb_frustum`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +62,7 @@ Functions documentation
       | *[in]*  **cropBox**  crop box
       | *[out]* **dest**     cropped bounding box
 
-.. c:function:: void  glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2])
+.. c:function:: void  glm_aabb_crop_until(vec3 box[2], vec3 cropBox[2], vec3 clampBox[2], vec3 dest[2])
 
     | crops a bounding box with another one.
 
