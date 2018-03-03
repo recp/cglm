@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-Euler Angles
+euler angles
 ============
 
 Header: cglm/euler.h

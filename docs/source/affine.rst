@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-Affine Transforms
+affine transforms
 ================================================================================
 
 Header: cglm/affine.h
@@ -15,7 +15,7 @@ before sending to transfrom functions.
 There are also functions to decompose transform matrix. These functions can't
 decompose matrix after projected.
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions:

@@ -1,9 +1,8 @@
 Getting Started
 ================================
-.. image:: cglm-intro.png
-   :width: 492px 
-   :height: 297px
-   :align: center
+
+Types:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **cglm** uses **glm** prefix for all functions e.g. glm_lookat. You can see supported types in common header file:
 
@@ -22,23 +21,50 @@ Getting Started
 As you can see types don't store extra informations in favor of space.
 You can send these values e.g. matrix to OpenGL directly without casting or calling a function like *value_ptr*
 
-*vec4* and *mat4* requires 16 byte aligment because vec4 and mat4 operations are
+Aligment is Required:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**vec4** and **mat4** requires 16 byte aligment because vec4 and mat4 operations are
 vectorized by SIMD instructions (SSE/AVX).
+
+Allocations:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.
+You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location.
+When allocating memory don't forget that **vec4** and **mat4** requires aligment.
 
 **NOTE:** Unaligned vec4 and unaligned mat4 operations will be supported in the future. Check todo list.
 Because you may want to multiply a CGLM matrix with external matrix.
 There is no guarantee that non-CGLM matrix is aligned. Unaligned types will have *u* prefix e.g. **umat4**
 
+Array vs Struct:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*cglm* uses arrays for vector and matrix types. So you can't access individual
+elements like vec.x, vec.y, vec.z... You must use subscript to access vector elements
+e.g. vec[0], vec[1], vec[2].
+
+Also I think it is more meaningful to access matrix elements with subscript
+e.g **matrix[2][3]** instead of **matrix._23**. Since matrix is array of vectors,
+vectors are also defined as array. This makes types homogeneous.
+
+**Return arrays?**
+
+Since C doesn't support return arrays, cglm also doesn't support this feature.
+
+Function design:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: cglm-intro.png
+   :width: 492px 
+   :height: 297px
+   :align: center
+
 cglm provides a few way to call a function to do same operation.
 
 * Inline - *glm_, glm_u*
-   * aligned
-   * unaligned (todo)
 * Pre-compiled - *glmc_, glmc_u*
-   * aligned
-   * unaligned (todo)
 
-For instance **glm_mat4_mul** is inline (all *glm_* functions are inline), to make it non-inline (pre-compiled)
+For instance **glm_mat4_mul** is inline (all *glm_* functions are inline), to make it non-inline (pre-compiled),
 call it as **glmc_mat4_mul** from library, to use unaligned version use **glm_umat4_mul** (todo).
 
 Most functions have **dest** parameter for output. For instance mat4_mul func looks like this:

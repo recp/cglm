@@ -1,6 +1,7 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
 [![Build Status](https://travis-ci.org/recp/cglm.svg?branch=master)](https://travis-ci.org/recp/cglm)
 [![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
+[![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
 
@@ -9,7 +10,7 @@ The original glm library is for C++ only (templates, namespaces, classes...), th
 #### Documentation
 
 Almost all functions (inline versions) and parameters are documented inside related headers. <br />
-Complete documentation is in progress: http://cglm.readthedocs.io
+Complete documentation: http://cglm.readthedocs.io
 
 #### Note for previous versions:
 
@@ -29,15 +30,15 @@ https://github.com/g-truc/glm
 - Welcome!
 
 #### Note for experienced developers:
-- Since I'm testing this library in my projects, sometimes bugs occurs; finding that bug[s] and making improvements would be more easy with multiple developer/contributor and their projects or knowledge. Consider to make some tests if you suspect something is wrong and any feedbacks, contributions and bug reports are always welcome. 
+- Since I'm testing this library in my projects, sometimes bugs occurs; finding that bug[s] and making improvements would be more easy with multiple developer/contributor and their projects or knowledge. Consider to make some tests if you suspect something is wrong and any feedbacks, contributions and bug reports are always welcome.
 
-#### Allocations? 
-`cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available. 
+#### Allocations?
+`cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available.
 
 #### Returning vector or matrix... ?
-Since almost all types are arrays and **C** doesn't allow returning arrays, so **cglm** doesn't support this feature. In the future *cglm* may use **struct** for some types for this purpose. 
+Since almost all types are arrays and **C** doesn't allow returning arrays, so **cglm** doesn't support this feature. In the future *cglm* may use **struct** for some types for this purpose.
 
-#### Other APIs like Vulkan, Metal, Dx? 
+#### Other APIs like Vulkan, Metal, Dx?
 Currently *cglm* uses default clip space configuration (-1, 1) for camera functions (perspective, extract corners...), in the future other clip space configurations will be supported
 
 <hr/>
@@ -121,8 +122,8 @@ MIT. check the LICENSE file
 ### Unix (Autotools)
 
 ```bash
-$ sh ./build-deps.sh # run only once (dependencies) [Optional]. 
-$ # You can pass this step if you don't want to run `make check` for tests. 
+$ sh ./build-deps.sh # run only once (dependencies) [Optional].
+$ # You can pass this step if you don't want to run `make check` for tests.
 $ # cglm uses cmocka for tests and it may reqiure cmake for building it
 $
 $ sh autogen.sh
@@ -145,6 +146,15 @@ if `msbuild` won't work (because of multi version VS) then try to build with `de
 ```Powershell
 $ devenv cglm.sln /Build Release
 ```
+
+### Building Docs
+First you need install Sphinx: http://www.sphinx-doc.org/en/master/usage/installation.html
+then:
+```bash
+$ cd docs
+$ sphinx-build source build
+```
+it will compile docs into build folder, you can run index.html inside that function.
 
 ## How to use
 If you want to use inline versions of funcstions then; include main header
@@ -201,7 +211,7 @@ Option 2: Cast matrix to pointer type (also valid for multiple dimensional array
 glUniformMatrix4fv(location, 1, GL_FALSE, (float *)matrix);
 ```
 
-You can pass same way to another APIs e.g. Vulkan, DX... 
+You can pass same way to another APIs e.g. Vulkan, DX...
 
 ## Notes
 
@@ -213,5 +223,5 @@ You can pass same way to another APIs e.g. Vulkan, DX...
 - [ ] Unit tests for comparing cglm with glm results
 - [x] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
-- [ ] Extra documentation
+- [x] Extra documentation
 - [ ] ARM Neon Arch (In Progress)

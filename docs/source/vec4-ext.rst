@@ -9,7 +9,7 @@ There are some functions are in called in extra header. These are called extra
 because they are not used like other functions in vec4.h in the future some of
 these functions ma be moved to vec4 header.
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions:

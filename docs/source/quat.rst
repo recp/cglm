@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-Quaternions
+quaternions
 ===========
 
 Header: cglm/quat.h

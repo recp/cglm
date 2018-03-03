@@ -5,7 +5,7 @@ vec4
 
 Header: cglm/vec4.h
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Macros:

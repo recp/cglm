@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-Camera
+camera
 ======
 
 Header: cglm/cam.h
@@ -23,7 +23,7 @@ matrices.
  **float** type cannot store very high precision so you will lose precision.
  Also your projection matrix will be inaccurate due to losing precision
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions:

@@ -33,11 +33,12 @@ Also currently only **float** type is supported for most operations.
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Table Of Contents:
 
    build
    getting_started
+   opengl
    api
 
 Indices and tables

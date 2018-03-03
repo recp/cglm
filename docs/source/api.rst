@@ -23,12 +23,14 @@ version of functions. You need to build *cglm* and link it.
 Follow the :doc:`build` documentation for this
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: API categories:
 
    affine
    affine-mat
    cam
+   frustum
+   box
    quat
    euler
    mat4
@@ -37,3 +39,8 @@ Follow the :doc:`build` documentation for this
    vec3-ext
    vec4
    vec4-ext
+   color
+   plane
+   util
+   io
+   call

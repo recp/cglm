@@ -13,7 +13,7 @@ alias means inline wrapper here. There is no call verison of alias functions
 There are also functions for rotating *vec3* vector. **_m4**, **_m3** prefixes
 rotate *vec3* with matrix.
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Macros:

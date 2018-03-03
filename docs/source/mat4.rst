@@ -8,7 +8,7 @@ Header: cglm/mat4.h
 Important: :c:func:`glm_mat4_scale` multiplies mat4 with scalar, if you need to
 apply scale transform use :c:func:`glm_scale` functions.
 
-Table of contents (clik func/macro to go):
+Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Macros:
