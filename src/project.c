@@ -16,6 +16,6 @@ glmc_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_unproject(mat4 m, vec2 vp, vec3 coord, vec3 dest) {
+glmc_unproject(mat4 m, vec4 vp, vec3 coord, vec3 dest) {
   glm_unproject(m, vp, coord, dest);
 }

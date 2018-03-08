@@ -9,6 +9,8 @@
 #define cglm_project_h
 
 #include "mat4.h"
+#include "vec3.h"
+#include "vec4.h"
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
@@ -46,7 +48,8 @@ glm_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec4 dest) {
   v[2] = 2.0f *  coord[2]                  - 1.0f;
   v[3] = 1.0f;
 
-  glm_mat4_mulv(invMat, v, dest);
+  glm_mat4_mulv(invMat, v, v);
+  glm_vec4_scale(v, 1.0f / v[3], dest);
 }
 
 /*!
