@@ -75,6 +75,9 @@
     <ClCompile Include="..\src\box.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\project.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -205,6 +208,12 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\color.h">
       <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\project.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\project.h">
+      <Filter>include\cglm\call</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
