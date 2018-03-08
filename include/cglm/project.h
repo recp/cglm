@@ -75,7 +75,7 @@ glm_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_unproject(mat4 m, vec2 vp, vec3 coord, vec3 dest) {
+glm_unproject(mat4 m, vec4 vp, vec3 coord, vec4 dest) {
   mat4 inv;
   glm_mat4_inv(m, inv);
   glm_unprojecti(inv, vp, coord, dest);
