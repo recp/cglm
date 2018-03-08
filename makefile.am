@@ -16,7 +16,7 @@ AM_CFLAGS = -Wall \
             -pedantic
 
 lib_LTLIBRARIES = libcglm.la
-libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
+libcglm_la_LDFLAGS = -no-undefined -version-info 0:3:5
 
 checkLDFLAGS = -L./.libs \
                -L./test/lib/cmocka/build/src \
