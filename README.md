@@ -161,7 +161,7 @@ If you want to use inline versions of funcstions then; include main header
 ```C
 #include <cglm/cglm.h>
 ```
-the haeder will include all headers. Then call func you want e.g. rotate vector by axis:
+the header will include all headers. Then call func you want e.g. rotate vector by axis:
 ```C
 glm_vec_rotate(v1, glm_rad(45), (vec3){1.0f, 0.0f, 0.0f});
 ```
@@ -180,7 +180,7 @@ to call pre-compiled versions include header with `c` postfix, c means call. Pre
 ```C
 #include <cglm/call.h>
 ```
-this header will include all heaers with c postfix. You need to call functions with c posfix:
+this header will include all headers with c postfix. You need to call functions with c posfix:
 ```C
 glmc_vec_normalize(vec);
 ```
