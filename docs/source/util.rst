@@ -18,6 +18,9 @@ Functions:
 #. :c:func:`glm_make_rad`
 #. :c:func:`glm_make_deg`
 #. :c:func:`glm_pow2`
+#. :c:func:`glm_min`
+#. :c:func:`glm_max`
+#. :c:func:`glm_clamp`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,3 +94,15 @@ Functions documentation
 
     Returns:
       maximum value
+
+.. c:function:: void  glm_clamp(float val, float minVal, float maxVal)
+
+    constrain a value to lie between two further values
+
+    Parameters:
+      | *[in]*  **val**     input value
+      | *[in]*  **minVal**  minimum value
+      | *[in]*  **maxVal**  maximum value
+
+    Returns:
+      clamped value
