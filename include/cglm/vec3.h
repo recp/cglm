@@ -479,6 +479,21 @@ glm_vec_ortho(vec3 v, vec3 dest) {
 }
 
 /*!
+ * @brief clamp vector's individual members between min and max values
+ *
+ * @param[in, out]  v      vector
+ * @param[in]       minVal minimum value
+ * @param[in]       maxVal maximum value
+ */
+CGLM_INLINE
+void
+glm_vec_clamp(vec3 v, float minVal, float maxVal) {
+  v[0] = glm_clamp(v[0], minVal, maxVal);
+  v[1] = glm_clamp(v[1], minVal, maxVal);
+  v[2] = glm_clamp(v[2], minVal, maxVal);
+}
+
+/*!
  * @brief vec3 cross product
  *
  * this is just convenient wrapper

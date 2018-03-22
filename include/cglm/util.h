@@ -115,4 +115,17 @@ glm_max(float a, float b) {
   return b;
 }
 
+/*!
+ * @brief clamp a number between min and max
+ *
+ * @param[in] val    value to clamp
+ * @param[in] minVal minimum value
+ * @param[in] maxVal maximum value
+ */
+CGLM_INLINE
+float
+glm_clamp(float val, float minVal, float maxVal) {
+  return glm_min(glm_max(val, minVal), maxVal);
+}
+
 #endif /* cglm_util_h */
