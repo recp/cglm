@@ -40,6 +40,7 @@
    CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
    CGLM_INLINE void  glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
  */
 
 #ifndef cglm_vec4_h

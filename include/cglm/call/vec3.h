@@ -104,6 +104,10 @@ CGLM_EXPORT
 void
 glmc_vec_minv(vec3 v1, vec3 v2, vec3 dest);
 
+CGLM_EXPORT
+void
+glmc_vec_clamp(vec3 v, float minVal, float maxVal);
+
 #ifdef __cplusplus
 }
 #endif

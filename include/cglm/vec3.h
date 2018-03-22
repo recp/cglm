@@ -46,6 +46,7 @@
    CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_ortho(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_clamp(vec3 v, float minVal, float maxVal);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
