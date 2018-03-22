@@ -14,7 +14,10 @@ main(int argc, const char * argv[]) {
 
     /* camera */
     cmocka_unit_test(test_camera_lookat),
-    cmocka_unit_test(test_camera_decomp)
+    cmocka_unit_test(test_camera_decomp),
+
+    /* vector */
+    cmocka_unit_test(test_clamp)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

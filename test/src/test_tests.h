@@ -16,4 +16,7 @@ test_camera_lookat(void **state);
 void
 test_camera_decomp(void **state);
 
+void
+test_clamp(void **state);
+
 #endif /* test_tests_h */
