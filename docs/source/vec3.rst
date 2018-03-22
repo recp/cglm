@@ -53,6 +53,7 @@ Functions:
 #. :c:func:`glm_vec_maxv`
 #. :c:func:`glm_vec_minv`
 #. :c:func:`glm_vec_ortho`
+#. :c:func:`glm_vec_clamp`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,3 +272,12 @@ Functions documentation
     Parameters:
       | *[in]*  **mat**   vector
       | *[out]* **dest**  orthogonal/perpendicular vector
+
+.. c:function:: void  glm_vec_clamp(vec3 v, float minVal, float maxVal)
+
+    constrain a value to lie between two further values
+
+    Parameters:
+      | *[in, out]*  **v**       vector
+      | *[in]*       **minVal**  minimum value
+      | *[in]*       **maxVal**  maximum value

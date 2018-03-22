@@ -46,6 +46,7 @@
    CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_ortho(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_clamp(vec3 v, float minVal, float maxVal);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -476,6 +477,21 @@ glm_vec_ortho(vec3 v, vec3 dest) {
   dest[0] = v[1] - v[2];
   dest[1] = v[2] - v[0];
   dest[2] = v[0] - v[1];
+}
+
+/*!
+ * @brief clamp vector's individual members between min and max values
+ *
+ * @param[in, out]  v      vector
+ * @param[in]       minVal minimum value
+ * @param[in]       maxVal maximum value
+ */
+CGLM_INLINE
+void
+glm_vec_clamp(vec3 v, float minVal, float maxVal) {
+  v[0] = glm_clamp(v[0], minVal, maxVal);
+  v[1] = glm_clamp(v[1], minVal, maxVal);
+  v[2] = glm_clamp(v[2], minVal, maxVal);
 }
 
 /*!

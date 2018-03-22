@@ -139,3 +139,9 @@ void
 glmc_vec_minv(vec3 v1, vec3 v2, vec3 dest) {
   glm_vec_maxv(v1, v2, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec_clamp(vec3 v, float minVal, float maxVal) {
+  glm_vec_clamp(v, minVal, maxVal);
+}
