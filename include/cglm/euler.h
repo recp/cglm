@@ -69,38 +69,33 @@ glm_euler_order(int ord[3]) {
 CGLM_INLINE
 void
 glm_euler_angles(mat4 m, vec3 dest) {
-  if (m[0][2] < 1.0f) {
-    if (m[0][2] > -1.0f) {
-      vec3  a[2];
-      float cy1, cy2;
-      int   path;
+  float m00, m01, m10, m11, m20, m21, m22;
+  float thetaX, thetaY, thetaZ;
 
-      a[0][1] = asinf(-m[0][2]);
-      a[1][1] = CGLM_PI - a[0][1];
+  m00 = m[0][0];  m10 = m[1][0];  m20 = m[2][0];
+  m01 = m[0][1];  m11 = m[1][1];  m21 = m[2][1];
+                                  m22 = m[2][2];
 
-      cy1 = cosf(a[0][1]);
-      cy2 = cosf(a[1][1]);
-
-      a[0][0] = atan2f(m[1][2] / cy1, m[2][2] / cy1);
-      a[1][0] = atan2f(m[1][2] / cy2, m[2][2] / cy2);
-
-      a[0][2] = atan2f(m[0][1] / cy1, m[0][0] / cy1);
-      a[1][2] = atan2f(m[0][1] / cy2, m[0][0] / cy2);
-
-      path = (fabsf(a[0][0]) + fabsf(a[0][1]) + fabsf(a[0][2])) >=
-               (fabsf(a[1][0]) + fabsf(a[1][1]) + fabsf(a[1][2]));
-
-      glm_vec_copy(a[path], dest);
-    } else {
-      dest[0] = atan2f(m[1][0], m[2][0]);
-      dest[1] = CGLM_PI_2;
-      dest[2] = 0.0f;
+  thetaY = 0.0f;
+  if (m20 < 1.0f) {
+    if (m20 > -1.0f) {
+      thetaY = asinf(m20);
+      thetaX = atan2f(-m21, m22);
+      thetaZ = atan2f(-m10, m00);
+    } else { /* m20 == -1 */
+      /* Not a unique solution */
+      thetaX = -atan2f(m01, m11);
+      thetaZ =  0.0f;
     }
-  } else {
-    dest[0] = atan2f(-m[1][0], -m[2][0]);
-    dest[1] =-CGLM_PI_2;
-    dest[2] = 0.0f;
+  } else {/* m20 == +1 */
+    thetaY = CGLM_PI_2;
+    thetaX = atan2f(m01, m11);
+    thetaZ = 0.0f;
   }
+
+  dest[0] = thetaX;
+  dest[1] = thetaY;
+  dest[2] = thetaZ;
 }
 
 
