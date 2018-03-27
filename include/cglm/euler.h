@@ -76,7 +76,6 @@ glm_euler_angles(mat4 m, vec3 dest) {
   m01 = m[0][1];  m11 = m[1][1];  m21 = m[2][1];
                                   m22 = m[2][2];
 
-  thetaY = 0.0f;
   if (m20 < 1.0f) {
     if (m20 > -1.0f) {
       thetaY = asinf(m20);
@@ -84,10 +83,11 @@ glm_euler_angles(mat4 m, vec3 dest) {
       thetaZ = atan2f(-m10, m00);
     } else { /* m20 == -1 */
       /* Not a unique solution */
+      thetaY = -CGLM_PI_2;
       thetaX = -atan2f(m01, m11);
       thetaZ =  0.0f;
     }
-  } else {/* m20 == +1 */
+  } else { /* m20 == +1 */
     thetaY = CGLM_PI_2;
     thetaX = atan2f(m01, m11);
     thetaZ = 0.0f;
@@ -97,7 +97,6 @@ glm_euler_angles(mat4 m, vec3 dest) {
   dest[1] = thetaY;
   dest[2] = thetaZ;
 }
-
 
 /*!
  * @brief build rotation matrix from euler angles
