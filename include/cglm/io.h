@@ -171,4 +171,33 @@ glm_versor_print(versor vec,
 #undef m
 }
 
+CGLM_INLINE
+void
+glm_aabb_print(vec3                    bbox[2],
+               const char * __restrict tag,
+               FILE       * __restrict ostream) {
+  int i, j;
+
+#define m 3
+
+  fprintf(ostream, "AABB (%s):\n", tag ? tag: "float");
+
+  for (i = 0; i < 2; i++) {
+    fprintf(ostream, "\t|");
+
+    for (j = 0; j < m; j++) {
+      fprintf(ostream, "%0.4f", bbox[i][j]);
+
+      if (j != m - 1)
+        fprintf(ostream, "\t");
+    }
+
+    fprintf(ostream, "|\n");
+  }
+
+  fprintf(ostream, "\n");
+
+#undef m
+}
+
 #endif /* cglm_io_h */
