@@ -165,4 +165,16 @@ glm_aabb_invalidate(vec3 box[2]) {
   glm_vec_broadcast(-FLT_MAX, box[1]);
 }
 
+/*!
+ * @brief check if AABB is valid or not
+ *
+ * @param[in]  box bounding box
+ */
+CGLM_INLINE
+bool
+glm_aabb_isvalid(vec3 box[2]) {
+  return glm_vec_max(box[0]) != FLT_MAX
+         && glm_vec_min(box[1]) != -FLT_MAX;
+}
+
 #endif /* cglm_box_h */
