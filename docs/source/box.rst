@@ -105,9 +105,9 @@ Functions documentation
     Parameters:
       | *[in, out]*   **box**     bounding box
 
-.. c:function:: bool  check if AABB is valid or not
+.. c:function:: bool  glm_aabb_isvalid(vec3 box[2])
 
-    | check if AABB intersects with frustum planes
+    | check if AABB is valid or not
 
     Parameters:
       | *[in]*   **box**     bounding box
