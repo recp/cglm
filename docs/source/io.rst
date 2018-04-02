@@ -39,6 +39,7 @@ Functions:
 #. :c:func:`glm_vec3_print`
 #. :c:func:`glm_ivec3_print`
 #. :c:func:`glm_versor_print`
+#. :c:func:`glm_aabb_print`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -89,4 +90,13 @@ Functions documentation
 
     Parameters:
       | *[in]*  **vec**      quaternion
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_aabb_print(versor vec, const char * __restrict tag, FILE * __restrict ostream)
+
+    | print aabb to given stream
+
+    Parameters:
+      | *[in]*  **vec**      aabb (axis-aligned bounding box)
+      | *[in]*  **tag**      tag to find it more easly in logs
       | *[in]*  **ostream**  FILE to write

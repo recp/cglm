@@ -24,6 +24,10 @@ Functions:
 #. :c:func:`glm_aabb_crop`
 #. :c:func:`glm_aabb_crop_until`
 #. :c:func:`glm_aabb_frustum`
+#. :c:func:`glm_aabb_invalidate`
+#. :c:func:`glm_aabb_isvalid`
+#. :c:func:`glm_aabb_size`
+#. :c:func:`glm_aabb_radius`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -91,3 +95,39 @@ Functions documentation
     Parameters:
       | *[in]*   **box**     bounding box
       | *[out]*  **planes**  frustum planes
+
+.. c:function:: void  glm_aabb_invalidate(vec3 box[2])
+
+    | invalidate AABB min and max values
+
+    | It fills *max* values with -FLT_MAX and *min* values with +FLT_MAX
+
+    Parameters:
+      | *[in, out]*   **box**     bounding box
+
+.. c:function:: bool  check if AABB is valid or not
+
+    | check if AABB intersects with frustum planes
+
+    Parameters:
+      | *[in]*   **box**     bounding box
+
+    Returns:
+      returns true if aabb is valid otherwise false
+
+.. c:function:: float  glm_aabb_size(vec3 box[2])
+
+    | distance between of min and max
+
+    Parameters:
+      | *[in]*   **box**     bounding box
+
+    Returns:
+      distance between min - max
+
+.. c:function:: float  glm_aabb_radius(vec3 box[2])
+
+    | radius of sphere which surrounds AABB
+
+    Parameters:
+      | *[in]*   **box**     bounding box
