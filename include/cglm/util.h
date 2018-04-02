@@ -21,7 +21,9 @@
 #include "common.h"
 
 /*!
- * @brief get sign of 32 bit integer as +1 or -1
+ * @brief get sign of 32 bit integer as +1, -1, 0
+ *
+ * Important: It returns 0 for zero input
  *
  * @param val integer value
  */
@@ -29,6 +31,19 @@ CGLM_INLINE
 int
 glm_sign(int val) {
   return ((val >> 31) - (-val >> 31));
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param val float value
+ */
+CGLM_INLINE
+float
+glm_signf(float val) {
+  return (val > 0.0f) - (val < 0.0f);
 }
 
 /*!

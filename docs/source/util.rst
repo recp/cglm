@@ -13,6 +13,7 @@ Table of contents (click to go):
 Functions:
 
 1. :c:func:`glm_sign`
+#. :c:func:`glm_signf`
 #. :c:func:`glm_rad`
 #. :c:func:`glm_deg`
 #. :c:func:`glm_make_rad`
@@ -27,10 +28,24 @@ Functions documentation
 
 .. c:function:: int  glm_sign(int val)
 
-    | returns sign of 32 bit integer as +1 or -1
+    | returns sign of 32 bit integer as +1, -1, 0
+
+    | **Important**: It returns 0 for zero input
 
     Parameters:
       | *[in]*  **val**   an integer
+
+    Returns:
+      sign of given number
+
+.. c:function:: float  glm_signf(float val)
+
+    | returns sign of 32 bit integer as +1.0, -1.0, 0.0
+
+    | **Important**: It returns 0.0f for zero input
+
+    Parameters:
+      | *[in]*  **val**   a float
 
     Returns:
       sign of given number
