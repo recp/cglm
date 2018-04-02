@@ -153,4 +153,16 @@ glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
   return true;
 }
 
+/*!
+ * @brief invalidate AABB min and max values
+ *
+ * @param[in, out]  box bounding box
+ */
+CGLM_INLINE
+void
+glm_aabb_invalidate(vec3 box[2]) {
+  glm_vec_broadcast(FLT_MAX,  box[0]);
+  glm_vec_broadcast(-FLT_MAX, box[1]);
+}
+
 #endif /* cglm_box_h */
