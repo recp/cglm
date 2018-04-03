@@ -23,5 +23,6 @@
 #include "color.h"
 #include "util.h"
 #include "io.h"
+#include "project.h"
 
 #endif /* cglm_h */

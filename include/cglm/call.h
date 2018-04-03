@@ -24,6 +24,7 @@ extern "C" {
 #include "call/frustum.h"
 #include "call/box.h"
 #include "call/io.h"
+#include "call/project.h"
 
 #ifdef __cplusplus
 }

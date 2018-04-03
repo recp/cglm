@@ -14,6 +14,7 @@
 #  define CGLM_ALIGN(X) __attribute((aligned(X)))
 #endif
 
+typedef float vec2[2];
 typedef float vec3[3];
 typedef int  ivec3[3];
 typedef CGLM_ALIGN(16) float vec4[4];

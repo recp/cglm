@@ -43,7 +43,7 @@ glm_sign(int val) {
 CGLM_INLINE
 float
 glm_signf(float val) {
-  return (val > 0.0f) - (val < 0.0f);
+  return (float)((val > 0.0f) - (val < 0.0f));
 }
 
 /*!

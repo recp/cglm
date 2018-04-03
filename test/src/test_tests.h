@@ -17,6 +17,9 @@ void
 test_camera_decomp(void **state);
 
 void
+test_project(void **state);
+
+void
 test_clamp(void **state);
 
 void
