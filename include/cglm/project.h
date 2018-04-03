@@ -84,4 +84,27 @@ glm_unproject(mat4 m, vec4 vp, vec3 coord, vec4 dest) {
   glm_unprojecti(inv, vp, coord, dest);
 }
 
+/*!
+ * @brief map object coordinates to window coordinates
+ *
+ * @param[in]  pos      object coordinates
+ * @param[in]  m        MVP matrix
+ * @param[in]  vp       viewport as [x, y, width, height]
+ * @param[out] dest     projected coordinates
+ */
+CGLM_INLINE
+void
+glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+  vec4 pos4;
+
+  glm_vec4(pos, 1.0f, pos4);
+
+  glm_mat4_mulv(m, pos4, pos4);
+  glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
+
+  dest[0] = (pos4[0] + 1.0f) * 0.5f * vp[2] + vp[0];
+  dest[1] = (pos4[1] + 1.0f) * 0.5f * vp[3] + vp[1];
+  dest[2] = (pos4[2] + 1.0f) * 0.5f;
+}
+
 #endif /* cglm_project_h */
