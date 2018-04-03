@@ -14,7 +14,7 @@ main(int argc, const char * argv[]) {
 
     /* camera */
     cmocka_unit_test(test_camera_lookat),
-    cmocka_unit_test(test_camera_decomp)
+    cmocka_unit_test(test_camera_decomp),
 
     /* project */
     cmocka_unit_test(test_project),
