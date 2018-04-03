@@ -98,13 +98,15 @@ libcglm_la_SOURCES=\
     src/mat4.c \
     src/plane.c \
     src/frustum.c \
-    src/box.c
+    src/box.c \
+    src/project.c
 
 test_tests_SOURCES=\
     test/src/test_common.c \
     test/src/test_main.c \
     test/src/test_mat4.c \
     test/src/test_cam.c \
+    test/src/test_project.c \
     test/src/test_clamp.c \
     test/src/test_euler.c
 
