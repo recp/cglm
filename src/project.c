@@ -10,12 +10,18 @@
 
 CGLM_EXPORT
 void
-glmc_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec3 dest) {
-  glm_unprojecti(invMat, vp, coord, dest);
+glmc_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+  glm_unprojecti(pos, invMat, vp, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_unproject(mat4 m, vec4 vp, vec3 coord, vec3 dest) {
-  glm_unproject(m, vp, coord, dest);
+glmc_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+  glm_unproject(pos, m, vp, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+  glm_project(pos, m, vp, dest);
 }

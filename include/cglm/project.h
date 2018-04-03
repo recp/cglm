@@ -33,23 +33,24 @@
  *   glm_mat4_mul(viewProj, model, MVP);
  *   glm_mat4_inv(viewProj, invMVP);
  *
+ * @param[in]  pos    viewport coordinates
  * @param[in]  invMat   matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[in]  coord    viewport coordinates
  * @param[out] dest     unprojected coordinates
  */
 CGLM_INLINE
 void
-glm_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec4 dest) {
+glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
   vec4 v;
 
-  v[0] = 2.0f * (coord[0] - vp[0]) / vp[2] - 1.0f;
-  v[1] = 2.0f * (coord[1] - vp[1]) / vp[3] - 1.0f;
-  v[2] = 2.0f *  coord[2]                  - 1.0f;
+  v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
+  v[1] = 2.0f * (pos[1] - vp[1]) / vp[3] - 1.0f;
+  v[2] = 2.0f *  pos[2]                  - 1.0f;
   v[3] = 1.0f;
 
   glm_mat4_mulv(invMat, v, v);
-  glm_vec4_scale(v, 1.0f / v[3], dest);
+  glm_vec4_scale(v, 1.0f / v[3], v);
+  glm_vec3(v, dest);
 }
 
 /*!
@@ -71,17 +72,17 @@ glm_unprojecti(mat4 invMat, vec4 vp, vec3 coord, vec4 dest) {
  *   glm_mat4_mul(proj, view, viewProj);
  *   glm_mat4_mul(viewProj, model, MVP);
  *
+ * @param[in]  pos      viewport coordinates
  * @param[in]  m        matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[in]  coord    viewport coordinates
  * @param[out] dest     unprojected coordinates
  */
 CGLM_INLINE
 void
-glm_unproject(mat4 m, vec4 vp, vec3 coord, vec4 dest) {
+glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   mat4 inv;
   glm_mat4_inv(m, inv);
-  glm_unprojecti(inv, vp, coord, dest);
+  glm_unprojecti(pos, inv, vp, dest);
 }
 
 /*!
