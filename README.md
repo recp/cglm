@@ -76,6 +76,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - inline or pre-compiled function call
 - frustum (extract view frustum planes, corners...)
 - bounding box  (AABB in Frustum (culling), crop, merge...)
+- project, unproject
 
 <hr />
 
@@ -226,6 +227,27 @@ glm_mat4_mul(m1, m2, m1);
 glm_mat4_mul(m1, m1, m1);
 ```
 the first two parameter are **[in]** and the last one is **[out]** parameter. After multiplied *m1* and *m2* the result is stored in *m1*. This is why we send *m1* twice. You may store result in different matrix, this just an example.
+
+### Example: Computing MVP matrix
+
+#### Option 1
+```C
+mat4 proj, view, model, mvp;
+
+/* init proj, view and model ... */
+
+glm_mat4_mul(proj, view, viewProj);
+glm_mat4_mul(viewProj, model, mvp);
+```
+
+#### Option 2
+```C
+mat4 proj, view, model, mvp;
+
+/* init proj, view and model ... */
+
+glm_mat4_mulN((mat4 *[]){&proj, &view, &model}, 3, mvp);
+```
 
 ## How to send matrix to OpenGL
 
