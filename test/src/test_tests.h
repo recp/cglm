@@ -19,4 +19,10 @@ test_camera_decomp(void **state);
 void
 test_project(void **state);
 
+void
+test_clamp(void **state);
+
+void
+test_euler(void **state);
+
 #endif /* test_tests_h */

@@ -39,6 +39,7 @@ Functions:
 #. :c:func:`glm_vec4_distance`
 #. :c:func:`glm_vec4_maxv`
 #. :c:func:`glm_vec4_minv`
+#. :c:func:`glm_vec4_clamp`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -203,3 +204,12 @@ Functions documentation
       | *[in]*  **v1**    vector1
       | *[in]*  **v2**    vector2
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_vec4_clamp(vec4 v, float minVal, float maxVal)
+
+    constrain a value to lie between two further values
+
+    Parameters:
+      | *[in, out]*  **v**       vector
+      | *[in]*       **minVal**  minimum value
+      | *[in]*       **maxVal**  maximum value

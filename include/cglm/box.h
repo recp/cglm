@@ -153,4 +153,50 @@ glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
   return true;
 }
 
+/*!
+ * @brief invalidate AABB min and max values
+ *
+ * @param[in, out]  box bounding box
+ */
+CGLM_INLINE
+void
+glm_aabb_invalidate(vec3 box[2]) {
+  glm_vec_broadcast(FLT_MAX,  box[0]);
+  glm_vec_broadcast(-FLT_MAX, box[1]);
+}
+
+/*!
+ * @brief check if AABB is valid or not
+ *
+ * @param[in]  box bounding box
+ */
+CGLM_INLINE
+bool
+glm_aabb_isvalid(vec3 box[2]) {
+  return glm_vec_max(box[0]) != FLT_MAX
+         && glm_vec_min(box[1]) != -FLT_MAX;
+}
+
+/*!
+ * @brief distance between of min and max
+ *
+ * @param[in]  box bounding box
+ */
+CGLM_INLINE
+float
+glm_aabb_size(vec3 box[2]) {
+  return glm_vec_distance(box[0], box[1]);
+}
+
+/*!
+ * @brief radius of sphere which surrounds AABB
+ *
+ * @param[in]  box bounding box
+ */
+CGLM_INLINE
+float
+glm_aabb_radius(vec3 box[2]) {
+  return glm_aabb_size(box) * 0.5f;
+}
+
 #endif /* cglm_box_h */

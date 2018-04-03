@@ -1,9 +1,11 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
 [![Build Status](https://travis-ci.org/recp/cglm.svg?branch=master)](https://travis-ci.org/recp/cglm)
-[![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
+ [![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
+[![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers) 
+[![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__restrict`
 
@@ -17,6 +19,7 @@ Complete documentation: http://cglm.readthedocs.io
 - _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec_copy`
 - OpenGL related functions are dropped to make this lib platform/third-party independent
 - make sure you have latest version and feel free to report bugs, troubles
+- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that you have the latest version
 
 #### Note for C++ developers:
 If you don't aware about original GLM library yet, you may also want to look at:
@@ -114,6 +117,36 @@ glm_mul(T, R, modelMat);
 glm_inv_tr(modelMat);
 ```
 
+## Contributors
+
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+<a href="graphs/contributors"><img src="https://opencollective.com/cglm/contributors.svg?width=890&button=false" /></a>
+
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/cglm#backer)]
+
+<a href="https://opencollective.com/cglm#backers" target="_blank"><img src="https://opencollective.com/cglm/backers.svg?width=890"></a>
+
+
+## Sponsors
+
+Support this project by becoming a sponsor. Your logo will show up here with a link to your website. [[Become a sponsor](https://opencollective.com/cglm#sponsor)]
+
+<a href="https://opencollective.com/cglm/sponsor/0/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/1/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/2/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/3/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/4/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/5/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/6/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/7/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/8/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/cglm/sponsor/9/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/9/avatar.svg"></a>
+
+
+
 ## License
 MIT. check the LICENSE file
 
@@ -161,7 +194,7 @@ If you want to use inline versions of funcstions then; include main header
 ```C
 #include <cglm/cglm.h>
 ```
-the haeder will include all headers. Then call func you want e.g. rotate vector by axis:
+the header will include all headers. Then call func you want e.g. rotate vector by axis:
 ```C
 glm_vec_rotate(v1, glm_rad(45), (vec3){1.0f, 0.0f, 0.0f});
 ```
@@ -180,7 +213,7 @@ to call pre-compiled versions include header with `c` postfix, c means call. Pre
 ```C
 #include <cglm/call.h>
 ```
-this header will include all heaers with c postfix. You need to call functions with c posfix:
+this header will include all headers with c postfix. You need to call functions with c posfix:
 ```C
 glmc_vec_normalize(vec);
 ```

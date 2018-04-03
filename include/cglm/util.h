@@ -21,7 +21,9 @@
 #include "common.h"
 
 /*!
- * @brief get sign of 32 bit integer as +1 or -1
+ * @brief get sign of 32 bit integer as +1, -1, 0
+ *
+ * Important: It returns 0 for zero input
  *
  * @param val integer value
  */
@@ -29,6 +31,19 @@ CGLM_INLINE
 int
 glm_sign(int val) {
   return ((val >> 31) - (-val >> 31));
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param val float value
+ */
+CGLM_INLINE
+float
+glm_signf(float val) {
+  return (val > 0.0f) - (val < 0.0f);
 }
 
 /*!
@@ -113,6 +128,19 @@ glm_max(float a, float b) {
   if (a > b)
     return a;
   return b;
+}
+
+/*!
+ * @brief clamp a number between min and max
+ *
+ * @param[in] val    value to clamp
+ * @param[in] minVal minimum value
+ * @param[in] maxVal maximum value
+ */
+CGLM_INLINE
+float
+glm_clamp(float val, float minVal, float maxVal) {
+  return glm_min(glm_max(val, minVal), maxVal);
 }
 
 #endif /* cglm_util_h */

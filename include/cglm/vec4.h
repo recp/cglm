@@ -40,6 +40,7 @@
    CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
    CGLM_INLINE void  glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
  */
 
 #ifndef cglm_vec4_h
@@ -371,6 +372,22 @@ glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
   dest[1] = glm_min(v1[1], v2[1]);
   dest[2] = glm_min(v1[2], v2[2]);
   dest[3] = glm_min(v1[3], v2[3]);
+}
+
+/*!
+ * @brief clamp vector's individual members between min and max values
+ *
+ * @param[in, out]  v      vector
+ * @param[in]       minVal minimum value
+ * @param[in]       maxVal maximum value
+ */
+CGLM_INLINE
+void
+glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
+  v[0] = glm_clamp(v[0], minVal, maxVal);
+  v[1] = glm_clamp(v[1], minVal, maxVal);
+  v[2] = glm_clamp(v[2], minVal, maxVal);
+  v[3] = glm_clamp(v[3], minVal, maxVal);
 }
 
 #endif /* cglm_vec4_h */
