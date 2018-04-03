@@ -33,7 +33,7 @@
  *   glm_mat4_mul(viewProj, model, MVP);
  *   glm_mat4_inv(viewProj, invMVP);
  *
- * @param[in]  pos    viewport coordinates
+ * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  invMat   matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
  * @param[out] dest     unprojected coordinates
@@ -72,7 +72,7 @@ glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  *   glm_mat4_mul(proj, view, viewProj);
  *   glm_mat4_mul(viewProj, model, MVP);
  *
- * @param[in]  pos      viewport coordinates
+ * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  m        matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
  * @param[out] dest     unprojected coordinates

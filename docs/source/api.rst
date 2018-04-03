@@ -41,6 +41,7 @@ Follow the :doc:`build` documentation for this
    vec4-ext
    color
    plane
+   project
    util
    io
    call
