@@ -70,6 +70,7 @@ Functions:
 1. :c:func:`glm_euler_order`
 #. :c:func:`glm_euler_angles`
 #. :c:func:`glm_euler`
+#. :c:func:`glm_euler_xyz`
 #. :c:func:`glm_euler_zyx`
 #. :c:func:`glm_euler_zxy`
 #. :c:func:`glm_euler_xzy`
@@ -115,8 +116,18 @@ Functions documentation
 
     | build rotation matrix from euler angles
 
+    this is alias of glm_euler_xyz function
+
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ex, Ey, Ez]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
+      | *[in]*  **dest**    rotation matrix
+
+.. c:function:: void  glm_euler_xyz(vec3 angles, mat4 dest)
+
+    | build rotation matrix from euler angles
+
+    Parameters:
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void  glm_euler_zyx(vec3 angles, mat4 dest)
@@ -124,7 +135,7 @@ Functions documentation
     | build rotation matrix from euler angles
 
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ez, Ey, Ex]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void  glm_euler_zxy(vec3 angles, mat4 dest)
@@ -132,7 +143,7 @@ Functions documentation
     | build rotation matrix from euler angles
 
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ez, Ex, Ey]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void  glm_euler_xzy(vec3 angles, mat4 dest)
@@ -140,7 +151,7 @@ Functions documentation
     | build rotation matrix from euler angles
 
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ex, Ez, Ey]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void  glm_euler_yzx(vec3 angles, mat4 dest)
@@ -148,7 +159,7 @@ Functions documentation
     build rotation matrix from euler angles
 
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ey, Ez, Ex]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void  glm_euler_yxz(vec3 angles, mat4 dest)
@@ -156,7 +167,7 @@ Functions documentation
     | build rotation matrix from euler angles
 
     Parameters:
-      | *[in]*  **angles**  angles as vector [Ey, Ex, Ez]
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **dest**    rotation matrix
 
 .. c:function:: void glm_euler_by_order(vec3 angles, glm_euler_sq ord, mat4 dest)
@@ -166,6 +177,6 @@ Functions documentation
     Use :c:func:`glm_euler_order` function to build *ord* parameter
 
     Parameters:
-      | *[in]*  **angles**  angles as vector (ord parameter spceifies angles order)
+      | *[in]*  **angles**  angles as vector [Xangle, Yangle, Zangle]
       | *[in]*  **ord**     euler order
       | *[in]*  **dest**    rotation matrix

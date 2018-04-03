@@ -21,6 +21,7 @@
    CGLM_INLINE glm_euler_sq glm_euler_order(int newOrder[3]);
    CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
    CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_xyz(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_zyx(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_zxy(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_xzy(vec3 angles, mat4 dest);
