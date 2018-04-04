@@ -20,15 +20,21 @@
 #  include <xmmintrin.h>
 #  include <emmintrin.h>
 
-/* float */
-#  define _mm_shuffle1_ps(a, z, y, x, w)                                       \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(z, y, x, w))
+/* OPTIONAL: You may save some instructions but latency (not sure) */
+#ifdef CGLM_USE_INT_DOM_FOR_SHUFF
+#  define _mm_shuffle1_ps(xmm, z, y, x, w)                                    \
+  _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                   \
+                   _MM_SHUFFLE(z, y, x, w)))
+#else
+#  define _mm_shuffle1_ps(xmm, z, y, x, w)                                    \
+     _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
+#endif
 
-#  define _mm_shuffle1_ps1(a, x)                                               \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(x, x, x, x))
+#  define _mm_shuffle1_ps1(xmm, x)                                            \
+     _mm_shuffle1_ps(xmm, x, x, x, x)
 
-#  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                \
-     _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
+#  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)               \
+     _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),       \
                                     z1, y1, x1, w1)
 #endif
 
