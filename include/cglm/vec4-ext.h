@@ -174,5 +174,41 @@ glm_vec4_min(vec4 v) {
   return min;
 }
 
+/*!
+ * @brief check if all items are NaN (not a number)
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isnan(vec4 v) {
+  return !(isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]));
+}
+
+/*!
+ * @brief check if all items are INFINITY
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isinf(vec4 v) {
+  return !(isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]));
+}
+
+/*!
+ * @brief check if all items are valid number
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isvalid(vec4 v) {
+  return !glm_vec4_isnan(v) && !glm_vec4_isinf(v);
+}
+
 #endif /* cglm_vec4_ext_h */
 
