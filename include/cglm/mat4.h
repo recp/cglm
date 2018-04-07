@@ -335,6 +335,36 @@ glm_mat4_mulq(mat4 m, versor q, mat4 dest) {
 }
 
 /*!
+ * @brief convert mat4's rotation part to quaternion
+ *
+ * @param[in]  m    left matrix
+ * @param[out] dest destination quaternion
+ */
+CGLM_INLINE
+void
+glm_mat4_quat(mat4 m, versor dest) {
+  versor q;
+  float  m00, m10, m20,
+         m01, m11, m21,
+         m02, m12, m22;
+
+  m00  = m[0][0];  m10 = m[1][0];  m20 = m[2][0];
+  m01  = m[0][1];  m11 = m[1][1];  m21 = m[2][1];
+  m02  = m[0][2];  m12 = m[1][2];  m22 = m[2][2];
+
+  q[0] = sqrtf(glm_max(0.0f, 1.0f + m00 + m11 + m22)) * 0.5f; /* w */
+  q[1] = sqrtf(glm_max(0.0f, 1.0f + m00 - m11 - m22)) * 0.5f; /* x */
+  q[2] = sqrtf(glm_max(0.0f, 1.0f - m00 + m11 - m22)) * 0.5f; /* y */
+  q[3] = sqrtf(glm_max(0.0f, 1.0f - m00 - m11 + m22)) * 0.5f; /* z */
+
+  q[1] *= glm_signf(m12 - m21);
+  q[2] *= glm_signf(m20 - m02);
+  q[3] *= glm_signf(m01 - m10);
+
+  glm_vec4_copy(q, dest);
+}
+
+/*!
  * @brief multiply vector with mat4's mat3 part(rotation)
  *
  * @param[in]  m    mat4(affine transform)

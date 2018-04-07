@@ -108,7 +108,7 @@ test_tests_SOURCES=\
     test/src/test_cam.c \
     test/src/test_project.c \
     test/src/test_clamp.c \
-    test/src/test_euler.c
-
+    test/src/test_euler.c \
+    test/src/test_quat.c
 all-local:
 	sh ./post-build.sh

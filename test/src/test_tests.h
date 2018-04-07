@@ -25,4 +25,7 @@ test_clamp(void **state);
 void
 test_euler(void **state);
 
+void
+test_quat(void **state);
+
 #endif /* test_tests_h */

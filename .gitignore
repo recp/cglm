@@ -60,3 +60,4 @@ cglm_test_iosTests/*
 docs/build/*
 win/cglm_test_*
 * copy.*
+*.o
