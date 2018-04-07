@@ -64,6 +64,12 @@ glmc_quat_mat4(versor q, mat4 dest) {
 
 CGLM_EXPORT
 void
+glmc_quat_mat3(versor q, mat3 dest) {
+  glm_quat_mat3(q, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_quat_slerp(versor q,
                 versor r,
                 float  t,
