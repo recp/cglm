@@ -45,6 +45,7 @@
 #define cglm_mat_h
 
 #include "common.h"
+#include "quat.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/mat4.h"
@@ -316,6 +317,21 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
   res[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
   glm_vec4_copy(res, dest);
 #endif
+}
+
+/*!
+ * @brief multiply mat4 with quaternion and store in dest vector
+ *
+ * @param[in]  m    left matrix
+ * @param[in]  q    quaternion as right matrix
+ * @param[out] dest destination matrix
+ */
+CGLM_INLINE
+void
+glm_mat4_mulq(mat4 m, versor q, mat4 dest) {
+  mat4 rot;
+  glm_quat_mat4(q, rot);
+  glm_mat4_mul(m, rot, dest);
 }
 
 /*!
