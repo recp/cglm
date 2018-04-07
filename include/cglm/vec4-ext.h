@@ -183,7 +183,7 @@ glm_vec4_min(vec4 v) {
 CGLM_INLINE
 bool
 glm_vec4_isnan(vec4 v) {
-  return !(isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]));
+  return isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]);
 }
 
 /*!
@@ -195,7 +195,7 @@ glm_vec4_isnan(vec4 v) {
 CGLM_INLINE
 bool
 glm_vec4_isinf(vec4 v) {
-  return !(isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]));
+  return isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]);
 }
 
 /*!

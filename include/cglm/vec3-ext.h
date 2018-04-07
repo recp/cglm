@@ -169,7 +169,7 @@ glm_vec_min(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec_isnan(vec3 v) {
-  return !(isnan(v[0]) || isnan(v[1]) || isnan(v[2]));
+  return isnan(v[0]) || isnan(v[1]) || isnan(v[2]);
 }
 
 /*!
@@ -181,7 +181,7 @@ glm_vec_isnan(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec_isinf(vec3 v) {
-  return !(isinf(v[0]) || isinf(v[1]) || isinf(v[2]));
+  return isinf(v[0]) || isinf(v[1]) || isinf(v[2]);
 }
 
 /*!
