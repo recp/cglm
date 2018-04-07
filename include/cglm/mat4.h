@@ -58,7 +58,9 @@
 #  include "simd/neon/mat4.h"
 #endif
 
-#include <assert.h>
+#ifdef DEBUG
+# include <assert.h>
+#endif
 
 #define GLM_MAT4_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f, 0.0f},                    \
                                  {0.0f, 1.0f, 0.0f, 0.0f},                    \
@@ -281,19 +283,17 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4_mulN(mat4 * __restrict matrices[], int len, mat4 dest) {
-  int i;
+glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
+  uint32_t i;
 
+#ifdef DEBUG
   assert(len > 1 && "there must be least 2 matrices to go!");
+#endif
 
-  glm_mat4_mul(*matrices[0],
-               *matrices[1],
-               dest);
+  glm_mat4_mul(*matrices[0], *matrices[1], dest);
 
   for (i = 2; i < len; i++)
-    glm_mat4_mul(dest,
-                 *matrices[i],
-                 dest);
+    glm_mat4_mul(dest, *matrices[i], dest);
 }
 
 /*!
