@@ -133,11 +133,12 @@ void
 glm_quat_normalize(versor q) {
   float sum;
 
-  sum = q[0] * q[0] + q[1] * q[1]
-          + q[2] * q[2] + q[3] * q[3];
+  sum = glm_vec4_norm2(q);
 
-  if (fabs(1.0f - sum) < 0.0001f)
+  if (sum <= 0.0f) {
+    glm_quat_identity(q);
     return;
+  }
 
   glm_vec4_scale(q, 1.0f / sqrtf(sum), q);
 }
