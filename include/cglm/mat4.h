@@ -343,38 +343,42 @@ glm_mat4_mulq(mat4 m, versor q, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_quat(mat4 m, versor dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat4_quat_sse2(m, dest);
-#else
-  vec4   vsgn, vzero = GLM_VEC4_ZERO_INIT;
-  versor q;
-  float  m00, m10, m20,
-         m01, m11, m21,
-         m02, m12, m22;
+  float trace, r, rinv;
 
-  m00  = m[0][0];  m01 = m[0][1];  m02 = m[0][2];
-  m10  = m[1][0];  m11 = m[1][1];  m12 = m[1][2];
-  m20  = m[2][0];  m21 = m[2][1];  m22 = m[2][2];
+  trace = m[0][0] + m[1][1] + m[2][2];
+  if (trace >= 0.0f) {
+    r       = 2.0f * sqrtf(1 + trace);
+    rinv    = 1.0f / r;
 
-  q[0] = 1.0f + m00 + m11 + m22; /* w */
-  q[1] = 1.0f + m00 - m11 - m22; /* x */
-  q[2] = 1.0f - m00 + m11 - m22; /* y */
-  q[3] = 1.0f - m00 - m11 + m22; /* z */
+    dest[1] = rinv * (m[1][2] - m[2][1]);
+    dest[2] = rinv * (m[2][0] - m[0][2]);
+    dest[3] = rinv * (m[0][1] - m[1][0]);
+    dest[0] = r * 0.25f;
+  } else if (m[0][0] >= m[1][1] && m[0][0] >= m[2][2]) {
+    r       = 2.0f * sqrtf(1 - m[1][1] - m[2][2] + m[0][0]);
+    rinv    = 1.0f / r;
 
-  glm_vec4_maxv(q, vzero, q);
-  glm_vec4_sqrt(q, q);
-  glm_vec4_scale(q, 0.5f, q);
+    dest[1] = r * 0.25f;
+    dest[2] = rinv * (m[0][1] + m[1][0]);
+    dest[3] = rinv * (m[0][2] + m[2][0]);
+    dest[0] = rinv * (m[1][2] - m[2][1]);
+  } else if (m[1][1] >= m[2][2]) {
+    r       = 2.0f * sqrtf(1 - m[0][0] - m[2][2] + m[1][1]);
+    rinv    = 1.0f / r;
 
-  vsgn[0] = 1.0f;
-  vsgn[1] = m12 - m21;
-  vsgn[2] = m20 - m02;
-  vsgn[3] = m01 - m10;
+    dest[1] = rinv * (m[0][1] + m[1][0]);
+    dest[2] = r * 0.25f;
+    dest[3] = rinv * (m[1][2] + m[2][1]);
+    dest[0] = rinv * (m[2][0] - m[0][2]);
+  } else {
+    r       = 2.0f * sqrtf(1 - m[0][0] - m[1][1] + m[2][2]);
+    rinv    = 1.0f / r;
 
-  glm_vec4_sign(vsgn, vsgn);
-  glm_vec4_mulv(q, vsgn, q);
-
-  glm_vec4_copy(q, dest);
-#endif
+    dest[1] = rinv * (m[0][2] + m[2][0]);
+    dest[2] = rinv * (m[1][2] + m[2][1]);
+    dest[3] = r * 0.25f;
+    dest[0] = rinv * (m[0][1] - m[1][0]);
+  }
 }
 
 /*!

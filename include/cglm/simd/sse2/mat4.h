@@ -103,57 +103,6 @@ glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
 }
 
 CGLM_INLINE
-void
-glm_mat4_quat_sse2(mat4 m, versor dest) {
-  __m128 c0, c1, c2, x0, x1, x2, x3, m00, m11, m22, r;
-  __m128 zero, one, half, ngone;
-
-  c0  = _mm_load_ps(m[0]);
-  c1  = _mm_load_ps(m[1]);
-  c2  = _mm_load_ps(m[2]);
-
-  m00 = _mm_xor_ps(_mm_shuffle1_ps1(c0, 0), _mm_set_ps(-0.f, -0.f,  0.f,  0.f));
-  m11 = _mm_xor_ps(_mm_shuffle1_ps1(c1, 1), _mm_set_ps(-0.f,  0.f, -0.f,  0.f));
-  m22 = _mm_xor_ps(_mm_shuffle1_ps1(c2, 2), _mm_set_ps( 0.f, -0.f, -0.f,  0.f));
-
-  x0    = _mm_set_ps(-1.0f, 0.0f, 0.5, 1.0f);
-  one   = _mm_shuffle1_ps1(x0, 0);
-  half  = _mm_shuffle1_ps1(x0, 1);
-  zero  = _mm_shuffle1_ps1(x0, 2);
-  ngone = _mm_shuffle1_ps1(x0, 3);
-
-  /*
-   q[0] = sqrtf(glm_max(0.0f, 1.0f + m00 + m11 + m22)) * 0.5f;
-   q[1] = sqrtf(glm_max(0.0f, 1.0f + m00 - m11 - m22)) * 0.5f;
-   q[2] = sqrtf(glm_max(0.0f, 1.0f - m00 + m11 - m22)) * 0.5f;
-   q[3] = sqrtf(glm_max(0.0f, 1.0f - m00 - m11 + m22)) * 0.5f;
-   */
-  x0 = _mm_add_ps(one, _mm_add_ps(_mm_add_ps(m00, m11), m22));
-  r  = _mm_mul_ps(_mm_sqrt_ps(_mm_max_ps(zero, x0)), half);
-
-  /*
-   q[1] *= glm_signf(m12 - m21);
-   q[2] *= glm_signf(m20 - m02);
-   q[3] *= glm_signf(m01 - m10);
-   */
-  x1 = _mm_shuffle_ps(c1, c2, _MM_SHUFFLE(0, 0, 2, 2)); /* m20 m20 m12 m12 */
-  x1 = _mm_shuffle_ps(x1, c0, _MM_SHUFFLE(1, 1, 2, 0)); /* m01 m01 m20 m12 */
-
-  x2 = _mm_shuffle_ps(c2, c0, _MM_SHUFFLE(2, 2, 1, 1)); /* m02 m02 m21 m21 */
-  x2 = _mm_shuffle_ps(x2, c1, _MM_SHUFFLE(0, 0, 2, 0)); /* m10 m10 m02 m21 */
-
-  x1 = _mm_sub_ps(x1, x2);
-  x2 = _mm_or_ps(_mm_and_ps(_mm_cmpgt_ps(x1, zero), one),
-                 _mm_and_ps(_mm_cmplt_ps(x1, zero), ngone));
-  x2 = _mm_shuffle1_ps(x2, 2, 1, 0, 0);
-
-  x3 = _mm_shuffle_ps(one, x2, _MM_SHUFFLE(0, 0, 0, 0)); /* q1 q1  1 1 */
-  x3 = _mm_shuffle_ps(x3,  x2, _MM_SHUFFLE(3, 2, 2, 0)); /* q3 q2 q1 1 */
-
-  _mm_store_ps(dest, _mm_mul_ps(r, x3));
-}
-
-CGLM_INLINE
 float
 glm_mat4_det_sse2(mat4 mat) {
   __m128 r0, r1, r2, r3, x0, x1, x2;

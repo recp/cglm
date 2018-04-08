@@ -55,12 +55,8 @@ test_rand_angle(void) {
 void
 test_rand_quat(versor q) {
   srand((unsigned int)time(NULL));
-  
-  q[0] = drand48();
-  q[1] = drand48();
-  q[2] = drand48();
-  q[3] = drand48();
 
+  glm_quat(q, drand48(), drand48(), drand48(), drand48());
   glm_quat_normalize(q);
 }
 
