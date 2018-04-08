@@ -146,7 +146,7 @@ glm_vec4_dot(vec4 a, vec4 b) {
 CGLM_INLINE
 float
 glm_vec4_norm2(vec4 v) {
-  return glm_vec_dot(v, v);
+  return glm_vec4_dot(v, v);
 }
 
 /*!

@@ -147,7 +147,7 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 CGLM_INLINE
 float
 glm_vec_norm2(vec3 v) {
-  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+  return glm_vec_dot(v, v);
 }
 
 /*!
