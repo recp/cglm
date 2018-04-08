@@ -212,4 +212,18 @@ glm_vec_sign(vec3 v, vec3 dest) {
   dest[2] = glm_signf(v[2]);
 }
 
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_sqrt(vec4 v, vec4 dest) {
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
+}
+
 #endif /* cglm_vec3_ext_h */

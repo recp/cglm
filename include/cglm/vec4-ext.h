@@ -239,4 +239,23 @@ glm_vec4_sign(vec4 v, vec4 dest) {
 #endif
 }
 
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sqrt(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_sqrt_ps(_mm_load_ps(v)));
+#else
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
+  dest[3] = sqrtf(v[3]);
+#endif
+}
+
 #endif /* cglm_vec4_ext_h */
