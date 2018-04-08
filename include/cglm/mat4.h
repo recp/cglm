@@ -343,25 +343,38 @@ glm_mat4_mulq(mat4 m, versor q, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_quat(mat4 m, versor dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_mat4_quat_sse2(m, dest);
+#else
+  vec4   vsgn, vzero = GLM_VEC4_ZERO_INIT;
   versor q;
   float  m00, m10, m20,
          m01, m11, m21,
          m02, m12, m22;
 
-  m00  = m[0][0];  m10 = m[1][0];  m20 = m[2][0];
-  m01  = m[0][1];  m11 = m[1][1];  m21 = m[2][1];
-  m02  = m[0][2];  m12 = m[1][2];  m22 = m[2][2];
+  m00  = m[0][0];  m01 = m[0][1];  m02 = m[0][2];
+  m10  = m[1][0];  m11 = m[1][1];  m12 = m[1][2];
+  m20  = m[2][0];  m21 = m[2][1];  m22 = m[2][2];
 
-  q[0] = sqrtf(glm_max(0.0f, 1.0f + m00 + m11 + m22)) * 0.5f; /* w */
-  q[1] = sqrtf(glm_max(0.0f, 1.0f + m00 - m11 - m22)) * 0.5f; /* x */
-  q[2] = sqrtf(glm_max(0.0f, 1.0f - m00 + m11 - m22)) * 0.5f; /* y */
-  q[3] = sqrtf(glm_max(0.0f, 1.0f - m00 - m11 + m22)) * 0.5f; /* z */
+  q[0] = 1.0f + m00 + m11 + m22; /* w */
+  q[1] = 1.0f + m00 - m11 - m22; /* x */
+  q[2] = 1.0f - m00 + m11 - m22; /* y */
+  q[3] = 1.0f - m00 - m11 + m22; /* z */
 
-  q[1] *= glm_signf(m12 - m21);
-  q[2] *= glm_signf(m20 - m02);
-  q[3] *= glm_signf(m01 - m10);
+  glm_vec4_maxv(q, vzero, q);
+  glm_vec4_sqrt(q, q);
+  glm_vec4_scale(q, 0.5f, q);
+
+  vsgn[0] = 1.0f;
+  vsgn[1] = m12 - m21;
+  vsgn[2] = m20 - m02;
+  vsgn[3] = m01 - m10;
+
+  glm_vec4_sign(vsgn, vsgn);
+  glm_vec4_mulv(q, vsgn, q);
 
   glm_vec4_copy(q, dest);
+#endif
 }
 
 /*!
@@ -614,5 +627,4 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
   mat[3][row2] = tmp[3];
 }
 
-#else
 #endif /* cglm_mat_h */
