@@ -36,6 +36,16 @@ test_rand_vec3(vec3 dest) {
   dest[2] = drand48();
 }
 
+void
+test_rand_vec4(vec4 dest) {
+  srand((unsigned int)time(NULL));
+
+  dest[0] = drand48();
+  dest[1] = drand48();
+  dest[2] = drand48();
+  dest[3] = drand48();
+}
+
 float
 test_rand_angle(void) {
   srand((unsigned int)time(NULL));

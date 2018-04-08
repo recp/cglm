@@ -40,6 +40,9 @@ test_assert_quat_eq(versor v1, versor v2);
 void
 test_rand_vec3(vec3 dest);
 
+void
+test_rand_vec4(vec4 dest) ;
+
 float
 test_rand_angle(void);
 
