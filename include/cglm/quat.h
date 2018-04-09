@@ -261,6 +261,56 @@ glm_quat_imag(versor q, vec3 dest) {
 }
 
 /*!
+ * @brief returns normalized imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_imagn(versor q, vec3 dest) {
+  glm_normalize_to(q, dest);
+}
+
+/*!
+ * @brief returns length of imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_imaglen(versor q) {
+  return glm_vec_norm(q);
+}
+
+/*!
+ * @brief returns angle of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_angle(versor q) {
+  /*
+   sin(theta / 2) = length(x*x + y*y + z*z)
+   cos(theta / 2) = w
+   theta          = 2 * atan(sin(theta / 2) / cos(theta / 2))
+   */
+  return 2.0f * atan2f(glm_quat_imaglen(q), glm_quat_real(q));
+}
+
+/*!
+ * @brief axis of quaternion
+ *
+ * @param[in]   q    quaternion
+ * @param[out]  dest axis of quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_axis(versor q, versor dest) {
+  glm_quat_imagn(q, dest);
+}
+
+/*!
  * @brief convert quaternion to mat4
  *
  * @param[in]   q     quaternion
