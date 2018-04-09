@@ -211,6 +211,56 @@ glm_quat_inv(versor q, versor dest) {
 }
 
 /*!
+ * @brief add (componentwise) two quaternions and store result in dest
+ *
+ * @param[in]   p    quaternion 1
+ * @param[in]   q    quaternion 2
+ * @param[out]  dest result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_add(versor p, versor q, versor dest) {
+  glm_vec4_add(p, q, dest);
+}
+
+/*!
+ * @brief subtract (componentwise) two quaternions and store result in dest
+ *
+ * @param[in]   p    quaternion 1
+ * @param[in]   q    quaternion 2
+ * @param[out]  dest result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_sub(versor p, versor q, versor dest) {
+  glm_vec4_sub(p, q, dest);
+}
+
+/*!
+ * @brief returns real part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_real(versor q) {
+  return q[3];
+}
+
+/*!
+ * @brief returns imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_imag(versor q, vec3 dest) {
+  dest[0] = q[0];
+  dest[1] = q[1];
+  dest[2] = q[2];
+}
+
+/*!
  * @brief convert quaternion to mat4
  *
  * @param[in]   q     quaternion
