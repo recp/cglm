@@ -183,6 +183,20 @@ glm_quat_mulv(versor q1, versor q2, versor dest) {
 }
 
 /*!
+ * @brief conjugate of quaternion
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  conjugate
+ */
+CGLM_INLINE
+void
+glm_quat_conjugate(versor q, versor dest) {
+  glm_vec4_copy(q, dest);
+  glm_vec4_flipsign(dest);
+  dest[3] = -dest[3];
+}
+
+/*!
  * @brief convert quaternion to mat4
  *
  * @param[in]   q     quaternion
