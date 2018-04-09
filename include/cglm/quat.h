@@ -11,15 +11,27 @@
    GLM_QUAT_IDENTITY
 
  Functions:
-   CGLM_INLINE void  glm_quat_identity(versor q);
-   CGLM_INLINE void  glm_quat(versor q, float angle, float x, float y, float z);
-   CGLM_INLINE void  glm_quatv(versor q, float angle, vec3 axis);
+   CGLM_INLINE void glm_quat_identity(versor q);
+   CGLM_INLINE void glm_quat_init(versor q, float x, float y, float z, float w);
+   CGLM_INLINE void glm_quat(versor q, float angle, float x, float y, float z);
+   CGLM_INLINE void glm_quatv(versor q, float angle, vec3 axis);
    CGLM_INLINE float glm_quat_norm(versor q);
-   CGLM_INLINE void  glm_quat_normalize(versor q);
-   CGLM_INLINE float glm_quat_dot(versor q, versor r);
-   CGLM_INLINE void  glm_quat_mulv(versor q1, versor q2, versor dest);
-   CGLM_INLINE void  glm_quat_mat4(versor q, mat4 dest);
-   CGLM_INLINE void  glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_normalize(versor q);
+   CGLM_INLINE float glm_quat_dot(versor q1, versor q2);
+   CGLM_INLINE void glm_quat_conjugate(versor q, versor dest);
+   CGLM_INLINE void glm_quat_inv(versor q, versor dest);
+   CGLM_INLINE void glm_quat_add(versor p, versor q, versor dest);
+   CGLM_INLINE void glm_quat_sub(versor p, versor q, versor dest);
+   CGLM_INLINE float glm_quat_real(versor q);
+   CGLM_INLINE void glm_quat_imag(versor q, vec3 dest);
+   CGLM_INLINE void glm_quat_imagn(versor q, vec3 dest);
+   CGLM_INLINE float glm_quat_imaglen(versor q);
+   CGLM_INLINE float glm_quat_angle(versor q);
+   CGLM_INLINE void glm_quat_axis(versor q, versor dest);
+   CGLM_INLINE void glm_quat_mul(versor p, versor q, versor dest);
+   CGLM_INLINE void glm_quat_mat4(versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_mat3(versor q, mat3 dest)
+   CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
  */
 
 #ifndef cglm_quat_h
@@ -165,24 +177,6 @@ glm_quat_dot(versor q1, versor q2) {
 }
 
 /*!
- * @brief multiplies two quaternion and stores result in dest
- *
- * @param[in]   q1    quaternion 1
- * @param[in]   q2    quaternion 2
- * @param[out]  dest  result quaternion
- */
-CGLM_INLINE
-void
-glm_quat_mulv(versor q1, versor q2, versor dest) {
-  dest[0] = q2[0] * q1[0] - q2[1] * q1[1] - q2[2] * q1[2] - q2[3] * q1[3];
-  dest[1] = q2[0] * q1[1] + q2[1] * q1[0] - q2[2] * q1[3] + q2[3] * q1[2];
-  dest[2] = q2[0] * q1[2] + q2[1] * q1[3] + q2[2] * q1[0] - q2[3] * q1[1];
-  dest[3] = q2[0] * q1[3] - q2[1] * q1[2] + q2[2] * q1[1] + q2[3] * q1[0];
-
-  glm_quat_normalize(dest);
-}
-
-/*!
  * @brief conjugate of quaternion
  *
  * @param[in]   q     quaternion
@@ -308,6 +302,37 @@ CGLM_INLINE
 void
 glm_quat_axis(versor q, versor dest) {
   glm_quat_imagn(q, dest);
+}
+
+/*!
+ * @brief multiplies two quaternion and stores result in dest
+ *        this is also called Hamilton Product
+ *
+ * According to WikiPedia:
+ * The product of two rotation quaternions [clarification needed] will be
+ * equivalent to the rotation q followed by the rotation p
+ *
+ * @param[in]   p     quaternion 1
+ * @param[in]   q     quaternion 2
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_mul(versor p, versor q, versor dest) {
+  /*
+    + (a1 b2 + b1 a2 + c1 d2 − d1 c2)i
+    + (a1 c2 − b1 d2 + c1 a2 + d1 b2)j
+    + (a1 d2 + b1 c2 − c1 b2 + d1 a2)k
+       a1 a2 − b1 b2 − c1 c2 − d1 d2
+   */
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_quat_mul_sse2(p, q, dest);
+#else
+  dest[0] = p[3] * q[0] + p[0] * q[3] + p[1] * q[2] - p[2] * q[1];
+  dest[1] = p[3] * q[1] - p[0] * q[2] + p[1] * q[3] + p[2] * q[0];
+  dest[2] = p[3] * q[2] + p[0] * q[1] - p[1] * q[0] + p[2] * q[3];
+  dest[3] = p[3] * q[3] - p[0] * q[0] - p[1] * q[1] - p[2] * q[2];
+#endif
 }
 
 /*!

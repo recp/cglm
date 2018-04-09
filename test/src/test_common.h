@@ -38,6 +38,9 @@ void
 test_assert_quat_eq(versor v1, versor v2);
 
 void
+test_assert_quat_eq_abs(versor v1, versor v2);
+
+void
 test_rand_vec3(vec3 dest);
 
 void

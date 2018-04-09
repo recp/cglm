@@ -46,8 +46,8 @@ glmc_quat_dot(versor q, versor r) {
 
 CGLM_EXPORT
 void
-glmc_quat_mulv(versor q1, versor q2, versor dest) {
-  glm_quat_mul(q1, q2, dest);
+glmc_quat_mul(versor p, versor q, versor dest) {
+  glm_quat_mul(p, q, dest);
 }
 
 CGLM_EXPORT
@@ -64,9 +64,6 @@ glmc_quat_mat3(versor q, mat3 dest) {
 
 CGLM_EXPORT
 void
-glmc_quat_slerp(versor q,
-                versor r,
-                float  t,
-                versor dest) {
+glmc_quat_slerp(versor q, versor r,  float t, versor dest) {
   glm_quat_slerp(q, r, t, dest);
 }

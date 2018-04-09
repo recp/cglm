@@ -39,7 +39,7 @@ glmc_quat_dot(versor q, versor r);
 
 CGLM_EXPORT
 void
-glmc_quat_mulv(versor q1, versor q2, versor dest);
+glmc_quat_mul(versor p, versor q, versor dest);
 
 CGLM_EXPORT
 void
