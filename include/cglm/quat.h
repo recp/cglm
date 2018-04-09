@@ -197,6 +197,20 @@ glm_quat_conjugate(versor q, versor dest) {
 }
 
 /*!
+ * @brief inverse of non-zero quaternion
+ *
+ * @param[in]   q    quaternion
+ * @param[out]  dest inverse quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_inv(versor q, versor dest) {
+  versor conj;
+  glm_quat_conjugate(q, conj);
+  glm_vec_scale(conj, glm_vec4_norm2(q), dest);
+}
+
+/*!
  * @brief convert quaternion to mat4
  *
  * @param[in]   q     quaternion
