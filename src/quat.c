@@ -16,19 +16,13 @@ glmc_quat_identity(versor q) {
 
 CGLM_EXPORT
 void
-glmc_quat(versor q,
-               float angle,
-               float x,
-               float y,
-               float z) {
+glmc_quat(versor q, float angle, float x, float y, float z) {
   glm_quat(q, angle, x, y, z);
 }
 
 CGLM_EXPORT
 void
-glmc_quatv(versor q,
-           float  angle,
-           vec3   v) {
+glmc_quatv(versor q, float angle, vec3 v) {
   glm_quatv(q, angle, v);
 }
 
@@ -53,7 +47,7 @@ glmc_quat_dot(versor q, versor r) {
 CGLM_EXPORT
 void
 glmc_quat_mulv(versor q1, versor q2, versor dest) {
-  glm_quat_mulv(q1, q2, dest);
+  glm_quat_mul(q1, q2, dest);
 }
 
 CGLM_EXPORT

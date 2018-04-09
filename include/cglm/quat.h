@@ -13,7 +13,7 @@
  Functions:
    CGLM_INLINE void  glm_quat_identity(versor q);
    CGLM_INLINE void  glm_quat(versor q, float angle, float x, float y, float z);
-   CGLM_INLINE void  glm_quatv(versor q, float angle, vec3 v);
+   CGLM_INLINE void  glm_quatv(versor q, float angle, vec3 axis);
    CGLM_INLINE float glm_quat_norm(versor q);
    CGLM_INLINE void  glm_quat_normalize(versor q);
    CGLM_INLINE float glm_quat_dot(versor q, versor r);
@@ -33,19 +33,16 @@
 #endif
 
 /*
- * IMPORTANT! cglm stores quat as [w, x, y, z]
+ * IMPORTANT:
+ * ----------------------------------------------------------------------------
+ * cglm stores quat as [x, y, z, w] since v0.3.6
  *
- * Possible changes (these may be changed in the future):
- *  - versor is identity quat, we can define new type for quat.
- *    it can't be quat or quaternion becuase someone can use that name for
- *    variable name. maybe just vec4.
- *  - it stores [w, x, y, z] but it may change to [x, y, z, w] if we get enough
- *    feedback to change it.
- *  - in general we use last param as dest, but this header used first param
- *    as dest this may be changed but decided yet
+ * it was [w, x, y, z] before v0.3.6 it has been changed to [x, y, z, w]
+ * with v0.3.6 version.
+ * ----------------------------------------------------------------------------
  */
 
-#define GLM_QUAT_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f}
+#define GLM_QUAT_IDENTITY_INIT  {0.0f, 0.0f, 0.0f, 1.0f}
 #define GLM_QUAT_IDENTITY       ((versor)GLM_QUAT_IDENTITY_INIT)
 
 /*!
@@ -61,6 +58,24 @@ glm_quat_identity(versor q) {
 }
 
 /*!
+ * @brief inits quaterion with raw values
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   x     x
+ * @param[in]   y     y
+ * @param[in]   z     z
+ * @param[in]   w     w (real part)
+ */
+CGLM_INLINE
+void
+glm_quat_init(versor q, float x, float y, float z, float w) {
+  q[0] = x;
+  q[1] = y;
+  q[2] = z;
+  q[3] = w;
+}
+
+/*!
  * @brief creates NEW quaternion with individual axis components
  *
  * @param[out]  q     quaternion
@@ -71,21 +86,17 @@ glm_quat_identity(versor q) {
  */
 CGLM_INLINE
 void
-glm_quat(versor q,
-         float  angle,
-         float  x,
-         float  y,
-         float  z) {
+glm_quat(versor q, float angle, float x, float y, float z) {
   float a, c, s;
 
   a = angle * 0.5f;
   c = cosf(a);
   s = sinf(a);
 
-  q[0] = c;
-  q[1] = s * x;
-  q[2] = s * y;
-  q[3] = s * z;
+  q[0] = s * x;
+  q[1] = s * y;
+  q[2] = s * z;
+  q[3] = c;
 }
 
 /*!
@@ -93,23 +104,21 @@ glm_quat(versor q,
  *
  * @param[out]  q     quaternion
  * @param[in]   angle angle (radians)
- * @param[in]   v     axis
+ * @param[in]   axis  axis
  */
 CGLM_INLINE
 void
-glm_quatv(versor q,
-          float  angle,
-          vec3   v) {
+glm_quatv(versor q, float angle, vec3 axis) {
   float a, c, s;
 
   a = angle * 0.5f;
   c = cosf(a);
   s = sinf(a);
 
-  q[0] = c;
-  q[1] = s * v[0];
-  q[2] = s * v[1];
-  q[3] = s * v[2];
+  q[0] = s * axis[0];
+  q[1] = s * axis[1];
+  q[2] = s * axis[2];
+  q[3] = c;
 }
 
 /*!
@@ -146,13 +155,13 @@ glm_quat_normalize(versor q) {
 /*!
  * @brief dot product of two quaternion
  *
- * @param[in]  q  quaternion 1
- * @param[in]  r  quaternion 2
+ * @param[in]  q1  quaternion 1
+ * @param[in]  q2  quaternion 2
  */
 CGLM_INLINE
 float
-glm_quat_dot(versor q, versor r) {
-  return glm_vec4_dot(q, r);
+glm_quat_dot(versor q1, versor q2) {
+  return glm_vec4_dot(q1, q2);
 }
 
 /*!
@@ -190,10 +199,10 @@ glm_quat_mat4(versor q, mat4 dest) {
   norm = glm_quat_norm(q);
   s    = norm > 0.0f ? 2.0f / norm : 0.0f;
 
-  w = q[0];
-  x = q[1];
-  y = q[2];
-  z = q[3];
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
 
   xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
   yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
@@ -237,10 +246,10 @@ glm_quat_mat3(versor q, mat3 dest) {
   norm = glm_quat_norm(q);
   s    = norm > 0.0f ? 2.0f / norm : 0.0f;
 
-  w = q[0];
-  x = q[1];
-  y = q[2];
-  z = q[3];
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
 
   xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
   yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
@@ -270,10 +279,8 @@ glm_quat_mat3(versor q, mat3 dest) {
  */
 CGLM_INLINE
 void
-glm_quat_slerp(versor q,
-               versor r,
-               float  t,
-               versor dest) {
+glm_quat_slerp(versor q, versor r, float t, versor dest) {
+
   /* https://en.wikipedia.org/wiki/Slerp */
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_quat_slerp_sse2(q, r, t, dest);

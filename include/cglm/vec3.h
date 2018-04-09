@@ -327,9 +327,7 @@ glm_vec_angle(vec3 v1, vec3 v2) {
 
 CGLM_INLINE
 void
-glm_quatv(versor q,
-          float  angle,
-          vec3   v);
+glm_quatv(versor q, float angle, vec3 axis);
 
 /*!
  * @brief rotate vec3 around axis by angle using Rodrigues' rotation formula

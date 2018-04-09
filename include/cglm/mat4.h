@@ -345,39 +345,41 @@ void
 glm_mat4_quat(mat4 m, versor dest) {
   float trace, r, rinv;
 
+  /* it seems using like m12 instead of m[1][2] causes extra instructions */
+
   trace = m[0][0] + m[1][1] + m[2][2];
   if (trace >= 0.0f) {
-    r       = 2.0f * sqrtf(1 + trace);
-    rinv    = 1.0f / r;
+    r       = sqrtf(1.0f + trace);
+    rinv    = 0.5f / r;
 
-    dest[1] = rinv * (m[1][2] - m[2][1]);
-    dest[2] = rinv * (m[2][0] - m[0][2]);
-    dest[3] = rinv * (m[0][1] - m[1][0]);
-    dest[0] = r * 0.25f;
-  } else if (m[0][0] >= m[1][1] && m[0][0] >= m[2][2]) {
-    r       = 2.0f * sqrtf(1 - m[1][1] - m[2][2] + m[0][0]);
-    rinv    = 1.0f / r;
-
-    dest[1] = r * 0.25f;
-    dest[2] = rinv * (m[0][1] + m[1][0]);
-    dest[3] = rinv * (m[0][2] + m[2][0]);
     dest[0] = rinv * (m[1][2] - m[2][1]);
-  } else if (m[1][1] >= m[2][2]) {
-    r       = 2.0f * sqrtf(1 - m[0][0] - m[2][2] + m[1][1]);
-    rinv    = 1.0f / r;
+    dest[1] = rinv * (m[2][0] - m[0][2]);
+    dest[2] = rinv * (m[0][1] - m[1][0]);
+    dest[3] = r    * 0.5f;
+  } else if (m[0][0] >= m[1][1] && m[0][0] >= m[2][2]) {
+    r       = sqrtf(1.0f - m[1][1] - m[2][2] + m[0][0]);
+    rinv    = 0.5f / r;
 
+    dest[0] = r    * 0.5f;
     dest[1] = rinv * (m[0][1] + m[1][0]);
-    dest[2] = r * 0.25f;
-    dest[3] = rinv * (m[1][2] + m[2][1]);
-    dest[0] = rinv * (m[2][0] - m[0][2]);
-  } else {
-    r       = 2.0f * sqrtf(1 - m[0][0] - m[1][1] + m[2][2]);
-    rinv    = 1.0f / r;
+    dest[2] = rinv * (m[0][2] + m[2][0]);
+    dest[3] = rinv * (m[1][2] - m[2][1]);
+  } else if (m[1][1] >= m[2][2]) {
+    r       = sqrtf(1.0f - m[0][0] - m[2][2] + m[1][1]);
+    rinv    = 0.5f / r;
 
-    dest[1] = rinv * (m[0][2] + m[2][0]);
+    dest[0] = rinv * (m[0][1] + m[1][0]);
+    dest[1] = r    * 0.5f;
     dest[2] = rinv * (m[1][2] + m[2][1]);
-    dest[3] = r * 0.25f;
-    dest[0] = rinv * (m[0][1] - m[1][0]);
+    dest[3] = rinv * (m[2][0] - m[0][2]);
+  } else {
+    r       = sqrtf(1.0f - m[0][0] - m[1][1] + m[2][2]);
+    rinv    = 0.5f / r;
+
+    dest[0] = rinv * (m[0][2] + m[2][0]);
+    dest[1] = rinv * (m[1][2] + m[2][1]);
+    dest[2] = r    * 0.5f;
+    dest[3] = rinv * (m[0][1] - m[1][0]);
   }
 }
 
