@@ -18,11 +18,12 @@ test_quat_mul_raw(versor p, versor q, versor dest) {
 
 void
 test_quat(void **state) {
-  mat4   inRot, outRot, view1, view2;
-  versor inQuat, outQuat, q3, q4;
-  vec3   eye;
+  mat4   inRot, outRot, view1, view2, rot1, rot2;
+  versor inQuat, outQuat, q3, q4, q5;
+  vec3   eye, axis;
   int    i;
 
+  /* 1. test quat to mat and mat to quat */
   for (i = 0; i < 1000; i++) {
     test_rand_quat(inQuat);
     glmc_quat_mat4(inQuat, inRot);
@@ -37,7 +38,7 @@ test_quat(void **state) {
     test_assert_quat_eq(q3, q4);
   }
 
-  /* test lookat */
+  /* 2. test lookat */
   test_rand_vec3(eye);
   glm_quatv(q3, glm_rad(-90.0f), GLM_YUP);
 
@@ -48,4 +49,32 @@ test_quat(void **state) {
   glm_quat_look(eye, q3, view2);
 
   test_assert_mat4_eq2(view1, view2, 0.000009);
+
+  /* 5. test quaternion rotation matrix result */
+  test_rand_quat(q3);
+  glm_quat_mat4(q3, rot1);
+
+  /* 5.1 test axis and angle of quat */
+  glm_quat_axis(q3, axis);
+  glm_rotate_make(rot2, glm_quat_angle(q3), axis);
+
+  test_assert_mat4_eq2(rot1, rot2, 0.000009);
+
+  /* 6. test quaternion multiplication, first rotation + second = final */
+  test_rand_quat(q3);
+  test_rand_quat(q4);
+
+  glm_quat_mul(q3, q4, q5);
+
+  glm_quat_axis(q3, axis);
+  glm_rotate_make(rot1, glm_quat_angle(q3), axis);
+
+  glm_quat_axis(q4, axis);
+  glm_rotate(rot1, glm_quat_angle(q4), axis);
+
+  /* rot2 is combine of two rotation now test with quaternion result */
+  glm_quat_mat4(q5, rot2);
+
+  /* result must be same (almost) */
+  test_assert_mat4_eq2(rot1, rot2, 0.000009);
 }
