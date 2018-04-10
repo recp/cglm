@@ -339,10 +339,6 @@ glm_vec_angle(vec3 v1, vec3 v2) {
   return acosf(glm_vec_dot(v1, v2) * norm);
 }
 
-CGLM_INLINE
-void
-glm_quatv(versor q, float angle, vec3 axis);
-
 /*!
  * @brief rotate vec3 around axis by angle using Rodrigues' rotation formula
  *
@@ -353,31 +349,26 @@ glm_quatv(versor q, float angle, vec3 axis);
 CGLM_INLINE
 void
 glm_vec_rotate(vec3 v, float angle, vec3 axis) {
-  versor q;
-  vec3   v1, v2, v3;
+  vec3   v1, v2, k;
   float  c, s;
 
   c = cosf(angle);
   s = sinf(angle);
 
+  glm_vec_normalize_to(axis, k);
+
   /* Right Hand, Rodrigues' rotation formula:
         v = v*cos(t) + (kxv)sin(t) + k*(k.v)(1 - cos(t))
    */
-
-  /* quaternion */
-  glm_quatv(q, angle, v);
-
   glm_vec_scale(v, c, v1);
 
-  glm_vec_cross(axis, v, v2);
+  glm_vec_cross(k, v, v2);
   glm_vec_scale(v2, s, v2);
 
-  glm_vec_scale(axis,
-                glm_vec_dot(axis, v) * (1.0f - c),
-                v3);
-
   glm_vec_add(v1, v2, v1);
-  glm_vec_add(v1, v3, v);
+
+  glm_vec_scale(k, glm_vec_dot(k, v) * (1.0f - c), v2);
+  glm_vec_add(v1, v2, v);
 }
 
 /*!
