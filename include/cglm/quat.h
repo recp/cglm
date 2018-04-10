@@ -168,7 +168,7 @@ glm_quat_normalize_to(versor q, versor dest) {
 
   x0   = _mm_load_ps(q);
   xdot = glm_simd_dot(x0, x0);
-  dot = _mm_cvtss_f32(xdot);
+  dot  = _mm_cvtss_f32(xdot);
 
   if (dot <= 0.0f) {
     glm_quat_identity(dest);
@@ -674,6 +674,34 @@ glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
   vec3 dir;
   glm_vec_sub(to, from, dir);
   glm_quat_for(dir, fwd, up, dest);
+}
+
+/*!
+ * @brief rotate existing transform matrix using quaternion
+ *
+ * @param[in]   q     quaternion
+ * @param[in]   v     vector to rotate
+ * @param[out]  dest  destination vector
+ */
+CGLM_INLINE
+void
+glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
+  versor p;
+  vec3   u, v1, v2;
+  float  s;
+
+  glm_quat_normalize_to(q, p);
+  glm_quat_imag(p, u);
+  s = glm_quat_real(p);
+
+  glm_vec_scale(u, 2.0f * glm_vec_dot(u, v), v1);
+  glm_vec_scale(v, s * s - glm_vec_dot(u, u), v2);
+  glm_vec_add(v1, v2, v1);
+
+  glm_vec_cross(u, v, v2);
+  glm_vec_scale(v2, 2.0f * s, v2);
+
+  glm_vec_add(v1, v2, dest);
 }
 
 #endif /* cglm_quat_h */

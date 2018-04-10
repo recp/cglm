@@ -20,7 +20,7 @@ void
 test_quat(void **state) {
   mat4   inRot, outRot, view1, view2, rot1, rot2;
   versor inQuat, outQuat, q3, q4, q5;
-  vec3   eye, axis, imag;
+  vec3   eye, axis, imag, v1, v2;
   int    i;
 
   /* 0. test identiy quat */
@@ -134,7 +134,25 @@ test_quat(void **state) {
   imag[1] = -1.0f;
   imag[2] =  0.0f;
 
-  assert_true(glm_vec_eqv_eps(imag, axis));
+  test_assert_vec3_eq(imag, axis);
+
+  /* 10. test rotate vector using quat */
+  /* (0,0,-1) around (1,0,0) must give (0,1,0) */
+  v1[0] = 0.0f; v1[1] = 0.0f; v1[2] = -1.0f;
+  v2[0] = 0.0f; v2[1] = 0.0f; v2[2] = -1.0f;
+
+  glm_vec_rotate(v1, glm_rad(90.0f), (vec3){1.0f, 0.0f, 0.0f});
+  glm_quatv(q3, glm_rad(90.0f), (vec3){1.0f, 0.0f, 0.0f});
+
+  glm_vec4_scale(q3, 1.5, q3);
+  glm_quat_rotatev(q3, v2, v2);
+
+  /* result must be : (0,1,0) */
+  assert_true(fabsf(v1[0]) <= 0.00009f
+              && fabsf(v1[1] - 1.0f) <= 0.00009f
+              && fabsf(v1[2]) <= 0.00009f);
+
+  test_assert_vec3_eq(v1, v2);
 
   /* TODO: add tests for slerp, lerp */
 }
