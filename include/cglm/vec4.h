@@ -269,6 +269,26 @@ glm_vec4_flipsign(vec4 v) {
 }
 
 /*!
+ * @brief flip sign of all vec4 members and store result in dest
+ *
+ * @param[in]  v     vector
+ * @param[out] dest  vector
+ */
+CGLM_INLINE
+void
+glm_vec4_flipsign_to(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_xor_ps(_mm_load_ps(v),
+                                _mm_set1_ps(-0.0f)));
+#else
+  dest[0] = -v[0];
+  dest[1] = -v[1];
+  dest[2] = -v[2];
+  dest[3] = -v[3];
+#endif
+}
+
+/*!
  * @brief make vector as inverse/opposite of itself
  *
  * @param[in, out]  v  vector

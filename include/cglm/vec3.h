@@ -243,6 +243,20 @@ glm_vec_flipsign(vec3 v) {
 }
 
 /*!
+ * @brief flip sign of all vec3 members and store result in dest
+ *
+ * @param[in]   v     vector
+ * @param[out]  dest  vector
+ */
+CGLM_INLINE
+void
+glm_vec_flipsign_to(vec3 v, vec3 dest) {
+  dest[0] = -v[0];
+  dest[1] = -v[1];
+  dest[2] = -v[2];
+}
+
+/*!
  * @brief make vector as inverse/opposite of itself
  *
  * @param[in, out]  v  vector
