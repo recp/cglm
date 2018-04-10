@@ -394,6 +394,53 @@ glm_quat_mat4(versor q, mat4 dest) {
 }
 
 /*!
+ * @brief convert quaternion to mat4 (transposed)
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix as transposed
+ */
+CGLM_INLINE
+void
+glm_quat_mat4t(versor q, mat4 dest) {
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
+
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[1][0] = xy + wz;
+  dest[2][1] = yz + wx;
+  dest[0][2] = xz + wy;
+
+  dest[0][1] = xy - wz;
+  dest[1][2] = yz - wx;
+  dest[2][0] = xz - wy;
+
+  dest[0][3] = 0.0f;
+  dest[1][3] = 0.0f;
+  dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
+  dest[3][3] = 1.0f;
+}
+
+/*!
  * @brief convert quaternion to mat3
  *
  * @param[in]   q     quaternion
@@ -430,6 +477,45 @@ glm_quat_mat3(versor q, mat3 dest) {
   dest[1][0] = xy - wz;
   dest[2][1] = yz - wx;
   dest[0][2] = xz - wy;
+}
+
+/*!
+ * @brief convert quaternion to mat3 (transposed)
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix
+ */
+CGLM_INLINE
+void
+glm_quat_mat3t(versor q, mat3 dest) {
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
+
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[1][0] = xy + wz;
+  dest[2][1] = yz + wx;
+  dest[0][2] = xz + wy;
+
+  dest[0][1] = xy - wz;
+  dest[1][2] = yz - wx;
+  dest[2][0] = xz - wy;
 }
 
 /*!
