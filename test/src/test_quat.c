@@ -18,8 +18,9 @@ test_quat_mul_raw(versor p, versor q, versor dest) {
 
 void
 test_quat(void **state) {
-  mat4   inRot, outRot;
+  mat4   inRot, outRot, view1, view2;
   versor inQuat, outQuat, q3, q4;
+  vec3   eye;
   int    i;
 
   for (i = 0; i < 1000; i++) {
@@ -35,4 +36,16 @@ test_quat(void **state) {
 
     test_assert_quat_eq(q3, q4);
   }
+
+  /* test lookat */
+  test_rand_vec3(eye);
+  glm_quatv(q3, glm_rad(-90.0f), GLM_YUP);
+
+  /* now X axis must be forward axis, Z must be right axis */
+  glm_look(eye, GLM_XUP, GLM_YUP, view1);
+
+  /* create view matrix with quaternion */
+  glm_quat_look(eye, q3, view2);
+
+  test_assert_mat4_eq2(view1, view2, 0.000009);
 }

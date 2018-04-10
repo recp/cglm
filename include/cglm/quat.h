@@ -39,6 +39,8 @@
 
 #include "common.h"
 #include "vec4.h"
+#include "mat4.h"
+#include "mat3.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
@@ -576,6 +578,31 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
 
   glm_vec4_add(q1, q2, q1);
   glm_vec4_scale(q1, 1.0f / sinTheta, dest);
+}
+
+CGLM_INLINE
+void
+glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
+
+/*!
+ * @brief creates view matrix using quaternion as camera orientation
+ *
+ * @param[in]   eye   eye
+ * @param[in]   ori   orientation in world space as quaternion
+ * @param[out]  dest  view matrix
+ */
+CGLM_INLINE
+void
+glm_quat_look(vec3 eye, versor ori, mat4 dest) {
+  vec4 t;
+
+  /* orientation */
+  glm_quat_mat4t(ori, dest);
+
+  /* translate */
+  glm_vec4(eye, 1.0f, t);
+  glm_mat4_mulv(dest, t, t);
+  glm_vec_flipsign_to(t, dest[3]);
 }
 
 #endif /* cglm_quat_h */
