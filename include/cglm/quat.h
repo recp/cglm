@@ -434,58 +434,62 @@ glm_quat_mat3(versor q, mat3 dest) {
 
 /*!
  * @brief interpolates between two quaternions
+ *        using linear interpolation (LERP)
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_lerp(versor from, versor to, float t, versor dest) {
+  glm_vec4_lerp(from, to, t, dest);
+}
+
+/*!
+ * @brief interpolates between two quaternions
  *        using spherical linear interpolation (SLERP)
  *
- * @param[in]   q     from
- * @param[in]   r     to
+ * @param[in]   from  from
+ * @param[in]   to    to
  * @param[in]   t     amout
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE
 void
-glm_quat_slerp(versor q, versor r, float t, versor dest) {
+glm_quat_slerp(versor from, versor to, float t, versor dest) {
+  vec4  q1, q2;
+  float cosTheta, sinTheta, angle;
 
-  /* https://en.wikipedia.org/wiki/Slerp */
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_quat_slerp_sse2(q, r, t, dest);
-#else
-  float cosTheta, sinTheta, angle, a, b, c;
+  cosTheta = glm_quat_dot(from, to);
+  glm_quat_copy(from, q1);
 
-  cosTheta = glm_quat_dot(q, r);
-  if (cosTheta < 0.0f) {
-    glm_vec4_flipsign(q);
-    cosTheta = -cosTheta;
+  if (fabsf(cosTheta) >= 1.0f) {
+    glm_quat_copy(q1, dest);
+    return;
   }
 
-  if (fabs(cosTheta) >= 1.0f) {
-    glm_quat_copy(q, dest);
-    return;
+  if (cosTheta < 0.0f) {
+    glm_vec4_flipsign(q1);
+    cosTheta = -cosTheta;
   }
 
   sinTheta = sqrtf(1.0f - cosTheta * cosTheta);
 
-  c = 1.0f - t;
-
-  /* LERP */
-  /* TODO: FLT_EPSILON vs 0.001? */
-  if (sinTheta < 0.001f) {
-    dest[0] = c * q[0] + t * r[0];
-    dest[1] = c * q[1] + t * r[1];
-    dest[2] = c * q[2] + t * r[2];
-    dest[3] = c * q[3] + t * r[3];
+  /* LERP to avoid zero division */
+  if (fabsf(sinTheta) < 0.001f) {
+    glm_quat_lerp(from, to, t, dest);
     return;
   }
 
   /* SLERP */
   angle = acosf(cosTheta);
-  a = sinf(c * angle);
-  b = sinf(t * angle);
+  glm_vec4_scale(q1, sinf((1.0f - t) * angle), q1);
+  glm_vec4_scale(to, sinf(t * angle), q2);
 
-  dest[0] = (q[0] * a + r[0] * b) / sinTheta;
-  dest[1] = (q[1] * a + r[1] * b) / sinTheta;
-  dest[2] = (q[2] * a + r[2] * b) / sinTheta;
-  dest[3] = (q[3] * a + r[3] * b) / sinTheta;
-#endif
+  glm_vec4_add(q1, q2, q1);
+  glm_vec4_scale(q1, 1.0f / sinTheta, dest);
 }
 
 #endif /* cglm_quat_h */
