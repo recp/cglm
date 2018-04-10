@@ -90,6 +90,31 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
 }
 
 /*!
+ * @brief creates NEW quaternion with axis vector
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   angle angle (radians)
+ * @param[in]   axis  axis
+ */
+CGLM_INLINE
+void
+glm_quatv(versor q, float angle, vec3 axis) {
+  vec3  k;
+  float a, c, s;
+
+  a = angle * 0.5f;
+  c = cosf(a);
+  s = sinf(a);
+
+  glm_normalize_to(axis, k);
+
+  q[0] = s * k[0];
+  q[1] = s * k[1];
+  q[2] = s * k[2];
+  q[3] = c;
+}
+
+/*!
  * @brief creates NEW quaternion with individual axis components
  *
  * @param[out]  q     quaternion
@@ -101,38 +126,8 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
 CGLM_INLINE
 void
 glm_quat(versor q, float angle, float x, float y, float z) {
-  float a, c, s;
-
-  a = angle * 0.5f;
-  c = cosf(a);
-  s = sinf(a);
-
-  q[0] = s * x;
-  q[1] = s * y;
-  q[2] = s * z;
-  q[3] = c;
-}
-
-/*!
- * @brief creates NEW quaternion with axis vector
- *
- * @param[out]  q     quaternion
- * @param[in]   angle angle (radians)
- * @param[in]   axis  axis
- */
-CGLM_INLINE
-void
-glm_quatv(versor q, float angle, vec3 axis) {
-  float a, c, s;
-
-  a = angle * 0.5f;
-  c = cosf(a);
-  s = sinf(a);
-
-  q[0] = s * axis[0];
-  q[1] = s * axis[1];
-  q[2] = s * axis[2];
-  q[3] = c;
+  vec3 axis = {x, y, z};
+  glm_quatv(q, angle, axis);
 }
 
 /*!
