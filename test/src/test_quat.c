@@ -20,25 +20,34 @@ void
 test_quat(void **state) {
   mat4   inRot, outRot, view1, view2, rot1, rot2;
   versor inQuat, outQuat, q3, q4, q5;
-  vec3   eye, axis;
+  vec3   eye, axis, imag;
   int    i;
+
+  /* 0. test identiy quat */
+  glm_quat_identity(q4);
+  assert_true(glm_quat_real(q4) == cosf(glm_rad(0.0f) * 0.5f));
 
   /* 1. test quat to mat and mat to quat */
   for (i = 0; i < 1000; i++) {
     test_rand_quat(inQuat);
+
     glmc_quat_mat4(inQuat, inRot);
     glmc_mat4_quat(inRot, outQuat);
     glmc_quat_mat4(outQuat, outRot);
+
+    /* 2. test first quat and generated one equality */
     test_assert_quat_eq_abs(inQuat, outQuat);
+
+    /* 3. test first rot and second rotation */
     test_assert_mat4_eq2(inRot, outRot, 0.000009); /* almost equal */
 
+    /* 4. test SSE mul and raw mul */
     test_quat_mul_raw(inQuat, outQuat, q3);
     glm_quat_mul_sse2(inQuat, outQuat, q4);
-
     test_assert_quat_eq(q3, q4);
   }
 
-  /* 2. test lookat */
+  /* 5. test lookat */
   test_rand_vec3(eye);
   glm_quatv(q3, glm_rad(-90.0f), GLM_YUP);
 
@@ -50,17 +59,19 @@ test_quat(void **state) {
 
   test_assert_mat4_eq2(view1, view2, 0.000009);
 
-  /* 5. test quaternion rotation matrix result */
+  /* 6. test quaternion rotation matrix result */
   test_rand_quat(q3);
   glm_quat_mat4(q3, rot1);
 
-  /* 5.1 test axis and angle of quat */
+  /* 6.1 test axis and angle of quat */
   glm_quat_axis(q3, axis);
   glm_rotate_make(rot2, glm_quat_angle(q3), axis);
 
   test_assert_mat4_eq2(rot1, rot2, 0.000009);
 
-  /* 6. test quaternion multiplication, first rotation + second = final */
+  /* 7. test quaternion multiplication (hamilton product),
+        final rotation = first rotation + second = quat1 * quat2
+   */
   test_rand_quat(q3);
   test_rand_quat(q4);
 
@@ -77,4 +88,53 @@ test_quat(void **state) {
 
   /* result must be same (almost) */
   test_assert_mat4_eq2(rot1, rot2, 0.000009);
+
+  /* 8. test quaternion for look rotation */
+
+  /* 8.1 same direction */
+  /* look at from 0, 0, 1 to zero, direction = 0, 0, -1 */
+  glm_quat_for((vec3){0, 0, -1}, (vec3){0, 0, -1}, GLM_YUP, q3);
+
+  /* result must be identity */
+  glm_quat_identity(q4);
+  test_assert_quat_eq(q3, q4);
+
+  /* look at from 0, 0, 1 to zero, direction = 0, 0, -1 */
+  glm_quat_forp(GLM_ZUP, GLM_VEC3_ZERO, (vec3){0, 0, -1}, GLM_YUP, q3);
+
+  /* result must be identity */
+  glm_quat_identity(q4);
+  test_assert_quat_eq(q3, q4);
+
+  /* 8.2 perpendicular */
+  glm_quat_for(GLM_XUP, (vec3){0, 0, -1}, GLM_YUP, q3);
+
+  /* result must be -90 */
+  glm_quatv(q4, glm_rad(-90.0f), GLM_YUP);
+  test_assert_quat_eq(q3, q4);
+
+  /* 9. test imag, real */
+
+  /* 9.1 real */
+  assert_true(glm_quat_real(q4) == cosf(glm_rad(-90.0f) * 0.5f));
+
+  /* 9.1 imag */
+  glm_quat_imag(q4, imag);
+
+  /* axis = Y_UP * sinf(angle * 0.5), YUP = 0, 1, 0 */
+  axis[0] = 0.0f;
+  axis[1] = sinf(glm_rad(-90.0f) * 0.5f) * 1.0f;
+  axis[2] = 0.0f;
+
+  assert_true(glm_vec_eqv_eps(imag, axis));
+
+  /* 9.2 axis */
+  glm_quat_axis(q4, axis);
+  imag[0] =  0.0f;
+  imag[1] = -1.0f;
+  imag[2] =  0.0f;
+
+  assert_true(glm_vec_eqv_eps(imag, axis));
+
+  /* TODO: add tests for slerp, lerp */
 }
