@@ -134,6 +134,18 @@ glm_quatv(versor q, float angle, vec3 axis) {
 }
 
 /*!
+ * @brief copy quaternion to another one
+ *
+ * @param[in]  q     quaternion
+ * @param[out] dest  destination
+ */
+CGLM_INLINE
+void
+glm_quat_copy(versor q, versor dest) {
+  glm_vec4_copy(q, dest);
+}
+
+/*!
  * @brief returns norm (magnitude) of quaternion
  *
  * @param[out]  q  quaternion
@@ -185,8 +197,7 @@ glm_quat_dot(versor q1, versor q2) {
 CGLM_INLINE
 void
 glm_quat_conjugate(versor q, versor dest) {
-  glm_vec4_copy(q, dest);
-  glm_vec4_flipsign(dest);
+  glm_vec4_flipsign_to(q, dest);
   dest[3] = -dest[3];
 }
 
@@ -442,23 +453,16 @@ glm_quat_slerp(versor q, versor r, float t, versor dest) {
 
   cosTheta = glm_quat_dot(q, r);
   if (cosTheta < 0.0f) {
-    q[0] *= -1.0f;
-    q[1] *= -1.0f;
-    q[2] *= -1.0f;
-    q[3] *= -1.0f;
-
+    glm_vec4_flipsign(q);
     cosTheta = -cosTheta;
   }
 
   if (fabs(cosTheta) >= 1.0f) {
-    dest[0] = q[0];
-    dest[1] = q[1];
-    dest[2] = q[2];
-    dest[3] = q[3];
+    glm_quat_copy(q, dest);
     return;
   }
 
-  sinTheta = sqrt(1.0f - cosTheta * cosTheta);
+  sinTheta = sqrtf(1.0f - cosTheta * cosTheta);
 
   c = 1.0f - t;
 
