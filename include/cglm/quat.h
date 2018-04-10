@@ -159,6 +159,43 @@ glm_quat_norm(versor q) {
 }
 
 /*!
+ * @brief normalize quaternion and store result in dest
+ *
+ * @param[in]   q     quaternion to normalze
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_normalize_to(versor q, versor dest) {
+#if defined( __SSE2__ ) || defined( __SSE2__ )
+  __m128 xdot, x0;
+  float  dot;
+
+  x0   = _mm_load_ps(q);
+  xdot = glm_simd_dot(x0, x0);
+  dot = _mm_cvtss_f32(xdot);
+
+  if (dot <= 0.0f) {
+    glm_quat_identity(dest);
+    return;
+  }
+
+  _mm_store_ps(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+#else
+  float dot;
+
+  dot = glm_vec4_norm2(q);
+
+  if (dot <= 0.0f) {
+    glm_quat_identity(q);
+    return;
+  }
+
+  glm_vec4_scale(q, 1.0f / sqrtf(dot), dest);
+#endif
+}
+
+/*!
  * @brief normalize quaternion
  *
  * @param[in, out]  q  quaternion
@@ -166,16 +203,7 @@ glm_quat_norm(versor q) {
 CGLM_INLINE
 void
 glm_quat_normalize(versor q) {
-  float sum;
-
-  sum = glm_vec4_norm2(q);
-
-  if (sum <= 0.0f) {
-    glm_quat_identity(q);
-    return;
-  }
-
-  glm_vec4_scale(q, 1.0f / sqrtf(sum), q);
+  glm_quat_normalize_to(q, q);
 }
 
 /*!

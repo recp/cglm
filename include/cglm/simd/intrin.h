@@ -30,6 +30,16 @@
 #  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                \
      _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
                                     z1, y1, x1, w1)
+
+CGLM_INLINE
+__m128
+glm_simd_dot(__m128 a, __m128 b) {
+  __m128 x0;
+  x0 = _mm_mul_ps(a, b);
+  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
+  return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
+}
+
 #endif
 
 /* x86, x64 */
