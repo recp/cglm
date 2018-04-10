@@ -417,4 +417,26 @@ glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
   v[3] = glm_clamp(v[3], minVal, maxVal);
 }
 
+/*!
+ * @brief linear interpolation between two vector
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
+  vec4 s, v;
+
+  /* from + s * (to - from) */
+  glm_vec4_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec4_sub(to, from, v);
+  glm_vec4_mulv(s, v, v);
+  glm_vec4_add(from, v, dest);
+}
+
 #endif /* cglm_vec4_h */

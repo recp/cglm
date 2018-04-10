@@ -507,6 +507,28 @@ glm_vec_clamp(vec3 v, float minVal, float maxVal) {
 }
 
 /*!
+ * @brief linear interpolation between two vector
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_lerp(vec3 from, vec3 to, float t, vec3 dest) {
+  vec3 s, v;
+
+  /* from + s * (to - from) */
+  glm_vec_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec_sub(to, from, v);
+  glm_vec_mulv(s, v, v);
+  glm_vec_add(from, v, dest);
+}
+
+/*!
  * @brief vec3 cross product
  *
  * this is just convenient wrapper
