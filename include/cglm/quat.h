@@ -605,4 +605,52 @@ glm_quat_look(vec3 eye, versor ori, mat4 dest) {
   glm_vec_flipsign_to(t, dest[3]);
 }
 
+/*!
+ * @brief creates look rotation quaternion
+ *
+ * @param[in]   fwd   forward vector
+ * @param[in]   up    up vector
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
+  vec3  axis;
+  float dot, angle;
+
+  dot = glm_vec_dot(dir, fwd);
+  if (fabsf(dot + 1.0f)  < 0.000001f) {
+    glm_quat_init(dest, up[0], up[1], up[2], CGLM_PI);
+    return;
+  }
+
+  if (fabsf(dot - 1.0f) < 0.000001f) {
+    glm_quat_identity(dest);
+    return;
+  }
+
+  angle = acosf(dot);
+  glm_cross(fwd, dir, axis);
+  glm_normalize(axis);
+
+  glm_quatv(dest, angle, axis);
+}
+
+/*!
+ * @brief creates look rotation quaternion using source and
+ *        destination positions p suffix stands for position
+ *
+ * @param[in]   from  source point
+ * @param[in]   to    destination point
+ * @param[in]   up    up vector
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
+  vec3 dir;
+  glm_vec_sub(to, from, dir);
+  glm_quat_for(dir, fwd, up, dest);
+}
+
 #endif /* cglm_quat_h */
