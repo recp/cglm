@@ -26,6 +26,8 @@ test_quat(void **state) {
   /* 0. test identiy quat */
   glm_quat_identity(q4);
   assert_true(glm_quat_real(q4) == cosf(glm_rad(0.0f) * 0.5f));
+  glm_quat_mat4(q4, rot1);
+  test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009);
 
   /* 1. test quat to mat and mat to quat */
   for (i = 0; i < 1000; i++) {
@@ -183,6 +185,15 @@ test_quat(void **state) {
 
   /* result must be identity */
   test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009);
+
+  test_rand_quat(q3);
+
+  /* 12. inverse of quat, multiplication must be IDENTITY */
+  glm_quat_inv(q3, q4);
+  glm_quat_mul(q3, q4, q5);
+
+  glm_quat_identity(q3);
+  test_assert_quat_eq(q3, q5);
 
   /* TODO: add tests for slerp, lerp */
 }

@@ -259,7 +259,7 @@ void
 glm_quat_inv(versor q, versor dest) {
   versor conj;
   glm_quat_conjugate(q, conj);
-  glm_vec_scale(conj, glm_vec4_norm2(q), dest);
+  glm_vec4_scale(conj, 1.0f / glm_vec4_norm2(q), dest);
 }
 
 /*!
