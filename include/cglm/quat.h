@@ -231,8 +231,8 @@ glm_quat_normalize(versor q) {
  */
 CGLM_INLINE
 float
-glm_quat_dot(versor q1, versor q2) {
-  return glm_vec4_dot(q1, q2);
+glm_quat_dot(versor p, versor q) {
+  return glm_vec4_dot(p, q);
 }
 
 /*!

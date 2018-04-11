@@ -19,11 +19,19 @@ glmc_quat_identity(versor q);
 
 CGLM_EXPORT
 void
+glmc_quat_init(versor q, float x, float y, float z, float w);
+
+CGLM_EXPORT
+void
 glmc_quat(versor q, float angle, float x, float y, float z);
 
 CGLM_EXPORT
 void
-glmc_quatv(versor q, float angle, vec3 v);
+glmc_quatv(versor q, float angle, vec3 axis);
+
+CGLM_EXPORT
+void
+glmc_quat_copy(versor q, versor dest);
 
 CGLM_EXPORT
 float
@@ -31,11 +39,55 @@ glmc_quat_norm(versor q);
 
 CGLM_EXPORT
 void
+glmc_quat_normalize_to(versor q, versor dest);
+
+CGLM_EXPORT
+void
 glmc_quat_normalize(versor q);
 
 CGLM_EXPORT
 float
-glmc_quat_dot(versor q, versor r);
+glmc_quat_dot(versor p, versor q);
+
+CGLM_EXPORT
+void
+glmc_quat_conjugate(versor q, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_inv(versor q, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_add(versor p, versor q, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_sub(versor p, versor q, versor dest);
+
+CGLM_EXPORT
+float
+glmc_quat_real(versor q);
+
+CGLM_EXPORT
+void
+glmc_quat_imag(versor q, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_quat_imagn(versor q, vec3 dest);
+
+CGLM_EXPORT
+float
+glmc_quat_imaglen(versor q);
+
+CGLM_EXPORT
+float
+glmc_quat_angle(versor q);
+
+CGLM_EXPORT
+void
+glmc_quat_axis(versor q, versor dest);
 
 CGLM_EXPORT
 void
@@ -47,11 +99,43 @@ glmc_quat_mat4(versor q, mat4 dest);
 
 CGLM_EXPORT
 void
+glmc_quat_mat4t(versor q, mat4 dest);
+
+CGLM_EXPORT
+void
 glmc_quat_mat3(versor q, mat3 dest);
 
 CGLM_EXPORT
 void
+glmc_quat_mat3t(versor q, mat3 dest);
+
+CGLM_EXPORT
+void
+glmc_quat_lerp(versor from, versor to, float t, versor dest);
+
+CGLM_EXPORT
+void
 glmc_quat_slerp(versor q, versor r, float t, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_look(vec3 eye, versor ori, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest);
+
+CGLM_EXPORT
+void
+glmc_quat_rotatev(versor from, vec3 to, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_quat_rotate(mat4 m, versor q, mat4 dest);
 
 #ifdef __cplusplus
 }
