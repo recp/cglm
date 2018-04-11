@@ -246,7 +246,7 @@ glm_vec_flipsign(vec3 v) {
  * @brief flip sign of all vec3 members and store result in dest
  *
  * @param[in]   v     vector
- * @param[out]  dest  vector
+ * @param[out]  dest  result vector
  */
 CGLM_INLINE
 void

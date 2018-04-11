@@ -40,6 +40,7 @@ Functions:
 #. :c:func:`glm_vec_scale`
 #. :c:func:`glm_vec_scale_as`
 #. :c:func:`glm_vec_flipsign`
+#. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec_inv`
 #. :c:func:`glm_vec_inv_to`
 #. :c:func:`glm_vec_normalize`
@@ -54,6 +55,7 @@ Functions:
 #. :c:func:`glm_vec_minv`
 #. :c:func:`glm_vec_ortho`
 #. :c:func:`glm_vec_clamp`
+#. :c:func:`glm_vec_lerp`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -157,7 +159,15 @@ Functions documentation
     flip sign of all vec3 members
 
     Parameters:
-    | *[in, out]*  **v**    vector
+      | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec_flipsign_to(vec3 v, vec3 dest)
+
+    flip sign of all vec3 members and store result in dest
+
+    Parameters:
+      | *[in]*  **v**       vector
+      | *[out]* **dest**    negated vector
 
 .. c:function:: void  glm_vec_inv(vec3 v)
 
@@ -206,7 +216,7 @@ Functions documentation
 
     Parameters:
       | *[in, out]*  **v**      vector
-      | *[in]*       **axis**   axis vector (must be unit vector)
+      | *[in]*       **axis**   axis vector (will be normalized)
       | *[out]*      **angle**  angle (radians)
 
 .. c:function:: void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest)
@@ -281,3 +291,15 @@ Functions documentation
       | *[in, out]*  **v**       vector
       | *[in]*       **minVal**  minimum value
       | *[in]*       **maxVal**  maximum value
+
+.. c:function:: void  glm_vec_lerp(vec3 from, vec3 to, float t, vec3 dest)
+
+    linear interpolation between two vector
+
+    | formula:  from + s * (to - from)
+
+    Parameters:
+      | *[in]*  **from**   from value
+      | *[in]*  **to**     to value
+      | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**   destination

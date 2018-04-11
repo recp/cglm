@@ -32,6 +32,7 @@ Functions:
 #. :c:func:`glm_vec4_scale`
 #. :c:func:`glm_vec4_scale_as`
 #. :c:func:`glm_vec4_flipsign`
+#. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec4_inv`
 #. :c:func:`glm_vec4_inv_to`
 #. :c:func:`glm_vec4_normalize`
@@ -40,6 +41,12 @@ Functions:
 #. :c:func:`glm_vec4_maxv`
 #. :c:func:`glm_vec4_minv`
 #. :c:func:`glm_vec4_clamp`
+#. :c:func:`glm_vec4_lerp`
+#. :c:func:`glm_vec4_isnan`
+#. :c:func:`glm_vec4_isinf`
+#. :c:func:`glm_vec4_isvalid`
+#. :c:func:`glm_vec4_sign`
+#. :c:func:`glm_vec4_sqrt`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -146,6 +153,14 @@ Functions documentation
     Parameters:
     | *[in, out]*  **v**    vector
 
+.. c:function:: void  glm_vec4_flipsign_to(vec4 v, vec4 dest)
+
+    flip sign of all vec4 members and store result in dest
+
+    Parameters:
+      | *[in]*  **v**       vector
+      | *[out]* **dest**    negated vector
+
 .. c:function:: void  glm_vec4_inv(vec4 v)
 
     make vector as inverse/opposite of itself
@@ -213,3 +228,15 @@ Functions documentation
       | *[in, out]*  **v**       vector
       | *[in]*       **minVal**  minimum value
       | *[in]*       **maxVal**  maximum value
+
+.. c:function:: void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
+
+    linear interpolation between two vector
+
+    | formula:  from + s * (to - from)
+
+    Parameters:
+      | *[in]*  **from**   from value
+      | *[in]*  **to**     to value
+      | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**   destination

@@ -22,6 +22,7 @@ Functions:
 #. :c:func:`glm_min`
 #. :c:func:`glm_max`
 #. :c:func:`glm_clamp`
+#. :c:func:`glm_lerp`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -121,3 +122,17 @@ Functions documentation
 
     Returns:
       clamped value
+
+.. c:function:: float  glm_lerp(float from, float to, float t)
+
+    linear interpolation between two number
+
+    | formula:  from + s * (to - from)
+
+    Parameters:
+      | *[in]*  **from**   from value
+      | *[in]*  **to**     to value
+      | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
+
+    Returns:
+       interpolated value

@@ -226,8 +226,8 @@ glm_quat_normalize(versor q) {
 /*!
  * @brief dot product of two quaternion
  *
- * @param[in]  q1  quaternion 1
- * @param[in]  q2  quaternion 2
+ * @param[in]  p  quaternion 1
+ * @param[in]  q  quaternion 2
  */
 CGLM_INLINE
 float
@@ -303,6 +303,7 @@ glm_quat_real(versor q) {
  * @brief returns imaginary part of quaternion
  *
  * @param[in]   q    quaternion
+ * @param[out]  dest imag
  */
 CGLM_INLINE
 void
@@ -649,6 +650,7 @@ glm_quat_look(vec3 eye, versor ori, mat4 dest) {
 /*!
  * @brief creates look rotation quaternion
  *
+ * @param[in]   dir   direction to look
  * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @param[out]  dest  destination quaternion
@@ -683,6 +685,7 @@ glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
  *
  * @param[in]   from  source point
  * @param[in]   to    destination point
+ * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @param[out]  dest  destination quaternion
  */
@@ -699,7 +702,7 @@ glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
  *
  * @param[in]   q     quaternion
  * @param[in]   v     vector to rotate
- * @param[out]  dest  destination vector
+ * @param[out]  dest  rotated vector
  */
 CGLM_INLINE
 void
@@ -727,7 +730,7 @@ glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
  *
  * @param[in]   m     existing transform matrix
  * @param[in]   q     quaternion
- * @param[out]  dest  destination matrix
+ * @param[out]  dest  rotated matrix/transform
  */
 CGLM_INLINE
 void
