@@ -43,3 +43,10 @@ https://github.com/erich666/GraphicsGems/blob/master/gems/TransBox.c
 6. Cull frustum
 http://www.txutxi.com/?p=584
 http://old.cescg.org/CESCG-2002/DSykoraJJelinek/
+
+7. Quaternions
+Initial mat4_quat is borrowed from Apple's simd library
+
+
+8. Vector Rotation using Quaternion
+https://gamedev.stackexchange.com/questions/28395/rotating-vector3-by-a-quaternion

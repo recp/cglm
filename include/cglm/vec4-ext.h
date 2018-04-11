@@ -175,7 +175,7 @@ glm_vec4_min(vec4 v) {
 }
 
 /*!
- * @brief check if all items are NaN (not a number)
+ * @brief check if one of items is NaN (not a number)
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -187,7 +187,7 @@ glm_vec4_isnan(vec4 v) {
 }
 
 /*!
- * @brief check if all items are INFINITY
+ * @brief check if one of items is INFINITY
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -210,5 +210,52 @@ glm_vec4_isvalid(vec4 v) {
   return !glm_vec4_isnan(v) && !glm_vec4_isinf(v);
 }
 
-#endif /* cglm_vec4_ext_h */
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sign(vec4 v, vec4 dest) {
+#if defined( __SSE2__ ) || defined( __SSE2__ )
+  __m128 x0, x1, x2, x3, x4;
 
+  x0 = _mm_load_ps(v);
+  x1 = _mm_set_ps(0.0f, 0.0f, 1.0f, -1.0f);
+  x2 = _mm_shuffle1_ps1(x1, 2);
+
+  x3 = _mm_and_ps(_mm_cmpgt_ps(x0, x2), _mm_shuffle1_ps1(x1, 1));
+  x4 = _mm_and_ps(_mm_cmplt_ps(x0, x2), _mm_shuffle1_ps1(x1, 0));
+
+  _mm_store_ps(dest, _mm_or_ps(x3, x4));
+#else
+  dest[0] = glm_signf(v[0]);
+  dest[1] = glm_signf(v[1]);
+  dest[2] = glm_signf(v[2]);
+  dest[3] = glm_signf(v[3]);
+#endif
+}
+
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sqrt(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_sqrt_ps(_mm_load_ps(v)));
+#else
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
+  dest[3] = sqrtf(v[3]);
+#endif
+}
+
+#endif /* cglm_vec4_ext_h */

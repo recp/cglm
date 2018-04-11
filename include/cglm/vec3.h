@@ -147,7 +147,7 @@ glm_vec_cross(vec3 a, vec3 b, vec3 d) {
 CGLM_INLINE
 float
 glm_vec_norm2(vec3 v) {
-  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+  return glm_vec_dot(v, v);
 }
 
 /*!
@@ -243,6 +243,20 @@ glm_vec_flipsign(vec3 v) {
 }
 
 /*!
+ * @brief flip sign of all vec3 members and store result in dest
+ *
+ * @param[in]   v     vector
+ * @param[out]  dest  result vector
+ */
+CGLM_INLINE
+void
+glm_vec_flipsign_to(vec3 v, vec3 dest) {
+  dest[0] = -v[0];
+  dest[1] = -v[1];
+  dest[2] = -v[2];
+}
+
+/*!
  * @brief make vector as inverse/opposite of itself
  *
  * @param[in, out]  v  vector
@@ -325,12 +339,6 @@ glm_vec_angle(vec3 v1, vec3 v2) {
   return acosf(glm_vec_dot(v1, v2) * norm);
 }
 
-CGLM_INLINE
-void
-glm_quatv(versor q,
-          float  angle,
-          vec3   v);
-
 /*!
  * @brief rotate vec3 around axis by angle using Rodrigues' rotation formula
  *
@@ -341,31 +349,26 @@ glm_quatv(versor q,
 CGLM_INLINE
 void
 glm_vec_rotate(vec3 v, float angle, vec3 axis) {
-  versor q;
-  vec3   v1, v2, v3;
+  vec3   v1, v2, k;
   float  c, s;
 
   c = cosf(angle);
   s = sinf(angle);
 
+  glm_vec_normalize_to(axis, k);
+
   /* Right Hand, Rodrigues' rotation formula:
         v = v*cos(t) + (kxv)sin(t) + k*(k.v)(1 - cos(t))
    */
-
-  /* quaternion */
-  glm_quatv(q, angle, v);
-
   glm_vec_scale(v, c, v1);
 
-  glm_vec_cross(axis, v, v2);
+  glm_vec_cross(k, v, v2);
   glm_vec_scale(v2, s, v2);
 
-  glm_vec_scale(axis,
-                glm_vec_dot(axis, v) * (1.0f - c),
-                v3);
-
   glm_vec_add(v1, v2, v1);
-  glm_vec_add(v1, v3, v);
+
+  glm_vec_scale(k, glm_vec_dot(k, v) * (1.0f - c), v2);
+  glm_vec_add(v1, v2, v);
 }
 
 /*!
@@ -492,6 +495,28 @@ glm_vec_clamp(vec3 v, float minVal, float maxVal) {
   v[0] = glm_clamp(v[0], minVal, maxVal);
   v[1] = glm_clamp(v[1], minVal, maxVal);
   v[2] = glm_clamp(v[2], minVal, maxVal);
+}
+
+/*!
+ * @brief linear interpolation between two vector
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec_lerp(vec3 from, vec3 to, float t, vec3 dest) {
+  vec3 s, v;
+
+  /* from + s * (to - from) */
+  glm_vec_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec_sub(to, from, v);
+  glm_vec_mulv(s, v, v);
+  glm_vec_add(from, v, dest);
 }
 
 /*!

@@ -23,7 +23,13 @@ main(int argc, const char * argv[]) {
     cmocka_unit_test(test_clamp),
 
     /* euler */
-    cmocka_unit_test(test_euler)
+    cmocka_unit_test(test_euler),
+
+    /* quaternion */
+    cmocka_unit_test(test_quat),
+
+    /* vec4 */
+    cmocka_unit_test(test_vec4)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

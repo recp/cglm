@@ -10,6 +10,12 @@
 
 CGLM_EXPORT
 void
+glmc_vec3(vec4 v4, vec3 dest) {
+  glm_vec3(v4, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec_copy(vec3 a, vec3 dest) {
   glm_vec_copy(a, dest);
 }
@@ -82,6 +88,12 @@ glmc_vec_flipsign(vec3 v) {
 
 CGLM_EXPORT
 void
+glmc_vec_flipsign_to(vec3 v, vec3 dest) {
+  glm_vec_flipsign_to(v, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec_inv(vec3 v) {
   glm_vec_inv(v);
 }
@@ -144,4 +156,102 @@ CGLM_EXPORT
 void
 glmc_vec_clamp(vec3 v, float minVal, float maxVal) {
   glm_vec_clamp(v, minVal, maxVal);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_ortho(vec3 v, vec3 dest) {
+  glm_vec_ortho(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_lerp(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec_lerp(from, to, t, dest);
+}
+
+/* ext */
+
+CGLM_EXPORT
+void
+glmc_vec_mulv(vec3 a, vec3 b, vec3 d) {
+  glm_vec_mulv(a, b, d);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_broadcast(float val, vec3 d) {
+  glm_vec_broadcast(val, d);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_eq(vec3 v, float val) {
+  return glm_vec_eq(v, val);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_eq_eps(vec3 v, float val) {
+  return glm_vec_eq_eps(v, val);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_eq_all(vec3 v) {
+  return glm_vec_eq_all(v);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_eqv(vec3 v1, vec3 v2) {
+  return glm_vec_eqv(v1, v2);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_eqv_eps(vec3 v1, vec3 v2) {
+  return glm_vec_eqv_eps(v1, v2);
+}
+
+CGLM_EXPORT
+float
+glmc_vec_max(vec3 v) {
+  return glm_vec_max(v);
+}
+
+CGLM_EXPORT
+float
+glmc_vec_min(vec3 v) {
+  return glm_vec_min(v);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_isnan(vec3 v) {
+  return glm_vec_isnan(v);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_isinf(vec3 v) {
+  return glm_vec_isinf(v);
+}
+
+CGLM_EXPORT
+bool
+glmc_vec_isvalid(vec3 v) {
+  return glm_vec_isvalid(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_sign(vec3 v, vec3 dest) {
+  glm_vec_sign(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_sqrt(vec3 v, vec3 dest) {
+  glm_vec_sqrt(v, dest);
 }

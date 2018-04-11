@@ -26,6 +26,7 @@
 #define cglm_vec3_ext_h
 
 #include "common.h"
+#include "util.h"
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
@@ -194,6 +195,35 @@ CGLM_INLINE
 bool
 glm_vec_isvalid(vec3 v) {
   return !glm_vec_isnan(v) && !glm_vec_isinf(v);
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param v vector
+ */
+CGLM_INLINE
+void
+glm_vec_sign(vec3 v, vec3 dest) {
+  dest[0] = glm_signf(v[0]);
+  dest[1] = glm_signf(v[1]);
+  dest[2] = glm_signf(v[2]);
+}
+
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_sqrt(vec3 v, vec3 dest) {
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
 }
 
 #endif /* cglm_vec3_ext_h */

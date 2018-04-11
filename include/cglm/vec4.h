@@ -122,7 +122,14 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 CGLM_INLINE
 float
 glm_vec4_dot(vec4 a, vec4 b) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 x0;
+  x0 = _mm_mul_ps(_mm_load_ps(a), _mm_load_ps(b));
+  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
+  return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
+#else
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+#endif
 }
 
 /*!
@@ -139,7 +146,7 @@ glm_vec4_dot(vec4 a, vec4 b) {
 CGLM_INLINE
 float
 glm_vec4_norm2(vec4 v) {
-  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
+  return glm_vec4_dot(v, v);
 }
 
 /*!
@@ -258,6 +265,26 @@ glm_vec4_flipsign(vec4 v) {
   v[1] = -v[1];
   v[2] = -v[2];
   v[3] = -v[3];
+#endif
+}
+
+/*!
+ * @brief flip sign of all vec4 members and store result in dest
+ *
+ * @param[in]  v     vector
+ * @param[out] dest  vector
+ */
+CGLM_INLINE
+void
+glm_vec4_flipsign_to(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_xor_ps(_mm_load_ps(v),
+                                _mm_set1_ps(-0.0f)));
+#else
+  dest[0] = -v[0];
+  dest[1] = -v[1];
+  dest[2] = -v[2];
+  dest[3] = -v[3];
 #endif
 }
 
@@ -388,6 +415,28 @@ glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
   v[1] = glm_clamp(v[1], minVal, maxVal);
   v[2] = glm_clamp(v[2], minVal, maxVal);
   v[3] = glm_clamp(v[3], minVal, maxVal);
+}
+
+/*!
+ * @brief linear interpolation between two vector
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
+  vec4 s, v;
+
+  /* from + s * (to - from) */
+  glm_vec4_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec4_sub(to, from, v);
+  glm_vec4_mulv(s, v, v);
+  glm_vec4_add(from, v, dest);
 }
 
 #endif /* cglm_vec4_h */

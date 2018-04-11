@@ -23,6 +23,11 @@ Functions:
 #. :c:func:`glm_vec_eqv_eps`
 #. :c:func:`glm_vec_max`
 #. :c:func:`glm_vec_min`
+#. :c:func:`glm_vec_isnan`
+#. :c:func:`glm_vec_isinf`
+#. :c:func:`glm_vec_isvalid`
+#. :c:func:`glm_vec_sign`
+#. :c:func:`glm_vec_sqrt`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -96,3 +101,43 @@ Functions documentation
 
     Parameters:
       | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec_isnan(vec3 v)
+
+    | check if one of items is NaN (not a number)
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec_isinf(vec3 v)
+
+    | check if one of items is INFINITY
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec_isvalid(vec3 v)
+
+    | check if all items are valid number
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: void glm_vec_sign(vec3 v, vec3 dest)
+
+    get sign of 32 bit float as +1, -1, 0
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  sign vector (only keeps signs as -1, 0, -1)
+
+.. c:function:: void glm_vec_sqrt(vec3 v, vec3 dest)
+
+    square root of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector (sqrt(v))
