@@ -220,7 +220,7 @@ glm_vec_sign(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec_sqrt(vec4 v, vec4 dest) {
+glm_vec_sqrt(vec3 v, vec3 dest) {
   dest[0] = sqrtf(v[0]);
   dest[1] = sqrtf(v[1]);
   dest[2] = sqrtf(v[2]);
