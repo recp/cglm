@@ -64,12 +64,6 @@ glmc_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_mat4_mulq(mat4 m, versor q, mat4 dest) {
-  glm_mat4_mulq(m, q, dest);
-}
-
-CGLM_EXPORT
-void
 glmc_mat4_quat(mat4 m, versor dest) {
   glm_mat4_quat(m, dest);
 }

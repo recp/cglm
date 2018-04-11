@@ -320,21 +320,6 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 }
 
 /*!
- * @brief multiply mat4 with quaternion and store in dest vector
- *
- * @param[in]  m    left matrix
- * @param[in]  q    quaternion as right matrix
- * @param[out] dest destination matrix
- */
-CGLM_INLINE
-void
-glm_mat4_mulq(mat4 m, versor q, mat4 dest) {
-  mat4 rot;
-  glm_quat_mat4(q, rot);
-  glm_mat4_mul(m, rot, dest);
-}
-
-/*!
  * @brief convert mat4's rotation part to quaternion
  *
  * @param[in]  m    left matrix

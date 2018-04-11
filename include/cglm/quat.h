@@ -15,8 +15,10 @@
    CGLM_INLINE void glm_quat_init(versor q, float x, float y, float z, float w);
    CGLM_INLINE void glm_quat(versor q, float angle, float x, float y, float z);
    CGLM_INLINE void glm_quatv(versor q, float angle, vec3 axis);
+   CGLM_INLINE void glm_quat_copy(versor q, versor dest);
    CGLM_INLINE float glm_quat_norm(versor q);
    CGLM_INLINE void glm_quat_normalize(versor q);
+   CGLM_INLINE void glm_quat_normalize_to(versor q, versor dest);
    CGLM_INLINE float glm_quat_dot(versor q1, versor q2);
    CGLM_INLINE void glm_quat_conjugate(versor q, versor dest);
    CGLM_INLINE void glm_quat_inv(versor q, versor dest);
@@ -30,8 +32,20 @@
    CGLM_INLINE void glm_quat_axis(versor q, versor dest);
    CGLM_INLINE void glm_quat_mul(versor p, versor q, versor dest);
    CGLM_INLINE void glm_quat_mat4(versor q, mat4 dest);
-   CGLM_INLINE void glm_quat_mat3(versor q, mat3 dest)
+   CGLM_INLINE void glm_quat_mat4t(versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_mat3(versor q, mat3 dest);
+   CGLM_INLINE void glm_quat_mat3t(versor q, mat3 dest);
+   CGLM_INLINE void glm_quat_lerp(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
+   CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
+   CGLM_INLINE void glm_quat_forp(vec3 from,
+                                  vec3 to,
+                                  vec3 fwd,
+                                  vec3 up,
+                                  versor dest);
+   CGLM_INLINE void glm_quat_rotatev(versor q, vec3 v, vec3 dest);
+   CGLM_INLINE void glm_quat_rotate(mat4 m, versor q, mat4 dest);
  */
 
 #ifndef cglm_quat_h
@@ -45,6 +59,14 @@
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
 #endif
+
+CGLM_INLINE
+void
+glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
+
+CGLM_INLINE
+void
+glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
 
 /*
  * IMPORTANT:
@@ -603,10 +625,6 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
   glm_vec4_scale(q1, 1.0f / sinTheta, dest);
 }
 
-CGLM_INLINE
-void
-glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
-
 /*!
  * @brief creates view matrix using quaternion as camera orientation
  *
@@ -677,7 +695,7 @@ glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
 }
 
 /*!
- * @brief rotate existing transform matrix using quaternion
+ * @brief rotate vector using using quaternion
  *
  * @param[in]   q     quaternion
  * @param[in]   v     vector to rotate
@@ -702,6 +720,21 @@ glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
   glm_vec_scale(v2, 2.0f * s, v2);
 
   glm_vec_add(v1, v2, dest);
+}
+
+/*!
+ * @brief rotate existing transform matrix using quaternion
+ *
+ * @param[in]   m     existing transform matrix
+ * @param[in]   q     quaternion
+ * @param[out]  dest  destination matrix
+ */
+CGLM_INLINE
+void
+glm_quat_rotate(mat4 m, versor q, mat4 dest) {
+  mat4 rot;
+  glm_quat_mat4(q, rot);
+  glm_mat4_mul(m, rot, dest);
 }
 
 #endif /* cglm_quat_h */

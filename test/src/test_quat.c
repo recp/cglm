@@ -154,5 +154,35 @@ test_quat(void **state) {
 
   test_assert_vec3_eq(v1, v2);
 
+  /* 11. test rotate transform */
+  glm_translate_make(rot1, (vec3){-10.0, 45.0f, 8.0f});
+  glm_rotate(rot1, glm_rad(-90), GLM_ZUP);
+
+  glm_quatv(q3, glm_rad(-90.0f), GLM_ZUP);
+  glm_translate_make(rot2, (vec3){-10.0, 45.0f, 8.0f});
+  glm_quat_rotate(rot2, q3, rot2);
+
+  /* result must be same (almost) */
+  test_assert_mat4_eq2(rot1, rot2, 0.000009);
+
+  glm_rotate_make(rot1, glm_rad(-90), GLM_ZUP);
+  glm_translate(rot1, (vec3){-10.0, 45.0f, 8.0f});
+
+  glm_quatv(q3, glm_rad(-90.0f), GLM_ZUP);
+  glm_mat4_identity(rot2);
+  glm_quat_rotate(rot2, q3, rot2);
+  glm_translate(rot2, (vec3){-10.0, 45.0f, 8.0f});
+
+  /* result must be same (almost) */
+  test_assert_mat4_eq2(rot1, rot2, 0.000009);
+
+  /* reverse */
+  glm_rotate_make(rot1, glm_rad(-90), GLM_ZUP);
+  glm_quatv(q3, glm_rad(90.0f), GLM_ZUP);
+  glm_quat_rotate(rot1, q3, rot1);
+
+  /* result must be identity */
+  test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009);
+
   /* TODO: add tests for slerp, lerp */
 }
