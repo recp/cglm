@@ -124,6 +124,24 @@ glmc_vec_divs(vec3 a, float s, vec3 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec_addadd(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_addadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_subadd(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_subadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_muladd(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_muladd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec_flipsign(vec3 v) {
   glm_vec_flipsign(v);
 }

@@ -109,4 +109,18 @@ test_vec4(void **state) {
   glm_vec4_scale(v1, 0.8, v1);
   glm_vec4_scale_as(v, 0.8, v);
   test_assert_vec4_eq(v1, v);
+
+  /* addadd, subadd, muladd */
+  glm_vec4_one(v);
+
+  glm_vec4_addadd(GLM_VEC4_ONE, GLM_VEC4_ONE, v);
+  assert_true(glmc_vec4_eq_eps(v, 3));
+
+  glm_vec4_subadd(GLM_VEC4_ONE, GLM_VEC4_ZERO, v);
+  assert_true(glmc_vec4_eq_eps(v, 4));
+
+  glm_vec4_broadcast(2, v1);
+  glm_vec4_broadcast(3, v2);
+  glm_vec4_muladd(v1, v2, v);
+  assert_true(glmc_vec4_eq_eps(v, 10));
 }

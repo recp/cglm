@@ -38,6 +38,9 @@ Functions:
 #. :c:func:`glm_vec4_scale_as`
 #. :c:func:`glm_vec4_div`
 #. :c:func:`glm_vec4_divs`
+#. :c:func:`glm_vec4_addadd`
+#. :c:func:`glm_vec4_subadd`
+#. :c:func:`glm_vec4_muladd`
 #. :c:func:`glm_vec4_flipsign`
 #. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec4_inv`
@@ -204,6 +207,36 @@ Functions documentation
       | *[in]*  **v**     vector
       | *[in]*  **s**     scalar
       | *[out]* **dest**  result = (a[0] / s, a[1] / s, a[2] / s, a[3] / s)
+
+.. c:function:: void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest)
+
+    | add two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a + b)
+
+.. c:function:: void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest)
+
+    | sub two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a - b)
+
+.. c:function:: void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest)
+
+    | mul two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec4_flipsign(vec4 v)
 

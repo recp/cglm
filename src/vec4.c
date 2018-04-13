@@ -106,7 +106,7 @@ glmc_vec4_scale(vec4 v, float s, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_scale_as(vec3 v, float s, vec3 dest) {
+glmc_vec4_scale_as(vec4 v, float s, vec4 dest) {
   glm_vec4_scale_as(v, s, dest);
 }
 
@@ -120,6 +120,24 @@ CGLM_EXPORT
 void
 glmc_vec4_divs(vec4 v, float s, vec4 dest) {
   glm_vec4_divs(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_addadd(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_addadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_subadd(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_subadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_muladd(a, b, dest);
 }
 
 CGLM_EXPORT

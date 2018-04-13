@@ -95,6 +95,18 @@ glmc_vec4_divs(vec4 v, float s, vec4 dest);
 
 CGLM_EXPORT
 void
+glmc_vec4_addadd(vec4 a, vec4 b, vec4 dest);
+
+CGLM_EXPORT
+void
+glmc_vec4_subadd(vec4 a, vec4 b, vec4 dest);
+
+CGLM_EXPORT
+void
+glmc_vec4_muladd(vec4 a, vec4 b, vec4 dest);
+
+CGLM_EXPORT
+void
 glmc_vec4_flipsign(vec4 v);
 
 CGLM_EXPORT

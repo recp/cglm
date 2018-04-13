@@ -37,6 +37,9 @@
    CGLM_INLINE void  glm_vec4_scale_as(vec4 v, float s, vec4 dest);
    CGLM_INLINE void  glm_vec4_div(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_divs(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_flipsign(vec4 v);
    CGLM_INLINE void  glm_vec4_inv(vec4 v);
    CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
@@ -393,6 +396,79 @@ glm_vec4_divs(vec4 v, float s, vec4 dest) {
   _mm_store_ps(dest, _mm_div_ps(_mm_load_ps(v), _mm_set1_ps(s)));
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
+#endif
+}
+
+
+/*!
+ * @brief add two vectors and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a + b)
+ */
+CGLM_INLINE
+void
+glm_vec4_addadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_add_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] + b[0];
+  dest[1] += a[1] + b[1];
+  dest[2] += a[2] + b[2];
+  dest[3] += a[3] + b[3];
+#endif
+}
+
+/*!
+ * @brief sub two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a - b)
+ */
+CGLM_INLINE
+void
+glm_vec4_subadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_sub_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] - b[0];
+  dest[1] += a[1] - b[1];
+  dest[2] += a[2] - b[2];
+  dest[3] += a[3] - b[3];
+#endif
+}
+
+/*!
+ * @brief mul two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_mul_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] * b[0];
+  dest[1] += a[1] * b[1];
+  dest[2] += a[2] * b[2];
+  dest[3] += a[3] * b[3];
 #endif
 }
 

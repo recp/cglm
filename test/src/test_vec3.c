@@ -9,7 +9,7 @@
 
 void
 test_vec3(void **state) {
-  vec3 v, v1;
+  vec3 v, v1, v2;
 
   /* test zero */
   glm_vec_zero(v);
@@ -49,4 +49,18 @@ test_vec3(void **state) {
   glm_vec_scale(v1, 0.8, v1);
   glm_vec_scale_as(v, 0.8, v);
   test_assert_vec3_eq(v1, v);
+
+  /* addadd, subadd, muladd */
+  glm_vec_one(v);
+
+  glm_vec_addadd(GLM_VEC3_ONE, GLM_VEC3_ONE, v);
+  assert_true(glmc_vec_eq_eps(v, 3));
+
+  glm_vec_subadd(GLM_VEC3_ONE, GLM_VEC3_ZERO, v);
+  assert_true(glmc_vec_eq_eps(v, 4));
+
+  glm_vec_broadcast(2, v1);
+  glm_vec_broadcast(3, v2);
+  glm_vec_muladd(v1, v2, v);
+  assert_true(glmc_vec_eq_eps(v, 10));
 }

@@ -37,6 +37,9 @@
    CGLM_INLINE void  glm_vec_scale_as(vec3 v, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_div(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_divs(vec3 a, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_addadd(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_subadd(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_muladd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_flipsign(vec3 v);
    CGLM_INLINE void  glm_vec_inv(vec3 v);
    CGLM_INLINE void  glm_vec_inv_to(vec3 v, vec3 dest);
@@ -333,6 +336,57 @@ glm_vec_divs(vec3 v, float s, vec3 dest) {
   dest[0] = v[0] / s;
   dest[1] = v[1] / s;
   dest[2] = v[2] / s;
+}
+
+/*!
+ * @brief add two vectors and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a + b)
+ */
+CGLM_INLINE
+void
+glm_vec_addadd(vec3 a, vec3 b, vec3 dest) {
+  dest[0] += a[0] + b[0];
+  dest[1] += a[1] + b[1];
+  dest[2] += a[2] + b[2];
+}
+
+/*!
+ * @brief sub two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a + b)
+ */
+CGLM_INLINE
+void
+glm_vec_subadd(vec3 a, vec3 b, vec3 dest) {
+  dest[0] += a[0] - b[0];
+  dest[1] += a[1] - b[1];
+  dest[2] += a[2] - b[2];
+}
+
+/*!
+ * @brief mul two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec_muladd(vec3 a, vec3 b, vec3 dest) {
+  dest[0] += a[0] * b[0];
+  dest[1] += a[1] * b[1];
+  dest[2] += a[2] * b[2];
 }
 
 /*!
