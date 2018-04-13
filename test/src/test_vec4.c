@@ -28,6 +28,16 @@ test_vec4_normalize_to(vec4 vec, vec4 dest) {
   glm_vec4_scale(vec, 1.0f / norm, dest);
 }
 
+float
+test_vec4_norm2(vec4 vec) {
+  return test_vec4_dot(vec, vec);
+}
+
+float
+test_vec4_norm(vec4 vec) {
+  return sqrtf(test_vec4_dot(vec, vec));
+}
+
 void
 test_vec4(void **state) {
   vec4  v, v1, v2;
@@ -35,7 +45,7 @@ test_vec4(void **state) {
   float d1, d2;
 
 
-  for (i = 0; i < 100; i++) {
+  for (i = 0; i < 1000; i++) {
     /* 1. test SSE/SIMD dot product */
     test_rand_vec4(v);
     d1 = glm_vec4_dot(v, v);
@@ -51,5 +61,13 @@ test_vec4(void **state) {
     /* all must be same */
     test_assert_vec4_eq(v1, v2);
     test_assert_vec4_eq(v, v2);
+
+    /* 3. test SIMD norm */
+    test_rand_vec4(v);
+    test_assert_eqf(test_vec4_norm(v), glm_vec4_norm(v));
+
+    /* 3. test SIMD norm2 */
+    test_rand_vec4(v);
+    test_assert_eqf(test_vec4_norm2(v), glm_vec4_norm2(v));
   }
 }

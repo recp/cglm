@@ -146,7 +146,15 @@ glm_vec4_dot(vec4 a, vec4 b) {
 CGLM_INLINE
 float
 glm_vec4_norm2(vec4 v) {
-  return glm_vec4_dot(v, v);
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 x0;
+  x0 = _mm_load_ps(v);
+  x0 = _mm_mul_ps(x0, x0);
+  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
+  return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
+#else
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+#endif
 }
 
 /*!
@@ -159,7 +167,13 @@ glm_vec4_norm2(vec4 v) {
 CGLM_INLINE
 float
 glm_vec4_norm(vec4 vec) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 x0;
+  x0 = _mm_load_ps(vec);
+  return _mm_cvtss_f32(_mm_sqrt_ss(glm_simd_dot(x0, x0)));
+#else
   return sqrtf(glm_vec4_norm2(vec));
+#endif
 }
 
 /*!
