@@ -198,7 +198,7 @@ glm_vec4_norm2(vec4 v) {
   x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
   return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
 #else
-  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
+  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
 #endif
 }
 
@@ -254,10 +254,10 @@ glm_vec4_adds(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(v), _mm_set1_ps(s)));
 #else
-  dest[0] = v1[0] + s;
-  dest[1] = v1[1] + s;
-  dest[2] = v1[2] + s;
-  dest[3] = v1[3] + s;
+  dest[0] = v[0] + s;
+  dest[1] = v[1] + s;
+  dest[2] = v[2] + s;
+  dest[3] = v[3] + s;
 #endif
 }
 
@@ -294,10 +294,10 @@ glm_vec4_subs(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(dest, _mm_sub_ps(_mm_load_ps(v), _mm_set1_ps(s)));
 #else
-  dest[0] = v1[0] - s;
-  dest[1] = v1[1] - s;
-  dest[2] = v1[2] - s;
-  dest[3] = v1[3] - s;
+  dest[0] = v[0] - s;
+  dest[1] = v[1] - s;
+  dest[2] = v[2] - s;
+  dest[3] = v[3] - s;
 #endif
 }
 
