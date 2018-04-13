@@ -313,26 +313,6 @@ glm_vec4_inv_to(vec4 v, vec4 dest) {
 }
 
 /*!
- * @brief normalize vec4 and store result in same vec
- *
- * @param[in, out] v vector
- */
-CGLM_INLINE
-void
-glm_vec4_normalize(vec4 v) {
-  float norm;
-
-  norm = glm_vec4_norm(v);
-
-  if (norm == 0.0f) {
-    v[0] = v[1] = v[2] = v[3] = 0.0f;
-    return;
-  }
-
-  glm_vec4_scale(v, 1.0f / norm, v);
-}
-
-/*!
  * @brief normalize vec4 to dest
  *
  * @param[in]  vec  source
@@ -341,16 +321,44 @@ glm_vec4_normalize(vec4 v) {
 CGLM_INLINE
 void
 glm_vec4_normalize_to(vec4 vec, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 xdot, x0;
+  float  dot;
+
+  x0   = _mm_load_ps(vec);
+  xdot = glm_simd_dot(x0, x0);
+  dot  = _mm_cvtss_f32(xdot);
+
+  if (dot == 0.0f) {
+    _mm_store_ps(dest, _mm_setzero_ps());
+    return;
+  }
+
+  _mm_store_ps(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+#else
   float norm;
 
   norm = glm_vec4_norm(vec);
 
   if (norm == 0.0f) {
     dest[0] = dest[1] = dest[2] = dest[3] = 0.0f;
+    glm_vec4_broadcast(0.0f, dest);
     return;
   }
 
   glm_vec4_scale(vec, 1.0f / norm, dest);
+#endif
+}
+
+/*!
+ * @brief normalize vec4 and store result in same vec
+ *
+ * @param[in, out] v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_normalize(vec4 v) {
+  glm_vec4_normalize_to(v, v);
 }
 
 /**

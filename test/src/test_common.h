@@ -35,6 +35,9 @@ void
 test_assert_vec3_eq(vec3 v1, vec3 v2);
 
 void
+test_assert_vec4_eq(vec4 v1, vec4 v2);
+
+void
 test_assert_quat_eq(versor v1, versor v2);
 
 void
