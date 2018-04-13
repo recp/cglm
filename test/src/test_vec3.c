@@ -9,6 +9,8 @@
 
 void
 test_vec3(void **state) {
+  mat3 rot1m3;
+  mat4 rot1;
   vec3 v, v1, v2;
 
   /* test zero */
@@ -63,4 +65,14 @@ test_vec3(void **state) {
   glm_vec_broadcast(3, v2);
   glm_vec_muladd(v1, v2, v);
   assert_true(glmc_vec_eq_eps(v, 10));
+
+  /* rotate */
+  glm_vec_copy(GLM_YUP, v);
+  glm_rotate_make(rot1, glm_rad(90), GLM_XUP);
+  glm_vec_rotate_m4(rot1, v, v1);
+  glm_mat4_pick3(rot1, rot1m3);
+  glm_vec_rotate_m3(rot1m3, v, v2);
+
+  test_assert_vec3_eq(v1, v2);
+  test_assert_vec3_eq(v1, GLM_ZUP);
 }

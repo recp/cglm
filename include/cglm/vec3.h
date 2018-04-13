@@ -67,6 +67,7 @@
 #define cglm_vec3_h
 
 #include "common.h"
+#include "vec4.h"
 #include "vec3-ext.h"
 #include "util.h"
 
@@ -551,6 +552,12 @@ glm_vec_rotate(vec3 v, float angle, vec3 axis) {
 /*!
  * @brief apply rotation matrix to vector
  *
+ *  matrix format should be (no perspective):
+ *   a  b  c  x
+ *   e  f  g  y
+ *   i  j  k  z
+ *   0  0  0  w
+ *
  * @param[in]  m    affine matrix or rot matrix
  * @param[in]  v    vector
  * @param[out] dest rotated vector
@@ -558,17 +565,44 @@ glm_vec_rotate(vec3 v, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
-  vec3 res, x, y, z;
+  vec4 x, y, z, res;
 
-  glm_vec_normalize_to(m[0], x);
-  glm_vec_normalize_to(m[1], y);
-  glm_vec_normalize_to(m[2], z);
+  glm_vec4_normalize_to(m[0], x);
+  glm_vec4_normalize_to(m[1], y);
+  glm_vec4_normalize_to(m[2], z);
 
-  res[0] = x[0] * v[0] + y[0] * v[1] + z[0] * v[2];
-  res[1] = x[1] * v[0] + y[1] * v[1] + z[1] * v[2];
-  res[2] = x[2] * v[0] + y[2] * v[1] + z[2] * v[2];
+  glm_vec4_scale(x,   v[0], res);
+  glm_vec4_muladds(y, v[1], res);
+  glm_vec4_muladds(y, v[2], res);
 
-  glm_vec_copy(res, dest);
+  glm_vec3(res, dest);
+}
+
+/*!
+ * @brief apply rotation matrix to vector
+ *
+ * @param[in]  m    affine matrix or rot matrix
+ * @param[in]  v    vector
+ * @param[out] dest rotated vector
+ */
+CGLM_INLINE
+void
+glm_vec_rotate_m3(mat3 m, vec3 v, vec3 dest) {
+  vec4 res, x, y, z;
+
+  glm_vec4(m[0], 0.0f, x);
+  glm_vec4(m[1], 0.0f, y);
+  glm_vec4(m[2], 0.0f, z);
+
+  glm_vec4_normalize(x);
+  glm_vec4_normalize(y);
+  glm_vec4_normalize(z);
+
+  glm_vec4_scale(x,   v[0], res);
+  glm_vec4_muladds(y, v[1], res);
+  glm_vec4_muladds(y, v[2], res);
+
+  glm_vec3(res, dest);
 }
 
 /*!

@@ -60,6 +60,7 @@ Functions:
 #. :c:func:`glm_vec_angle`
 #. :c:func:`glm_vec_rotate`
 #. :c:func:`glm_vec_rotate_m4`
+#. :c:func:`glm_vec_rotate_m3`
 #. :c:func:`glm_vec_proj`
 #. :c:func:`glm_vec_center`
 #. :c:func:`glm_vec_maxv`
@@ -330,6 +331,15 @@ Functions documentation
       | *[out]*      **angle**  angle (radians)
 
 .. c:function:: void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest)
+
+    apply rotation matrix to vector
+
+    Parameters:
+      | *[in]*  **m**     affine matrix or rot matrix
+      | *[in]*  **v**     vector
+      | *[out]* **dest**  rotated vector
+
+.. c:function:: void  glm_vec_rotate_m3(mat3 m, vec3 v, vec3 dest)
 
     apply rotation matrix to vector
 
