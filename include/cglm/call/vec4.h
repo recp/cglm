@@ -23,6 +23,14 @@ glmc_vec4(vec3 v3, float last, vec4 dest);
 
 CGLM_EXPORT
 void
+glmc_vec4_zero(vec4 v);
+
+CGLM_EXPORT
+void
+glmc_vec4_one(vec4 v);
+
+CGLM_EXPORT
+void
 glmc_vec4_copy3(vec4 a, vec3 dest);
 
 CGLM_EXPORT

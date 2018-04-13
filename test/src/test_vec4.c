@@ -70,4 +70,12 @@ test_vec4(void **state) {
     test_rand_vec4(v);
     test_assert_eqf(test_vec4_norm2(v), glm_vec4_norm2(v));
   }
+
+  /* test zero */
+  glm_vec4_zero(v);
+  test_assert_vec4_eq(GLM_VEC4_ZERO, v);
+
+  /* test one */
+  glm_vec4_one(v);
+  test_assert_vec4_eq(GLM_VEC4_ONE, v);
 }

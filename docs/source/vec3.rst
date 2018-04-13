@@ -31,6 +31,8 @@ Functions:
 
 1. :c:func:`glm_vec3`
 #. :c:func:`glm_vec_copy`
+#. :c:func:`glm_vec_zero`
+#. :c:func:`glm_vec_one`
 #. :c:func:`glm_vec_dot`
 #. :c:func:`glm_vec_cross`
 #. :c:func:`glm_vec_norm2`
@@ -75,6 +77,20 @@ Functions documentation
     Parameters:
       | *[in]*  **a**     source
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_vec_zero(vec3 v)
+
+    makes all members 0.0f (zero)
+
+    Parameters:
+      | *[in, out]*  **v**     vector
+
+.. c:function:: void  glm_vec_one(vec3 v)
+
+    makes all members 1.0f (one)
+
+    Parameters:
+      | *[in, out]*  **v**     vector
 
 .. c:function:: float  glm_vec_dot(vec3 a, vec3 b)
 

@@ -24,6 +24,8 @@ Functions:
 1. :c:func:`glm_vec4`
 #. :c:func:`glm_vec4_copy3`
 #. :c:func:`glm_vec4_copy`
+#. :c:func:`glm_vec4_zero`
+#. :c:func:`glm_vec4_one`
 #. :c:func:`glm_vec4_dot`
 #. :c:func:`glm_vec4_norm2`
 #. :c:func:`glm_vec4_norm`
@@ -77,6 +79,13 @@ Functions documentation
     Parameters:
       | *[in]*  **v**     source
       | *[in]*  **dest**  destination
+
+.. c:function:: void  glm_vec4_zero(vec4 v)
+
+    makes all members zero
+
+    Parameters:
+      | *[in, out]*  **v**     vector
 
 .. c:function:: float  glm_vec4_dot(vec4 a, vec4 b)
 

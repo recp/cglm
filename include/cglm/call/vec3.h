@@ -25,6 +25,14 @@ void
 glmc_vec_copy(vec3 a, vec3 dest);
 
 CGLM_EXPORT
+void
+glmc_vec_zero(vec3 v);
+
+CGLM_EXPORT
+void
+glmc_vec_one(vec3 v);
+
+CGLM_EXPORT
 float
 glmc_vec_dot(vec3 a, vec3 b);
 

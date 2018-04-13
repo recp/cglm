@@ -112,6 +112,42 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief make vector zero
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_zero(vec4 v) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_setzero_ps());
+#else
+  v[0] = 0.0f;
+  v[1] = 0.0f;
+  v[2] = 0.0f;
+  v[3] = 0.0f;
+#endif
+}
+
+/*!
+ * @brief make vector one
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_one(vec4 v) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_set1_ps(1.0f));
+#else
+  v[0] = 1.0f;
+  v[1] = 1.0f;
+  v[2] = 1.0f;
+  v[3] = 1.0f;
+#endif
+}
+
+/*!
  * @brief vec4 dot product
  *
  * @param[in] a vector1

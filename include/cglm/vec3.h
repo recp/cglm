@@ -104,6 +104,32 @@ glm_vec_copy(vec3 a, vec3 dest) {
 }
 
 /*!
+ * @brief make vector zero
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec_zero(vec4 v) {
+  v[0] = 0.0f;
+  v[1] = 0.0f;
+  v[2] = 0.0f;
+}
+
+/*!
+ * @brief make vector one
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec_one(vec4 v) {
+  v[0] = 1.0f;
+  v[1] = 1.0f;
+  v[2] = 1.0f;
+}
+
+/*!
  * @brief vec3 dot product
  *
  * @param[in] a vector1
