@@ -247,8 +247,8 @@ glm_vec_scale_as(vec3 v, float s, vec3 dest) {
   float norm;
   norm = glm_vec_norm(v);
 
-  if (norm == 0) {
-    glm_vec_copy(v, dest);
+  if (norm == 0.0f) {
+    glm_vec_zero(dest);
     return;
   }
 

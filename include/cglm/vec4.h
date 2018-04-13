@@ -291,8 +291,8 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
   float norm;
   norm = glm_vec4_norm(v);
 
-  if (norm == 0) {
-    glm_vec4_copy(v, dest);
+  if (norm == 0.0f) {
+    glm_vec4_zero(dest);
     return;
   }
 
