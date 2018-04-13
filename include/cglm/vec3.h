@@ -390,6 +390,23 @@ glm_vec_muladd(vec3 a, vec3 b, vec3 dest) {
 }
 
 /*!
+ * @brief mul vector with scalar and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec_muladds(vec3 a, float s, vec3 dest) {
+  dest[0] += a[0] * s;
+  dest[1] += a[1] * s;
+  dest[2] += a[2] * s;
+}
+
+/*!
  * @brief flip sign of all vec3 members
  *
  * @param[in, out]  v  vector

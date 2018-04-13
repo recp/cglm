@@ -49,6 +49,7 @@ Functions:
 #. :c:func:`glm_vec_addadd`
 #. :c:func:`glm_vec_subadd`
 #. :c:func:`glm_vec_muladd`
+#. :c:func:`glm_vec_muladds`
 #. :c:func:`glm_vec_flipsign`
 #. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec_inv`
@@ -251,6 +252,16 @@ Functions documentation
     Parameters:
       | *[in]*  **a**     vector 1
       | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec_muladds(vec3 a, float s, vec3 dest)
+
+    | mul vector with scalar and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector
+      | *[in]*  **s**     scalar
       | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec_flipsign(vec3 v)

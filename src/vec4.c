@@ -142,6 +142,12 @@ glmc_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec4_muladds(vec4 a, float s, vec4 dest) {
+  glm_vec4_muladds(a, s, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec4_flipsign(vec4 v) {
   glm_vec4_flipsign(v);
 }

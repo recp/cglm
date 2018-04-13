@@ -473,6 +473,30 @@ glm_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
 }
 
 /*!
+ * @brief mul vector with scalar and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec4_muladds(vec4 a, float s, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_mul_ps(_mm_load_ps(a),
+                                           _mm_set1_ps(s))));
+#else
+  dest[0] += a[0] * s;
+  dest[1] += a[1] * s;
+  dest[2] += a[2] * s;
+  dest[3] += a[3] * s;
+#endif
+}
+
+/*!
  * @brief flip sign of all vec4 members
  *
  * @param[in, out]  v  vector
