@@ -40,6 +40,12 @@ glm_simd_dot(__m128 a, __m128 b) {
   return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
 }
 
+CGLM_INLINE
+__m128
+glm_simd_norm(__m128 a) {
+  return _mm_sqrt_ps(glm_simd_dot(a, a));
+}
+
 #endif
 
 /* x86, x64 */
