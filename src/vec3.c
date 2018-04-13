@@ -76,8 +76,26 @@ glmc_vec_add(vec3 v1, vec3 v2, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
-  glm_vec_sub(v1, v2, dest);
+glmc_vec_adds(vec3 v, float s, vec3 dest) {
+  glm_vec_adds(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_sub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_sub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_subs(vec3 v, float s, vec3 dest) {
+  glm_vec_subs(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_mul(vec3 a, vec3 b, vec3 d) {
+  glm_vec_mul(a, b, d);
 }
 
 CGLM_EXPORT
@@ -90,6 +108,18 @@ CGLM_EXPORT
 void
 glmc_vec_scale_as(vec3 v, float s, vec3 dest) {
   glm_vec_scale_as(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_div(vec3 a, vec3 b, vec3 dest) {
+  glm_vec_div(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_divs(vec3 a, float s, vec3 dest) {
+  glm_vec_divs(a, s, dest);
 }
 
 CGLM_EXPORT

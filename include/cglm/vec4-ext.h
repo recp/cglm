@@ -32,7 +32,7 @@
 #include <float.h>
 
 /*!
- * @brief multiplies individual items, just for convenient like SIMD
+ * @brief DEPRECATED! use glm_vec4_mul
  *
  * @param a v1
  * @param b v2

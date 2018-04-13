@@ -78,4 +78,35 @@ test_vec4(void **state) {
   /* test one */
   glm_vec4_one(v);
   test_assert_vec4_eq(GLM_VEC4_ONE, v);
+
+  /* adds, subs, div, divs, mul */
+  glm_vec4_add(v, GLM_VEC4_ONE, v);
+  assert_true(glmc_vec4_eq_eps(v, 2));
+
+  glm_vec4_adds(v, 10, v);
+  assert_true(glmc_vec4_eq_eps(v, 12));
+
+  glm_vec4_sub(v, GLM_VEC4_ONE, v);
+  assert_true(glmc_vec4_eq_eps(v, 11));
+
+  glm_vec4_subs(v, 1, v);
+  assert_true(glmc_vec4_eq_eps(v, 10));
+
+  glm_vec4_broadcast(2, v1);
+  glm_vec4_div(v, v1, v);
+  assert_true(glmc_vec4_eq_eps(v, 5));
+
+  glm_vec4_divs(v, 0.5, v);
+  assert_true(glmc_vec4_eq_eps(v, 10));
+
+  glm_vec4_mul(v, v1, v);
+  assert_true(glmc_vec4_eq_eps(v, 20));
+
+  glm_vec4_scale(v, 0.5, v);
+  assert_true(glmc_vec4_eq_eps(v, 10));
+
+  glm_vec4_normalize_to(v, v1);
+  glm_vec4_scale(v1, 0.8, v1);
+  glm_vec4_scale_as(v, 0.8, v);
+  test_assert_vec4_eq(v1, v);
 }

@@ -28,10 +28,15 @@
    CGLM_INLINE void  glm_vec_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE float glm_vec_norm2(vec3 v);
    CGLM_INLINE float glm_vec_norm(vec3 vec);
-   CGLM_INLINE void  glm_vec_add(vec3 v1, vec3 v2, vec3 dest);
-   CGLM_INLINE void  glm_vec_sub(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE void  glm_vec_add(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_adds(vec3 a, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_sub(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_subs(vec3 a, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_mul(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_scale(vec3 v, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_scale_as(vec3 v, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec_div(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_divs(vec3 a, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_flipsign(vec3 v);
    CGLM_INLINE void  glm_vec_inv(vec3 v);
    CGLM_INLINE void  glm_vec_inv_to(vec3 v, vec3 dest);
@@ -110,7 +115,7 @@ glm_vec_copy(vec3 a, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec_zero(vec4 v) {
+glm_vec_zero(vec3 v) {
   v[0] = 0.0f;
   v[1] = 0.0f;
   v[2] = 0.0f;
@@ -123,7 +128,7 @@ glm_vec_zero(vec4 v) {
  */
 CGLM_INLINE
 void
-glm_vec_one(vec4 v) {
+glm_vec_one(vec3 v) {
   v[0] = 1.0f;
   v[1] = 1.0f;
   v[2] = 1.0f;
@@ -190,33 +195,78 @@ glm_vec_norm(vec3 vec) {
 }
 
 /*!
- * @brief add v2 vector to v1 vector store result in dest
+ * @brief add a vector to b vector store result in dest
  *
- * @param[in]  v1 vector1
- * @param[in]  v2 vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
 void
-glm_vec_add(vec3 v1, vec3 v2, vec3 dest) {
-  dest[0] = v1[0] + v2[0];
-  dest[1] = v1[1] + v2[1];
-  dest[2] = v1[2] + v2[2];
+glm_vec_add(vec3 a, vec3 b, vec3 dest) {
+  dest[0] = a[0] + b[0];
+  dest[1] = a[1] + b[1];
+  dest[2] = a[2] + b[2];
+}
+
+/*!
+ * @brief add scalar to v vector store result in dest (d = v + s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_adds(vec3 v, float s, vec3 dest) {
+  dest[0] = v[0] + s;
+  dest[1] = v[1] + s;
+  dest[2] = v[2] + s;
 }
 
 /*!
  * @brief subtract v2 vector from v1 vector store result in dest
  *
- * @param[in]  v1 vector1
- * @param[in]  v2 vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
 void
-glm_vec_sub(vec3 v1, vec3 v2, vec3 dest) {
-  dest[0] = v1[0] - v2[0];
-  dest[1] = v1[1] - v2[1];
-  dest[2] = v1[2] - v2[2];
+glm_vec_sub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] = a[0] - b[0];
+  dest[1] = a[1] - b[1];
+  dest[2] = a[2] - b[2];
+}
+
+/*!
+ * @brief subtract scalar from v vector store result in dest (d = v - s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_subs(vec3 v, float s, vec3 dest) {
+  dest[0] = v[0] - s;
+  dest[1] = v[1] - s;
+  dest[2] = v[2] - s;
+}
+
+/*!
+ * @brief multiply two vector (component-wise multiplication)
+ *
+ * @param a v1
+ * @param b v2
+ * @param d v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
+ */
+CGLM_INLINE
+void
+glm_vec_mul(vec3 a, vec3 b, vec3 d) {
+  d[0] = a[0] * b[0];
+  d[1] = a[1] * b[1];
+  d[2] = a[2] * b[2];
 }
 
 /*!
@@ -253,6 +303,36 @@ glm_vec_scale_as(vec3 v, float s, vec3 dest) {
   }
 
   glm_vec_scale(v, s / norm, dest);
+}
+
+/*!
+ * @brief div vector with another component-wise division: d = a / b
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest result = (a[0]/b[0], a[1]/b[1], a[2]/b[2])
+ */
+CGLM_INLINE
+void
+glm_vec_div(vec3 a, vec3 b, vec3 dest) {
+  dest[0] = a[0] / b[0];
+  dest[1] = a[1] / b[1];
+  dest[2] = a[2] / b[2];
+}
+
+/*!
+ * @brief div vector with scalar: d = v / s
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest result = (a[0]/s, a[1]/s, a[2]/s)
+ */
+CGLM_INLINE
+void
+glm_vec_divs(vec3 v, float s, vec3 dest) {
+  dest[0] = v[0] / s;
+  dest[1] = v[1] / s;
+  dest[2] = v[2] / s;
 }
 
 /*!
