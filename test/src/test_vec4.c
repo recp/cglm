@@ -39,8 +39,24 @@ test_vec4_norm(vec4 vec) {
 }
 
 void
+test_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
+  dest[0] = glm_max(v1[0], v2[0]);
+  dest[1] = glm_max(v1[1], v2[1]);
+  dest[2] = glm_max(v1[2], v2[2]);
+  dest[3] = glm_max(v1[3], v2[3]);
+}
+
+void
+test_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
+  dest[0] = glm_min(v1[0], v2[0]);
+  dest[1] = glm_min(v1[1], v2[1]);
+  dest[2] = glm_min(v1[2], v2[2]);
+  dest[3] = glm_min(v1[3], v2[3]);
+}
+
+void
 test_vec4(void **state) {
-  vec4  v, v1, v2;
+  vec4  v, v1, v2, v3, v4;
   int   i;
   float d1, d2;
 
@@ -123,4 +139,16 @@ test_vec4(void **state) {
   glm_vec4_broadcast(3, v2);
   glm_vec4_muladd(v1, v2, v);
   assert_true(glmc_vec4_eq_eps(v, 10));
+
+  /* min, max */
+  test_rand_vec4(v1);
+  test_rand_vec4(v2);
+
+  glm_vec4_maxv(v1, v2, v3);
+  test_vec4_maxv(v1, v2, v4);
+  test_assert_vec4_eq(v3, v4);
+
+  glm_vec4_minv(v1, v2, v3);
+  test_vec4_minv(v1, v2, v4);
+  test_assert_vec4_eq(v3, v4);
 }

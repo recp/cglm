@@ -633,10 +633,14 @@ glm_vec4_distance(vec4 v1, vec4 v2) {
 CGLM_INLINE
 void
 glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_max_ps(_mm_load_ps(v1), _mm_load_ps(v2)));
+#else
   dest[0] = glm_max(v1[0], v2[0]);
   dest[1] = glm_max(v1[1], v2[1]);
   dest[2] = glm_max(v1[2], v2[2]);
   dest[3] = glm_max(v1[3], v2[3]);
+#endif
 }
 
 /*!
@@ -649,10 +653,14 @@ glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_min_ps(_mm_load_ps(v1), _mm_load_ps(v2)));
+#else
   dest[0] = glm_min(v1[0], v2[0]);
   dest[1] = glm_min(v1[1], v2[1]);
   dest[2] = glm_min(v1[2], v2[2]);
   dest[3] = glm_min(v1[3], v2[3]);
+#endif
 }
 
 /*!
