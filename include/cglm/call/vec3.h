@@ -25,6 +25,14 @@ void
 glmc_vec_copy(vec3 a, vec3 dest);
 
 CGLM_EXPORT
+void
+glmc_vec_zero(vec3 v);
+
+CGLM_EXPORT
+void
+glmc_vec_one(vec3 v);
+
+CGLM_EXPORT
 float
 glmc_vec_dot(vec3 a, vec3 b);
 
@@ -54,7 +62,19 @@ glmc_vec_add(vec3 v1, vec3 v2, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec_sub(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec_adds(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_sub(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_subs(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_mul(vec3 a, vec3 b, vec3 d);
 
 CGLM_EXPORT
 void
@@ -63,6 +83,30 @@ glmc_vec_scale(vec3 v, float s, vec3 dest);
 CGLM_EXPORT
 void
 glmc_vec_scale_as(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_div(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_divs(vec3 a, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_addadd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_subadd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_muladd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_muladds(vec3 a, float s, vec3 dest);
 
 CGLM_EXPORT
 void

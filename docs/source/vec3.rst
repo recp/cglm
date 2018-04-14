@@ -31,14 +31,25 @@ Functions:
 
 1. :c:func:`glm_vec3`
 #. :c:func:`glm_vec_copy`
+#. :c:func:`glm_vec_zero`
+#. :c:func:`glm_vec_one`
 #. :c:func:`glm_vec_dot`
 #. :c:func:`glm_vec_cross`
 #. :c:func:`glm_vec_norm2`
 #. :c:func:`glm_vec_norm`
 #. :c:func:`glm_vec_add`
+#. :c:func:`glm_vec_adds`
 #. :c:func:`glm_vec_sub`
+#. :c:func:`glm_vec_subs`
+#. :c:func:`glm_vec_mul`
 #. :c:func:`glm_vec_scale`
 #. :c:func:`glm_vec_scale_as`
+#. :c:func:`glm_vec_div`
+#. :c:func:`glm_vec_divs`
+#. :c:func:`glm_vec_addadd`
+#. :c:func:`glm_vec_subadd`
+#. :c:func:`glm_vec_muladd`
+#. :c:func:`glm_vec_muladds`
 #. :c:func:`glm_vec_flipsign`
 #. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec_inv`
@@ -49,6 +60,7 @@ Functions:
 #. :c:func:`glm_vec_angle`
 #. :c:func:`glm_vec_rotate`
 #. :c:func:`glm_vec_rotate_m4`
+#. :c:func:`glm_vec_rotate_m3`
 #. :c:func:`glm_vec_proj`
 #. :c:func:`glm_vec_center`
 #. :c:func:`glm_vec_maxv`
@@ -75,6 +87,20 @@ Functions documentation
     Parameters:
       | *[in]*  **a**     source
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_vec_zero(vec3 v)
+
+    makes all members 0.0f (zero)
+
+    Parameters:
+      | *[in, out]*  **v**     vector
+
+.. c:function:: void  glm_vec_one(vec3 v)
+
+    makes all members 1.0f (one)
+
+    Parameters:
+      | *[in, out]*  **v**     vector
 
 .. c:function:: float  glm_vec_dot(vec3 a, vec3 b)
 
@@ -117,23 +143,50 @@ Functions documentation
     Parameters:
       | *[in]*  **vec**   vector
 
-.. c:function:: void  glm_vec_add(vec3 v1, vec3 v2, vec3 dest)
+.. c:function:: void  glm_vec_add(vec3 a, vec3 b, vec3 dest)
 
-    add v2 vector to v1 vector store result in dest
+    add a vector to b vector store result in dest
 
     Parameters:
-      | *[in]*  **v1**    vector1
-      | *[in]*  **v2**    vector2
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
+      | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec_adds(vec3 a, float s, vec3 dest)
+
+    add scalar to v vector store result in dest (d = v + vec(s))
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
       | *[out]* **dest**  destination vector
 
 .. c:function:: void  glm_vec_sub(vec3 v1, vec3 v2, vec3 dest)
 
-    subtract v2 vector from v1 vector store result in dest
+    subtract b vector from a vector store result in dest (d = v1 - v2)
 
     Parameters:
-      | *[in]*  **v1**    vector1
-      | *[in]*  **v2**    vector2
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
       | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec_subs(vec3 v, float s, vec3 dest)
+
+    subtract scalar from v vector store result in dest (d = v - vec(s))
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec_mul(vec3 a, vec3 b, vec3 d)
+
+    multiply two vector (component-wise multiplication)
+
+    Parameters:
+      | *[in]*  **a**     vector
+      | *[in]*  **b**     scalar
+      | *[out]* **d**     result = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
 
 .. c:function:: void glm_vec_scale(vec3 v, float s, vec3 dest)
 
@@ -153,6 +206,64 @@ Functions documentation
       | *[in]*  **v**     vector
       | *[in]*  **s**     scalar
       | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec_div(vec3 a, vec3 b, vec3 dest)
+
+    div vector with another component-wise division: d = a / b
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  result = (a[0] / b[0], a[1] / b[1], a[2] / b[2])
+
+.. c:function:: void  glm_vec_divs(vec3 v, float s, vec3 dest)
+
+    div vector with scalar: d = v / s
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  result = (a[0] / s, a[1] / s, a[2] / s])
+
+.. c:function:: void  glm_vec_addadd(vec3 a, vec3 b, vec3 dest)
+
+    | add two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a + b)
+
+.. c:function:: void  glm_vec_subadd(vec3 a, vec3 b, vec3 dest)
+
+    | sub two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a - b)
+
+.. c:function:: void  glm_vec_muladd(vec3 a, vec3 b, vec3 dest)
+
+    | mul two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec_muladds(vec3 a, float s, vec3 dest)
+
+    | mul vector with scalar and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec_flipsign(vec3 v)
 
@@ -220,6 +331,15 @@ Functions documentation
       | *[out]*      **angle**  angle (radians)
 
 .. c:function:: void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest)
+
+    apply rotation matrix to vector
+
+    Parameters:
+      | *[in]*  **m**     affine matrix or rot matrix
+      | *[in]*  **v**     vector
+      | *[out]* **dest**  rotated vector
+
+.. c:function:: void  glm_vec_rotate_m3(mat3 m, vec3 v, vec3 dest)
 
     apply rotation matrix to vector
 

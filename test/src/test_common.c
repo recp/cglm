@@ -85,10 +85,23 @@ test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
 }
 
 void
+test_assert_eqf(float a, float b) {
+  assert_true(fabsf(a - b) <= 0.000009); /* rounding errors */
+}
+
+void
 test_assert_vec3_eq(vec3 v1, vec3 v2) {
   assert_true(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
   assert_true(fabsf(v1[1] - v2[1]) <= 0.000009);
   assert_true(fabsf(v1[2] - v2[2]) <= 0.000009);
+}
+
+void
+test_assert_vec4_eq(vec4 v1, vec4 v2) {
+  assert_true(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
+  assert_true(fabsf(v1[1] - v2[1]) <= 0.000009);
+  assert_true(fabsf(v1[2] - v2[2]) <= 0.000009);
+  assert_true(fabsf(v1[3] - v2[3]) <= 0.000009);
 }
 
 void

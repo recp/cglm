@@ -28,10 +28,18 @@
    CGLM_INLINE float glm_vec4_dot(vec4 a, vec4 b);
    CGLM_INLINE float glm_vec4_norm2(vec4 v);
    CGLM_INLINE float glm_vec4_norm(vec4 vec);
-   CGLM_INLINE void  glm_vec4_add(vec4 v1, vec4 v2, vec4 dest);
-   CGLM_INLINE void  glm_vec4_sub(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE void  glm_vec4_add(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_adds(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_sub(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_subs(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_mul(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_scale(vec4 v, float s, vec4 dest);
    CGLM_INLINE void  glm_vec4_scale_as(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_div(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_divs(vec4 v, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_flipsign(vec4 v);
    CGLM_INLINE void  glm_vec4_inv(vec4 v);
    CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
@@ -41,6 +49,7 @@
    CGLM_INLINE void  glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
+   CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
  */
 
 #ifndef cglm_vec4_h
@@ -112,6 +121,42 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief make vector zero
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_zero(vec4 v) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_setzero_ps());
+#else
+  v[0] = 0.0f;
+  v[1] = 0.0f;
+  v[2] = 0.0f;
+  v[3] = 0.0f;
+#endif
+}
+
+/*!
+ * @brief make vector one
+ *
+ * @param[in, out]  v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_one(vec4 v) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_set1_ps(1.0f));
+#else
+  v[0] = 1.0f;
+  v[1] = 1.0f;
+  v[2] = 1.0f;
+  v[3] = 1.0f;
+#endif
+}
+
+/*!
  * @brief vec4 dot product
  *
  * @param[in] a vector1
@@ -146,7 +191,15 @@ glm_vec4_dot(vec4 a, vec4 b) {
 CGLM_INLINE
 float
 glm_vec4_norm2(vec4 v) {
-  return glm_vec4_dot(v, v);
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 x0;
+  x0 = _mm_load_ps(v);
+  x0 = _mm_mul_ps(x0, x0);
+  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
+  return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
+#else
+  return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
+#endif
 }
 
 /*!
@@ -159,50 +212,112 @@ glm_vec4_norm2(vec4 v) {
 CGLM_INLINE
 float
 glm_vec4_norm(vec4 vec) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 x0;
+  x0 = _mm_load_ps(vec);
+  return _mm_cvtss_f32(_mm_sqrt_ss(glm_simd_dot(x0, x0)));
+#else
   return sqrtf(glm_vec4_norm2(vec));
+#endif
 }
 
 /*!
  * @brief add v2 vector to v1 vector store result in dest
  *
- * @param[in]  v1 vector1
- * @param[in]  v2 vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination vector
  */
 CGLM_INLINE
 void
-glm_vec4_add(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_add(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest,
-               _mm_add_ps(_mm_load_ps(v1),
-                          _mm_load_ps(v2)));
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(a), _mm_load_ps(b)));
 #else
-  dest[0] = v1[0] + v2[0];
-  dest[1] = v1[1] + v2[1];
-  dest[2] = v1[2] + v2[2];
-  dest[3] = v1[3] + v2[3];
+  dest[0] = a[0] + b[0];
+  dest[1] = a[1] + b[1];
+  dest[2] = a[2] + b[2];
+  dest[3] = a[3] + b[3];
 #endif
 }
 
 /*!
- * @brief subtract v2 vector from v1 vector store result in dest
+ * @brief add scalar to v vector store result in dest (d = v + vec(s))
  *
- * @param[in]  v1 vector1
- * @param[in]  v2 vector2
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
  * @param[out] dest destination vector
  */
 CGLM_INLINE
 void
-glm_vec4_sub(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_adds(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest,
-               _mm_sub_ps(_mm_load_ps(v1),
-                          _mm_load_ps(v2)));
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(v), _mm_set1_ps(s)));
 #else
-  dest[0] = v1[0] - v2[0];
-  dest[1] = v1[1] - v2[1];
-  dest[2] = v1[2] - v2[2];
-  dest[3] = v1[3] - v2[3];
+  dest[0] = v[0] + s;
+  dest[1] = v[1] + s;
+  dest[2] = v[2] + s;
+  dest[3] = v[3] + s;
+#endif
+}
+
+/*!
+ * @brief subtract b vector from a vector store result in dest (d = v1 - v2)
+ *
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sub(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_sub_ps(_mm_load_ps(a), _mm_load_ps(b)));
+#else
+  dest[0] = a[0] - b[0];
+  dest[1] = a[1] - b[1];
+  dest[2] = a[2] - b[2];
+  dest[3] = a[3] - b[3];
+#endif
+}
+
+/*!
+ * @brief subtract scalar from v vector store result in dest (d = v - vec(s))
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_subs(vec4 v, float s, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_sub_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+#else
+  dest[0] = v[0] - s;
+  dest[1] = v[1] - s;
+  dest[2] = v[2] - s;
+  dest[3] = v[3] - s;
+#endif
+}
+
+/*!
+ * @brief multiply two vector (component-wise multiplication)
+ *
+ * @param a v1
+ * @param b v2
+ * @param d v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
+ */
+CGLM_INLINE
+void
+glm_vec4_mul(vec4 a, vec4 b, vec4 d) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(d, _mm_mul_ps(_mm_load_ps(a), _mm_load_ps(b)));
+#else
+  d[0] = a[0] * b[0];
+  d[1] = a[1] * b[1];
+  d[2] = a[2] * b[2];
+  d[3] = a[3] * b[3];
 #endif
 }
 
@@ -217,9 +332,7 @@ CGLM_INLINE
 void
 glm_vec4_scale(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest,
-               _mm_mul_ps(_mm_load_ps(v),
-                          _mm_set1_ps(s)));
+  _mm_store_ps(dest, _mm_mul_ps(_mm_load_ps(v), _mm_set1_ps(s)));
 #else
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
@@ -241,12 +354,146 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
   float norm;
   norm = glm_vec4_norm(v);
 
-  if (norm == 0) {
-    glm_vec4_copy(v, dest);
+  if (norm == 0.0f) {
+    glm_vec4_zero(dest);
     return;
   }
 
   glm_vec4_scale(v, s / norm, dest);
+}
+
+/*!
+ * @brief div vector with another component-wise division: d = v1 / v2
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest result = (a[0]/b[0], a[1]/b[1], a[2]/b[2], a[3]/b[3])
+ */
+CGLM_INLINE
+void
+glm_vec4_div(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_div_ps(_mm_load_ps(a), _mm_load_ps(b)));
+#else
+  dest[0] = a[0] / b[0];
+  dest[1] = a[1] / b[1];
+  dest[2] = a[2] / b[2];
+  dest[3] = a[3] / b[3];
+#endif
+}
+
+/*!
+ * @brief div vec4 vector with scalar: d = v / s
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_divs(vec4 v, float s, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_div_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+#else
+  glm_vec4_scale(v, 1.0f / s, dest);
+#endif
+}
+
+
+/*!
+ * @brief add two vectors and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a + b)
+ */
+CGLM_INLINE
+void
+glm_vec4_addadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_add_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] + b[0];
+  dest[1] += a[1] + b[1];
+  dest[2] += a[2] + b[2];
+  dest[3] += a[3] + b[3];
+#endif
+}
+
+/*!
+ * @brief sub two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a - b)
+ */
+CGLM_INLINE
+void
+glm_vec4_subadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_sub_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] - b[0];
+  dest[1] += a[1] - b[1];
+  dest[2] += a[2] - b[2];
+  dest[3] += a[3] - b[3];
+#endif
+}
+
+/*!
+ * @brief mul two vectors and add result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_mul_ps(_mm_load_ps(a),
+                                           _mm_load_ps(b))));
+#else
+  dest[0] += a[0] * b[0];
+  dest[1] += a[1] * b[1];
+  dest[2] += a[2] * b[2];
+  dest[3] += a[3] * b[3];
+#endif
+}
+
+/*!
+ * @brief mul vector with scalar and add result to sum
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec4_muladds(vec4 a, float s, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
+                                _mm_mul_ps(_mm_load_ps(a),
+                                           _mm_set1_ps(s))));
+#else
+  dest[0] += a[0] * s;
+  dest[1] += a[1] * s;
+  dest[2] += a[2] * s;
+  dest[3] += a[3] * s;
+#endif
 }
 
 /*!
@@ -258,8 +505,7 @@ CGLM_INLINE
 void
 glm_vec4_flipsign(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(v, _mm_xor_ps(_mm_load_ps(v),
-                             _mm_set1_ps(-0.0f)));
+  _mm_store_ps(v, _mm_xor_ps(_mm_load_ps(v), _mm_set1_ps(-0.0f)));
 #else
   v[0] = -v[0];
   v[1] = -v[1];
@@ -313,26 +559,6 @@ glm_vec4_inv_to(vec4 v, vec4 dest) {
 }
 
 /*!
- * @brief normalize vec4 and store result in same vec
- *
- * @param[in, out] v vector
- */
-CGLM_INLINE
-void
-glm_vec4_normalize(vec4 v) {
-  float norm;
-
-  norm = glm_vec4_norm(v);
-
-  if (norm == 0.0f) {
-    v[0] = v[1] = v[2] = v[3] = 0.0f;
-    return;
-  }
-
-  glm_vec4_scale(v, 1.0f / norm, v);
-}
-
-/*!
  * @brief normalize vec4 to dest
  *
  * @param[in]  vec  source
@@ -341,16 +567,44 @@ glm_vec4_normalize(vec4 v) {
 CGLM_INLINE
 void
 glm_vec4_normalize_to(vec4 vec, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  __m128 xdot, x0;
+  float  dot;
+
+  x0   = _mm_load_ps(vec);
+  xdot = glm_simd_dot(x0, x0);
+  dot  = _mm_cvtss_f32(xdot);
+
+  if (dot == 0.0f) {
+    _mm_store_ps(dest, _mm_setzero_ps());
+    return;
+  }
+
+  _mm_store_ps(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+#else
   float norm;
 
   norm = glm_vec4_norm(vec);
 
   if (norm == 0.0f) {
     dest[0] = dest[1] = dest[2] = dest[3] = 0.0f;
+    glm_vec4_broadcast(0.0f, dest);
     return;
   }
 
   glm_vec4_scale(vec, 1.0f / norm, dest);
+#endif
+}
+
+/*!
+ * @brief normalize vec4 and store result in same vec
+ *
+ * @param[in, out] v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_normalize(vec4 v) {
+  glm_vec4_normalize_to(v, v);
 }
 
 /**

@@ -29,7 +29,10 @@ main(int argc, const char * argv[]) {
     cmocka_unit_test(test_quat),
 
     /* vec4 */
-    cmocka_unit_test(test_vec4)
+    cmocka_unit_test(test_vec4),
+
+    /* vec3 */
+    cmocka_unit_test(test_vec3)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

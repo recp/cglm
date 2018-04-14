@@ -32,7 +32,7 @@
 #include <float.h>
 
 /*!
- * @brief multiplies individual items, just for convenient like SIMD
+ * @brief DEPRECATED! use glm_vec_mul
  *
  * @param[in]  a vec1
  * @param[in]  b vec2

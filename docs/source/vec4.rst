@@ -24,13 +24,24 @@ Functions:
 1. :c:func:`glm_vec4`
 #. :c:func:`glm_vec4_copy3`
 #. :c:func:`glm_vec4_copy`
+#. :c:func:`glm_vec4_zero`
+#. :c:func:`glm_vec4_one`
 #. :c:func:`glm_vec4_dot`
 #. :c:func:`glm_vec4_norm2`
 #. :c:func:`glm_vec4_norm`
 #. :c:func:`glm_vec4_add`
+#. :c:func:`glm_vec4_adds`
 #. :c:func:`glm_vec4_sub`
+#. :c:func:`glm_vec4_subs`
+#. :c:func:`glm_vec4_mul`
 #. :c:func:`glm_vec4_scale`
 #. :c:func:`glm_vec4_scale_as`
+#. :c:func:`glm_vec4_div`
+#. :c:func:`glm_vec4_divs`
+#. :c:func:`glm_vec4_addadd`
+#. :c:func:`glm_vec4_subadd`
+#. :c:func:`glm_vec4_muladd`
+#. :c:func:`glm_vec4_muladds`
 #. :c:func:`glm_vec4_flipsign`
 #. :c:func:`glm_vec_flipsign_to`
 #. :c:func:`glm_vec4_inv`
@@ -78,6 +89,13 @@ Functions documentation
       | *[in]*  **v**     source
       | *[in]*  **dest**  destination
 
+.. c:function:: void  glm_vec4_zero(vec4 v)
+
+    makes all members zero
+
+    Parameters:
+      | *[in, out]*  **v**     vector
+
 .. c:function:: float  glm_vec4_dot(vec4 a, vec4 b)
 
     dot product of vec4
@@ -110,23 +128,50 @@ Functions documentation
     Parameters:
       | *[in]*  **vec**   vector
 
-.. c:function:: void  glm_vec4_add(vec4 v1, vec4 v2, vec4 dest)
+.. c:function:: void  glm_vec4_add(vec4 a, vec4 b, vec4 dest)
 
-    add v2 vector to v1 vector store result in dest
-
-    Parameters:
-      | *[in]*  **v1**    vector1
-      | *[in]*  **v2**    vector2
-      | *[out]* **dest**  destination vector
-
-.. c:function:: void  glm_vec4_sub(vec4 v1, vec4 v2, vec4 dest)
-
-    subtract v2 vector from v1 vector store result in dest
+    add a vector to b vector store result in dest
 
     Parameters:
-      | *[in]*  **v1**    vector1
-      | *[in]*  **v2**    vector2
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
       | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec4_adds(vec4 v, float s, vec4 dest)
+
+    add scalar to v vector store result in dest (d = v + vec(s))
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec4_sub(vec4 a, vec4 b, vec4 dest)
+
+    subtract b vector from a vector store result in dest (d = v1 - v2)
+
+    Parameters:
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
+      | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec4_subs(vec4 v, float s, vec4 dest)
+
+    subtract scalar from v vector store result in dest (d = v - vec(s))
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec4_mul(vec4 a, vec4 b, vec4 d)
+
+    multiply two vector (component-wise multiplication)
+
+    Parameters:
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
+      | *[out]* **dest**  result = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
 
 .. c:function:: void glm_vec4_scale(vec4 v, float s, vec4 dest)
 
@@ -145,6 +190,64 @@ Functions documentation
       | *[in]*  **v**     vector
       | *[in]*  **s**     scalar
       | *[out]* **dest**  destination vector
+
+.. c:function:: void  glm_vec4_div(vec4 a, vec4 b, vec4 dest)
+
+    div vector with another component-wise division: d = v1 / v2
+
+    Parameters:
+      | *[in]*  **a**     vector1
+      | *[in]*  **b**     vector2
+      | *[out]* **dest**  result = (a[0] / b[0], a[1] / b[1], a[2] / b[2], a[3] / b[3])
+
+.. c:function:: void  glm_vec4_divs(vec4 v, float s, vec4 dest)
+
+    div vector with scalar: d = v / s
+
+    Parameters:
+      | *[in]*  **v**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  result = (a[0] / s, a[1] / s, a[2] / s, a[3] / s)
+
+.. c:function:: void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest)
+
+    | add two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a + b)
+
+.. c:function:: void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest)
+
+    | sub two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a - b)
+
+.. c:function:: void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest)
+
+    | mul two vectors and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec4_muladds(vec4 a, float s, vec4 dest)
+
+    | mul vector with scalar and add result to sum
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector
+      | *[in]*  **s**     scalar
+      | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec4_flipsign(vec4 v)
 
