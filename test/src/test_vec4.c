@@ -55,6 +55,14 @@ test_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
 }
 
 void
+test_vec4_clamp(vec4 v, float minVal, float maxVal) {
+  v[0] = glm_clamp(v[0], minVal, maxVal);
+  v[1] = glm_clamp(v[1], minVal, maxVal);
+  v[2] = glm_clamp(v[2], minVal, maxVal);
+  v[3] = glm_clamp(v[3], minVal, maxVal);
+}
+
+void
 test_vec4(void **state) {
   vec4  v, v1, v2, v3, v4;
   int   i;
@@ -151,4 +159,20 @@ test_vec4(void **state) {
   glm_vec4_minv(v1, v2, v3);
   test_vec4_minv(v1, v2, v4);
   test_assert_vec4_eq(v3, v4);
+
+  glm_vec4_print(v3, stderr);
+  glm_vec4_print(v4, stderr);
+
+  /* clamp */
+  glm_vec4_clamp(v3, 0.1, 0.8);
+  test_vec4_clamp(v4, 0.1, 0.8);
+  test_assert_vec4_eq(v3, v4);
+
+  glm_vec4_print(v3, stderr);
+  glm_vec4_print(v4, stderr);
+
+  assert_true(v3[0] >= 0.0999 && v3[0] <= 0.80001); /* rounding erros */
+  assert_true(v3[1] >= 0.0999 && v3[1] <= 0.80001);
+  assert_true(v3[2] >= 0.0999 && v3[2] <= 0.80001);
+  assert_true(v3[3] >= 0.0999 && v3[3] <= 0.80001);
 }

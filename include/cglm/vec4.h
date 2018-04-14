@@ -673,10 +673,15 @@ glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  _mm_store_ps(v, _mm_min_ps(_mm_max_ps(_mm_load_ps(v), _mm_set1_ps(minVal)),
+                             _mm_set1_ps(maxVal)));
+#else
   v[0] = glm_clamp(v[0], minVal, maxVal);
   v[1] = glm_clamp(v[1], minVal, maxVal);
   v[2] = glm_clamp(v[2], minVal, maxVal);
   v[3] = glm_clamp(v[3], minVal, maxVal);
+#endif
 }
 
 /*!
