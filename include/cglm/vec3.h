@@ -573,7 +573,7 @@ glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
 
   glm_vec4_scale(x,   v[0], res);
   glm_vec4_muladds(y, v[1], res);
-  glm_vec4_muladds(y, v[2], res);
+  glm_vec4_muladds(z, v[2], res);
 
   glm_vec3(res, dest);
 }
@@ -600,7 +600,7 @@ glm_vec_rotate_m3(mat3 m, vec3 v, vec3 dest) {
 
   glm_vec4_scale(x,   v[0], res);
   glm_vec4_muladds(y, v[1], res);
-  glm_vec4_muladds(y, v[2], res);
+  glm_vec4_muladds(z, v[2], res);
 
   glm_vec3(res, dest);
 }
