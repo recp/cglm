@@ -492,7 +492,7 @@ glm_vec_normalize_to(vec3 vec, vec3 dest) {
   norm = glm_vec_norm(vec);
 
   if (norm == 0.0f) {
-    dest[0] = dest[1] = dest[2] = 0.0f;
+    glm_vec_zero(dest);
     return;
   }
 
