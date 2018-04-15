@@ -28,6 +28,17 @@ test_rand_mat4(mat4 dest) {
 }
 
 void
+test_rand_mat3(mat3 dest) {
+  mat4 m4;
+
+  srand((unsigned int)time(NULL));
+
+  /* random rotatation around random axis with random angle */
+  glm_rotate_make(m4, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_mat4_pick3(m4, dest);
+}
+
+void
 test_rand_vec3(vec3 dest) {
   srand((unsigned int)time(NULL));
 
@@ -80,6 +91,18 @@ test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
     for (j = 0; j < n; j++) {
       for (k = 0; k < m; k++)
         assert_true(fabsf(m1[i][j] - m2[i][j]) <= eps);
+    }
+  }
+}
+
+void
+test_assert_mat3_eq(mat3 m1, mat3 m2) {
+  int i, j, k;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      for (k = 0; k < 3; k++)
+        assert_true(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
     }
   }
 }

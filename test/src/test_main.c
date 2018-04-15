@@ -12,6 +12,9 @@ main(int argc, const char * argv[]) {
     /* mat4 */
     cmocka_unit_test(test_mat4),
 
+    /* mat3 */
+    cmocka_unit_test(test_mat3),
+
     /* camera */
     cmocka_unit_test(test_camera_lookat),
     cmocka_unit_test(test_camera_decomp),

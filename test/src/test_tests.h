@@ -9,6 +9,9 @@
 /* mat4 */
 void test_mat4(void **state);
 
+/* mat3 */
+void test_mat3(void **state);
+
 /* camera */
 void
 test_camera_lookat(void **state);
