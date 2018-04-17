@@ -757,14 +757,14 @@ glm_quat_rotate(mat4 m, versor q, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_quat_rotate_at(mat4 model, versor q, vec3 pivot) {
+glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
   vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
-  glm_translate(model, pivot);
-  glm_quat_rotate(model, q, model);
-  glm_translate(model, pivotInv);
+  glm_translate(m, pivot);
+  glm_quat_rotate(m, q, m);
+  glm_translate(m, pivotInv);
 }
 
 /*!

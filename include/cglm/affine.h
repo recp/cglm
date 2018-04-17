@@ -25,6 +25,8 @@
    CGLM_INLINE void glm_rotate_make(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate_ndc(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate(mat4 m, float angle, vec3 axis);
+   CGLM_INLINE void glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis);
+   CGLM_INLINE void glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis);
    CGLM_INLINE void glm_decompose_scalev(mat4 m, vec3 s);
    CGLM_INLINE bool glm_uniscaled(mat4 m);
    CGLM_INLINE void glm_decompose_rs(mat4 m, mat4 r, vec3 s);
@@ -521,7 +523,7 @@ glm_decompose_scalev(mat4 m, vec3 s) {
 }
 
 /*!
- * @brief returns true if matrix is uniform scaled. This is helpful for 
+ * @brief returns true if matrix is uniform scaled. This is helpful for
  *        creating normal matrix.
  *
  * @param[in] m m

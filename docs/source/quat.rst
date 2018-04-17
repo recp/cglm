@@ -56,6 +56,9 @@ Functions:
 #. :c:func:`glm_quat_for`
 #. :c:func:`glm_quat_forp`
 #. :c:func:`glm_quat_rotatev`
+#. :c:func:`glm_quat_rotate`
+#. :c:func:`glm_quat_rotate_at`
+#. :c:func:`glm_quat_rotate_atm`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -354,3 +357,24 @@ Functions documentation
       | *[in]*  **m**     existing transform matrix to rotate
       | *[in]*  **q**     quaternion
       | *[out]* **dest**  rotated matrix/transform
+
+.. c:function:: void glm_quat_rotate_at(mat4 m, versor q, vec3 pivot)
+
+    | rotate existing transform matrix using quaternion at pivot point
+
+    Parameters:
+      | *[in, out]*  **m**      existing transform matrix to rotate
+      | *[in]*       **q**      quaternion
+      | *[in]*       **pivot**  pivot
+
+.. c:function:: void glm_quat_rotate(mat4 m, versor q, mat4 dest)
+
+    | rotate NEW transform matrix using quaternion at pivot point
+    | this creates rotation matrix, it assumes you don't have a matrix
+
+    | this should work faster than glm_quat_rotate_at because it reduces one glm_translate.
+
+    Parameters:
+      | *[in, out]*  **m**      existing transform matrix to rotate
+      | *[in]*       **q**      quaternion
+      | *[in]*       **pivot**  pivot
