@@ -137,6 +137,14 @@ CGLM_EXPORT
 void
 glmc_quat_rotate(mat4 m, versor q, mat4 dest);
 
+CGLM_EXPORT
+void
+glmc_quat_rotate_at(mat4 model, versor q, vec3 pivot);
+
+CGLM_EXPORT
+void
+glmc_quat_rotate_atm(mat4 m, versor q, vec3 pivot);
+
 #ifdef __cplusplus
 }
 #endif

@@ -38,6 +38,11 @@
 #include "vec4.h"
 #include "affine-mat.h"
 #include "util.h"
+#include "mat4.h"
+
+CGLM_INLINE
+void
+glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
 
 /*!
  * @brief translate existing transform matrix by v vector
@@ -459,19 +464,46 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
  *        around given axis by angle at given pivot point (rotation center)
  *
  * @param[in, out]  m      affine transfrom
+ * @param[in]       pivot  rotation center
  * @param[in]       angle  angle (radians)
  * @param[in]       axis   axis
  */
 CGLM_INLINE
 void
-glm_rotate_at(mat4 model, vec3 pivot, float angle, vec3 axis) {
+glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
   vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
-  glm_translate(model, pivot);
-  glm_rotate(model, angle, axis);
-  glm_translate(model, pivotInv);
+  glm_translate(m, pivot);
+  glm_rotate(m, angle, axis);
+  glm_translate(m, pivotInv);
+}
+
+/*!
+ * @brief creates NEW rotation matrix by angle and axis at given point
+ *
+ * this creates rotation matrix, it assumes you don't have a matrix
+ *
+ * this should work faster than glm_rotate_at because it reduces
+ * one glm_translate.
+ *
+ * @param[out] m      affine transfrom
+ * @param[in]  pivot  rotation center
+ * @param[in]  angle  angle (radians)
+ * @param[in]  axis   axis
+ */
+CGLM_INLINE
+void
+glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_mat4_identity(m);
+  glm_vec_copy(pivot, m[3]);
+  glm_rotate(m, angle, axis);
+  glm_translate(m, pivotInv);
 }
 
 /*!

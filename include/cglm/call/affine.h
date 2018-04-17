@@ -87,7 +87,11 @@ glmc_rotate(mat4 m, float angle, vec3 axis);
 
 CGLM_EXPORT
 void
-glmc_rotate_at(mat4 model, vec3 pivot, float angle, vec3 axis);
+glmc_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis);
+
+CGLM_EXPORT
+void
+glmc_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis);
 
 CGLM_EXPORT
 void
