@@ -10,6 +10,12 @@
 
 CGLM_EXPORT
 void
+glmc_translate_make(mat4 m, vec3 v) {
+  glm_translate_make(m, v);
+}
+
+CGLM_EXPORT
+void
 glmc_translate_to(mat4 m, vec3 v, mat4 dest) {
   glm_translate_to(m, v, dest);
 }
@@ -40,6 +46,12 @@ glmc_translate_z(mat4 m, float to) {
 
 CGLM_EXPORT
 void
+glmc_scale_make(mat4 m, vec3 v) {
+  glm_scale_make(m, v);
+}
+
+CGLM_EXPORT
+void
 glmc_scale_to(mat4 m, vec3 v, mat4 dest) {
   glm_scale_to(m, v, dest);
 }
@@ -54,6 +66,12 @@ CGLM_EXPORT
 void
 glmc_scale1(mat4 m, float s) {
   glm_scale1(m, s);
+}
+
+CGLM_EXPORT
+void
+glmc_scale_uni(mat4 m, float s) {
+  glm_scale_uni(m, s);
 }
 
 CGLM_EXPORT
@@ -102,6 +120,12 @@ CGLM_EXPORT
 void
 glmc_decompose_scalev(mat4 m, vec3 s) {
   glm_decompose_scalev(m, s);
+}
+
+CGLM_EXPORT
+bool
+glmc_uniscaled(mat4 m) {
+  return glm_uniscaled(m);
 }
 
 CGLM_EXPORT
