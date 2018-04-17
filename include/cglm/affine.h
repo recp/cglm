@@ -400,7 +400,7 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
 }
 
 /*!
- * @brief rotate existing transform matrix around Z axis by angle and axis
+ * @brief rotate existing transform matrix around given axis by angle
  *
  * this name may change in the future, axis must be normalized.
  *
@@ -439,7 +439,7 @@ glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
 }
 
 /*!
- * @brief rotate existing transform matrix around Z axis by angle and axis
+ * @brief rotate existing transform matrix around given axis by angle
  *
  * @param[in, out]  m      affine transfrom
  * @param[in]       angle  angle (radians)
@@ -452,6 +452,26 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
 
   glm_vec_normalize_to(axis, axis_ndc);
   glm_rotate_ndc(m, angle, axis_ndc);
+}
+
+/*!
+ * @brief rotate existing transform
+ *        around given axis by angle at given pivot point (rotation center)
+ *
+ * @param[in, out]  m      affine transfrom
+ * @param[in]       angle  angle (radians)
+ * @param[in]       axis   axis
+ */
+CGLM_INLINE
+void
+glm_rotate_at(mat4 model, vec3 pivot, float angle, vec3 axis) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_translate(model, pivot);
+  glm_rotate(model, angle, axis);
+  glm_translate(model, pivotInv);
 }
 
 /*!
