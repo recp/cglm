@@ -35,7 +35,10 @@ main(int argc, const char * argv[]) {
     cmocka_unit_test(test_vec4),
 
     /* vec3 */
-    cmocka_unit_test(test_vec3)
+    cmocka_unit_test(test_vec3),
+
+    /* affine */
+    cmocka_unit_test(test_affine)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

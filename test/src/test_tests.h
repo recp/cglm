@@ -37,4 +37,7 @@ test_vec4(void **state);
 void
 test_vec3(void **state);
 
+void
+test_affine(void **state);
+
 #endif /* test_tests_h */
