@@ -277,19 +277,18 @@ glm_scale_uni(mat4 m, float s) {
 CGLM_INLINE
 void
 glm_rotate_x(mat4 m, float angle, mat4 dest) {
-  float cosVal;
-  float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
+  float c, s;
 
-  cosVal = cosf(angle);
-  sinVal = sinf(angle);
+  c = cosf(angle);
+  s = sinf(angle);
 
-  t[1][1] =  cosVal;
-  t[1][2] =  sinVal;
-  t[2][1] = -sinVal;
-  t[2][2] =  cosVal;
+  t[1][1] =  c;
+  t[1][2] =  s;
+  t[2][1] = -s;
+  t[2][2] =  c;
 
-  glm_mat4_mul(m, t, dest);
+  glm_mul_rot(m, t, dest);
 }
 
 /*!
@@ -303,19 +302,18 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_y(mat4 m, float angle, mat4 dest) {
-  float cosVal;
-  float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
+  float c, s;
 
-  cosVal = cosf(angle);
-  sinVal = sinf(angle);
+  c = cosf(angle);
+  s = sinf(angle);
 
-  t[0][0] =  cosVal;
-  t[0][2] = -sinVal;
-  t[2][0] =  sinVal;
-  t[2][2] =  cosVal;
+  t[0][0] =  c;
+  t[0][2] = -s;
+  t[2][0] =  s;
+  t[2][2] =  c;
 
-  glm_mat4_mul(m, t, dest);
+  glm_mul_rot(m, t, dest);
 }
 
 /*!
@@ -329,19 +327,18 @@ glm_rotate_y(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_z(mat4 m, float angle, mat4 dest) {
-  float cosVal;
-  float sinVal;
   mat4  t = GLM_MAT4_IDENTITY_INIT;
+  float c, s;
 
-  cosVal = cosf(angle);
-  sinVal = sinf(angle);
+  c = cosf(angle);
+  s = sinf(angle);
 
-  t[0][0] =  cosVal;
-  t[0][1] =  sinVal;
-  t[1][0] = -sinVal;
-  t[1][1] =  cosVal;
+  t[0][0] =  c;
+  t[0][1] =  s;
+  t[1][0] = -s;
+  t[1][1] =  c;
 
-  glm_mat4_mul(m, t, dest);
+  glm_mul_rot(m, t, dest);
 }
 
 /*!
@@ -387,31 +384,9 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate(mat4 m, float angle, vec3 axis) {
-  mat4 rot, tmp;
-
+  mat4 rot;
   glm_rotate_make(rot, angle, axis);
-
-  glm_vec4_scale(m[0], rot[0][0], tmp[1]);
-  glm_vec4_scale(m[1], rot[0][1], tmp[0]);
-  glm_vec4_add(tmp[1], tmp[0],    tmp[1]);
-  glm_vec4_scale(m[2], rot[0][2], tmp[0]);
-  glm_vec4_add(tmp[1], tmp[0],    tmp[1]);
-
-  glm_vec4_scale(m[0], rot[1][0], tmp[2]);
-  glm_vec4_scale(m[1], rot[1][1], tmp[0]);
-  glm_vec4_add(tmp[2], tmp[0],    tmp[2]);
-  glm_vec4_scale(m[2], rot[1][2], tmp[0]);
-  glm_vec4_add(tmp[2], tmp[0],    tmp[2]);
-
-  glm_vec4_scale(m[0], rot[2][0], tmp[3]);
-  glm_vec4_scale(m[1], rot[2][1], tmp[0]);
-  glm_vec4_add(tmp[3], tmp[0],    tmp[3]);
-  glm_vec4_scale(m[2], rot[2][2], tmp[0]);
-  glm_vec4_add(tmp[3], tmp[0],    tmp[3]);
-
-  glm_vec4_copy(tmp[1], m[0]);
-  glm_vec4_copy(tmp[2], m[1]);
-  glm_vec4_copy(tmp[3], m[2]);
+  glm_mul_rot(m, rot, m);
 }
 
 /*!
