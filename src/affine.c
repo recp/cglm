@@ -64,12 +64,6 @@ glmc_scale(mat4 m, vec3 v) {
 
 CGLM_EXPORT
 void
-glmc_scale1(mat4 m, float s) {
-  glm_scale1(m, s);
-}
-
-CGLM_EXPORT
-void
 glmc_scale_uni(mat4 m, float s) {
   glm_scale_uni(m, s);
 }

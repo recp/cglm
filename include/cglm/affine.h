@@ -16,7 +16,6 @@
    CGLM_INLINE void glm_scale_to(mat4 m, vec3 v, mat4 dest);
    CGLM_INLINE void glm_scale_make(mat4 m, vec3 v);
    CGLM_INLINE void glm_scale(mat4 m, vec3 v);
-   CGLM_INLINE void glm_scale1(mat4 m, float s);
    CGLM_INLINE void glm_scale_uni(mat4 m, float s);
    CGLM_INLINE void glm_rotate_x(mat4 m, float angle, mat4 dest);
    CGLM_INLINE void glm_rotate_y(mat4 m, float angle, mat4 dest);
@@ -239,16 +238,6 @@ glm_scale_make(mat4 m, vec3 v) {
 CGLM_INLINE
 void
 glm_scale(mat4 m, vec3 v) {
-  glm_scale_to(m, v, m);
-}
-
-/*!
- * @brief DEPRECATED! Use glm_scale_uni
- */
-CGLM_INLINE
-void
-glm_scale1(mat4 m, float s) {
-  vec3 v = { s, s, s };
   glm_scale_to(m, v, m);
 }
 

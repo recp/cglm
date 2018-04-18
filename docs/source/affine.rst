@@ -36,6 +36,15 @@ If you want to rotate model around arbibtrary point follow these steps:
 
 **glm_rotate_at**, **glm_quat_rotate_at** and their helper functions works that way.
 
+The implementation would be:
+
+.. code-block:: c
+  :linenos:
+
+  glm_translate(m, pivot);
+  glm_rotate(m, angle, axis);
+  glm_translate(m, pivotInv); /* pivotInv = -pivot */
+
 Transforms Order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -68,7 +77,7 @@ because you call it first, do you?
 
 Result will be **`transform = transform * translate1`**
 
-2. Then you call translate using `translate2` and you expect it will be second transform, really?
+2. Then you call translate using `translate2` and you expect it will be second transform?
 
 Result will be **`transform = transform * translate2`**. Now lets expand transform,
 it was `transform * translate1` before second call.
@@ -85,6 +94,8 @@ It is all about matrix multiplication order. It is similar to MVP matrix:
 `MVP = Projection * View * Model`, model will be applied first, then view then projection.
 
 **Confused?**
+
+In the end the last function call applied first in shaders.
 
 As alternative way, you can create transform matrices individually then combine manually,
 but don't forget that `glm_translate`, `glm_rotate`, `glm_scale`... are optimized and should be faster (an smaller assembly output) than manual multiplication
@@ -121,14 +132,11 @@ Functions:
 #. :c:func:`glm_scale_to`
 #. :c:func:`glm_scale_make`
 #. :c:func:`glm_scale`
-#. :c:func:`glm_scale1`
 #. :c:func:`glm_scale_uni`
 #. :c:func:`glm_rotate_x`
 #. :c:func:`glm_rotate_y`
 #. :c:func:`glm_rotate_z`
-#. :c:func:`glm_rotate_ndc_make`
 #. :c:func:`glm_rotate_make`
-#. :c:func:`glm_rotate_ndc`
 #. :c:func:`glm_rotate`
 #. :c:func:`glm_rotate_at`
 #. :c:func:`glm_rotate_atm`
@@ -216,10 +224,6 @@ Functions documentation
       | *[in, out]* **m** affine transfrom
       | *[in]*      **v** scale vector [x, y, z]
 
-.. c:function:: void  glm_scale1(mat4 m, float s)
-
-    DEPRECATED! Use glm_scale_uni
-
 .. c:function:: void  glm_scale_uni(mat4 m, float s)
 
     applies uniform scale to existing transform matrix v = [s, s, s]
@@ -259,16 +263,6 @@ Functions documentation
       | *[in]*  **angle** angle (radians)
       | *[out]* **dest**  rotated matrix
 
-.. c:function:: void  glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc)
-
-    creates NEW rotation matrix by angle and axis
-    this name may change in the future. axis must be is normalized
-
-    Parameters:
-      | *[out]* **m**        affine transfrom
-      | *[in]*  **angle**    angle (radians)
-      | *[in]*  **axis_ndc** normalized axis
-
 .. c:function:: void  glm_rotate_make(mat4 m, float angle, vec3 axis)
 
     creates NEW rotation matrix by angle and axis,
@@ -278,16 +272,6 @@ Functions documentation
       | *[out]* **m**    affine transfrom
       | *[in]*  **axis** angle (radians)
       | *[in]*  **axis** axis
-
-.. c:function:: void  glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc)
-
-    rotate existing transform matrix around Z axis by angle and axis
-    this name may change in the future, axis must be normalized.
-
-    Parameters:
-      | *[out]* **m**        affine transfrom
-      | *[in]*  **angle**    angle (radians)
-      | *[in]*  **axis_ndc** normalized axis
 
 .. c:function:: void  glm_rotate(mat4 m, float angle, vec3 axis)
 
