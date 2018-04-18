@@ -55,6 +55,7 @@
 #include "vec4.h"
 #include "mat4.h"
 #include "mat3.h"
+#include "affine-mat.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
@@ -70,7 +71,7 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
 
 CGLM_INLINE
 void
-glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
+glm_mul_rot(mat4 m1, mat4 m2, mat4 dest);
 
 CGLM_INLINE
 void
@@ -745,7 +746,7 @@ void
 glm_quat_rotate(mat4 m, versor q, mat4 dest) {
   mat4 rot;
   glm_quat_mat4(q, rot);
-  glm_mat4_mul(m, rot, dest);
+  glm_mul_rot(m, rot, dest);
 }
 
 /*!
