@@ -21,9 +21,7 @@
    CGLM_INLINE void glm_rotate_x(mat4 m, float angle, mat4 dest);
    CGLM_INLINE void glm_rotate_y(mat4 m, float angle, mat4 dest);
    CGLM_INLINE void glm_rotate_z(mat4 m, float angle, mat4 dest);
-   CGLM_INLINE void glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc);
    CGLM_INLINE void glm_rotate_make(mat4 m, float angle, vec3 axis);
-   CGLM_INLINE void glm_rotate_ndc(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate(mat4 m, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis);
    CGLM_INLINE void glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis);
@@ -349,48 +347,6 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
 /*!
  * @brief creates NEW rotation matrix by angle and axis
  *
- * this name may change in the future. axis must be is normalized
- *
- * @param[out] m        affine transfrom
- * @param[in]  angle    angle (radians)
- * @param[in]  axis_ndc normalized axis
- */
-CGLM_INLINE
-void
-glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
-  /* https://www.opengl.org/sdk/docs/man2/xhtml/glRotate.xml */
-
-  vec3 v, vs;
-  float c;
-
-  c = cosf(angle);
-
-  glm_vec_scale(axis_ndc, 1.0f - c, v);
-  glm_vec_scale(axis_ndc, sinf(angle), vs);
-
-  glm_vec_scale(axis_ndc, v[0], m[0]);
-  glm_vec_scale(axis_ndc, v[1], m[1]);
-  glm_vec_scale(axis_ndc, v[2], m[2]);
-
-  m[0][0] += c;
-  m[0][1] += vs[2];
-  m[0][2] -= vs[1];
-
-  m[1][0] -= vs[2];
-  m[1][1] += c;
-  m[1][2] += vs[0];
-
-  m[2][0] += vs[1];
-  m[2][1] -= vs[0];
-  m[2][2] += c;
-
-  m[0][3] = m[1][3] = m[2][3] = m[3][0] = m[3][1] = m[3][2] = 0.0f;
-  m[3][3] = 1.0f;
-}
-
-/*!
- * @brief creates NEW rotation matrix by angle and axis
- *
  * axis will be normalized so you don't need to normalize it
  *
  * @param[out] m     affine transfrom
@@ -400,27 +356,40 @@ glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
 CGLM_INLINE
 void
 glm_rotate_make(mat4 m, float angle, vec3 axis) {
-  vec3 axis_ndc;
+  vec3  axisn, v, vs;
+  float c;
 
-  glm_vec_normalize_to(axis, axis_ndc);
-  glm_rotate_ndc_make(m, angle, axis_ndc);
+  c = cosf(angle);
+
+  glm_vec_normalize_to(axis, axisn);
+  glm_vec_scale(axisn, 1.0f - c, v);
+  glm_vec_scale(axisn, sinf(angle), vs);
+
+  glm_vec_scale(axisn, v[0], m[0]);
+  glm_vec_scale(axisn, v[1], m[1]);
+  glm_vec_scale(axisn, v[2], m[2]);
+
+  m[0][0] += c;       m[1][0] -= vs[2];   m[2][0] += vs[1];
+  m[0][1] += vs[2];   m[1][1] += c;       m[2][1] -= vs[0];
+  m[0][2] -= vs[1];   m[1][2] += vs[0];   m[2][2] += c;
+
+  m[0][3] = m[1][3] = m[2][3] = m[3][0] = m[3][1] = m[3][2] = 0.0f;
+  m[3][3] = 1.0f;
 }
 
 /*!
  * @brief rotate existing transform matrix around given axis by angle
  *
- * this name may change in the future, axis must be normalized.
- *
- * @param[in, out]  m         affine transfrom
- * @param[in]       angle     angle (radians)
- * @param[in]       axis_ndc  normalized axis
+ * @param[in, out]  m      affine transfrom
+ * @param[in]       angle  angle (radians)
+ * @param[in]       axis   axis
  */
 CGLM_INLINE
 void
-glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
+glm_rotate(mat4 m, float angle, vec3 axis) {
   mat4 rot, tmp;
 
-  glm_rotate_ndc_make(rot, angle, axis_ndc);
+  glm_rotate_make(rot, angle, axis);
 
   glm_vec4_scale(m[0], rot[0][0], tmp[1]);
   glm_vec4_scale(m[1], rot[0][1], tmp[0]);
@@ -443,22 +412,6 @@ glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
   glm_vec4_copy(tmp[1], m[0]);
   glm_vec4_copy(tmp[2], m[1]);
   glm_vec4_copy(tmp[3], m[2]);
-}
-
-/*!
- * @brief rotate existing transform matrix around given axis by angle
- *
- * @param[in, out]  m      affine transfrom
- * @param[in]       angle  angle (radians)
- * @param[in]       axis   axis
- */
-CGLM_INLINE
-void
-glm_rotate(mat4 m, float angle, vec3 axis) {
-  vec3 axis_ndc;
-
-  glm_vec_normalize_to(axis, axis_ndc);
-  glm_rotate_ndc(m, angle, axis_ndc);
 }
 
 /*!

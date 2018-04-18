@@ -94,20 +94,8 @@ glmc_rotate_z(mat4 m, float rad, mat4 dest) {
 
 CGLM_EXPORT
 void
-glmc_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
-  glm_rotate_ndc_make(m, angle, axis_ndc);
-}
-
-CGLM_EXPORT
-void
 glmc_rotate_make(mat4 m, float angle, vec3 axis) {
   glm_rotate_make(m, angle, axis);
-}
-
-CGLM_EXPORT
-void
-glmc_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
-  glm_rotate_ndc(m, angle, axis_ndc);
 }
 
 CGLM_EXPORT
