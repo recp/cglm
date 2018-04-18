@@ -54,7 +54,8 @@ cglm_HEADERS = include/cglm/version.h \
                   include/cglm/plane.h \
                   include/cglm/frustum.h \
                   include/cglm/box.h \
-                  include/cglm/color.h
+                  include/cglm/color.h \
+                  include/cglm/project.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -68,7 +69,8 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/euler.h \
                     include/cglm/call/plane.h \
                     include/cglm/call/frustum.h \
-                    include/cglm/call/box.h
+                    include/cglm/call/box.h \
+                    include/cglm/call/project.h
 
 cglm_simddir=$(includedir)/cglm/simd
 cglm_simd_HEADERS = include/cglm/simd/intrin.h
