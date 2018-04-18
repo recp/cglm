@@ -55,6 +55,7 @@
 #include "vec4.h"
 #include "mat4.h"
 #include "mat3.h"
+#include "affine-mat.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
@@ -62,11 +63,19 @@
 
 CGLM_INLINE
 void
+glm_mat4_identity(mat4 mat);
+
+CGLM_INLINE
+void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
 
 CGLM_INLINE
 void
-glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
+glm_mul_rot(mat4 m1, mat4 m2, mat4 dest);
+
+CGLM_INLINE
+void
+glm_translate(mat4 m, vec3 v);
 
 /*
  * IMPORTANT:
@@ -737,7 +746,51 @@ void
 glm_quat_rotate(mat4 m, versor q, mat4 dest) {
   mat4 rot;
   glm_quat_mat4(q, rot);
-  glm_mat4_mul(m, rot, dest);
+  glm_mul_rot(m, rot, dest);
+}
+
+/*!
+ * @brief rotate existing transform matrix using quaternion at pivot point
+ *
+ * @param[in, out]   m     existing transform matrix
+ * @param[in]        q     quaternion
+ * @param[out]       pivot pivot
+ */
+CGLM_INLINE
+void
+glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_translate(m, pivot);
+  glm_quat_rotate(m, q, m);
+  glm_translate(m, pivotInv);
+}
+
+/*!
+ * @brief rotate NEW transform matrix using quaternion at pivot point
+ *
+ * this creates rotation matrix, it assumes you don't have a matrix
+ *
+ * this should work faster than glm_quat_rotate_at because it reduces
+ * one glm_translate.
+ *
+ * @param[out]  m     existing transform matrix
+ * @param[in]   q     quaternion
+ * @param[in]   pivot pivot
+ */
+CGLM_INLINE
+void
+glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_mat4_identity(m);
+  glm_vec_copy(pivot, m[3]);
+  glm_quat_rotate(m, q, m);
+  glm_translate(m, pivotInv);
 }
 
 #endif /* cglm_quat_h */

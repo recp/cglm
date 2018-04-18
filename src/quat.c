@@ -194,3 +194,15 @@ void
 glmc_quat_rotate(mat4 m, versor q, mat4 dest) {
   glm_quat_rotate(m, q, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_quat_rotate_at(mat4 model, versor q, vec3 pivot) {
+  glm_quat_rotate_at(model, q, pivot);
+}
+
+CGLM_EXPORT
+void
+glmc_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
+  glm_quat_rotate_atm(m, q, pivot);
+}

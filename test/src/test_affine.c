@@ -91,6 +91,15 @@ test_affine(void **state) {
   glm_rotate_z(t2, M_PI_4, t2);
   test_assert_mat4_eq(t2, t3);
 
+  /* test rotate */
+  glmc_rotate_make(t1, M_PI_4, (vec3){0, 0, 1});
+  glm_translate_make(t2, (vec3){34, 57, 36});
+
+  glmc_mat4_mul(t2, t1, t3); /* T * R */
+  glmc_rotate(t2, M_PI_4, (vec3){0, 0, 1});
+
+  test_assert_mat4_eq(t3, t2);
+
   /* test scale_uni */
   glmc_rotate_make(t1, M_PI_4, GLM_YUP);
   glm_translate_make(t2, (vec3){34, 57, 36});

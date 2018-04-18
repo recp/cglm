@@ -15,12 +15,12 @@
 #endif
 
 typedef float vec2[2];
-typedef float vec3[3];
+typedef  CGLM_ALIGN(8) float vec3[3];
 typedef int  ivec3[3];
 typedef CGLM_ALIGN(16) float vec4[4];
 
 typedef vec3 mat3[3];
-typedef vec4 mat4[4];
+typedef CGLM_ALIGN(16) vec4 mat4[4];
 
 typedef vec4 versor;
 

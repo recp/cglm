@@ -46,6 +46,25 @@ glm_simd_norm(__m128 a) {
   return _mm_sqrt_ps(glm_simd_dot(a, a));
 }
 
+static inline
+__m128
+glm_simd_load_v3(vec3 v) {
+  __m128i xy;
+  __m128  z;
+
+  xy = _mm_loadl_epi64((const __m128i *)v);
+  z  = _mm_load_ss(&v[2]);
+
+  return _mm_movelh_ps(_mm_castsi128_ps(xy), z);
+}
+
+static inline
+void
+glm_simd_store_v3(__m128 vx, vec3 v) {
+  _mm_storel_pi((__m64 *)&v[0], vx);
+  _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
+}
+
 #endif
 
 /* x86, x64 */
