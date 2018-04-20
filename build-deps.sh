@@ -9,18 +9,7 @@
 # check if deps are pulled
 git submodule update --init --recursive
 
-# fix glibtoolize
-
 cd $(dirname "$0")
-
-if [ "$(uname)" = "Darwin" ]; then
-  libtoolBin=$(which glibtoolize)
-  libtoolBinDir=$(dirname "${libtoolBin}")
-
-  if [ ! -f "${libtoolBinDir}/libtoolize" ]; then
-    ln -s $libtoolBin "${libtoolBinDir}/libtoolize"
-  fi
-fi
 
 # general deps: gcc make autoconf automake libtool cmake
 
