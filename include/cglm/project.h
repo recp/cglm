@@ -8,9 +8,9 @@
 #ifndef cglm_project_h
 #define cglm_project_h
 
-#include "mat4.h"
 #include "vec3.h"
 #include "vec4.h"
+#include "mat4.h"
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]

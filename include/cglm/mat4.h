@@ -46,6 +46,8 @@
 
 #include "common.h"
 #include "quat.h"
+#include "vec4.h"
+#include "vec3.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/mat4.h"

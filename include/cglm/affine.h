@@ -34,10 +34,11 @@
 #define cglm_affine_h
 
 #include "common.h"
-#include "vec4.h"
-#include "affine-mat.h"
 #include "util.h"
+#include "vec3.h"
+#include "vec4.h"
 #include "mat4.h"
+#include "affine-mat.h"
 
 CGLM_INLINE
 void

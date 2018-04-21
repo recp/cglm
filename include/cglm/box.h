@@ -11,6 +11,7 @@
 #include "common.h"
 #include "vec3.h"
 #include "vec4.h"
+#include "util.h"
 
 /*!
  * @brief apply transform to Axis-Aligned Bounding Box

@@ -52,6 +52,7 @@
 #define cglm_quat_h
 
 #include "common.h"
+#include "vec3.h"
 #include "vec4.h"
 #include "mat4.h"
 #include "mat3.h"

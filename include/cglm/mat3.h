@@ -31,6 +31,7 @@
 #define cglm_mat3_h
 
 #include "common.h"
+#include "vec3.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/mat3.h"
