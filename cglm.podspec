@@ -19,9 +19,8 @@ cglm is math library for graphics programming for C. It is similar to original g
   s.source               = { :git => "https://github.com/recp/cglm.git", :tag => "v#{s.version}" }
   s.source_files         = "src", "include/cglm/**/*.h"
   s.public_header_files  = "include", "include/cglm/**/*.h"
-  s.private_header_files = "src/**/*.h"
-  s.exclude_files        = "src/win/*", "src/dllmain.c"
-  s.preserve_path        = "include"
+  s.exclude_files        = "src/win/*", "src/dllmain.c", "src/**/*.h"
+  s.preserve_paths       = "include", "src"
   s.header_mappings_dir  = "include"
 
   # Linking
