@@ -10,9 +10,13 @@
 
 #if defined( _WIN32 )
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
-#    define __SSE2__
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
 #  elif _M_IX86_FP == 1
-#    define __SSE__
+#    ifndef __SSE__
+#      define __SSE__
+#    endif
 #  endif
 #endif
 
