@@ -14,7 +14,7 @@
 #include <math.h>
 #include <float.h>
 
-#if defined(_WIN32)
+#if defined(_MSC_VER)
 #  ifdef CGLM_DLL
 #    define CGLM_EXPORT __declspec(dllexport)
 #  else
