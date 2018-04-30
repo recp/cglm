@@ -8,7 +8,7 @@
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
 
-#if defined( _WIN32 )
+#if defined( _MSC_VER )
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
 #    ifndef __SSE2__
 #      define __SSE2__
