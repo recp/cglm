@@ -16,6 +16,7 @@
 
 #include "common.h"
 #include "mat4.h"
+#include "mat3.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/affine.h"
