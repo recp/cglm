@@ -111,7 +111,7 @@ CGLM_INLINE
 void
 glm_vec4_copy(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_load_ps(v));
+  _mm_store_ps(dest, glmm_load(v));
 #else
   dest[0] = v[0];
   dest[1] = v[1];
@@ -169,7 +169,7 @@ float
 glm_vec4_dot(vec4 a, vec4 b) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
-  x0 = _mm_mul_ps(_mm_load_ps(a), _mm_load_ps(b));
+  x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
   x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
   return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
 #else
@@ -193,7 +193,7 @@ float
 glm_vec4_norm2(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
-  x0 = _mm_load_ps(v);
+  x0 = glmm_load(v);
   x0 = _mm_mul_ps(x0, x0);
   x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
   return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
@@ -214,7 +214,7 @@ float
 glm_vec4_norm(vec4 vec) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
-  x0 = _mm_load_ps(vec);
+  x0 = glmm_load(vec);
   return _mm_cvtss_f32(_mm_sqrt_ss(glm_simd_dot(x0, x0)));
 #else
   return sqrtf(glm_vec4_norm2(vec));
@@ -232,7 +232,7 @@ CGLM_INLINE
 void
 glm_vec4_add(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(a), _mm_load_ps(b)));
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = a[0] + b[0];
   dest[1] = a[1] + b[1];
@@ -252,7 +252,7 @@ CGLM_INLINE
 void
 glm_vec4_adds(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(v), _mm_set1_ps(s)));
 #else
   dest[0] = v[0] + s;
   dest[1] = v[1] + s;
@@ -272,7 +272,7 @@ CGLM_INLINE
 void
 glm_vec4_sub(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_sub_ps(_mm_load_ps(a), _mm_load_ps(b)));
+  _mm_store_ps(dest, _mm_sub_ps(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = a[0] - b[0];
   dest[1] = a[1] - b[1];
@@ -292,7 +292,7 @@ CGLM_INLINE
 void
 glm_vec4_subs(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_sub_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+  _mm_store_ps(dest, _mm_sub_ps(glmm_load(v), _mm_set1_ps(s)));
 #else
   dest[0] = v[0] - s;
   dest[1] = v[1] - s;
@@ -312,7 +312,7 @@ CGLM_INLINE
 void
 glm_vec4_mul(vec4 a, vec4 b, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(d, _mm_mul_ps(_mm_load_ps(a), _mm_load_ps(b)));
+  _mm_store_ps(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
 #else
   d[0] = a[0] * b[0];
   d[1] = a[1] * b[1];
@@ -332,7 +332,7 @@ CGLM_INLINE
 void
 glm_vec4_scale(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_mul_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+  _mm_store_ps(dest, _mm_mul_ps(glmm_load(v), _mm_set1_ps(s)));
 #else
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
@@ -373,7 +373,7 @@ CGLM_INLINE
 void
 glm_vec4_div(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_div_ps(_mm_load_ps(a), _mm_load_ps(b)));
+  _mm_store_ps(dest, _mm_div_ps(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = a[0] / b[0];
   dest[1] = a[1] / b[1];
@@ -393,7 +393,7 @@ CGLM_INLINE
 void
 glm_vec4_divs(vec4 v, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_div_ps(_mm_load_ps(v), _mm_set1_ps(s)));
+  _mm_store_ps(dest, _mm_div_ps(glmm_load(v), _mm_set1_ps(s)));
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
 #endif
@@ -413,9 +413,9 @@ CGLM_INLINE
 void
 glm_vec4_addadd(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
-                                _mm_add_ps(_mm_load_ps(a),
-                                           _mm_load_ps(b))));
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(dest),
+                                _mm_add_ps(glmm_load(a),
+                                           glmm_load(b))));
 #else
   dest[0] += a[0] + b[0];
   dest[1] += a[1] + b[1];
@@ -437,9 +437,9 @@ CGLM_INLINE
 void
 glm_vec4_subadd(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
-                                _mm_sub_ps(_mm_load_ps(a),
-                                           _mm_load_ps(b))));
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(dest),
+                                _mm_sub_ps(glmm_load(a),
+                                           glmm_load(b))));
 #else
   dest[0] += a[0] - b[0];
   dest[1] += a[1] - b[1];
@@ -461,9 +461,9 @@ CGLM_INLINE
 void
 glm_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
-                                _mm_mul_ps(_mm_load_ps(a),
-                                           _mm_load_ps(b))));
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(dest),
+                                _mm_mul_ps(glmm_load(a),
+                                           glmm_load(b))));
 #else
   dest[0] += a[0] * b[0];
   dest[1] += a[1] * b[1];
@@ -485,8 +485,8 @@ CGLM_INLINE
 void
 glm_vec4_muladds(vec4 a, float s, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_add_ps(_mm_load_ps(dest),
-                                _mm_mul_ps(_mm_load_ps(a),
+  _mm_store_ps(dest, _mm_add_ps(glmm_load(dest),
+                                _mm_mul_ps(glmm_load(a),
                                            _mm_set1_ps(s))));
 #else
   dest[0] += a[0] * s;
@@ -505,7 +505,7 @@ CGLM_INLINE
 void
 glm_vec4_flipsign(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(v, _mm_xor_ps(_mm_load_ps(v), _mm_set1_ps(-0.0f)));
+  _mm_store_ps(v, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
 #else
   v[0] = -v[0];
   v[1] = -v[1];
@@ -524,7 +524,7 @@ CGLM_INLINE
 void
 glm_vec4_flipsign_to(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_xor_ps(_mm_load_ps(v),
+  _mm_store_ps(dest, _mm_xor_ps(glmm_load(v),
                                 _mm_set1_ps(-0.0f)));
 #else
   dest[0] = -v[0];
@@ -571,7 +571,7 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
   __m128 xdot, x0;
   float  dot;
 
-  x0   = _mm_load_ps(vec);
+  x0   = glmm_load(vec);
   xdot = glm_simd_dot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
@@ -633,7 +633,7 @@ CGLM_INLINE
 void
 glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_max_ps(_mm_load_ps(v1), _mm_load_ps(v2)));
+  _mm_store_ps(dest, _mm_max_ps(glmm_load(v1), glmm_load(v2)));
 #else
   dest[0] = glm_max(v1[0], v2[0]);
   dest[1] = glm_max(v1[1], v2[1]);
@@ -653,7 +653,7 @@ CGLM_INLINE
 void
 glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_min_ps(_mm_load_ps(v1), _mm_load_ps(v2)));
+  _mm_store_ps(dest, _mm_min_ps(glmm_load(v1), glmm_load(v2)));
 #else
   dest[0] = glm_min(v1[0], v2[0]);
   dest[1] = glm_min(v1[1], v2[1]);
@@ -673,7 +673,7 @@ CGLM_INLINE
 void
 glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(v, _mm_min_ps(_mm_max_ps(_mm_load_ps(v), _mm_set1_ps(minVal)),
+  _mm_store_ps(v, _mm_min_ps(_mm_max_ps(glmm_load(v), _mm_set1_ps(minVal)),
                              _mm_set1_ps(maxVal)));
 #else
   v[0] = glm_clamp(v[0], minVal, maxVal);

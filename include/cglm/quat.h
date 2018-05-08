@@ -198,7 +198,7 @@ glm_quat_normalize_to(versor q, versor dest) {
   __m128 xdot, x0;
   float  dot;
 
-  x0   = _mm_load_ps(q);
+  x0   = glmm_load(q);
   xdot = glm_simd_dot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 

@@ -20,10 +20,10 @@ glm_mat4_scale_sse2(mat4 m, float s){
   __m128 x0;
   x0 = _mm_set1_ps(s);
 
-  _mm_store_ps(m[0], _mm_mul_ps(_mm_load_ps(m[0]), x0));
-  _mm_store_ps(m[1], _mm_mul_ps(_mm_load_ps(m[1]), x0));
-  _mm_store_ps(m[2], _mm_mul_ps(_mm_load_ps(m[2]), x0));
-  _mm_store_ps(m[3], _mm_mul_ps(_mm_load_ps(m[3]), x0));
+  _mm_store_ps(m[0], _mm_mul_ps(glmm_load(m[0]), x0));
+  _mm_store_ps(m[1], _mm_mul_ps(glmm_load(m[1]), x0));
+  _mm_store_ps(m[2], _mm_mul_ps(glmm_load(m[2]), x0));
+  _mm_store_ps(m[3], _mm_mul_ps(glmm_load(m[3]), x0));
 }
 
 CGLM_INLINE
@@ -31,10 +31,10 @@ void
 glm_mat4_transp_sse2(mat4 m, mat4 dest){
   __m128 r0, r1, r2, r3;
 
-  r0 = _mm_load_ps(m[0]);
-  r1 = _mm_load_ps(m[1]);
-  r2 = _mm_load_ps(m[2]);
-  r3 = _mm_load_ps(m[3]);
+  r0 = glmm_load(m[0]);
+  r1 = glmm_load(m[1]);
+  r2 = glmm_load(m[2]);
+  r3 = glmm_load(m[3]);
 
   _MM_TRANSPOSE4_PS(r0, r1, r2, r3);
 
@@ -51,31 +51,31 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
   __m128 l0, l1, l2, l3, r;
 
-  l0 = _mm_load_ps(m1[0]);
-  l1 = _mm_load_ps(m1[1]);
-  l2 = _mm_load_ps(m1[2]);
-  l3 = _mm_load_ps(m1[3]);
+  l0 = glmm_load(m1[0]);
+  l1 = glmm_load(m1[1]);
+  l2 = glmm_load(m1[2]);
+  l3 = glmm_load(m1[3]);
 
-  r = _mm_load_ps(m2[0]);
+  r = glmm_load(m2[0]);
   _mm_store_ps(dest[0],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
                           _mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 2), l2),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 3), l3))));
-  r = _mm_load_ps(m2[1]);
+  r = glmm_load(m2[1]);
   _mm_store_ps(dest[1],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
                           _mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 2), l2),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 3), l3))));
-  r = _mm_load_ps(m2[2]);
+  r = glmm_load(m2[2]);
   _mm_store_ps(dest[2],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
                           _mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 2), l2),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 3), l3))));
 
-  r = _mm_load_ps(m2[3]);
+  r = glmm_load(m2[3]);
   _mm_store_ps(dest[3],
                _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_shuffle1_ps1(r, 0), l0),
                                      _mm_mul_ps(_mm_shuffle1_ps1(r, 1), l1)),
@@ -88,15 +88,15 @@ void
 glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
   __m128 x0, x1, x2;
 
-  x0 = _mm_load_ps(v);
-  x1 = _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
+  x0 = glmm_load(v);
+  x1 = _mm_add_ps(_mm_mul_ps(glmm_load(m[0]),
                              _mm_shuffle1_ps1(x0, 0)),
-                  _mm_mul_ps(_mm_load_ps(m[1]),
+                  _mm_mul_ps(glmm_load(m[1]),
                              _mm_shuffle1_ps1(x0, 1)));
 
-  x2 = _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
+  x2 = _mm_add_ps(_mm_mul_ps(glmm_load(m[2]),
                              _mm_shuffle1_ps1(x0, 2)),
-                  _mm_mul_ps(_mm_load_ps(m[3]),
+                  _mm_mul_ps(glmm_load(m[3]),
                              _mm_shuffle1_ps1(x0, 3)));
 
   _mm_store_ps(dest, _mm_add_ps(x1, x2));
@@ -108,10 +108,10 @@ glm_mat4_det_sse2(mat4 mat) {
   __m128 r0, r1, r2, r3, x0, x1, x2;
 
   /* 127 <- 0, [square] det(A) = det(At) */
-  r0 = _mm_load_ps(mat[0]); /* d c b a */
-  r1 = _mm_load_ps(mat[1]); /* h g f e */
-  r2 = _mm_load_ps(mat[2]); /* l k j i */
-  r3 = _mm_load_ps(mat[3]); /* p o n m */
+  r0 = glmm_load(mat[0]); /* d c b a */
+  r1 = glmm_load(mat[1]); /* h g f e */
+  r2 = glmm_load(mat[2]); /* l k j i */
+  r3 = glmm_load(mat[3]); /* p o n m */
 
   /*
    t[1] = j * p - n * l;
@@ -166,10 +166,10 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
          x0, x1, x2, x3, x4, x5, x6, x7;
 
   /* 127 <- 0 */
-  r0 = _mm_load_ps(mat[0]); /* d c b a */
-  r1 = _mm_load_ps(mat[1]); /* h g f e */
-  r2 = _mm_load_ps(mat[2]); /* l k j i */
-  r3 = _mm_load_ps(mat[3]); /* p o n m */
+  r0 = glmm_load(mat[0]); /* d c b a */
+  r1 = glmm_load(mat[1]); /* h g f e */
+  r2 = glmm_load(mat[2]); /* l k j i */
+  r3 = glmm_load(mat[3]); /* p o n m */
 
   x0 = _mm_shuffle_ps(r2, r3, _MM_SHUFFLE(3, 2, 3, 2));  /* p o l k */
   x1 = _mm_shuffle1_ps(x0, 1, 3, 3, 3);                  /* l p p p */
@@ -290,10 +290,10 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
          x0, x1, x2, x3, x4, x5, x6, x7;
 
   /* 127 <- 0 */
-  r0 = _mm_load_ps(mat[0]); /* d c b a */
-  r1 = _mm_load_ps(mat[1]); /* h g f e */
-  r2 = _mm_load_ps(mat[2]); /* l k j i */
-  r3 = _mm_load_ps(mat[3]); /* p o n m */
+  r0 = glmm_load(mat[0]); /* d c b a */
+  r1 = glmm_load(mat[1]); /* h g f e */
+  r2 = glmm_load(mat[2]); /* l k j i */
+  r3 = glmm_load(mat[3]); /* p o n m */
 
   x0 = _mm_shuffle_ps(r2, r3, _MM_SHUFFLE(3, 2, 3, 2));  /* p o l k */
   x1 = _mm_shuffle1_ps(x0, 1, 3, 3, 3);                  /* l p p p */

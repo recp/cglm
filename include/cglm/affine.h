@@ -59,18 +59,18 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(dest[3],
-               _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_load_ps(t[0]),
+               _mm_add_ps(_mm_add_ps(_mm_mul_ps(glmm_load(t[0]),
                                                 _mm_set1_ps(v[0])),
-                                     _mm_mul_ps(_mm_load_ps(t[1]),
+                                     _mm_mul_ps(glmm_load(t[1]),
                                                 _mm_set1_ps(v[1]))),
-                          _mm_add_ps(_mm_mul_ps(_mm_load_ps(t[2]),
+                          _mm_add_ps(_mm_mul_ps(glmm_load(t[2]),
                                                 _mm_set1_ps(v[2])),
-                                     _mm_load_ps(t[3]))))
+                                     glmm_load(t[3]))))
   ;
 
-  _mm_store_ps(dest[0], _mm_load_ps(m[0]));
-  _mm_store_ps(dest[1], _mm_load_ps(m[1]));
-  _mm_store_ps(dest[2], _mm_load_ps(m[2]));
+  _mm_store_ps(dest[0], glmm_load(m[0]));
+  _mm_store_ps(dest[1], glmm_load(m[1]));
+  _mm_store_ps(dest[2], glmm_load(m[2]));
 #else
   vec4 v1, v2, v3;
 
@@ -98,13 +98,13 @@ void
 glm_translate(mat4 m, vec3 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
-               _mm_add_ps(_mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
+               _mm_add_ps(_mm_add_ps(_mm_mul_ps(glmm_load(m[0]),
                                                 _mm_set1_ps(v[0])),
-                                     _mm_mul_ps(_mm_load_ps(m[1]),
+                                     _mm_mul_ps(glmm_load(m[1]),
                                                 _mm_set1_ps(v[1]))),
-                          _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
+                          _mm_add_ps(_mm_mul_ps(glmm_load(m[2]),
                                                 _mm_set1_ps(v[2])),
-                                     _mm_load_ps(m[3]))))
+                                     glmm_load(m[3]))))
   ;
 #else
   vec4 v1, v2, v3;
@@ -130,9 +130,9 @@ void
 glm_translate_x(mat4 m, float x) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
-               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[0]),
+               _mm_add_ps(_mm_mul_ps(glmm_load(m[0]),
                                      _mm_set1_ps(x)),
-                          _mm_load_ps(m[3])))
+                          glmm_load(m[3])))
   ;
 #else
   vec4 v1;
@@ -152,9 +152,9 @@ void
 glm_translate_y(mat4 m, float y) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
-               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[1]),
+               _mm_add_ps(_mm_mul_ps(glmm_load(m[1]),
                                      _mm_set1_ps(y)),
-                          _mm_load_ps(m[3])))
+                          glmm_load(m[3])))
   ;
 #else
   vec4 v1;
@@ -174,9 +174,9 @@ void
 glm_translate_z(mat4 m, float z) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   _mm_store_ps(m[3],
-               _mm_add_ps(_mm_mul_ps(_mm_load_ps(m[2]),
+               _mm_add_ps(_mm_mul_ps(glmm_load(m[2]),
                                      _mm_set1_ps(z)),
-                          _mm_load_ps(m[3])))
+                          glmm_load(m[3])))
   ;
 #else
   vec4 v1;

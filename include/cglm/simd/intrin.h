@@ -35,7 +35,7 @@
      _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
                                     z1, y1, x1, w1)
 
-CGLM_INLINE
+static inline
 __m128
 glm_simd_dot(__m128 a, __m128 b) {
   __m128 x0;
@@ -44,7 +44,7 @@ glm_simd_dot(__m128 a, __m128 b) {
   return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
 }
 
-CGLM_INLINE
+static inline
 __m128
 glm_simd_norm(__m128 a) {
   return _mm_sqrt_ps(glm_simd_dot(a, a));
@@ -68,6 +68,14 @@ glm_simd_store_v3(__m128 vx, vec3 v) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
 }
+
+#ifdef CGLM_ALL_UNALIGNED
+#define glmm_load(p)      _mm_loadu_ps(p)
+#define glmm_store(p, a)  _mm_storeu_ps(p, a)
+#else
+#define glmm_load(p)      _mm_load_ps(p)
+#define glmm_store(p, a)  _mm_store_ps(p, a)
+#endif
 
 #endif
 

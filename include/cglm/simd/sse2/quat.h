@@ -24,8 +24,8 @@ glm_quat_mul_sse2(versor p, versor q, versor dest) {
 
   __m128 xp, xq, x0, r;
 
-  xp = _mm_load_ps(p); /* 3 2 1 0 */
-  xq = _mm_load_ps(q);
+  xp = glmm_load(p); /* 3 2 1 0 */
+  xq = glmm_load(q);
 
   r  = _mm_mul_ps(_mm_shuffle1_ps1(xp, 3), xq);
 
