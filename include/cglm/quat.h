@@ -207,7 +207,7 @@ glm_quat_normalize_to(versor q, versor dest) {
     return;
   }
 
-  _mm_store_ps(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+  glmm_store(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
 #else
   float dot;
 

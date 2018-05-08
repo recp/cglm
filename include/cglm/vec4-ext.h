@@ -42,7 +42,7 @@ CGLM_INLINE
 void
 glm_vec4_mulv(vec4 a, vec4 b, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
+  glmm_store(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
 #else
   d[0] = a[0] * b[0];
   d[1] = a[1] * b[1];
@@ -61,7 +61,7 @@ CGLM_INLINE
 void
 glm_vec4_broadcast(float val, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(d, _mm_set1_ps(val));
+  glmm_store(d, _mm_set1_ps(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
 #endif
@@ -230,7 +230,7 @@ glm_vec4_sign(vec4 v, vec4 dest) {
   x3 = _mm_and_ps(_mm_cmpgt_ps(x0, x2), _mm_shuffle1_ps1(x1, 1));
   x4 = _mm_and_ps(_mm_cmplt_ps(x0, x2), _mm_shuffle1_ps1(x1, 0));
 
-  _mm_store_ps(dest, _mm_or_ps(x3, x4));
+  glmm_store(dest, _mm_or_ps(x3, x4));
 #else
   dest[0] = glm_signf(v[0]);
   dest[1] = glm_signf(v[1]);
@@ -249,7 +249,7 @@ CGLM_INLINE
 void
 glm_vec4_sqrt(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(dest, _mm_sqrt_ps(glmm_load(v)));
+  glmm_store(dest, _mm_sqrt_ps(glmm_load(v)));
 #else
   dest[0] = sqrtf(v[0]);
   dest[1] = sqrtf(v[1]);
