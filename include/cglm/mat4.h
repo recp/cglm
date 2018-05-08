@@ -110,8 +110,8 @@ CGLM_INLINE
 void
 glm_mat4_copy(mat4 mat, mat4 dest) {
 #ifdef __AVX__
-  _mm256_store_ps(dest[0], _mm256_load_ps(mat[0]));
-  _mm256_store_ps(dest[2], _mm256_load_ps(mat[2]));
+  glmm_store256(dest[0], glmm_load256(mat[0]));
+  glmm_store256(dest[2], glmm_load256(mat[2]));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest[0], glmm_load(mat[0]));
   glmm_store(dest[1], glmm_load(mat[1]));

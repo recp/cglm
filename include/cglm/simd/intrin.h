@@ -70,11 +70,11 @@ glm_simd_store_v3(__m128 vx, vec3 v) {
 }
 
 #ifdef CGLM_ALL_UNALIGNED
-#define glmm_load(p)      _mm_loadu_ps(p)
-#define glmm_store(p, a)  _mm_storeu_ps(p, a)
+#  define glmm_load(p)      _mm_loadu_ps(p)
+#  define glmm_store(p, a)  _mm_storeu_ps(p, a)
 #else
-#define glmm_load(p)      _mm_load_ps(p)
-#define glmm_store(p, a)  _mm_store_ps(p, a)
+#  define glmm_load(p)      _mm_load_ps(p)
+#  define glmm_store(p, a)  _mm_store_ps(p, a)
 #endif
 
 #endif
@@ -86,6 +86,15 @@ glm_simd_store_v3(__m128 vx, vec3 v) {
 
 #ifdef __AVX__
 #  define CGLM_AVX_FP 1
+
+#ifdef CGLM_ALL_UNALIGNED
+#  define glmm_load256(p)      _mm256_loadu_ps(p)
+#  define glmm_store256(p, a)  _mm256_storeu_ps(p, a)
+#else
+#  define glmm_load256(p)      _mm256_load_ps(p)
+#  define glmm_store256(p, a)  _mm256_store_ps(p, a)
+#endif
+
 #endif
 
 /* ARM Neon */
