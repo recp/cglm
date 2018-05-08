@@ -52,7 +52,7 @@ glmm_norm(__m128 a) {
 
 static inline
 __m128
-glmm_load3(vec3 v) {
+glmm_load3(float v[3]) {
   __m128i xy;
   __m128  z;
 
@@ -64,7 +64,7 @@ glmm_load3(vec3 v) {
 
 static inline
 void
-glmm_store3(__m128 vx, vec3 v) {
+glmm_store3(__m128 vx, float v[3]) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
 }
