@@ -215,7 +215,7 @@ glm_vec4_norm(vec4 vec) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
   x0 = glmm_load(vec);
-  return _mm_cvtss_f32(_mm_sqrt_ss(glm_simd_dot(x0, x0)));
+  return _mm_cvtss_f32(_mm_sqrt_ss(glmm_dot(x0, x0)));
 #else
   return sqrtf(glm_vec4_norm2(vec));
 #endif
@@ -571,7 +571,7 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
   float  dot;
 
   x0   = glmm_load(vec);
-  xdot = glm_simd_dot(x0, x0);
+  xdot = glmm_dot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
   if (dot == 0.0f) {

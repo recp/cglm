@@ -37,7 +37,7 @@
 
 static inline
 __m128
-glm_simd_dot(__m128 a, __m128 b) {
+glmm_dot(__m128 a, __m128 b) {
   __m128 x0;
   x0 = _mm_mul_ps(a, b);
   x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
@@ -46,13 +46,13 @@ glm_simd_dot(__m128 a, __m128 b) {
 
 static inline
 __m128
-glm_simd_norm(__m128 a) {
-  return _mm_sqrt_ps(glm_simd_dot(a, a));
+glmm_norm(__m128 a) {
+  return _mm_sqrt_ps(glmm_dot(a, a));
 }
 
 static inline
 __m128
-glm_simd_load_v3(vec3 v) {
+glmm_load3(vec3 v) {
   __m128i xy;
   __m128  z;
 
@@ -64,7 +64,7 @@ glm_simd_load_v3(vec3 v) {
 
 static inline
 void
-glm_simd_store_v3(__m128 vx, vec3 v) {
+glmm_store3(__m128 vx, vec3 v) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
 }
