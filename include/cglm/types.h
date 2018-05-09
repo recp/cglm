@@ -9,10 +9,10 @@
 #define cglm_types_h
 
 #if defined(_MSC_VER)
-#if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
-#  define CGLM_ALL_UNALIGNED
 /* do not use alignment for older visual studio versions */
-#  define CGLM_ALIGN(X) /* __declspec(align(X))            */
+#if _MSC_VER < 1913 /*  Visual Studio 2017 version 15.6  */
+#  define CGLM_ALL_UNALIGNED
+#  define CGLM_ALIGN(X) /* no alignment */
 #else
 #  define CGLM_ALIGN(X) __declspec(align(X))
 #endif
