@@ -18,6 +18,10 @@
 #      define __SSE__
 #    endif
 #  endif
+/* do not use alignment for older visual studio versions */
+#  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
+#    define CGLM_ALL_UNALIGNED
+#  endif
 #endif
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
