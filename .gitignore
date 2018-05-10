@@ -61,3 +61,11 @@ docs/build/*
 win/cglm_test_*
 * copy.*
 *.o
+*.obj
+*codeanalysis.*.xml
+*codeanalysis.xml
+*.lib
+*.tlog
+win/x64
+win/x85
+win/Debug

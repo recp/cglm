@@ -27,6 +27,13 @@ Alignment is Required:
 **vec4** and **mat4** requires 16 byte alignment because vec4 and mat4 operations are
 vectorized by SIMD instructions (SSE/AVX).
 
+**UPDATE:**
+  By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default
+
+  | Check :doc:`opt` page for more details
+
+  Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
+
 Allocations:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.

@@ -9,23 +9,35 @@
 #define cglm_types_h
 
 #if defined(_MSC_VER)
-#  define CGLM_ALIGN(X) /* __declspec(align(X)) */
+/* do not use alignment for older visual studio versions */
+#if _MSC_VER < 1913 /*  Visual Studio 2017 version 15.6  */
+#  define CGLM_ALL_UNALIGNED
+#  define CGLM_ALIGN(X) /* no alignment */
+#else
+#  define CGLM_ALIGN(X) __declspec(align(X))
+#endif
 #else
 #  define CGLM_ALIGN(X) __attribute((aligned(X)))
 #endif
 
-typedef float vec2[2];
-typedef  CGLM_ALIGN(8) float vec3[3];
-typedef int  ivec3[3];
-typedef CGLM_ALIGN(16) float vec4[4];
+#ifndef CGLM_ALL_UNALIGNED
+#  define CGLM_ALIGN_IF(X) CGLM_ALIGN(X)
+#else
+#  define CGLM_ALIGN_IF(X) /* no alignment */
+#endif
 
-typedef vec3 mat3[3];
-typedef CGLM_ALIGN(16) vec4 mat4[4];
+typedef float                   vec2[2];
+typedef CGLM_ALIGN_IF(8)  float vec3[3];
+typedef int                    ivec3[3];
+typedef CGLM_ALIGN_IF(16) float vec4[4];
 
-typedef vec4 versor;
+typedef vec3                    mat3[3];
+typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
 
-#define CGLM_PI    (float)M_PI
-#define CGLM_PI_2  (float)M_PI_2
-#define CGLM_PI_4  (float)M_PI_4
+typedef vec4                    versor;
+
+#define CGLM_PI    ((float)M_PI)
+#define CGLM_PI_2  ((float)M_PI_2)
+#define CGLM_PI_4  ((float)M_PI_4)
 
 #endif /* cglm_types_h */

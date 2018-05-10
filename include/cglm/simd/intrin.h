@@ -18,6 +18,10 @@
 #      define __SSE__
 #    endif
 #  endif
+/* do not use alignment for older visual studio versions */
+#  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
+#    define CGLM_ALL_UNALIGNED
+#  endif
 #endif
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
@@ -35,24 +39,24 @@
      _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
                                     z1, y1, x1, w1)
 
-CGLM_INLINE
+static inline
 __m128
-glm_simd_dot(__m128 a, __m128 b) {
+glmm_dot(__m128 a, __m128 b) {
   __m128 x0;
   x0 = _mm_mul_ps(a, b);
   x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
   return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
 }
 
-CGLM_INLINE
+static inline
 __m128
-glm_simd_norm(__m128 a) {
-  return _mm_sqrt_ps(glm_simd_dot(a, a));
+glmm_norm(__m128 a) {
+  return _mm_sqrt_ps(glmm_dot(a, a));
 }
 
 static inline
 __m128
-glm_simd_load_v3(vec3 v) {
+glmm_load3(float v[3]) {
   __m128i xy;
   __m128  z;
 
@@ -64,10 +68,18 @@ glm_simd_load_v3(vec3 v) {
 
 static inline
 void
-glm_simd_store_v3(__m128 vx, vec3 v) {
+glmm_store3(__m128 vx, float v[3]) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
 }
+
+#ifdef CGLM_ALL_UNALIGNED
+#  define glmm_load(p)      _mm_loadu_ps(p)
+#  define glmm_store(p, a)  _mm_storeu_ps(p, a)
+#else
+#  define glmm_load(p)      _mm_load_ps(p)
+#  define glmm_store(p, a)  _mm_store_ps(p, a)
+#endif
 
 #endif
 
@@ -78,6 +90,15 @@ glm_simd_store_v3(__m128 vx, vec3 v) {
 
 #ifdef __AVX__
 #  define CGLM_AVX_FP 1
+
+#ifdef CGLM_ALL_UNALIGNED
+#  define glmm_load256(p)      _mm256_loadu_ps(p)
+#  define glmm_store256(p, a)  _mm256_storeu_ps(p, a)
+#else
+#  define glmm_load256(p)      _mm256_load_ps(p)
+#  define glmm_store256(p, a)  _mm256_store_ps(p, a)
+#endif
+
 #endif
 
 /* ARM Neon */

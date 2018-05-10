@@ -198,8 +198,8 @@ glm_quat_normalize_to(versor q, versor dest) {
   __m128 xdot, x0;
   float  dot;
 
-  x0   = _mm_load_ps(q);
-  xdot = glm_simd_dot(x0, x0);
+  x0   = glmm_load(q);
+  xdot = glmm_dot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
   if (dot <= 0.0f) {
@@ -207,7 +207,7 @@ glm_quat_normalize_to(versor q, versor dest) {
     return;
   }
 
-  _mm_store_ps(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+  glmm_store(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
 #else
   float dot;
 
