@@ -170,8 +170,8 @@ glm_vec4_dot(vec4 a, vec4 b) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
   x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
-  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
-  return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
+  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 3, 2));
+  return _mm_cvtss_f32(_mm_add_ss(x0, glmm_shuff1(x0, 0, 1, 0, 1)));
 #else
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
 #endif
@@ -195,8 +195,8 @@ glm_vec4_norm2(vec4 v) {
   __m128 x0;
   x0 = glmm_load(v);
   x0 = _mm_mul_ps(x0, x0);
-  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
-  return _mm_cvtss_f32(_mm_add_ss(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1)));
+  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 3, 2));
+  return _mm_cvtss_f32(_mm_add_ss(x0, glmm_shuff1(x0, 0, 1, 0, 1)));
 #else
   return v[0] * v[0] + v[1] * v[1] + v[2] * v[2] + v[3] * v[3];
 #endif

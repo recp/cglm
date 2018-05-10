@@ -225,10 +225,10 @@ glm_vec4_sign(vec4 v, vec4 dest) {
 
   x0 = glmm_load(v);
   x1 = _mm_set_ps(0.0f, 0.0f, 1.0f, -1.0f);
-  x2 = _mm_shuffle1_ps1(x1, 2);
+  x2 = glmm_shuff1x(x1, 2);
 
-  x3 = _mm_and_ps(_mm_cmpgt_ps(x0, x2), _mm_shuffle1_ps1(x1, 1));
-  x4 = _mm_and_ps(_mm_cmplt_ps(x0, x2), _mm_shuffle1_ps1(x1, 0));
+  x3 = _mm_and_ps(_mm_cmpgt_ps(x0, x2), glmm_shuff1x(x1, 1));
+  x4 = _mm_and_ps(_mm_cmplt_ps(x0, x2), glmm_shuff1x(x1, 0));
 
   glmm_store(dest, _mm_or_ps(x3, x4));
 #else

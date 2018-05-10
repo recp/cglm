@@ -28,24 +28,28 @@
 #  include <xmmintrin.h>
 #  include <emmintrin.h>
 
-/* float */
-#  define _mm_shuffle1_ps(a, z, y, x, w)                                       \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(z, y, x, w))
+/* OPTIONAL: You may save some instructions but latency (not sure) */
+#ifdef CGLM_USE_INT_DOMAIN
+#  define glmm_shuff1(xmm, z, y, x, w)                                        \
+     _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                \
+                                        _MM_SHUFFLE(z, y, x, w)))
+#else
+#  define glmm_shuff1(xmm, z, y, x, w)                                        \
+     _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
+#endif
 
-#  define _mm_shuffle1_ps1(a, x)                                               \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(x, x, x, x))
-
-#  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                \
-     _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
-                                    z1, y1, x1, w1)
+#define glmm_shuff1x(xmm, x) glmm_shuff1(xmm, x, x, x, x)
+#define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
+     glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
+                 z1, y1, x1, w1)
 
 static inline
 __m128
 glmm_dot(__m128 a, __m128 b) {
   __m128 x0;
   x0 = _mm_mul_ps(a, b);
-  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
-  return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
+  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 3, 2));
+  return _mm_add_ps(x0, glmm_shuff1(x0, 0, 1, 0, 1));
 }
 
 static inline
@@ -70,7 +74,7 @@ static inline
 void
 glmm_store3(__m128 vx, float v[3]) {
   _mm_storel_pi((__m64 *)&v[0], vx);
-  _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
+  _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
 
 #ifdef CGLM_ALL_UNALIGNED
