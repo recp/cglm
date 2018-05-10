@@ -96,3 +96,43 @@ Functions documentation
 
     Parameters:
       | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec4_isnan(vec4 v)
+
+    | check if one of items is NaN (not a number)
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec4_isinf(vec4 v)
+
+    | check if one of items is INFINITY
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: bool glm_vec4_isvalid(vec4 v)
+
+    | check if all items are valid number
+    | you should only use this in DEBUG mode or very critical asserts
+
+    Parameters:
+      | *[in]*  **v**  vector
+
+.. c:function:: void glm_vec4_sign(vec4 v, vec4 dest)
+
+    get sign of 32 bit float as +1, -1, 0
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  sign vector (only keeps signs as -1, 0, -1)
+
+.. c:function:: void glm_vec4_sqrt(vec4 v, vec4 dest)
+
+    square root of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector (sqrt(v))

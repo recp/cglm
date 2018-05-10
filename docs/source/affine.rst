@@ -5,6 +5,8 @@ affine transforms
 
 Header: cglm/affine.h
 
+Initialize Transform Matrices
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Functions with **_make** prefix expect you don't have a matrix and they create
 a matrix for you. You don't need to pass identity matrix.
 
@@ -14,6 +16,107 @@ before sending to transfrom functions.
 
 There are also functions to decompose transform matrix. These functions can't
 decompose matrix after projected.
+
+Rotation Center
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Rotating functions uses origin as rotation center (pivot/anchor point),
+since scale factors are stored in rotation matrix, same may also true for scalling.
+cglm provides some functions for rotating around at given point e.g.
+**glm_rotate_at**, **glm_quat_rotate_at**. Use them or follow next section for algorihm ("Rotate or Scale around specific Point (Pivot Point / Anchor Point)").
+
+Rotate or Scale around specific Point (Anchor Point)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you want to rotate model around arbibtrary point follow these steps:
+
+1. Move model from pivot point to origin: **translate(-pivot.x, -pivot.y, -pivot.z)**
+2. Apply rotation (or scaling maybe)
+3. Move model back from origin to pivot (reverse of step-1): **translate(pivot.x, pivot.y, pivot.z)**
+
+**glm_rotate_at**, **glm_quat_rotate_at** and their helper functions works that way.
+
+The implementation would be:
+
+.. code-block:: c
+  :linenos:
+
+  glm_translate(m, pivot);
+  glm_rotate(m, angle, axis);
+  glm_translate(m, pivotInv); /* pivotInv = -pivot */
+
+Transforms Order
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is important to understand this part especially if you call transform
+functions multiple times
+
+`glm_translate`, `glm_rotate`, `glm_scale` and `glm_quat_rotate` and their
+helpers functions works like this (cglm may provide reverse order too as alternative in the future):
+
+.. code-block:: c
+  :linenos:
+
+  TransformMatrix = TransformMatrix * TraslateMatrix; // glm_translate()
+  TransformMatrix = TransformMatrix * RotateMatrix;   // glm_rotate(), glm_quat_rotate()
+  TransformMatrix = TransformMatrix * ScaleMatrix;    // glm_scale()
+
+As you can see it is multipled as right matrix. For instance what will happen if you call `glm_translate` twice?
+
+.. code-block:: c
+  :linenos:
+
+  glm_translate(transform, translate1); /* transform = transform * translate1 */
+  glm_translate(transform, translate2); /* transform = transform * translate2 */
+  glm_rotate(transform, angle, axis)    /* transform = transform * rotation   */
+
+Now lets try to understand this:
+
+1. You call translate using `translate1` and you expect it will be first transform
+because you call it first, do you?
+
+Result will be **`transform = transform * translate1`**
+
+2. Then you call translate using `translate2` and you expect it will be second transform?
+
+Result will be **`transform = transform * translate2`**. Now lets expand transform,
+it was `transform * translate1` before second call.
+
+Now it is **`transform = transform * translate1 * translate2`**, now do you understand what I say?
+
+3. After last call transform will be:
+
+**`transform = transform * translate1 * translate2 * rotation`**
+
+The order will be; **rotation will be applied first**, then **translate2** then **translate1**
+
+It is all about matrix multiplication order. It is similar to MVP matrix:
+`MVP = Projection * View * Model`, model will be applied first, then view then projection.
+
+**Confused?**
+
+In the end the last function call applied first in shaders.
+
+As alternative way, you can create transform matrices individually then combine manually,
+but don't forget that `glm_translate`, `glm_rotate`, `glm_scale`... are optimized and should be faster (an smaller assembly output) than manual multiplication
+
+.. code-block:: c
+  :linenos:
+
+  mat4 transform1, transform2, transform3, finalTransform;
+
+  glm_translate_make(transform1, translate1);
+  glm_translate_make(transform2, translate2);
+  glm_rotate_make(transform3, angle, axis);
+
+  /* first apply transform1, then transform2, thentransform3 */
+  glm_mat4_mulN((mat4 *[]){&transform3, &transform2, &transform1}, 3, finalTransform);
+
+  /* if you don't want to use mulN, same as above */
+  glm_mat4_mul(transform3, transform2, finalTransform);
+  glm_mat4_mul(finalTransform, transform1, finalTransform);
+
+Now transform1 will be applied first, then transform2 then transform3
 
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -29,15 +132,14 @@ Functions:
 #. :c:func:`glm_scale_to`
 #. :c:func:`glm_scale_make`
 #. :c:func:`glm_scale`
-#. :c:func:`glm_scale1`
 #. :c:func:`glm_scale_uni`
 #. :c:func:`glm_rotate_x`
 #. :c:func:`glm_rotate_y`
 #. :c:func:`glm_rotate_z`
-#. :c:func:`glm_rotate_ndc_make`
 #. :c:func:`glm_rotate_make`
-#. :c:func:`glm_rotate_ndc`
 #. :c:func:`glm_rotate`
+#. :c:func:`glm_rotate_at`
+#. :c:func:`glm_rotate_atm`
 #. :c:func:`glm_decompose_scalev`
 #. :c:func:`glm_uniscaled`
 #. :c:func:`glm_decompose_rs`
@@ -122,10 +224,6 @@ Functions documentation
       | *[in, out]* **m** affine transfrom
       | *[in]*      **v** scale vector [x, y, z]
 
-.. c:function:: void  glm_scale1(mat4 m, float s)
-
-    DEPRECATED! Use glm_scale_uni
-
 .. c:function:: void  glm_scale_uni(mat4 m, float s)
 
     applies uniform scale to existing transform matrix v = [s, s, s]
@@ -165,16 +263,6 @@ Functions documentation
       | *[in]*  **angle** angle (radians)
       | *[out]* **dest**  rotated matrix
 
-.. c:function:: void  glm_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc)
-
-    creates NEW rotation matrix by angle and axis
-    this name may change in the future. axis must be is normalized
-
-    Parameters:
-      | *[out]* **m**        affine transfrom
-      | *[in]*  **angle**    angle (radians)
-      | *[in]*  **axis_ndc** normalized axis
-
 .. c:function:: void  glm_rotate_make(mat4 m, float angle, vec3 axis)
 
     creates NEW rotation matrix by angle and axis,
@@ -185,22 +273,35 @@ Functions documentation
       | *[in]*  **axis** angle (radians)
       | *[in]*  **axis** axis
 
-.. c:function:: void  glm_rotate_ndc(mat4 m, float angle, vec3 axis_ndc)
-
-    rotate existing transform matrix around Z axis by angle and axis
-    this name may change in the future, axis must be normalized.
-
-    Parameters:
-      | *[out]* **m**        affine transfrom
-      | *[in]*  **angle**    angle (radians)
-      | *[in]*  **axis_ndc** normalized axis
-
 .. c:function:: void  glm_rotate(mat4 m, float angle, vec3 axis)
 
     rotate existing transform matrix around Z axis by angle and axis
 
     Parameters:
       | *[in, out]* **m**     affine transfrom
+      | *[in]*      **angle** angle (radians)
+      | *[in]*      **axis**  axis
+
+.. c:function:: void  glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis)
+
+    rotate existing transform around given axis by angle at given pivot point (rotation center)
+
+    Parameters:
+      | *[in, out]* **m**     affine transfrom
+      | *[in]*      **pivot** pivot, anchor point, rotation center
+      | *[in]*      **angle** angle (radians)
+      | *[in]*      **axis**  axis
+
+.. c:function:: void  glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis)
+
+    | creates NEW rotation matrix by angle and axis at given point
+    | this creates rotation matrix, it assumes you don't have a matrix
+
+    | this should work faster than glm_rotate_at because it reduces one glm_translate.
+
+    Parameters:
+      | *[in, out]* **m**     affine transfrom
+      | *[in]*      **pivot** pivot, anchor point, rotation center
       | *[in]*      **angle** angle (radians)
       | *[in]*      **axis**  axis
 

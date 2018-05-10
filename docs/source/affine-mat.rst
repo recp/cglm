@@ -33,6 +33,7 @@ Table of contents (click func go):
 Functions:
 
 1. :c:func:`glm_mul`
+#. :c:func:`glm_mul_rot`
 #. :c:func:`glm_inv_tr`
 
 Functions documentation
@@ -50,6 +51,27 @@ Functions documentation
        R  R  R  Y
        R  R  R  Z
        0  0  0  W
+
+    this reduces some multiplications. It should be faster than mat4_mul.
+    if you are not sure about matrix format then DON'T use this! use mat4_mul
+
+    Parameters:
+      | *[in]*  **m1**    affine matrix 1
+      | *[in]*  **m2**    affine matrix 2
+      | *[out]* **dest**  result matrix
+
+.. c:function:: void  glm_mul_rot(mat4 m1, mat4 m2, mat4 dest)
+
+    | this is similar to glm_mat4_mul but specialized to rotation matrix
+
+    Right Matrix format should be (left is free):
+
+    .. code-block:: text
+
+       R  R  R  0
+       R  R  R  0
+       R  R  R  0
+       0  0  0  1
 
     this reduces some multiplications. It should be faster than mat4_mul.
     if you are not sure about matrix format then DON'T use this! use mat4_mul

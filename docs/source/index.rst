@@ -40,6 +40,8 @@ Also currently only **float** type is supported for most operations.
    getting_started
    opengl
    api
+   opt
+   troubleshooting
 
 Indices and tables
 ==================

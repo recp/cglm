@@ -11,41 +11,84 @@
    GLM_QUAT_IDENTITY
 
  Functions:
-   CGLM_INLINE void  glm_quat_identity(versor q);
-   CGLM_INLINE void  glm_quat(versor q, float angle, float x, float y, float z);
-   CGLM_INLINE void  glm_quatv(versor q, float angle, vec3 v);
+   CGLM_INLINE void glm_quat_identity(versor q);
+   CGLM_INLINE void glm_quat_init(versor q, float x, float y, float z, float w);
+   CGLM_INLINE void glm_quat(versor q, float angle, float x, float y, float z);
+   CGLM_INLINE void glm_quatv(versor q, float angle, vec3 axis);
+   CGLM_INLINE void glm_quat_copy(versor q, versor dest);
    CGLM_INLINE float glm_quat_norm(versor q);
-   CGLM_INLINE void  glm_quat_normalize(versor q);
-   CGLM_INLINE float glm_quat_dot(versor q, versor r);
-   CGLM_INLINE void  glm_quat_mulv(versor q1, versor q2, versor dest);
-   CGLM_INLINE void  glm_quat_mat4(versor q, mat4 dest);
-   CGLM_INLINE void  glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_normalize(versor q);
+   CGLM_INLINE void glm_quat_normalize_to(versor q, versor dest);
+   CGLM_INLINE float glm_quat_dot(versor q1, versor q2);
+   CGLM_INLINE void glm_quat_conjugate(versor q, versor dest);
+   CGLM_INLINE void glm_quat_inv(versor q, versor dest);
+   CGLM_INLINE void glm_quat_add(versor p, versor q, versor dest);
+   CGLM_INLINE void glm_quat_sub(versor p, versor q, versor dest);
+   CGLM_INLINE float glm_quat_real(versor q);
+   CGLM_INLINE void glm_quat_imag(versor q, vec3 dest);
+   CGLM_INLINE void glm_quat_imagn(versor q, vec3 dest);
+   CGLM_INLINE float glm_quat_imaglen(versor q);
+   CGLM_INLINE float glm_quat_angle(versor q);
+   CGLM_INLINE void glm_quat_axis(versor q, versor dest);
+   CGLM_INLINE void glm_quat_mul(versor p, versor q, versor dest);
+   CGLM_INLINE void glm_quat_mat4(versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_mat4t(versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_mat3(versor q, mat3 dest);
+   CGLM_INLINE void glm_quat_mat3t(versor q, mat3 dest);
+   CGLM_INLINE void glm_quat_lerp(versor from, versor to, float t, versor dest);
+   CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
+   CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
+   CGLM_INLINE void glm_quat_forp(vec3 from,
+                                  vec3 to,
+                                  vec3 fwd,
+                                  vec3 up,
+                                  versor dest);
+   CGLM_INLINE void glm_quat_rotatev(versor q, vec3 v, vec3 dest);
+   CGLM_INLINE void glm_quat_rotate(mat4 m, versor q, mat4 dest);
  */
 
 #ifndef cglm_quat_h
 #define cglm_quat_h
 
 #include "common.h"
+#include "vec3.h"
 #include "vec4.h"
+#include "mat4.h"
+#include "mat3.h"
+#include "affine-mat.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
 #endif
 
+CGLM_INLINE
+void
+glm_mat4_identity(mat4 mat);
+
+CGLM_INLINE
+void
+glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
+
+CGLM_INLINE
+void
+glm_mul_rot(mat4 m1, mat4 m2, mat4 dest);
+
+CGLM_INLINE
+void
+glm_translate(mat4 m, vec3 v);
+
 /*
- * IMPORTANT! cglm stores quat as [w, x, y, z]
+ * IMPORTANT:
+ * ----------------------------------------------------------------------------
+ * cglm stores quat as [x, y, z, w] since v0.3.6
  *
- * Possible changes (these may be changed in the future):
- *  - versor is identity quat, we can define new type for quat.
- *    it can't be quat or quaternion becuase someone can use that name for
- *    variable name. maybe just vec4.
- *  - it stores [w, x, y, z] but it may change to [x, y, z, w] if we get enough
- *    feedback to change it.
- *  - in general we use last param as dest, but this header used first param
- *    as dest this may be changed but decided yet
+ * it was [w, x, y, z] before v0.3.6 it has been changed to [x, y, z, w]
+ * with v0.3.6 version.
+ * ----------------------------------------------------------------------------
  */
 
-#define GLM_QUAT_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f}
+#define GLM_QUAT_IDENTITY_INIT  {0.0f, 0.0f, 0.0f, 1.0f}
 #define GLM_QUAT_IDENTITY       ((versor)GLM_QUAT_IDENTITY_INIT)
 
 /*!
@@ -61,6 +104,49 @@ glm_quat_identity(versor q) {
 }
 
 /*!
+ * @brief inits quaterion with raw values
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   x     x
+ * @param[in]   y     y
+ * @param[in]   z     z
+ * @param[in]   w     w (real part)
+ */
+CGLM_INLINE
+void
+glm_quat_init(versor q, float x, float y, float z, float w) {
+  q[0] = x;
+  q[1] = y;
+  q[2] = z;
+  q[3] = w;
+}
+
+/*!
+ * @brief creates NEW quaternion with axis vector
+ *
+ * @param[out]  q     quaternion
+ * @param[in]   angle angle (radians)
+ * @param[in]   axis  axis
+ */
+CGLM_INLINE
+void
+glm_quatv(versor q, float angle, vec3 axis) {
+  vec3  k;
+  float a, c, s;
+
+  a = angle * 0.5f;
+  c = cosf(a);
+  s = sinf(a);
+
+  glm_normalize_to(axis, k);
+
+  q[0] = s * k[0];
+  q[1] = s * k[1];
+  q[2] = s * k[2];
+  q[3] = c;
+}
+
+/*!
  * @brief creates NEW quaternion with individual axis components
  *
  * @param[out]  q     quaternion
@@ -71,45 +157,21 @@ glm_quat_identity(versor q) {
  */
 CGLM_INLINE
 void
-glm_quat(versor q,
-         float  angle,
-         float  x,
-         float  y,
-         float  z) {
-  float a, c, s;
-
-  a = angle * 0.5f;
-  c = cosf(a);
-  s = sinf(a);
-
-  q[0] = c;
-  q[1] = s * x;
-  q[2] = s * y;
-  q[3] = s * z;
+glm_quat(versor q, float angle, float x, float y, float z) {
+  vec3 axis = {x, y, z};
+  glm_quatv(q, angle, axis);
 }
 
 /*!
- * @brief creates NEW quaternion with axis vector
+ * @brief copy quaternion to another one
  *
- * @param[out]  q     quaternion
- * @param[in]   angle angle (radians)
- * @param[in]   v     axis
+ * @param[in]  q     quaternion
+ * @param[out] dest  destination
  */
 CGLM_INLINE
 void
-glm_quatv(versor q,
-          float  angle,
-          vec3   v) {
-  float a, c, s;
-
-  a = angle * 0.5f;
-  c = cosf(a);
-  s = sinf(a);
-
-  q[0] = c;
-  q[1] = s * v[0];
-  q[2] = s * v[1];
-  q[3] = s * v[2];
+glm_quat_copy(versor q, versor dest) {
+  glm_vec4_copy(q, dest);
 }
 
 /*!
@@ -124,6 +186,43 @@ glm_quat_norm(versor q) {
 }
 
 /*!
+ * @brief normalize quaternion and store result in dest
+ *
+ * @param[in]   q     quaternion to normalze
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_normalize_to(versor q, versor dest) {
+#if defined( __SSE2__ ) || defined( __SSE2__ )
+  __m128 xdot, x0;
+  float  dot;
+
+  x0   = glmm_load(q);
+  xdot = glmm_dot(x0, x0);
+  dot  = _mm_cvtss_f32(xdot);
+
+  if (dot <= 0.0f) {
+    glm_quat_identity(dest);
+    return;
+  }
+
+  glmm_store(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+#else
+  float dot;
+
+  dot = glm_vec4_norm2(q);
+
+  if (dot <= 0.0f) {
+    glm_quat_identity(q);
+    return;
+  }
+
+  glm_vec4_scale(q, 1.0f / sqrtf(dot), dest);
+#endif
+}
+
+/*!
  * @brief normalize quaternion
  *
  * @param[in, out]  q  quaternion
@@ -131,45 +230,178 @@ glm_quat_norm(versor q) {
 CGLM_INLINE
 void
 glm_quat_normalize(versor q) {
-  float sum;
-
-  sum = q[0] * q[0] + q[1] * q[1]
-          + q[2] * q[2] + q[3] * q[3];
-
-  if (fabs(1.0f - sum) < 0.0001f)
-    return;
-
-  glm_vec4_scale(q, 1.0f / sqrtf(sum), q);
+  glm_quat_normalize_to(q, q);
 }
 
 /*!
  * @brief dot product of two quaternion
  *
- * @param[in]  q  quaternion 1
- * @param[in]  r  quaternion 2
+ * @param[in]  p  quaternion 1
+ * @param[in]  q  quaternion 2
  */
 CGLM_INLINE
 float
-glm_quat_dot(versor q, versor r) {
-  return glm_vec4_dot(q, r);
+glm_quat_dot(versor p, versor q) {
+  return glm_vec4_dot(p, q);
+}
+
+/*!
+ * @brief conjugate of quaternion
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  conjugate
+ */
+CGLM_INLINE
+void
+glm_quat_conjugate(versor q, versor dest) {
+  glm_vec4_flipsign_to(q, dest);
+  dest[3] = -dest[3];
+}
+
+/*!
+ * @brief inverse of non-zero quaternion
+ *
+ * @param[in]   q    quaternion
+ * @param[out]  dest inverse quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_inv(versor q, versor dest) {
+  versor conj;
+  glm_quat_conjugate(q, conj);
+  glm_vec4_scale(conj, 1.0f / glm_vec4_norm2(q), dest);
+}
+
+/*!
+ * @brief add (componentwise) two quaternions and store result in dest
+ *
+ * @param[in]   p    quaternion 1
+ * @param[in]   q    quaternion 2
+ * @param[out]  dest result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_add(versor p, versor q, versor dest) {
+  glm_vec4_add(p, q, dest);
+}
+
+/*!
+ * @brief subtract (componentwise) two quaternions and store result in dest
+ *
+ * @param[in]   p    quaternion 1
+ * @param[in]   q    quaternion 2
+ * @param[out]  dest result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_sub(versor p, versor q, versor dest) {
+  glm_vec4_sub(p, q, dest);
+}
+
+/*!
+ * @brief returns real part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_real(versor q) {
+  return q[3];
+}
+
+/*!
+ * @brief returns imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ * @param[out]  dest imag
+ */
+CGLM_INLINE
+void
+glm_quat_imag(versor q, vec3 dest) {
+  dest[0] = q[0];
+  dest[1] = q[1];
+  dest[2] = q[2];
+}
+
+/*!
+ * @brief returns normalized imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_imagn(versor q, vec3 dest) {
+  glm_normalize_to(q, dest);
+}
+
+/*!
+ * @brief returns length of imaginary part of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_imaglen(versor q) {
+  return glm_vec_norm(q);
+}
+
+/*!
+ * @brief returns angle of quaternion
+ *
+ * @param[in]   q    quaternion
+ */
+CGLM_INLINE
+float
+glm_quat_angle(versor q) {
+  /*
+   sin(theta / 2) = length(x*x + y*y + z*z)
+   cos(theta / 2) = w
+   theta          = 2 * atan(sin(theta / 2) / cos(theta / 2))
+   */
+  return 2.0f * atan2f(glm_quat_imaglen(q), glm_quat_real(q));
+}
+
+/*!
+ * @brief axis of quaternion
+ *
+ * @param[in]   q    quaternion
+ * @param[out]  dest axis of quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_axis(versor q, versor dest) {
+  glm_quat_imagn(q, dest);
 }
 
 /*!
  * @brief multiplies two quaternion and stores result in dest
+ *        this is also called Hamilton Product
  *
- * @param[in]   q1    quaternion 1
- * @param[in]   q2    quaternion 2
+ * According to WikiPedia:
+ * The product of two rotation quaternions [clarification needed] will be
+ * equivalent to the rotation q followed by the rotation p
+ *
+ * @param[in]   p     quaternion 1
+ * @param[in]   q     quaternion 2
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE
 void
-glm_quat_mulv(versor q1, versor q2, versor dest) {
-  dest[0] = q2[0] * q1[0] - q2[1] * q1[1] - q2[2] * q1[2] - q2[3] * q1[3];
-  dest[1] = q2[0] * q1[1] + q2[1] * q1[0] - q2[2] * q1[3] + q2[3] * q1[2];
-  dest[2] = q2[0] * q1[2] + q2[1] * q1[3] + q2[2] * q1[0] - q2[3] * q1[1];
-  dest[3] = q2[0] * q1[3] - q2[1] * q1[2] + q2[2] * q1[1] + q2[3] * q1[0];
-
-  glm_quat_normalize(dest);
+glm_quat_mul(versor p, versor q, versor dest) {
+  /*
+    + (a1 b2 + b1 a2 + c1 d2 − d1 c2)i
+    + (a1 c2 − b1 d2 + c1 a2 + d1 b2)j
+    + (a1 d2 + b1 c2 − c1 b2 + d1 a2)k
+       a1 a2 − b1 b2 − c1 c2 − d1 d2
+   */
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glm_quat_mul_sse2(p, q, dest);
+#else
+  dest[0] = p[3] * q[0] + p[0] * q[3] + p[1] * q[2] - p[2] * q[1];
+  dest[1] = p[3] * q[1] - p[0] * q[2] + p[1] * q[3] + p[2] * q[0];
+  dest[2] = p[3] * q[2] + p[0] * q[1] - p[1] * q[0] + p[2] * q[3];
+  dest[3] = p[3] * q[3] - p[0] * q[0] - p[1] * q[1] - p[2] * q[2];
+#endif
 }
 
 /*!
@@ -181,19 +413,22 @@ glm_quat_mulv(versor q1, versor q2, versor dest) {
 CGLM_INLINE
 void
 glm_quat_mat4(versor q, mat4 dest) {
-  float w, x, y, z;
-  float xx, yy, zz;
-  float xy, yz, xz;
-  float wx, wy, wz;
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
 
-  w = q[0];
-  x = q[1];
-  y = q[2];
-  z = q[3];
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
 
-  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
-  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
-  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -207,8 +442,8 @@ glm_quat_mat4(versor q, mat4 dest) {
   dest[2][1] = yz - wx;
   dest[0][2] = xz - wy;
 
-  dest[1][3] = 0.0f;
   dest[0][3] = 0.0f;
+  dest[1][3] = 0.0f;
   dest[2][3] = 0.0f;
   dest[3][0] = 0.0f;
   dest[3][1] = 0.0f;
@@ -217,68 +452,346 @@ glm_quat_mat4(versor q, mat4 dest) {
 }
 
 /*!
+ * @brief convert quaternion to mat4 (transposed)
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix as transposed
+ */
+CGLM_INLINE
+void
+glm_quat_mat4t(versor q, mat4 dest) {
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
+
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[1][0] = xy + wz;
+  dest[2][1] = yz + wx;
+  dest[0][2] = xz + wy;
+
+  dest[0][1] = xy - wz;
+  dest[1][2] = yz - wx;
+  dest[2][0] = xz - wy;
+
+  dest[0][3] = 0.0f;
+  dest[1][3] = 0.0f;
+  dest[2][3] = 0.0f;
+  dest[3][0] = 0.0f;
+  dest[3][1] = 0.0f;
+  dest[3][2] = 0.0f;
+  dest[3][3] = 1.0f;
+}
+
+/*!
+ * @brief convert quaternion to mat3
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix
+ */
+CGLM_INLINE
+void
+glm_quat_mat3(versor q, mat3 dest) {
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
+
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[0][1] = xy + wz;
+  dest[1][2] = yz + wx;
+  dest[2][0] = xz + wy;
+
+  dest[1][0] = xy - wz;
+  dest[2][1] = yz - wx;
+  dest[0][2] = xz - wy;
+}
+
+/*!
+ * @brief convert quaternion to mat3 (transposed)
+ *
+ * @param[in]   q     quaternion
+ * @param[out]  dest  result matrix
+ */
+CGLM_INLINE
+void
+glm_quat_mat3t(versor q, mat3 dest) {
+  float w, x, y, z,
+        xx, yy, zz,
+        xy, yz, xz,
+        wx, wy, wz, norm, s;
+
+  norm = glm_quat_norm(q);
+  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+
+  x = q[0];
+  y = q[1];
+  z = q[2];
+  w = q[3];
+
+  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
+  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
+  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+
+  dest[0][0] = 1.0f - yy - zz;
+  dest[1][1] = 1.0f - xx - zz;
+  dest[2][2] = 1.0f - xx - yy;
+
+  dest[1][0] = xy + wz;
+  dest[2][1] = yz + wx;
+  dest[0][2] = xz + wy;
+
+  dest[0][1] = xy - wz;
+  dest[1][2] = yz - wx;
+  dest[2][0] = xz - wy;
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        using linear interpolation (LERP)
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_lerp(versor from, versor to, float t, versor dest) {
+  glm_vec4_lerp(from, to, t, dest);
+}
+
+/*!
  * @brief interpolates between two quaternions
  *        using spherical linear interpolation (SLERP)
  *
- * @param[in]   q     from
- * @param[in]   r     to
+ * @param[in]   from  from
+ * @param[in]   to    to
  * @param[in]   t     amout
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE
 void
-glm_quat_slerp(versor q,
-               versor r,
-               float  t,
-               versor dest) {
-  /* https://en.wikipedia.org/wiki/Slerp */
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glm_quat_slerp_sse2(q, r, t, dest);
-#else
-  float cosTheta, sinTheta, angle, a, b, c;
+glm_quat_slerp(versor from, versor to, float t, versor dest) {
+  vec4  q1, q2;
+  float cosTheta, sinTheta, angle;
 
-  cosTheta = glm_quat_dot(q, r);
-  if (cosTheta < 0.0f) {
-    q[0] *= -1.0f;
-    q[1] *= -1.0f;
-    q[2] *= -1.0f;
-    q[3] *= -1.0f;
+  cosTheta = glm_quat_dot(from, to);
+  glm_quat_copy(from, q1);
 
-    cosTheta = -cosTheta;
-  }
-
-  if (fabs(cosTheta) >= 1.0f) {
-    dest[0] = q[0];
-    dest[1] = q[1];
-    dest[2] = q[2];
-    dest[3] = q[3];
+  if (fabsf(cosTheta) >= 1.0f) {
+    glm_quat_copy(q1, dest);
     return;
   }
 
-  sinTheta = sqrt(1.0f - cosTheta * cosTheta);
+  if (cosTheta < 0.0f) {
+    glm_vec4_flipsign(q1);
+    cosTheta = -cosTheta;
+  }
 
-  c = 1.0f - t;
+  sinTheta = sqrtf(1.0f - cosTheta * cosTheta);
 
-  /* LERP */
-  /* TODO: FLT_EPSILON vs 0.001? */
-  if (sinTheta < 0.001f) {
-    dest[0] = c * q[0] + t * r[0];
-    dest[1] = c * q[1] + t * r[1];
-    dest[2] = c * q[2] + t * r[2];
-    dest[3] = c * q[3] + t * r[3];
+  /* LERP to avoid zero division */
+  if (fabsf(sinTheta) < 0.001f) {
+    glm_quat_lerp(from, to, t, dest);
     return;
   }
 
   /* SLERP */
   angle = acosf(cosTheta);
-  a = sinf(c * angle);
-  b = sinf(t * angle);
+  glm_vec4_scale(q1, sinf((1.0f - t) * angle), q1);
+  glm_vec4_scale(to, sinf(t * angle), q2);
 
-  dest[0] = (q[0] * a + r[0] * b) / sinTheta;
-  dest[1] = (q[1] * a + r[1] * b) / sinTheta;
-  dest[2] = (q[2] * a + r[2] * b) / sinTheta;
-  dest[3] = (q[3] * a + r[3] * b) / sinTheta;
-#endif
+  glm_vec4_add(q1, q2, q1);
+  glm_vec4_scale(q1, 1.0f / sinTheta, dest);
+}
+
+/*!
+ * @brief creates view matrix using quaternion as camera orientation
+ *
+ * @param[in]   eye   eye
+ * @param[in]   ori   orientation in world space as quaternion
+ * @param[out]  dest  view matrix
+ */
+CGLM_INLINE
+void
+glm_quat_look(vec3 eye, versor ori, mat4 dest) {
+  vec4 t;
+
+  /* orientation */
+  glm_quat_mat4t(ori, dest);
+
+  /* translate */
+  glm_vec4(eye, 1.0f, t);
+  glm_mat4_mulv(dest, t, t);
+  glm_vec_flipsign_to(t, dest[3]);
+}
+
+/*!
+ * @brief creates look rotation quaternion
+ *
+ * @param[in]   dir   direction to look
+ * @param[in]   fwd   forward vector
+ * @param[in]   up    up vector
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
+  vec3  axis;
+  float dot, angle;
+
+  dot = glm_vec_dot(dir, fwd);
+  if (fabsf(dot + 1.0f)  < 0.000001f) {
+    glm_quat_init(dest, up[0], up[1], up[2], CGLM_PI);
+    return;
+  }
+
+  if (fabsf(dot - 1.0f) < 0.000001f) {
+    glm_quat_identity(dest);
+    return;
+  }
+
+  angle = acosf(dot);
+  glm_cross(fwd, dir, axis);
+  glm_normalize(axis);
+
+  glm_quatv(dest, angle, axis);
+}
+
+/*!
+ * @brief creates look rotation quaternion using source and
+ *        destination positions p suffix stands for position
+ *
+ * @param[in]   from  source point
+ * @param[in]   to    destination point
+ * @param[in]   fwd   forward vector
+ * @param[in]   up    up vector
+ * @param[out]  dest  destination quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
+  vec3 dir;
+  glm_vec_sub(to, from, dir);
+  glm_quat_for(dir, fwd, up, dest);
+}
+
+/*!
+ * @brief rotate vector using using quaternion
+ *
+ * @param[in]   q     quaternion
+ * @param[in]   v     vector to rotate
+ * @param[out]  dest  rotated vector
+ */
+CGLM_INLINE
+void
+glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
+  versor p;
+  vec3   u, v1, v2;
+  float  s;
+
+  glm_quat_normalize_to(q, p);
+  glm_quat_imag(p, u);
+  s = glm_quat_real(p);
+
+  glm_vec_scale(u, 2.0f * glm_vec_dot(u, v), v1);
+  glm_vec_scale(v, s * s - glm_vec_dot(u, u), v2);
+  glm_vec_add(v1, v2, v1);
+
+  glm_vec_cross(u, v, v2);
+  glm_vec_scale(v2, 2.0f * s, v2);
+
+  glm_vec_add(v1, v2, dest);
+}
+
+/*!
+ * @brief rotate existing transform matrix using quaternion
+ *
+ * @param[in]   m     existing transform matrix
+ * @param[in]   q     quaternion
+ * @param[out]  dest  rotated matrix/transform
+ */
+CGLM_INLINE
+void
+glm_quat_rotate(mat4 m, versor q, mat4 dest) {
+  mat4 rot;
+  glm_quat_mat4(q, rot);
+  glm_mul_rot(m, rot, dest);
+}
+
+/*!
+ * @brief rotate existing transform matrix using quaternion at pivot point
+ *
+ * @param[in, out]   m     existing transform matrix
+ * @param[in]        q     quaternion
+ * @param[out]       pivot pivot
+ */
+CGLM_INLINE
+void
+glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_translate(m, pivot);
+  glm_quat_rotate(m, q, m);
+  glm_translate(m, pivotInv);
+}
+
+/*!
+ * @brief rotate NEW transform matrix using quaternion at pivot point
+ *
+ * this creates rotation matrix, it assumes you don't have a matrix
+ *
+ * this should work faster than glm_quat_rotate_at because it reduces
+ * one glm_translate.
+ *
+ * @param[out]  m     existing transform matrix
+ * @param[in]   q     quaternion
+ * @param[in]   pivot pivot
+ */
+CGLM_INLINE
+void
+glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
+  vec3 pivotInv;
+
+  glm_vec_inv_to(pivot, pivotInv);
+
+  glm_mat4_identity(m);
+  glm_vec_copy(pivot, m[3]);
+  glm_quat_rotate(m, q, m);
+  glm_translate(m, pivotInv);
 }
 
 #endif /* cglm_quat_h */

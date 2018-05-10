@@ -143,4 +143,19 @@ glm_clamp(float val, float minVal, float maxVal) {
   return glm_min(glm_max(val, minVal), maxVal);
 }
 
+/*!
+ * @brief linear interpolation between two number
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ */
+CGLM_INLINE
+float
+glm_lerp(float from, float to, float t) {
+  return from + glm_clamp(t, 0.0f, 1.0f) * (to - from);
+}
+
 #endif /* cglm_util_h */

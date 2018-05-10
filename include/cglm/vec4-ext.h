@@ -32,7 +32,7 @@
 #include <float.h>
 
 /*!
- * @brief multiplies individual items, just for convenient like SIMD
+ * @brief DEPRECATED! use glm_vec4_mul
  *
  * @param a v1
  * @param b v2
@@ -42,7 +42,7 @@ CGLM_INLINE
 void
 glm_vec4_mulv(vec4 a, vec4 b, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(d, _mm_mul_ps(_mm_load_ps(a), _mm_load_ps(b)));
+  glmm_store(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
 #else
   d[0] = a[0] * b[0];
   d[1] = a[1] * b[1];
@@ -61,7 +61,7 @@ CGLM_INLINE
 void
 glm_vec4_broadcast(float val, vec4 d) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  _mm_store_ps(d, _mm_set1_ps(val));
+  glmm_store(d, _mm_set1_ps(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
 #endif
@@ -174,5 +174,88 @@ glm_vec4_min(vec4 v) {
   return min;
 }
 
-#endif /* cglm_vec4_ext_h */
+/*!
+ * @brief check if one of items is NaN (not a number)
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isnan(vec4 v) {
+  return isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]);
+}
 
+/*!
+ * @brief check if one of items is INFINITY
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isinf(vec4 v) {
+  return isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]);
+}
+
+/*!
+ * @brief check if all items are valid number
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec4_isvalid(vec4 v) {
+  return !glm_vec4_isnan(v) && !glm_vec4_isinf(v);
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param v vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sign(vec4 v, vec4 dest) {
+#if defined( __SSE2__ ) || defined( __SSE2__ )
+  __m128 x0, x1, x2, x3, x4;
+
+  x0 = glmm_load(v);
+  x1 = _mm_set_ps(0.0f, 0.0f, 1.0f, -1.0f);
+  x2 = _mm_shuffle1_ps1(x1, 2);
+
+  x3 = _mm_and_ps(_mm_cmpgt_ps(x0, x2), _mm_shuffle1_ps1(x1, 1));
+  x4 = _mm_and_ps(_mm_cmplt_ps(x0, x2), _mm_shuffle1_ps1(x1, 0));
+
+  glmm_store(dest, _mm_or_ps(x3, x4));
+#else
+  dest[0] = glm_signf(v[0]);
+  dest[1] = glm_signf(v[1]);
+  dest[2] = glm_signf(v[2]);
+  dest[3] = glm_signf(v[3]);
+#endif
+}
+
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_sqrt(vec4 v, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(dest, _mm_sqrt_ps(glmm_load(v)));
+#else
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
+  dest[3] = sqrtf(v[3]);
+#endif
+}
+
+#endif /* cglm_vec4_ext_h */

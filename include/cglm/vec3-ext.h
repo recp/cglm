@@ -26,12 +26,13 @@
 #define cglm_vec3_ext_h
 
 #include "common.h"
+#include "util.h"
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
 
 /*!
- * @brief multiplies individual items, just for convenient like SIMD
+ * @brief DEPRECATED! use glm_vec_mul
  *
  * @param[in]  a vec1
  * @param[in]  b vec2
@@ -158,6 +159,71 @@ glm_vec_min(vec3 v) {
     min = v[2];
 
   return min;
+}
+
+/*!
+ * @brief check if all items are NaN (not a number)
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec_isnan(vec3 v) {
+  return isnan(v[0]) || isnan(v[1]) || isnan(v[2]);
+}
+
+/*!
+ * @brief check if all items are INFINITY
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec_isinf(vec3 v) {
+  return isinf(v[0]) || isinf(v[1]) || isinf(v[2]);
+}
+
+/*!
+ * @brief check if all items are valid number
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec_isvalid(vec3 v) {
+  return !glm_vec_isnan(v) && !glm_vec_isinf(v);
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param v vector
+ */
+CGLM_INLINE
+void
+glm_vec_sign(vec3 v, vec3 dest) {
+  dest[0] = glm_signf(v[0]);
+  dest[1] = glm_signf(v[1]);
+  dest[2] = glm_signf(v[2]);
+}
+
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec_sqrt(vec3 v, vec3 dest) {
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
 }
 
 #endif /* cglm_vec3_ext_h */

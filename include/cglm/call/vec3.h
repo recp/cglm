@@ -18,7 +18,19 @@ extern "C" {
 
 CGLM_EXPORT
 void
+glmc_vec3(vec4 v4, vec3 dest);
+
+CGLM_EXPORT
+void
 glmc_vec_copy(vec3 a, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_zero(vec3 v);
+
+CGLM_EXPORT
+void
+glmc_vec_one(vec3 v);
 
 CGLM_EXPORT
 float
@@ -50,7 +62,19 @@ glmc_vec_add(vec3 v1, vec3 v2, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec_sub(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec_adds(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_sub(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_subs(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_mul(vec3 a, vec3 b, vec3 d);
 
 CGLM_EXPORT
 void
@@ -62,7 +86,35 @@ glmc_vec_scale_as(vec3 v, float s, vec3 dest);
 
 CGLM_EXPORT
 void
+glmc_vec_div(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_divs(vec3 a, float s, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_addadd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_subadd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_muladd(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_muladds(vec3 a, float s, vec3 dest);
+
+CGLM_EXPORT
+void
 glmc_vec_flipsign(vec3 v);
+
+CGLM_EXPORT
+void
+glmc_vec_flipsign_to(vec3 v, vec3 dest);
 
 CGLM_EXPORT
 void
@@ -107,6 +159,72 @@ glmc_vec_minv(vec3 v1, vec3 v2, vec3 dest);
 CGLM_EXPORT
 void
 glmc_vec_clamp(vec3 v, float minVal, float maxVal);
+
+CGLM_EXPORT
+void
+glmc_vec_ortho(vec3 v, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_lerp(vec3 from, vec3 to, float t, vec3 dest);
+
+/* ext */
+
+CGLM_EXPORT
+void
+glmc_vec_mulv(vec3 a, vec3 b, vec3 d);
+
+CGLM_EXPORT
+void
+glmc_vec_broadcast(float val, vec3 d);
+
+CGLM_EXPORT
+bool
+glmc_vec_eq(vec3 v, float val);
+
+CGLM_EXPORT
+bool
+glmc_vec_eq_eps(vec3 v, float val);
+
+CGLM_EXPORT
+bool
+glmc_vec_eq_all(vec3 v);
+
+CGLM_EXPORT
+bool
+glmc_vec_eqv(vec3 v1, vec3 v2);
+
+CGLM_EXPORT
+bool
+glmc_vec_eqv_eps(vec3 v1, vec3 v2);
+
+CGLM_EXPORT
+float
+glmc_vec_max(vec3 v);
+
+CGLM_EXPORT
+float
+glmc_vec_min(vec3 v);
+
+CGLM_EXPORT
+bool
+glmc_vec_isnan(vec3 v);
+
+CGLM_EXPORT
+bool
+glmc_vec_isinf(vec3 v);
+
+CGLM_EXPORT
+bool
+glmc_vec_isvalid(vec3 v);
+
+CGLM_EXPORT
+void
+glmc_vec_sign(vec3 v, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec_sqrt(vec3 v, vec3 dest);
 
 #ifdef __cplusplus
 }

@@ -21,11 +21,11 @@ glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
 
   __m256 y0, y1, y2, y3, y4, y5, y6, y7, y8, y9;
 
-  y0 = _mm256_load_ps(m2[0]); /* h g f e d c b a */
-  y1 = _mm256_load_ps(m2[2]); /* p o n m l k j i */
+  y0 = glmm_load256(m2[0]); /* h g f e d c b a */
+  y1 = glmm_load256(m2[2]); /* p o n m l k j i */
 
-  y2 = _mm256_load_ps(m1[0]); /* h g f e d c b a */
-  y3 = _mm256_load_ps(m1[2]); /* p o n m l k j i */
+  y2 = glmm_load256(m1[0]); /* h g f e d c b a */
+  y3 = glmm_load256(m1[2]); /* p o n m l k j i */
 
   y4 = _mm256_permute2f128_ps(y2, y2, 0b00000011); /* d c b a h g f e */
   y5 = _mm256_permute2f128_ps(y3, y3, 0b00000011); /* l k j i p o n m */
@@ -39,11 +39,11 @@ glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
   y8 = _mm256_permutevar_ps(y0, _mm256_set_epi32(0, 0, 0, 0, 1, 1, 1, 1));
   y9 = _mm256_permutevar_ps(y0, _mm256_set_epi32(2, 2, 2, 2, 3, 3, 3, 3));
 
-  _mm256_store_ps(dest[0],
-                  _mm256_add_ps(_mm256_add_ps(_mm256_mul_ps(y2, y6),
-                                              _mm256_mul_ps(y3, y7)),
-                                _mm256_add_ps(_mm256_mul_ps(y4, y8),
-                                              _mm256_mul_ps(y5, y9))));
+  glmm_store256(dest[0],
+                _mm256_add_ps(_mm256_add_ps(_mm256_mul_ps(y2, y6),
+                                            _mm256_mul_ps(y3, y7)),
+                              _mm256_add_ps(_mm256_mul_ps(y4, y8),
+                                            _mm256_mul_ps(y5, y9))));
 
   /* n n n n i i i i */
   /* p p p p k k k k */
@@ -54,11 +54,11 @@ glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
   y8 = _mm256_permutevar_ps(y1, _mm256_set_epi32(0, 0, 0, 0, 1, 1, 1, 1));
   y9 = _mm256_permutevar_ps(y1, _mm256_set_epi32(2, 2, 2, 2, 3, 3, 3, 3));
 
-  _mm256_store_ps(dest[2],
-                  _mm256_add_ps(_mm256_add_ps(_mm256_mul_ps(y2, y6),
-                                              _mm256_mul_ps(y3, y7)),
-                                _mm256_add_ps(_mm256_mul_ps(y4, y8),
-                                              _mm256_mul_ps(y5, y9))));
+  glmm_store256(dest[2],
+                _mm256_add_ps(_mm256_add_ps(_mm256_mul_ps(y2, y6),
+                                            _mm256_mul_ps(y3, y7)),
+                              _mm256_add_ps(_mm256_mul_ps(y4, y8),
+                                            _mm256_mul_ps(y5, y9))));
 }
 
 #endif

@@ -10,6 +10,12 @@
 
 CGLM_EXPORT
 void
+glmc_translate_make(mat4 m, vec3 v) {
+  glm_translate_make(m, v);
+}
+
+CGLM_EXPORT
+void
 glmc_translate_to(mat4 m, vec3 v, mat4 dest) {
   glm_translate_to(m, v, dest);
 }
@@ -40,6 +46,12 @@ glmc_translate_z(mat4 m, float to) {
 
 CGLM_EXPORT
 void
+glmc_scale_make(mat4 m, vec3 v) {
+  glm_scale_make(m, v);
+}
+
+CGLM_EXPORT
+void
 glmc_scale_to(mat4 m, vec3 v, mat4 dest) {
   glm_scale_to(m, v, dest);
 }
@@ -52,8 +64,8 @@ glmc_scale(mat4 m, vec3 v) {
 
 CGLM_EXPORT
 void
-glmc_scale1(mat4 m, float s) {
-  glm_scale1(m, s);
+glmc_scale_uni(mat4 m, float s) {
+  glm_scale_uni(m, s);
 }
 
 CGLM_EXPORT
@@ -76,20 +88,8 @@ glmc_rotate_z(mat4 m, float rad, mat4 dest) {
 
 CGLM_EXPORT
 void
-glmc_rotate_ndc_make(mat4 m, float angle, vec3 axis_ndc) {
-  glm_rotate_ndc_make(m, angle, axis_ndc);
-}
-
-CGLM_EXPORT
-void
 glmc_rotate_make(mat4 m, float angle, vec3 axis) {
   glm_rotate_make(m, angle, axis);
-}
-
-CGLM_EXPORT
-void
-glmc_rotate_ndc(mat4 m, float angle, vec3 axis_ndc) {
-  glm_rotate_ndc(m, angle, axis_ndc);
 }
 
 CGLM_EXPORT
@@ -100,8 +100,26 @@ glmc_rotate(mat4 m, float angle, vec3 axis) {
 
 CGLM_EXPORT
 void
+glmc_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
+  glm_rotate_at(m, pivot, angle, axis);
+}
+
+CGLM_EXPORT
+void
+glmc_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
+  glm_rotate_atm(m, pivot, angle, axis);
+}
+
+CGLM_EXPORT
+void
 glmc_decompose_scalev(mat4 m, vec3 s) {
   glm_decompose_scalev(m, s);
+}
+
+CGLM_EXPORT
+bool
+glmc_uniscaled(mat4 m) {
+  return glm_uniscaled(m);
 }
 
 CGLM_EXPORT

@@ -8,11 +8,19 @@
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
 
-#if defined( _WIN32 )
+#if defined( _MSC_VER )
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
-#    define __SSE2__
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
 #  elif _M_IX86_FP == 1
-#    define __SSE__
+#    ifndef __SSE__
+#      define __SSE__
+#    endif
+#  endif
+/* do not use alignment for older visual studio versions */
+#  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
+#    define CGLM_ALL_UNALIGNED
 #  endif
 #endif
 
@@ -36,6 +44,49 @@
 #  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)               \
      _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),       \
                                     z1, y1, x1, w1)
+
+static inline
+__m128
+glmm_dot(__m128 a, __m128 b) {
+  __m128 x0;
+  x0 = _mm_mul_ps(a, b);
+  x0 = _mm_add_ps(x0, _mm_shuffle1_ps(x0, 1, 0, 3, 2));
+  return _mm_add_ps(x0, _mm_shuffle1_ps(x0, 0, 1, 0, 1));
+}
+
+static inline
+__m128
+glmm_norm(__m128 a) {
+  return _mm_sqrt_ps(glmm_dot(a, a));
+}
+
+static inline
+__m128
+glmm_load3(float v[3]) {
+  __m128i xy;
+  __m128  z;
+
+  xy = _mm_loadl_epi64((const __m128i *)v);
+  z  = _mm_load_ss(&v[2]);
+
+  return _mm_movelh_ps(_mm_castsi128_ps(xy), z);
+}
+
+static inline
+void
+glmm_store3(__m128 vx, float v[3]) {
+  _mm_storel_pi((__m64 *)&v[0], vx);
+  _mm_store_ss(&v[2], _mm_shuffle1_ps(vx, 2, 2, 2, 2));
+}
+
+#ifdef CGLM_ALL_UNALIGNED
+#  define glmm_load(p)      _mm_loadu_ps(p)
+#  define glmm_store(p, a)  _mm_storeu_ps(p, a)
+#else
+#  define glmm_load(p)      _mm_load_ps(p)
+#  define glmm_store(p, a)  _mm_store_ps(p, a)
+#endif
+
 #endif
 
 /* x86, x64 */
@@ -45,6 +96,15 @@
 
 #ifdef __AVX__
 #  define CGLM_AVX_FP 1
+
+#ifdef CGLM_ALL_UNALIGNED
+#  define glmm_load256(p)      _mm256_loadu_ps(p)
+#  define glmm_store256(p, a)  _mm256_storeu_ps(p, a)
+#else
+#  define glmm_load256(p)      _mm256_load_ps(p)
+#  define glmm_store256(p, a)  _mm256_store_ps(p, a)
+#endif
+
 #endif
 
 /* ARM Neon */

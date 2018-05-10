@@ -21,17 +21,24 @@ Types:
 As you can see types don't store extra informations in favor of space.
 You can send these values e.g. matrix to OpenGL directly without casting or calling a function like *value_ptr*
 
-Aligment is Required:
+Alignment is Required:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**vec4** and **mat4** requires 16 byte aligment because vec4 and mat4 operations are
+**vec4** and **mat4** requires 16 byte alignment because vec4 and mat4 operations are
 vectorized by SIMD instructions (SSE/AVX).
+
+**UPDATE:**
+  By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default
+
+  | Check :doc:`opt` page for more details
+
+  Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
 
 Allocations:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.
 You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location.
-When allocating memory don't forget that **vec4** and **mat4** requires aligment.
+When allocating memory don't forget that **vec4** and **mat4** requires alignment.
 
 **NOTE:** Unaligned vec4 and unaligned mat4 operations will be supported in the future. Check todo list.
 Because you may want to multiply a CGLM matrix with external matrix.

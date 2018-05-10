@@ -10,6 +10,9 @@
 
 #include "common.h"
 #include "plane.h"
+#include "vec3.h"
+#include "vec4.h"
+#include "mat4.h"
 
 #define GLM_LBN 0 /* left  bottom near */
 #define GLM_LTN 1 /* left  top    near */

@@ -19,7 +19,11 @@ Complete documentation: http://cglm.readthedocs.io
 - _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec_copy`
 - OpenGL related functions are dropped to make this lib platform/third-party independent
 - make sure you have latest version and feel free to report bugs, troubles
-- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that you have the latest version
+- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that 
+you have the latest version
+- **[major change]** by starting v0.4.0, quaternions are stored as [x, y, z, w], it was [w, x, y, z] in v0.3.5 and earlier versions
+- **[api rename]** by starting v0.4.5, **glm_simd** functions are renamed to **glmm_**  
+- **[new option]** by starting v0.4.5, you can disable alignment requirement, check options in docs.  
 
 #### Note for C++ developers:
 If you don't aware about original GLM library yet, you may also want to look at:
