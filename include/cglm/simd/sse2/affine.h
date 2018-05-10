@@ -90,7 +90,7 @@ glm_inv_tr_sse2(mat4 mat) {
   r1 = glmm_load(mat[1]);
   r2 = glmm_load(mat[2]);
   r3 = glmm_load(mat[3]);
-  x1  = _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f);
+  x1 = _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f);
 
   _MM_TRANSPOSE4_PS(r0, r1, r2, x1);
 

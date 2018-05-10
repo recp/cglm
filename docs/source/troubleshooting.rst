@@ -44,7 +44,7 @@ you may do it yourself.
 **This MSVC issue is still in TODOs.**
 
 **UPDATE:** By starting v0.4.5 cglm provides an option to disable alignment requirement.
-Also alignment is disabled for older msvc verisons as default. Now alignment only is required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is defined.
+Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
 
 Crashes, Invalid Memory Access:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

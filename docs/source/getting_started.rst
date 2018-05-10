@@ -28,11 +28,11 @@ Alignment is Required:
 vectorized by SIMD instructions (SSE/AVX).
 
 **UPDATE:**
-  By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default 
+  By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default
 
   | Check :doc:`opt` page for more details
 
-  Also alignment is disabled for older msvc verisons as default. Now alignment only is required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
+  Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
 
 Allocations:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
