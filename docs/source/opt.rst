@@ -5,7 +5,7 @@ Options
 
 A few options are provided via macros.
 
-Alignment
+Alignment Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As default, cglm requires types to be aligned. Alignment requirements:
@@ -34,3 +34,9 @@ have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
  ALWAYS USE SAME CONFIGURATION / OPTION for **cglm** if you have multiple projects.
 
  For instance if you set CGLM_ALL_UNALIGNED in a project then set it in other projects too
+
+SSE and SSE2 Shuffle Option
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**_mm_shuffle_ps** generates **shufps** instruction even if registers are same.
+You can force it to generate **pshufd** instruction by defining
+**CGLM_USE_INT_DOMAIN** macro. As default it is not defined.

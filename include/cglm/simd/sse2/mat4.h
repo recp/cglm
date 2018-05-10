@@ -168,8 +168,8 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
   r3 = glmm_load(mat[3]); /* p o n m */
 
   x0 = _mm_shuffle_ps(r2, r3, _MM_SHUFFLE(3, 2, 3, 2));  /* p o l k */
-  x1 = glmm_shuff1(x0, 1, 3, 3, 3);                  /* l p p p */
-  x2 = glmm_shuff1(x0, 0, 2, 2, 2);                  /* k o o o */
+  x1 = glmm_shuff1(x0, 1, 3, 3, 3);                      /* l p p p */
+  x2 = glmm_shuff1(x0, 0, 2, 2, 2);                      /* k o o o */
   x0 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(3, 3, 3, 3));  /* h h l l */
   x3 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(2, 2, 2, 2));  /* g g k k */
 
@@ -180,7 +180,7 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
   t0 = _mm_sub_ps(_mm_mul_ps(x3, x1), _mm_mul_ps(x2, x0));
 
   x4 = _mm_shuffle_ps(r2, r3, _MM_SHUFFLE(2, 1, 2, 1)); /* o n k j */
-  x4 = glmm_shuff1(x4, 0, 2, 2, 2);                 /* j n n n */
+  x4 = glmm_shuff1(x4, 0, 2, 2, 2);                     /* j n n n */
   x5 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(1, 1, 1, 1)); /* f f j j */
 
   /* t1[1] = j * p - n * l;

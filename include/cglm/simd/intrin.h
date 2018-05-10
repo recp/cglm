@@ -32,7 +32,7 @@
 #ifdef CGLM_USE_INT_DOMAIN
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
      _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                \
-                      _MM_SHUFFLE(z, y, x, w)))
+                                        _MM_SHUFFLE(z, y, x, w)))
 #else
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
      _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
