@@ -34,3 +34,33 @@ glmc_aabb_crop_until(vec3 box[2],
                      vec3 dest[2]) {
   glm_aabb_crop_until(box, cropBox, clampBox, dest);
 }
+
+CGLM_EXPORT
+bool
+glmc_aabb_frustum(vec3 box[2], vec4 planes[6]) {
+  return glm_aabb_frustum(box, planes);
+}
+
+CGLM_EXPORT
+void
+glmc_aabb_invalidate(vec3 box[2]) {
+  glm_aabb_invalidate(box);
+}
+
+CGLM_EXPORT
+bool
+glmc_aabb_isvalid(vec3 box[2]) {
+  return glm_aabb_isvalid(box);
+}
+
+CGLM_EXPORT
+float
+glmc_aabb_size(vec3 box[2]) {
+  return glm_aabb_size(box);
+}
+
+CGLM_EXPORT
+float
+glmc_aabb_radius(vec3 box[2]) {
+  return glm_aabb_radius(box);
+}
