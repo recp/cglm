@@ -200,4 +200,16 @@ glm_aabb_radius(vec3 box[2]) {
   return glm_aabb_size(box) * 0.5f;
 }
 
+/*!
+ * @brief computes center point of AABB
+ *
+ * @param[in]   box  bounding box
+ * @param[out]  dest center of bounding box
+ */
+CGLM_INLINE
+void
+glm_aabb_center(vec3 box[2], vec3 dest) {
+  glm_vec_center(box[0], box[1], dest);
+}
+
 #endif /* cglm_box_h */

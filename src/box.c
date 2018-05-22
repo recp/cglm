@@ -64,3 +64,9 @@ float
 glmc_aabb_radius(vec3 box[2]) {
   return glm_aabb_radius(box);
 }
+
+CGLM_EXPORT
+void
+glmc_aabb_center(vec3 box[2], vec3 dest) {
+  glm_aabb_center(box, dest);
+}

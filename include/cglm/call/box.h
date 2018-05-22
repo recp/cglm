@@ -51,6 +51,11 @@ glmc_aabb_size(vec3 box[2]);
 CGLM_EXPORT
 float
 glmc_aabb_radius(vec3 box[2]);
+
+CGLM_EXPORT
+void
+glmc_aabb_center(vec3 box[2], vec3 dest);
+
 #ifdef __cplusplus
 }
 #endif
