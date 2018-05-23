@@ -100,7 +100,7 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
 CGLM_INLINE
 void
 glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
-  vec4 pos4, vone = GLM_VEC4_ONE_INIT;
+  CGLM_ALIGN(16) vec4 pos4, vone = GLM_VEC4_ONE_INIT;
 
   glm_vec4(pos, 1.0f, pos4);
 

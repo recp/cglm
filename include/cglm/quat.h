@@ -99,7 +99,7 @@ glm_translate(mat4 m, vec3 v);
 CGLM_INLINE
 void
 glm_quat_identity(versor q) {
-  versor v = GLM_QUAT_IDENTITY_INIT;
+  CGLM_ALIGN(16) versor v = GLM_QUAT_IDENTITY_INIT;
   glm_vec4_copy(v, q);
 }
 
@@ -131,7 +131,7 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
 CGLM_INLINE
 void
 glm_quatv(versor q, float angle, vec3 axis) {
-  vec3  k;
+  CGLM_ALIGN(8) vec3 k;
   float a, c, s;
 
   a = angle * 0.5f;
@@ -158,7 +158,7 @@ glm_quatv(versor q, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_quat(versor q, float angle, float x, float y, float z) {
-  vec3 axis = {x, y, z};
+  CGLM_ALIGN(8) vec3 axis = {x, y, z};
   glm_quatv(q, angle, axis);
 }
 
@@ -267,7 +267,7 @@ glm_quat_conjugate(versor q, versor dest) {
 CGLM_INLINE
 void
 glm_quat_inv(versor q, versor dest) {
-  versor conj;
+  CGLM_ALIGN(8) versor conj;
   glm_quat_conjugate(q, conj);
   glm_vec4_scale(conj, 1.0f / glm_vec4_norm2(q), dest);
 }
@@ -603,7 +603,7 @@ glm_quat_lerp(versor from, versor to, float t, versor dest) {
 CGLM_INLINE
 void
 glm_quat_slerp(versor from, versor to, float t, versor dest) {
-  vec4  q1, q2;
+  CGLM_ALIGN(16) vec4 q1, q2;
   float cosTheta, sinTheta, angle;
 
   cosTheta = glm_quat_dot(from, to);
@@ -646,7 +646,7 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
 CGLM_INLINE
 void
 glm_quat_look(vec3 eye, versor ori, mat4 dest) {
-  vec4 t;
+  CGLM_ALIGN(16) vec4 t;
 
   /* orientation */
   glm_quat_mat4t(ori, dest);
@@ -668,7 +668,7 @@ glm_quat_look(vec3 eye, versor ori, mat4 dest) {
 CGLM_INLINE
 void
 glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
-  vec3  axis;
+  CGLM_ALIGN(8) vec3 axis;
   float dot, angle;
 
   dot = glm_vec_dot(dir, fwd);
@@ -702,7 +702,7 @@ glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
 CGLM_INLINE
 void
 glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
-  vec3 dir;
+  CGLM_ALIGN(8) vec3 dir;
   glm_vec_sub(to, from, dir);
   glm_quat_for(dir, fwd, up, dest);
 }
@@ -717,9 +717,9 @@ glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
 CGLM_INLINE
 void
 glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
-  versor p;
-  vec3   u, v1, v2;
-  float  s;
+  CGLM_ALIGN(16) versor p;
+  CGLM_ALIGN(8)  vec3   u, v1, v2;
+  float s;
 
   glm_quat_normalize_to(q, p);
   glm_quat_imag(p, u);
@@ -745,7 +745,7 @@ glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
 CGLM_INLINE
 void
 glm_quat_rotate(mat4 m, versor q, mat4 dest) {
-  mat4 rot;
+  CGLM_ALIGN(16) mat4 rot;
   glm_quat_mat4(q, rot);
   glm_mul_rot(m, rot, dest);
 }
@@ -760,7 +760,7 @@ glm_quat_rotate(mat4 m, versor q, mat4 dest) {
 CGLM_INLINE
 void
 glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
-  vec3 pivotInv;
+  CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
@@ -784,12 +784,11 @@ glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
 CGLM_INLINE
 void
 glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
-  vec3 pivotInv;
+  CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
-  glm_mat4_identity(m);
-  glm_vec_copy(pivot, m[3]);
+  glm_translate_make(m, pivot);
   glm_quat_rotate(m, q, m);
   glm_translate(m, pivotInv);
 }

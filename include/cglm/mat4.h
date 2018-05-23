@@ -139,7 +139,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_identity(mat4 mat) {
-  mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
   glm_mat4_copy(t, mat);
 }
 
@@ -586,7 +586,7 @@ glm_mat4_inv_fast(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_swap_col(mat4 mat, int col1, int col2) {
-  vec4 tmp;
+  CGLM_ALIGN(16) vec4 tmp;
   glm_vec4_copy(mat[col1], tmp);
   glm_vec4_copy(mat[col2], mat[col1]);
   glm_vec4_copy(tmp, mat[col2]);
@@ -602,7 +602,7 @@ glm_mat4_swap_col(mat4 mat, int col1, int col2) {
 CGLM_INLINE
 void
 glm_mat4_swap_row(mat4 mat, int row1, int row2) {
-  vec4 tmp;
+  CGLM_ALIGN(16) vec4 tmp;
   tmp[0] = mat[0][row1];
   tmp[1] = mat[1][row1];
   tmp[2] = mat[2][row1];

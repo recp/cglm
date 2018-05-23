@@ -55,7 +55,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
 CGLM_INLINE
 void
 glm_translate_to(mat4 m, vec3 v, mat4 dest) {
-  mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest[3],
@@ -82,7 +82,7 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
   glm_vec4_add(v2, t[3], t[3]);
   glm_vec4_add(v3, t[3], t[3]);
 
-  glm__memcpy(float, dest, t, sizeof(mat4));
+  glm_mat4_copy(t, dest);
 #endif
 }
 
@@ -254,7 +254,7 @@ glm_scale(mat4 m, vec3 v) {
 CGLM_INLINE
 void
 glm_scale_uni(mat4 m, float s) {
-  vec3 v = { s, s, s };
+  CGLM_ALIGN(8) vec3 v = { s, s, s };
   glm_scale_to(m, v, m);
 }
 
@@ -269,7 +269,7 @@ glm_scale_uni(mat4 m, float s) {
 CGLM_INLINE
 void
 glm_rotate_x(mat4 m, float angle, mat4 dest) {
-  mat4  t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -294,7 +294,7 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_y(mat4 m, float angle, mat4 dest) {
-  mat4  t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -319,7 +319,7 @@ glm_rotate_y(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_z(mat4 m, float angle, mat4 dest) {
-  mat4  t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -345,7 +345,7 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_make(mat4 m, float angle, vec3 axis) {
-  vec3  axisn, v, vs;
+  CGLM_ALIGN(8) vec3 axisn, v, vs;
   float c;
 
   c = cosf(angle);
@@ -376,7 +376,7 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate(mat4 m, float angle, vec3 axis) {
-  mat4 rot;
+  CGLM_ALIGN(16) mat4 rot;
   glm_rotate_make(rot, angle, axis);
   glm_mul_rot(m, rot, m);
 }
@@ -393,7 +393,7 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
-  vec3 pivotInv;
+  CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
@@ -418,12 +418,11 @@ glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
-  vec3 pivotInv;
+  CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec_inv_to(pivot, pivotInv);
 
-  glm_mat4_identity(m);
-  glm_vec_copy(pivot, m[3]);
+  glm_translate_make(m, pivot);
   glm_rotate(m, angle, axis);
   glm_translate(m, pivotInv);
 }
@@ -453,9 +452,8 @@ glm_decompose_scalev(mat4 m, vec3 s) {
 CGLM_INLINE
 bool
 glm_uniscaled(mat4 m) {
-  vec3 s;
+  CGLM_ALIGN(8) vec3 s;
   glm_decompose_scalev(m, s);
-
   return glm_vec_eq_all(s);
 }
 
@@ -470,8 +468,8 @@ glm_uniscaled(mat4 m) {
 CGLM_INLINE
 void
 glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
-  vec4 t = {0.0f, 0.0f, 0.0f, 1.0f};
-  vec3 v;
+  CGLM_ALIGN(16) vec4 t = {0.0f, 0.0f, 0.0f, 1.0f};
+  CGLM_ALIGN(8)  vec3 v;
 
   glm_vec4_copy(m[0], r[0]);
   glm_vec4_copy(m[1], r[1]);

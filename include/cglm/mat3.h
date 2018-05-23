@@ -81,7 +81,7 @@ glm_mat3_copy(mat3 mat, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_identity(mat3 mat) {
-  mat3 t = GLM_MAT3_IDENTITY_INIT;
+  CGLM_ALIGN(16) mat3 t = GLM_MAT3_IDENTITY_INIT;
   glm_mat3_copy(t, mat);
 }
 
@@ -155,7 +155,7 @@ glm_mat3_transpose_to(mat3 m, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_transpose(mat3 m) {
-  mat3 tmp;
+  CGLM_ALIGN(16) mat3 tmp;
 
   tmp[0][1] = m[1][0];
   tmp[0][2] = m[2][0];

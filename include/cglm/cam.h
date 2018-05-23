@@ -332,7 +332,7 @@ glm_lookat(vec3 eye,
            vec3 center,
            vec3 up,
            mat4 dest) {
-  vec3 f, u, s;
+  CGLM_ALIGN(8) vec3 f, u, s;
 
   glm_vec_sub(center, eye, f);
   glm_vec_normalize(f);
@@ -372,7 +372,7 @@ glm_lookat(vec3 eye,
 CGLM_INLINE
 void
 glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
-  vec3 target;
+  CGLM_ALIGN(8) vec3 target;
   glm_vec_add(eye, dir, target);
   glm_lookat(eye, target, up, dest);
 }
@@ -390,7 +390,7 @@ glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
 CGLM_INLINE
 void
 glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
-  vec3 up;
+  CGLM_ALIGN(8) vec3 up;
   glm_vec_ortho(dir, up);
   glm_look(eye, dir, up, dest);
 }

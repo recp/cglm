@@ -454,8 +454,7 @@ glm_vec_inv(vec3 v) {
 CGLM_INLINE
 void
 glm_vec_inv_to(vec3 v, vec3 dest) {
-  glm_vec_copy(v, dest);
-  glm_vec_flipsign(dest);
+  glm_vec_flipsign_to(v, dest);
 }
 
 /*!
