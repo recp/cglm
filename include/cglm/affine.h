@@ -225,8 +225,10 @@ glm_scale_to(mat4 m, vec3 v, mat4 dest) {
 CGLM_INLINE
 void
 glm_scale_make(mat4 m, vec3 v) {
-  mat4 t = GLM_MAT4_IDENTITY_INIT;
-  glm_scale_to(t, v, m);
+  glm_mat4_identity(m);
+  m[0][0] = v[0];
+  m[1][1] = v[1];
+  m[2][2] = v[2];
 }
 
 /*!
