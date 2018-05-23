@@ -194,8 +194,8 @@ glm_translate_z(mat4 m, float z) {
 CGLM_INLINE
 void
 glm_translate_make(mat4 m, vec3 v) {
-  mat4 t = GLM_MAT4_IDENTITY_INIT;
-  glm_translate_to(t, v, m);
+  glm_mat4_identity(m);
+  glm_vec_copy(v, m[3]);
 }
 
 /*!
