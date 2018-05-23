@@ -46,48 +46,6 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
 
 /*!
  * @brief translate existing transform matrix by v vector
- *        and store result in dest
- *
- * @param[in]  m    affine transfrom
- * @param[in]  v    translate vector [x, y, z]
- * @param[out] dest translated matrix
- */
-CGLM_INLINE
-void
-glm_translate_to(mat4 m, vec3 v, mat4 dest) {
-  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
-
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest[3],
-             _mm_add_ps(_mm_add_ps(_mm_mul_ps(glmm_load(t[0]),
-                                              _mm_set1_ps(v[0])),
-                                   _mm_mul_ps(glmm_load(t[1]),
-                                              _mm_set1_ps(v[1]))),
-                        _mm_add_ps(_mm_mul_ps(glmm_load(t[2]),
-                                              _mm_set1_ps(v[2])),
-                                   glmm_load(t[3]))))
-  ;
-
-  glmm_store(dest[0], glmm_load(m[0]));
-  glmm_store(dest[1], glmm_load(m[1]));
-  glmm_store(dest[2], glmm_load(m[2]));
-#else
-  vec4 v1, v2, v3;
-
-  glm_vec4_scale(t[0], v[0], v1);
-  glm_vec4_scale(t[1], v[1], v2);
-  glm_vec4_scale(t[2], v[2], v3);
-
-  glm_vec4_add(v1, t[3], t[3]);
-  glm_vec4_add(v2, t[3], t[3]);
-  glm_vec4_add(v3, t[3], t[3]);
-
-  glm_mat4_copy(t, dest);
-#endif
-}
-
-/*!
- * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix
  *
  * @param[in, out]  m  affine transfrom
@@ -117,6 +75,23 @@ glm_translate(mat4 m, vec3 v) {
   glm_vec4_add(v2, m[3], m[3]);
   glm_vec4_add(v3, m[3], m[3]);
 #endif
+}
+
+/*!
+ * @brief translate existing transform matrix by v vector
+ *        and store result in dest
+ *
+ * source matrix will remain same
+ *
+ * @param[in]  m    affine transfrom
+ * @param[in]  v    translate vector [x, y, z]
+ * @param[out] dest translated matrix
+ */
+CGLM_INLINE
+void
+glm_translate_to(mat4 m, vec3 v, mat4 dest) {
+  glm_mat4_copy(m, dest);
+  glm_translate(dest, v);
 }
 
 /*!
