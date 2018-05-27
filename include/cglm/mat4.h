@@ -370,20 +370,20 @@ glm_mat4_quat(mat4 m, versor dest) {
 }
 
 /*!
- * @brief multiply vector with mat4's mat3 part(rotation)
+ * @brief multiply vector with mat4
  *
  * @param[in]  m    mat4(affine transform)
  * @param[in]  v    vec3
- * @param[out] dest vec3
+ * @param[in]  last 4th item to make it vec4
+ * @param[out] dest result vector (vec3)
  */
 CGLM_INLINE
 void
-glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest) {
-  vec3 res;
-  res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
-  res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
-  res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
-  glm_vec_copy(res, dest);
+glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
+  vec4 res;
+  glm_vec4(v, last, res);
+  glm_mat4_mulv(m, res, res);
+  glm_vec3(res, dest);
 }
 
 /*!
