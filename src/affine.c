@@ -133,3 +133,21 @@ void
 glmc_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
   glm_decompose(m, t, r, s);
 }
+
+CGLM_EXPORT
+void
+glmc_mul(mat4 m1, mat4 m2, mat4 dest) {
+  glm_mul(m1, m2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
+  glm_mul_rot(m1, m2, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_inv_tr(mat4 mat) {
+  glm_inv_tr(mat);
+}

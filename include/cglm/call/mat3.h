@@ -42,6 +42,10 @@ glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest);
 
 CGLM_EXPORT
 void
+glmc_mat3_quat(mat3 m, versor dest);
+
+CGLM_EXPORT
+void
 glmc_mat3_scale(mat3 m, float s);
 
 CGLM_EXPORT

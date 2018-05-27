@@ -112,6 +112,12 @@ glmc_mat4_inv_precise(mat4 mat, mat4 dest) {
 
 CGLM_EXPORT
 void
+glmc_mat4_inv_fast(mat4 mat, mat4 dest) {
+  glm_mat4_inv_fast(mat, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_mat4_swap_col(mat4 mat, int col1, int col2) {
   glm_mat4_swap_col(mat, col1, col2);
 }

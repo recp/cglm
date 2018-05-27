@@ -190,6 +190,12 @@ glmc_vec_rotate_m4(mat4 m, vec3 v, vec3 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec_rotate_m3(mat3 m, vec3 v, vec3 dest) {
+  glm_vec_rotate_m3(m, v, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec_proj(vec3 a, vec3 b, vec3 dest) {
   glm_vec_proj(a, b, dest);
 }

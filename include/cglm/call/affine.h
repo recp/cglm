@@ -97,6 +97,20 @@ CGLM_EXPORT
 void
 glmc_decompose(mat4 m, vec4 t, mat4 r, vec3 s);
 
+/* affine-mat */
+
+CGLM_EXPORT
+void
+glmc_mul(mat4 m1, mat4 m2, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_mul_rot(mat4 m1, mat4 m2, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_inv_tr(mat4 mat);
+
 #ifdef __cplusplus
 }
 #endif
