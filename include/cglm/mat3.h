@@ -189,9 +189,9 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
 
 
 /*!
- * @brief convert mat4's rotation part to quaternion
+ * @brief convert mat3 to quaternion
  *
- * @param[in]  m    left matrix
+ * @param[in]  m    rotation matrix
  * @param[out] dest destination quaternion
  */
 CGLM_INLINE

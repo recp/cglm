@@ -28,6 +28,7 @@ Functions:
 #. :c:func:`glm_aabb_isvalid`
 #. :c:func:`glm_aabb_size`
 #. :c:func:`glm_aabb_radius`
+#. :c:func:`glm_aabb_center`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -131,3 +132,11 @@ Functions documentation
 
     Parameters:
       | *[in]*   **box**     bounding box
+
+.. c:function:: void  glm_aabb_center(vec3 box[2], vec3 dest)
+
+    | computes center point of AABB
+
+    Parameters:
+      | *[in]*    **box**     bounding box
+      | *[out]*   **box**     center of bounding box

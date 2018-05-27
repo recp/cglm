@@ -323,7 +323,7 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 /*!
  * @brief convert mat4's rotation part to quaternion
  *
- * @param[in]  m    left matrix
+ * @param[in]  m    affine matrix
  * @param[out] dest destination quaternion
  */
 CGLM_INLINE

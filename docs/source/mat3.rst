@@ -24,6 +24,7 @@ Functions:
 #. :c:func:`glm_mat3_transpose_to`
 #. :c:func:`glm_mat3_transpose`
 #. :c:func:`glm_mat3_mulv`
+#. :c:func:`glm_mat3_quat`
 #. :c:func:`glm_mat3_scale`
 #. :c:func:`glm_mat3_det`
 #. :c:func:`glm_mat3_inv`
@@ -88,6 +89,14 @@ Functions documentation
       | *[in]*  **mat**   mat3 (left)
       | *[in]*  **v**     vec3 (right, column vector)
       | *[out]* **dest**  destination (result, column vector)
+
+.. c:function:: void  glm_mat3_quat(mat3 m, versor dest)
+
+    convert mat3 to quaternion
+
+    Parameters:
+      | *[in]*  **m**     rotation matrix
+      | *[out]* **dest**  destination quaternion
 
 .. c:function:: void  glm_mat3_scale(mat3 m, float s)
 
