@@ -321,6 +321,9 @@ glm_perspective_resize(float aspect,
 /*!
  * @brief set up view matrix
  *
+ * NOTE: The UP vector must not be parallel to the line of sight from
+ *       the eye point to the reference point
+ *
  * @param[in]  eye    eye vector
  * @param[in]  center center vector
  * @param[in]  up     up vector
@@ -363,6 +366,9 @@ glm_lookat(vec3 eye,
  *
  * convenient wrapper for lookat: if you only have direction not target self
  * then this might be useful. Because you need to get target from direction.
+ *
+ * NOTE: The UP vector must not be parallel to the line of sight from
+ *       the eye point to the reference point
  *
  * @param[in]  eye    eye vector
  * @param[in]  dir    direction vector

@@ -167,11 +167,13 @@ Functions documentation
 
     | set up view matrix
 
+    **NOTE:** The UP vector must not be parallel to the line of sight from the eye point to the reference point.
+
     Parameters:
-    | *[in]*  **eye**     eye vector
-    | *[in]*  **center**  center vector
-    | *[in]*  **up**      up vector
-    | *[out]* **dest**    result matrix
+      | *[in]*  **eye**     eye vector
+      | *[in]*  **center**  center vector
+      | *[in]*  **up**      up vector
+      | *[out]* **dest**    result matrix
 
 .. c:function:: void  glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest)
 
@@ -180,6 +182,8 @@ Functions documentation
     convenient wrapper for :c:func:`glm_lookat`: if you only have direction not
     target self then this might be useful. Because you need to get target
     from direction.
+
+    **NOTE:** The UP vector must not be parallel to the line of sight from the eye point to the reference point.
 
     Parameters:
       | *[in]*  **eye**     eye vector
