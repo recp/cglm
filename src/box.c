@@ -70,3 +70,27 @@ void
 glmc_aabb_center(vec3 box[2], vec3 dest) {
   glm_aabb_center(box, dest);
 }
+
+CGLM_EXPORT
+bool
+glmc_aabb_aabb(vec3 box[2], vec3 other[2]) {
+  return glm_aabb_aabb(box, other);
+}
+
+CGLM_EXPORT
+bool
+glmc_aabb_point(vec3 box[2], vec3 point) {
+  return glm_aabb_point(box, point);
+}
+
+CGLM_EXPORT
+bool
+glmc_aabb_contains(vec3 box[2], vec3 other[2]) {
+  return glm_aabb_contains(box, other);
+}
+
+CGLM_EXPORT
+bool
+glmc_aabb_sphere(vec3 box[2], vec4 sph) {
+  return glm_aabb_sphere(box, sph);
+}
