@@ -634,6 +634,21 @@ glm_vec_center(vec3 v1, vec3 v2, vec3 dest) {
 }
 
 /**
+ * @brief squared distance between two vectors
+ *
+ * @param[in] v1 vector1
+ * @param[in] v2 vector2
+ * @return returns squared distance (distance * distance)
+ */
+CGLM_INLINE
+float
+glm_vec_distance2(vec3 v1, vec3 v2) {
+  return glm_pow2(v2[0] - v1[0])
+       + glm_pow2(v2[1] - v1[1])
+       + glm_pow2(v2[2] - v1[2]);
+}
+
+/**
  * @brief distance between two vectors
  *
  * @param[in] v1 vector1
@@ -643,9 +658,7 @@ glm_vec_center(vec3 v1, vec3 v2, vec3 dest) {
 CGLM_INLINE
 float
 glm_vec_distance(vec3 v1, vec3 v2) {
-  return sqrtf(glm_pow2(v2[0] - v1[0])
-             + glm_pow2(v2[1] - v1[1])
-             + glm_pow2(v2[2] - v1[2]));
+  return sqrtf(glm_vec_distance2(v1, v2));
 }
 
 /*!
