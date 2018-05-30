@@ -70,7 +70,7 @@ glmc_aabb_contains(vec3 box[2], vec3 other[2]);
 
 CGLM_EXPORT
 bool
-glmc_aabb_sphere(vec3 box[2], vec4 sph);
+glmc_aabb_sphere(vec3 box[2], vec4 s);
 
 #ifdef __cplusplus
 }

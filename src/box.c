@@ -91,6 +91,6 @@ glmc_aabb_contains(vec3 box[2], vec3 other[2]) {
 
 CGLM_EXPORT
 bool
-glmc_aabb_sphere(vec3 box[2], vec4 sph) {
-  return glm_aabb_sphere(box, sph);
+glmc_aabb_sphere(vec3 box[2], vec4 s) {
+  return glm_aabb_sphere(box, s);
 }

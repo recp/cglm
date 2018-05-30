@@ -229,24 +229,27 @@ glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
 /*!
  * @brief check if AABB intersects with sphere
  *
- * @param[in]   box    bounding box
- * @param[in]   other  other bounding box
+ * https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+ * Solid Box - Solid Sphere test.
+ *
+ * @param[in]   box    solid bounding box
+ * @param[in]   s      solid sphere
  */
 CGLM_INLINE
 bool
-glm_aabb_sphere(vec3 box[2], vec4 sph) {
-  vec3  v;
-  float dist;
+glm_aabb_sphere(vec3 box[2], vec4 s) {
+  float dmin;
+  int   a, b, c;
 
-  /* get box closest point to sphere center by clamping */
-  v[0] = glm_max(box[0][0], glm_min(sph[0], box[1][0]));
-  v[1] = glm_max(box[0][1], glm_min(sph[1], box[1][1]));
-  v[2] = glm_max(box[0][2], glm_min(sph[2], box[1][2]));
+  a = s[0] >= box[0][0];
+  b = s[1] >= box[0][1];
+  c = s[2] >= box[0][2];
 
-  /* this is the same as glm_sphere_point */
-  dist = glm_vec_distance(v, sph);
+  dmin  = glm_pow2(s[0] - box[a][0])
+        + glm_pow2(s[1] - box[b][1])
+        + glm_pow2(s[2] - box[c][2]);
 
-  return dist < sph[3];
+  return dmin <= glm_pow2(s[3]);
 }
 
 /*!
