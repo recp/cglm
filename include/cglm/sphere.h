@@ -18,6 +18,26 @@
   any function
  */
 
+/*!
+ * @brief helper for getting sphere radius
+ *
+ * @param[in]   s  sphere
+ *
+ * @return returns radii
+ */
+CGLM_INLINE
+float
+glm_sphere_radii(vec4 s) {
+  return s[3];
+}
+
+/*!
+ * @brief apply transform to sphere, it is just wrapper for glm_mat4_mulv3
+ *
+ * @param[in]  s    sphere
+ * @param[in]  m    transform matrix
+ * @param[out] dest transformed sphere
+ */
 CGLM_INLINE
 void
 glm_sphere_transform(vec4 s, mat4 m, vec4 dest) {
@@ -25,6 +45,16 @@ glm_sphere_transform(vec4 s, mat4 m, vec4 dest) {
   dest[3] = s[3];
 }
 
+/*!
+ * @brief merges two spheres and creates a new one
+ *
+ * two sphere must be in same space, for instance if one in world space then
+ * the other must be in world space too, not in local space.
+ *
+ * @param[in]  s1   sphere 1
+ * @param[in]  s2   sphere 2
+ * @param[out] dest merged/extended sphere
+ */
 CGLM_INLINE
 void
 glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
@@ -33,8 +63,23 @@ glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
   dist  = glm_vec_distance(s1, s2);
   radii = dist + s1[3] + s2[3];
 
+  radii = glm_max(radii, s1[3]);
+  radii = glm_max(radii, s2[3]);
+
   glm_vec_center(s1, s2, dest);
   dest[3] = radii;
+}
+
+/*!
+ * @brief check if two sphere intersects
+ *
+ * @param[in]   s1  sphere
+ * @param[in]   s2  other sphere
+ */
+CGLM_INLINE
+bool
+glm_sphere_sphere(vec4 s1, vec4 s2) {
+  return glm_vec_distance2(s1, s2) <= glm_pow2(s1[3] + s2[3]);
 }
 
 #endif /* cglm_sphere_h */
