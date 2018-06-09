@@ -29,4 +29,8 @@ CGLM_EXPORT
 bool
 glmc_sphere_sphere(vec4 s1, vec4 s2);
 
+CGLM_EXPORT
+bool
+glmc_sphere_point(vec4 s, vec3 point);
+
 #endif /* cglmc_sphere_h */

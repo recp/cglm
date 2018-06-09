@@ -82,4 +82,18 @@ glm_sphere_sphere(vec4 s1, vec4 s2) {
   return glm_vec_distance2(s1, s2) <= glm_pow2(s1[3] + s2[3]);
 }
 
+/*!
+ * @brief check if sphere intersects with point
+ *
+ * @param[in]   s      sphere
+ * @param[in]   point  point
+ */
+CGLM_INLINE
+bool
+glm_sphere_point(vec4 s, vec3 point) {
+  float rr;
+  rr = s[3] * s[3];
+  return glm_vec_distance2(point, s) <= rr;
+}
+
 #endif /* cglm_sphere_h */

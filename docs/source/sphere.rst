@@ -21,6 +21,7 @@ Functions:
 #. :c:func:`glm_sphere_transform`
 #. :c:func:`glm_sphere_merge`
 #. :c:func:`glm_sphere_sphere`
+#. :c:func:`glm_sphere_point`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -63,3 +64,11 @@ Functions documentation
     Parameters:
       | *[in]*  **s1**      sphere
       | *[in]*  **s2**      other sphere
+
+.. c:function:: bool  glm_sphere_point(vec4 s, vec3 point)
+
+    | check if sphere intersects with point
+
+    Parameters:
+      | *[in]*  **s**       sphere
+      | *[in]*  **point**   point
