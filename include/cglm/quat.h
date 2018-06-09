@@ -646,15 +646,12 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
 CGLM_INLINE
 void
 glm_quat_look(vec3 eye, versor ori, mat4 dest) {
-  CGLM_ALIGN(16) vec4 t;
-
   /* orientation */
   glm_quat_mat4t(ori, dest);
 
   /* translate */
-  glm_vec4(eye, 1.0f, t);
-  glm_mat4_mulv(dest, t, t);
-  glm_vec_flipsign_to(t, dest[3]);
+  glm_mat4_mulv3(dest, eye, 1.0f, dest[3]);
+  glm_vec_flipsign(dest[3]);
 }
 
 /*!
