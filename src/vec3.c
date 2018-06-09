@@ -208,6 +208,12 @@ glmc_vec_center(vec3 v1, vec3 v2, vec3 dest) {
 
 CGLM_EXPORT
 float
+glmc_vec_distance2(vec3 v1, vec3 v2) {
+  return glm_vec_distance2(v1, v2);
+}
+
+CGLM_EXPORT
+float
 glmc_vec_distance(vec3 v1, vec3 v2) {
   return glm_vec_distance(v1, v2);
 }

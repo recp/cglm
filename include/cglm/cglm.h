@@ -24,5 +24,6 @@
 #include "util.h"
 #include "io.h"
 #include "project.h"
+#include "sphere.h"
 
 #endif /* cglm_h */

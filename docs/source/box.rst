@@ -29,6 +29,10 @@ Functions:
 #. :c:func:`glm_aabb_size`
 #. :c:func:`glm_aabb_radius`
 #. :c:func:`glm_aabb_center`
+#. :c:func:`glm_aabb_aabb`
+#. :c:func:`glm_aabb_sphere`
+#. :c:func:`glm_aabb_point`
+#. :c:func:`glm_aabb_contains`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,5 +142,40 @@ Functions documentation
     | computes center point of AABB
 
     Parameters:
+      | *[in]*    **box**      bounding box
+      | *[out]*   **dest**     center of bounding box
+
+.. c:function:: bool  glm_aabb_aabb(vec3 box[2], vec3 other[2])
+
+    | check if two AABB intersects
+
+    Parameters:
       | *[in]*    **box**     bounding box
-      | *[out]*   **box**     center of bounding box
+      | *[out]*   **other**   other bounding box
+
+.. c:function:: bool  glm_aabb_sphere(vec3 box[2], vec4 s)
+
+    | check if AABB intersects with sphere
+
+    | https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+    | Solid Box - Solid Sphere test.
+
+    Parameters:
+      | *[in]*    **box**     solid bounding box
+      | *[out]*   **s**       solid sphere
+
+.. c:function:: bool  glm_aabb_point(vec3 box[2], vec3 point)
+
+    | check if point is inside of AABB
+
+    Parameters:
+      | *[in]*    **box**     bounding box
+      | *[out]*   **point**   point
+
+.. c:function:: bool  glm_aabb_contains(vec3 box[2], vec3 other[2])
+
+    | check if AABB contains other AABB
+
+    Parameters:
+      | *[in]*    **box**     bounding box
+      | *[out]*   **other**   other bounding box

@@ -98,7 +98,6 @@ glm_make_deg(float *rad) {
 CGLM_INLINE
 float
 glm_pow2(float x) {
-
   return x * x;
 }
 

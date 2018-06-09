@@ -56,6 +56,22 @@ CGLM_EXPORT
 void
 glmc_aabb_center(vec3 box[2], vec3 dest);
 
+CGLM_EXPORT
+bool
+glmc_aabb_aabb(vec3 box[2], vec3 other[2]);
+
+CGLM_EXPORT
+bool
+glmc_aabb_point(vec3 box[2], vec3 point);
+
+CGLM_EXPORT
+bool
+glmc_aabb_contains(vec3 box[2], vec3 other[2]);
+
+CGLM_EXPORT
+bool
+glmc_aabb_sphere(vec3 box[2], vec4 s);
+
 #ifdef __cplusplus
 }
 #endif

@@ -25,6 +25,7 @@ extern "C" {
 #include "call/box.h"
 #include "call/io.h"
 #include "call/project.h"
+#include "call/sphere.h"
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 This library [initially] used some [piece of] implementations
 (may include codes) from these open source projects/resources:
 
-1. Affine Transforms
+1. Initial Affine Transforms
 The original glm repo (g-truc), url: https://github.com/g-truc/glm
 
 LICENSE[S]:
@@ -11,7 +11,7 @@ LICENSE[S]:
 
 FULL LICENSE: https://github.com/g-truc/glm/blob/master/copying.txt
 
-2. Quaternions
+2. Initial Quaternions
 Anton's OpenGL 4 Tutorials book source code:
 
 LICENSE:
@@ -47,6 +47,8 @@ http://old.cescg.org/CESCG-2002/DSykoraJJelinek/
 7. Quaternions
 Initial mat4_quat is borrowed from Apple's simd library
 
-
 8. Vector Rotation using Quaternion
 https://gamedev.stackexchange.com/questions/28395/rotating-vector3-by-a-quaternion
+
+9. Sphere AABB intersect
+https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c

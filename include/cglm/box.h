@@ -212,4 +212,72 @@ glm_aabb_center(vec3 box[2], vec3 dest) {
   glm_vec_center(box[0], box[1], dest);
 }
 
+/*!
+ * @brief check if two AABB intersects
+ *
+ * @param[in]   box    bounding box
+ * @param[in]   other  other bounding box
+ */
+CGLM_INLINE
+bool
+glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
+  return (box[0][0] <= other[1][0] && box[1][0] >= other[0][0])
+      && (box[0][1] <= other[1][1] && box[1][1] >= other[0][1])
+      && (box[0][2] <= other[1][2] && box[1][2] >= other[0][2]);
+}
+
+/*!
+ * @brief check if AABB intersects with sphere
+ *
+ * https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+ * Solid Box - Solid Sphere test.
+ *
+ * @param[in]   box    solid bounding box
+ * @param[in]   s      solid sphere
+ */
+CGLM_INLINE
+bool
+glm_aabb_sphere(vec3 box[2], vec4 s) {
+  float dmin;
+  int   a, b, c;
+
+  a = s[0] >= box[0][0];
+  b = s[1] >= box[0][1];
+  c = s[2] >= box[0][2];
+
+  dmin  = glm_pow2(s[0] - box[a][0])
+        + glm_pow2(s[1] - box[b][1])
+        + glm_pow2(s[2] - box[c][2]);
+
+  return dmin <= glm_pow2(s[3]);
+}
+
+/*!
+ * @brief check if point is inside of AABB
+ *
+ * @param[in]   box    bounding box
+ * @param[in]   point  point
+ */
+CGLM_INLINE
+bool
+glm_aabb_point(vec3 box[2], vec3 point) {
+  return (point[0] >= box[0][0] && point[0] <= box[1][0])
+      && (point[1] >= box[0][1] && point[1] <= box[1][1])
+      && (point[2] >= box[0][2] && point[2] <= box[1][2]);
+}
+
+/*!
+ * @brief check if AABB contains other AABB
+ *
+ * @param[in]   box    bounding box
+ * @param[in]   other  other bounding box
+ */
+CGLM_INLINE
+bool
+glm_aabb_contains(vec3 box[2], vec3 other[2]) {
+  return (box[0][0] <= other[0][0] && box[1][0] >= other[1][0])
+      && (box[0][1] <= other[0][1] && box[1][1] >= other[1][1])
+      && (box[0][2] <= other[0][2] && box[1][2] >= other[1][2]);
+}
+
 #endif /* cglm_box_h */

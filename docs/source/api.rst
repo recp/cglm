@@ -45,3 +45,4 @@ Follow the :doc:`build` documentation for this
    util
    io
    call
+   sphere

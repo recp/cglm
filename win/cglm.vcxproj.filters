@@ -78,6 +78,9 @@
     <ClCompile Include="..\src\project.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\sphere.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -214,6 +217,12 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\call\project.h">
       <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\sphere.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\sphere.h">
+      <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

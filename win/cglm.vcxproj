@@ -31,6 +31,7 @@
     <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\project.c" />
     <ClCompile Include="..\src\quat.c" />
+    <ClCompile Include="..\src\sphere.c" />
     <ClCompile Include="..\src\vec3.c" />
     <ClCompile Include="..\src\vec4.c" />
   </ItemGroup>
@@ -50,6 +51,7 @@
     <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\project.h" />
     <ClInclude Include="..\include\cglm\call\quat.h" />
+    <ClInclude Include="..\include\cglm\call\sphere.h" />
     <ClInclude Include="..\include\cglm\call\vec3.h" />
     <ClInclude Include="..\include\cglm\call\vec4.h" />
     <ClInclude Include="..\include\cglm\cam.h" />
@@ -72,6 +74,7 @@
     <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
+    <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />
     <ClInclude Include="..\include\cglm\vec3-ext.h" />

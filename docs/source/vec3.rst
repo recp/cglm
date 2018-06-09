@@ -56,6 +56,7 @@ Functions:
 #. :c:func:`glm_vec_inv_to`
 #. :c:func:`glm_vec_normalize`
 #. :c:func:`glm_vec_normalize_to`
+#. :c:func:`glm_vec_distance2`
 #. :c:func:`glm_vec_distance`
 #. :c:func:`glm_vec_angle`
 #. :c:func:`glm_vec_rotate`
@@ -365,6 +366,17 @@ Functions documentation
       | *[in]*  **v1**    vector1
       | *[in]*  **v2**    vector2
       | *[out]* **dest**  center point
+
+.. c:function:: float  glm_vec_distance2(vec3 v1, vec3 v2)
+
+    squared distance between two vectors
+
+    Parameters:
+      | *[in]*  **mat**   vector1
+      | *[in]*  **row1**  vector2
+
+    Returns:
+      | squared distance (distance * distance)
 
 .. c:function:: float  glm_vec_distance(vec3 v1, vec3 v2)
 
