@@ -145,7 +145,7 @@ glm_ease_quint_inout(float t) {
 
   if (t < 0.5f) {
     f = t * t;
-    return 16.0f * f * f * f;
+    return 16.0f * f * f * t;
   }
 
   f = 2.0f * t - 2.0f;
@@ -157,20 +157,16 @@ glm_ease_quint_inout(float t) {
 CGLM_INLINE
 float
 glm_ease_exp_in(float t) {
-  float c;
-
-  if (t <= 0.0f)
+  if (t == 0.0f)
     return t;
 
-  c = t - 1.0f;
-
-  return powf(2.0f, c * 10.0f);
+  return powf(2.0f,  10.0f * (t - 1.0f));
 }
 
 CGLM_INLINE
 float
 glm_ease_exp_out(float t) {
-  if (t >= 1.0f)
+  if (t == 1.0f)
     return t;
 
   return 1.0f - powf(2.0f, -10.0f * t);
@@ -179,6 +175,9 @@ glm_ease_exp_out(float t) {
 CGLM_INLINE
 float
 glm_ease_exp_inout(float t) {
+  if (t == 0.0f || t == 1.0f)
+    return t;
+
   if (t < 0.5f)
     return 0.5f * powf(2.0f, (20.0f * t) - 10.0f);
 
@@ -239,14 +238,14 @@ glm_ease_back_inout(float t) {
   x = 0.5;
   n = t / 0.5f;
 
-  if (n < 1) {
-    z = ((s + 1) * n) - s;
+  if (n < 1.0f) {
+    z = (s + 1) * n - s;
     m = n * n * z;
     return x * m;
   }
 
-  n -= 2;
-  z  = ((s + 1) * n) + s;
+  n -= 2.0f;
+  z  = (s + 1.0f) * n + s;
   m  = (n * n * z) + 2;
 
   return x * m;
@@ -272,10 +271,10 @@ glm_ease_elast_inout(float t) {
   a = 2.0f * t;
 
   if (t < 0.5f)
-    return 0.5f * sinf(13.0f * CGLM_PI_2 * (a))
-                * powf(2.0f, 10.0f * ((a) - 1.0f));
+    return 0.5f * sinf(13.0f * CGLM_PI_2 * a)
+                * powf(2.0f, 10.0f * (a - 1.0f));
 
-  return 0.5f * (sinf(-13.0f * CGLM_PI_2 * ((a - 1.0f) + 1.0f))
+  return 0.5f * (sinf(-13.0f * CGLM_PI_2 * a)
                  * powf(2.0f, -10.0f * (a - 1.0f)) + 2.0f);
 }
 
