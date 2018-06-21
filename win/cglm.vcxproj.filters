@@ -81,6 +81,9 @@
     <ClCompile Include="..\src\sphere.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ease.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -222,6 +225,12 @@
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\sphere.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\ease.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\ease.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>

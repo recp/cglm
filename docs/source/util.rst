@@ -136,3 +136,38 @@ Functions documentation
 
     Returns:
        interpolated value
+
+.. c:function:: bool glm_eq(float a, float b)
+
+    check if two float equal with using EPSILON
+
+    Parameters:
+      | *[in]*  **a**   a
+      | *[in]*  **b**   b
+
+    Returns:
+       true if a and b equals
+
+.. c:function:: float glm_percent(float from, float to, float current)
+
+    percentage of current value between start and end value
+
+    Parameters:
+      | *[in]*  **from**   from value
+      | *[in]*  **to**     to value
+      | *[in]*  **current**   value between from and to values
+
+    Returns:
+       clamped normalized percent (0-100 in 0-1)
+
+.. c:function:: float glm_percentc(float from, float to, float current)
+
+    clamped percentage of current value between start and end value
+
+    Parameters:
+      | *[in]*  **from**      from value
+      | *[in]*  **to**        to value
+      | *[in]*  **current**   value between from and to values
+
+    Returns:
+       clamped normalized percent (0-100 in 0-1)

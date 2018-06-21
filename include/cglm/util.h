@@ -19,6 +19,7 @@
 #define cglm_util_h
 
 #include "common.h"
+#include <stdbool.h>
 
 /*!
  * @brief get sign of 32 bit integer as +1, -1, 0
@@ -155,6 +156,46 @@ CGLM_INLINE
 float
 glm_lerp(float from, float to, float t) {
   return from + glm_clamp(t, 0.0f, 1.0f) * (to - from);
+}
+
+/*!
+ * @brief check if two float equal with using EPSILON
+ *
+ * @param[in]   a   a
+ * @param[in]   b   b
+ */
+CGLM_INLINE
+bool
+glm_eq(float a, float b) {
+  return fabsf(a - b) <= FLT_EPSILON;
+}
+
+/*!
+ * @brief percentage of current value between start and end value
+ *
+ * maybe fraction could be alternative name.
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    current value
+ */
+CGLM_INLINE
+float
+glm_percent(float from, float to, float current) {
+  return (current - from) / (to - from);
+}
+
+/*!
+ * @brief clamped percentage of current value between start and end value
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    current value
+ */
+CGLM_INLINE
+float
+glm_percentc(float from, float to, float current) {
+  return glm_clamp(glm_percent(from, to, current), 0.0f, 1.0f);
 }
 
 #endif /* cglm_util_h */
