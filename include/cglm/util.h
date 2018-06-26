@@ -21,6 +21,9 @@
 #include "common.h"
 #include <stdbool.h>
 
+#define GLM_MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
+#define GLM_MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
+
 /*!
  * @brief get sign of 32 bit integer as +1, -1, 0
  *
