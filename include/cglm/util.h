@@ -185,7 +185,12 @@ glm_eq(float a, float b) {
 CGLM_INLINE
 float
 glm_percent(float from, float to, float current) {
-  return (current - from) / (to - from);
+  float t;
+
+  if ((t = to - from) == 0.0f)
+    return 1.0f;
+
+  return (current - from) / t;
 }
 
 /*!
