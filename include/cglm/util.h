@@ -178,9 +178,9 @@ glm_eq(float a, float b) {
  *
  * maybe fraction could be alternative name.
  *
- * @param[in]   from from value
- * @param[in]   to   to value
- * @param[in]   t    current value
+ * @param[in]   from    from value
+ * @param[in]   to      to value
+ * @param[in]   current current value
  */
 CGLM_INLINE
 float
@@ -196,9 +196,9 @@ glm_percent(float from, float to, float current) {
 /*!
  * @brief clamped percentage of current value between start and end value
  *
- * @param[in]   from from value
- * @param[in]   to   to value
- * @param[in]   t    current value
+ * @param[in]   from    from value
+ * @param[in]   to      to value
+ * @param[in]   current current value
  */
 CGLM_INLINE
 float
