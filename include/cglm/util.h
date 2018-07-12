@@ -147,6 +147,17 @@ glm_clamp(float val, float minVal, float maxVal) {
 }
 
 /*!
+ * @brief clamp a number to zero and one
+ *
+ * @param[in] val value to clamp
+ */
+CGLM_INLINE
+float
+glm_clamp_zo(float val) {
+  return glm_clamp(val, 0.0f, 1.0f);
+}
+
+/*!
  * @brief linear interpolation between two number
  *
  * formula:  from + s * (to - from)
@@ -158,7 +169,7 @@ glm_clamp(float val, float minVal, float maxVal) {
 CGLM_INLINE
 float
 glm_lerp(float from, float to, float t) {
-  return from + glm_clamp(t, 0.0f, 1.0f) * (to - from);
+  return from + glm_clamp_zo(t) * (to - from);
 }
 
 /*!
