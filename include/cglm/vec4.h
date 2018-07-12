@@ -698,7 +698,7 @@ glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
   vec4 s, v;
 
   /* from + s * (to - from) */
-  glm_vec4_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec4_broadcast(glm_clamp_zo(t), s);
   glm_vec4_sub(to, from, v);
   glm_vec4_mulv(s, v, v);
   glm_vec4_add(from, v, dest);

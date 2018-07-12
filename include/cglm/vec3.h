@@ -736,7 +736,7 @@ glm_vec_lerp(vec3 from, vec3 to, float t, vec3 dest) {
   vec3 s, v;
 
   /* from + s * (to - from) */
-  glm_vec_broadcast(glm_clamp(t, 0.0f, 1.0f), s);
+  glm_vec_broadcast(glm_clamp_zo(t), s);
   glm_vec_sub(to, from, v);
   glm_vec_mulv(s, v, v);
   glm_vec_add(from, v, dest);
