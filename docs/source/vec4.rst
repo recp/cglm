@@ -24,6 +24,7 @@ Functions:
 1. :c:func:`glm_vec4`
 #. :c:func:`glm_vec4_copy3`
 #. :c:func:`glm_vec4_copy`
+#. :c:func:`glm_vec4_ucopy`
 #. :c:func:`glm_vec4_zero`
 #. :c:func:`glm_vec4_one`
 #. :c:func:`glm_vec4_dot`
@@ -84,6 +85,16 @@ Functions documentation
 .. c:function:: void  glm_vec4_copy(vec4 v, vec4 dest)
 
     copy all members of [a] to [dest]
+
+    Parameters:
+      | *[in]*  **v**     source
+      | *[in]*  **dest**  destination
+
+.. c:function:: void  glm_vec4_ucopy(vec4 v, vec4 dest)
+
+    copy all members of [a] to [dest]
+
+    | alignment is not required
 
     Parameters:
       | *[in]*  **v**     source

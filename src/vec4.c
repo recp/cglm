@@ -39,6 +39,12 @@ glmc_vec4_copy(vec4 v, vec4 dest) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec4_ucopy(vec4 v, vec4 dest) {
+  glm_vec4_ucopy(v, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec4_dot(vec4 a, vec4 b) {
   return glm_vec4_dot(a, b);
