@@ -121,6 +121,21 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief copy all members of [a] to [dest]
+ *
+ * @param[in]  v    source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_ucopy(vec4 v, vec4 dest) {
+  dest[0] = v[0];
+  dest[1] = v[1];
+  dest[2] = v[2];
+  dest[3] = v[3];
+}
+
+/*!
  * @brief make vector zero
  *
  * @param[in, out]  v vector
