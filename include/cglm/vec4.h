@@ -25,6 +25,7 @@
    CGLM_INLINE void  glm_vec4(vec3 v3, float last, vec4 dest);
    CGLM_INLINE void  glm_vec4_copy3(vec4 a, vec3 dest);
    CGLM_INLINE void  glm_vec4_copy(vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_ucopy(vec4 v, vec4 dest);
    CGLM_INLINE float glm_vec4_dot(vec4 a, vec4 b);
    CGLM_INLINE float glm_vec4_norm2(vec4 v);
    CGLM_INLINE float glm_vec4_norm(vec4 vec);
@@ -122,6 +123,8 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 
 /*!
  * @brief copy all members of [a] to [dest]
+ *
+ * alignment is not required
  *
  * @param[in]  v    source
  * @param[out] dest destination
