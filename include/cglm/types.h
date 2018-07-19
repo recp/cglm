@@ -26,13 +26,25 @@
 #  define CGLM_ALIGN_IF(X) /* no alignment */
 #endif
 
+#ifdef __AVX__
+#  define CGLM_ALIGN_MAT CGLM_ALIGN(32)
+#else
+#  define CGLM_ALIGN_MAT CGLM_ALIGN(16)
+#endif
+
 typedef float                   vec2[2];
 typedef CGLM_ALIGN_IF(8)  float vec3[3];
 typedef int                    ivec3[3];
 typedef CGLM_ALIGN_IF(16) float vec4[4];
 
-typedef vec3                    mat3[3];
+#ifdef __AVX__
+typedef CGLM_ALIGN_IF(32) vec3  mat3[3];
+typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
+#else
+typedef                   vec3  mat3[3];
 typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
+#endif
+
 
 typedef vec4                    versor;
 

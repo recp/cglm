@@ -151,7 +151,7 @@ glm_inv_tr(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_inv_tr_sse2(mat);
 #else
-  CGLM_ALIGN(16) mat3 r;
+  CGLM_ALIGN_MAT mat3 r;
   CGLM_ALIGN(16) vec3 t;
 
   /* rotate */

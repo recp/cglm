@@ -742,7 +742,7 @@ glm_quat_rotatev(versor q, vec3 v, vec3 dest) {
 CGLM_INLINE
 void
 glm_quat_rotate(mat4 m, versor q, mat4 dest) {
-  CGLM_ALIGN(16) mat4 rot;
+  CGLM_ALIGN_MAT mat4 rot;
   glm_quat_mat4(q, rot);
   glm_mul_rot(m, rot, dest);
 }

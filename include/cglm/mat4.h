@@ -139,7 +139,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_identity(mat4 mat) {
-  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   glm_mat4_copy(t, mat);
 }
 

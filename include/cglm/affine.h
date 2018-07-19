@@ -244,7 +244,7 @@ glm_scale_uni(mat4 m, float s) {
 CGLM_INLINE
 void
 glm_rotate_x(mat4 m, float angle, mat4 dest) {
-  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -269,7 +269,7 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_y(mat4 m, float angle, mat4 dest) {
-  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -294,7 +294,7 @@ glm_rotate_y(mat4 m, float angle, mat4 dest) {
 CGLM_INLINE
 void
 glm_rotate_z(mat4 m, float angle, mat4 dest) {
-  CGLM_ALIGN(16) mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
   c = cosf(angle);
@@ -351,7 +351,7 @@ glm_rotate_make(mat4 m, float angle, vec3 axis) {
 CGLM_INLINE
 void
 glm_rotate(mat4 m, float angle, vec3 axis) {
-  CGLM_ALIGN(16) mat4 rot;
+  CGLM_ALIGN_MAT mat4 rot;
   glm_rotate_make(rot, angle, axis);
   glm_mul_rot(m, rot, m);
 }
