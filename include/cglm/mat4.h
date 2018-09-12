@@ -23,6 +23,7 @@
    CGLM_INLINE void  glm_mat4_ucopy(mat4 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_copy(mat4 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_identity(mat4 mat);
+   CGLM_INLINE void  glm_mat4_identity_array(mat4 * restrict mat, size_t count);
    CGLM_INLINE void  glm_mat4_pick3(mat4 mat, mat3 dest);
    CGLM_INLINE void  glm_mat4_pick3t(mat4 mat, mat3 dest);
    CGLM_INLINE void  glm_mat4_ins3(mat3 mat, mat4 dest);
@@ -141,6 +142,25 @@ void
 glm_mat4_identity(mat4 mat) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   glm_mat4_copy(t, mat);
+}
+
+/*!
+ * @brief make given matrix array's each element identity matrix
+ *
+ * @param[in, out]  mat   matrix array (must be aligned (16/32)
+ *                        if alignment is not disabled)
+ *
+ * @param[in]       count count of matrices
+ */
+CGLM_INLINE
+void
+glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
+  size_t i;
+
+  for (i = 0; i < count; i++) {
+    glm_mat4_copy(t, mat[i]);
+  }
 }
 
 /*!

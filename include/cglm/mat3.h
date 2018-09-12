@@ -16,6 +16,7 @@
  Functions:
    CGLM_INLINE void  glm_mat3_copy(mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_identity(mat3 mat);
+   CGLM_INLINE void  glm_mat3_identity_array(mat3 * restrict mat, size_t count);
    CGLM_INLINE void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
@@ -83,6 +84,25 @@ void
 glm_mat3_identity(mat3 mat) {
   CGLM_ALIGN_MAT mat3 t = GLM_MAT3_IDENTITY_INIT;
   glm_mat3_copy(t, mat);
+}
+
+/*!
+ * @brief make given matrix array's each element identity matrix
+ *
+ * @param[in, out]  mat   matrix array (must be aligned (16/32)
+ *                        if alignment is not disabled)
+ *
+ * @param[in]       count count of matrices
+ */
+CGLM_INLINE
+void
+glm_mat3_identity_array(mat3 * __restrict mat, size_t count) {
+  CGLM_ALIGN_MAT mat3 t = GLM_MAT3_IDENTITY_INIT;
+  size_t i;
+
+  for (i = 0; i < count; i++) {
+    glm_mat3_copy(t, mat[i]);
+  }
 }
 
 /*!

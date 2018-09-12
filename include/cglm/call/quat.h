@@ -19,6 +19,10 @@ glmc_quat_identity(versor q);
 
 CGLM_EXPORT
 void
+glmc_quat_identity_array(versor * __restrict q, size_t count);
+
+CGLM_EXPORT
+void
 glmc_quat_init(versor q, float x, float y, float z, float w);
 
 CGLM_EXPORT

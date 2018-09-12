@@ -8,11 +8,16 @@
 #include "../include/cglm/cglm.h"
 #include "../include/cglm/call.h"
 
-
 CGLM_EXPORT
 void
 glmc_quat_identity(versor q) {
   glm_quat_identity(q);
+}
+
+CGLM_EXPORT
+void
+glmc_quat_identity_array(versor * __restrict q, size_t count) {
+  glm_quat_identity_array(q, count);
 }
 
 CGLM_EXPORT

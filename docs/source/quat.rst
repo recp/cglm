@@ -27,6 +27,7 @@ Macros:
 Functions:
 
 1. :c:func:`glm_quat_identity`
+#. :c:func:`glm_quat_identity_array`
 #. :c:func:`glm_quat_init`
 #. :c:func:`glm_quat`
 #. :c:func:`glm_quatv`
@@ -69,6 +70,14 @@ Functions documentation
 
     Parameters:
       | *[in, out]*  **q**    quaternion
+
+.. c:function:: void  glm_quat_identity_array(versor * __restrict q, size_t count)
+
+    | make given quaternion array's each element identity quaternion
+
+    Parameters:
+      | *[in, out]*  **q**   quat array (must be aligned (16) if alignment is not disabled)
+      | *[in]*  **count**    count of quaternions
 
 .. c:function:: void  glm_quat_init(versor q, float x, float y, float z, float w)
 

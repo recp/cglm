@@ -104,6 +104,25 @@ glm_quat_identity(versor q) {
 }
 
 /*!
+ * @brief make given quaternion array's each element identity quaternion
+ *
+ * @param[in, out]  q     quat array (must be aligned (16)
+ *                        if alignment is not disabled)
+ *
+ * @param[in]       count count of quaternions
+ */
+CGLM_INLINE
+void
+glm_quat_identity_array(versor * __restrict q, size_t count) {
+  CGLM_ALIGN(16) versor v = GLM_QUAT_IDENTITY_INIT;
+  size_t i;
+
+  for (i = 0; i < count; i++) {
+    glm_vec4_copy(v, q[i]);
+  }
+}
+
+/*!
  * @brief inits quaterion with raw values
  *
  * @param[out]  q     quaternion

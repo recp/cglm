@@ -20,6 +20,7 @@ Functions:
 
 1. :c:func:`glm_mat3_copy`
 #. :c:func:`glm_mat3_identity`
+#. :c:func:`glm_mat3_identity_array`
 #. :c:func:`glm_mat3_mul`
 #. :c:func:`glm_mat3_transpose_to`
 #. :c:func:`glm_mat3_transpose`
@@ -48,6 +49,14 @@ Functions documentation
 
     Parameters:
       | *[out]* **mat**  matrix
+
+.. c:function:: void  glm_mat3_identity_array(mat3 * __restrict mat, size_t count)
+
+    make given matrix array's each element identity matrix
+
+    Parameters:
+      | *[in,out]* **mat**  matrix array (must be aligned (16/32) if alignment is not disabled)
+      | *[in]* **count**  count of matrices
 
 .. c:function:: void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest)
 

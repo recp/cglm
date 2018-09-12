@@ -16,7 +16,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_scale_sse2(mat4 m, float s){
+glm_mat4_scale_sse2(mat4 m, float s) {
   __m128 x0;
   x0 = _mm_set1_ps(s);
 
@@ -28,7 +28,7 @@ glm_mat4_scale_sse2(mat4 m, float s){
 
 CGLM_INLINE
 void
-glm_mat4_transp_sse2(mat4 m, mat4 dest){
+glm_mat4_transp_sse2(mat4 m, mat4 dest) {
   __m128 r0, r1, r2, r3;
 
   r0 = glmm_load(m[0]);
