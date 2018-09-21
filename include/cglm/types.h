@@ -48,8 +48,8 @@ typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
 
 typedef vec4                    versor;
 
-#define CGLM_PI    ((float)3.14159265358979323846)
-#define CGLM_PI_2  ((float)1.57079632679489661923)
-#define CGLM_PI_4  ((float)0.78539816339744830962)
+#define CGLM_PI    ((float)3.14159265358979323846264338327950288)
+#define CGLM_PI_2  ((float)1.57079632679489661923132169163975144)
+#define CGLM_PI_4  ((float)0.785398163397448309615660845819875721)
 
 #endif /* cglm_types_h */
