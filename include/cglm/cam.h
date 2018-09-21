@@ -293,7 +293,7 @@ CGLM_INLINE
 void
 glm_perspective_default(float aspect,
                         mat4  dest) {
-  glm_perspective((float)CGLM_PI_4,
+  glm_perspective(GLM_PI_4f,
                   aspect,
                   0.01f,
                   100.0f,
