@@ -198,26 +198,15 @@ glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_default(float aspect,
-                  mat4  dest) {
+glm_ortho_default(float aspect, mat4 dest) {
   if (aspect >= 1.0f) {
-    glm_ortho(-1.0f * aspect,
-               1.0f * aspect,
-              -1.0f,
-               1.0f,
-              -100.0f,
-               100.0f,
-               dest);
+    glm_ortho(-aspect, aspect, -1.0f, 1.0f, -100.0f, 100.0f, dest);
 	  return;
   }
 
-  glm_ortho(-1.0f,
-             1.0f,
-            -1.0f / aspect,
-             1.0f / aspect,
-            -100.0f,
-             100.0f,
-             dest);
+  aspect = 1.0f / aspect;
+
+  glm_ortho(-1.0f, 1.0f, -aspect, aspect, -100.0f, 100.0f, dest);
 }
 
 /*!
@@ -291,13 +280,8 @@ glm_perspective(float fovy,
  */
 CGLM_INLINE
 void
-glm_perspective_default(float aspect,
-                        mat4  dest) {
-  glm_perspective(GLM_PI_4f,
-                  aspect,
-                  0.01f,
-                  100.0f,
-                  dest);
+glm_perspective_default(float aspect, mat4 dest) {
+  glm_perspective(GLM_PI_4f, aspect, 0.01f, 100.0f, dest);
 }
 
 /*!
@@ -310,8 +294,7 @@ glm_perspective_default(float aspect,
  */
 CGLM_INLINE
 void
-glm_perspective_resize(float aspect,
-                       mat4  proj) {
+glm_perspective_resize(float aspect, mat4 proj) {
   if (proj[0][0] == 0.0f)
     return;
 
