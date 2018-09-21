@@ -84,12 +84,12 @@ glm_euler_angles(mat4 m, vec3 dest) {
       thetaZ = atan2f(-m10, m00);
     } else { /* m20 == -1 */
       /* Not a unique solution */
-      thetaY = -CGLM_PI_2;
+      thetaY = -GLM_PI_2f;
       thetaX = -atan2f(m01, m11);
       thetaZ =  0.0f;
     }
   } else { /* m20 == +1 */
-    thetaY = CGLM_PI_2;
+    thetaY = GLM_PI_2f;
     thetaX = atan2f(m01, m11);
     thetaZ = 0.0f;
   }

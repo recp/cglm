@@ -19,19 +19,19 @@ glm_ease_linear(float t) {
 CGLM_INLINE
 float
 glm_ease_sine_in(float t) {
-  return sinf((t - 1.0f) * CGLM_PI_2) + 1.0f;
+  return sinf((t - 1.0f) * GLM_PI_2f) + 1.0f;
 }
 
 CGLM_INLINE
 float
 glm_ease_sine_out(float t) {
-  return sinf(t * CGLM_PI_2);
+  return sinf(t * GLM_PI_2f);
 }
 
 CGLM_INLINE
 float
 glm_ease_sine_inout(float t) {
-  return 0.5f * (1.0f - cosf(t * CGLM_PI));
+  return 0.5f * (1.0f - cosf(t * GLM_PIf));
 }
 
 CGLM_INLINE
@@ -254,13 +254,13 @@ glm_ease_back_inout(float t) {
 CGLM_INLINE
 float
 glm_ease_elast_in(float t) {
-  return sinf(13.0f * CGLM_PI_2 * t) * powf(2.0f, 10.0f * (t - 1.0f));
+  return sinf(13.0f * GLM_PI_2f * t) * powf(2.0f, 10.0f * (t - 1.0f));
 }
 
 CGLM_INLINE
 float
 glm_ease_elast_out(float t) {
-  return sinf(-13.0f * CGLM_PI_2 * (t + 1.0f)) * powf(2.0f, -10.0f * t) + 1.0f;
+  return sinf(-13.0f * GLM_PI_2f * (t + 1.0f)) * powf(2.0f, -10.0f * t) + 1.0f;
 }
 
 CGLM_INLINE
@@ -271,10 +271,10 @@ glm_ease_elast_inout(float t) {
   a = 2.0f * t;
 
   if (t < 0.5f)
-    return 0.5f * sinf(13.0f * CGLM_PI_2 * a)
+    return 0.5f * sinf(13.0f * GLM_PI_2f * a)
                 * powf(2.0f, 10.0f * (a - 1.0f));
 
-  return 0.5f * (sinf(-13.0f * CGLM_PI_2 * a)
+  return 0.5f * (sinf(-13.0f * GLM_PI_2f * a)
                  * powf(2.0f, -10.0f * (a - 1.0f)) + 2.0f);
 }
 

@@ -689,7 +689,7 @@ glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
 
   dot = glm_vec_dot(dir, fwd);
   if (fabsf(dot + 1.0f)  < 0.000001f) {
-    glm_quat_init(dest, up[0], up[1], up[2], CGLM_PI);
+    glm_quat_init(dest, up[0], up[1], up[2], GLM_PIf);
     return;
   }
 

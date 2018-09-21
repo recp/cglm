@@ -58,7 +58,7 @@ glm_signf(float val) {
 CGLM_INLINE
 float
 glm_rad(float deg) {
-  return deg * CGLM_PI / 180.0f;
+  return deg * GLM_PIf / 180.0f;
 }
 
 /*!
@@ -69,7 +69,7 @@ glm_rad(float deg) {
 CGLM_INLINE
 float
 glm_deg(float rad) {
-  return rad * 180.0f / CGLM_PI;
+  return rad * 180.0f / GLM_PIf;
 }
 
 /*!
@@ -80,7 +80,7 @@ glm_deg(float rad) {
 CGLM_INLINE
 void
 glm_make_rad(float *deg) {
-  *deg = *deg * CGLM_PI / 180.0f;
+  *deg = *deg * GLM_PIf / 180.0f;
 }
 
 /*!
@@ -91,7 +91,7 @@ glm_make_rad(float *deg) {
 CGLM_INLINE
 void
 glm_make_deg(float *rad) {
-  *rad = *rad * 180.0f / CGLM_PI;
+  *rad = *rad * 180.0f / GLM_PIf;
 }
 
 /*!
