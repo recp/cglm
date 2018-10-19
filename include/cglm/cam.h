@@ -201,7 +201,7 @@ void
 glm_ortho_default(float aspect, mat4 dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-aspect, aspect, -1.0f, 1.0f, -100.0f, 100.0f, dest);
-	  return;
+    return;
   }
 
   aspect = 1.0f / aspect;
@@ -229,7 +229,7 @@ glm_ortho_default_s(float aspect,
               -size - 100.0f,
                size + 100.0f,
                dest);
-	  return;
+    return;
   }
 
   glm_ortho(-size,
