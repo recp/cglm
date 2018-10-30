@@ -528,7 +528,9 @@ glm_mat4_det(mat4 mat) {
 CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_inv_avx(mat, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
 #else
   float t[6];
@@ -589,7 +591,9 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_inv_fast(mat4 mat, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_inv_fast_avx(mat, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_fast_sse2(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
