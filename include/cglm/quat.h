@@ -286,7 +286,7 @@ glm_quat_conjugate(versor q, versor dest) {
 CGLM_INLINE
 void
 glm_quat_inv(versor q, versor dest) {
-  CGLM_ALIGN(8) versor conj;
+  CGLM_ALIGN(16) versor conj;
   glm_quat_conjugate(q, conj);
   glm_vec4_scale(conj, 1.0f / glm_vec4_norm2(q), dest);
 }
