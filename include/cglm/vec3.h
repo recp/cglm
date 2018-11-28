@@ -548,11 +548,18 @@ glm_vec_normalize_to(vec3 vec, vec3 dest) {
 CGLM_INLINE
 float
 glm_vec_angle(vec3 v1, vec3 v2) {
-  float norm;
+  float norm, dot;
 
   /* maybe compiler generate approximation instruction (rcp) */
   norm = 1.0f / (glm_vec_norm(v1) * glm_vec_norm(v2));
-  return acosf(glm_vec_dot(v1, v2) * norm);
+  dot  = glm_vec_dot(v1, v2) * norm;
+
+  if (dot > 1.0f)
+    return 0.0f;
+  else if (dot < -1.0f)
+    return CGLM_PI;
+
+  return acosf(dot);
 }
 
 /*!
