@@ -5,11 +5,6 @@
  * Full license can be found in the LICENSE file
  */
 
-/*!
- * vec3 functions dont have suffix e.g glm_vec_dot (not glm_vec3_dot)
- * all functions without suffix are vec3 functions
- */
-
 /*
  Macros:
    glm_vec4_dup3(v, dest)
