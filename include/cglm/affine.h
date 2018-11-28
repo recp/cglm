@@ -370,7 +370,7 @@ void
 glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
-  glm_vec_inv_to(pivot, pivotInv);
+  glm_vec_negate_to(pivot, pivotInv);
 
   glm_translate(m, pivot);
   glm_rotate(m, angle, axis);
@@ -395,7 +395,7 @@ void
 glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
-  glm_vec_inv_to(pivot, pivotInv);
+  glm_vec_negate_to(pivot, pivotInv);
 
   glm_translate_make(m, pivot);
   glm_rotate(m, angle, axis);
@@ -467,7 +467,7 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
     glm_vec4_flipsign(r[0]);
     glm_vec4_flipsign(r[1]);
     glm_vec4_flipsign(r[2]);
-    glm_vec_flipsign(s);
+    glm_vec_negate(s);
   }
 }
 

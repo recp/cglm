@@ -52,6 +52,8 @@ Functions:
 #. :c:func:`glm_vec_muladds`
 #. :c:func:`glm_vec_flipsign`
 #. :c:func:`glm_vec_flipsign_to`
+#. :c:func:`glm_vec_negate`
+#. :c:func:`glm_vec_negate_to`
 #. :c:func:`glm_vec_inv`
 #. :c:func:`glm_vec_inv_to`
 #. :c:func:`glm_vec_normalize`
@@ -276,6 +278,21 @@ Functions documentation
 .. c:function:: void  glm_vec_flipsign_to(vec3 v, vec3 dest)
 
     flip sign of all vec3 members and store result in dest
+
+    Parameters:
+      | *[in]*  **v**       vector
+      | *[out]* **dest**    negated vector
+
+.. c:function:: void  glm_vec_negate(vec3 v)
+
+    negate vector components
+
+    Parameters:
+      | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec_negate_to(vec3 v, vec3 dest)
+
+    negate vector components and store result in dest
 
     Parameters:
       | *[in]*  **v**       vector

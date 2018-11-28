@@ -160,6 +160,18 @@ glmc_vec_flipsign_to(vec3 v, vec3 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec_negate(vec3 v) {
+  glm_vec_negate(v);
+}
+
+CGLM_EXPORT
+void
+glmc_vec_negate_to(vec3 v, vec3 dest) {
+  glm_vec_negate_to(v, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec_inv(vec3 v) {
   glm_vec_inv(v);
 }

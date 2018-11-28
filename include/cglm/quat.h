@@ -670,7 +670,7 @@ glm_quat_look(vec3 eye, versor ori, mat4 dest) {
 
   /* translate */
   glm_mat4_mulv3(dest, eye, 1.0f, dest[3]);
-  glm_vec_flipsign(dest[3]);
+  glm_vec_negate(dest[3]);
 }
 
 /*!
@@ -778,7 +778,7 @@ void
 glm_quat_rotate_at(mat4 m, versor q, vec3 pivot) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
-  glm_vec_inv_to(pivot, pivotInv);
+  glm_vec_negate_to(pivot, pivotInv);
 
   glm_translate(m, pivot);
   glm_quat_rotate(m, q, m);
@@ -802,7 +802,7 @@ void
 glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
-  glm_vec_inv_to(pivot, pivotInv);
+  glm_vec_negate_to(pivot, pivotInv);
 
   glm_translate_make(m, pivot);
   glm_quat_rotate(m, q, m);

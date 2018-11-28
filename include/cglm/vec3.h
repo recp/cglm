@@ -24,6 +24,8 @@
  Functions:
    CGLM_INLINE void  glm_vec3(vec4 v4, vec3 dest);
    CGLM_INLINE void  glm_vec_copy(vec3 a, vec3 dest);
+   CGLM_INLINE void  glm_vec_zero(vec3 v);
+   CGLM_INLINE void  glm_vec_one(vec3 v);
    CGLM_INLINE float glm_vec_dot(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE float glm_vec_norm2(vec3 v);
@@ -40,7 +42,11 @@
    CGLM_INLINE void  glm_vec_addadd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_subadd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_muladd(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec_muladds(vec3 a, float s, vec3 dest);
    CGLM_INLINE void  glm_vec_flipsign(vec3 v);
+   CGLM_INLINE void  glm_vec_flipsign_to(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_negate_to(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_negate(vec3 v);
    CGLM_INLINE void  glm_vec_inv(vec3 v);
    CGLM_INLINE void  glm_vec_inv_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec_normalize(vec3 v);
@@ -49,18 +55,26 @@
    CGLM_INLINE float glm_vec_angle(vec3 v1, vec3 v2);
    CGLM_INLINE void  glm_vec_rotate(vec3 v, float angle, vec3 axis);
    CGLM_INLINE void  glm_vec_rotate_m4(mat4 m, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec_rotate_m4(mat3 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec_proj(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec_center(vec3 v1, vec3 v2, vec3 dest);
+   CGLM_INLINE float glm_vec_distance2(vec3 v1, vec3 v2);
    CGLM_INLINE void  glm_vec_maxv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_minv(vec3 v1, vec3 v2, vec3 dest);
    CGLM_INLINE void  glm_vec_ortho(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec_clamp(vec3 v, float minVal, float maxVal);
+   CGLM_INLINE void  glm_vec_lerp(vec3 from, vec3 to, float t, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE float glm_dot(vec3 a, vec3 b);
    CGLM_INLINE void  glm_normalize(vec3 v);
    CGLM_INLINE void  glm_normalize_to(vec3 v, vec3 dest);
+
+ DEPRECATED:
+   glm_vec_dup
+   glm_vec_flipsign
+   glm_vec_flipsign_to
  */
 
 #ifndef cglm_vec3_h
@@ -120,9 +134,7 @@ glm_vec_copy(vec3 a, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec_zero(vec3 v) {
-  v[0] = 0.0f;
-  v[1] = 0.0f;
-  v[2] = 0.0f;
+  v[0] = v[1] = v[2] = 0.0f;
 }
 
 /*!
@@ -133,9 +145,7 @@ glm_vec_zero(vec3 v) {
 CGLM_INLINE
 void
 glm_vec_one(vec3 v) {
-  v[0] = 1.0f;
-  v[1] = 1.0f;
-  v[2] = 1.0f;
+  v[0] = v[1] = v[2] = 1.0f;
 }
 
 /*!
@@ -408,7 +418,9 @@ glm_vec_muladds(vec3 a, float s, vec3 dest) {
 }
 
 /*!
- * @brief flip sign of all vec3 members
+ * DEPRECATED! use glm_vec_negate and friends
+ *
+ * @brief negate vector components
  *
  * @param[in, out]  v  vector
  */
@@ -421,7 +433,9 @@ glm_vec_flipsign(vec3 v) {
 }
 
 /*!
- * @brief flip sign of all vec3 members and store result in dest
+ * DEPRECATED! use glm_vec_negate and friends
+ *
+ * @brief negate vector components and store result in dest
  *
  * @param[in]   v     vector
  * @param[out]  dest  result vector
@@ -432,6 +446,31 @@ glm_vec_flipsign_to(vec3 v, vec3 dest) {
   dest[0] = -v[0];
   dest[1] = -v[1];
   dest[2] = -v[2];
+}
+
+/*!
+ * @brief negate vector components and store result in dest
+ *
+ * @param[in]   v     vector
+ * @param[out]  dest  result vector
+ */
+CGLM_INLINE
+void
+glm_vec_negate_to(vec3 v, vec3 dest) {
+  dest[0] = -v[0];
+  dest[1] = -v[1];
+  dest[2] = -v[2];
+}
+
+/*!
+ * @brief negate vector components
+ *
+ * @param[in, out]  v  vector
+ */
+CGLM_INLINE
+void
+glm_vec_negate(vec3 v) {
+  glm_vec_negate_to(v, v);
 }
 
 /*!
