@@ -43,6 +43,8 @@ Functions:
 #. :c:func:`glm_vec4_subadd`
 #. :c:func:`glm_vec4_muladd`
 #. :c:func:`glm_vec4_muladds`
+#. :c:func:`glm_vec4_maxadd`
+#. :c:func:`glm_vec4_minadd`
 #. :c:func:`glm_vec4_flipsign`
 #. :c:func:`glm_vec4_flipsign_to`
 #. :c:func:`glm_vec4_inv`
@@ -260,6 +262,26 @@ Functions documentation
     Parameters:
       | *[in]*  **a**     vector
       | *[in]*  **s**     scalar
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest)
+
+    | add max of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec4_minadd(vec4 a, vec4 b, vec4 dest)
+
+    | add min of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
       | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec4_flipsign(vec4 v)

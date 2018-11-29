@@ -37,6 +37,8 @@
    CGLM_INLINE void  glm_vec3_subadd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_muladd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_muladds(vec3 a, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_minadd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_flipsign(vec3 v);
    CGLM_INLINE void  glm_vec3_flipsign_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_negate_to(vec3 v, vec3 dest);
@@ -420,6 +422,40 @@ glm_vec3_muladds(vec3 a, float s, vec3 dest) {
 }
 
 /*!
+ * @brief add max of two vector to result/dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += max(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest) {
+  dest[0] += glm_max(a[0], b[0]);
+  dest[1] += glm_max(a[1], b[1]);
+  dest[2] += glm_max(a[2], b[2]);
+}
+
+/*!
+ * @brief add min of two vector to result/dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += min(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec3_minadd(vec3 a, vec3 b, vec3 dest) {
+  dest[0] += glm_min(a[0], b[0]);
+  dest[1] += glm_min(a[1], b[1]);
+  dest[2] += glm_min(a[2], b[2]);
+}
+
+/*!
  * @brief negate vector components and store result in dest
  *
  * @param[in]   v     vector
@@ -732,7 +768,7 @@ glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
   /* from + s * (to - from) */
   glm_vec3_broadcast(glm_clamp_zo(t), s);
   glm_vec3_sub(to, from, v);
-  glm_vec3_mulv(s, v, v);
+  glm_vec3_mul(s, v, v);
   glm_vec3_add(from, v, dest);
 }
 

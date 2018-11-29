@@ -23,7 +23,7 @@
 CGLM_INLINE
 void
 glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
-  vec3 v[2], xa, xb, ya, yb, za, zb, tmp;
+  vec3 v[2], xa, xb, ya, yb, za, zb;
 
   glm_vec3_scale(m[0], box[0][0], xa);
   glm_vec3_scale(m[0], box[1][0], xb);
@@ -34,21 +34,17 @@ glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
   glm_vec3_scale(m[2], box[0][2], za);
   glm_vec3_scale(m[2], box[1][2], zb);
 
-  /* min(xa, xb) + min(ya, yb) + min(za, zb) + translation */
-  glm_vec3_minv(xa, xb, v[0]);
-  glm_vec3_minv(ya, yb, tmp);
-  glm_vec3_add(v[0], tmp, v[0]);
-  glm_vec3_minv(za, zb, tmp);
-  glm_vec3_add(v[0], tmp, v[0]);
-  glm_vec3_add(v[0], m[3], v[0]);
+  /* translation + min(xa, xb) + min(ya, yb) + min(za, zb) */
+  glm_vec3(m[3], v[0]);
+  glm_vec3_minadd(xa, xb, v[0]);
+  glm_vec3_minadd(ya, yb, v[0]);
+  glm_vec3_minadd(za, zb, v[0]);
 
-  /* max(xa, xb) + max(ya, yb) + max(za, zb) + translation */
-  glm_vec3_maxv(xa, xb, v[1]);
-  glm_vec3_maxv(ya, yb, tmp);
-  glm_vec3_add(v[1], tmp, v[1]);
-  glm_vec3_maxv(za, zb, tmp);
-  glm_vec3_add(v[1], tmp, v[1]);
-  glm_vec3_add(v[1], m[3], v[1]);
+  /* translation + max(xa, xb) + max(ya, yb) + max(za, zb) */
+  glm_vec3(m[3], v[1]);
+  glm_vec3_maxadd(xa, xb, v[1]);
+  glm_vec3_maxadd(ya, yb, v[1]);
+  glm_vec3_maxadd(za, zb, v[1]);
 
   glm_vec3_copy(v[0], dest[0]);
   glm_vec3_copy(v[1], dest[1]);

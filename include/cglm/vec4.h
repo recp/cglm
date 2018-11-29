@@ -34,6 +34,9 @@
    CGLM_INLINE void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_muladds(vec4 a, float s, vec4 dest);
+   CGLM_INLINE void  glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_minadd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_negate(vec4 v);
    CGLM_INLINE void  glm_vec4_inv(vec4 v);
    CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
@@ -44,7 +47,6 @@
    CGLM_INLINE void  glm_vec4_minv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
-
 
  DEPRECATED:
    glm_vec4_dup
@@ -522,6 +524,54 @@ glm_vec4_muladds(vec4 a, float s, vec4 dest) {
 }
 
 /*!
+ * @brief add max of two vector to result/dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest += max(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(dest, _mm_add_ps(glmm_load(dest),
+                              _mm_max_ps(glmm_load(a),
+                                         glmm_load(b))));
+#else
+  dest[0] += glm_max(a[0], b[0]);
+  dest[1] += glm_max(a[1], b[1]);
+  dest[2] += glm_max(a[2], b[2]);
+  dest[3] += glm_max(a[3], b[3]);
+#endif
+}
+
+/*!
+ * @brief add min of two vector to result/dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += min(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(dest, _mm_add_ps(glmm_load(dest),
+                              _mm_min_ps(glmm_load(a),
+                                         glmm_load(b))));
+#else
+  dest[0] += glm_min(a[0], b[0]);
+  dest[1] += glm_min(a[1], b[1]);
+  dest[2] += glm_min(a[2], b[2]);
+  dest[3] += glm_min(a[3], b[3]);
+#endif
+}
+
+/*!
  * @brief negate vector components and store result in dest
  *
  * @param[in]  v     vector
@@ -694,7 +744,7 @@ glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
   /* from + s * (to - from) */
   glm_vec4_broadcast(glm_clamp_zo(t), s);
   glm_vec4_sub(to, from, v);
-  glm_vec4_mulv(s, v, v);
+  glm_vec4_mul(s, v, v);
   glm_vec4_add(from, v, dest);
 }
 

@@ -148,6 +148,18 @@ glmc_vec3_muladds(vec3 a, float s, vec3 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec3_maxadd(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_maxadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_minadd(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_minadd(a, b, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec3_negate(vec3 v) {
   glm_vec3_negate(v);
 }

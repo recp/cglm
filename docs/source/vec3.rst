@@ -55,6 +55,8 @@ Functions:
 #. :c:func:`glm_vec3_subadd`
 #. :c:func:`glm_vec3_muladd`
 #. :c:func:`glm_vec3_muladds`
+#. :c:func:`glm_vec3_maxadd`
+#. :c:func:`glm_vec3_minadd`
 #. :c:func:`glm_vec3_flipsign`
 #. :c:func:`glm_vec3_flipsign_to`
 #. :c:func:`glm_vec3_inv`
@@ -271,6 +273,26 @@ Functions documentation
     Parameters:
       | *[in]*  **a**     vector
       | *[in]*  **s**     scalar
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest)
+
+    | add max of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  dest += (a * b)
+
+.. c:function:: void  glm_vec3_minadd(vec3 a, vec3 b, vec3 dest)
+
+    | add min of two vector to result/dest
+    | it applies += operator so dest must be initialized
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
       | *[out]* **dest**  dest += (a * b)
 
 .. c:function:: void  glm_vec3_flipsign(vec3 v)

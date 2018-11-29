@@ -119,6 +119,14 @@ glmc_vec4_muladds(vec4 a, float s, vec4 dest);
 
 CGLM_EXPORT
 void
+glmc_vec4_maxadd(vec4 a, vec4 b, vec4 dest);
+
+CGLM_EXPORT
+void
+glmc_vec4_minadd(vec4 a, vec4 b, vec4 dest);
+
+CGLM_EXPORT
+void
 glmc_vec4_negate(vec4 v);
 
 CGLM_EXPORT
