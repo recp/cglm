@@ -11,13 +11,12 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_vec4_mulv(vec4 a, vec4 b, vec4 d);
    CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
    CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
    CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
    CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
-   CGLM_INLINE bool  glm_vec4_eqv(vec4 v1, vec4 v2);
-   CGLM_INLINE bool  glm_vec4_eqv_eps(vec4 v1, vec4 v2);
+   CGLM_INLINE bool  glm_vec4_eqv(vec4 a, vec4 b);
+   CGLM_INLINE bool  glm_vec4_eqv_eps(vec4 a, vec4 b);
    CGLM_INLINE float glm_vec4_max(vec4 v);
    CGLM_INLINE float glm_vec4_min(vec4 v);
    CGLM_INLINE bool  glm_vec4_isnan(vec4 v);
@@ -35,26 +34,6 @@
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
-
-/*!
- * @brief DEPRECATED! use glm_vec4_mul
- *
- * @param a v1
- * @param b v2
- * @param d v3 = (v1[0] * v2[0],  v1[1] * v2[1], v1[2] * v2[2], v1[3] * v2[3])
- */
-CGLM_INLINE
-void
-glm_vec4_mulv(vec4 a, vec4 b, vec4 d) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
-#else
-  d[0] = a[0] * b[0];
-  d[1] = a[1] * b[1];
-  d[2] = a[2] * b[2];
-  d[3] = a[3] * b[3];
-#endif
-}
 
 /*!
  * @brief fill a vector with specified value
@@ -118,31 +97,31 @@ glm_vec4_eq_all(vec4 v) {
 /*!
  * @brief check if vector is equal to another (without epsilon)
  *
- * @param v1 vector
- * @param v2 vector
+ * @param a vector
+ * @param b vector
  */
 CGLM_INLINE
 bool
-glm_vec4_eqv(vec4 v1, vec4 v2) {
-  return v1[0] == v2[0]
-         && v1[1] == v2[1]
-         && v1[2] == v2[2]
-         && v1[3] == v2[3];
+glm_vec4_eqv(vec4 a, vec4 b) {
+  return a[0] == b[0]
+         && a[1] == b[1]
+         && a[2] == b[2]
+         && a[3] == b[3];
 }
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
  *
- * @param v1 vector
- * @param v2 vector
+ * @param a vector
+ * @param b vector
  */
 CGLM_INLINE
 bool
-glm_vec4_eqv_eps(vec4 v1, vec4 v2) {
-  return fabsf(v1[0] - v2[0]) <= FLT_EPSILON
-         && fabsf(v1[1] - v2[1]) <= FLT_EPSILON
-         && fabsf(v1[2] - v2[2]) <= FLT_EPSILON
-         && fabsf(v1[3] - v2[3]) <= FLT_EPSILON;
+glm_vec4_eqv_eps(vec4 a, vec4 b) {
+  return fabsf(a[0] - b[0]) <= FLT_EPSILON
+         && fabsf(a[1] - b[1]) <= FLT_EPSILON
+         && fabsf(a[2] - b[2]) <= FLT_EPSILON
+         && fabsf(a[3] - b[3]) <= FLT_EPSILON;
 }
 
 /*!

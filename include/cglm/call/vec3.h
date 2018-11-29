@@ -46,15 +46,15 @@ glmc_vec3_cross(vec3 a, vec3 b, vec3 d);
 
 CGLM_EXPORT
 float
-glmc_vec3_norm(vec3 vec);
+glmc_vec3_norm(vec3 v);
 
 CGLM_EXPORT
 float
-glmc_vec3_norm2(vec3 vec);
+glmc_vec3_norm2(vec3 v);
 
 CGLM_EXPORT
 void
-glmc_vec3_normalize_to(vec3 vec, vec3 dest);
+glmc_vec3_normalize_to(vec3 v, vec3 dest);
 
 CGLM_EXPORT
 void
@@ -62,7 +62,7 @@ glmc_vec3_normalize(vec3 v);
 
 CGLM_EXPORT
 void
-glmc_vec3_add(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec3_add(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 void
@@ -122,7 +122,7 @@ glmc_vec3_negate_to(vec3 v, vec3 dest);
 
 CGLM_EXPORT
 float
-glmc_vec3_angle(vec3 v1, vec3 v2);
+glmc_vec3_angle(vec3 a, vec3 b);
 
 CGLM_EXPORT
 void
@@ -142,23 +142,23 @@ glmc_vec3_proj(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec3_center(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec3_center(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 float
-glmc_vec3_distance2(vec3 v1, vec3 v2);
+glmc_vec3_distance2(vec3 a, vec3 b);
 
 CGLM_EXPORT
 float
-glmc_vec3_distance(vec3 v1, vec3 v2);
+glmc_vec3_distance(vec3 a, vec3 b);
 
 CGLM_EXPORT
 void
-glmc_vec3_maxv(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec3_maxv(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec3_minv(vec3 v1, vec3 v2, vec3 dest);
+glmc_vec3_minv(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 void
@@ -196,11 +196,11 @@ glmc_vec3_eq_all(vec3 v);
 
 CGLM_EXPORT
 bool
-glmc_vec3_eqv(vec3 v1, vec3 v2);
+glmc_vec3_eqv(vec3 a, vec3 b);
 
 CGLM_EXPORT
 bool
-glmc_vec3_eqv_eps(vec3 v1, vec3 v2);
+glmc_vec3_eqv_eps(vec3 a, vec3 b);
 
 CGLM_EXPORT
 float

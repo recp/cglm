@@ -35,7 +35,7 @@ glmc_vec4_one(vec4 v);
 
 CGLM_EXPORT
 void
-glmc_vec4_copy3(vec4 a, vec3 dest);
+glmc_vec4_copy3(vec4 v, vec3 dest);
 
 CGLM_EXPORT
 void
@@ -51,15 +51,15 @@ glmc_vec4_dot(vec4 a, vec4 b);
 
 CGLM_EXPORT
 float
-glmc_vec4_norm(vec4 vec);
+glmc_vec4_norm(vec4 v);
 
 CGLM_EXPORT
 float
-glmc_vec4_norm2(vec4 vec);
+glmc_vec4_norm2(vec4 v);
 
 CGLM_EXPORT
 void
-glmc_vec4_normalize_to(vec4 vec, vec4 dest);
+glmc_vec4_normalize_to(vec4 v, vec4 dest);
 
 CGLM_EXPORT
 void
@@ -127,15 +127,15 @@ glmc_vec4_negate_to(vec4 v, vec4 dest);
 
 CGLM_EXPORT
 float
-glmc_vec4_distance(vec4 v1, vec4 v2);
+glmc_vec4_distance(vec4 a, vec4 b);
 
 CGLM_EXPORT
 void
-glmc_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
+glmc_vec4_maxv(vec4 a, vec4 b, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
+glmc_vec4_minv(vec4 a, vec4 b, vec4 dest);
 
 CGLM_EXPORT
 void
@@ -169,11 +169,11 @@ glmc_vec4_eq_all(vec4 v);
 
 CGLM_EXPORT
 bool
-glmc_vec4_eqv(vec4 v1, vec4 v2);
+glmc_vec4_eqv(vec4 a, vec4 b);
 
 CGLM_EXPORT
 bool
-glmc_vec4_eqv_eps(vec4 v1, vec4 v2);
+glmc_vec4_eqv_eps(vec4 a, vec4 b);
 
 CGLM_EXPORT
 float

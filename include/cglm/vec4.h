@@ -7,8 +7,6 @@
 
 /*
  Macros:
-   glm_vec4_dup3(v, dest)
-   glm_vec4_dup(v, dest)
    GLM_VEC4_ONE_INIT
    GLM_VEC4_BLACK_INIT
    GLM_VEC4_ZERO_INIT
@@ -23,7 +21,7 @@
    CGLM_INLINE void  glm_vec4_ucopy(vec4 v, vec4 dest);
    CGLM_INLINE float glm_vec4_dot(vec4 a, vec4 b);
    CGLM_INLINE float glm_vec4_norm2(vec4 v);
-   CGLM_INLINE float glm_vec4_norm(vec4 vec);
+   CGLM_INLINE float glm_vec4_norm(vec4 v);
    CGLM_INLINE void  glm_vec4_add(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_adds(vec4 v, float s, vec4 dest);
    CGLM_INLINE void  glm_vec4_sub(vec4 a, vec4 b, vec4 dest);
@@ -41,9 +39,9 @@
    CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_normalize(vec4 v);
    CGLM_INLINE void  glm_vec4_normalize_to(vec4 vec, vec4 dest);
-   CGLM_INLINE float glm_vec4_distance(vec4 v1, vec4 v2);
-   CGLM_INLINE void  glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest);
-   CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
+   CGLM_INLINE float glm_vec4_distance(vec4 a, vec4 b);
+   CGLM_INLINE void  glm_vec4_maxv(vec4 a, vec4 b, vec4 dest);
+   CGLM_INLINE void  glm_vec4_minv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
 
@@ -54,6 +52,7 @@
    glm_vec4_flipsign_to
    glm_vec4_inv
    glm_vec4_inv_to
+   glm_vec4_mulv
  */
 
 #ifndef cglm_vec4_h
@@ -70,6 +69,7 @@
 #define glm_vec4_flipsign_to(v, dest)  glm_vec4_negate_to(v, dest)
 #define glm_vec4_inv(v)                glm_vec4_negate(v)
 #define glm_vec4_inv_to(v, dest)       glm_vec4_negate_to(v, dest)
+#define glm_vec4_mulv(a, b, d)         glm_vec4_mul(a, b, d)
 
 #define GLM_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
 #define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
@@ -230,24 +230,24 @@ glm_vec4_norm2(vec4 v) {
 /*!
  * @brief norm (magnitude) of vec4
  *
- * @param[in] vec vector
+ * @param[in] v vector
  *
  * @return norm
  */
 CGLM_INLINE
 float
-glm_vec4_norm(vec4 vec) {
+glm_vec4_norm(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0;
-  x0 = glmm_load(vec);
+  x0 = glmm_load(v);
   return _mm_cvtss_f32(_mm_sqrt_ss(glmm_dot(x0, x0)));
 #else
-  return sqrtf(glm_vec4_norm2(vec));
+  return sqrtf(glm_vec4_norm2(v));
 #endif
 }
 
 /*!
- * @brief add v2 vector to v1 vector store result in dest
+ * @brief add b vector to a vector store result in dest
  *
  * @param[in]  a    vector1
  * @param[in]  b    vector2
@@ -287,7 +287,7 @@ glm_vec4_adds(vec4 v, float s, vec4 dest) {
 }
 
 /*!
- * @brief subtract b vector from a vector store result in dest (d = v1 - v2)
+ * @brief subtract b vector from a vector store result in dest (d = a - b)
  *
  * @param[in]  a    vector1
  * @param[in]  b    vector2
@@ -329,20 +329,20 @@ glm_vec4_subs(vec4 v, float s, vec4 dest) {
 /*!
  * @brief multiply two vector (component-wise multiplication)
  *
- * @param a v1
- * @param b v2
- * @param d v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
+ * @param a vector1
+ * @param b vector2
+ * @param d dest = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
  */
 CGLM_INLINE
 void
-glm_vec4_mul(vec4 a, vec4 b, vec4 d) {
+glm_vec4_mul(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(d, _mm_mul_ps(glmm_load(a), glmm_load(b)));
+  glmm_store(dest, _mm_mul_ps(glmm_load(a), glmm_load(b)));
 #else
-  d[0] = a[0] * b[0];
-  d[1] = a[1] * b[1];
-  d[2] = a[2] * b[2];
-  d[3] = a[3] * b[3];
+  dest[0] = a[0] * b[0];
+  dest[1] = a[1] * b[1];
+  dest[2] = a[2] * b[2];
+  dest[3] = a[3] * b[3];
 #endif
 }
 
@@ -388,7 +388,7 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
 }
 
 /*!
- * @brief div vector with another component-wise division: d = v1 / v2
+ * @brief div vector with another component-wise division: d = a / b
  *
  * @param[in]  a    vector 1
  * @param[in]  b    vector 2
@@ -554,17 +554,17 @@ glm_vec4_negate(vec4 v) {
 /*!
  * @brief normalize vec4 to dest
  *
- * @param[in]  vec  source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec4_normalize_to(vec4 vec, vec4 dest) {
+glm_vec4_normalize_to(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 xdot, x0;
   float  dot;
 
-  x0   = glmm_load(vec);
+  x0   = glmm_load(v);
   xdot = glmm_dot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
@@ -577,14 +577,14 @@ glm_vec4_normalize_to(vec4 vec, vec4 dest) {
 #else
   float norm;
 
-  norm = glm_vec4_norm(vec);
+  norm = glm_vec4_norm(v);
 
   if (norm == 0.0f) {
     glm_vec4_zero(dest);
     return;
   }
 
-  glm_vec4_scale(vec, 1.0f / norm, dest);
+  glm_vec4_scale(v, 1.0f / norm, dest);
 #endif
 }
 
@@ -602,56 +602,56 @@ glm_vec4_normalize(vec4 v) {
 /**
  * @brief distance between two vectors
  *
- * @param[in] v1 vector1
- * @param[in] v2 vector2
+ * @param[in] a vector1
+ * @param[in] b vector2
  * @return returns distance
  */
 CGLM_INLINE
 float
-glm_vec4_distance(vec4 v1, vec4 v2) {
-  return sqrtf(glm_pow2(v2[0] - v1[0])
-             + glm_pow2(v2[1] - v1[1])
-             + glm_pow2(v2[2] - v1[2])
-             + glm_pow2(v2[3] - v1[3]));
+glm_vec4_distance(vec4 a, vec4 b) {
+  return sqrtf(glm_pow2(b[0] - a[0])
+             + glm_pow2(b[1] - a[1])
+             + glm_pow2(b[2] - a[2])
+             + glm_pow2(b[3] - a[3]));
 }
 
 /*!
  * @brief max values of vectors
  *
- * @param[in]  v1   vector1
- * @param[in]  v2   vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec4_maxv(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_max_ps(glmm_load(v1), glmm_load(v2)));
+  glmm_store(dest, _mm_max_ps(glmm_load(a), glmm_load(b)));
 #else
-  dest[0] = glm_max(v1[0], v2[0]);
-  dest[1] = glm_max(v1[1], v2[1]);
-  dest[2] = glm_max(v1[2], v2[2]);
-  dest[3] = glm_max(v1[3], v2[3]);
+  dest[0] = glm_max(a[0], b[0]);
+  dest[1] = glm_max(a[1], b[1]);
+  dest[2] = glm_max(a[2], b[2]);
+  dest[3] = glm_max(a[3], b[3]);
 #endif
 }
 
 /*!
  * @brief min values of vectors
  *
- * @param[in]  v1   vector1
- * @param[in]  v2   vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest) {
+glm_vec4_minv(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_min_ps(glmm_load(v1), glmm_load(v2)));
+  glmm_store(dest, _mm_min_ps(glmm_load(a), glmm_load(b)));
 #else
-  dest[0] = glm_min(v1[0], v2[0]);
-  dest[1] = glm_min(v1[1], v2[1]);
-  dest[2] = glm_min(v1[2], v2[2]);
-  dest[3] = glm_min(v1[3], v2[3]);
+  dest[0] = glm_min(a[0], b[0]);
+  dest[1] = glm_min(a[1], b[1]);
+  dest[2] = glm_min(a[2], b[2]);
+  dest[3] = glm_min(a[3], b[3]);
 #endif
 }
 

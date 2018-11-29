@@ -19,7 +19,7 @@
    CGLM_INLINE float glm_quat_norm(versor q);
    CGLM_INLINE void glm_quat_normalize(versor q);
    CGLM_INLINE void glm_quat_normalize_to(versor q, versor dest);
-   CGLM_INLINE float glm_quat_dot(versor q1, versor q2);
+   CGLM_INLINE float glm_quat_dot(versor p, versor q);
    CGLM_INLINE void glm_quat_conjugate(versor q, versor dest);
    CGLM_INLINE void glm_quat_inv(versor q, versor dest);
    CGLM_INLINE void glm_quat_add(versor p, versor q, versor dest);

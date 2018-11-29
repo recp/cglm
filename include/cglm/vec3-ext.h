@@ -11,13 +11,12 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_vec3_mulv(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE void  glm_vec3_broadcast(float val, vec3 d);
    CGLM_INLINE bool  glm_vec3_eq(vec3 v, float val);
    CGLM_INLINE bool  glm_vec3_eq_eps(vec3 v, float val);
    CGLM_INLINE bool  glm_vec3_eq_all(vec3 v);
-   CGLM_INLINE bool  glm_vec3_eqv(vec3 v1, vec3 v2);
-   CGLM_INLINE bool  glm_vec3_eqv_eps(vec3 v1, vec3 v2);
+   CGLM_INLINE bool  glm_vec3_eqv(vec3 a, vec3 b);
+   CGLM_INLINE bool  glm_vec3_eqv_eps(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_max(vec3 v);
    CGLM_INLINE float glm_vec3_min(vec3 v);
    CGLM_INLINE bool  glm_vec3_isnan(vec3 v);
@@ -35,21 +34,6 @@
 #include <stdbool.h>
 #include <math.h>
 #include <float.h>
-
-/*!
- * @brief DEPRECATED! use glm_vec3_mul
- *
- * @param[in]  a vec1
- * @param[in]  b vec2
- * @param[out] d vec3 = (v1[0] * v2[0],  v1[1] * v2[1], v1[2] * v2[2])
- */
-CGLM_INLINE
-void
-glm_vec3_mulv(vec3 a, vec3 b, vec3 d) {
-  d[0] = a[0] * b[0];
-  d[1] = a[1] * b[1];
-  d[2] = a[2] * b[2];
-}
 
 /*!
  * @brief fill a vector with specified value
@@ -103,29 +87,29 @@ glm_vec3_eq_all(vec3 v) {
 /*!
  * @brief check if vector is equal to another (without epsilon)
  *
- * @param[in] v1 vector
- * @param[in] v2 vector
+ * @param[in] a vector
+ * @param[in] b vector
  */
 CGLM_INLINE
 bool
-glm_vec3_eqv(vec3 v1, vec3 v2) {
-  return v1[0] == v2[0]
-         && v1[1] == v2[1]
-         && v1[2] == v2[2];
+glm_vec3_eqv(vec3 a, vec3 b) {
+  return a[0] == b[0]
+         && a[1] == b[1]
+         && a[2] == b[2];
 }
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
  *
- * @param[in] v1 vector
- * @param[in] v2 vector
+ * @param[in] a vector
+ * @param[in] b vector
  */
 CGLM_INLINE
 bool
-glm_vec3_eqv_eps(vec3 v1, vec3 v2) {
-  return fabsf(v1[0] - v2[0]) <= FLT_EPSILON
-         && fabsf(v1[1] - v2[1]) <= FLT_EPSILON
-         && fabsf(v1[2] - v2[2]) <= FLT_EPSILON;
+glm_vec3_eqv_eps(vec3 a, vec3 b) {
+  return fabsf(a[0] - b[0]) <= FLT_EPSILON
+         && fabsf(a[1] - b[1]) <= FLT_EPSILON
+         && fabsf(a[2] - b[2]) <= FLT_EPSILON;
 }
 
 /*!

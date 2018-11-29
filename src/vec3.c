@@ -46,14 +46,14 @@ glmc_vec3_cross(vec3 a, vec3 b, vec3 d) {
 
 CGLM_EXPORT
 float
-glmc_vec3_norm(vec3 vec) {
-  return glm_vec3_norm(vec);
+glmc_vec3_norm(vec3 v) {
+  return glm_vec3_norm(v);
 }
 
 CGLM_EXPORT
 void
-glmc_vec3_normalize_to(vec3 vec, vec3 dest) {
-  glm_vec3_normalize_to(vec, dest);
+glmc_vec3_normalize_to(vec3 v, vec3 dest) {
+  glm_vec3_normalize_to(v, dest);
 }
 
 CGLM_EXPORT
@@ -64,14 +64,14 @@ glmc_vec3_normalize(vec3 v) {
 
 CGLM_EXPORT
 float
-glmc_vec3_norm2(vec3 vec) {
-  return glm_vec3_norm2(vec);
+glmc_vec3_norm2(vec3 v) {
+  return glm_vec3_norm2(v);
 }
 
 CGLM_EXPORT
 void
-glmc_vec3_add(vec3 v1, vec3 v2, vec3 dest) {
-  glm_vec3_add(v1, v2, dest);
+glmc_vec3_add(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_add(a, b, dest);
 }
 
 CGLM_EXPORT
@@ -160,8 +160,8 @@ glmc_vec3_negate_to(vec3 v, vec3 dest) {
 
 CGLM_EXPORT
 float
-glmc_vec3_angle(vec3 v1, vec3 v2) {
-  return glm_vec3_angle(v1, v2);
+glmc_vec3_angle(vec3 a, vec3 b) {
+  return glm_vec3_angle(a, b);
 }
 
 CGLM_EXPORT
@@ -190,32 +190,32 @@ glmc_vec3_proj(vec3 a, vec3 b, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec3_center(vec3 v1, vec3 v2, vec3 dest) {
-  glm_vec3_center(v1, v2, dest);
+glmc_vec3_center(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_center(a, b, dest);
 }
 
 CGLM_EXPORT
 float
-glmc_vec3_distance2(vec3 v1, vec3 v2) {
-  return glm_vec3_distance2(v1, v2);
+glmc_vec3_distance2(vec3 a, vec3 b) {
+  return glm_vec3_distance2(a, b);
 }
 
 CGLM_EXPORT
 float
-glmc_vec3_distance(vec3 v1, vec3 v2) {
-  return glm_vec3_distance(v1, v2);
+glmc_vec3_distance(vec3 a, vec3 b) {
+  return glm_vec3_distance(a, b);
 }
 
 CGLM_EXPORT
 void
-glmc_vec3_maxv(vec3 v1, vec3 v2, vec3 dest) {
-  glm_vec3_minv(v1, v2, dest);
+glmc_vec3_maxv(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_minv(a, b, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_vec3_minv(vec3 v1, vec3 v2, vec3 dest) {
-  glm_vec3_maxv(v1, v2, dest);
+glmc_vec3_minv(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_maxv(a, b, dest);
 }
 
 CGLM_EXPORT
@@ -270,14 +270,14 @@ glmc_vec3_eq_all(vec3 v) {
 
 CGLM_EXPORT
 bool
-glmc_vec3_eqv(vec3 v1, vec3 v2) {
-  return glm_vec3_eqv(v1, v2);
+glmc_vec3_eqv(vec3 a, vec3 b) {
+  return glm_vec3_eqv(a, b);
 }
 
 CGLM_EXPORT
 bool
-glmc_vec3_eqv_eps(vec3 v1, vec3 v2) {
-  return glm_vec3_eqv_eps(v1, v2);
+glmc_vec3_eqv_eps(vec3 a, vec3 b) {
+  return glm_vec3_eqv_eps(a, b);
 }
 
 CGLM_EXPORT
