@@ -62,7 +62,7 @@ Wrong Results:
 
 Again, you may used wrong function.
 
-For instance if you use **glm_normalize()** or **glm_vec_normalize()** for **vec4**,
+For instance if you use **glm_normalize()** or **glm_vec3_normalize()** for **vec4**,
 it will assume that passed param is **vec3** and will normalize it for **vec3**.
 Since you need to **vec4** to be normalized in your case, you will get wrong results.
 

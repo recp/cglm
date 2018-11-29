@@ -44,7 +44,9 @@ Functions:
 #. :c:func:`glm_vec4_muladd`
 #. :c:func:`glm_vec4_muladds`
 #. :c:func:`glm_vec4_flipsign`
-#. :c:func:`glm_vec_flipsign_to`
+#. :c:func:`glm_vec4_flipsign_to`
+#. :c:func:`glm_vec4_negate`
+#. :c:func:`glm_vec4_negate_to`
 #. :c:func:`glm_vec4_inv`
 #. :c:func:`glm_vec4_inv_to`
 #. :c:func:`glm_vec4_normalize`
@@ -262,14 +264,33 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_flipsign(vec4 v)
 
-    flip sign of all vec4 members
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate`
 
     Parameters:
     | *[in, out]*  **v**    vector
 
 .. c:function:: void  glm_vec4_flipsign_to(vec4 v, vec4 dest)
 
-    flip sign of all vec4 members and store result in dest
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate_TO`
+
+    Parameters:
+      | *[in]*  **v**       vector
+      | *[out]* **dest**    negated vector
+
+.. c:function:: void  glm_vec4_negate(vec4 v)
+
+    negate vector components
+
+    Parameters:
+    | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec4_negate_to(vec4 v, vec4 dest)
+
+    negate vector components and store result in dest
 
     Parameters:
       | *[in]*  **v**       vector

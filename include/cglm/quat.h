@@ -273,7 +273,7 @@ glm_quat_dot(versor p, versor q) {
 CGLM_INLINE
 void
 glm_quat_conjugate(versor q, versor dest) {
-  glm_vec4_flipsign_to(q, dest);
+  glm_vec4_negate_to(q, dest);
   dest[3] = -dest[3];
 }
 
@@ -634,7 +634,7 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
   }
 
   if (cosTheta < 0.0f) {
-    glm_vec4_flipsign(q1);
+    glm_vec4_negate(q1);
     cosTheta = -cosTheta;
   }
 

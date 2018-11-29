@@ -7,7 +7,7 @@
 
 /*
  Macros:
-   glm_vec_dup(v, dest)
+   glm_vec3_dup(v, dest)
    GLM_VEC3_ONE_INIT
    GLM_VEC3_ZERO_INIT
    GLM_VEC3_ONE
@@ -67,7 +67,7 @@
    CGLM_INLINE void  glm_normalize_to(vec3 v, vec3 dest);
 
  DEPRECATED:
-   glm_vec_dup
+   glm_vec3_dup
    glm_vec3_flipsign
    glm_vec3_flipsign_to
  */
@@ -81,7 +81,9 @@
 #include "util.h"
 
 /* DEPRECATED! use _copy, _ucopy versions */
-#define glm_vec_dup(v, dest) glm_vec3_copy(v, dest)
+#define glm_vec3_dup(v, dest)         glm_vec3_copy(v, dest)
+#define glm_vec3_flipsign(v)          glm_vec3_negate(v)
+#define glm_vec3_flipsign_to(v, dest) glm_vec3_negate_to(v, dest)
 
 #define GLM_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
 #define GLM_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
@@ -410,37 +412,6 @@ glm_vec3_muladds(vec3 a, float s, vec3 dest) {
   dest[0] += a[0] * s;
   dest[1] += a[1] * s;
   dest[2] += a[2] * s;
-}
-
-/*!
- * DEPRECATED! use glm_vec3_negate and friends
- *
- * @brief negate vector components
- *
- * @param[in, out]  v  vector
- */
-CGLM_INLINE
-void
-glm_vec3_flipsign(vec3 v) {
-  v[0] = -v[0];
-  v[1] = -v[1];
-  v[2] = -v[2];
-}
-
-/*!
- * DEPRECATED! use glm_vec3_negate and friends
- *
- * @brief negate vector components and store result in dest
- *
- * @param[in]   v     vector
- * @param[out]  dest  result vector
- */
-CGLM_INLINE
-void
-glm_vec3_flipsign_to(vec3 v, vec3 dest) {
-  dest[0] = -v[0];
-  dest[1] = -v[1];
-  dest[2] = -v[2];
 }
 
 /*!

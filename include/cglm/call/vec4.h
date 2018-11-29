@@ -14,8 +14,10 @@ extern "C" {
 #include "../cglm.h"
 
 /* DEPRECATED! use _copy, _ucopy versions */
-#define glmc_vec4_dup3(v, dest) glmc_vec4_copy3(v, dest)
-#define glmc_vec4_dup(v, dest)  glmc_vec4_copy(v, dest)
+#define glmc_vec4_dup3(v, dest)         glmc_vec4_copy3(v, dest)
+#define glmc_vec4_dup(v, dest)          glmc_vec4_copy(v, dest)
+#define glmc_vec4_flipsign(v)           glmc_vec4_negate(v)
+#define glmc_vec4_flipsign_to(v, dest)  glmc_vec4_negate_to(v, dest)
 
 CGLM_EXPORT
 void
@@ -115,11 +117,11 @@ glmc_vec4_muladds(vec4 a, float s, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign(vec4 v);
+glmc_vec4_negate(vec4 v);
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign_to(vec4 v, vec4 dest);
+glmc_vec4_negate_to(vec4 v, vec4 dest);
 
 CGLM_EXPORT
 void

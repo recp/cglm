@@ -154,14 +154,14 @@ glmc_vec4_muladds(vec4 a, float s, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign(vec4 v) {
-  glm_vec4_flipsign(v);
+glmc_vec4_negate(vec4 v) {
+  glm_vec4_negate(v);
 }
 
 CGLM_EXPORT
 void
-glmc_vec4_flipsign_to(vec4 v, vec4 dest) {
-  glm_vec4_flipsign_to(v, dest);
+glmc_vec4_negate_to(vec4 v, vec4 dest) {
+  glm_vec4_negate_to(v, dest);
 }
 
 CGLM_EXPORT

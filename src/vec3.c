@@ -148,18 +148,6 @@ glmc_vec3_muladds(vec3 a, float s, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec3_flipsign(vec3 v) {
-  glm_vec3_flipsign(v);
-}
-
-CGLM_EXPORT
-void
-glmc_vec3_flipsign_to(vec3 v, vec3 dest) {
-  glm_vec3_flipsign_to(v, dest);
-}
-
-CGLM_EXPORT
-void
 glmc_vec3_negate(vec3 v) {
   glm_vec3_negate(v);
 }

@@ -464,9 +464,9 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
      is -1, then negate the matrix and the scaling factors. */
   glm_vec3_cross(m[0], m[1], v);
   if (glm_vec3_dot(v, m[2]) < 0.0f) {
-    glm_vec4_flipsign(r[0]);
-    glm_vec4_flipsign(r[1]);
-    glm_vec4_flipsign(r[2]);
+    glm_vec4_negate(r[0]);
+    glm_vec4_negate(r[1]);
+    glm_vec4_negate(r[2]);
     glm_vec3_negate(s);
   }
 }

@@ -36,7 +36,7 @@
    CGLM_INLINE void  glm_vec4_addadd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_subadd(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_muladd(vec4 a, vec4 b, vec4 dest);
-   CGLM_INLINE void  glm_vec4_flipsign(vec4 v);
+   CGLM_INLINE void  glm_vec4_negate(vec4 v);
    CGLM_INLINE void  glm_vec4_inv(vec4 v);
    CGLM_INLINE void  glm_vec4_inv_to(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_normalize(vec4 v);
@@ -46,6 +46,12 @@
    CGLM_INLINE void  glm_vec4_minv(vec4 v1, vec4 v2, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
+
+
+ DEPRECATED:
+   glm_vec4_dup
+   glm_vec4_flipsign
+   glm_vec4_flipsign_to
  */
 
 #ifndef cglm_vec4_h
@@ -510,32 +516,14 @@ glm_vec4_muladds(vec4 a, float s, vec4 dest) {
 }
 
 /*!
- * @brief flip sign of all vec4 members
- *
- * @param[in, out]  v  vector
- */
-CGLM_INLINE
-void
-glm_vec4_flipsign(vec4 v) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(v, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
-#else
-  v[0] = -v[0];
-  v[1] = -v[1];
-  v[2] = -v[2];
-  v[3] = -v[3];
-#endif
-}
-
-/*!
- * @brief flip sign of all vec4 members and store result in dest
+ * @brief negate vector components and store result in dest
  *
  * @param[in]  v     vector
- * @param[out] dest  vector
+ * @param[out] dest  result vector
  */
 CGLM_INLINE
 void
-glm_vec4_flipsign_to(vec4 v, vec4 dest) {
+glm_vec4_negate_to(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
 #else
@@ -547,6 +535,17 @@ glm_vec4_flipsign_to(vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief flip sign of all vec4 members
+ *
+ * @param[in, out]  v  vector
+ */
+CGLM_INLINE
+void
+glm_vec4_negate(vec4 v) {
+  glm_vec4_negate_to(v, v);
+}
+
+/*!
  * @brief make vector as inverse/opposite of itself
  *
  * @param[in, out]  v  vector
@@ -554,7 +553,7 @@ glm_vec4_flipsign_to(vec4 v, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_inv(vec4 v) {
-  glm_vec4_flipsign(v);
+  glm_vec4_negate(v);
 }
 
 /*!
@@ -567,7 +566,7 @@ CGLM_INLINE
 void
 glm_vec4_inv_to(vec4 v, vec4 dest) {
   glm_vec4_copy(v, dest);
-  glm_vec4_flipsign(dest);
+  glm_vec4_negate(dest);
 }
 
 /*!

@@ -4,7 +4,7 @@
 [![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
-[![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers) 
+[![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
 
 The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__restrict`
@@ -19,7 +19,7 @@ Complete documentation: http://cglm.readthedocs.io
 - _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec3_copy`
 - OpenGL related functions are dropped to make this lib platform/third-party independent
 - make sure you have latest version and feel free to report bugs, troubles
-- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that 
+- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that
 you have the latest version
 - **[major change]** by starting v0.4.0, quaternions are stored as [x, y, z, w], it was [w, x, y, z] in v0.3.5 and earlier versions
 - **[api rename]** by starting v0.4.5, **glm_simd** functions are renamed to **glmm_**  

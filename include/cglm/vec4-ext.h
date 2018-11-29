@@ -11,20 +11,20 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_vec4_mulv(vec4 a, vec4 b, vec4 d);
-   CGLM_INLINE void glm_vec4_broadcast(float val, vec4 d);
-   CGLM_INLINE bool glm_vec4_eq(vec4 v, float val);
-   CGLM_INLINE bool glm_vec4_eq_eps(vec4 v, float val);
-   CGLM_INLINE bool glm_vec4_eq_all(vec4 v);
-   CGLM_INLINE bool glm_vec4_eqv(vec4 v1, vec4 v2);
-   CGLM_INLINE bool glm_vec4_eqv_eps(vec4 v1, vec4 v2);
+   CGLM_INLINE void  glm_vec4_mulv(vec4 a, vec4 b, vec4 d);
+   CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
+   CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
+   CGLM_INLINE bool  glm_vec4_eqv(vec4 v1, vec4 v2);
+   CGLM_INLINE bool  glm_vec4_eqv_eps(vec4 v1, vec4 v2);
    CGLM_INLINE float glm_vec4_max(vec4 v);
    CGLM_INLINE float glm_vec4_min(vec4 v);
-   CGLM_INLINE bool glm_vec4_isnan(vec4 v);
-   CGLM_INLINE bool glm_vec4_isinf(vec4 v);
-   CGLM_INLINE bool glm_vec4_isvalid(vec4 v);
-   CGLM_INLINE void glm_vec4_sign(vec4 v, vec4 dest);
-   CGLM_INLINE void glm_vec4_sqrt(vec4 v, vec4 dest);
+   CGLM_INLINE bool  glm_vec4_isnan(vec4 v);
+   CGLM_INLINE bool  glm_vec4_isinf(vec4 v);
+   CGLM_INLINE bool  glm_vec4_isvalid(vec4 v);
+   CGLM_INLINE void  glm_vec4_sign(vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
  */
 
 #ifndef cglm_vec4_ext_h

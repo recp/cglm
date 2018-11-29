@@ -13,6 +13,11 @@ extern "C" {
 
 #include "../cglm.h"
 
+/* DEPRECATED! use _copy, _ucopy versions */
+#define glmc_vec_dup(v, dest)          glmc_vec3_copy(v, dest)
+#define glmc_vec3_flipsign(v)          glmc_vec3_negate(v)
+#define glmc_vec3_flipsign_to(v, dest) glmc_vec3_negate_to(v, dest)
+
 CGLM_EXPORT
 void
 glmc_vec3(vec4 v4, vec3 dest);
