@@ -70,6 +70,8 @@
    glm_vec3_dup
    glm_vec3_flipsign
    glm_vec3_flipsign_to
+   glm_vec3_inv
+   glm_vec3_inv_to
  */
 
 #ifndef cglm_vec3_h
@@ -84,6 +86,8 @@
 #define glm_vec3_dup(v, dest)         glm_vec3_copy(v, dest)
 #define glm_vec3_flipsign(v)          glm_vec3_negate(v)
 #define glm_vec3_flipsign_to(v, dest) glm_vec3_negate_to(v, dest)
+#define glm_vec3_inv(v)               glm_vec3_negate(v)
+#define glm_vec3_inv_to(v, dest)      glm_vec3_negate_to(v, dest)
 
 #define GLM_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
 #define GLM_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
@@ -437,29 +441,6 @@ CGLM_INLINE
 void
 glm_vec3_negate(vec3 v) {
   glm_vec3_negate_to(v, v);
-}
-
-/*!
- * @brief make vector as inverse/opposite of itself
- *
- * @param[in, out]  v  vector
- */
-CGLM_INLINE
-void
-glm_vec3_inv(vec3 v) {
-  glm_vec3_negate(v);
-}
-
-/*!
- * @brief inverse/opposite vector
- *
- * @param[in]  v    source
- * @param[out] dest destination
- */
-CGLM_INLINE
-void
-glm_vec3_inv_to(vec3 v, vec3 dest) {
-  glm_vec3_negate_to(v, dest);
 }
 
 /*!

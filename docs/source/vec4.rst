@@ -45,10 +45,10 @@ Functions:
 #. :c:func:`glm_vec4_muladds`
 #. :c:func:`glm_vec4_flipsign`
 #. :c:func:`glm_vec4_flipsign_to`
-#. :c:func:`glm_vec4_negate`
-#. :c:func:`glm_vec4_negate_to`
 #. :c:func:`glm_vec4_inv`
 #. :c:func:`glm_vec4_inv_to`
+#. :c:func:`glm_vec4_negate`
+#. :c:func:`glm_vec4_negate_to`
 #. :c:func:`glm_vec4_normalize`
 #. :c:func:`glm_vec4_normalize_to`
 #. :c:func:`glm_vec4_distance`
@@ -275,11 +275,30 @@ Functions documentation
 
     **DEPRACATED!**
 
-    use :c:func:`glm_vec4_negate_TO`
+    use :c:func:`glm_vec4_negate_to`
 
     Parameters:
       | *[in]*  **v**       vector
       | *[out]* **dest**    negated vector
+
+.. c:function:: void  glm_vec4_inv(vec4 v)
+
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate`
+
+    Parameters:
+      | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec4_inv_to(vec4 v, vec4 dest)
+
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec4_negate_to`
+
+    Parameters:
+      | *[in]*  **v**     source
+      | *[out]* **dest**  destination
 
 .. c:function:: void  glm_vec4_negate(vec4 v)
 
@@ -295,21 +314,6 @@ Functions documentation
     Parameters:
       | *[in]*  **v**       vector
       | *[out]* **dest**    negated vector
-
-.. c:function:: void  glm_vec4_inv(vec4 v)
-
-    make vector as inverse/opposite of itself
-
-    Parameters:
-      | *[in, out]*  **v**    vector
-
-.. c:function:: void  glm_vec4_inv_to(vec4 v, vec4 dest)
-
-    inverse/opposite vector
-
-    Parameters:
-      | *[in]*  **v**     source
-      | *[out]* **dest**  destination
 
 .. c:function:: void  glm_vec4_normalize(vec4 v)
 

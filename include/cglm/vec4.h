@@ -52,6 +52,8 @@
    glm_vec4_dup
    glm_vec4_flipsign
    glm_vec4_flipsign_to
+   glm_vec4_inv
+   glm_vec4_inv_to
  */
 
 #ifndef cglm_vec4_h
@@ -61,9 +63,13 @@
 #include "vec4-ext.h"
 #include "util.h"
 
-/* DEPRECATED! use _copy, _ucopy versions */
-#define glm_vec4_dup3(v, dest) glm_vec4_copy3(v, dest)
-#define glm_vec4_dup(v, dest)  glm_vec4_copy(v, dest)
+/* DEPRECATED! functions */
+#define glm_vec4_dup3(v, dest)         glm_vec4_copy3(v, dest)
+#define glm_vec4_dup(v, dest)          glm_vec4_copy(v, dest)
+#define glm_vec4_flipsign(v)           glm_vec4_negate(v)
+#define glm_vec4_flipsign_to(v, dest)  glm_vec4_negate_to(v, dest)
+#define glm_vec4_inv(v)                glm_vec4_negate(v)
+#define glm_vec4_inv_to(v, dest)       glm_vec4_negate_to(v, dest)
 
 #define GLM_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
 #define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
@@ -543,30 +549,6 @@ CGLM_INLINE
 void
 glm_vec4_negate(vec4 v) {
   glm_vec4_negate_to(v, v);
-}
-
-/*!
- * @brief make vector as inverse/opposite of itself
- *
- * @param[in, out]  v  vector
- */
-CGLM_INLINE
-void
-glm_vec4_inv(vec4 v) {
-  glm_vec4_negate(v);
-}
-
-/*!
- * @brief inverse/opposite vector
- *
- * @param[in]  v    source
- * @param[out] dest destination
- */
-CGLM_INLINE
-void
-glm_vec4_inv_to(vec4 v, vec4 dest) {
-  glm_vec4_copy(v, dest);
-  glm_vec4_negate(dest);
 }
 
 /*!

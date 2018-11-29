@@ -159,18 +159,6 @@ glmc_vec3_negate_to(vec3 v, vec3 dest) {
 }
 
 CGLM_EXPORT
-void
-glmc_vec3_inv(vec3 v) {
-  glm_vec3_inv(v);
-}
-
-CGLM_EXPORT
-void
-glmc_vec3_inv_to(vec3 v, vec3 dest) {
-  glm_vec3_inv_to(v, dest);
-}
-
-CGLM_EXPORT
 float
 glmc_vec3_angle(vec3 v1, vec3 v2) {
   return glm_vec3_angle(v1, v2);

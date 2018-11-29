@@ -57,10 +57,10 @@ Functions:
 #. :c:func:`glm_vec3_muladds`
 #. :c:func:`glm_vec3_flipsign`
 #. :c:func:`glm_vec3_flipsign_to`
-#. :c:func:`glm_vec3_negate`
-#. :c:func:`glm_vec3_negate_to`
 #. :c:func:`glm_vec3_inv`
 #. :c:func:`glm_vec3_inv_to`
+#. :c:func:`glm_vec3_negate`
+#. :c:func:`glm_vec3_negate_to`
 #. :c:func:`glm_vec3_normalize`
 #. :c:func:`glm_vec3_normalize_to`
 #. :c:func:`glm_vec3_distance2`
@@ -292,6 +292,25 @@ Functions documentation
       | *[in]*  **v**       vector
       | *[out]* **dest**    negated vector
 
+.. c:function:: void  glm_vec3_inv(vec3 v)
+
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec3_negate`
+
+    Parameters:
+      | *[in, out]*  **v**    vector
+
+.. c:function:: void  glm_vec3_inv_to(vec3 v, vec3 dest)
+
+    **DEPRACATED!**
+
+    use :c:func:`glm_vec3_negate_to`
+
+    Parameters:
+      | *[in]*  **v**     source
+      | *[out]* **dest**  destination
+
 .. c:function:: void  glm_vec3_negate(vec3 v)
 
     negate vector components
@@ -306,21 +325,6 @@ Functions documentation
     Parameters:
       | *[in]*  **v**       vector
       | *[out]* **dest**    negated vector
-
-.. c:function:: void  glm_vec3_inv(vec3 v)
-
-    make vector as inverse/opposite of itself
-
-    Parameters:
-      | *[in, out]*  **v**    vector
-
-.. c:function:: void  glm_vec3_inv_to(vec3 v, vec3 dest)
-
-    inverse/opposite vector
-
-    Parameters:
-      | *[in]*  **v**     source
-      | *[out]* **dest**  destination
 
 .. c:function:: void  glm_vec3_normalize(vec3 v)
 

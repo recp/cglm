@@ -17,6 +17,8 @@ extern "C" {
 #define glmc_vec_dup(v, dest)          glmc_vec3_copy(v, dest)
 #define glmc_vec3_flipsign(v)          glmc_vec3_negate(v)
 #define glmc_vec3_flipsign_to(v, dest) glmc_vec3_negate_to(v, dest)
+#define glmc_vec3_inv(v)               glmc_vec3_negate(v)
+#define glmc_vec3_inv_to(v, dest)      glmc_vec3_negate_to(v, dest)
 
 CGLM_EXPORT
 void
@@ -112,28 +114,12 @@ glmc_vec3_muladds(vec3 a, float s, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec3_flipsign(vec3 v);
-
-CGLM_EXPORT
-void
-glmc_vec3_flipsign_to(vec3 v, vec3 dest);
-
-CGLM_EXPORT
-void
 glmc_vec3_negate(vec3 v);
 
 CGLM_EXPORT
 void
 glmc_vec3_negate_to(vec3 v, vec3 dest);
 
-CGLM_EXPORT
-void
-glmc_vec3_inv(vec3 v);
-
-CGLM_EXPORT
-void
-glmc_vec3_inv_to(vec3 v, vec3 dest);
-  
 CGLM_EXPORT
 float
 glmc_vec3_angle(vec3 v1, vec3 v2);
