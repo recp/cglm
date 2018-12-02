@@ -16,8 +16,6 @@
    GLM_MAT4_ZERO_INIT
    GLM_MAT4_IDENTITY
    GLM_MAT4_ZERO
-   glm_mat4_udup(mat, dest)
-   glm_mat4_dup(mat, dest)
 
  Functions:
    CGLM_INLINE void  glm_mat4_ucopy(mat4 mat, mat4 dest);

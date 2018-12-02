@@ -23,35 +23,31 @@
 CGLM_INLINE
 void
 glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
-  vec3 v[2], xa, xb, ya, yb, za, zb, tmp;
+  vec3 v[2], xa, xb, ya, yb, za, zb;
 
-  glm_vec_scale(m[0], box[0][0], xa);
-  glm_vec_scale(m[0], box[1][0], xb);
+  glm_vec3_scale(m[0], box[0][0], xa);
+  glm_vec3_scale(m[0], box[1][0], xb);
 
-  glm_vec_scale(m[1], box[0][1], ya);
-  glm_vec_scale(m[1], box[1][1], yb);
+  glm_vec3_scale(m[1], box[0][1], ya);
+  glm_vec3_scale(m[1], box[1][1], yb);
 
-  glm_vec_scale(m[2], box[0][2], za);
-  glm_vec_scale(m[2], box[1][2], zb);
+  glm_vec3_scale(m[2], box[0][2], za);
+  glm_vec3_scale(m[2], box[1][2], zb);
 
-  /* min(xa, xb) + min(ya, yb) + min(za, zb) + translation */
-  glm_vec_minv(xa, xb, v[0]);
-  glm_vec_minv(ya, yb, tmp);
-  glm_vec_add(v[0], tmp, v[0]);
-  glm_vec_minv(za, zb, tmp);
-  glm_vec_add(v[0], tmp, v[0]);
-  glm_vec_add(v[0], m[3], v[0]);
+  /* translation + min(xa, xb) + min(ya, yb) + min(za, zb) */
+  glm_vec3(m[3], v[0]);
+  glm_vec3_minadd(xa, xb, v[0]);
+  glm_vec3_minadd(ya, yb, v[0]);
+  glm_vec3_minadd(za, zb, v[0]);
 
-  /* max(xa, xb) + max(ya, yb) + max(za, zb) + translation */
-  glm_vec_maxv(xa, xb, v[1]);
-  glm_vec_maxv(ya, yb, tmp);
-  glm_vec_add(v[1], tmp, v[1]);
-  glm_vec_maxv(za, zb, tmp);
-  glm_vec_add(v[1], tmp, v[1]);
-  glm_vec_add(v[1], m[3], v[1]);
+  /* translation + max(xa, xb) + max(ya, yb) + max(za, zb) */
+  glm_vec3(m[3], v[1]);
+  glm_vec3_maxadd(xa, xb, v[1]);
+  glm_vec3_maxadd(ya, yb, v[1]);
+  glm_vec3_maxadd(za, zb, v[1]);
 
-  glm_vec_copy(v[0], dest[0]);
-  glm_vec_copy(v[1], dest[1]);
+  glm_vec3_copy(v[0], dest[0]);
+  glm_vec3_copy(v[1], dest[1]);
 }
 
 /*!
@@ -162,8 +158,8 @@ glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
 CGLM_INLINE
 void
 glm_aabb_invalidate(vec3 box[2]) {
-  glm_vec_broadcast(FLT_MAX,  box[0]);
-  glm_vec_broadcast(-FLT_MAX, box[1]);
+  glm_vec3_broadcast(FLT_MAX,  box[0]);
+  glm_vec3_broadcast(-FLT_MAX, box[1]);
 }
 
 /*!
@@ -174,8 +170,8 @@ glm_aabb_invalidate(vec3 box[2]) {
 CGLM_INLINE
 bool
 glm_aabb_isvalid(vec3 box[2]) {
-  return glm_vec_max(box[0]) != FLT_MAX
-         && glm_vec_min(box[1]) != -FLT_MAX;
+  return glm_vec3_max(box[0]) != FLT_MAX
+         && glm_vec3_min(box[1]) != -FLT_MAX;
 }
 
 /*!
@@ -186,7 +182,7 @@ glm_aabb_isvalid(vec3 box[2]) {
 CGLM_INLINE
 float
 glm_aabb_size(vec3 box[2]) {
-  return glm_vec_distance(box[0], box[1]);
+  return glm_vec3_distance(box[0], box[1]);
 }
 
 /*!
@@ -209,7 +205,7 @@ glm_aabb_radius(vec3 box[2]) {
 CGLM_INLINE
 void
 glm_aabb_center(vec3 box[2], vec3 dest) {
-  glm_vec_center(box[0], box[1], dest);
+  glm_vec3_center(box[0], box[1], dest);
 }
 
 /*!

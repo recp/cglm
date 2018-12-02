@@ -127,7 +127,7 @@ Functions documentation
     .. code-block:: c
 
        for (j = 0; j < 4; j++) {
-         glm_vec_center(corners[i], corners[i + 4], centerCorners[i]);
+         glm_vec3_center(corners[i], corners[i + 4], centerCorners[i]);
        }
 
     corners[i + 4] is far of corners[i] point.

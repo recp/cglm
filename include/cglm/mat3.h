@@ -330,9 +330,9 @@ CGLM_INLINE
 void
 glm_mat3_swap_col(mat3 mat, int col1, int col2) {
   vec3 tmp;
-  glm_vec_copy(mat[col1], tmp);
-  glm_vec_copy(mat[col2], mat[col1]);
-  glm_vec_copy(tmp, mat[col2]);
+  glm_vec3_copy(mat[col1], tmp);
+  glm_vec3_copy(mat[col2], mat[col1]);
+  glm_vec3_copy(tmp, mat[col2]);
 }
 
 /*!

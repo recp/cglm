@@ -9,7 +9,7 @@ There are many convenient functions for camera. For instance :c:func:`glm_look`
 is just wrapper for :c:func:`glm_lookat`. Sometimes you only have direction
 instead of target, so that makes easy to build view matrix using direction.
 There is also :c:func:`glm_look_anyup` function which can help build view matrix
-without providing UP axis. It uses :c:func:`glm_vec_ortho` to get a UP axis and
+without providing UP axis. It uses :c:func:`glm_vec3_ortho` to get a UP axis and
 builds view matrix.
 
 You can also *_default* versions of ortho and perspective to build projection

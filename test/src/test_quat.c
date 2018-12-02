@@ -128,7 +128,7 @@ test_quat(void **state) {
   axis[1] = sinf(glm_rad(-90.0f) * 0.5f) * 1.0f;
   axis[2] = 0.0f;
 
-  assert_true(glm_vec_eqv_eps(imag, axis));
+  assert_true(glm_vec3_eqv_eps(imag, axis));
 
   /* 9.2 axis */
   glm_quat_axis(q4, axis);
@@ -143,7 +143,7 @@ test_quat(void **state) {
   v1[0] = 0.0f; v1[1] = 0.0f; v1[2] = -1.0f;
   v2[0] = 0.0f; v2[1] = 0.0f; v2[2] = -1.0f;
 
-  glm_vec_rotate(v1, glm_rad(90.0f), (vec3){1.0f, 0.0f, 0.0f});
+  glm_vec3_rotate(v1, glm_rad(90.0f), (vec3){1.0f, 0.0f, 0.0f});
   glm_quatv(q3, glm_rad(90.0f), (vec3){1.0f, 0.0f, 0.0f});
 
   glm_vec4_scale(q3, 1.5, q3);

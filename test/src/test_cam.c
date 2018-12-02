@@ -16,7 +16,7 @@ test_camera_lookat(void **state) {
        up     = {0.0f, 1.0f, 0.0f}
   ;
 
-  glm_vec_add(eye, dir, center);
+  glm_vec3_add(eye, dir, center);
   glm_lookat(eye, center, up, view1);
 
   glm_look(eye, dir, up, view2);
