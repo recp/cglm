@@ -331,9 +331,9 @@ glm_vec4_subs(vec4 v, float s, vec4 dest) {
 /*!
  * @brief multiply two vector (component-wise multiplication)
  *
- * @param a vector1
- * @param b vector2
- * @param d dest = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
+ * @param a    vector1
+ * @param b    vector2
+ * @param dest dest = (a[0] * b[0], a[1] * b[1], a[2] * b[2], a[3] * b[3])
  */
 CGLM_INLINE
 void
@@ -553,7 +553,7 @@ glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
  * it applies += operator so dest must be initialized
  *
  * @param[in]  a    vector
- * @param[in]  s    scalar
+ * @param[in]  b    scalar
  * @param[out] dest dest += min(a, b)
  */
 CGLM_INLINE
