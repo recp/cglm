@@ -45,6 +45,10 @@ void
 glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest);
 
 CGLM_EXPORT
+float
+glmc_mat3_trace(mat3 m);
+
+CGLM_EXPORT
 void
 glmc_mat3_quat(mat3 m, versor dest);
 

@@ -29,6 +29,8 @@
    CGLM_INLINE void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
    CGLM_INLINE void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
    CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
+   CGLM_INLINE float glm_mat4_trace(mat4 m);
+   CGLM_INLINE float glm_mat4_trace3(mat4 m);
    CGLM_INLINE void  glm_mat4_transpose_to(mat4 m, mat4 dest);
    CGLM_INLINE void  glm_mat4_transpose(mat4 m);
    CGLM_INLINE void  glm_mat4_scale_p(mat4 m, float s);
@@ -336,6 +338,32 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
   res[3] = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3] * v[3];
   glm_vec4_copy(res, dest);
 #endif
+}
+
+/*!
+ * @brief trace of matrix
+ *
+ * sum of the elements on the main diagonal from upper left to the lower right
+ *
+ * @param[in]  m matrix
+ */
+CGLM_INLINE
+float
+glm_mat4_trace(mat4 m) {
+  return m[0][0] + m[1][1] + m[2][2] + m[3][3];
+}
+
+/*!
+ * @brief trace of matrix (rotation part)
+ *
+ * sum of the elements on the main diagonal from upper left to the lower right
+ *
+ * @param[in]  m matrix
+ */
+CGLM_INLINE
+float
+glm_mat4_trace3(mat4 m) {
+  return m[0][0] + m[1][1] + m[2][2];
 }
 
 /*!

@@ -33,6 +33,8 @@ Functions:
 #. :c:func:`glm_mat4_mulN`
 #. :c:func:`glm_mat4_mulv`
 #. :c:func:`glm_mat4_mulv3`
+#. :c:func:`glm_mat3_trace`
+#. :c:func:`glm_mat3_trace3`
 #. :c:func:`glm_mat4_quat`
 #. :c:func:`glm_mat4_transpose_to`
 #. :c:func:`glm_mat4_transpose`
@@ -155,6 +157,27 @@ Functions documentation
     | *[in]*  **m**     mat4 (left)
     | *[in]*  **v**     vec3 (right, column vector)
     | *[out]* **dest**  vec3 (result, column vector)
+
+.. c:function:: void  glm_mat4_trace(mat4 m)
+
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
+
+.. c:function:: void  glm_mat4_trace3(mat4 m)
+
+    | trace of matrix (rotation part)
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
 
 .. c:function:: void  glm_mat4_quat(mat4 m, versor dest)
 

@@ -29,6 +29,7 @@ Functions:
 #. :c:func:`glm_mat3_scale`
 #. :c:func:`glm_mat3_det`
 #. :c:func:`glm_mat3_inv`
+#. :c:func:`glm_mat3_trace`
 #. :c:func:`glm_mat3_swap_col`
 #. :c:func:`glm_mat3_swap_row`
 
@@ -132,6 +133,16 @@ Functions documentation
     Parameters:
       | *[in]*  **mat**  matrix
       | *[out]* **dest** destination (inverse matrix)
+
+.. c:function:: void glm_mat3_trace(mat3 m)
+
+    | sum of the elements on the main diagonal from upper left to the lower right
+
+    Parameters:
+      | *[in]*  **m**  matrix
+
+    Returns:
+        trace of matrix
 
 .. c:function:: void  glm_mat3_swap_col(mat3 mat, int col1, int col2)
 
