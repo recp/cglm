@@ -40,8 +40,14 @@ glmc_vec3_dot(vec3 a, vec3 b) {
 
 CGLM_EXPORT
 void
-glmc_vec3_cross(vec3 a, vec3 b, vec3 d) {
-  glm_vec3_cross(a, b, d);
+glmc_vec3_cross(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_cross(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_crossn(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_crossn(a, b, dest);
 }
 
 CGLM_EXPORT

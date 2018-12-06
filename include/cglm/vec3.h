@@ -21,7 +21,6 @@
    CGLM_INLINE void  glm_vec3_zero(vec3 v);
    CGLM_INLINE void  glm_vec3_one(vec3 v);
    CGLM_INLINE float glm_vec3_dot(vec3 a, vec3 b);
-   CGLM_INLINE void  glm_vec3_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE float glm_vec3_norm2(vec3 v);
    CGLM_INLINE float glm_vec3_norm(vec3 v);
    CGLM_INLINE void  glm_vec3_add(vec3 a, vec3 b, vec3 dest);
@@ -47,6 +46,8 @@
    CGLM_INLINE void  glm_vec3_inv_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_normalize(vec3 v);
    CGLM_INLINE void  glm_vec3_normalize_to(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_cross(vec3 a, vec3 b, vec3 d);
+   CGLM_INLINE void  glm_vec3_crossn(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE float glm_vec3_distance(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_angle(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec3_rotate(vec3 v, float angle, vec3 axis);
@@ -164,22 +165,6 @@ CGLM_INLINE
 float
 glm_vec3_dot(vec3 a, vec3 b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-}
-
-/*!
- * @brief vec3 cross product
- *
- * @param[in]  a source 1
- * @param[in]  b source 2
- * @param[out] d destination
- */
-CGLM_INLINE
-void
-glm_vec3_cross(vec3 a, vec3 b, vec3 d) {
-  /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
-  d[0] = a[1] * b[2] - a[2] * b[1];
-  d[1] = a[2] * b[0] - a[0] * b[2];
-  d[2] = a[0] * b[1] - a[1] * b[0];
 }
 
 /*!
@@ -519,6 +504,36 @@ glm_vec3_normalize_to(vec3 v, vec3 dest) {
   }
 
   glm_vec3_scale(v, 1.0f / norm, dest);
+}
+
+/*!
+ * @brief cross product of two vector (RH)
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_cross(vec3 a, vec3 b, vec3 dest) {
+  /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
+  dest[0] = a[1] * b[2] - a[2] * b[1];
+  dest[1] = a[2] * b[0] - a[0] * b[2];
+  dest[2] = a[0] * b[1] - a[1] * b[0];
+}
+
+/*!
+ * @brief cross product of two vector (RH) and normalize the result
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_crossn(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_cross(a, b, dest);
+  glm_vec3_normalize(dest);
 }
 
 /*!

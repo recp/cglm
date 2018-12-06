@@ -426,7 +426,6 @@ glm_vec4_divs(vec4 v, float s, vec4 dest) {
 #endif
 }
 
-
 /*!
  * @brief add two vectors and add result to sum
  *

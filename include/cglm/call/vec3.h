@@ -42,7 +42,11 @@ glmc_vec3_dot(vec3 a, vec3 b);
 
 CGLM_EXPORT
 void
-glmc_vec3_cross(vec3 a, vec3 b, vec3 d);
+glmc_vec3_cross(vec3 a, vec3 b, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec3_crossn(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 float

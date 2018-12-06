@@ -39,7 +39,6 @@ Functions:
 #. :c:func:`glm_vec3_zero`
 #. :c:func:`glm_vec3_one`
 #. :c:func:`glm_vec3_dot`
-#. :c:func:`glm_vec3_cross`
 #. :c:func:`glm_vec3_norm2`
 #. :c:func:`glm_vec3_norm`
 #. :c:func:`glm_vec3_add`
@@ -65,6 +64,8 @@ Functions:
 #. :c:func:`glm_vec3_negate_to`
 #. :c:func:`glm_vec3_normalize`
 #. :c:func:`glm_vec3_normalize_to`
+#. :c:func:`glm_vec3_cross`
+#. :c:func:`glm_vec3_crossn`
 #. :c:func:`glm_vec3_distance2`
 #. :c:func:`glm_vec3_distance`
 #. :c:func:`glm_vec3_angle`
@@ -125,12 +126,21 @@ Functions documentation
 
 .. c:function:: void  glm_vec3_cross(vec3 a, vec3 b, vec3 d)
 
-    cross product
+    cross product of two vector (RH)
 
     Parameters:
-      | *[in]*  **a**  source 1
-      | *[in]*  **b**  source 2
-      | *[out]* **d**  destination
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  destination
+
+.. c:function:: void  glm_vec3_crossn(vec3 a, vec3 b, vec3 dest)
+
+    cross product of two vector (RH) and normalize the result
+
+    Parameters:
+      | *[in]*  **a**     vector 1
+      | *[in]*  **b**     vector 2
+      | *[out]* **dest**  destination
 
 .. c:function:: float  glm_vec3_norm2(vec3 v)
 

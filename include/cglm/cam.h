@@ -323,9 +323,7 @@ glm_lookat(vec3 eye,
   glm_vec3_sub(center, eye, f);
   glm_vec3_normalize(f);
 
-  glm_vec3_cross(f, up, s);
-  glm_vec3_normalize(s);
-
+  glm_vec3_crossn(f, up, s);
   glm_vec3_cross(s, f, u);
 
   dest[0][0] = s[0];
