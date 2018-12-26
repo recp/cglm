@@ -25,6 +25,7 @@ you have the latest version
 - **[api rename]** by starting v0.4.5, **glm_simd** functions are renamed to **glmm_**  
 - **[new option]** by starting v0.4.5, you can disable alignment requirement, check options in docs.  
 - **[major change]** by starting v0.5.0, vec3 functions use **glm_vec3_** namespace, it was **glm_vec_** until v0.5.0
+- **[major change]** by starting v0.5.1, built-in alignment is removed from **vec3** and **mat3** types
 
 #### Note for C++ developers:
 If you don't aware about original GLM library yet, you may also want to look at:
