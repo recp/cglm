@@ -10,12 +10,12 @@
 
 #if defined(_MSC_VER)
 /* do not use alignment for older visual studio versions */
-#if _MSC_VER < 1913 /*  Visual Studio 2017 version 15.6  */
-#  define CGLM_ALL_UNALIGNED
-#  define CGLM_ALIGN(X) /* no alignment */
-#else
-#  define CGLM_ALIGN(X) __declspec(align(X))
-#endif
+#  if _MSC_VER < 1913 /*  Visual Studio 2017 version 15.6  */
+#    define CGLM_ALL_UNALIGNED
+#    define CGLM_ALIGN(X) /* no alignment */
+#  else
+#    define CGLM_ALIGN(X) __declspec(align(X))
+#  endif
 #else
 #  define CGLM_ALIGN(X) __attribute((aligned(X)))
 #endif
@@ -33,19 +33,17 @@
 #endif
 
 typedef float                   vec2[2];
-typedef CGLM_ALIGN_IF(8)  float vec3[3];
+typedef float                   vec3[3];
 typedef int                    ivec3[3];
 typedef CGLM_ALIGN_IF(16) float vec4[4];
+typedef vec4                    versor;
+typedef vec3                    mat3[3];
 
 #ifdef __AVX__
-typedef CGLM_ALIGN_IF(32) vec3  mat3[3];
 typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
 #else
-typedef                   vec3  mat3[3];
 typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
 #endif
-
-typedef vec4                    versor;
 
 #define GLM_E         2.71828182845904523536028747135266250   /* e           */
 #define GLM_LOG2E     1.44269504088896340735992468100189214   /* log2(e)     */
