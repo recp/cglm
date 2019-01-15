@@ -10,6 +10,6 @@
 
 #define CGLM_VERSION_MAJOR 0
 #define CGLM_VERSION_MINOR 5
-#define CGLM_VERSION_PATCH 1
+#define CGLM_VERSION_PATCH 2
 
 #endif /* cglm_version_h */
