@@ -36,6 +36,7 @@ Functions:
 #. :c:func:`glm_ortho_default`
 #. :c:func:`glm_ortho_default_s`
 #. :c:func:`glm_perspective`
+#. :c:func:`glm_persp_move_far`
 #. :c:func:`glm_perspective_default`
 #. :c:func:`glm_perspective_resize`
 #. :c:func:`glm_lookat`
@@ -144,6 +145,16 @@ Functions documentation
       | *[in]*  **nearVal** near clipping plane
       | *[in]*  **farVal**  far clipping planes
       | *[out]* **dest**    result matrix
+
+.. c:function:: void  glm_persp_move_far(mat4 proj, float deltaFar)
+
+    | extend perspective projection matrix's far distance
+
+    | this function does not guarantee far >= near, be aware of that!
+
+    Parameters:
+      | *[in, out]*  **proj**      projection matrix to extend
+      | *[in]*       **deltaFar**  distance from existing far (negative to shink)
 
 .. c:function:: void glm_perspective_default(float aspect, mat4 dest)
 

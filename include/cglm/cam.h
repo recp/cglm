@@ -272,6 +272,30 @@ glm_perspective(float fovy,
 }
 
 /*!
+ * @brief extend perspective projection matrix's far distance
+ *
+ * this function does not guarantee far >= near, be aware of that!
+ *
+ * @param[in, out] proj      projection matrix to extend
+ * @param[in]      deltaFar  distance from existing far (negative to shink)
+ */
+CGLM_INLINE
+void
+glm_persp_move_far(mat4 proj, float deltaFar) {
+  float fn, farVal, nearVal, p22, p32;
+
+  p22        = proj[2][2];
+  p32        = proj[3][2];
+
+  nearVal    = p32 / (p22 - 1.0f);
+  farVal     = p32 / (p22 + 1.0f) + deltaFar;
+  fn         = 1.0f / (nearVal - farVal);
+
+  proj[2][2] = (nearVal + farVal) * fn;
+  proj[3][2] = 2.0f * nearVal * farVal * fn;
+}
+
+/*!
  * @brief set up perspective projection matrix with default near/far
  *        and angle values
  *
