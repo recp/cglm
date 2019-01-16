@@ -146,15 +146,15 @@ Functions documentation
       | *[in]*  **farVal**  far clipping planes
       | *[out]* **dest**    result matrix
 
-.. c:function:: void  glm_persp_move_far(mat4 proj, float deltaFarVal)
+.. c:function:: void  glm_persp_move_far(mat4 proj, float deltaFar)
 
     | extend perspective projection matrix's far distance
 
     | this function does not guarantee far >= near, be aware of that!
 
     Parameters:
-      | *[in, out]*  **proj**         projection matrix to extend
-      | *[in]*       **deltaFarVal**  distance from existing far (negative to shink)
+      | *[in, out]*  **proj**      projection matrix to extend
+      | *[in]*       **deltaFar**  distance from existing far (negative to shink)
 
 .. c:function:: void glm_perspective_default(float aspect, mat4 dest)
 
