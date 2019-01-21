@@ -24,9 +24,9 @@ test_mat4(void **state) {
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (i == j)
-        assert_true(m3[i][j] == 1.0f);
+        assert_true(glm_eq(m3[i][j], 1.0f));
       else
-        assert_true(m3[i][j] == 0.0f);
+        assert_true(glm_eq(m3[i][j], 0.0f));
     }
   }
 

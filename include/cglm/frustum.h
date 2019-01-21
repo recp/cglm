@@ -106,7 +106,7 @@ glm_frustum_planes(mat4 m, vec4 dest[6]) {
  *
  * Find center coordinates:
  *   for (j = 0; j < 4; j++) {
- *     glm_vec_center(corners[i], corners[i + 4], centerCorners[i]);
+ *     glm_vec3_center(corners[i], corners[i + 4], centerCorners[i]);
  *   }
  *
  * @param[in]  invMat matrix (see brief)
@@ -187,8 +187,8 @@ glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
   vec3 min, max;
   int  i;
 
-  glm_vec_broadcast(FLT_MAX, min);
-  glm_vec_broadcast(-FLT_MAX, max);
+  glm_vec3_broadcast(FLT_MAX, min);
+  glm_vec3_broadcast(-FLT_MAX, max);
 
   for (i = 0; i < 8; i++) {
     glm_mat4_mulv(m, corners[i], v);
@@ -202,8 +202,8 @@ glm_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]) {
     max[2] = glm_max(max[2], v[2]);
   }
 
-  glm_vec_copy(min, box[0]);
-  glm_vec_copy(max, box[1]);
+  glm_vec3_copy(min, box[0]);
+  glm_vec3_copy(max, box[1]);
 }
 
 /*!
@@ -228,7 +228,7 @@ glm_frustum_corners_at(vec4  corners[8],
   float dist, sc;
 
   /* because distance and scale is same for all */
-  dist = glm_vec_distance(corners[GLM_RTF], corners[GLM_RTN]);
+  dist = glm_vec3_distance(corners[GLM_RTF], corners[GLM_RTN]);
   sc   = dist * (splitDist / farDist);
 
   /* left bottom */

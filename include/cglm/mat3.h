@@ -21,6 +21,7 @@
    CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
    CGLM_INLINE void  glm_mat3_mulv(mat3 m, vec3 v, vec3 dest);
+   CGLM_INLINE float glm_mat3_trace(mat3 m);
    CGLM_INLINE void  glm_mat3_scale(mat3 m, float s);
    CGLM_INLINE float glm_mat3_det(mat3 mat);
    CGLM_INLINE void  glm_mat3_inv(mat3 mat, mat3 dest);
@@ -207,6 +208,18 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
   dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
 }
 
+/*!
+ * @brief trace of matrix
+ *
+ * sum of the elements on the main diagonal from upper left to the lower right
+ *
+ * @param[in]  m matrix
+ */
+CGLM_INLINE
+float
+glm_mat3_trace(mat3 m) {
+  return m[0][0] + m[1][1] + m[2][2];
+}
 
 /*!
  * @brief convert mat3 to quaternion
@@ -330,9 +343,9 @@ CGLM_INLINE
 void
 glm_mat3_swap_col(mat3 mat, int col1, int col2) {
   vec3 tmp;
-  glm_vec_copy(mat[col1], tmp);
-  glm_vec_copy(mat[col2], mat[col1]);
-  glm_vec_copy(tmp, mat[col2]);
+  glm_vec3_copy(mat[col1], tmp);
+  glm_vec3_copy(mat[col2], mat[col1]);
+  glm_vec3_copy(tmp, mat[col2]);
 }
 
 /*!

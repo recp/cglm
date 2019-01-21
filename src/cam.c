@@ -90,6 +90,12 @@ glmc_perspective(float fovy,
 
 CGLM_EXPORT
 void
+glmc_persp_move_far(mat4 proj, float deltaFar) {
+  glm_persp_move_far(proj, deltaFar);
+}
+
+CGLM_EXPORT
+void
 glmc_perspective_default(float aspect, mat4 dest) {
   glm_perspective_default(aspect, dest);
 }

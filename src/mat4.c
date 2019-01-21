@@ -75,6 +75,18 @@ glmc_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
 }
 
 CGLM_EXPORT
+float
+glmc_mat4_trace(mat4 m) {
+  return glm_mat4_trace(m);
+}
+
+CGLM_EXPORT
+float
+glmc_mat4_trace3(mat4 m) {
+  return glm_mat4_trace3(m);
+}
+
+CGLM_EXPORT
 void
 glmc_mat4_quat(mat4 m, versor dest) {
   glm_mat4_quat(m, dest);

@@ -60,13 +60,13 @@ void
 glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
   float dist, radii;
 
-  dist  = glm_vec_distance(s1, s2);
+  dist  = glm_vec3_distance(s1, s2);
   radii = dist + s1[3] + s2[3];
 
   radii = glm_max(radii, s1[3]);
   radii = glm_max(radii, s2[3]);
 
-  glm_vec_center(s1, s2, dest);
+  glm_vec3_center(s1, s2, dest);
   dest[3] = radii;
 }
 
@@ -79,7 +79,7 @@ glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
 CGLM_INLINE
 bool
 glm_sphere_sphere(vec4 s1, vec4 s2) {
-  return glm_vec_distance2(s1, s2) <= glm_pow2(s1[3] + s2[3]);
+  return glm_vec3_distance2(s1, s2) <= glm_pow2(s1[3] + s2[3]);
 }
 
 /*!
@@ -93,7 +93,7 @@ bool
 glm_sphere_point(vec4 s, vec3 point) {
   float rr;
   rr = s[3] * s[3];
-  return glm_vec_distance2(point, s) <= rr;
+  return glm_vec3_distance2(point, s) <= rr;
 }
 
 #endif /* cglm_sphere_h */

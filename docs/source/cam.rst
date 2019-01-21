@@ -9,7 +9,7 @@ There are many convenient functions for camera. For instance :c:func:`glm_look`
 is just wrapper for :c:func:`glm_lookat`. Sometimes you only have direction
 instead of target, so that makes easy to build view matrix using direction.
 There is also :c:func:`glm_look_anyup` function which can help build view matrix
-without providing UP axis. It uses :c:func:`glm_vec_ortho` to get a UP axis and
+without providing UP axis. It uses :c:func:`glm_vec3_ortho` to get a UP axis and
 builds view matrix.
 
 You can also *_default* versions of ortho and perspective to build projection
@@ -36,6 +36,7 @@ Functions:
 #. :c:func:`glm_ortho_default`
 #. :c:func:`glm_ortho_default_s`
 #. :c:func:`glm_perspective`
+#. :c:func:`glm_persp_move_far`
 #. :c:func:`glm_perspective_default`
 #. :c:func:`glm_perspective_resize`
 #. :c:func:`glm_lookat`
@@ -144,6 +145,16 @@ Functions documentation
       | *[in]*  **nearVal** near clipping plane
       | *[in]*  **farVal**  far clipping planes
       | *[out]* **dest**    result matrix
+
+.. c:function:: void  glm_persp_move_far(mat4 proj, float deltaFar)
+
+    | extend perspective projection matrix's far distance
+
+    | this function does not guarantee far >= near, be aware of that!
+
+    Parameters:
+      | *[in, out]*  **proj**      projection matrix to extend
+      | *[in]*       **deltaFar**  distance from existing far (negative to shink)
 
 .. c:function:: void glm_perspective_default(float aspect, mat4 dest)
 
