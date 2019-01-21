@@ -105,10 +105,24 @@ glmm_store3(__m128 vx, float v[3]) {
 
 #endif
 
+#if defined(__SSE3__)
+#  include <x86intrin.h>
+#endif
+
+#if defined(__SSE4_1__)
+#  include <smmintrin.h>
+#endif
+
+#if defined(__SSE4_2__)
+#  include <nmmintrin.h>
+#endif
+
 /* ARM Neon */
-#if defined(__ARM_NEON) && defined(__ARM_NEON_FP)
+#if defined(__ARM_NEON)
 #  include <arm_neon.h>
-#  define CGLM_NEON_FP 1
+#  if defined(__ARM_NEON_FP)
+#    define CGLM_NEON_FP 1
+#  endif
 #else
 #  undef  CGLM_NEON_FP
 #endif
