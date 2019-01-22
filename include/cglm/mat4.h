@@ -118,6 +118,11 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
   glmm_store(dest[1], glmm_load(mat[1]));
   glmm_store(dest[2], glmm_load(mat[2]));
   glmm_store(dest[3], glmm_load(mat[3]));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(dest[0], vld1q_f32(mat[0]));
+  vst1q_f32(dest[1], vld1q_f32(mat[1]));
+  vst1q_f32(dest[2], vld1q_f32(mat[2]));
+  vst1q_f32(dest[3], vld1q_f32(mat[3]));
 #else
   glm_mat4_ucopy(mat, dest);
 #endif
@@ -252,7 +257,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   glm_mat4_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mul_sse2(m1, m2, dest);
-#elif defined( __ARM_NEON_FP )
+#elif defined(CGLM_NEON_FP)
   glm_mat4_mul_neon(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
@@ -506,6 +511,13 @@ void
 glm_mat4_scale(mat4 m, float s) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
+#elif defined(CGLM_NEON_FP)
+  float32x4_t v0;
+  v0 = vdupq_n_f32(s);
+  vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), v0));
+  vst1q_f32(m[1], vmulq_f32(vld1q_f32(m[1]), v0));
+  vst1q_f32(m[2], vmulq_f32(vld1q_f32(m[2]), v0));
+  vst1q_f32(m[3], vmulq_f32(vld1q_f32(m[3]), v0));
 #else
   glm_mat4_scale_p(m, s);
 #endif
