@@ -725,6 +725,8 @@ void
 glm_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_max_ps(glmm_load(a), glmm_load(b)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(dest, vmaxq_f32(vld1q_f32(a), vld1q_f32(b)));
 #else
   dest[0] = glm_max(a[0], b[0]);
   dest[1] = glm_max(a[1], b[1]);
@@ -745,6 +747,8 @@ void
 glm_vec4_minv(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_min_ps(glmm_load(a), glmm_load(b)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(dest, vminq_f32(vld1q_f32(a), vld1q_f32(b)));
 #else
   dest[0] = glm_min(a[0], b[0]);
   dest[1] = glm_min(a[1], b[1]);
@@ -766,6 +770,9 @@ glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_min_ps(_mm_max_ps(glmm_load(v), _mm_set1_ps(minVal)),
                            _mm_set1_ps(maxVal)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(v, vminq_f32(vmaxq_f32(vld1q_f32(v), vdupq_n_f32(minVal)),
+                         vdupq_n_f32(maxVal)));
 #else
   v[0] = glm_clamp(v[0], minVal, maxVal);
   v[1] = glm_clamp(v[1], minVal, maxVal);
