@@ -52,3 +52,6 @@ https://gamedev.stackexchange.com/questions/28395/rotating-vector3-by-a-quaterni
 
 9. Sphere AABB intersect
 https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+
+10. Horizontal add
+https://stackoverflow.com/questions/6996764/fastest-way-to-do-horizontal-float-vector-sum-on-x86

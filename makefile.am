@@ -34,30 +34,30 @@ test_tests_CFLAGS  = $(checkCFLAGS)
 
 cglmdir=$(includedir)/cglm
 cglm_HEADERS = include/cglm/version.h \
-                  include/cglm/cglm.h \
-                  include/cglm/call.h \
-                  include/cglm/cam.h \
-                  include/cglm/io.h \
-                  include/cglm/mat4.h \
-                  include/cglm/mat3.h \
-                  include/cglm/types.h \
-                  include/cglm/common.h \
-                  include/cglm/affine.h \
-                  include/cglm/vec3.h \
-                  include/cglm/vec3-ext.h \
-                  include/cglm/vec4.h \
-                  include/cglm/vec4-ext.h \
-                  include/cglm/euler.h \
-                  include/cglm/util.h \
-                  include/cglm/quat.h \
-                  include/cglm/affine-mat.h \
-                  include/cglm/plane.h \
-                  include/cglm/frustum.h \
-                  include/cglm/box.h \
-                  include/cglm/color.h \
-                  include/cglm/project.h \
-                  include/cglm/sphere.h \
-                  include/cglm/ease.h
+               include/cglm/cglm.h \
+               include/cglm/call.h \
+               include/cglm/cam.h \
+               include/cglm/io.h \
+               include/cglm/mat4.h \
+               include/cglm/mat3.h \
+               include/cglm/types.h \
+               include/cglm/common.h \
+               include/cglm/affine.h \
+               include/cglm/vec3.h \
+               include/cglm/vec3-ext.h \
+               include/cglm/vec4.h \
+               include/cglm/vec4-ext.h \
+               include/cglm/euler.h \
+               include/cglm/util.h \
+               include/cglm/quat.h \
+               include/cglm/affine-mat.h \
+               include/cglm/plane.h \
+               include/cglm/frustum.h \
+               include/cglm/box.h \
+               include/cglm/color.h \
+               include/cglm/project.h \
+               include/cglm/sphere.h \
+               include/cglm/ease.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -77,7 +77,9 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/ease.h
 
 cglm_simddir=$(includedir)/cglm/simd
-cglm_simd_HEADERS = include/cglm/simd/intrin.h
+cglm_simd_HEADERS = include/cglm/simd/intrin.h \
+                    include/cglm/simd/x86.h \
+                    include/cglm/simd/arm.h
 
 cglm_simd_sse2dir=$(includedir)/cglm/simd/sse2
 cglm_simd_sse2_HEADERS = include/cglm/simd/sse2/affine.h \

@@ -200,24 +200,8 @@ glm_vec4_one(vec4 v) {
 CGLM_INLINE
 float
 glm_vec4_dot(vec4 a, vec4 b) {
-#if (defined(__SSE4_1__) || defined(__SSE4_2__)) && defined(CGLM_SSE4_DOT)
-  return _mm_cvtss_f32(_mm_dp_ps(glmm_load(a), glmm_load(b), 0xFF));
-#elif defined(__SSE3__) && defined(CGLM_SSE3_DOT)
-  __m128 x0, x1;
-  x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
-  x1 = _mm_hadd_ps(x0, x0);
-  return _mm_cvtss_f32(_mm_hadd_ps(x1, x1));
-#elif defined(__SSE__) || defined(__SSE2__)
-  __m128 x0;
-  x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
-  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 3, 2));
-  return _mm_cvtss_f32(_mm_add_ss(x0, glmm_shuff1(x0, 0, 1, 0, 1)));
-#elif defined(CGLM_NEON_FP)
-  float32x4_t v0, v1, v2;
-  v0 = vmulq_f32(vld1q_f32(a), vld1q_f32(b));
-  v1 = vaddq_f32(v0, vrev64q_f32(v0));
-  v2 = vaddq_f32(v1, vcombine_f32(vget_high_f32(v1), vget_low_f32(v1)));
-  return vgetq_lane_f32(v2, 0);
+#if defined(CGLM_SIMD)
+  return glmm_dot(glmm_load(a), glmm_load(b));
 #else
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
 #endif
@@ -250,10 +234,8 @@ glm_vec4_norm2(vec4 v) {
 CGLM_INLINE
 float
 glm_vec4_norm(vec4 v) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  __m128 x0;
-  x0 = glmm_load(v);
-  return _mm_cvtss_f32(_mm_sqrt_ss(glmm_dot(x0, x0)));
+#if defined(CGLM_SIMD)
+  return glmm_norm(glmm_load(v));
 #else
   return sqrtf(glm_vec4_dot(v, v));
 #endif
@@ -663,7 +645,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
   float  dot;
 
   x0   = glmm_load(v);
-  xdot = glmm_dot(x0, x0);
+  xdot = glmm_vdot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
   if (dot == 0.0f) {

@@ -233,5 +233,11 @@
     <ClInclude Include="..\include\cglm\ease.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\arm.h">
+      <Filter>include\cglm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\x86.h">
+      <Filter>include\cglm\simd</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

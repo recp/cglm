@@ -69,6 +69,7 @@
     <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\project.h" />
     <ClInclude Include="..\include\cglm\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\arm.h" />
     <ClInclude Include="..\include\cglm\simd\avx\affine.h" />
     <ClInclude Include="..\include\cglm\simd\avx\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\intrin.h" />
@@ -77,6 +78,7 @@
     <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\x86.h" />
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />
