@@ -72,10 +72,10 @@ static inline
 __m128
 glmm_vdots(__m128 a, __m128 b) {
 #if (defined(__SSE4_1__) || defined(__SSE4_2__)) && defined(CGLM_SSE4_DOT)
-  return _mm_dp_ps(glmm_load(a), glmm_load(b), 0xFF);
+  return _mm_dp_ps(a, b, 0xFF);
 #elif defined(__SSE3__) && defined(CGLM_SSE3_DOT)
   __m128 x0, x1;
-  x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
+  x0 = _mm_mul_ps(a, b);
   x1 = _mm_hadd_ps(x0, x0);
   return _mm_hadd_ps(x1, x1);
 #else
@@ -87,10 +87,10 @@ static inline
 __m128
 glmm_vdot(__m128 a, __m128 b) {
 #if (defined(__SSE4_1__) || defined(__SSE4_2__)) && defined(CGLM_SSE4_DOT)
-  return _mm_dp_ps(glmm_load(a), glmm_load(b), 0xFF);
+  return _mm_dp_ps(a, b, 0xFF);
 #elif defined(__SSE3__) && defined(CGLM_SSE3_DOT)
   __m128 x0, x1;
-  x0 = _mm_mul_ps(glmm_load(a), glmm_load(b));
+  x0 = _mm_mul_ps(a, b);
   x1 = _mm_hadd_ps(x0, x0);
   return _mm_hadd_ps(x1, x1);
 #else
