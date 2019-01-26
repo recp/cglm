@@ -46,3 +46,4 @@ Follow the :doc:`build` documentation for this
    io
    call
    sphere
+   curve
