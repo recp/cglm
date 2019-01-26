@@ -137,4 +137,7 @@ CGLM_EXPORT
 float
 glmc_ease_bounce_inout(float t);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_ease_h */
