@@ -45,6 +45,7 @@ Functions:
 #. :c:func:`glm_mat4_inv_fast`
 #. :c:func:`glm_mat4_swap_col`
 #. :c:func:`glm_mat4_swap_row`
+#. :c:func:`glm_mat4_rmc`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,3 +271,20 @@ Functions documentation
       | *[in, out]*  **mat**   matrix
       | *[in]*       **row1**  row1
       | *[in]*       **row2**  row2
+
+.. c:function:: float  glm_mat4_rmc(vec4 r, mat4 m, vec4 c)
+
+    | **rmc** stands for **Row** * **Matrix** * **Column**
+
+    | helper for  R (row vector) * M (matrix) * C (column vector)
+
+    | the result is scalar because S * M = Matrix1x4 (row vector),
+    | then Matrix1x4 * Vec4 (column vector) = Matrix1x1 (Scalar)
+
+    Parameters:
+      | *[in]*  **r**  row vector or matrix1x4
+      | *[in]*  **m**  matrix4x4
+      | *[in]*  **c**  column vector or matrix4x1
+
+    Returns:
+        scalar value e.g. Matrix1x1

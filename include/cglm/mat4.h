@@ -677,4 +677,26 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
   mat[3][row2] = tmp[3];
 }
 
+/*!
+ * @brief helper for  R (row vector) * M (matrix) * C (column vector)
+ *
+ * rmc stands for Row * Matrix * Column
+ *
+ * the result is scalar because S * M = Matrix1x4 (row vector),
+ * then Matrix1x4 * Vec4 (column vector) = Matrix1x1 (Scalar)
+ *
+ * @param[in]  r   row vector or matrix1x4
+ * @param[in]  m   matrix4x4
+ * @param[in]  c   column vector or matrix4x1
+ *
+ * @return scalar value e.g. B(s)
+ */
+CGLM_INLINE
+float
+glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
+  vec4 tmp;
+  glm_mat4_mulv(m, r, tmp);
+  return glm_vec4_dot(c, tmp);
+}
+
 #endif /* cglm_mat_h */
