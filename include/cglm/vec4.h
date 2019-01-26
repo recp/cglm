@@ -800,4 +800,23 @@ glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
   glm_vec4_add(from, v, dest);
 }
 
+/*!
+ * @brief helper to fill vec4 as [S^3, S^2, S, 1]
+ *
+ * @param[in]   s    parameter
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_cubic(float s, vec4 dest) {
+  float ss;
+
+  ss = s * s;
+
+  dest[0] = s;
+  dest[1] = ss;
+  dest[2] = ss * s;
+  dest[3] = 1.0f;
+}
+
 #endif /* cglm_vec4_h */

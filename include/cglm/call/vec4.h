@@ -153,6 +153,10 @@ CGLM_EXPORT
 void
 glmc_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest);
 
+CGLM_EXPORT
+void
+glmc_vec4_cubic(float s, vec4 dest);
+
 /* ext */
 
 CGLM_EXPORT
