@@ -813,9 +813,9 @@ glm_vec4_cubic(float s, vec4 dest) {
 
   ss = s * s;
 
-  dest[0] = s;
+  dest[0] = ss * s;
   dest[1] = ss;
-  dest[2] = ss * s;
+  dest[2] = s;
   dest[3] = 1.0f;
 }
 
