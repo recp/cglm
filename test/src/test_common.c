@@ -58,7 +58,7 @@ test_rand_vec4(vec4 dest) {
 }
 
 float
-test_rand_angle(void) {
+test_rand(void) {
   srand((unsigned int)time(NULL));
   return drand48();
 }
