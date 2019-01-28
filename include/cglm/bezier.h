@@ -53,4 +53,77 @@ glm_bezier(float s, float p0, float c0, float c1, float p1) {
   return a + s * (c1 * xs3 + p1 * ss - a);
 }
 
+/*!
+ * @brief iterative way to solve cubic equation
+ *
+ * @param[in]  s    parameter between 0 and 1
+ * @param[in]  p0   begin point
+ * @param[in]  c0   control point 1
+ * @param[in]  c1   control point 2
+ * @param[in]  p1   end point
+ *
+ * @return parameter to use in cubic equation
+ */
+CGLM_INLINE
+float
+glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
+  float u, v, a, b, c, d, e, f;
+  int   i;
+
+  if (prm - p0 < CGLM_DECASTEL_SMALL)
+    return 0.0f;
+
+  if (p1 - prm < CGLM_DECASTEL_SMALL)
+    return 1.0f;
+
+  u  = 0.0f;
+  v  = 1.0f;
+
+  for (i = 0; i < CGLM_DECASTEL_MAX; i++) {
+    /* de Casteljau Subdivision */
+    a  = (p0 + c0) * 0.5f;
+    b  = (c0 + c1) * 0.5f;
+    c  = (c1 + p1) * 0.5f;
+    d  = (a  + b)  * 0.5f;
+    e  = (b  + c)  * 0.5f;
+    f  = (d  + e)  * 0.5f; /* this one is on the curve! */
+
+    /* The curve point is close enough to our wanted t */
+    if (fabsf(f - prm) < CGLM_DECASTEL_EPS)
+      return glm_clamp_zo((u  + v) * 0.5f);
+
+    /* dichotomy */
+    if (f < prm) {
+      p0 = f;
+      c0 = e;
+      c1 = c;
+      u  = (u  + v) * 0.5f;
+    } else {
+      c0 = a;
+      c1 = d;
+      p1 = f;
+      v  = (u  + v) * 0.5f;
+    }
+  }
+
+  return glm_clamp_zo((u  + v) * 0.5f);
+}
+
+/*!
+ * @brief solve cubic bezier equation
+ *
+ * @param[in]  s    parameter between 0 and 1
+ * @param[in]  p0   begin point
+ * @param[in]  c0   control point 1
+ * @param[in]  c1   control point 2
+ * @param[in]  p1   end point
+ *
+ * @return parameter to use in cubic equation
+ */
+CGLM_INLINE
+float
+glm_bezier_solve(float prm, float p0, float c0, float c1, float p1) {
+  return glm_decasteljau(prm, p0, c0, c1, p1);
+}
+
 #endif /* cglm_bezier_h */

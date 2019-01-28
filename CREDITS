@@ -55,3 +55,9 @@ https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
 
 10. Horizontal add
 https://stackoverflow.com/questions/6996764/fastest-way-to-do-horizontal-float-vector-sum-on-x86
+
+11. de casteljau implementation and comments
+https://forums.khronos.org/showthread.php/10264-Animations-in-1-4-1-release-notes-revision-A/page2?highlight=bezier
+https://forums.khronos.org/showthread.php/10644-Animation-Bezier-interpolation
+https://forums.khronos.org/showthread.php/10387-2D-Tangents-in-Bezier-Splines?p=34164&viewfull=1#post34164
+https://forums.khronos.org/showthread.php/10651-Animation-TCB-Spline-Interpolation-in-COLLADA?highlight=bezier

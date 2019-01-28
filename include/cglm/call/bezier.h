@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglmc_curve_h
-#define cglmc_curve_h
+#ifndef cglmc_bezier_h
+#define cglmc_bezier_h
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -17,7 +17,15 @@ CGLM_EXPORT
 float
 glmc_bezier(float s, float p0, float c0, float c1, float p1);
 
+CGLM_EXPORT
+float
+glmc_decasteljau(float prm, float p0, float c0, float c1, float p1);
+
+CGLM_EXPORT
+float
+glmc_bezier_solve(float prm, float p0, float c0, float c1, float p1);
+
 #ifdef __cplusplus
 }
 #endif
-#endif /* cglmc_curve_h */
+#endif /* cglmc_bezier_h */
