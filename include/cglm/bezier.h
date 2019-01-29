@@ -8,13 +8,17 @@
 #ifndef cglm_bezier_h
 #define cglm_bezier_h
 
-#define GLM_BEZIER_MAT_INIT  {{-1.0f,  3.0f, -3.0f, 1.0f},                    \
-                              { 3.0f, -6.0f,  3.0f, 0.0f},                    \
-                              {-3.0f,  3.0f,  0.0f, 0.0f},                    \
-                              { 1.0f,  0.0f,  0.0f, 0.0f}}
-
+#define GLM_BEZIER_MAT_INIT  {{-1.0f,  3.0f, -3.0f,  1.0f},                   \
+                              { 3.0f, -6.0f,  3.0f,  0.0f},                   \
+                              {-3.0f,  3.0f,  0.0f,  0.0f},                   \
+                              { 1.0f,  0.0f,  0.0f,  0.0f}}
+#define GLM_HERMITE_MAT_INIT {{ 2.0f, -3.0f,  0.0f,  1.0f},                   \
+                              {-2.0f,  3.0f,  0.0f,  0.0f},                   \
+                              { 1.0f, -2.0f,  1.0f,  0.0f},                   \
+                              { 1.0f, -1.0f,  0.0f,  0.0f}}
 /* for C only */
-#define GLM_BEZIER_MAT ((mat4)GLM_BEZIER_MAT_INIT)
+#define GLM_BEZIER_MAT  ((mat4)GLM_BEZIER_MAT_INIT)
+#define GLM_HERMITE_MAT ((mat4)GLM_HERMITE_MAT_INIT)
 
 #define CGLM_DECASTEL_EPS   1e-9
 #define CGLM_DECASTEL_MAX   1000
@@ -54,9 +58,45 @@ glm_bezier(float s, float p0, float c0, float c1, float p1) {
 }
 
 /*!
- * @brief iterative way to solve cubic equation
+ * @brief cubic hermite interpolation
+ *
+ * Formula:
+ *  H(s) = P0*(2*s^3 - 3*s^2 + 1) + T0*(s^3 - 2*s^2 + s)
+ *            + P1*(-2*s^3 + 3*s^2) + T1*(s^3 - s^2)
+ *
+ * similar result using matrix:
+ *  H(s) = glm_smc(t, GLM_HERMITE_MAT, (vec4){p0, p1, c0, c1})
+ *
+ * glm_eq(glm_smc(...), glm_hermite(...)) should return TRUE
  *
  * @param[in]  s    parameter between 0 and 1
+ * @param[in]  p0   begin point
+ * @param[in]  t0   tangent 1
+ * @param[in]  t1   tangent 2
+ * @param[in]  p1   end point
+ *
+ * @return B(s)
+ */
+CGLM_INLINE
+float
+glm_hermite(float s, float p0, float t0, float t1, float p1) {
+  float ss, d, a, b, c, e, f;
+
+  ss = s  * s;
+  a  = ss + ss;
+  c  = a  + ss;
+  b  = a  * s;
+  d  = s  * ss;
+  f  = d  - ss;
+  e  = b  - c;
+
+  return p0 * (e + 1.0f) + t0 * (f - ss + s) + t1 * f - p1 * e;
+}
+
+/*!
+ * @brief iterative way to solve cubic equation
+ *
+ * @param[in]  prm  parameter between 0 and 1
  * @param[in]  p0   begin point
  * @param[in]  c0   control point 1
  * @param[in]  c1   control point 2
@@ -112,7 +152,7 @@ glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
 /*!
  * @brief solve cubic bezier equation
  *
- * @param[in]  s    parameter between 0 and 1
+ * @param[in]  prm  parameter between 0 and 1
  * @param[in]  p0   begin point
  * @param[in]  c0   control point 1
  * @param[in]  c1   control point 2

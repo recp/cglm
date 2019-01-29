@@ -19,6 +19,10 @@ glmc_bezier(float s, float p0, float c0, float c1, float p1);
 
 CGLM_EXPORT
 float
+glmc_hermite(float s, float p0, float t0, float t1, float p1);
+
+CGLM_EXPORT
+float
 glmc_decasteljau(float prm, float p0, float c0, float c1, float p1);
 
 CGLM_EXPORT
