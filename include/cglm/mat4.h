@@ -695,8 +695,8 @@ CGLM_INLINE
 float
 glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
   vec4 tmp;
-  glm_mat4_mulv(m, r, tmp);
-  return glm_vec4_dot(c, tmp);
+  glm_mat4_mulv(m, c, tmp);
+  return glm_vec4_dot(r, tmp);
 }
 
 #endif /* cglm_mat_h */
