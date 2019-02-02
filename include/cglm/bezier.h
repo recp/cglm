@@ -149,21 +149,4 @@ glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
   return glm_clamp_zo((u  + v) * 0.5f);
 }
 
-/*!
- * @brief solve cubic bezier equation
- *
- * @param[in]  prm  parameter between 0 and 1
- * @param[in]  p0   begin point
- * @param[in]  c0   control point 1
- * @param[in]  c1   control point 2
- * @param[in]  p1   end point
- *
- * @return parameter to use in cubic equation
- */
-CGLM_INLINE
-float
-glm_bezier_solve(float prm, float p0, float c0, float c1, float p1) {
-  return glm_decasteljau(prm, p0, c0, c1, p1);
-}
-
 #endif /* cglm_bezier_h */

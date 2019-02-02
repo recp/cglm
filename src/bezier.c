@@ -25,9 +25,3 @@ float
 glmc_decasteljau(float prm, float p0, float c0, float c1, float p1) {
   return glm_decasteljau(prm, p0, c0, c1, p1);
 }
-
-CGLM_EXPORT
-float
-glmc_bezier_solve(float prm, float p0, float c0, float c1, float p1) {
-  return glm_bezier_solve(prm, p0, c0, c1, p1);
-}
