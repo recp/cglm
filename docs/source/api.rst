@@ -47,3 +47,4 @@ Follow the :doc:`build` documentation for this
    call
    sphere
    curve
+   bezier

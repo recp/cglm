@@ -75,7 +75,7 @@ glm_bezier(float s, float p0, float c0, float c1, float p1) {
  * @param[in]  t1   tangent 2
  * @param[in]  p1   end point
  *
- * @return B(s)
+ * @return H(s)
  */
 CGLM_INLINE
 float
