@@ -33,4 +33,7 @@ CGLM_EXPORT
 bool
 glmc_sphere_point(vec4 s, vec3 point);
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglmc_sphere_h */

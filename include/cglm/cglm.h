@@ -26,5 +26,7 @@
 #include "project.h"
 #include "sphere.h"
 #include "ease.h"
+#include "curve.h"
+#include "bezier.h"
 
 #endif /* cglm_h */

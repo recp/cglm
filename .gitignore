@@ -69,3 +69,4 @@ win/cglm_test_*
 win/x64
 win/x85
 win/Debug
+cglm-test-ios*

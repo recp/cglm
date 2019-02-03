@@ -58,11 +58,7 @@ Functions:
 #. :c:func:`glm_vec4_minv`
 #. :c:func:`glm_vec4_clamp`
 #. :c:func:`glm_vec4_lerp`
-#. :c:func:`glm_vec4_isnan`
-#. :c:func:`glm_vec4_isinf`
-#. :c:func:`glm_vec4_isvalid`
-#. :c:func:`glm_vec4_sign`
-#. :c:func:`glm_vec4_sqrt`
+#. :c:func:`glm_vec4_cubic`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -400,4 +396,12 @@ Functions documentation
       | *[in]*  **from**   from value
       | *[in]*  **to**     to value
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**   destination
+
+.. c:function:: void  glm_vec4_cubic(float s, vec4 dest)
+
+    helper to fill vec4 as [S^3, S^2, S, 1]
+
+    Parameters:
+      | *[in]*  **s**      parameter
       | *[out]* **dest**   destination

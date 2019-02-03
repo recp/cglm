@@ -59,7 +59,7 @@ void
 test_rand_vec4(vec4 dest) ;
 
 float
-test_rand_angle(void);
+test_rand(void);
 
 void
 test_rand_quat(versor q);

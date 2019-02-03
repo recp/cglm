@@ -20,8 +20,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affine.c" />
+    <ClCompile Include="..\src\bezier.c" />
     <ClCompile Include="..\src\box.c" />
     <ClCompile Include="..\src\cam.c" />
+    <ClCompile Include="..\src\curve.c" />
     <ClCompile Include="..\src\dllmain.c" />
     <ClCompile Include="..\src\ease.c" />
     <ClCompile Include="..\src\euler.c" />
@@ -39,11 +41,14 @@
   <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
+    <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
     <ClInclude Include="..\include\cglm\call.h" />
     <ClInclude Include="..\include\cglm\call\affine.h" />
+    <ClInclude Include="..\include\cglm\call\bezier.h" />
     <ClInclude Include="..\include\cglm\call\box.h" />
     <ClInclude Include="..\include\cglm\call\cam.h" />
+    <ClInclude Include="..\include\cglm\call\curve.h" />
     <ClInclude Include="..\include\cglm\call\ease.h" />
     <ClInclude Include="..\include\cglm\call\euler.h" />
     <ClInclude Include="..\include\cglm\call\frustum.h" />
@@ -60,6 +65,7 @@
     <ClInclude Include="..\include\cglm\cglm.h" />
     <ClInclude Include="..\include\cglm\color.h" />
     <ClInclude Include="..\include\cglm\common.h" />
+    <ClInclude Include="..\include\cglm\curve.h" />
     <ClInclude Include="..\include\cglm\ease.h" />
     <ClInclude Include="..\include\cglm\euler.h" />
     <ClInclude Include="..\include\cglm\frustum.h" />
@@ -69,6 +75,7 @@
     <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\project.h" />
     <ClInclude Include="..\include\cglm\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\arm.h" />
     <ClInclude Include="..\include\cglm\simd\avx\affine.h" />
     <ClInclude Include="..\include\cglm\simd\avx\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\intrin.h" />
@@ -77,6 +84,7 @@
     <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\x86.h" />
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />

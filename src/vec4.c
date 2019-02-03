@@ -206,6 +206,12 @@ glmc_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
   glm_vec4_lerp(from, to, t, dest);
 }
 
+CGLM_EXPORT
+void
+glmc_vec4_cubic(float s, vec4 dest) {
+  glm_vec4_cubic(s, dest);
+}
+
 /* ext */
 
 CGLM_EXPORT

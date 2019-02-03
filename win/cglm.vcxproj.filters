@@ -84,6 +84,12 @@
     <ClCompile Include="..\src\ease.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\curve.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\bezier.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -232,6 +238,24 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\ease.h">
       <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\arm.h">
+      <Filter>include\cglm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\x86.h">
+      <Filter>include\cglm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\curve.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\curve.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\bezier.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\bezier.h">
+      <Filter>include\cglm\call</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

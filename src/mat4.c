@@ -151,3 +151,9 @@ void
 glmc_mat4_swap_row(mat4 mat, int row1, int row2) {
   glm_mat4_swap_row(mat, row1, row2);
 }
+
+CGLM_EXPORT
+float
+glmc_mat4_rmc(vec4 r, mat4 m, vec4 c) {
+  return glm_mat4_rmc(r, m, c);
+}

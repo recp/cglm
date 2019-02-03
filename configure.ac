@@ -29,6 +29,7 @@ LT_INIT
 # Checks for libraries.
 AC_CHECK_LIB([m], [floor])
 
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_SYS_LARGEFILE
 
 # Checks for header files.

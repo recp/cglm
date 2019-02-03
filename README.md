@@ -82,7 +82,11 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - inline or pre-compiled function call
 - frustum (extract view frustum planes, corners...)
 - bounding box  (AABB in Frustum (culling), crop, merge...)
+- bounding sphere
 - project, unproject
+- easing functions
+- curves
+- curve interpolation helpers (S*M*C, deCasteljau...)
 - and other...
 
 <hr />
