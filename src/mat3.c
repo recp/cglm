@@ -91,3 +91,9 @@ void
 glmc_mat3_swap_row(mat3 mat, int row1, int row2) {
   glm_mat3_swap_row(mat, row1, row2);
 }
+
+CGLM_EXPORT
+float
+glmc_mat3_rmc(vec3 r, mat3 m, vec3 c) {
+  return glm_mat3_rmc(r, m, c);
+}

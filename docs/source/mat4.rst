@@ -278,7 +278,7 @@ Functions documentation
 
     | helper for  R (row vector) * M (matrix) * C (column vector)
 
-    | the result is scalar because S * M = Matrix1x4 (row vector),
+    | the result is scalar because R * M = Matrix1x4 (row vector),
     | then Matrix1x4 * Vec4 (column vector) = Matrix1x1 (Scalar)
 
     Parameters:

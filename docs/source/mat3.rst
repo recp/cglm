@@ -32,6 +32,7 @@ Functions:
 #. :c:func:`glm_mat3_trace`
 #. :c:func:`glm_mat3_swap_col`
 #. :c:func:`glm_mat3_swap_row`
+#. :c:func:`glm_mat3_rmc`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -161,3 +162,20 @@ Functions documentation
       | *[in, out]*  **mat**   matrix
       | *[in]*       **row1**  row1
       | *[in]*       **row2**  row2
+
+.. c:function:: float  glm_mat3_rmc(vec3 r, mat3 m, vec3 c)
+
+    | **rmc** stands for **Row** * **Matrix** * **Column**
+
+    | helper for  R (row vector) * M (matrix) * C (column vector)
+
+    | the result is scalar because R * M = Matrix1x3 (row vector),
+    | then Matrix1x3 * Vec3 (column vector) = Matrix1x1 (Scalar)
+
+    Parameters:
+      | *[in]*  **r**  row vector or matrix1x3
+      | *[in]*  **m**  matrix3x3
+      | *[in]*  **c**  column vector or matrix3x1
+
+    Returns:
+        scalar value e.g. Matrix1x1

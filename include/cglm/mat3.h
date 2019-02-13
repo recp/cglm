@@ -22,11 +22,13 @@
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
    CGLM_INLINE void  glm_mat3_mulv(mat3 m, vec3 v, vec3 dest);
    CGLM_INLINE float glm_mat3_trace(mat3 m);
+   CGLM_INLINE void  glm_mat3_quat(mat3 m, versor dest);
    CGLM_INLINE void  glm_mat3_scale(mat3 m, float s);
    CGLM_INLINE float glm_mat3_det(mat3 mat);
    CGLM_INLINE void  glm_mat3_inv(mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_swap_col(mat3 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
+   CGLM_INLINE float glm_mat3_rmc(vec3 r, mat3 m, vec3 c);
  */
 
 #ifndef cglm_mat3_h
@@ -370,6 +372,28 @@ glm_mat3_swap_row(mat3 mat, int row1, int row2) {
   mat[0][row2] = tmp[0];
   mat[1][row2] = tmp[1];
   mat[2][row2] = tmp[2];
+}
+
+/*!
+ * @brief helper for  R (row vector) * M (matrix) * C (column vector)
+ *
+ * rmc stands for Row * Matrix * Column
+ *
+ * the result is scalar because R * M = Matrix1x3 (row vector),
+ * then Matrix1x3 * Vec3 (column vector) = Matrix1x1 (Scalar)
+ *
+ * @param[in]  r   row vector or matrix1x3
+ * @param[in]  m   matrix3x3
+ * @param[in]  c   column vector or matrix3x1
+ *
+ * @return scalar value e.g. Matrix1x1
+ */
+CGLM_INLINE
+float
+glm_mat3_rmc(vec3 r, mat3 m, vec3 c) {
+  vec3 tmp;
+  glm_mat3_mulv(m, c, tmp);
+  return glm_vec3_dot(r, tmp);
 }
 
 #endif /* cglm_mat3_h */

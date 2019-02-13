@@ -72,6 +72,10 @@ CGLM_EXPORT
 void
 glmc_mat3_swap_row(mat3 mat, int row1, int row2);
 
+CGLM_EXPORT
+float
+glmc_mat3_rmc(vec3 r, mat3 m, vec3 c);
+
 #ifdef __cplusplus
 }
 #endif
