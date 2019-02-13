@@ -22,6 +22,7 @@
    CGLM_INLINE void  glm_mat4_copy(mat4 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_identity(mat4 mat);
    CGLM_INLINE void  glm_mat4_identity_array(mat4 * restrict mat, size_t count);
+   CGLM_INLINE void  glm_mat4_zero(mat4 mat);
    CGLM_INLINE void  glm_mat4_pick3(mat4 mat, mat3 dest);
    CGLM_INLINE void  glm_mat4_pick3t(mat4 mat, mat3 dest);
    CGLM_INLINE void  glm_mat4_ins3(mat3 mat, mat4 dest);
@@ -31,6 +32,7 @@
    CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
    CGLM_INLINE float glm_mat4_trace(mat4 m);
    CGLM_INLINE float glm_mat4_trace3(mat4 m);
+   CGLM_INLINE void  glm_mat4_quat(mat4 m, versor dest) ;
    CGLM_INLINE void  glm_mat4_transpose_to(mat4 m, mat4 dest);
    CGLM_INLINE void  glm_mat4_transpose(mat4 m);
    CGLM_INLINE void  glm_mat4_scale_p(mat4 m, float s);
@@ -40,6 +42,7 @@
    CGLM_INLINE void  glm_mat4_inv_fast(mat4 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
+   CGLM_INLINE float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
  */
 
 #ifndef cglm_mat_h
@@ -98,7 +101,15 @@
 CGLM_INLINE
 void
 glm_mat4_ucopy(mat4 mat, mat4 dest) {
-  glm__memcpy(float, dest, mat, sizeof(mat4));
+  dest[0][0] = mat[0][0];  dest[1][0] = mat[1][0];
+  dest[0][1] = mat[0][1];  dest[1][1] = mat[1][1];
+  dest[0][2] = mat[0][2];  dest[1][2] = mat[1][2];
+  dest[0][3] = mat[0][3];  dest[1][3] = mat[1][3];
+
+  dest[2][0] = mat[2][0];  dest[3][0] = mat[3][0];
+  dest[2][1] = mat[2][1];  dest[3][1] = mat[3][1];
+  dest[2][2] = mat[2][2];  dest[3][2] = mat[3][2];
+  dest[2][3] = mat[2][3];  dest[3][3] = mat[3][3];
 }
 
 /*!
@@ -166,6 +177,18 @@ glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
   for (i = 0; i < count; i++) {
     glm_mat4_copy(t, mat[i]);
   }
+}
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_mat4_zero(mat4 mat) {
+  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_ZERO_INIT;
+  glm_mat4_copy(t, mat);
 }
 
 /*!
@@ -474,10 +497,8 @@ glm_mat4_transpose(mat4 m) {
   glm_mat4_transp_sse2(m, m);
 #else
   mat4 d;
-
   glm_mat4_transpose_to(m, d);
-
-  glm__memcpy(float, m, d, sizeof(mat4));
+  glm_mat4_ucopy(d, m);
 #endif
 }
 
@@ -682,7 +703,7 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
  *
  * rmc stands for Row * Matrix * Column
  *
- * the result is scalar because S * M = Matrix1x4 (row vector),
+ * the result is scalar because R * M = Matrix1x4 (row vector),
  * then Matrix1x4 * Vec4 (column vector) = Matrix1x1 (Scalar)
  *
  * @param[in]  r   row vector or matrix1x4

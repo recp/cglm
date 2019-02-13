@@ -17,6 +17,7 @@
    CGLM_INLINE void  glm_mat3_copy(mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_identity(mat3 mat);
    CGLM_INLINE void  glm_mat3_identity_array(mat3 * restrict mat, size_t count);
+   CGLM_INLINE void  glm_mat3_zero(mat3 mat);
    CGLM_INLINE void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
@@ -65,7 +66,17 @@
 CGLM_INLINE
 void
 glm_mat3_copy(mat3 mat, mat3 dest) {
-  glm__memcpy(float, dest, mat, sizeof(mat3));
+  dest[0][0] = mat[0][0];
+  dest[0][1] = mat[0][1];
+  dest[0][2] = mat[0][2];
+
+  dest[1][0] = mat[1][0];
+  dest[1][1] = mat[1][1];
+  dest[1][2] = mat[1][2];
+
+  dest[2][0] = mat[2][0];
+  dest[2][1] = mat[2][1];
+  dest[2][2] = mat[2][2];
 }
 
 /*!
@@ -106,6 +117,18 @@ glm_mat3_identity_array(mat3 * __restrict mat, size_t count) {
   for (i = 0; i < count; i++) {
     glm_mat3_copy(t, mat[i]);
   }
+}
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_mat3_zero(mat3 mat) {
+  CGLM_ALIGN_MAT mat3 t = GLM_MAT3_ZERO_INIT;
+  glm_mat3_copy(t, mat);
 }
 
 /*!

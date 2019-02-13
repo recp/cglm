@@ -84,7 +84,7 @@ glm_frustum(float left,
             mat4  dest) {
   float rl, tb, fn, nv;
 
-  glm__memzero(float, dest, sizeof(mat4));
+  glm_mat4_zero(dest);
 
   rl = 1.0f / (right  - left);
   tb = 1.0f / (top    - bottom);
@@ -122,7 +122,7 @@ glm_ortho(float left,
           mat4  dest) {
   float rl, tb, fn;
 
-  glm__memzero(float, dest, sizeof(mat4));
+  glm_mat4_zero(dest);
 
   rl = 1.0f / (right  - left);
   tb = 1.0f / (top    - bottom);
@@ -259,7 +259,7 @@ glm_perspective(float fovy,
                 mat4  dest) {
   float f, fn;
 
-  glm__memzero(float, dest, sizeof(mat4));
+  glm_mat4_zero(dest);
 
   f  = 1.0f / tanf(fovy * 0.5f);
   fn = 1.0f / (nearVal - farVal);

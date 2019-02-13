@@ -26,6 +26,7 @@ Functions:
 #. :c:func:`glm_mat4_copy`
 #. :c:func:`glm_mat4_identity`
 #. :c:func:`glm_mat4_identity_array`
+#. :c:func:`glm_mat4_zero`
 #. :c:func:`glm_mat4_pick3`
 #. :c:func:`glm_mat4_pick3t`
 #. :c:func:`glm_mat4_ins3`
@@ -80,6 +81,13 @@ Functions documentation
     Parameters:
       | *[in,out]* **mat**  matrix array (must be aligned (16/32) if alignment is not disabled)
       | *[in]* **count**  count of matrices
+
+.. c:function:: void  glm_mat4_zero(mat4 mat)
+
+    make given matrix zero
+
+    Parameters:
+      | *[in,out]* **mat**  matrix to
 
 .. c:function:: void  glm_mat4_pick3(mat4 mat, mat3 dest)
 
