@@ -7,7 +7,7 @@
 #*****************************************************************************
 
 AC_PREREQ([2.69])
-AC_INIT([cglm], [0.5.2], [info@recp.me])
+AC_INIT([cglm], [0.5.3], [info@recp.me])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AC_CONFIG_MACRO_DIR([m4])
