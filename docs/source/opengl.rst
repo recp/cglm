@@ -43,9 +43,9 @@ array of matrices:
    /* ... */
    glUniformMatrix4fv(location, count, GL_FALSE, (float *)matrix);
 
-in this way, passing aray of matrices is same 
+in this way, passing aray of matrices is same
 
-Passing / Uniforming Vectors to OpenGL:¶
+Passing / Uniforming Vectors to OpenGL:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You don't need to do extra thing when passing cglm vectors to OpengL or other APIs.

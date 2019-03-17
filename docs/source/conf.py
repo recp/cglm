@@ -90,7 +90,7 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -99,13 +99,13 @@ html_theme = 'alabaster'
 # html_theme_options = {}
 
 html_theme_options = {
-    'github_banner': 'true',
-    'github_button': 'true',
-    'github_user': 'recp',
-    'github_repo': 'cglm',
-    'travis_button': 'true',
-    'show_related': 'true',
-    'fixed_sidebar': 'true'
+    # 'github_banner': 'true',
+    # 'github_button': 'true',
+    # 'github_user': 'recp',
+    # 'github_repo': 'cglm',
+    # 'travis_button': 'true',
+    # 'show_related': 'true',
+    # 'fixed_sidebar': 'true'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
