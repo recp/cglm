@@ -9,23 +9,26 @@ Types:
 .. code-block:: c
   :linenos:
 
-   typedef float vec3[3];
-   typedef int  ivec3[3];
-   typedef CGLM_ALIGN(16) float vec4[4];
+  typedef float                   vec2[2];
+  typedef float                   vec3[3];
+  typedef int                    ivec3[3];
+  typedef CGLM_ALIGN_IF(16) float vec4[4];
+  typedef vec4                    versor;
+  typedef vec3                    mat3[3];
 
-   typedef vec3 mat3[3];
-   typedef vec4 mat4[4];
-
-   typedef vec4 versor;
+  #ifdef __AVX__
+  typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
+  #else
+  typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
+  #endif
 
 As you can see types don't store extra informations in favor of space.
 You can send these values e.g. matrix to OpenGL directly without casting or calling a function like *value_ptr*
 
-Alignment is Required:
+Alignment Is Required:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**vec4** and **mat4** requires 16 byte alignment because vec4 and mat4 operations are
-vectorized by SIMD instructions (SSE/AVX).
+**vec4** and **mat4** requires 16 (32 for **mat4** if AVX is enabled) byte alignment because **vec4** and **mat4** operations are vectorized by SIMD instructions (SSE/AVX/NEON).
 
 **UPDATE:**
   By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default
@@ -37,10 +40,9 @@ vectorized by SIMD instructions (SSE/AVX).
 Allocations:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.
-You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location.
-When allocating memory don't forget that **vec4** and **mat4** requires alignment.
+You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location. When allocating memory, don't forget that **vec4** and **mat4** require alignment.
 
-**NOTE:** Unaligned vec4 and unaligned mat4 operations will be supported in the future. Check todo list.
+**NOTE:** Unaligned **vec4** and unaligned **mat4** operations will be supported in the future. Check todo list.
 Because you may want to multiply a CGLM matrix with external matrix.
 There is no guarantee that non-CGLM matrix is aligned. Unaligned types will have *u* prefix e.g. **umat4**
 
