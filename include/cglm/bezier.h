@@ -8,6 +8,8 @@
 #ifndef cglm_bezier_h
 #define cglm_bezier_h
 
+#include "common.h"
+
 #define GLM_BEZIER_MAT_INIT  {{-1.0f,  3.0f, -3.0f,  1.0f},                   \
                               { 3.0f, -6.0f,  3.0f,  0.0f},                   \
                               {-3.0f,  3.0f,  0.0f,  0.0f},                   \

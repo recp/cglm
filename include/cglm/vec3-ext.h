@@ -31,9 +31,6 @@
 
 #include "common.h"
 #include "util.h"
-#include <stdbool.h>
-#include <math.h>
-#include <float.h>
 
 /*!
  * @brief fill a vector with specified value
