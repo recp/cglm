@@ -428,8 +428,8 @@ glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest) {
  *
  * it applies += operator so dest must be initialized
  *
- * @param[in]  a    vector
- * @param[in]  b    scalar
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
  * @param[out] dest dest += min(a, b)
  */
 CGLM_INLINE
