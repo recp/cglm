@@ -113,6 +113,12 @@ test_assert_eqf(float a, float b) {
 }
 
 void
+test_assert_vec2_eq(vec2 v1, vec2 v2) {
+  assert_true(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
+  assert_true(fabsf(v1[1] - v2[1]) <= 0.000009);
+}
+
+void
 test_assert_vec3_eq(vec3 v1, vec3 v2) {
   assert_true(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
   assert_true(fabsf(v1[1] - v2[1]) <= 0.000009);

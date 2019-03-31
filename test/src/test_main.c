@@ -41,7 +41,10 @@ main(int argc, const char * argv[]) {
     cmocka_unit_test(test_affine),
 
     /* bezier */
-    cmocka_unit_test(test_bezier)
+    cmocka_unit_test(test_bezier),
+
+    /* vec2 */
+    cmocka_unit_test(test_vec2)
   };
 
   return cmocka_run_group_tests(tests, NULL, NULL);

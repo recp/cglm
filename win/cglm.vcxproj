@@ -88,6 +88,7 @@
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />
+    <ClInclude Include="..\include\cglm\vec2.h" />
     <ClInclude Include="..\include\cglm\vec3-ext.h" />
     <ClInclude Include="..\include\cglm\vec3.h" />
     <ClInclude Include="..\include\cglm\vec4-ext.h" />

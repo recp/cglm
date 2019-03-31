@@ -41,6 +41,9 @@ void
 test_assert_mat3_eq(mat3 m1, mat3 m2);
 
 void
+test_assert_vec2_eq(vec2 v1, vec2 v2);
+
+void
 test_assert_vec3_eq(vec3 v1, vec3 v2);
 
 void

@@ -43,4 +43,8 @@ test_affine(void **state);
 void
 test_bezier(void **state);
 
+/* vec2 */
+void
+test_vec2(void **state);
+
 #endif /* test_tests_h */
