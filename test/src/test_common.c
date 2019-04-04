@@ -57,6 +57,14 @@ test_rand_vec4(vec4 dest) {
   dest[3] = drand48();
 }
 
+vec4s
+test_rand_vec4s()
+{
+  vec4s r;
+  test_rand_vec4(r.raw);
+  return r;
+}
+
 float
 test_rand(void) {
   srand((unsigned int)time(NULL));
@@ -125,6 +133,12 @@ test_assert_vec4_eq(vec4 v1, vec4 v2) {
   assert_true(fabsf(v1[1] - v2[1]) <= 0.000009);
   assert_true(fabsf(v1[2] - v2[2]) <= 0.000009);
   assert_true(fabsf(v1[3] - v2[3]) <= 0.000009);
+}
+
+void
+test_assert_vec4s_eq(vec4s v1, vec4s v2)
+{
+  test_assert_vec4_eq(v1.raw, v2.raw);
 }
 
 void

@@ -8,9 +8,11 @@
 #ifndef cglm_vec4s_h
 #define cglm_vec4s_h
 
-#include "common.h"
-#include "vec4-ext.h"
-#include "util.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "../cglm.h"
 
 #define GLMS_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
 #define GLMS_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
@@ -92,7 +94,7 @@ vec4s
 glms_vec4_adds(vec4s v, float s)
 {
   vec4s r;
-  glm_vec4_adds(v.raw s, r.raw);
+  glm_vec4_adds(v.raw, s, r.raw);
   return r;
 }
 
@@ -226,7 +228,7 @@ vec4s
 glms_vec4_inv(vec4s v)
 {
   glm_vec4_inv(v.raw);
-  return r;
+  return v;
 }
 
 CGLM_INLINE
@@ -279,4 +281,7 @@ glms_vec4_lerp(vec4s from, vec4s to, float t)
   return r;
 }
 
+#ifdef __cplusplus
+}
+#endif
 #endif /* cglm_vec4s_h */

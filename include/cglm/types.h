@@ -47,17 +47,7 @@ typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
 #endif
 
 // struct types
-typedef union CGLM_ALIGN_IF(8) vec2s {
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
-  struct {
-    float x;
-    float y;
-  };
-#endif
-  vec2 raw;
-} vec2s;
-
-typedef union CGLM_ALIGN_IF(8) vec3s {
+typedef union CGLM_ALIGN_IF(16) vec3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -67,17 +57,6 @@ typedef union CGLM_ALIGN_IF(8) vec3s {
 #endif
   vec3 raw;
 } vec3s;
-
-typedef union CGLM_ALIGN_IF(8) ivec3s {
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
-  struct {
-    int x;
-    int y;
-    int z;
-  };
-#endif
-  ivec3 raw;
-} ivec3s;
 
 typedef union CGLM_ALIGN_IF(16) vec4s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT

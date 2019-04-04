@@ -20,6 +20,7 @@
 #include <stdbool.h>
 
 #include <cglm/cglm.h>
+#include <cglm/cglms.h>
 #include <cglm/call.h>
 
 void
@@ -47,6 +48,9 @@ void
 test_assert_vec4_eq(vec4 v1, vec4 v2);
 
 void
+test_assert_vec4s_eq(vec4s v1, vec4s v2);
+
+void
 test_assert_quat_eq(versor v1, versor v2);
 
 void
@@ -56,7 +60,10 @@ void
 test_rand_vec3(vec3 dest);
 
 void
-test_rand_vec4(vec4 dest) ;
+test_rand_vec4(vec4 dest);
+
+vec4s
+test_rand_vec4s();
 
 float
 test_rand(void);
