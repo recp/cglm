@@ -12,6 +12,8 @@ extern "C" {
 #endif
 
 #include "cglm.h"
+#include "types-struct.h"
+#include "structs/vec3.h"
 #include "structs/vec4.h"
 
 #ifdef __cplusplus

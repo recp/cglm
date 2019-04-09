@@ -45,6 +45,9 @@ void
 test_assert_vec3_eq(vec3 v1, vec3 v2);
 
 void
+test_assert_vec3s_eq(vec3s v1, vec3s v2);
+
+void
 test_assert_vec4_eq(vec4 v1, vec4 v2);
 
 void
@@ -58,6 +61,9 @@ test_assert_quat_eq_abs(versor v1, versor v2);
 
 void
 test_rand_vec3(vec3 dest);
+
+vec3s
+test_rand_vec3s();
 
 void
 test_rand_vec4(vec4 dest);

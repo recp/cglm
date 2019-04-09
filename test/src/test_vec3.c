@@ -12,6 +12,7 @@ test_vec3(void **state) {
   mat3 rot1m3;
   mat4 rot1;
   vec3 v, v1, v2;
+  vec3s vs1, vs2, vs3, vs4;
 
   /* test zero */
   glm_vec3_zero(v);
@@ -75,4 +76,12 @@ test_vec3(void **state) {
 
   test_assert_vec3_eq(v1, v2);
   test_assert_vec3_eq(v1, GLM_ZUP);
+
+  /* structs */
+  vs1 = test_rand_vec3s();
+  vs2 = test_rand_vec3s();
+
+  vs3 = glms_vec3_add(vs1, vs2);
+  vs4 = glms_vec3_maxv(vs1, vs3);
+  test_assert_vec3s_eq(vs3, vs4);
 }

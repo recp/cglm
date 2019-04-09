@@ -32,7 +32,6 @@
 #  define CGLM_ALIGN_MAT CGLM_ALIGN(16)
 #endif
 
-// array types
 typedef float                   vec2[2];
 typedef float                   vec3[3];
 typedef int                    ivec3[3];
@@ -45,30 +44,6 @@ typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
 #else
 typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
 #endif
-
-// struct types
-typedef union CGLM_ALIGN_IF(16) vec3s {
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
-  struct {
-    float x;
-    float y;
-    float z;
-  };
-#endif
-  vec3 raw;
-} vec3s;
-
-typedef union CGLM_ALIGN_IF(16) vec4s {
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
-  struct {
-    float x;
-    float y;
-    float z;
-    float w;
-  };
-#endif
-  vec4 raw;
-} vec4s;
 
 #define GLM_E         2.71828182845904523536028747135266250   /* e           */
 #define GLM_LOG2E     1.44269504088896340735992468100189214   /* log2(e)     */
