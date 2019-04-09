@@ -8,6 +8,7 @@
 #ifndef cglm_project_h
 #define cglm_project_h
 
+#include "common.h"
 #include "vec3.h"
 #include "vec4.h"
 #include "mat4.h"
