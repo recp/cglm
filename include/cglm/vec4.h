@@ -697,11 +697,7 @@ glm_vec4_distance(vec4 a, vec4 b) {
   return _mm_cvtss_f32(_mm_sqrt_ss(_mm_add_ss(x0,
                                               glmm_shuff1(x0, 0, 1, 0, 1))));
 #elif defined(CGLM_NEON_FP)
-  float32x4_t v0;
-  float32_t   r;
-  v0 = vsubq_f32(vld1q_f32(a), vld1q_f32(b));
-  r  = vaddvq_f32(vmulq_f32(v0, v0));
-  return sqrtf(r);
+  return glmm_norm(vsubq_f32(glmm_load(a), glmm_load(b)));
 #else
   return sqrtf(glm_pow2(b[0] - a[0])
              + glm_pow2(b[1] - a[1])
