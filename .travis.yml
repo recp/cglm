@@ -57,3 +57,6 @@ after_success:
         --gcov-options '\-lp'
         --verbose;
     fi
+
+after_failure:
+  - cat ./test-suite.log
