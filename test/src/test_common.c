@@ -5,6 +5,7 @@
 
 #include "test_common.h"
 #include <stdlib.h>
+#include <math.h>
 
 #define m 4
 #define n 4
