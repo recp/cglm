@@ -10,10 +10,15 @@ cd $(dirname "$0")
 
 mkdir -p .libs
 
+libmocka_folder=$(pwd)/test/lib/cmocka/build/src/
+
 if [ "$(uname)" = "Darwin" ]; then
-  ln -sf $(pwd)/test/lib/cmocka/build/src/libcmocka.0.dylib \
-      .libs/libcmocka.0.dylib;
+  libcmocka=libcmocka.0.dylib
 else
-  ln -sf $(pwd)/test/lib/cmocka/build/src/libcmocka.so.0 \
-      .libs/libcmocka.so.0;
+  libcmocka=libcmocka.so.0
+fi
+
+libcmocka_fullpath="$libmocka_folder$libcmocka"
+if [ ! -f libcmocka ]; then
+  ln -sf libcmocka .libs/$libcmocka;
 fi
