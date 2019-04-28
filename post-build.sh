@@ -19,6 +19,6 @@ else
 fi
 
 libcmocka_fullpath="$libmocka_folder$libcmocka"
-if [ ! -f libcmocka ]; then
-  ln -sf libcmocka .libs/$libcmocka;
+if [ ! -f libcmocka_fullpath ]; then
+  ln -sf libcmocka_fullpath .libs/$libcmocka;
 fi
