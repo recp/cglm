@@ -8,7 +8,7 @@
 
 cd $(dirname "$0")
 
-mkdir -p .libs
+mkdir -p "$(pwd)/.libs"
 
 libmocka_folder=$(pwd)/test/lib/cmocka/build/src/
 
@@ -18,7 +18,7 @@ else
   libcmocka=libcmocka.so.0
 fi
 
-libcmocka_fullpath="$libmocka_folder$libcmocka"
-if [ ! -f libcmocka_fullpath ]; then
-  ln -sf $libcmocka_fullpath .libs/$libcmocka;
+libcmocka_path="$libmocka_folder$libcmocka"
+if [ -f "$libcmocka_path" ]; then
+  ln -sf "$libcmocka_path" "$(pwd)/.libs/$libcmocka";
 fi
