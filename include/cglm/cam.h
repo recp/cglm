@@ -147,7 +147,7 @@ glm_ortho(float left,
  */
 CGLM_INLINE
 void
-glm_ortho_aabb(vec3 box[2], mat4 dest) {
+glm_ortho_aabb(const vec3 box[2], mat4 dest) {
   glm_ortho(box[0][0],  box[1][0],
             box[0][1],  box[1][1],
            -box[1][2], -box[0][2],
@@ -165,7 +165,7 @@ glm_ortho_aabb(vec3 box[2], mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_p(vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_p(const vec3 box[2], float padding, mat4 dest) {
   glm_ortho(box[0][0] - padding,    box[1][0] + padding,
             box[0][1] - padding,    box[1][1] + padding,
           -(box[1][2] + padding), -(box[0][2] - padding),
@@ -183,7 +183,7 @@ glm_ortho_aabb_p(vec3 box[2], float padding, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_pz(const vec3 box[2], float padding, mat4 dest) {
   glm_ortho(box[0][0],              box[1][0],
             box[0][1],              box[1][1],
           -(box[1][2] + padding), -(box[0][2] - padding),
@@ -218,9 +218,7 @@ glm_ortho_default(float aspect, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_default_s(float aspect,
-                    float size,
-                    mat4  dest) {
+glm_ortho_default_s(float aspect, float size, mat4 dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-size * aspect,
                size * aspect,
@@ -338,10 +336,10 @@ glm_perspective_resize(float aspect, mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_lookat(vec3 eye,
-           vec3 center,
-           vec3 up,
-           mat4 dest) {
+glm_lookat(const vec3 eye,
+           const vec3 center,
+           const vec3 up,
+           mat4       dest) {
   CGLM_ALIGN(8) vec3 f, u, s;
 
   glm_vec3_sub(center, eye, f);

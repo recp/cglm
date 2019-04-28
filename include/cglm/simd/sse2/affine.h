@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_sse2(const mat4 m1, const mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   __m128 l0, l1, l2, l3, r;
 
@@ -51,7 +51,7 @@ glm_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mul_rot_sse2(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_rot_sse2(const mat4 m1, const mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   __m128 l0, l1, l2, l3, r;
 

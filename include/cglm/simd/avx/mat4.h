@@ -16,7 +16,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_avx(const mat4 m1, const mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   __m256 y0, y1, y2, y3, y4, y5, y6, y7, y8, y9;
