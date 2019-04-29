@@ -22,7 +22,7 @@
  */
 CGLM_INLINE
 void
-glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
+glm_aabb_transform(const vec3 box[2], const mat4 m, vec3 dest[2]) {
   vec3 v[2], xa, xb, ya, yb, za, zb;
 
   glm_vec3_scale(m[0], box[0][0], xa);
@@ -62,7 +62,7 @@ glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) {
+glm_aabb_merge(const vec3 box1[2], const vec3 box2[2], vec3 dest[2]) {
   dest[0][0] = glm_min(box1[0][0], box2[0][0]);
   dest[0][1] = glm_min(box1[0][1], box2[0][1]);
   dest[0][2] = glm_min(box1[0][2], box2[0][2]);
@@ -85,7 +85,7 @@ glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
+glm_aabb_crop(const vec3 box[2], const vec3 cropBox[2], vec3 dest[2]) {
   dest[0][0] = glm_max(box[0][0], cropBox[0][0]);
   dest[0][1] = glm_max(box[0][1], cropBox[0][1]);
   dest[0][2] = glm_max(box[0][2], cropBox[0][2]);
@@ -109,10 +109,10 @@ glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb_crop_until(vec3 box[2],
-                    vec3 cropBox[2],
-                    vec3 clampBox[2],
-                    vec3 dest[2]) {
+glm_aabb_crop_until(const vec3 box[2],
+                    const vec3 cropBox[2],
+                    const vec3 clampBox[2],
+                    vec3       dest[2]) {
   glm_aabb_crop(box, cropBox, dest);
   glm_aabb_merge(clampBox, dest, dest);
 }
@@ -133,9 +133,10 @@ glm_aabb_crop_until(vec3 box[2],
  */
 CGLM_INLINE
 bool
-glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
-  float *p, dp;
-  int    i;
+glm_aabb_frustum(const vec3 box[2], const vec4 planes[6]) {
+  const float *p;
+  float       dp;
+  int         i;
 
   for (i = 0; i < 6; i++) {
     p  = planes[i];
@@ -169,7 +170,7 @@ glm_aabb_invalidate(vec3 box[2]) {
  */
 CGLM_INLINE
 bool
-glm_aabb_isvalid(vec3 box[2]) {
+glm_aabb_isvalid(const vec3 box[2]) {
   return glm_vec3_max(box[0]) != FLT_MAX
          && glm_vec3_min(box[1]) != -FLT_MAX;
 }
@@ -181,7 +182,7 @@ glm_aabb_isvalid(vec3 box[2]) {
  */
 CGLM_INLINE
 float
-glm_aabb_size(vec3 box[2]) {
+glm_aabb_size(const vec3 box[2]) {
   return glm_vec3_distance(box[0], box[1]);
 }
 
@@ -192,7 +193,7 @@ glm_aabb_size(vec3 box[2]) {
  */
 CGLM_INLINE
 float
-glm_aabb_radius(vec3 box[2]) {
+glm_aabb_radius(const vec3 box[2]) {
   return glm_aabb_size(box) * 0.5f;
 }
 
@@ -204,7 +205,7 @@ glm_aabb_radius(vec3 box[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb_center(vec3 box[2], vec3 dest) {
+glm_aabb_center(const vec3 box[2], vec3 dest) {
   glm_vec3_center(box[0], box[1], dest);
 }
 
@@ -216,7 +217,7 @@ glm_aabb_center(vec3 box[2], vec3 dest) {
  */
 CGLM_INLINE
 bool
-glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
+glm_aabb_aabb(const vec3 box[2], const vec3 other[2]) {
   return (box[0][0] <= other[1][0] && box[1][0] >= other[0][0])
       && (box[0][1] <= other[1][1] && box[1][1] >= other[0][1])
       && (box[0][2] <= other[1][2] && box[1][2] >= other[0][2]);
@@ -233,7 +234,7 @@ glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
  */
 CGLM_INLINE
 bool
-glm_aabb_sphere(vec3 box[2], vec4 s) {
+glm_aabb_sphere(const vec3 box[2], const vec4 s) {
   float dmin;
   int   a, b, c;
 
@@ -256,7 +257,7 @@ glm_aabb_sphere(vec3 box[2], vec4 s) {
  */
 CGLM_INLINE
 bool
-glm_aabb_point(vec3 box[2], vec3 point) {
+glm_aabb_point(const vec3 box[2], const vec3 point) {
   return (point[0] >= box[0][0] && point[0] <= box[1][0])
       && (point[1] >= box[0][1] && point[1] <= box[1][1])
       && (point[2] >= box[0][2] && point[2] <= box[1][2]);
@@ -270,7 +271,7 @@ glm_aabb_point(vec3 box[2], vec3 point) {
  */
 CGLM_INLINE
 bool
-glm_aabb_contains(vec3 box[2], vec3 other[2]) {
+glm_aabb_contains(const vec3 box[2], const vec3 other[2]) {
   return (box[0][0] <= other[0][0] && box[1][0] >= other[1][0])
       && (box[0][1] <= other[0][1] && box[1][1] >= other[1][1])
       && (box[0][2] <= other[0][2] && box[1][2] >= other[1][2]);

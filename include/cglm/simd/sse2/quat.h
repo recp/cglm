@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_quat_mul_sse2(versor p, versor q, versor dest) {
+glm_quat_mul_sse2(const versor p, const versor q, versor dest) {
   /*
    + (a1 b2 + b1 a2 + c1 d2 − d1 c2)i
    + (a1 c2 − b1 d2 + c1 a2 + d1 b2)j

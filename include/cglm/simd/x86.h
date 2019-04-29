@@ -103,7 +103,7 @@ glmm_vdot(__m128 a, __m128 b) {
 
 static inline
 float
-glmm_dot(__m128 a, __m128 b) {
+glmm_dot(const __m128 a, const __m128 b) {
   return _mm_cvtss_f32(glmm_vdots(a, b));
 }
 
@@ -115,7 +115,7 @@ glmm_norm(__m128 a) {
 
 static inline
 __m128
-glmm_load3(float v[3]) {
+glmm_load3(const float v[3]) {
   __m128i xy;
   __m128  z;
 
