@@ -147,7 +147,7 @@ glm_ortho(float left,
  */
 CGLM_INLINE
 void
-glm_ortho_aabb(const vec3 box[2], mat4 dest) {
+glm_ortho_aabb(vec3 box[2], mat4 dest) {
   glm_ortho(box[0][0],  box[1][0],
             box[0][1],  box[1][1],
            -box[1][2], -box[0][2],
@@ -165,7 +165,7 @@ glm_ortho_aabb(const vec3 box[2], mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_p(const vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_p(vec3 box[2], float padding, mat4 dest) {
   glm_ortho(box[0][0] - padding,    box[1][0] + padding,
             box[0][1] - padding,    box[1][1] + padding,
           -(box[1][2] + padding), -(box[0][2] - padding),
@@ -183,7 +183,7 @@ glm_ortho_aabb_p(const vec3 box[2], float padding, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_pz(const vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest) {
   glm_ortho(box[0][0],              box[1][0],
             box[0][1],              box[1][1],
           -(box[1][2] + padding), -(box[0][2] - padding),
@@ -218,7 +218,9 @@ glm_ortho_default(float aspect, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_default_s(float aspect, float size, mat4 dest) {
+glm_ortho_default_s(float aspect,
+                    float size,
+                    mat4  dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-size * aspect,
                size * aspect,
@@ -336,10 +338,10 @@ glm_perspective_resize(float aspect, mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_lookat(const vec3 eye,
-           const vec3 center,
-           const vec3 up,
-           mat4       dest) {
+glm_lookat(vec3 eye,
+           vec3 center,
+           vec3 up,
+           mat4 dest) {
   CGLM_ALIGN(8) vec3 f, u, s;
 
   glm_vec3_sub(center, eye, f);
@@ -380,7 +382,7 @@ glm_lookat(const vec3 eye,
  */
 CGLM_INLINE
 void
-glm_look(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
+glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
   CGLM_ALIGN(8) vec3 target;
   glm_vec3_add(eye, dir, target);
   glm_lookat(eye, target, up, dest);
@@ -398,7 +400,7 @@ glm_look(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look_anyup(const vec3 eye, const vec3 dir, mat4 dest) {
+glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
   CGLM_ALIGN(8) vec3 up;
   glm_vec3_ortho(dir, up);
   glm_look(eye, dir, up, dest);
@@ -417,7 +419,7 @@ glm_look_anyup(const vec3 eye, const vec3 dir, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp(const mat4 proj,
+glm_persp_decomp(mat4 proj,
                  float * __restrict nearVal,
                  float * __restrict farVal,
                  float * __restrict top,
@@ -457,7 +459,7 @@ glm_persp_decomp(const mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decompv(const mat4 proj, float dest[6]) {
+glm_persp_decompv(mat4 proj, float dest[6]) {
   glm_persp_decomp(proj, &dest[0], &dest[1], &dest[2],
                          &dest[3], &dest[4], &dest[5]);
 }
@@ -472,7 +474,7 @@ glm_persp_decompv(const mat4 proj, float dest[6]) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp_x(const mat4 proj,
+glm_persp_decomp_x(mat4 proj,
                    float * __restrict left,
                    float * __restrict right) {
   float nearVal, m20, m00;
@@ -495,7 +497,7 @@ glm_persp_decomp_x(const mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_y(const mat4 proj,
+glm_persp_decomp_y(mat4 proj,
                    float * __restrict top,
                    float * __restrict bottom) {
   float nearVal, m21, m11;
@@ -518,7 +520,7 @@ glm_persp_decomp_y(const mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_z(const mat4 proj,
+glm_persp_decomp_z(mat4 proj,
                    float * __restrict nearVal,
                    float * __restrict farVal) {
   float m32, m22;
@@ -538,7 +540,7 @@ glm_persp_decomp_z(const mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_far(const mat4 proj, float * __restrict farVal) {
+glm_persp_decomp_far(mat4 proj, float * __restrict farVal) {
   *farVal = proj[3][2] / (proj[2][2] + 1.0f);
 }
 
@@ -550,7 +552,7 @@ glm_persp_decomp_far(const mat4 proj, float * __restrict farVal) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp_near(const mat4 proj, float * __restrict nearVal) {
+glm_persp_decomp_near(mat4 proj, float * __restrict nearVal) {
   *nearVal = proj[3][2] / (proj[2][2] - 1.0f);
 }
 
@@ -564,7 +566,7 @@ glm_persp_decomp_near(const mat4 proj, float * __restrict nearVal) {
  */
 CGLM_INLINE
 float
-glm_persp_fovy(const mat4 proj) {
+glm_persp_fovy(mat4 proj) {
   return 2.0f * atanf(1.0f / proj[1][1]);
 }
 
@@ -575,7 +577,7 @@ glm_persp_fovy(const mat4 proj) {
  */
 CGLM_INLINE
 float
-glm_persp_aspect(const mat4 proj) {
+glm_persp_aspect(mat4 proj) {
   return proj[1][1] / proj[0][0];
 }
 
@@ -588,7 +590,7 @@ glm_persp_aspect(const mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_persp_sizes(const mat4 proj, float fovy, vec4 dest) {
+glm_persp_sizes(mat4 proj, float fovy, vec4 dest) {
   float t, a, nearVal, farVal;
 
   t = 2.0f * tanf(fovy * 0.5f);
