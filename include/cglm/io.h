@@ -25,8 +25,8 @@
 
 CGLM_INLINE
 void
-glm_mat4_print(const mat4              matrix,
-               FILE * const __restrict ostream) {
+glm_mat4_print(mat4              matrix,
+               FILE * __restrict ostream) {
   int i;
   int j;
 
@@ -55,8 +55,8 @@ glm_mat4_print(const mat4              matrix,
 
 CGLM_INLINE
 void
-glm_mat3_print(const mat3              matrix,
-               FILE * const __restrict ostream) {
+glm_mat3_print(mat3              matrix,
+               FILE * __restrict ostream) {
   int i;
   int j;
 
@@ -85,8 +85,8 @@ glm_mat3_print(const mat3              matrix,
 
 CGLM_INLINE
 void
-glm_vec4_print(const vec4              vec,
-               FILE * const __restrict ostream) {
+glm_vec4_print(vec4              vec,
+               FILE * __restrict ostream) {
   int i;
 
 #define m 4
@@ -107,8 +107,8 @@ glm_vec4_print(const vec4              vec,
 
 CGLM_INLINE
 void
-glm_vec3_print(const vec3              vec,
-               FILE * const __restrict ostream) {
+glm_vec3_print(vec3              vec,
+               FILE * __restrict ostream) {
   int i;
 
 #define m 3
@@ -129,8 +129,8 @@ glm_vec3_print(const vec3              vec,
 
 CGLM_INLINE
 void
-glm_ivec3_print(const ivec3             vec,
-                FILE * const __restrict ostream) {
+glm_ivec3_print(ivec3             vec,
+                FILE * __restrict ostream) {
   int i;
 
 #define m 3
@@ -151,8 +151,8 @@ glm_ivec3_print(const ivec3             vec,
 
 CGLM_INLINE
 void
-glm_versor_print(const versor            vec,
-                 FILE * const __restrict ostream) {
+glm_versor_print(versor            vec,
+                 FILE * __restrict ostream) {
   int i;
 
 #define m 4
@@ -173,9 +173,9 @@ glm_versor_print(const versor            vec,
 
 CGLM_INLINE
 void
-glm_aabb_print(const vec3              bbox[2],
+glm_aabb_print(vec3                    bbox[2],
                const char * __restrict tag,
-               FILE * const __restrict ostream) {
+               FILE       * __restrict ostream) {
   int i, j;
 
 #define m 3
