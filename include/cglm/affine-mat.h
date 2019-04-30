@@ -44,7 +44,7 @@
  */
 CGLM_INLINE
 void
-glm_mul(const mat4 m1, const mat4 m2, mat4 dest) {
+glm_mul(mat4 m1, mat4 m2, mat4 dest) {
 #ifdef __AVX__
   glm_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -100,7 +100,7 @@ glm_mul(const mat4 m1, const mat4 m2, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_mul_rot(const mat4 m1, const mat4 m2, mat4 dest) {
+glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mul_rot_sse2(m1, m2, dest);
 #else

@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_mul_neon(const mat4 m1, const mat4 m2, mat4 dest) {
+glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   float32x4_t l0, l1, l2, l3, r, d0, d1, d2, d3;
 
