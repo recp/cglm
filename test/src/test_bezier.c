@@ -51,8 +51,8 @@ test_bezier(void **state) {
   Bs_plain = test_bezier_plain(s, p0, c0, c1, p1);
 
   assert_true(glm_eq(Bs,  Bs_plain));
-  assert_true(glm_eq(smc, Bs_plain));
-  assert_true(glm_eq(Bs,  smc));
+  test_assert_eqf(smc, Bs_plain);
+  test_assert_eqf(Bs,  smc);
 
   /* test cubic hermite */
   smc      = glm_smc(s, GLM_HERMITE_MAT, (vec4){p0, p1, c0, c1});

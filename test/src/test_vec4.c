@@ -93,6 +93,13 @@ test_vec4(void **state) {
     /* 3. test SIMD norm2 */
     test_rand_vec4(v);
     test_assert_eqf(test_vec4_norm2(v), glm_vec4_norm2(v));
+
+    /* 4. test SSE/SIMD distance */
+    test_rand_vec4(v1);
+    test_rand_vec4(v2);
+    d1 = glm_vec4_distance(v1, v2);
+    d2 = sqrtf(powf(v1[0]-v2[0], 2.0f) + pow(v1[1]-v2[1], 2.0f) + pow(v1[2]-v2[2], 2.0f) + pow(v1[3]-v2[3], 2.0f));
+    assert_true(fabsf(d1 - d2) <= 0.000009);
   }
 
   /* test zero */
