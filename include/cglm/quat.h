@@ -233,7 +233,7 @@ glm_quat_normalize_to(const versor q, versor dest) {
   dot = glm_vec4_norm2(q);
 
   if (dot <= 0.0f) {
-    glm_quat_identity(q);
+    glm_quat_identity(dest);
     return;
   }
 
