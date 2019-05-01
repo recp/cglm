@@ -15,6 +15,9 @@ extern "C" {
 #include "types-struct.h"
 #include "structs/vec3.h"
 #include "structs/vec4.h"
+#include "structs/mat3.h"
+#include "structs/mat4.h"
+#include "structs/sphere.h"
 
 #ifdef __cplusplus
 }

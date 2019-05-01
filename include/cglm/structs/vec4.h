@@ -8,10 +8,6 @@
 #ifndef cglm_vec4s_h
 #define cglm_vec4s_h
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #include "../common.h"
 #include "../types-struct.h"
 #include "../util.h"
@@ -255,7 +251,4 @@ glms_vec4_lerp(vec4s from, vec4s to, float t) {
   return r;
 }
 
-#ifdef __cplusplus
-}
-#endif
 #endif /* cglm_vec4s_h */
