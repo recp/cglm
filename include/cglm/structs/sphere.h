@@ -10,8 +10,8 @@
 
 #include "../common.h"
 #include "../types-struct.h"
-#include "../mat4.h"
 #include "../sphere.h"
+#include "mat4.h"
 
 /*
   Sphere Representation in cglm: [center.x, center.y, center.z, radii]

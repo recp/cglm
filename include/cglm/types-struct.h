@@ -21,6 +21,17 @@ typedef union vec3s {
   vec3 raw;
 } vec3s;
 
+typedef union ivec3s {
+#ifndef CGLM_NO_ANONYMOUS_STRUCT
+  struct {
+    int x;
+    int y;
+    int z;
+  };
+#endif
+  ivec3 raw;
+} ivec3s;
+
 typedef union CGLM_ALIGN_IF(16) vec4s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
@@ -38,15 +49,9 @@ typedef vec4s versors;
 typedef union mat3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
-    float m00;
-    float m01;
-    float m02;
-    float m10;
-    float m11;
-    float m12;
-    float m20;
-    float m21;
-    float m22;
+    float m00, m01, m02;
+    float m10, m11, m12;
+    float m20, m21, m22;
   };
   struct {
     vec3s col0;
@@ -54,32 +59,17 @@ typedef union mat3s {
     vec3s col2;
   };
 #endif
+	vec3s col[3];
   mat3 raw;
 } mat3s;
 
-#ifdef __AVX__
-typedef union CGLM_ALIGN_IF(32) mat4s {
-#else
-typedef union CGLM_ALIGN_IF(16) mat4s {
-#endif
+typedef union CGLM_ALIGN_MAT mat4s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
-    float m00;
-    float m01;
-    float m02;
-    float m03;
-    float m10;
-    float m11;
-    float m12;
-    float m13;
-    float m20;
-    float m21;
-    float m22;
-    float m23;
-    float m30;
-    float m31;
-    float m32;
-    float m33;
+    float m00, m01, m02, m03;
+		float m10, m11, m12, m13;
+		float m20, m21, m22, m23;
+		float m30, m31, m32, m33;
   };
   struct {
     vec4s col0;
@@ -88,6 +78,7 @@ typedef union CGLM_ALIGN_IF(16) mat4s {
     vec4s col3;
   };
 #endif
+	vec4s col[4];
   mat4 raw;
 } mat4s;
 

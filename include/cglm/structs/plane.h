@@ -5,10 +5,12 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_plane_h
-#define cglm_plane_h
+#ifndef cglm_planes_h
+#define cglm_planes_h
 
-#include "common.h"
+#include "../common.h"
+#include "../types-struct.h"
+#include "../plane.h"
 #include "vec4.h"
 
 /*
@@ -19,18 +21,20 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_plane_normalize(vec4 plane);
+   CGLM_INLINE vec4s glms_plane_normalize(vec4s plane);
  */
 
 /*!
  * @brief normalizes a plane
  *
- * @param[in, out] plane plane to normalize
+ * @param[in] plane plane to normalize
+ * @returns         normalized plane
  */
 CGLM_INLINE
-void
-glm_plane_normalize(vec4 plane) {
-  glm_vec4_scale(plane, 1.0f / glm_vec3_norm(plane), plane);
+vec4s
+glms_plane_normalize(vec4s plane) {
+	glm_plane_normalize(plane.raw);
+	return plane;
 }
 
-#endif /* cglm_plane_h */
+#endif /* cglm_planes_h */

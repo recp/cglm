@@ -33,7 +33,6 @@
    CGLM_INLINE float   glms_mat4_trace3(mat4s m);
    CGLM_INLINE versors glms_mat4_quat(mat4s m);
    CGLM_INLINE vec3s   glms_mat4_mulv3(mat4s m, vec3s v, float last);
-   CGLM_INLINE mat4s   glms_mat4_transpose_to(mat4s m);
    CGLM_INLINE mat4s   glms_mat4_transpose(mat4s m);
    CGLM_INLINE mat4s   glms_mat4_scale_p(mat4s m, float s);
    CGLM_INLINE mat4s   glms_mat4_scale(mat4s m, float s);
@@ -54,19 +53,19 @@
 #include "vec4.h"
 #include "vec3.h"
 
-#define GLMS_MAT4_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f, 0.0f},                    \
-                                  {0.0f, 1.0f, 0.0f, 0.0f},                    \
-                                  {0.0f, 0.0f, 1.0f, 0.0f},                    \
-                                  {0.0f, 0.0f, 0.0f, 1.0f}}
+#define GLMS_MAT4_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f,                    \
+                                  0.0f, 1.0f, 0.0f, 0.0f,                    \
+                                  0.0f, 0.0f, 1.0f, 0.0f,                    \
+                                  0.0f, 0.0f, 0.0f, 1.0f}
 
-#define GLMS_MAT4_ZERO_INIT      {{0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                  {0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                  {0.0f, 0.0f, 0.0f, 0.0f},                    \
-                                  {0.0f, 0.0f, 0.0f, 0.0f}}
+#define GLMS_MAT4_ZERO_INIT      {0.0f, 0.0f, 0.0f, 0.0f,                    \
+                                  0.0f, 0.0f, 0.0f, 0.0f,                    \
+                                  0.0f, 0.0f, 0.0f, 0.0f,                    \
+                                  0.0f, 0.0f, 0.0f, 0.0f}
 
 /* for C only */
-#define GLMS_MAT4_IDENTITY ((mat4)GLMS_MAT4_IDENTITY_INIT)
-#define GLMS_MAT4_ZERO     ((mat4)GLMS_MAT4_ZERO_INIT)
+#define GLMS_MAT4_IDENTITY ((mat4s)GLMS_MAT4_IDENTITY_INIT)
+#define GLMS_MAT4_ZERO     ((mat4s)GLMS_MAT4_ZERO_INIT)
 
 /*!
  * @brief copy all members of [mat] to [dest]
@@ -132,7 +131,7 @@ glms_mat4_identity() {
 CGLM_INLINE
 void
 glms_mat4_identity_array(mat4s * __restrict mat, size_t count) {
-  CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat4s t = GLMS_MAT4_IDENTITY_INIT;
   size_t i;
 
   for (i = 0; i < count; i++) {
@@ -229,20 +228,25 @@ glms_mat4_mul(mat4s m1, mat4s m2) {
  * @code
  * mat m1, m2, m3, m4, res;
  *
- * glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4, res);
+ * res = glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4);
  * @endcode
  *
  * @warning matrices parameter is pointer array not mat4 array!
  *
  * @param[in]  matrices mat4 * array
  * @param[in]  len      matrices count
- * @returns             result
+ * @returns             result matrix
  */
 CGLM_INLINE
 mat4s
 glms_mat4_mulN(mat4s * __restrict matrices[], uint32_t len) {
-  mat4s r;
-  glm_mat4_mulN(matrices, len, r.raw);
+  CGLM_ALIGN_MAT mat4s r = GLMS_MAT4_IDENTITY_INIT;
+	uint32_t i;
+
+  for (i = 0; i < len; i++) {
+		r = glms_mat4_mul(r, *matrices[i]);
+	}
+  
   return r;
 }
 
@@ -314,22 +318,6 @@ vec3s
 glms_mat4_mulv3(mat4s m, vec3s v, float last) {
   vec3s r;
   glm_mat4_mulv3(m.raw, v.raw, last, r.raw);
-  return r;
-}
-
-/*!
- * @brief transpose mat4 and store in dest
- *
- * source matrix will not be transposed unless dest is m
- *
- * @param[in]  m    matrix
- * @returns         result
- */
-CGLM_INLINE
-mat4s
-glms_mat4_transpose_to(mat4s m) {
-  mat4s r;
-  glm_mat4_transpose_to(m.raw, r.raw);
   return r;
 }
 

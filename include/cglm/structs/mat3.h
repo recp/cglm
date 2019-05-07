@@ -18,7 +18,6 @@
    CGLM_INLINE void   glms_mat3_identity_array(mat3s * __restrict mat, size_t count);
    CGLM_INLINE mat3s  glms_mat3_zero();
    CGLM_INLINE mat3s  glms_mat3_mul(mat3s m1, mat3s m2);
-   CGLM_INLINE mat3s  glms_mat3_transpose_to(mat3s m);
    CGLM_INLINE ma3s   glms_mat3_transpose(mat3s m);
    CGLM_INLINE vec3s  glms_mat3_mulv(mat3s m, vec3s v);
    CGLM_INLINE float  glms_mat3_trace(mat3s m);
@@ -137,22 +136,6 @@ mat3s
 glms_mat3_mul(mat3s m1, mat3s m2) {
   mat3s r;
   glm_mat3_mul(m1.raw, m2.raw, r.raw);
-  return r;
-}
-
-/*!
- * @brief transpose mat3 and store in dest
- *
- * source matrix will not be transposed unless dest is m
- *
- * @param[in]  m     matrix
- * @param[out] dest  result
- */
-CGLM_INLINE
-mat3s
-glms_mat3_transpose_to(mat3s m) {
-  mat3s r;
-  glm_mat3_transpose_to(m.raw, r.raw);
   return r;
 }
 
