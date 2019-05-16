@@ -241,7 +241,7 @@ CGLM_INLINE
 mat4s
 glms_mat4_mulN(mat4s * __restrict matrices[], uint32_t len) {
   CGLM_ALIGN_MAT mat4s r = GLMS_MAT4_IDENTITY_INIT;
-	uint32_t i;
+	size_t i;
 
   for (i = 0; i < len; i++) {
 		r = glms_mat4_mul(r, *matrices[i]);

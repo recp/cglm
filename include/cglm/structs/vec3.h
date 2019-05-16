@@ -41,6 +41,30 @@ glms_vec3_copy(vec3s v) {
 }
 
 CGLM_INLINE
+void
+glms_vec3_pack(vec3s dst[], vec3 src[], size_t len) {
+	size_t i;
+	
+	for (i = 0; i < len; i++) {
+		dst[i].x = src[i][0];
+		dst[i].y = src[i][1];
+		dst[i].z = src[i][2];
+	}
+}
+
+CGLM_INLINE
+void
+glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len) {
+	size_t i;
+
+	for (i = 0; i < len; i++) {
+		dst[i][0] = src[i].x;
+		dst[i][1] = src[i].y;
+		dst[i][2] = src[i].z;
+	}	
+}
+
+CGLM_INLINE
 vec3s
 glms_vec3_zero() {
   vec3s r;
@@ -65,13 +89,13 @@ glms_vec3_dot(vec3s a, vec3s b) {
 CGLM_INLINE
 float
 glms_vec3_norm2(vec3s v) {
-  glm_vec3_norm2(v.raw);
+  return glm_vec3_norm2(v.raw);
 }
 
 CGLM_INLINE
 float
 glms_vec3_norm(vec3s v) {
-  glm_vec3_norm(v.raw);
+  return glm_vec3_norm(v.raw);
 }
 
 CGLM_INLINE
@@ -148,50 +172,44 @@ glms_vec3_divs(vec3s a, float s) {
 
 CGLM_INLINE
 vec3s
-glms_vec3_addadd(vec3s a, vec3s b) {
-  vec3s r;
-  glm_vec3_addadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec3_addadd(vec3s a, vec3s b, vec3s dest) {
+  glm_vec3_addadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_subadd(vec3s a, vec3s b) {
-  vec3s r;
-  glm_vec3_subadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec3_subadd(vec3s a, vec3s b, vec3s dest) {
+  glm_vec3_subadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_muladd(vec3s a, vec3s b) {
-  vec3s r;
-  glm_vec3_muladd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec3_muladd(vec3s a, vec3s b, vec3s dest) {
+  glm_vec3_muladd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_muladds(vec3s a, float s) {
-  vec3s r;
-  glm_vec3_muladds(a.raw, s, r.raw);
-  return r;
+glms_vec3_muladds(vec3s a, float s, vec3s dest) {
+  glm_vec3_muladds(a.raw, s, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_maxadd(vec3s a, vec3s b) {
-  vec3s r;
-  glm_vec3_maxadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec3_maxadd(vec3s a, vec3s b, vec3s dest) {
+  glm_vec3_maxadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_minadd(vec3s a, vec3s b) {
-  vec3s r;
-  glm_vec3_minadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec3_minadd(vec3s a, vec3s b, vec3s dest) {
+  glm_vec3_minadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
@@ -199,22 +217,6 @@ vec3s
 glms_vec3_flipsign(vec3s v) {
   glm_vec3_flipsign(v.raw);
   return v;
-}
-
-CGLM_INLINE
-vec3s
-glms_vec3_flipsign_to(vec3s v) {
-  vec3s r;
-  glm_vec3_flipsign_to(v.raw, r.raw);
-  return r;
-}
-
-CGLM_INLINE
-vec3s
-glms_vec3_negate_to(vec3s v) {
-  vec3s r;
-  glm_vec3_negate_to(v.raw, r.raw);
-  return r;
 }
 
 CGLM_INLINE
@@ -233,25 +235,9 @@ glms_vec3_inv(vec3s v) {
 
 CGLM_INLINE
 vec3s
-glms_vec3_inv_to(vec3s v) {
-  vec3s r;
-  glm_vec3_inv_to(v.raw, r.raw);
-  return r;
-}
-
-CGLM_INLINE
-vec3s
 glms_vec3_normalize(vec3s v) {
   glm_vec3_normalize(v.raw);
   return v;
-}
-
-CGLM_INLINE
-vec3s
-glms_vec3_normalize_to(vec3s v) {
-  vec3s r;
-  glm_vec3_normalize_to(v.raw, r.raw);
-  return r;
 }
 
 CGLM_INLINE
@@ -291,17 +277,17 @@ glms_vec3_rotate(vec3s v, float angle, vec3s axis) {
 
 CGLM_INLINE
 vec3s
-glms_vec3_rotate_m4(mat4 m, vec3s v) {
+glms_vec3_rotate_m4(mat4s m, vec3s v) {
   vec3s r;
-  glm_vec3_rotate_m4(m, v.raw, r.raw);
+  glm_vec3_rotate_m4(m.raw, v.raw, r.raw);
   return r;
 }
 
 CGLM_INLINE
 vec3s
-glms_vec3_rotate_m3(mat3 m, vec3s v) {
+glms_vec3_rotate_m3(mat3s m, vec3s v) {
   vec3s r;
-  glm_vec3_rotate_m3(m, v.raw, r.raw);
+  glm_vec3_rotate_m3(m.raw, v.raw, r.raw);
   return r;
 }
 
@@ -385,14 +371,6 @@ vec3s
 glms_normalize(vec3s v) {
   glm_normalize(v.raw);
   return v;
-}
-
-CGLM_INLINE
-vec3s
-glms_normalize_to(vec3s v) {
-  vec3s r;
-  glm_normalize_to(v.raw, r.raw);
-  return r;
 }
 
 #endif /* cglm_vec3s_h */

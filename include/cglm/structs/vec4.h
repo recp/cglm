@@ -54,6 +54,29 @@ glms_vec4_ucopy(vec4s v) {
   return r;
 }
 
+CGLM_INLINE
+void
+glms_vec4_pack(vec4s dst[], vec4 src[], size_t len) {
+	size_t i;
+	
+	for (i = 0; i < len; i++) {
+		dst[i].x = src[i][0];
+		dst[i].y = src[i][1];
+		dst[i].z = src[i][2];
+	}
+}
+
+CGLM_INLINE
+void
+glms_vec4_unpack(vec4 dst[], vec4s src[], size_t len) {
+	size_t i;
+
+	for (i = 0; i < len; i++) {
+		dst[i][0] = src[i].x;
+		dst[i][1] = src[i].y;
+		dst[i][2] = src[i].z;
+	}
+}
 
 CGLM_INLINE
 float
@@ -147,50 +170,44 @@ glms_vec4_divs(vec4s v, float s) {
 
 CGLM_INLINE
 vec4s
-glms_vec4_addadd(vec4s a, vec4s b) {
-  vec4s r;
-  glm_vec4_addadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec4_addadd(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_addadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec4s
-glms_vec4_subadd(vec4s a, vec4s b) {
-  vec4s r;
-  glm_vec4_subadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec4_subadd(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_subadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec4s
-glms_vec4_muladd(vec4s a, vec4s b) {
-  vec4s r;
-  glm_vec4_muladd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec4_muladd(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_muladd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec4s
-glms_vec4_muladds(vec4s a, float s) {
-  vec4s r;
-  glm_vec4_muladds(a.raw, s, r.raw);
-  return r;
+glms_vec4_muladds(vec4s a, float s, vec4s dest) {
+  glm_vec4_muladds(a.raw, s, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec4s
-glms_vec4_maxadd(vec4s a, vec4s b) {
-  vec4s r;
-  glm_vec4_maxadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec4_maxadd(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_maxadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
 vec4s
-glms_vec4_minadd(vec4s a, vec4s b) {
-  vec4s r;
-  glm_vec4_minadd(a.raw, b.raw, r.raw);
-  return r;
+glms_vec4_minadd(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_minadd(a.raw, b.raw, dest.raw);
+  return dest;
 }
 
 CGLM_INLINE
@@ -249,6 +266,14 @@ glms_vec4_lerp(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_lerp(from.raw, to.raw, t, r.raw);
   return r;
+}
+
+CGLM_INLINE
+vec4s
+glms_vec4_cubic(float s) {
+	vec4s r;
+	glm_vec4_cubic(s, r.raw);
+	return r;
 }
 
 #endif /* cglm_vec4s_h */

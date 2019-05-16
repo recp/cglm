@@ -286,15 +286,9 @@ glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) {
 CGLM_INLINE
 vec3s
 glms_decompose_scalev(mat4s m) {
-	mat3s m3x3;
-	vec3s s;
-
-	m3x3 = glms_mat4_pick3(m);
-
-  s.x = glms_vec3_norm(m3x3.col[0]);
-  s.y = glms_vec3_norm(m3x3.col[1]);
-  s.z = glms_vec3_norm(m3x3.col[2]);
-	return s;
+	vec3s r;
+	glm_decompose_scalev(m.raw, r.raw);
+	return r;
 }
 
 /*!
@@ -322,6 +316,8 @@ glms_uniscaled(mat4s m) {
 CGLM_INLINE
 void
 glms_decompose_rs(mat4s m, mat4s r, vec3s s) {
+	// FIX: Modify param
+	//
 	glm_decompose_rs(m.raw, r.raw, s.raw);
 }
 
@@ -337,6 +333,8 @@ glms_decompose_rs(mat4s m, mat4s r, vec3s s) {
 CGLM_INLINE
 void
 glms_decompose(mat4s m, vec4s t, mat4s r, vec3s s) {
+	// FIX: Modify param
+	//
 	glm_decompose(m.raw, t.raw, r.raw, s.raw);
 }
 

@@ -25,34 +25,12 @@
 CGLM_INLINE
 void
 glms_aabb_transform(vec3s box[2], mat4s m, vec3s dest[2]) {
-  vec3s v[2], xa, xb, ya, yb, za, zb;
-	mat3s m3x3;
+	vec3 rawBox[2];
+	vec3 rawDest[2];
 
-	m3x3 = glms_mat4_pick3(m);
-
-  xa = glms_vec3_scale(m3x3.col[0], box[0].x);
-  xb = glms_vec3_scale(m3x3.col[0], box[1].x);
-
-  ya = glms_vec3_scale(m3x3.col[1], box[0].y);
-  yb = glms_vec3_scale(m3x3.col[1], box[1].y);
-
-  za = glms_vec3_scale(m3x3.col[2], box[0].z);
-  zb = glms_vec3_scale(m3x3.col[2], box[1].z);
-
-  /* translation + min(xa, xb) + min(ya, yb) + min(za, zb) */
-  v[0] = m3x3.col[3];
-  v[0] = glms_vec3_minadd(xa, xb);
-  v[0] = glms_vec3_minadd(ya, yb);
-  v[0] = glms_vec3_minadd(za, zb);
-
-  /* translation + max(xa, xb) + max(ya, yb) + max(za, zb) */
-  v[1] = m3x3.col[3];
-  v[1] = glms_vec3_maxadd(xa, xb);
-  v[1] = glms_vec3_maxadd(ya, yb);
-  v[1] = glms_vec3_maxadd(za, zb);
-
-  dest[0] = glms_vec3_copy(v[0]);
-  dest[1] = glms_vec3_copy(v[1]);
+	glms_vec3_unpack(rawBox, box, 2);
+	glm_aabb_transform(rawBox, m.raw, rawDest);
+	glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -68,13 +46,14 @@ glms_aabb_transform(vec3s box[2], mat4s m, vec3s dest[2]) {
 CGLM_INLINE
 void
 glms_aabb_merge(vec3s box1[2], vec3s box2[2], vec3s dest[2]) {
-  dest[0].x = glm_min(box1[0].x, box2[0].x);
-  dest[0].y = glm_min(box1[0].y, box2[0].y);
-  dest[0].z = glm_min(box1[0].z, box2[0].z);
+	vec3 rawBox1[2];
+	vec3 rawBox2[2];
+	vec3 rawDest[2];
 
-  dest[1].x = glm_max(box1[1].x, box2[1].x);
-  dest[1].y = glm_max(box1[1].y, box2[1].y);
-  dest[1].z = glm_max(box1[1].z, box2[1].z);
+	glms_vec3_unpack(rawBox1, box1, 2);
+	glms_vec3_unpack(rawBox2, box2, 2);
+	glm_aabb_merge(rawBox1, rawBox2, rawDest);
+	glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -91,13 +70,14 @@ glms_aabb_merge(vec3s box1[2], vec3s box2[2], vec3s dest[2]) {
 CGLM_INLINE
 void
 glms_aabb_crop(vec3s box[2], vec3s cropBox[2], vec3s dest[2]) {
-  dest[0].x = glm_max(box[0].x, cropBox[0].x);
-  dest[0].y = glm_max(box[0].y, cropBox[0].y);
-  dest[0].z = glm_max(box[0].z, cropBox[0].z);
+	vec3 rawBox[2];
+	vec3 rawCropBox[2];
+	vec3 rawDest[2];
 
-  dest[1].x = glm_min(box[1].x, cropBox[1].x);
-  dest[1].y = glm_min(box[1].y, cropBox[1].y);
-  dest[1].z = glm_min(box[1].z, cropBox[1].z);
+	glms_vec3_unpack(rawBox, box, 2);
+	glms_vec3_unpack(rawCropBox, cropBox, 2);
+	glm_aabb_crop(rawBox, rawCropBox, rawDest);
+	glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -139,21 +119,12 @@ glms_aabb_crop_until(vec3s box[2],
 CGLM_INLINE
 bool
 glms_aabb_frustum(vec3s box[2], vec4s planes[6]) {
-	vec4s p;
-  float dp;
-  int    i;
+	vec3 rawBox[2];
+	vec4 rawPlanes[6];
 
-  for (i = 0; i < 6; i++) {
-    p  = planes[i];
-    dp = p.x * box[p.x > 0.0f].x
-       + p.y * box[p.y > 0.0f].y
-       + p.z * box[p.z > 0.0f].z;
-
-    if (dp < -p.w)
-      return false;
-  }
-
-  return true;
+	glms_vec3_unpack(rawBox, box, 2);
+	glms_vec4_unpack(rawPlanes, planes, 6);
+	return glm_aabb_frustum(rawBox, rawPlanes);
 }
 
 /*!
@@ -164,6 +135,8 @@ glms_aabb_frustum(vec3s box[2], vec4s planes[6]) {
 CGLM_INLINE
 void
 glms_aabb_invalidate(vec3s box[2]) {
+	// FIX: Modify param
+	//
   box[0] = glms_vec3_broadcast(FLT_MAX);
   box[1] = glms_vec3_broadcast(-FLT_MAX);
 }
@@ -176,8 +149,9 @@ glms_aabb_invalidate(vec3s box[2]) {
 CGLM_INLINE
 bool
 glms_aabb_isvalid(vec3s box[2]) {
-  return glms_vec3_max(box[0]) != FLT_MAX &&
-         glms_vec3_min(box[1]) != -FLT_MAX;
+	vec3 rawBox[2];
+	glms_vec3_unpack(rawBox, box, 2);
+	return glm_aabb_isvalid(rawBox);
 }
 
 /*!

@@ -73,28 +73,10 @@ void
 glms_aabb_print(vec3s                   bbox[2],
                 const char * __restrict tag,
                 FILE       * __restrict ostream) {
-	int i, j;
+	vec3 rawBbox[2];
 
-#define m 3
-
-  fprintf(ostream, "AABB (%s):\n", tag ? tag : "float");
-
-  for (i = 0; i < 2; i++) {
-    fprintf(ostream, "\t|");
-
-    for (j = 0; j < m; j++) {
-      fprintf(ostream, "%0.4f", bbox[i].raw[j]);
-
-      if (j != m - 1)
-        fprintf(ostream, "\t");
-    }
-
-    fprintf(ostream, "|\n");
-  }
-
-  fprintf(ostream, "\n");
-
-#undef m
+	glms_vec3_unpack(rawBbox, bbox, 2);
+	glm_aabb_print(rawBbox, tag, ostream);
 }
 
 #endif /* cglm_ios_h */
