@@ -53,13 +53,8 @@ typedef union mat3s {
     float m10, m11, m12;
     float m20, m21, m22;
   };
-  struct {
-    vec3s col0;
-    vec3s col1;
-    vec3s col2;
-  };
 #endif
-	vec3s col[3];
+  vec3s col[3];
   mat3 raw;
 } mat3s;
 
@@ -67,18 +62,12 @@ typedef union CGLM_ALIGN_MAT mat4s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
-		float m10, m11, m12, m13;
-		float m20, m21, m22, m23;
-		float m30, m31, m32, m33;
-  };
-  struct {
-    vec4s col0;
-    vec4s col1;
-    vec4s col2;
-    vec4s col3;
+    float m10, m11, m12, m13;
+    float m20, m21, m22, m23;
+    float m30, m31, m32, m33;
   };
 #endif
-	vec4s col[4];
+  vec4s col[4];
   mat4 raw;
 } mat4s;
 

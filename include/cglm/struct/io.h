@@ -30,14 +30,14 @@ void
 glms_mat4_print(mat4s             matrix,
                 FILE * __restrict ostream) {
 
-	glm_mat4_print(matrix.raw, ostream);
+  glm_mat4_print(matrix.raw, ostream);
 }
 
 CGLM_INLINE
 void
 glms_mat3_print(mat3s             matrix,
                 FILE * __restrict ostream) {
-	glm_mat3_print(matrix.raw, ostream);
+  glm_mat3_print(matrix.raw, ostream);
 }
 
 CGLM_INLINE
@@ -73,10 +73,10 @@ void
 glms_aabb_print(vec3s                   bbox[2],
                 const char * __restrict tag,
                 FILE       * __restrict ostream) {
-	vec3 rawBbox[2];
+  vec3 rawBbox[2];
 
-	glms_vec3_unpack(rawBbox, bbox, 2);
-	glm_aabb_print(rawBbox, tag, ostream);
+  glms_vec3_unpack(rawBbox, bbox, 2);
+  glm_aabb_print(rawBbox, tag, ostream);
 }
 
 #endif /* cglm_ios_h */

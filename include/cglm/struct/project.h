@@ -39,14 +39,14 @@
  * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  invMat   matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @returns				      unprojected coordinates
+ * @returns             unprojected coordinates
  */
 CGLM_INLINE
 vec3s
 glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
-	vec3s r;
-	glm_unprojecti(pos.raw, invMat.raw, vp.raw, r.raw);
-	return r;
+  vec3s r;
+  glm_unprojecti(pos.raw, invMat.raw, vp.raw, r.raw);
+  return r;
 }
 
 /*!
@@ -71,14 +71,14 @@ glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
  * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  m        matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @returns				      unprojected coordinates
+ * @returns             unprojected coordinates
  */
 CGLM_INLINE
 vec3s
 glms_unproject(vec3s pos, mat4s m, vec4s vp) {
-	vec3s r;
-	glm_unproject(pos.raw, m.raw, vp.raw, r.raw);
-	return r;
+  vec3s r;
+  glm_unproject(pos.raw, m.raw, vp.raw, r.raw);
+  return r;
 }
 
 /*!
@@ -96,9 +96,9 @@ glms_unproject(vec3s pos, mat4s m, vec4s vp) {
 CGLM_INLINE
 vec3s
 glms_project(vec3s pos, mat4s m, vec4s vp) {
-	vec3s r;
-	glm_project(pos.raw, m.raw, vp.raw, r.raw);
-	return r;
+  vec3s r;
+  glm_project(pos.raw, m.raw, vp.raw, r.raw);
+  return r;
 }
 
 #endif /* cglm_projects_h */

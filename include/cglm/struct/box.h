@@ -25,12 +25,12 @@
 CGLM_INLINE
 void
 glms_aabb_transform(vec3s box[2], mat4s m, vec3s dest[2]) {
-	vec3 rawBox[2];
-	vec3 rawDest[2];
+  vec3 rawBox[2];
+  vec3 rawDest[2];
 
-	glms_vec3_unpack(rawBox, box, 2);
-	glm_aabb_transform(rawBox, m.raw, rawDest);
-	glms_vec3_pack(dest, rawDest, 2);
+  glms_vec3_unpack(rawBox, box, 2);
+  glm_aabb_transform(rawBox, m.raw, rawDest);
+  glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -46,14 +46,14 @@ glms_aabb_transform(vec3s box[2], mat4s m, vec3s dest[2]) {
 CGLM_INLINE
 void
 glms_aabb_merge(vec3s box1[2], vec3s box2[2], vec3s dest[2]) {
-	vec3 rawBox1[2];
-	vec3 rawBox2[2];
-	vec3 rawDest[2];
+  vec3 rawBox1[2];
+  vec3 rawBox2[2];
+  vec3 rawDest[2];
 
-	glms_vec3_unpack(rawBox1, box1, 2);
-	glms_vec3_unpack(rawBox2, box2, 2);
-	glm_aabb_merge(rawBox1, rawBox2, rawDest);
-	glms_vec3_pack(dest, rawDest, 2);
+  glms_vec3_unpack(rawBox1, box1, 2);
+  glms_vec3_unpack(rawBox2, box2, 2);
+  glm_aabb_merge(rawBox1, rawBox2, rawDest);
+  glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -70,14 +70,14 @@ glms_aabb_merge(vec3s box1[2], vec3s box2[2], vec3s dest[2]) {
 CGLM_INLINE
 void
 glms_aabb_crop(vec3s box[2], vec3s cropBox[2], vec3s dest[2]) {
-	vec3 rawBox[2];
-	vec3 rawCropBox[2];
-	vec3 rawDest[2];
+  vec3 rawBox[2];
+  vec3 rawCropBox[2];
+  vec3 rawDest[2];
 
-	glms_vec3_unpack(rawBox, box, 2);
-	glms_vec3_unpack(rawCropBox, cropBox, 2);
-	glm_aabb_crop(rawBox, rawCropBox, rawDest);
-	glms_vec3_pack(dest, rawDest, 2);
+  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_unpack(rawCropBox, cropBox, 2);
+  glm_aabb_crop(rawBox, rawCropBox, rawDest);
+  glms_vec3_pack(dest, rawDest, 2);
 }
 
 /*!
@@ -119,12 +119,12 @@ glms_aabb_crop_until(vec3s box[2],
 CGLM_INLINE
 bool
 glms_aabb_frustum(vec3s box[2], vec4s planes[6]) {
-	vec3 rawBox[2];
-	vec4 rawPlanes[6];
+  vec3 rawBox[2];
+  vec4 rawPlanes[6];
 
-	glms_vec3_unpack(rawBox, box, 2);
-	glms_vec4_unpack(rawPlanes, planes, 6);
-	return glm_aabb_frustum(rawBox, rawPlanes);
+  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec4_unpack(rawPlanes, planes, 6);
+  return glm_aabb_frustum(rawBox, rawPlanes);
 }
 
 /*!
@@ -135,8 +135,6 @@ glms_aabb_frustum(vec3s box[2], vec4s planes[6]) {
 CGLM_INLINE
 void
 glms_aabb_invalidate(vec3s box[2]) {
-	// FIX: Modify param
-	//
   box[0] = glms_vec3_broadcast(FLT_MAX);
   box[1] = glms_vec3_broadcast(-FLT_MAX);
 }
@@ -149,9 +147,9 @@ glms_aabb_invalidate(vec3s box[2]) {
 CGLM_INLINE
 bool
 glms_aabb_isvalid(vec3s box[2]) {
-	vec3 rawBox[2];
-	glms_vec3_unpack(rawBox, box, 2);
-	return glm_aabb_isvalid(rawBox);
+  vec3 rawBox[2];
+  glms_vec3_unpack(rawBox, box, 2);
+  return glm_aabb_isvalid(rawBox);
 }
 
 /*!
@@ -197,11 +195,11 @@ glms_aabb_center(vec3s box[2]) {
 CGLM_INLINE
 bool
 glms_aabb_aabb(vec3s box[2], vec3s other[2]) {
-	vec3 rawBox[2];
-	vec3 rawOther[2];
+  vec3 rawBox[2];
+  vec3 rawOther[2];
 
-	glms_vec3_unpack(rawBox, box, 2);
-	glms_vec3_unpack(rawOther, other, 2);
+  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_unpack(rawOther, other, 2);
   return glm_aabb_aabb(rawBox, rawOther);
 }
 
@@ -217,10 +215,10 @@ glms_aabb_aabb(vec3s box[2], vec3s other[2]) {
 CGLM_INLINE
 bool
 glms_aabb_sphere(vec3s box[2], vec4s s) {
-	vec3 rawBox[2];
-	
-	glms_vec3_unpack(rawBox, box, 2);
-	return glm_aabb_sphere(rawBox, s.raw);
+  vec3 rawBox[2];
+
+  glms_vec3_unpack(rawBox, box, 2);
+  return glm_aabb_sphere(rawBox, s.raw);
 }
 
 /*!
@@ -232,9 +230,9 @@ glms_aabb_sphere(vec3s box[2], vec4s s) {
 CGLM_INLINE
 bool
 glms_aabb_point(vec3s box[2], vec3s point) {
-	vec3 rawBox[2];
+  vec3 rawBox[2];
 
-	glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_unpack(rawBox, box, 2);
   return glm_aabb_point(rawBox, point.raw);
 }
 
@@ -247,12 +245,12 @@ glms_aabb_point(vec3s box[2], vec3s point) {
 CGLM_INLINE
 bool
 glms_aabb_contains(vec3s box[2], vec3s other[2]) {
-	vec3 rawBox[2];
-	vec3 rawOther[2];
+  vec3 rawBox[2];
+  vec3 rawOther[2];
 
-	glms_vec3_unpack(rawBox, box, 2);
-	glms_vec3_unpack(rawOther, other, 2);
-	return glm_aabb_contains(rawBox, rawOther);
+  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_unpack(rawOther, other, 2);
+  return glm_aabb_contains(rawBox, rawOther);
 }
 
 #endif /* cglm_boxs_h */

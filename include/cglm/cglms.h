@@ -13,11 +13,19 @@ extern "C" {
 
 #include "cglm.h"
 #include "types-struct.h"
-#include "structs/vec3.h"
-#include "structs/vec4.h"
-#include "structs/mat3.h"
-#include "structs/mat4.h"
-#include "structs/sphere.h"
+#include "struct/vec3.h"
+#include "struct/vec4.h"
+#include "struct/mat3.h"
+#include "struct/mat4.h"
+#include "struct/affine.h"
+#include "struct/frustum.h"
+#include "struct/plane.h"
+#include "struct/box.h"
+#include "struct/color.h"
+#include "struct/io.h"
+#include "struct/project.h"
+#include "struct/sphere.h"
+#include "struct/curve.h"
 
 #ifdef __cplusplus
 }

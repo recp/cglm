@@ -34,7 +34,7 @@
 CGLM_INLINE
 float
 glms_smc(float s, mat4s m, vec4s c) {
-	return glm_smc(s, m.raw, c.raw);
+  return glm_smc(s, m.raw, c.raw);
 }
 
 #endif /* cglm_curves_h */

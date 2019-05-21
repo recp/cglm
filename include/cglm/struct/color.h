@@ -21,7 +21,7 @@
 CGLM_INLINE
 float
 glms_luminance(vec3s rgb) {
-	return glm_luminance(rgb.raw);
+  return glm_luminance(rgb.raw);
 }
 
 #endif /* cglm_colors_h */

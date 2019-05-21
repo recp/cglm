@@ -12,17 +12,17 @@
 /*
  Functions:
    CGLM_INLINE vec3s glms_vec3_broadcast(float val);
-	 CGLM_INLINE bool  glms_vec3_eq(vec3s v, float val);
-	 CGLM_INLINE bool  glms_vec3_eq_eps(vec3s v, float val);
-	 CGLM_INLINE bool  glms_vec3_eq_all(vec3s v);
-	 CGLM_INLINE bool  glms_vec3_eqv(vec3s a, vec3s b);
-	 CGLM_INLINE bool  glms_vec3_eqv_eps(vec3s a, vec3s b);
-	 CGLM_INLINE float glms_vec3_max(vec3s v);
-	 CGLM_INLINE float glms_vec3_min(vec3s v);
-	 CGLM_INLINE bool  glms_vec3_isnan(vec3s v);
-	 CGLM_INLINE bool  glms_vec3_isinf(vec3s v);
-	 CGLM_INLINE bool  glms_vec3_isvalid(vec3s v);
-	 CGLM_INLINE vec3s glms_vec3_sign(vec3s v);
+   CGLM_INLINE bool  glms_vec3_eq(vec3s v, float val);
+   CGLM_INLINE bool  glms_vec3_eq_eps(vec3s v, float val);
+   CGLM_INLINE bool  glms_vec3_eq_all(vec3s v);
+   CGLM_INLINE bool  glms_vec3_eqv(vec3s a, vec3s b);
+   CGLM_INLINE bool  glms_vec3_eqv_eps(vec3s a, vec3s b);
+   CGLM_INLINE float glms_vec3_max(vec3s v);
+   CGLM_INLINE float glms_vec3_min(vec3s v);
+   CGLM_INLINE bool  glms_vec3_isnan(vec3s v);
+   CGLM_INLINE bool  glms_vec3_isinf(vec3s v);
+   CGLM_INLINE bool  glms_vec3_isvalid(vec3s v);
+   CGLM_INLINE vec3s glms_vec3_sign(vec3s v);
    CGLM_INLINE vec3s glms_vec3_sqrt(vec3s v);
  */
 
@@ -37,8 +37,8 @@
 /*!
  * @brief fill a vector with specified value
  *
- * @param[in]  val value
- * @returns			   dest
+ * @param[in]  val  value
+ * @returns         dest
  */
 CGLM_INLINE
 vec3s
@@ -170,8 +170,8 @@ glms_vec3_isvalid(vec3s v) {
  *
  * Important: It returns 0 for zero/NaN input
  *
- * @param 	v vector
- * @returns 	sign vector
+ * @param   v   vector
+ * @returns     sign vector
  */
 CGLM_INLINE
 vec3s
@@ -185,7 +185,7 @@ glms_vec3_sign(vec3s v) {
  * @brief square root of each vector item
  *
  * @param[in]  v    vector
- * @returns				  destination vector
+ * @returns         destination vector
  */
 CGLM_INLINE
 vec3s

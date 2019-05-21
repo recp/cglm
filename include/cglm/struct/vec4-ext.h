@@ -11,19 +11,19 @@
 
 /*
  Functions:
-	 CGLM_INLINE vec4s glms_vec4_broadcast(float val);
-	 CGLM_INLINE bool  glms_vec4_eq(vec4s v, float val);
-	 CGLM_INLINE bool  glms_vec4_eq_eps(vec4s v, float val);
-	 CGLM_INLINE bool  glms_vec4_eq_all(vec4s v);
-	 CGLM_INLINE bool  glms_vec4_eqv(vec4s a, vec4s b);
-	 CGLM_INLINE bool  glms_vec4_eqv_eps(vec4s a, vec4s b);
-	 CGLM_INLINE float glms_vec4_max(vec4s v);
-	 CGLM_INLINE float glms_vec4_min(vec4s v);
-	 CGLM_INLINE bool  glms_vec4_isnan(vec4s v);
-	 CGLM_INLINE bool  glms_vec4_isinf(vec4s v);
-	 CGLM_INLINE bool  glms_vec4_isvalid(vec4s v);
-	 CGLM_INLINE vec4s glms_vec4_sign(vec4s v);
-	 CGLM_INLINE vec4s glms_vec4_sqrt(vec4s v);
+   CGLM_INLINE vec4s glms_vec4_broadcast(float val);
+   CGLM_INLINE bool  glms_vec4_eq(vec4s v, float val);
+   CGLM_INLINE bool  glms_vec4_eq_eps(vec4s v, float val);
+   CGLM_INLINE bool  glms_vec4_eq_all(vec4s v);
+   CGLM_INLINE bool  glms_vec4_eqv(vec4s a, vec4s b);
+   CGLM_INLINE bool  glms_vec4_eqv_eps(vec4s a, vec4s b);
+   CGLM_INLINE float glms_vec4_max(vec4s v);
+   CGLM_INLINE float glms_vec4_min(vec4s v);
+   CGLM_INLINE bool  glms_vec4_isnan(vec4s v);
+   CGLM_INLINE bool  glms_vec4_isinf(vec4s v);
+   CGLM_INLINE bool  glms_vec4_isvalid(vec4s v);
+   CGLM_INLINE vec4s glms_vec4_sign(vec4s v);
+   CGLM_INLINE vec4s glms_vec4_sqrt(vec4s v);
  */
 
 #ifndef cglm_vec4s_ext_h
@@ -38,7 +38,7 @@
  * @brief fill a vector with specified value
  *
  * @param val value
- * @returns		dest
+ * @returns   dest
  */
 CGLM_INLINE
 vec4s
@@ -170,8 +170,8 @@ glms_vec4_isvalid(vec4s v) {
  *
  * Important: It returns 0 for zero/NaN input
  *
- * @param 	v 	vector
- * @returns			sign vector
+ * @param   v   vector
+ * @returns     sign vector
  */
 CGLM_INLINE
 vec4s
@@ -185,7 +185,7 @@ glms_vec4_sign(vec4s v) {
  * @brief square root of each vector item
  *
  * @param[in]  v    vector
- * @returns					destination vector
+ * @returns         destination vector
  */
 CGLM_INLINE
 vec4s
