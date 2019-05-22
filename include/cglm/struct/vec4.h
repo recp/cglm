@@ -139,9 +139,7 @@ glms_vec4_pack(vec4s dst[], vec4 src[], size_t len) {
   size_t i;
 
   for (i = 0; i < len; i++) {
-    dst[i].x = src[i][0];
-    dst[i].y = src[i][1];
-    dst[i].z = src[i][2];
+    glm_vec4_copy(src[i], dst[i].raw);
   }
 }
 
@@ -158,9 +156,7 @@ glms_vec4_unpack(vec4 dst[], vec4s src[], size_t len) {
   size_t i;
 
   for (i = 0; i < len; i++) {
-    dst[i][0] = src[i].x;
-    dst[i][1] = src[i].y;
-    dst[i][2] = src[i].z;
+    glm_vec4_copy(src[i].raw, dst[i]);
   }
 }
 
