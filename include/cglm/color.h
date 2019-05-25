@@ -23,4 +23,10 @@ glm_luminance(vec3 rgb) {
   return glm_dot(rgb, l);
 }
 
+CGLM_INLINE
+void
+glm_normal(vec3 a, vec3 b, vec3 c, vec3 dest) {
+
+}
+
 #endif /* cglm_color_h */
