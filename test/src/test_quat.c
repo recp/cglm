@@ -44,9 +44,11 @@ test_quat(void **state) {
     test_assert_mat4_eq2(inRot, outRot, 0.000009); /* almost equal */
 
     /* 4. test SSE mul and raw mul */
+#if defined( __SSE__ ) || defined( __SSE2__ )
     test_quat_mul_raw(inQuat, outQuat, q3);
     glm_quat_mul_sse2(inQuat, outQuat, q4);
     test_assert_quat_eq(q3, q4);
+#endif
   }
 
   /* 5. test lookat */

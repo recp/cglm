@@ -25,7 +25,7 @@
 /*!
  * @brief normalizes a plane
  *
- * @param[in, out] plane pnale to normalize
+ * @param[in, out] plane plane to normalize
  */
 CGLM_INLINE
 void

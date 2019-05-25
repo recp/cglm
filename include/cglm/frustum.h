@@ -65,7 +65,7 @@
  * Exracted planes order: [left, right, bottom, top, near, far]
  *
  * @param[in]  m    matrix (see brief)
- * @param[out] dest exracted view frustum planes (see brief)
+ * @param[out] dest extracted view frustum planes (see brief)
  */
 CGLM_INLINE
 void

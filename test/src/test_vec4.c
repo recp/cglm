@@ -65,9 +65,9 @@ test_vec4_clamp(vec4 v, float minVal, float maxVal) {
 void
 test_vec4(void **state) {
   vec4  v, v1, v2, v3, v4;
+  vec4s vs1, vs2, vs3, vs4;
   int   i;
   float d1, d2;
-
 
   for (i = 0; i < 1000; i++) {
     /* 1. test SSE/SIMD dot product */
@@ -182,4 +182,12 @@ test_vec4(void **state) {
   assert_true(v3[1] >= 0.0999 && v3[1] <= 0.80001);
   assert_true(v3[2] >= 0.0999 && v3[2] <= 0.80001);
   assert_true(v3[3] >= 0.0999 && v3[3] <= 0.80001);
+
+  /* structs */
+  vs1 = test_rand_vec4s();
+  vs2 = test_rand_vec4s();
+
+  vs3 = glms_vec4_add(vs1, vs2);
+  vs4 = glms_vec4_maxv(vs1, vs3);
+  test_assert_vec4s_eq(vs3, vs4);
 }
