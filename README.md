@@ -46,8 +46,6 @@ https://github.com/g-truc/glm
 
 **cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you you struct api (`glms_`).
 
-Since almost all types are arrays and **C** doesn't allow returning arrays, so **cglm** doesn't support this feature. In the future *cglm* may use **struct** for some types for this purpose.
-
 #### Other APIs like Vulkan, Metal, Dx?
 Currently *cglm* uses default clip space configuration (-1, 1) for camera functions (perspective, extract corners...), in the future other clip space configurations will be supported
 
