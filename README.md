@@ -7,8 +7,6 @@
 [![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
 
-The original glm library is for C++ only (templates, namespaces, classes...), this library targeted to C99 but currently you can use it for C89 safely by language extensions e.g `__restrict`
-
 #### Documentation
 
 Almost all functions (inline versions) and parameters are documented inside related headers. <br />
@@ -45,6 +43,9 @@ https://github.com/g-truc/glm
 `cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available.
 
 #### Returning vector or matrix... ?
+
+**cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you you struct api (`glms_`).
+
 Since almost all types are arrays and **C** doesn't allow returning arrays, so **cglm** doesn't support this feature. In the future *cglm* may use **struct** for some types for this purpose.
 
 #### Other APIs like Vulkan, Metal, Dx?
@@ -68,6 +69,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 </table>
 
 ## Features
+- array api and struct api, you can use arrays or structs.
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
 - general purpose vector operations (cross, dot, rotate, proj, angle...)
