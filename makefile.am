@@ -132,5 +132,11 @@ test_tests_SOURCES=\
     test/src/test_affine.c \
     test/src/test_bezier.c
 
+# When running configure with --prefix, $VPATH references
+# the source directory that post-build.sh is in. When not
+# using a prefix, $VPATH will be unset, so we need to fall
+# back to using . to run the script.
+export VPATH
+
 all-local:
-	sh ./post-build.sh
+	sh $${VPATH:-.}/post-build.sh
