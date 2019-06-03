@@ -14,7 +14,7 @@
                                 float bottom,  float top,
                                 float nearVal, float farVal)
    CGLM_INLINE mat4s glms_ortho_aabb(vec3s box[2]);
-   CGLM_INLINE mat4s glms_ortho_aabb_p(vec3s box[2], float padding);
+   CGLM_INLINE mat4s glms_ortho_aabb_p(vec3s box[2],  float padding);
    CGLM_INLINE mat4s glms_ortho_aabb_pz(vec3s box[2], float padding);
    CGLM_INLINE mat4s glms_ortho_default(float aspect)
    CGLM_INLINE mat4s glms_ortho_default_s(float aspect, float size)
@@ -29,22 +29,13 @@
    CGLM_INLINE mat4s glms_look(vec3s eye, vec3s dir, vec3s up)
    CGLM_INLINE mat4s glms_look_anyup(vec3s eye, vec3s dir)
    CGLM_INLINE void  glms_persp_decomp(mat4s  proj,
-                                       float *nearVal,
-                                       float *farVal,
-                                       float *top,
-                                       float *bottom,
-                                       float *left,
-                                       float *right)
-   CGLM_INLINE void glms_persp_decompv(mat4s proj, float dest[6])
-   CGLM_INLINE void glms_persp_decomp_x(mat4s  proj,
-                                        float *left,
-                                        float *right)
-   CGLM_INLINE void glms_persp_decomp_y(mat4s  proj,
-                                        float *top,
-                                        float *bottom)
-   CGLM_INLINE void glms_persp_decomp_z(mat4s  proj,
-                                        float *nearVal,
-                                        float *farVal)
+                                       float *nearv, float *farv,
+                                       float *top,   float *bottom,
+                                       float *left,  float *right)
+   CGLM_INLINE void  glms_persp_decompv(mat4s proj, float dest[6])
+   CGLM_INLINE void  glms_persp_decomp_x(mat4s proj, float *left, float *right)
+   CGLM_INLINE void  glms_persp_decomp_y(mat4s proj, float *top, float *bottom)
+   CGLM_INLINE void  glms_persp_decomp_z(mat4s proj, float *nearv, float *farv)
    CGLM_INLINE void  glms_persp_decomp_far(mat4s proj, float *farVal)
    CGLM_INLINE void  glms_persp_decomp_near(mat4s proj, float *nearVal)
    CGLM_INLINE float glms_persp_fovy(mat4s proj)
@@ -326,12 +317,9 @@ glms_look_anyup(vec3s eye, vec3s dir) {
 CGLM_INLINE
 void
 glms_persp_decomp(mat4s proj,
-                  float * __restrict nearVal,
-                  float * __restrict farVal,
-                  float * __restrict top,
-                  float * __restrict bottom,
-                  float * __restrict left,
-                  float * __restrict right) {
+                  float * __restrict nearVal, float * __restrict farVal,
+                  float * __restrict top,     float * __restrict bottom,
+                  float * __restrict left,    float * __restrict right) {
   glm_persp_decomp(proj.raw, nearVal, farVal, top, bottom, left, right);
 }
 
