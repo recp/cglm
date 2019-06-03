@@ -50,8 +50,8 @@
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
  */
 
-#ifndef cglm_vec4s_h
-#define cglm_vec4s_h
+#ifndef cglms_vec4s_h
+#define cglms_vec4s_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -85,8 +85,8 @@ glms_vec4(vec3s v3, float last) {
 /*!
  * @brief copy first 3 members of [a] to [dest]
  *
- * @param[in]  a    source
- * @returns         destination
+ * @param[in]  v    source
+ * @returns         vec3
  */
 CGLM_INLINE
 vec3s
@@ -163,7 +163,6 @@ glms_vec4_unpack(vec4 dst[], vec4s src[], size_t len) {
 /*!
  * @brief make vector zero
  *
- * @param[in]  v vector
  * @returns      zero vector
  */
 CGLM_INLINE
@@ -177,7 +176,6 @@ glms_vec4_zero() {
 /*!
  * @brief make vector one
  *
- * @param[in]  v vector
  * @returns      one vector
  */
 CGLM_INLINE
@@ -579,4 +577,4 @@ glms_vec4_cubic(float s) {
   return r;
 }
 
-#endif /* cglm_vec4s_h */
+#endif /* cglms_vec4s_h */

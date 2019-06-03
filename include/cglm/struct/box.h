@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_boxs_h
-#define cglm_boxs_h
+#ifndef cglms_boxs_h
+#define cglms_boxs_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -178,7 +178,7 @@ glms_aabb_radius(vec3s box[2]) {
  * @brief computes center point of AABB
  *
  * @param[in]   box  bounding box
- * @param[out]  dest center of bounding box
+ * @returns center of bounding box
  */
 CGLM_INLINE
 vec3s
@@ -253,4 +253,4 @@ glms_aabb_contains(vec3s box[2], vec3s other[2]) {
   return glm_aabb_contains(rawBox, rawOther);
 }
 
-#endif /* cglm_boxs_h */
+#endif /* cglms_boxs_h */

@@ -26,8 +26,8 @@
    CGLM_INLINE vec3s glms_vec3_sqrt(vec3s v);
  */
 
-#ifndef cglm_vec3s_ext_h
-#define cglm_vec3s_ext_h
+#ifndef cglms_vec3s_ext_h
+#define cglms_vec3s_ext_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -195,4 +195,4 @@ glms_vec3_sqrt(vec3s v) {
   return r;
 }
 
-#endif /* cglm_vec3s_ext_h */
+#endif /* cglms_vec3s_ext_h */

@@ -29,8 +29,8 @@
    CGLM_INLINE void  glms_decompose(mat4s m, vec4s t, mat4s * r, vec3s * s);
  */
 
-#ifndef cglm_affines_h
-#define cglm_affines_h
+#ifndef cglms_affines_h
+#define cglms_affines_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -117,8 +117,8 @@ glms_translate_make(vec3s v) {
 /*!
  * @brief creates NEW scale matrix by v vector
  *
- * @param[out]  m  affine transfrom
  * @param[in]   v  scale vector [x, y, z]
+ * @returns affine transfrom
  */
 CGLM_INLINE
 mat4s
@@ -334,4 +334,4 @@ glms_decompose(mat4s m, vec4s * __restrict t, mat4s * __restrict r, vec3s * __re
   glm_decompose(m.raw, t->raw, r->raw, s->raw);
 }
 
-#endif /* cglm_affines_h */
+#endif /* cglms_affines_h */

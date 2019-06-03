@@ -30,8 +30,8 @@
    CGLM_INLINE float  glms_mat3_rmc(vec3s r, mat3s m, vec3s c);
  */
 
-#ifndef cglm_mat3s_h
-#define cglm_mat3s_h
+#ifndef cglms_mat3s_h
+#define cglms_mat3s_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -286,4 +286,4 @@ glms_mat3_rmc(vec3s r, mat3s m, vec3s c) {
   return glm_mat3_rmc(r.raw, m.raw, c.raw);
 }
 
-#endif /* cglm_mat3s_h */
+#endif /* cglms_mat3s_h */

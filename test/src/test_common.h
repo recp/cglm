@@ -20,7 +20,7 @@
 #include <stdbool.h>
 
 #include <cglm/cglm.h>
-#include <cglm/cglms.h>
+#include <cglm/struct.h>
 #include <cglm/call.h>
 
 void
@@ -63,13 +63,13 @@ void
 test_rand_vec3(vec3 dest);
 
 vec3s
-test_rand_vec3s();
+test_rand_vec3s(void);
 
 void
 test_rand_vec4(vec4 dest);
 
 vec4s
-test_rand_vec4s();
+test_rand_vec4s(void);
 
 float
 test_rand(void);

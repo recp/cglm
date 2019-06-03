@@ -44,8 +44,8 @@
    CGLM_INLINE float   glms_mat4_rmc(vec4s r, mat4s m, vec4s c);
  */
 
-#ifndef cglm_mat4s_h
-#define cglm_mat4s_h
+#ifndef cglms_mat4s_h
+#define cglms_mat4s_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -463,5 +463,4 @@ glms_mat4_rmc(vec4s r, mat4s m, vec4s c) {
   return glm_mat4_rmc(r.raw, m.raw, c.raw);
 }
 
-#endif /* cglm_mat4s_h */
- 
+#endif /* cglms_mat4s_h */

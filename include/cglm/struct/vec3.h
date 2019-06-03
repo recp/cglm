@@ -17,7 +17,6 @@
 
  Functions:
    CGLM_INLINE vec3s glms_vec3(vec4s v4);
-   CGLM_INLINE vec3s glms_vec3_copy(vec3s v);
    CGLM_INLINE void  glms_vec3_pack(vec3s dst[], vec3 src[], size_t len);
    CGLM_INLINE void  glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len);
    CGLM_INLINE vec3s glms_vec3_zero();
@@ -66,8 +65,8 @@
    CGLM_INLINE vec3s glms_normalize(vec3s v);
  */
 
-#ifndef cglm_vec3s_h
-#define cglm_vec3s_h
+#ifndef cglms_vec3s_h
+#define cglms_vec3s_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -96,20 +95,6 @@ vec3s
 glms_vec3(vec4s v4) {
   vec3s r;
   glm_vec3(v4.raw, r.raw);
-  return r;
-}
-
-/*!
- * @brief copy all members of [a] to [dest]
- *
- * @param[in]  a    source
- * @returns         destination
- */
-CGLM_INLINE
-vec3s
-glms_vec3_copy(vec3s v) {
-  vec3s r;
-  glm_vec3_copy(v.raw, r.raw);
   return r;
 }
 
@@ -150,7 +135,6 @@ glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len) {
 /*!
  * @brief make vector zero
  *
- * @param[in]  v  vector
  * @returns       zero vector
  */
 CGLM_INLINE
@@ -164,7 +148,6 @@ glms_vec3_zero() {
 /*!
  * @brief make vector one
  *
- * @param[in]  v  vector
  * @returns       one vector
  */
 CGLM_INLINE
@@ -237,7 +220,7 @@ glms_vec3_add(vec3s a, vec3s b) {
 /*!
  * @brief add scalar to v vector store result in dest (d = v + s)
  *
- * @param[in]  v    vector
+ * @param[in]  a    vector
  * @param[in]  s    scalar
  * @returns         destination vector
  */
@@ -267,7 +250,7 @@ glms_vec3_sub(vec3s a, vec3s b) {
 /*!
  * @brief subtract scalar from v vector store result in dest (d = v - s)
  *
- * @param[in]  v    vector
+ * @param[in]  a    vector
  * @param[in]  s    scalar
  * @returns         destination vector
  */
@@ -342,7 +325,7 @@ glms_vec3_div(vec3s a, vec3s b) {
 /*!
  * @brief div vector with scalar: d = v / s
  *
- * @param[in]  v    vector
+ * @param[in]  a    vector
  * @param[in]  s    scalar
  * @returns         result = (a[0]/s, a[1]/s, a[2]/s)
  */
@@ -764,4 +747,4 @@ glms_normalize(vec3s v) {
   return v;
 }
 
-#endif /* cglm_vec3s_h */
+#endif /* cglms_vec3s_h */

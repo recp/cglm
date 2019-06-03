@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_spheres_h
-#define cglm_spheres_h
+#ifndef cglms_spheres_h
+#define cglms_spheres_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -90,4 +90,4 @@ glms_sphere_point(vec4s s, vec3s point) {
   return glm_sphere_point(s.raw, point.raw);
 }
 
-#endif /* cglm_spheres_h */
+#endif /* cglms_spheres_h */

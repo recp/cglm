@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_colors_h
-#define cglm_colors_h
+#ifndef cglms_colors_h
+#define cglms_colors_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -24,4 +24,4 @@ glms_luminance(vec3s rgb) {
   return glm_luminance(rgb.raw);
 }
 
-#endif /* cglm_colors_h */
+#endif /* cglms_colors_h */

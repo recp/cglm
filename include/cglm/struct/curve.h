@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_curves_h
-#define cglm_curves_h
+#ifndef cglms_curves_h
+#define cglms_curves_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -37,4 +37,4 @@ glms_smc(float s, mat4s m, vec4s c) {
   return glm_smc(s, m.raw, c.raw);
 }
 
-#endif /* cglm_curves_h */
+#endif /* cglms_curves_h */

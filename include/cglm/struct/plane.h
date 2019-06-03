@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_planes_h
-#define cglm_planes_h
+#ifndef cglms_planes_h
+#define cglms_planes_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -37,4 +37,4 @@ glms_plane_normalize(vec4s plane) {
   return plane;
 }
 
-#endif /* cglm_planes_h */
+#endif /* cglms_planes_h */

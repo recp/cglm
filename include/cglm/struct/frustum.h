@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_frustums_h
-#define cglm_frustums_h
+#ifndef cglms_frustums_h
+#define cglms_frustums_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -152,4 +152,4 @@ glms_frustum_corners_at(vec4s corners[8],
   glms_vec4_pack(planeCorners, rawPlaneCorners, 8);
 }
 
-#endif /* cglm_frustums_h */
+#endif /* cglms_frustums_h */

@@ -15,8 +15,8 @@
    CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
  */
 
-#ifndef cglm_ios_h
-#define cglm_ios_h
+#ifndef cglms_ios_h
+#define cglms_ios_h
 
 #include "../common.h"
 #include "../io.h"
@@ -79,4 +79,4 @@ glms_aabb_print(vec3s                   bbox[2],
   glm_aabb_print(rawBbox, tag, ostream);
 }
 
-#endif /* cglm_ios_h */
+#endif /* cglms_ios_h */

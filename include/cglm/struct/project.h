@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_projects_h
-#define cglm_projects_h
+#ifndef cglms_projects_h
+#define cglms_projects_h
 
 #include "../common.h"
 #include "../types-struct.h"
@@ -91,7 +91,7 @@ glms_unproject(vec3s pos, mat4s m, vec4s vp) {
  * @param[in]  pos      object coordinates
  * @param[in]  m        MVP matrix
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[out] dest     projected coordinates
+ * @returns projected coordinates
  */
 CGLM_INLINE
 vec3s
@@ -101,4 +101,4 @@ glms_project(vec3s pos, mat4s m, vec4s vp) {
   return r;
 }
 
-#endif /* cglm_projects_h */
+#endif /* cglms_projects_h */
