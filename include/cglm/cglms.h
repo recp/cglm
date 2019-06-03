@@ -23,6 +23,7 @@ extern "C" {
 #include "struct/box.h"
 #include "struct/color.h"
 #include "struct/io.h"
+#include "struct/cam.h"
 #include "struct/project.h"
 #include "struct/sphere.h"
 #include "struct/curve.h"
