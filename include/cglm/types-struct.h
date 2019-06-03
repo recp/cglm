@@ -44,7 +44,22 @@ typedef union CGLM_ALIGN_IF(16) vec4s {
   vec4 raw;
 } vec4s;
 
-typedef vec4s versors;
+typedef union CGLM_ALIGN_IF(16) versors {
+#ifndef CGLM_NO_ANONYMOUS_STRUCT
+  struct {
+    float x;
+    float y;
+    float z;
+    float w;
+  };
+
+  struct {
+    vec3s imag;
+    float real;
+  };
+#endif
+  vec4 raw;
+} versors;
 
 typedef union mat3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
