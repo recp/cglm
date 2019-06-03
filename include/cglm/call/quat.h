@@ -91,7 +91,7 @@ glmc_quat_angle(versor q);
 
 CGLM_EXPORT
 void
-glmc_quat_axis(versor q, versor dest);
+glmc_quat_axis(versor q, vec3 dest);
 
 CGLM_EXPORT
 void

@@ -29,7 +29,7 @@
    CGLM_INLINE void glm_quat_imagn(versor q, vec3 dest);
    CGLM_INLINE float glm_quat_imaglen(versor q);
    CGLM_INLINE float glm_quat_angle(versor q);
-   CGLM_INLINE void glm_quat_axis(versor q, versor dest);
+   CGLM_INLINE void glm_quat_axis(versor q, vec3 dest);
    CGLM_INLINE void glm_quat_mul(versor p, versor q, versor dest);
    CGLM_INLINE void glm_quat_mat4(versor q, mat4 dest);
    CGLM_INLINE void glm_quat_mat4t(versor q, mat4 dest);
@@ -388,7 +388,7 @@ glm_quat_angle(versor q) {
  */
 CGLM_INLINE
 void
-glm_quat_axis(versor q, versor dest) {
+glm_quat_axis(versor q, vec3 dest) {
   glm_quat_imagn(q, dest);
 }
 
