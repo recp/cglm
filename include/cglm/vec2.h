@@ -432,6 +432,32 @@ glm_vec2_normalize_to(vec2 vec, vec2 dest) {
   glm_vec2_scale(vec, 1.0f / norm, dest);
 }
 
+/**
+ * @brief squared distance between two vectors
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ * @return returns squared distance (distance * distance)
+ */
+CGLM_INLINE
+float
+glm_vec2_distance2(vec2 a, vec2 b) {
+  return glm_pow2(b[0] - a[0]) + glm_pow2(b[1] - a[1]);
+}
+
+/**
+ * @brief distance between two vectors
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ * @return returns distance
+ */
+CGLM_INLINE
+float
+glm_vec2_distance(vec2 a, vec2 b) {
+  return sqrtf(glm_vec2_distance2(a, b));
+}
+
 /*!
  * @brief max values of vectors
  *

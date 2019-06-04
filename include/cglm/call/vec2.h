@@ -1,13 +1,20 @@
-//
-//  vec2.h
-//  glm
-//
-//  Created by Recep Aslantas on 3/31/19.
-//  Copyright © 2019 Recep Aslantas. All rights reserved.
-//
+/*
+ * Copyright (c), Recep Aslantas.
+ *
+ * MIT License (MIT), http://opensource.org/licenses/MIT
+ * Full license can be found in the LICENSE file
+ */
 
-#ifndef vec2_h
-#define vec2_h
+#ifndef cglmc_vec2_h
+#define cglmc_vec2_h
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "../cglm.h"
 
 
-#endif /* vec2_h */
+#ifdef __cplusplus
+}
+#endif
+#endif /* cglmc_vec2_h */
