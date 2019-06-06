@@ -183,6 +183,44 @@ test_vec4(void **state) {
   assert_true(v3[2] >= 0.0999 && v3[2] <= 0.80001);
   assert_true(v3[3] >= 0.0999 && v3[3] <= 0.80001);
 
+  /* swizzle */
+
+  /* ZYX */
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_WZYX, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1});
+
+  glm_vec4_swizzle(v1, GLM_XXXX, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_YYYY, v1);
+  test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_ZZZZ, v1);
+  test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_WWWW, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+
   /* structs */
   vs1 = test_rand_vec4s();
   vs2 = test_rand_vec4s();

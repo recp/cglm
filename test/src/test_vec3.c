@@ -84,4 +84,30 @@ test_vec3(void **state) {
   vs3 = glms_vec3_add(vs1, vs2);
   vs4 = glms_vec3_maxv(vs1, vs3);
   test_assert_vec3s_eq(vs3, vs4);
+
+  /* swizzle */
+
+  /* ZYX */
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  glm_vec3_swizzle(v1, GLM_ZYX, v1);
+  test_assert_vec3_eq(v1, (vec3){3, 2, 1});
+
+  glm_vec3_swizzle(v1, GLM_XXX, v1);
+  test_assert_vec3_eq(v1, (vec3){3, 3, 3});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+
+  glm_vec3_swizzle(v1, GLM_YYY, v1);
+  test_assert_vec3_eq(v1, (vec3){2, 2, 2});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+
+  glm_vec3_swizzle(v1, GLM_ZZZ, v1);
+  test_assert_vec3_eq(v1, (vec3){3, 3, 3});
 }
