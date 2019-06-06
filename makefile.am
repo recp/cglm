@@ -13,7 +13,7 @@ AM_CFLAGS = -Wall \
             -O3 \
             -Wstrict-aliasing=2 \
             -fstrict-aliasing \
-            -Wpedantic
+            -pedantic
 
 lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
@@ -34,26 +34,32 @@ test_tests_CFLAGS  = $(checkCFLAGS)
 
 cglmdir=$(includedir)/cglm
 cglm_HEADERS = include/cglm/version.h \
-                  include/cglm/cglm.h \
-                  include/cglm/call.h \
-                  include/cglm/cam.h \
-                  include/cglm/io.h \
-                  include/cglm/mat4.h \
-                  include/cglm/mat3.h \
-                  include/cglm/types.h \
-                  include/cglm/common.h \
-                  include/cglm/affine.h \
-                  include/cglm/vec3.h \
-                  include/cglm/vec3-ext.h \
-                  include/cglm/vec4.h \
-                  include/cglm/vec4-ext.h \
-                  include/cglm/euler.h \
-                  include/cglm/util.h \
-                  include/cglm/quat.h \
-                  include/cglm/affine-mat.h \
-                  include/cglm/plane.h \
-                  include/cglm/frustum.h \
-                  include/cglm/box.h
+               include/cglm/cglm.h \
+               include/cglm/call.h \
+               include/cglm/cam.h \
+               include/cglm/io.h \
+               include/cglm/mat4.h \
+               include/cglm/mat3.h \
+               include/cglm/types.h \
+               include/cglm/common.h \
+               include/cglm/affine.h \
+               include/cglm/vec3.h \
+               include/cglm/vec3-ext.h \
+               include/cglm/vec4.h \
+               include/cglm/vec4-ext.h \
+               include/cglm/euler.h \
+               include/cglm/util.h \
+               include/cglm/quat.h \
+               include/cglm/affine-mat.h \
+               include/cglm/plane.h \
+               include/cglm/frustum.h \
+               include/cglm/box.h \
+               include/cglm/color.h \
+               include/cglm/project.h \
+               include/cglm/sphere.h \
+               include/cglm/ease.h \
+               include/cglm/curve.h \
+               include/cglm/bezier.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -67,10 +73,17 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/euler.h \
                     include/cglm/call/plane.h \
                     include/cglm/call/frustum.h \
-                    include/cglm/call/box.h
+                    include/cglm/call/box.h \
+                    include/cglm/call/project.h \
+                    include/cglm/call/sphere.h \
+                    include/cglm/call/ease.h \
+                    include/cglm/call/curve.h \
+                    include/cglm/call/bezier.h
 
 cglm_simddir=$(includedir)/cglm/simd
-cglm_simd_HEADERS = include/cglm/simd/intrin.h
+cglm_simd_HEADERS = include/cglm/simd/intrin.h \
+                    include/cglm/simd/x86.h \
+                    include/cglm/simd/arm.h
 
 cglm_simd_sse2dir=$(includedir)/cglm/simd/sse2
 cglm_simd_sse2_HEADERS = include/cglm/simd/sse2/affine.h \
@@ -85,6 +98,26 @@ cglm_simd_avx_HEADERS = include/cglm/simd/avx/mat4.h \
 cglm_simd_neondir=$(includedir)/cglm/simd/neon
 cglm_simd_neon_HEADERS = include/cglm/simd/neon/mat4.h
 
+cglm_structdir=$(includedir)/cglm/struct
+cglm_struct_HEADERS = include/cglm/struct/mat4.h \
+                      include/cglm/struct/mat3.h \
+                      include/cglm/struct/vec3.h \
+                      include/cglm/struct/vec3-ext.h \
+                      include/cglm/struct/vec4.h \
+                      include/cglm/struct/vec4-ext.h \
+                      include/cglm/struct/affine.h \
+                      include/cglm/struct/io.h \
+                      include/cglm/struct/cam.h \
+                      include/cglm/struct/quat.h \
+                      include/cglm/struct/euler.h \
+                      include/cglm/struct/plane.h \
+                      include/cglm/struct/frustum.h \
+                      include/cglm/struct/box.h \
+                      include/cglm/struct/project.h \
+                      include/cglm/struct/sphere.h \
+                      include/cglm/struct/color.h \
+                      include/cglm/struct/curve.h
+
 libcglm_la_SOURCES=\
     src/euler.c \
     src/affine.c \
@@ -97,13 +130,33 @@ libcglm_la_SOURCES=\
     src/mat4.c \
     src/plane.c \
     src/frustum.c \
-    src/box.c
+    src/box.c \
+    src/project.c \
+    src/sphere.c \
+    src/ease.c \
+    src/curve.c \
+    src/bezier.c
 
 test_tests_SOURCES=\
     test/src/test_common.c \
     test/src/test_main.c \
     test/src/test_mat4.c \
-    test/src/test_cam.c
+    test/src/test_cam.c \
+    test/src/test_project.c \
+    test/src/test_clamp.c \
+    test/src/test_euler.c \
+    test/src/test_quat.c \
+    test/src/test_vec4.c \
+    test/src/test_vec3.c \
+    test/src/test_mat3.c \
+    test/src/test_affine.c \
+    test/src/test_bezier.c
+
+# When running configure with --prefix, $VPATH references
+# the source directory that post-build.sh is in. When not
+# using a prefix, $VPATH will be unset, so we need to fall
+# back to using . to run the script.
+export VPATH
 
 all-local:
-	sh ./post-build.sh
+	sh $${VPATH:-.}/post-build.sh

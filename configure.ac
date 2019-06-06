@@ -7,7 +7,7 @@
 #*****************************************************************************
 
 AC_PREREQ([2.69])
-AC_INIT([cglm], [0.2.1], [info@recp.me])
+AC_INIT([cglm], [0.6.0], [info@recp.me])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AC_CONFIG_MACRO_DIR([m4])
@@ -29,6 +29,7 @@ LT_INIT
 # Checks for libraries.
 AC_CHECK_LIB([m], [floor])
 
+m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 AC_SYS_LARGEFILE
 
 # Checks for header files.

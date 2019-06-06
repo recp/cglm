@@ -1,40 +1,79 @@
 Getting Started
 ================================
 
+Types:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 **cglm** uses **glm** prefix for all functions e.g. glm_lookat. You can see supported types in common header file:
 
 .. code-block:: c
   :linenos:
 
-   typedef float vec3[3];
-   typedef int  ivec3[3];
-   typedef CGLM_ALIGN(16) float vec4[4];
+  typedef float                   vec2[2];
+  typedef float                   vec3[3];
+  typedef int                    ivec3[3];
+  typedef CGLM_ALIGN_IF(16) float vec4[4];
+  typedef vec4                    versor;
+  typedef vec3                    mat3[3];
 
-   typedef vec3 mat3[3];
-   typedef vec4 mat4[4];
-
-   typedef vec4 versor;
+  #ifdef __AVX__
+  typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
+  #else
+  typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
+  #endif
 
 As you can see types don't store extra informations in favor of space.
 You can send these values e.g. matrix to OpenGL directly without casting or calling a function like *value_ptr*
 
-*vec4* and *mat4* requires 16 byte aligment because vec4 and mat4 operations are
-vectorized by SIMD instructions (SSE/AVX).
+Alignment Is Required:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**NOTE:** Unaligned vec4 and unaligned mat4 operations will be supported in the future. Check todo list.
+**vec4** and **mat4** requires 16 (32 for **mat4** if AVX is enabled) byte alignment because **vec4** and **mat4** operations are vectorized by SIMD instructions (SSE/AVX/NEON).
+
+**UPDATE:**
+  By starting v0.4.5 cglm provides an option to disable alignment requirement, it is enabled as default
+
+  | Check :doc:`opt` page for more details
+
+  Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
+
+Allocations:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.
+You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location. When allocating memory, don't forget that **vec4** and **mat4** require alignment.
+
+**NOTE:** Unaligned **vec4** and unaligned **mat4** operations will be supported in the future. Check todo list.
 Because you may want to multiply a CGLM matrix with external matrix.
 There is no guarantee that non-CGLM matrix is aligned. Unaligned types will have *u* prefix e.g. **umat4**
+
+Array vs Struct:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*cglm* uses arrays for vector and matrix types. So you can't access individual
+elements like vec.x, vec.y, vec.z... You must use subscript to access vector elements
+e.g. vec[0], vec[1], vec[2].
+
+Also I think it is more meaningful to access matrix elements with subscript
+e.g **matrix[2][3]** instead of **matrix._23**. Since matrix is array of vectors,
+vectors are also defined as array. This makes types homogeneous.
+
+**Return arrays?**
+
+Since C doesn't support return arrays, cglm also doesn't support this feature.
+
+Function design:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: cglm-intro.png
+   :width: 492px 
+   :height: 297px
+   :align: center
 
 cglm provides a few way to call a function to do same operation.
 
 * Inline - *glm_, glm_u*
-   * aligned
-   * unaligned (todo)
 * Pre-compiled - *glmc_, glmc_u*
-   * aligned
-   * unaligned (todo)
 
-For instance **glm_mat4_mul** is inline (all *glm_* functions are inline), to make it non-inline (pre-compiled)
+For instance **glm_mat4_mul** is inline (all *glm_* functions are inline), to make it non-inline (pre-compiled),
 call it as **glmc_mat4_mul** from library, to use unaligned version use **glm_umat4_mul** (todo).
 
 Most functions have **dest** parameter for output. For instance mat4_mul func looks like this:

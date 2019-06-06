@@ -16,21 +16,27 @@
  Functions:
    CGLM_INLINE void  glm_mat3_copy(mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_identity(mat3 mat);
+   CGLM_INLINE void  glm_mat3_identity_array(mat3 * restrict mat, size_t count);
+   CGLM_INLINE void  glm_mat3_zero(mat3 mat);
    CGLM_INLINE void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
    CGLM_INLINE void  glm_mat3_mulv(mat3 m, vec3 v, vec3 dest);
+   CGLM_INLINE float glm_mat3_trace(mat3 m);
+   CGLM_INLINE void  glm_mat3_quat(mat3 m, versor dest);
    CGLM_INLINE void  glm_mat3_scale(mat3 m, float s);
    CGLM_INLINE float glm_mat3_det(mat3 mat);
    CGLM_INLINE void  glm_mat3_inv(mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_swap_col(mat3 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
+   CGLM_INLINE float glm_mat3_rmc(vec3 r, mat3 m, vec3 c);
  */
 
 #ifndef cglm_mat3_h
 #define cglm_mat3_h
 
 #include "common.h"
+#include "vec3.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/mat3.h"
@@ -45,8 +51,8 @@
 
 
 /* for C only */
-#define GLM_MAT3_IDENTITY (mat3)GLM_MAT3_IDENTITY_INIT
-#define GLM_MAT3_ZERO     (mat3)GLM_MAT3_ZERO_INIT
+#define GLM_MAT3_IDENTITY ((mat3)GLM_MAT3_IDENTITY_INIT)
+#define GLM_MAT3_ZERO     ((mat3)GLM_MAT3_ZERO_INIT)
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_mat3_dup(mat, dest) glm_mat3_copy(mat, dest)
@@ -60,7 +66,17 @@
 CGLM_INLINE
 void
 glm_mat3_copy(mat3 mat, mat3 dest) {
-  glm__memcpy(float, dest, mat, sizeof(mat3));
+  dest[0][0] = mat[0][0];
+  dest[0][1] = mat[0][1];
+  dest[0][2] = mat[0][2];
+
+  dest[1][0] = mat[1][0];
+  dest[1][1] = mat[1][1];
+  dest[1][2] = mat[1][2];
+
+  dest[2][0] = mat[2][0];
+  dest[2][1] = mat[2][1];
+  dest[2][2] = mat[2][2];
 }
 
 /*!
@@ -80,7 +96,38 @@ glm_mat3_copy(mat3 mat, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_identity(mat3 mat) {
-  mat3 t = GLM_MAT3_IDENTITY_INIT;
+  CGLM_ALIGN_MAT mat3 t = GLM_MAT3_IDENTITY_INIT;
+  glm_mat3_copy(t, mat);
+}
+
+/*!
+ * @brief make given matrix array's each element identity matrix
+ *
+ * @param[in, out]  mat   matrix array (must be aligned (16/32)
+ *                        if alignment is not disabled)
+ *
+ * @param[in]       count count of matrices
+ */
+CGLM_INLINE
+void
+glm_mat3_identity_array(mat3 * __restrict mat, size_t count) {
+  CGLM_ALIGN_MAT mat3 t = GLM_MAT3_IDENTITY_INIT;
+  size_t i;
+
+  for (i = 0; i < count; i++) {
+    glm_mat3_copy(t, mat[i]);
+  }
+}
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_mat3_zero(mat3 mat) {
+  CGLM_ALIGN_MAT mat3 t = GLM_MAT3_ZERO_INIT;
   glm_mat3_copy(t, mat);
 }
 
@@ -154,7 +201,7 @@ glm_mat3_transpose_to(mat3 m, mat3 dest) {
 CGLM_INLINE
 void
 glm_mat3_transpose(mat3 m) {
-  mat3 tmp;
+  CGLM_ALIGN_MAT mat3 tmp;
 
   tmp[0][1] = m[1][0];
   tmp[0][2] = m[2][0];
@@ -184,6 +231,68 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
   dest[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
   dest[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
   dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+}
+
+/*!
+ * @brief trace of matrix
+ *
+ * sum of the elements on the main diagonal from upper left to the lower right
+ *
+ * @param[in]  m matrix
+ */
+CGLM_INLINE
+float
+glm_mat3_trace(mat3 m) {
+  return m[0][0] + m[1][1] + m[2][2];
+}
+
+/*!
+ * @brief convert mat3 to quaternion
+ *
+ * @param[in]  m    rotation matrix
+ * @param[out] dest destination quaternion
+ */
+CGLM_INLINE
+void
+glm_mat3_quat(mat3 m, versor dest) {
+  float trace, r, rinv;
+
+  /* it seems using like m12 instead of m[1][2] causes extra instructions */
+
+  trace = m[0][0] + m[1][1] + m[2][2];
+  if (trace >= 0.0f) {
+    r       = sqrtf(1.0f + trace);
+    rinv    = 0.5f / r;
+
+    dest[0] = rinv * (m[1][2] - m[2][1]);
+    dest[1] = rinv * (m[2][0] - m[0][2]);
+    dest[2] = rinv * (m[0][1] - m[1][0]);
+    dest[3] = r    * 0.5f;
+  } else if (m[0][0] >= m[1][1] && m[0][0] >= m[2][2]) {
+    r       = sqrtf(1.0f - m[1][1] - m[2][2] + m[0][0]);
+    rinv    = 0.5f / r;
+
+    dest[0] = r    * 0.5f;
+    dest[1] = rinv * (m[0][1] + m[1][0]);
+    dest[2] = rinv * (m[0][2] + m[2][0]);
+    dest[3] = rinv * (m[1][2] - m[2][1]);
+  } else if (m[1][1] >= m[2][2]) {
+    r       = sqrtf(1.0f - m[0][0] - m[2][2] + m[1][1]);
+    rinv    = 0.5f / r;
+
+    dest[0] = rinv * (m[0][1] + m[1][0]);
+    dest[1] = r    * 0.5f;
+    dest[2] = rinv * (m[1][2] + m[2][1]);
+    dest[3] = rinv * (m[2][0] - m[0][2]);
+  } else {
+    r       = sqrtf(1.0f - m[0][0] - m[1][1] + m[2][2]);
+    rinv    = 0.5f / r;
+
+    dest[0] = rinv * (m[0][2] + m[2][0]);
+    dest[1] = rinv * (m[1][2] + m[2][1]);
+    dest[2] = r    * 0.5f;
+    dest[3] = rinv * (m[0][1] - m[1][0]);
+  }
 }
 
 /*!
@@ -259,9 +368,9 @@ CGLM_INLINE
 void
 glm_mat3_swap_col(mat3 mat, int col1, int col2) {
   vec3 tmp;
-  glm_vec_copy(mat[col1], tmp);
-  glm_vec_copy(mat[col2], mat[col1]);
-  glm_vec_copy(tmp, mat[col2]);
+  glm_vec3_copy(mat[col1], tmp);
+  glm_vec3_copy(mat[col2], mat[col1]);
+  glm_vec3_copy(tmp, mat[col2]);
 }
 
 /*!
@@ -286,6 +395,28 @@ glm_mat3_swap_row(mat3 mat, int row1, int row2) {
   mat[0][row2] = tmp[0];
   mat[1][row2] = tmp[1];
   mat[2][row2] = tmp[2];
+}
+
+/*!
+ * @brief helper for  R (row vector) * M (matrix) * C (column vector)
+ *
+ * rmc stands for Row * Matrix * Column
+ *
+ * the result is scalar because R * M = Matrix1x3 (row vector),
+ * then Matrix1x3 * Vec3 (column vector) = Matrix1x1 (Scalar)
+ *
+ * @param[in]  r   row vector or matrix1x3
+ * @param[in]  m   matrix3x3
+ * @param[in]  c   column vector or matrix3x1
+ *
+ * @return scalar value e.g. Matrix1x1
+ */
+CGLM_INLINE
+float
+glm_mat3_rmc(vec3 r, mat3 m, vec3 c) {
+  vec3 tmp;
+  glm_mat3_mulv(m, c, tmp);
+  return glm_vec3_dot(r, tmp);
 }
 
 #endif /* cglm_mat3_h */

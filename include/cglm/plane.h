@@ -9,9 +9,7 @@
 #define cglm_plane_h
 
 #include "common.h"
-#include "mat4.h"
 #include "vec4.h"
-#include "vec3.h"
 
 /*
  Plane equation:  Ax + By + Cz + D = 0;
@@ -27,12 +25,12 @@
 /*!
  * @brief normalizes a plane
  *
- * @param[in, out] plane pnale to normalize
+ * @param[in, out] plane plane to normalize
  */
 CGLM_INLINE
 void
 glm_plane_normalize(vec4 plane) {
-  glm_vec4_scale(plane, 1.0f / glm_vec_norm(plane), plane);
+  glm_vec4_scale(plane, 1.0f / glm_vec3_norm(plane), plane);
 }
 
 #endif /* cglm_plane_h */

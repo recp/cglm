@@ -11,73 +11,60 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_vec_mulv(vec3 a, vec3 b, vec3 d);
-   CGLM_INLINE void  glm_vec_broadcast(float val, vec3 d);
-   CGLM_INLINE bool  glm_vec_eq(vec3 v, float val);
-   CGLM_INLINE bool  glm_vec_eq_eps(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec_eq_all(vec3 v);
-   CGLM_INLINE bool  glm_vec_eqv(vec3 v1, vec3 v2);
-   CGLM_INLINE bool  glm_vec_eqv_eps(vec3 v1, vec3 v2);
-   CGLM_INLINE float glm_vec_max(vec3 v);
-   CGLM_INLINE float glm_vec_min(vec3 v);
+   CGLM_INLINE void  glm_vec3_broadcast(float val, vec3 d);
+   CGLM_INLINE bool  glm_vec3_eq(vec3 v, float val);
+   CGLM_INLINE bool  glm_vec3_eq_eps(vec3 v, float val);
+   CGLM_INLINE bool  glm_vec3_eq_all(vec3 v);
+   CGLM_INLINE bool  glm_vec3_eqv(vec3 a, vec3 b);
+   CGLM_INLINE bool  glm_vec3_eqv_eps(vec3 a, vec3 b);
+   CGLM_INLINE float glm_vec3_max(vec3 v);
+   CGLM_INLINE float glm_vec3_min(vec3 v);
+   CGLM_INLINE bool  glm_vec3_isnan(vec3 v);
+   CGLM_INLINE bool  glm_vec3_isinf(vec3 v);
+   CGLM_INLINE bool  glm_vec3_isvalid(vec3 v);
+   CGLM_INLINE void  glm_vec3_sign(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
 
 #ifndef cglm_vec3_ext_h
 #define cglm_vec3_ext_h
 
 #include "common.h"
-#include <stdbool.h>
-#include <math.h>
-#include <float.h>
-
-/*!
- * @brief multiplies individual items, just for convenient like SIMD
- *
- * @param a vec1
- * @param b vec2
- * @param d vec3 = (v1[0] * v2[0],  v1[1] * v2[1], v1[2] * v2[2])
- */
-CGLM_INLINE
-void
-glm_vec_mulv(vec3 a, vec3 b, vec3 d) {
-  d[0] = a[0] * b[0];
-  d[1] = a[1] * b[1];
-  d[2] = a[2] * b[2];
-}
+#include "util.h"
 
 /*!
  * @brief fill a vector with specified value
  *
- * @param val value
- * @param d   dest
+ * @param[in]  val value
+ * @param[out] d   dest
  */
 CGLM_INLINE
 void
-glm_vec_broadcast(float val, vec3 d) {
+glm_vec3_broadcast(float val, vec3 d) {
   d[0] = d[1] = d[2] = val;
 }
 
 /*!
  * @brief check if vector is equal to value (without epsilon)
  *
- * @param v   vector
- * @param val value
+ * @param[in] v   vector
+ * @param[in] val value
  */
 CGLM_INLINE
 bool
-glm_vec_eq(vec3 v, float val) {
+glm_vec3_eq(vec3 v, float val) {
   return v[0] == val && v[0] == v[1] && v[0] == v[2];
 }
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
  *
- * @param v   vector
- * @param val value
+ * @param[in] v   vector
+ * @param[in] val value
  */
 CGLM_INLINE
 bool
-glm_vec_eq_eps(vec4 v, float val) {
+glm_vec3_eq_eps(vec3 v, float val) {
   return fabsf(v[0] - val) <= FLT_EPSILON
          && fabsf(v[1] - val) <= FLT_EPSILON
          && fabsf(v[2] - val) <= FLT_EPSILON;
@@ -86,50 +73,50 @@ glm_vec_eq_eps(vec4 v, float val) {
 /*!
  * @brief check if vectors members are equal (without epsilon)
  *
- * @param v   vector
+ * @param[in] v   vector
  */
 CGLM_INLINE
 bool
-glm_vec_eq_all(vec3 v) {
+glm_vec3_eq_all(vec3 v) {
   return v[0] == v[1] && v[0] == v[2];
 }
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
  *
- * @param v1 vector
- * @param v2 vector
+ * @param[in] a vector
+ * @param[in] b vector
  */
 CGLM_INLINE
 bool
-glm_vec_eqv(vec3 v1, vec3 v2) {
-  return v1[0] == v2[0]
-        && v1[1] == v2[1]
-        && v1[2] == v2[2];
+glm_vec3_eqv(vec3 a, vec3 b) {
+  return a[0] == b[0]
+         && a[1] == b[1]
+         && a[2] == b[2];
 }
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
  *
- * @param v1 vector
- * @param v2 vector
+ * @param[in] a vector
+ * @param[in] b vector
  */
 CGLM_INLINE
 bool
-glm_vec_eqv_eps(vec3 v1, vec3 v2) {
-  return fabsf(v1[0] - v2[0]) <= FLT_EPSILON
-         && fabsf(v1[1] - v2[1]) <= FLT_EPSILON
-         && fabsf(v1[2] - v2[2]) <= FLT_EPSILON;
+glm_vec3_eqv_eps(vec3 a, vec3 b) {
+  return fabsf(a[0] - b[0]) <= FLT_EPSILON
+         && fabsf(a[1] - b[1]) <= FLT_EPSILON
+         && fabsf(a[2] - b[2]) <= FLT_EPSILON;
 }
 
 /*!
  * @brief max value of vector
  *
- * @param v vector
+ * @param[in] v vector
  */
 CGLM_INLINE
 float
-glm_vec_max(vec3 v) {
+glm_vec3_max(vec3 v) {
   float max;
 
   max = v[0];
@@ -144,11 +131,11 @@ glm_vec_max(vec3 v) {
 /*!
  * @brief min value of vector
  *
- * @param v vector
+ * @param[in] v vector
  */
 CGLM_INLINE
 float
-glm_vec_min(vec3 v) {
+glm_vec3_min(vec3 v) {
   float min;
 
   min = v[0];
@@ -158,6 +145,71 @@ glm_vec_min(vec3 v) {
     min = v[2];
 
   return min;
+}
+
+/*!
+ * @brief check if all items are NaN (not a number)
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec3_isnan(vec3 v) {
+  return isnan(v[0]) || isnan(v[1]) || isnan(v[2]);
+}
+
+/*!
+ * @brief check if all items are INFINITY
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec3_isinf(vec3 v) {
+  return isinf(v[0]) || isinf(v[1]) || isinf(v[2]);
+}
+
+/*!
+ * @brief check if all items are valid number
+ *        you should only use this in DEBUG mode or very critical asserts
+ *
+ * @param[in] v vector
+ */
+CGLM_INLINE
+bool
+glm_vec3_isvalid(vec3 v) {
+  return !glm_vec3_isnan(v) && !glm_vec3_isinf(v);
+}
+
+/*!
+ * @brief get sign of 32 bit float as +1, -1, 0
+ *
+ * Important: It returns 0 for zero/NaN input
+ *
+ * @param v vector
+ */
+CGLM_INLINE
+void
+glm_vec3_sign(vec3 v, vec3 dest) {
+  dest[0] = glm_signf(v[0]);
+  dest[1] = glm_signf(v[1]);
+  dest[2] = glm_signf(v[2]);
+}
+
+/*!
+ * @brief square root of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_sqrt(vec3 v, vec3 dest) {
+  dest[0] = sqrtf(v[0]);
+  dest[1] = sqrtf(v[1]);
+  dest[2] = sqrtf(v[2]);
 }
 
 #endif /* cglm_vec3_ext_h */

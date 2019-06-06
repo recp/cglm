@@ -8,45 +8,83 @@
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
 
-#if defined( _WIN32 )
+#if defined( _MSC_VER )
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
-#    define __SSE2__
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
 #  elif _M_IX86_FP == 1
-#    define __SSE__
+#    ifndef __SSE__
+#      define __SSE__
+#    endif
+#  endif
+/* do not use alignment for older visual studio versions */
+#  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
+#    define CGLM_ALL_UNALIGNED
 #  endif
 #endif
 
 #if defined( __SSE__ ) || defined( __SSE2__ )
 #  include <xmmintrin.h>
 #  include <emmintrin.h>
-
-/* float */
-#  define _mm_shuffle1_ps(a, z, y, x, w)                                       \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(z, y, x, w))
-
-#  define _mm_shuffle1_ps1(a, x)                                               \
-     _mm_shuffle_ps(a, a, _MM_SHUFFLE(x, x, x, x))
-
-#  define _mm_shuffle2_ps(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                \
-     _mm_shuffle1_ps(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),        \
-                                    z1, y1, x1, w1)
+#  define CGLM_SSE_FP 1
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
 #endif
 
-/* x86, x64 */
-#if defined( __SSE__ ) || defined( __SSE2__ )
-#  define CGLM_SSE_FP 1
+#if defined(__SSE3__)
+#  include <x86intrin.h>
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
+#endif
+
+#if defined(__SSE4_1__)
+#  include <smmintrin.h>
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
+#endif
+
+#if defined(__SSE4_2__)
+#  include <nmmintrin.h>
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
 #endif
 
 #ifdef __AVX__
+#  include <immintrin.h>
 #  define CGLM_AVX_FP 1
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
 #endif
 
 /* ARM Neon */
-#if defined(__ARM_NEON) && defined(__ARM_NEON_FP)
+#if defined(__ARM_NEON)
 #  include <arm_neon.h>
-#  define CGLM_NEON_FP 1
-#else
-#  undef  CGLM_NEON_FP
+#  if defined(__ARM_NEON_FP)
+#    define CGLM_NEON_FP 1
+#    ifndef CGLM_SIMD_ARM
+#      define CGLM_SIMD_ARM
+#    endif
+#  endif
+#endif
+
+#if defined(CGLM_SIMD_x86) || defined(CGLM_NEON_FP)
+#  ifndef CGLM_SIMD
+#    define CGLM_SIMD
+#  endif
+#endif
+
+#if defined(CGLM_SIMD_x86)
+#  include "x86.h"
+#endif
+
+#if defined(CGLM_SIMD_ARM)
+#  include "arm.h"
 #endif
 
 #endif /* cglm_intrin_h */

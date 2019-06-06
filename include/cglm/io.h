@@ -25,7 +25,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_print(mat4   matrix,
+glm_mat4_print(mat4              matrix,
                FILE * __restrict ostream) {
   int i;
   int j;
@@ -55,7 +55,7 @@ glm_mat4_print(mat4   matrix,
 
 CGLM_INLINE
 void
-glm_mat3_print(mat3 matrix,
+glm_mat3_print(mat3              matrix,
                FILE * __restrict ostream) {
   int i;
   int j;
@@ -85,7 +85,7 @@ glm_mat3_print(mat3 matrix,
 
 CGLM_INLINE
 void
-glm_vec4_print(vec4 vec,
+glm_vec4_print(vec4              vec,
                FILE * __restrict ostream) {
   int i;
 
@@ -107,7 +107,7 @@ glm_vec4_print(vec4 vec,
 
 CGLM_INLINE
 void
-glm_vec3_print(vec3 vec,
+glm_vec3_print(vec3              vec,
                FILE * __restrict ostream) {
   int i;
 
@@ -129,7 +129,7 @@ glm_vec3_print(vec3 vec,
 
 CGLM_INLINE
 void
-glm_ivec3_print(ivec3 vec,
+glm_ivec3_print(ivec3             vec,
                 FILE * __restrict ostream) {
   int i;
 
@@ -151,7 +151,7 @@ glm_ivec3_print(ivec3 vec,
 
 CGLM_INLINE
 void
-glm_versor_print(versor vec,
+glm_versor_print(versor            vec,
                  FILE * __restrict ostream) {
   int i;
 
@@ -167,6 +167,35 @@ glm_versor_print(versor vec,
   }
 
   fprintf(ostream, "|\n\n");
+
+#undef m
+}
+
+CGLM_INLINE
+void
+glm_aabb_print(vec3                    bbox[2],
+               const char * __restrict tag,
+               FILE       * __restrict ostream) {
+  int i, j;
+
+#define m 3
+
+  fprintf(ostream, "AABB (%s):\n", tag ? tag: "float");
+
+  for (i = 0; i < 2; i++) {
+    fprintf(ostream, "\t|");
+
+    for (j = 0; j < m; j++) {
+      fprintf(ostream, "%0.4f", bbox[i][j]);
+
+      if (j != m - 1)
+        fprintf(ostream, "\t");
+    }
+
+    fprintf(ostream, "|\n");
+  }
+
+  fprintf(ostream, "\n");
 
 #undef m
 }

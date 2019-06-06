@@ -23,6 +23,10 @@ glmc_euler(vec3 angles, mat4 dest);
 
 CGLM_EXPORT
 void
+glmc_euler_xyz(vec3 angles,  mat4 dest);
+
+CGLM_EXPORT
+void
 glmc_euler_zyx(vec3 angles,  mat4 dest);
 
 CGLM_EXPORT

@@ -1,0 +1,63 @@
+This library [initially] used some [piece of] implementations
+(may include codes) from these open source projects/resources:
+
+1. Initial Affine Transforms
+The original glm repo (g-truc), url: https://github.com/g-truc/glm
+
+LICENSE[S]:
+  The Happy Bunny License (Modified MIT License)
+  The MIT License
+  Copyright (c) 2005 - 2016 G-Truc Creation
+
+FULL LICENSE: https://github.com/g-truc/glm/blob/master/copying.txt
+
+2. Initial Quaternions
+Anton's OpenGL 4 Tutorials book source code:
+
+LICENSE:
+  OpenGL 4 Example Code.
+  Accompanies written series "Anton's OpenGL 4 Tutorials"
+  Email: anton at antongerdelan dot net
+  First version 27 Jan 2014
+  Copyright Dr Anton Gerdelan, Trinity College Dublin, Ireland.
+
+3. Euler Angles
+  David Eberly
+  Geometric Tools, LLC http://www.geometrictools.com/
+  Copyright (c) 1998-2016. All Rights Reserved.
+
+  Computing Euler angles from a rotation matrix (euler.pdf)
+  Gregory G. Slabaugh
+
+4. Extracting Planes
+Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix
+Authors:
+  Gil Gribb (ggribb@ravensoft.com)
+  Klaus Hartmann (k_hartmann@osnabrueck.netsurf.de)
+
+5. Transform AABB
+Transform Axis Aligned Bounding Boxes:
+http://dev.theomader.com/transform-bounding-boxes/
+https://github.com/erich666/GraphicsGems/blob/master/gems/TransBox.c
+
+6. Cull frustum
+http://www.txutxi.com/?p=584
+http://old.cescg.org/CESCG-2002/DSykoraJJelinek/
+
+7. Quaternions
+Initial mat4_quat is borrowed from Apple's simd library
+
+8. Vector Rotation using Quaternion
+https://gamedev.stackexchange.com/questions/28395/rotating-vector3-by-a-quaternion
+
+9. Sphere AABB intersect
+https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
+
+10. Horizontal add
+https://stackoverflow.com/questions/6996764/fastest-way-to-do-horizontal-float-vector-sum-on-x86
+
+11. de casteljau implementation and comments
+https://forums.khronos.org/showthread.php/10264-Animations-in-1-4-1-release-notes-revision-A/page2?highlight=bezier
+https://forums.khronos.org/showthread.php/10644-Animation-Bezier-interpolation
+https://forums.khronos.org/showthread.php/10387-2D-Tangents-in-Bezier-Splines?p=34164&viewfull=1#post34164
+https://forums.khronos.org/showthread.php/10651-Animation-TCB-Spline-Interpolation-in-COLLADA?highlight=bezier
