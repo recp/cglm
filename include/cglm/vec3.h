@@ -61,7 +61,7 @@
    CGLM_INLINE void  glm_vec3_ortho(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_clamp(vec3 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
-   CGLM_INLINE void  glm_vec_swizzle(vec3 v, int mask, vec3 dest);
+   CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -862,14 +862,14 @@ glm_normalize_to(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec_swizzle(vec3 v, int mask, vec3 dest) {
+glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
   vec3 t;
 
   t[0] = v[(mask & (3 << 0))];
   t[1] = v[(mask & (3 << 2)) >> 2];
   t[2] = v[(mask & (3 << 4)) >> 4];
 
-  glm_vec_copy(t, dest);
+  glm_vec3_copy(t, dest);
 }
 
 #endif /* cglm_vec3_h */
