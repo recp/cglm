@@ -48,6 +48,7 @@
    CGLM_INLINE vec4s glms_vec4_clamp(vec4s v, float minVal, float maxVal);
    CGLM_INLINE vec4s glms_vec4_lerp(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
+   CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
  */
 
 #ifndef cglms_vec4s_h
@@ -575,6 +576,23 @@ glms_vec4_cubic(float s) {
   vec4s r;
   glm_vec4_cubic(s, r.raw);
   return r;
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXXX, GLM_WZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @returns swizzled vector
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_swizzle(vec4s v, int mask) {
+  vec4s dest;
+  glm_vec4_swizzle(v.raw, mask, dest.raw);
+  return dest;
 }
 
 #endif /* cglms_vec4s_h */

@@ -58,6 +58,7 @@
    CGLM_INLINE vec3s glms_vec3_ortho(vec3s v);
    CGLM_INLINE vec3s glms_vec3_clamp(vec3s v, float minVal, float maxVal);
    CGLM_INLINE vec3s glms_vec3_lerp(vec3s from, vec3s to, float t);
+   CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -745,6 +746,23 @@ vec3s
 glms_normalize(vec3s v) {
   glm_normalize(v.raw);
   return v;
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXX, GLM_ZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @returns swizzled vector
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_swizzle(vec3s v, int mask) {
+  vec3s dest;
+  glm_vec3_swizzle(v.raw, mask, dest.raw);
+  return dest;
 }
 
 #endif /* cglms_vec3s_h */
