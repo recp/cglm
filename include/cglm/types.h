@@ -38,6 +38,8 @@ typedef int                    ivec3[3];
 typedef CGLM_ALIGN_IF(16) float vec4[4];
 typedef vec4                    versor;
 typedef vec3                    mat3[3];
+// typedef vec4                    mat2;
+typedef CGLM_ALIGN_IF(16) vec2  mat2[2];
 
 #ifdef __AVX__
 typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
