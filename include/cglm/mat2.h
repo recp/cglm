@@ -22,10 +22,9 @@
 #define GLM_MAT2_IDENTITY_INIT  {{1.0f, 0.0f}, {0.0f, 1.0f}}
 #define GLM_MAT2_ZERO_INIT      {{0.0f, 0.0f}, {0.0f, 0.0f}}
 
-
 /* for C only */
-#define GLM_MAT2_IDENTITY ((mat3)GLM_MAT2_IDENTITY_INIT)
-#define GLM_MAT2_ZERO     ((mat3)GLM_MAT2_ZERO_INIT)
+#define GLM_MAT2_IDENTITY ((mat2)GLM_MAT2_IDENTITY_INIT)
+#define GLM_MAT2_ZERO     ((mat2)GLM_MAT2_ZERO_INIT)
 
 /*!
  * @brief copy all members of [mat] to [dest]
@@ -36,10 +35,7 @@
 CGLM_INLINE
 void
 glm_mat2_copy(mat2 mat, mat2 dest) {
-  dest[0][0] = mat[0][0];
-  dest[0][1] = mat[0][1];
-  dest[1][0] = mat[1][0];
-  dest[1][1] = mat[1][1];
+  glm_vec4_copy(mat[0], dest[0]);
 }
 
 /*!
@@ -66,7 +62,7 @@ glm_mat2_identity(mat2 mat) {
 /*!
  * @brief make given matrix array's each element identity matrix
  *
- * @param[in, out]  mat   matrix array (must be aligned (16/32)
+ * @param[in, out]  mat   matrix array (must be aligned (16)
  *                        if alignment is not disabled)
  *
  * @param[in]       count count of matrices
@@ -100,8 +96,8 @@ glm_mat2_zero(mat2 mat) {
  * m1, m2 and dest matrices can be same matrix, it is possible to write this:
  *
  * @code
- * mat3 m = GLM_MAT3_IDENTITY_INIT;
- * glm_mat3_mul(m, m, m);
+ * mat2 m = GLM_MAT2_IDENTITY_INIT;
+ * glm_mat2_mul(m, m, m);
  * @endcode
  *
  * @param[in]  m1   left matrix
@@ -127,7 +123,7 @@ glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest) {
 }
 
 /*!
- * @brief transpose mat3 and store in dest
+ * @brief transpose mat2 and store in dest
  *
  * source matrix will not be transposed unless dest is m
  *
@@ -148,7 +144,7 @@ glm_mat2_transpose_to(mat2 m, mat2 dest) {
 }
 
 /*!
- * @brief tranpose mat3 and store result in same matrix
+ * @brief tranpose mat2 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */
@@ -160,4 +156,146 @@ glm_mat2_transpose(mat2 m) {
   m[0][1] = m[1][0];
   m[1][0] = tmp;
 }
+
+/*!
+ * @brief multiply mat2 with vec2 (column vector) and store in dest vector
+ *
+ * @param[in]  m    mat2 (left)
+ * @param[in]  v    vec2 (right, column vector)
+ * @param[out] dest vec2 (result, column vector)
+ */
+CGLM_INLINE
+void
+glm_mat2_mulv(mat2 m, vec2 v, vec2 dest) {
+  dest[0] = m[0][0] * v[0] + m[1][0] * v[1];
+  dest[1] = m[0][1] * v[0] + m[1][1] * v[1];
+}
+
+/*!
+ * @brief trace of matrix
+ *
+ * sum of the elements on the main diagonal from upper left to the lower right
+ *
+ * @param[in]  m matrix
+ */
+CGLM_INLINE
+float
+glm_mat2_trace(mat2 m) {
+  return m[0][0] + m[1][1];
+}
+
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]      s scalar
+ */
+CGLM_INLINE
+void
+glm_mat2_scale(mat2 m, float s) {
+  glm_vec4_scale(m[0], s, m[0]);
+}
+
+/*!
+ * @brief mat2 determinant
+ *
+ * @param[in] mat matrix
+ *
+ * @return determinant
+ */
+CGLM_INLINE
+float
+glm_mat2_det(mat2 mat) {
+  return mat[0][0] * mat[1][1] - mat[1][0] * mat[0][1];
+}
+
+/*!
+ * @brief inverse mat2 and store in dest
+ *
+ * @param[in]  mat  matrix
+ * @param[out] dest inverse matrix
+ */
+CGLM_INLINE
+void
+glm_mat2_inv(mat2 mat, mat2 dest) {
+  float det;
+  float a = mat[0][0], b = mat[0][1],
+        c = mat[1][0], d = mat[1][1];
+
+  det = 1.0f / (a * d - c * b);
+
+  dest[0][0] =  d * det;
+  dest[0][1] = -b * det;
+  dest[1][0] = -c * det;
+  dest[1][1] =  a * det;
+}
+
+/*!
+ * @brief swap two matrix columns
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     col1 col1
+ * @param[in]     col2 col2
+ */
+CGLM_INLINE
+void
+glm_mat2_swap_col(mat2 mat, int col1, int col2) {
+  float a, b;
+
+  a = mat[col1][0];
+  b = mat[col1][1];
+
+  mat[col1][0] = mat[col2][0];
+  mat[col1][1] = mat[col2][1];
+
+  mat[col2][0] = a;
+  mat[col2][1] = b;
+}
+
+/*!
+ * @brief swap two matrix rows
+ *
+ * @param[in,out] mat  matrix
+ * @param[in]     row1 row1
+ * @param[in]     row2 row2
+ */
+CGLM_INLINE
+void
+glm_mat2_swap_row(mat2 mat, int row1, int row2) {
+  float a, b;
+
+  a = mat[0][row1];
+  b = mat[1][row1];
+
+  mat[0][row1] = mat[0][row2];
+  mat[1][row1] = mat[1][row2];
+
+  mat[0][row2] = a;
+  mat[1][row2] = b;
+}
+
+/*!
+ * @brief helper for  R (row vector) * M (matrix) * C (column vector)
+ *
+ * rmc stands for Row * Matrix * Column
+ *
+ * the result is scalar because R * M = Matrix1x2 (row vector),
+ * then Matrix1x2 * Vec2 (column vector) = Matrix1x1 (Scalar)
+ *
+ * @param[in]  r   row vector or matrix1x2
+ * @param[in]  m   matrix2x2
+ * @param[in]  c   column vector or matrix2x1
+ *
+ * @return scalar value e.g. Matrix1x1
+ */
+CGLM_INLINE
+float
+glm_mat2_rmc(vec2 r, mat2 m, vec2 c) {
+  vec2 tmp;
+  glm_mat2_mulv(m, c, tmp);
+  return glm_vec2_dot(r, tmp);
+}
+
 #endif /* cglm_mat2_h */

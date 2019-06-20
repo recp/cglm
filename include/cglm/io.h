@@ -181,6 +181,28 @@ glm_ivec3_print(ivec3             vec,
 
 CGLM_INLINE
 void
+glm_vec2_print(vec2              vec,
+               FILE * __restrict ostream) {
+  int i;
+
+#define m 2
+
+  fprintf(ostream, "Vector (float%d):\n\t|", m);
+
+  for (i = 0; i < m; i++) {
+    fprintf(ostream, "%0.4f", vec[i]);
+
+    if (i != m - 1)
+      fprintf(ostream, "\t");
+  }
+
+  fprintf(ostream, "|\n\n");
+
+#undef m
+}
+
+CGLM_INLINE
+void
 glm_versor_print(versor            vec,
                  FILE * __restrict ostream) {
   int i;
