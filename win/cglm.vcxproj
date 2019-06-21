@@ -120,7 +120,7 @@
     <ProjectGuid>{CA8BCAF9-CD25-4133-8F62-3D1449B5D2FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cglm</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
