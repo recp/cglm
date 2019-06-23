@@ -59,7 +59,9 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/sphere.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
-               include/cglm/bezier.h
+               include/cglm/bezier.h \
+               include/cglm/types-struct.h \
+               include/cglm/struct.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -151,6 +153,8 @@ test_tests_SOURCES=\
     test/src/test_mat3.c \
     test/src/test_affine.c \
     test/src/test_bezier.c
+
+pkgconfig_DATA=cglm.pc
 
 # When running configure with --prefix, $VPATH references
 # the source directory that post-build.sh is in. When not
