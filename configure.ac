@@ -14,6 +14,10 @@ AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADERS([config.h])
 
+# Dependencies for pkg-config.
+PKG_PROG_PKG_CONFIG
+PKG_INSTALLDIR
+
 # Checks for programs.
 AC_PROG_CC
 AM_PROG_CC_C_O
@@ -53,6 +57,6 @@ AC_TYPE_UINT8_T
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 
-AC_CONFIG_FILES([makefile])
+AC_CONFIG_FILES([makefile cglm.pc])
 
 AC_OUTPUT

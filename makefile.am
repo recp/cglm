@@ -154,6 +154,8 @@ test_tests_SOURCES=\
     test/src/test_affine.c \
     test/src/test_bezier.c
 
+pkgconfig_DATA=cglm.pc
+
 # When running configure with --prefix, $VPATH references
 # the source directory that post-build.sh is in. When not
 # using a prefix, $VPATH will be unset, so we need to fall
