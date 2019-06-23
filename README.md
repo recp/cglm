@@ -145,6 +145,17 @@ $ make check # [Optional] (if you run `sh ./build-deps.sh`)
 $ [sudo] make install
 ```
 
+This will also install pkg-config files so you can use
+`pkg-config --cflags cglm` and `pkg-config --libs cglm` to retrieve compiler
+and linker flags.
+
+The files will be installed into the given prefix (usually `/usr/local` by
+default on Linux), but your pkg-config may not be configured to actually check
+there. You can figure out where it's looking by running `pkg-config --variable
+pc_path pkg-config` and change the path the files are installed to via
+`./configure --with-pkgconfigdir=/your/path`. Alternatively, you can add the
+prefix path to your `PKG_CONFIG_PATH` environment variable.
+
 ### Windows (MSBuild)
 Windows related build files, project files are located in `win` folder,
 make sure you are inside `cglm/win` folder.
