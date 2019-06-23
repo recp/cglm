@@ -16,7 +16,17 @@ AC_CONFIG_HEADERS([config.h])
 
 # Dependencies for pkg-config.
 PKG_PROG_PKG_CONFIG
-PKG_INSTALLDIR
+# Ancient versions of pkg-config (such as the one used in Travis CI)
+# don't have this macro, so we need to do it manually.
+m4_ifdef([PKG_INSTALLDIR], [
+    PKG_INSTALLDIR
+], [
+    AC_ARG_WITH([pkgconfigdir],
+        [AS_HELP_STRING([--with-pkgconfigdir],
+                        [pkg-config installation directory ['${libdir}/pkgconfig']])],,
+        [with_pkgconfigdir=]'${libdir}/pkgconfig')
+    AC_SUBST([pkgconfigdir], [$with_pkgconfigdir])
+])
 
 # Checks for programs.
 AC_PROG_CC
