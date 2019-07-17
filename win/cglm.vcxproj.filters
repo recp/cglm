@@ -45,9 +45,6 @@
     <ClCompile Include="..\src\cam.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\dllmain.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\src\euler.c">
       <Filter>src</Filter>
     </ClCompile>

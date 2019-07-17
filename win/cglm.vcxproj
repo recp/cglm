@@ -24,7 +24,6 @@
     <ClCompile Include="..\src\box.c" />
     <ClCompile Include="..\src\cam.c" />
     <ClCompile Include="..\src\curve.c" />
-    <ClCompile Include="..\src\dllmain.c" />
     <ClCompile Include="..\src\ease.c" />
     <ClCompile Include="..\src\euler.c" />
     <ClCompile Include="..\src\frustum.c" />
