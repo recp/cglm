@@ -26,7 +26,7 @@ you have the latest version
 - **[major change]** by starting v0.5.1, built-in alignment is removed from **vec3** and **mat3** types
 
 #### Note for C++ developers:
-If you don't aware about original GLM library yet, you may also want to look at:
+If you are not aware of the original GLM library yet, you may also want to look at:
 https://github.com/g-truc/glm
 
 #### Note for new comers (Important):
