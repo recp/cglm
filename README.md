@@ -9,7 +9,7 @@
 
 #### Documentation
 
-Almost all functions (inline versions) and parameters are documented inside related headers. <br />
+Almost all functions (inline versions) and parameters are documented inside the corresponding headers. <br />
 Complete documentation: http://cglm.readthedocs.io
 
 #### Note for previous versions:
@@ -44,7 +44,7 @@ https://github.com/g-truc/glm
 
 #### Returning vector or matrix... ?
 
-**cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you you struct api (`glms_`).
+**cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you utilize struct api (`glms_`).
 
 #### Other APIs like Vulkan, Metal, Dx?
 Currently *cglm* uses default clip space configuration (-1, 1) for camera functions (perspective, extract corners...), in the future other clip space configurations will be supported
@@ -71,7 +71,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
 - general purpose vector operations (cross, dot, rotate, proj, angle...)
-- affine transforms
+- affine transformations
 - matrix decomposition (extract rotation, scaling factor)
 - optimized affine transform matrices (mul, rigid-body inverse)
 - camera (lookat)
@@ -87,12 +87,12 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - easing functions
 - curves
 - curve interpolation helpers (S*M*C, deCasteljau...)
-- and other...
+- and others...
 
 <hr />
 
 You have two option to call a function/operation: inline or library call (link)
-Almost all functions are marked inline (always_inline) so compiler probably will inline.
+Almost all functions are marked inline (always_inline) so compiler will probably inline.
 To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`.
 
 ```C
@@ -119,7 +119,7 @@ You can pass matrices and vectors as array to functions rather than get address.
   glm_translate(m, (vec3){1.0f, 0.0f, 0.0f});
 ```
 
-Library contains general purpose mat4 mul and inverse functions but also contains some special form (optimized) of these functions for affine transform matrices. If you want to multiply two affine transform matrices you can use glm_mul instead of glm_mat4_mul and glm_inv_tr (ROT + TR) instead glm_mat4_inv
+Library contains general purpose mat4 mul and inverse functions, and also contains some special forms (optimized) of these functions for affine transformations' matrices. If you want to multiply two affine transformation matrices you can use glm_mul instead of glm_mat4_mul and glm_inv_tr (ROT + TR) instead glm_mat4_inv
 ```C
 /* multiplication */
 mat4 modelMat;
@@ -157,9 +157,9 @@ pc_path pkg-config` and change the path the files are installed to via
 prefix path to your `PKG_CONFIG_PATH` environment variable.
 
 ### Windows (MSBuild)
-Windows related build files, project files are located in `win` folder,
+Windows related build file and project files are located in `win` folder,
 make sure you are inside `cglm/win` folder.
-Code Analysis are enabled, it may take awhile to build
+Code Analysis is enabled, so it may take awhile to build.
 
 ```Powershell
 $ cd win
@@ -180,11 +180,11 @@ $ sphinx-build source build
 it will compile docs into build folder, you can run index.html inside that function.
 
 ## How to use
-If you want to use inline versions of funcstions then; include main header
+If you want to use the inline versions of functions, then include the main header
 ```C
 #include <cglm/cglm.h>
 ```
-the header will include all headers. Then call func you want e.g. rotate vector by axis:
+the header will include all headers. Then call the func you want e.g. rotate vector by axis:
 ```C
 glm_vec3_rotate(v1, glm_rad(45), (vec3){1.0f, 0.0f, 0.0f});
 ```
@@ -215,7 +215,7 @@ glm_mat4_mul(m1, m2, m1);
 /* or */
 glm_mat4_mul(m1, m1, m1);
 ```
-the first two parameter are **[in]** and the last one is **[out]** parameter. After multiplied *m1* and *m2* the result is stored in *m1*. This is why we send *m1* twice. You may store result in different matrix, this just an example.
+the first two parameter are **[in]** and the last one is **[out]** parameter. After multiplying *m1* and *m2*, the result is stored in *m1*. This is why we send *m1* twice. You may store the result in a different matrix, this is just an example.
 
 ### Example: Computing MVP matrix
 
@@ -255,7 +255,7 @@ Option 2: Cast matrix to pointer type (also valid for multiple dimensional array
 glUniformMatrix4fv(location, 1, GL_FALSE, (float *)matrix);
 ```
 
-You can pass same way to another APIs e.g. Vulkan, DX...
+You can pass matrices the same way to other APIs e.g. Vulkan, DX...
 
 ## Notes
 
