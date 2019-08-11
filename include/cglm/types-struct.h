@@ -10,6 +10,16 @@
 
 #include "types.h"
 
+typedef union vec2s {
+#ifndef CGLM_NO_ANONYMOUS_STRUCT
+  struct {
+    float x;
+    float y;
+  };
+#endif
+  vec2 raw;
+} vec2s;
+
 typedef union vec3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
