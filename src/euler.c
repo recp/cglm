@@ -58,6 +58,6 @@ glmc_euler_yxz(vec3 angles, mat4 dest) {
 
 CGLM_EXPORT
 void
-glmc_euler_by_order(vec3 angles, glm_euler_sq axis, mat4 dest) {
+glmc_euler_by_order(vec3 angles, glm_euler_seq axis, mat4 dest) {
   glm_euler_by_order(angles, axis, dest);
 }
