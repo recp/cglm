@@ -15,7 +15,7 @@
 
 /*
  Types:
-   enum glm_euler_sq
+   enum glm_euler_seq
 
  Functions:
    CGLM_INLINE vec3s glms_euler_angles(mat4s m)
@@ -25,7 +25,7 @@
    CGLM_INLINE mat4s glms_euler_yzx(vec3s angles)
    CGLM_INLINE mat4s glms_euler_zxy(vec3s angles)
    CGLM_INLINE mat4s glms_euler_zyx(vec3s angles)
-   CGLM_INLINE mat4s glms_euler_by_order(vec3s angles, glm_euler_sq ord)
+   CGLM_INLINE mat4s glms_euler_by_order(vec3s angles, glm_euler_seq ord)
  */
 
 #ifndef cglms_euler_h
@@ -143,7 +143,7 @@ glms_euler_zyx(vec3s angles) {
  */
 CGLM_INLINE
 mat4s
-glms_euler_by_order(vec3s angles, glm_euler_sq ord) {
+glms_euler_by_order(vec3s angles, glm_euler_seq ord) {
   mat4s dest;
   glm_euler_by_order(angles.raw, ord, dest.raw);
   return dest;

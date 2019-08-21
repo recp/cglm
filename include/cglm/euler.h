@@ -15,10 +15,10 @@
 
 /*
  Types:
-   enum glm_euler_sq
+   enum glm_euler_seq
 
  Functions:
-   CGLM_INLINE glm_euler_sq glm_euler_order(int newOrder[3]);
+   CGLM_INLINE glm_euler_seq glm_euler_order(int newOrder[3]);
    CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
    CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_xyz(vec3 angles, mat4 dest);
@@ -28,7 +28,7 @@
    CGLM_INLINE void glm_euler_yzx(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_yxz(vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_by_order(vec3         angles,
-                                       glm_euler_sq ord,
+                                       glm_euler_seq ord,
                                        mat4         dest);
  */
 
@@ -41,24 +41,26 @@
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
  * vector then you can convert it to this enum by doing this:
  * @code
- * glm_euler_sq order;
+ * glm_euler_seq order;
  * order = orderVec[0] | orderVec[1] << 2 | orderVec[2] << 4;
  * @endcode
  * you may need to explicit cast if required
  */
-typedef enum glm_euler_sq {
+typedef enum glm_euler_seq {
   GLM_EULER_XYZ = 0 << 0 | 1 << 2 | 2 << 4,
   GLM_EULER_XZY = 0 << 0 | 2 << 2 | 1 << 4,
   GLM_EULER_YZX = 1 << 0 | 2 << 2 | 0 << 4,
   GLM_EULER_YXZ = 1 << 0 | 0 << 2 | 2 << 4,
   GLM_EULER_ZXY = 2 << 0 | 0 << 2 | 1 << 4,
   GLM_EULER_ZYX = 2 << 0 | 1 << 2 | 0 << 4
-} glm_euler_sq;
+} glm_euler_seq;
+
+typedef glm_euler_seq glm_euler_sq;
 
 CGLM_INLINE
-glm_euler_sq
+glm_euler_seq
 glm_euler_order(int ord[3]) {
-  return (glm_euler_sq)(ord[0] << 0 | ord[1] << 2 | ord[2] << 4);
+  return (glm_euler_seq)(ord[0] << 0 | ord[1] << 2 | ord[2] << 4);
 }
 
 /*!
@@ -352,7 +354,7 @@ glm_euler_zyx(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_by_order(vec3 angles, glm_euler_sq ord, mat4 dest) {
+glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz;
 
