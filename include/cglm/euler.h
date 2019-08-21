@@ -55,6 +55,8 @@ typedef enum glm_euler_sq {
   GLM_EULER_ZYX = 2 << 0 | 1 << 2 | 0 << 4
 } glm_euler_sq;
 
+typedef glm_euler_seq glm_euler_sq;
+
 CGLM_INLINE
 glm_euler_sq
 glm_euler_order(int ord[3]) {
