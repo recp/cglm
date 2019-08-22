@@ -178,14 +178,14 @@ glmc_vec4_negate_to(vec4 v, vec4 dest) {
 
 CGLM_EXPORT
 float
-glmc_vec4_distance_squared(vec4 a, vec4 b) {
-  return glm_vec4_distance_squared(a, b);
+glmc_vec4_distance(vec4 a, vec4 b) {
+  return glm_vec4_distance(a, b);
 }
 
 CGLM_EXPORT
 float
-glmc_vec4_distance(vec4 a, vec4 b) {
-    return glm_vec4_distance(a, b);
+glmc_vec4_distance2(vec4 a, vec4 b) {
+  return glm_vec4_distance2(a, b);
 }
 
 CGLM_EXPORT

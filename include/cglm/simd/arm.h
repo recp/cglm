@@ -33,14 +33,14 @@ glmm_dot(float32x4_t a, float32x4_t b) {
 
 static inline
 float
-glmm_norm_squared(float32x4_t a) {
-  return glmm_dot(a, a);
+glmm_norm(float32x4_t a) {
+  return sqrtf(glmm_dot(a, a));
 }
 
 static inline
 float
-glmm_norm(float32x4_t a) {
-  return sqrtf(glmm_dot(a, a));
+glmm_norm2(float32x4_t a) {
+  return glmm_dot(a, a);
 }
 
 #endif
