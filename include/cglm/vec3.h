@@ -48,14 +48,14 @@
    CGLM_INLINE void  glm_vec3_normalize_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE void  glm_vec3_crossn(vec3 a, vec3 b, vec3 dest);
-   CGLM_INLINE float glm_vec3_distance(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_angle(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec3_rotate(vec3 v, float angle, vec3 axis);
    CGLM_INLINE void  glm_vec3_rotate_m4(mat4 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_rotate_m3(mat3 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_proj(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_center(vec3 a, vec3 b, vec3 dest);
-   CGLM_INLINE float glm_vec3_distance2(vec3 a, vec3 b);
+   CGLM_INLINE float glm_vec3_distance_squared(vec3 a, vec3 b);
+   CGLM_INLINE float glm_vec3_distance(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec3_maxv(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_minv(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_ortho(vec3 v, vec3 dest);
@@ -93,6 +93,7 @@
 #define glm_vec3_inv(v)               glm_vec3_negate(v)
 #define glm_vec3_inv_to(v, dest)      glm_vec3_negate_to(v, dest)
 #define glm_vec3_mulv(a, b, d)        glm_vec3_mul(a, b, d)
+#define glm_vec3_distance2(a, b)      glm_vec3_distance_squared(a, b)
 
 #define GLM_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
 #define GLM_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
@@ -693,10 +694,10 @@ glm_vec3_center(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 float
-glm_vec3_distance2(vec3 a, vec3 b) {
-  return glm_pow2(b[0] - a[0])
-       + glm_pow2(b[1] - a[1])
-       + glm_pow2(b[2] - a[2]);
+glm_vec3_distance_squared(vec3 a, vec3 b) {
+  return glm_pow2(a[0] - b[0])
+       + glm_pow2(a[1] - b[1])
+       + glm_pow2(a[2] - b[2]);
 }
 
 /**
@@ -709,8 +710,9 @@ glm_vec3_distance2(vec3 a, vec3 b) {
 CGLM_INLINE
 float
 glm_vec3_distance(vec3 a, vec3 b) {
-  return sqrtf(glm_vec3_distance2(a, b));
+  return sqrtf(glm_vec3_distance_squared(a, b));
 }
+
 
 /*!
  * @brief max values of vectors

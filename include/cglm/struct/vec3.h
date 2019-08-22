@@ -45,14 +45,14 @@
    CGLM_INLINE vec3s glms_vec3_normalize(vec3s v);
    CGLM_INLINE vec3s glms_vec3_cross(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_crossn(vec3s a, vec3s b);
-   CGLM_INLINE float glms_vec3_distance(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_angle(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_rotate(vec3s v, float angle, vec3s axis);
    CGLM_INLINE vec3s glms_vec3_rotate_m4(mat4s m, vec3s v);
    CGLM_INLINE vec3s glms_vec3_rotate_m3(mat3s m, vec3s v);
    CGLM_INLINE vec3s glms_vec3_proj(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_center(vec3s a, vec3s b);
-   CGLM_INLINE float glms_vec3_distance2(vec3s a, vec3s b);
+   CGLM_INLINE float glms_vec3_distance_squared(vec3s a, vec3s b);
+   CGLM_INLINE float glms_vec3_distance(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_maxv(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_minv(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_ortho(vec3s v);
@@ -607,8 +607,8 @@ glms_vec3_center(vec3s a, vec3s b) {
  */
 CGLM_INLINE
 float
-glms_vec3_distance2(vec3s a, vec3s b) {
-  return glm_vec3_distance2(a.raw, b.raw);
+glms_vec3_distance_squared(vec3s a, vec3s b) {
+  return glm_vec3_distance_squared(a.raw, b.raw);
 }
 
 /**

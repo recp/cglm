@@ -158,7 +158,7 @@ glmc_vec3_center(vec3 a, vec3 b, vec3 dest);
 
 CGLM_EXPORT
 float
-glmc_vec3_distance2(vec3 a, vec3 b);
+glmc_vec3_distance_squared(vec3 a, vec3 b);
 
 CGLM_EXPORT
 float
