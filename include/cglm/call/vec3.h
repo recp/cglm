@@ -19,6 +19,7 @@ extern "C" {
 #define glmc_vec3_flipsign_to(v, dest) glmc_vec3_negate_to(v, dest)
 #define glmc_vec3_inv(v)               glmc_vec3_negate(v)
 #define glmc_vec3_inv_to(v, dest)      glmc_vec3_negate_to(v, dest)
+#define glmc_vec3_distance2(a, b)      glmc_vec3_distance_squared(a, b)
 
 CGLM_EXPORT
 void
