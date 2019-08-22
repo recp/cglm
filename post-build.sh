@@ -8,12 +8,17 @@
 
 cd $(dirname "$0")
 
-mkdir -p .libs
+mkdir -p "$(pwd)/.libs"
+
+libmocka_folder=$(pwd)/test/lib/cmocka/build/src/
 
 if [ "$(uname)" = "Darwin" ]; then
-  ln -sf $(pwd)/test/lib/cmocka/build/src/libcmocka.0.dylib \
-      .libs/libcmocka.0.dylib;
+  libcmocka=libcmocka.0.dylib
 else
-  ln -sf $(pwd)/test/lib/cmocka/build/src/libcmocka.so.0 \
-      .libs/libcmocka.so.0;
+  libcmocka=libcmocka.so.0
+fi
+
+libcmocka_path="$libmocka_folder$libcmocka"
+if [ -f "$libcmocka_path" ]; then
+  ln -sf "$libcmocka_path" "$(pwd)/.libs/$libcmocka";
 fi

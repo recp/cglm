@@ -38,14 +38,8 @@ typedef int                    ivec3[3];
 typedef CGLM_ALIGN_IF(16) float vec4[4];
 typedef vec4                    versor;
 typedef vec3                    mat3[3];
-// typedef vec4                    mat2;
 typedef CGLM_ALIGN_IF(16) vec2  mat2[2];
-
-#ifdef __AVX__
-typedef CGLM_ALIGN_IF(32) vec4  mat4[4];
-#else
-typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
-#endif
+typedef CGLM_ALIGN_MAT    vec4  mat4[4];
 
 #define GLM_E         2.71828182845904523536028747135266250   /* e           */
 #define GLM_LOG2E     1.44269504088896340735992468100189214   /* log2(e)     */

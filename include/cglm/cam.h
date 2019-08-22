@@ -7,48 +7,37 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_frustum(float left,
-                                 float right,
-                                 float bottom,
-                                 float top,
-                                 float nearVal,
-                                 float farVal,
+   CGLM_INLINE void  glm_frustum(float left,    float right,
+                                 float bottom,  float top,
+                                 float nearVal, float farVal,
                                  mat4  dest)
-   CGLM_INLINE void  glm_ortho(float left,
-                               float right,
-                               float bottom,
-                               float top,
-                               float nearVal,
-                               float farVal,
+   CGLM_INLINE void  glm_ortho(float left,    float right,
+                               float bottom,  float top,
+                               float nearVal, float farVal,
                                mat4  dest)
    CGLM_INLINE void  glm_ortho_aabb(vec3 box[2], mat4 dest)
-   CGLM_INLINE void  glm_ortho_aabb_p(vec3 box[2], float padding, mat4 dest)
+   CGLM_INLINE void  glm_ortho_aabb_p(vec3 box[2],  float padding, mat4 dest)
    CGLM_INLINE void  glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest)
    CGLM_INLINE void  glm_ortho_default(float aspect, mat4  dest)
-   CGLM_INLINE void  glm_ortho_default_s(float aspect, float size, mat4  dest)
+   CGLM_INLINE void  glm_ortho_default_s(float aspect, float size, mat4 dest)
    CGLM_INLINE void  glm_perspective(float fovy,
                                      float aspect,
                                      float nearVal,
                                      float farVal,
                                      mat4  dest)
-   CGLM_INLINE void  glm_perspective_default(float aspect, mat4  dest)
-   CGLM_INLINE void  glm_perspective_resize(float aspect, mat4  proj)
+   CGLM_INLINE void  glm_perspective_default(float aspect, mat4 dest)
+   CGLM_INLINE void  glm_perspective_resize(float aspect, mat4 proj)
    CGLM_INLINE void  glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest)
    CGLM_INLINE void  glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest)
    CGLM_INLINE void  glm_look_anyup(vec3 eye, vec3 dir, mat4 dest)
    CGLM_INLINE void  glm_persp_decomp(mat4   proj,
-                                      float *nearVal,
-                                      float *farVal,
-                                      float *top,
-                                      float *bottom,
-                                      float *left,
-                                      float *right)
+                                      float *nearVal, float *farVal,
+                                      float *top,     float *bottom,
+                                      float *left,    float *right)
    CGLM_INLINE void  glm_persp_decompv(mat4 proj, float dest[6])
    CGLM_INLINE void  glm_persp_decomp_x(mat4 proj, float *left, float *right)
    CGLM_INLINE void  glm_persp_decomp_y(mat4 proj, float *top,  float *bottom)
-   CGLM_INLINE void  glm_persp_decomp_z(mat4 proj,
-                                        float *nearVal,
-                                        float *farVal)
+   CGLM_INLINE void  glm_persp_decomp_z(mat4 proj, float *nearv, float *farv)
    CGLM_INLINE void  glm_persp_decomp_far(mat4 proj, float *farVal)
    CGLM_INLINE void  glm_persp_decomp_near(mat4 proj, float *nearVal)
    CGLM_INLINE float glm_persp_fovy(mat4 proj)
@@ -75,12 +64,9 @@
  */
 CGLM_INLINE
 void
-glm_frustum(float left,
-            float right,
-            float bottom,
-            float top,
-            float nearVal,
-            float farVal,
+glm_frustum(float left,    float right,
+            float bottom,  float top,
+            float nearVal, float farVal,
             mat4  dest) {
   float rl, tb, fn, nv;
 
@@ -113,12 +99,9 @@ glm_frustum(float left,
  */
 CGLM_INLINE
 void
-glm_ortho(float left,
-          float right,
-          float bottom,
-          float top,
-          float nearVal,
-          float farVal,
+glm_ortho(float left,    float right,
+          float bottom,  float top,
+          float nearVal, float farVal,
           mat4  dest) {
   float rl, tb, fn;
 
@@ -218,9 +201,7 @@ glm_ortho_default(float aspect, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_default_s(float aspect,
-                    float size,
-                    mat4  dest) {
+glm_ortho_default_s(float aspect, float size, mat4 dest) {
   if (aspect >= 1.0f) {
     glm_ortho(-size * aspect,
                size * aspect,
@@ -420,12 +401,9 @@ glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
 CGLM_INLINE
 void
 glm_persp_decomp(mat4 proj,
-                 float * __restrict nearVal,
-                 float * __restrict farVal,
-                 float * __restrict top,
-                 float * __restrict bottom,
-                 float * __restrict left,
-                 float * __restrict right) {
+                 float * __restrict nearVal, float * __restrict farVal,
+                 float * __restrict top,     float * __restrict bottom,
+                 float * __restrict left,    float * __restrict right) {
   float m00, m11, m20, m21, m22, m32, n, f;
   float n_m11, n_m00;
 

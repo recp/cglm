@@ -7,12 +7,26 @@
 #*****************************************************************************
 
 AC_PREREQ([2.69])
-AC_INIT([cglm], [0.5.4], [info@recp.me])
+AC_INIT([cglm], [0.6.0], [info@recp.me])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
 
 AC_CONFIG_MACRO_DIR([m4])
 AC_CONFIG_SRCDIR([src/])
 AC_CONFIG_HEADERS([config.h])
+
+# Dependencies for pkg-config.
+PKG_PROG_PKG_CONFIG
+# Ancient versions of pkg-config (such as the one used in Travis CI)
+# don't have this macro, so we need to do it manually.
+m4_ifdef([PKG_INSTALLDIR], [
+    PKG_INSTALLDIR
+], [
+    AC_ARG_WITH([pkgconfigdir],
+        [AS_HELP_STRING([--with-pkgconfigdir],
+                        [pkg-config installation directory ['${libdir}/pkgconfig']])],,
+        [with_pkgconfigdir=]'${libdir}/pkgconfig')
+    AC_SUBST([pkgconfigdir], [$with_pkgconfigdir])
+])
 
 # Checks for programs.
 AC_PROG_CC
@@ -53,6 +67,6 @@ AC_TYPE_UINT8_T
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
 
-AC_CONFIG_FILES([makefile])
+AC_CONFIG_FILES([Makefile cglm.pc])
 
 AC_OUTPUT

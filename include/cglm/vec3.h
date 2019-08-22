@@ -61,6 +61,7 @@
    CGLM_INLINE void  glm_vec3_ortho(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_clamp(vec3 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -102,6 +103,11 @@
 #define GLM_YUP  ((vec3){0.0f, 1.0f, 0.0f})
 #define GLM_ZUP  ((vec3){0.0f, 0.0f, 1.0f})
 #define GLM_XUP  ((vec3){1.0f, 0.0f, 0.0f})
+
+#define GLM_XXX GLM_SHUFFLE3(0, 0, 0)
+#define GLM_YYY GLM_SHUFFLE3(1, 1, 1)
+#define GLM_ZZZ GLM_SHUFFLE3(2, 2, 2)
+#define GLM_ZYX GLM_SHUFFLE3(0, 1, 2)
 
 /*!
  * @brief init vec3 using vec4
@@ -428,8 +434,8 @@ glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest) {
  *
  * it applies += operator so dest must be initialized
  *
- * @param[in]  a    vector
- * @param[in]  b    scalar
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
  * @param[out] dest dest += min(a, b)
  */
 CGLM_INLINE
@@ -843,6 +849,27 @@ CGLM_INLINE
 void
 glm_normalize_to(vec3 v, vec3 dest) {
   glm_vec3_normalize_to(v, dest);
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXX, GLM_ZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
+  vec3 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+  t[2] = v[(mask & (3 << 4)) >> 4];
+
+  glm_vec3_copy(t, dest);
 }
 
 #endif /* cglm_vec3_h */

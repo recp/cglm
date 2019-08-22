@@ -65,9 +65,9 @@ test_vec4_clamp(vec4 v, float minVal, float maxVal) {
 void
 test_vec4(void **state) {
   vec4  v, v1, v2, v3, v4;
+  vec4s vs1, vs2, vs3, vs4;
   int   i;
   float d1, d2;
-
 
   for (i = 0; i < 1000; i++) {
     /* 1. test SSE/SIMD dot product */
@@ -93,6 +93,13 @@ test_vec4(void **state) {
     /* 3. test SIMD norm2 */
     test_rand_vec4(v);
     test_assert_eqf(test_vec4_norm2(v), glm_vec4_norm2(v));
+
+    /* 4. test SSE/SIMD distance */
+    test_rand_vec4(v1);
+    test_rand_vec4(v2);
+    d1 = glm_vec4_distance(v1, v2);
+    d2 = sqrtf(powf(v1[0]-v2[0], 2.0f) + pow(v1[1]-v2[1], 2.0f) + pow(v1[2]-v2[2], 2.0f) + pow(v1[3]-v2[3], 2.0f));
+    assert_true(fabsf(d1 - d2) <= 0.000009);
   }
 
   /* test zero */
@@ -175,4 +182,50 @@ test_vec4(void **state) {
   assert_true(v3[1] >= 0.0999 && v3[1] <= 0.80001);
   assert_true(v3[2] >= 0.0999 && v3[2] <= 0.80001);
   assert_true(v3[3] >= 0.0999 && v3[3] <= 0.80001);
+
+  /* swizzle */
+
+  /* ZYX */
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_WZYX, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1});
+
+  glm_vec4_swizzle(v1, GLM_XXXX, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_YYYY, v1);
+  test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_ZZZZ, v1);
+  test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3});
+
+  v1[0] = 1;
+  v1[1] = 2;
+  v1[2] = 3;
+  v1[3] = 4;
+
+  glm_vec4_swizzle(v1, GLM_WWWW, v1);
+  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+
+  /* structs */
+  vs1 = test_rand_vec4s();
+  vs2 = test_rand_vec4s();
+
+  vs3 = glms_vec4_add(vs1, vs2);
+  vs4 = glms_vec4_maxv(vs1, vs3);
+  test_assert_vec4s_eq(vs3, vs4);
 }

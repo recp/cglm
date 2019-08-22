@@ -5,10 +5,12 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_project_h
-#define cglm_project_h
+#ifndef cglms_projects_h
+#define cglms_projects_h
 
-#include "common.h"
+#include "../common.h"
+#include "../types-struct.h"
+#include "../project.h"
 #include "vec3.h"
 #include "vec4.h"
 #include "mat4.h"
@@ -37,21 +39,14 @@
  * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  invMat   matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[out] dest     unprojected coordinates
+ * @returns             unprojected coordinates
  */
 CGLM_INLINE
-void
-glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
-  vec4 v;
-
-  v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
-  v[1] = 2.0f * (pos[1] - vp[1]) / vp[3] - 1.0f;
-  v[2] = 2.0f *  pos[2]                  - 1.0f;
-  v[3] = 1.0f;
-
-  glm_mat4_mulv(invMat, v, v);
-  glm_vec4_scale(v, 1.0f / v[3], v);
-  glm_vec3(v, dest);
+vec3s
+glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
+  vec3s r;
+  glm_unprojecti(pos.raw, invMat.raw, vp.raw, r.raw);
+  return r;
 }
 
 /*!
@@ -76,14 +71,14 @@ glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  m        matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[out] dest     unprojected coordinates
+ * @returns             unprojected coordinates
  */
 CGLM_INLINE
-void
-glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
-  mat4 inv;
-  glm_mat4_inv(m, inv);
-  glm_unprojecti(pos, inv, vp, dest);
+vec3s
+glms_unproject(vec3s pos, mat4s m, vec4s vp) {
+  vec3s r;
+  glm_unproject(pos.raw, m.raw, vp.raw, r.raw);
+  return r;
 }
 
 /*!
@@ -96,23 +91,14 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  * @param[in]  pos      object coordinates
  * @param[in]  m        MVP matrix
  * @param[in]  vp       viewport as [x, y, width, height]
- * @param[out] dest     projected coordinates
+ * @returns projected coordinates
  */
 CGLM_INLINE
-void
-glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
-  CGLM_ALIGN(16) vec4 pos4, vone = GLM_VEC4_ONE_INIT;
-
-  glm_vec4(pos, 1.0f, pos4);
-
-  glm_mat4_mulv(m, pos4, pos4);
-  glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
-  glm_vec4_add(pos4, vone, pos4);
-  glm_vec4_scale(pos4, 0.5f, pos4);
-
-  dest[0] = pos4[0] * vp[2] + vp[0];
-  dest[1] = pos4[1] * vp[3] + vp[1];
-  dest[2] = pos4[2];
+vec3s
+glms_project(vec3s pos, mat4s m, vec4s vp) {
+  vec3s r;
+  glm_project(pos.raw, m.raw, vp.raw, r.raw);
+  return r;
 }
 
-#endif /* cglm_project_h */
+#endif /* cglms_projects_h */

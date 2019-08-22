@@ -24,7 +24,6 @@
     <ClCompile Include="..\src\box.c" />
     <ClCompile Include="..\src\cam.c" />
     <ClCompile Include="..\src\curve.c" />
-    <ClCompile Include="..\src\dllmain.c" />
     <ClCompile Include="..\src\ease.c" />
     <ClCompile Include="..\src\euler.c" />
     <ClCompile Include="..\src\frustum.c" />
@@ -86,6 +85,26 @@
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
     <ClInclude Include="..\include\cglm\simd\x86.h" />
     <ClInclude Include="..\include\cglm\sphere.h" />
+    <ClInclude Include="..\include\cglm\struct.h" />
+    <ClInclude Include="..\include\cglm\struct\affine.h" />
+    <ClInclude Include="..\include\cglm\struct\box.h" />
+    <ClInclude Include="..\include\cglm\struct\cam.h" />
+    <ClInclude Include="..\include\cglm\struct\color.h" />
+    <ClInclude Include="..\include\cglm\struct\curve.h" />
+    <ClInclude Include="..\include\cglm\struct\euler.h" />
+    <ClInclude Include="..\include\cglm\struct\frustum.h" />
+    <ClInclude Include="..\include\cglm\struct\io.h" />
+    <ClInclude Include="..\include\cglm\struct\mat3.h" />
+    <ClInclude Include="..\include\cglm\struct\mat4.h" />
+    <ClInclude Include="..\include\cglm\struct\plane.h" />
+    <ClInclude Include="..\include\cglm\struct\project.h" />
+    <ClInclude Include="..\include\cglm\struct\quat.h" />
+    <ClInclude Include="..\include\cglm\struct\sphere.h" />
+    <ClInclude Include="..\include\cglm\struct\vec3-ext.h" />
+    <ClInclude Include="..\include\cglm\struct\vec3.h" />
+    <ClInclude Include="..\include\cglm\struct\vec4-ext.h" />
+    <ClInclude Include="..\include\cglm\struct\vec4.h" />
+    <ClInclude Include="..\include\cglm\types-struct.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />
     <ClInclude Include="..\include\cglm\vec2.h" />
@@ -101,7 +120,7 @@
     <ProjectGuid>{CA8BCAF9-CD25-4133-8F62-3D1449B5D2FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cglm</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

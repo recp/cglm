@@ -70,3 +70,4 @@ win/x64
 win/x85
 win/Debug
 cglm-test-ios*
+/cglm.pc

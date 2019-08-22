@@ -47,6 +47,7 @@
    CGLM_INLINE void  glm_vec4_minv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
+   CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
 
  DEPRECATED:
    glm_vec4_dup
@@ -80,6 +81,12 @@
 #define GLM_VEC4_ONE        ((vec4)GLM_VEC4_ONE_INIT)
 #define GLM_VEC4_BLACK      ((vec4)GLM_VEC4_BLACK_INIT)
 #define GLM_VEC4_ZERO       ((vec4)GLM_VEC4_ZERO_INIT)
+
+#define GLM_XXXX GLM_SHUFFLE4(0, 0, 0, 0)
+#define GLM_YYYY GLM_SHUFFLE4(1, 1, 1, 1)
+#define GLM_ZZZZ GLM_SHUFFLE4(2, 2, 2, 2)
+#define GLM_WWWW GLM_SHUFFLE4(3, 3, 3, 3)
+#define GLM_WZYX GLM_SHUFFLE4(0, 1, 2, 3)
 
 /*!
  * @brief init vec4 using vec3
@@ -576,8 +583,8 @@ glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
  *
  * it applies += operator so dest must be initialized
  *
- * @param[in]  a    vector
- * @param[in]  b    scalar
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
  * @param[out] dest dest += min(a, b)
  */
 CGLM_INLINE
@@ -690,18 +697,9 @@ CGLM_INLINE
 float
 glm_vec4_distance(vec4 a, vec4 b) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  __m128 x0;
-  x0 = _mm_sub_ps(glmm_load(b), glmm_load(a));
-  x0 = _mm_mul_ps(x0, x0);
-  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 3, 2));
-  return _mm_cvtss_f32(_mm_sqrt_ss(_mm_add_ss(x0,
-                                              glmm_shuff1(x0, 0, 1, 0, 1))));
+  return glmm_norm(_mm_sub_ps(glmm_load(b), glmm_load(a)));
 #elif defined(CGLM_NEON_FP)
-  float32x4_t v0;
-  float32_t   r;
-  v0 = vsubq_f32(vld1q_f32(a), vld1q_f32(b));
-  r  = vaddvq_f32(vmulq_f32(v0, v0));
-  return sqrtf(r);
+  return glmm_norm(vsubq_f32(glmm_load(a), glmm_load(b)));
 #else
   return sqrtf(glm_pow2(b[0] - a[0])
              + glm_pow2(b[1] - a[1])
@@ -817,6 +815,28 @@ glm_vec4_cubic(float s, vec4 dest) {
   dest[1] = ss;
   dest[2] = s;
   dest[3] = 1.0f;
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXXX, GLM_WZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_swizzle(vec4 v, int mask, vec4 dest) {
+  vec4 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+  t[2] = v[(mask & (3 << 4)) >> 4];
+  t[3] = v[(mask & (3 << 6)) >> 6];
+
+  glm_vec4_copy(t, dest);
 }
 
 #endif /* cglm_vec4_h */

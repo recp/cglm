@@ -59,7 +59,9 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/sphere.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
-               include/cglm/bezier.h
+               include/cglm/bezier.h \
+               include/cglm/types-struct.h \
+               include/cglm/struct.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -98,6 +100,26 @@ cglm_simd_avx_HEADERS = include/cglm/simd/avx/mat4.h \
 cglm_simd_neondir=$(includedir)/cglm/simd/neon
 cglm_simd_neon_HEADERS = include/cglm/simd/neon/mat4.h
 
+cglm_structdir=$(includedir)/cglm/struct
+cglm_struct_HEADERS = include/cglm/struct/mat4.h \
+                      include/cglm/struct/mat3.h \
+                      include/cglm/struct/vec3.h \
+                      include/cglm/struct/vec3-ext.h \
+                      include/cglm/struct/vec4.h \
+                      include/cglm/struct/vec4-ext.h \
+                      include/cglm/struct/affine.h \
+                      include/cglm/struct/io.h \
+                      include/cglm/struct/cam.h \
+                      include/cglm/struct/quat.h \
+                      include/cglm/struct/euler.h \
+                      include/cglm/struct/plane.h \
+                      include/cglm/struct/frustum.h \
+                      include/cglm/struct/box.h \
+                      include/cglm/struct/project.h \
+                      include/cglm/struct/sphere.h \
+                      include/cglm/struct/color.h \
+                      include/cglm/struct/curve.h
+
 libcglm_la_SOURCES=\
     src/euler.c \
     src/affine.c \
@@ -132,5 +154,13 @@ test_tests_SOURCES=\
     test/src/test_affine.c \
     test/src/test_bezier.c
 
+pkgconfig_DATA=cglm.pc
+
+# When running configure with --prefix, $VPATH references
+# the source directory that post-build.sh is in. When not
+# using a prefix, $VPATH will be unset, so we need to fall
+# back to using . to run the script.
+export VPATH
+
 all-local:
-	sh ./post-build.sh
+	sh $${VPATH:-.}/post-build.sh

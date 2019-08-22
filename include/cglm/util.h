@@ -19,7 +19,6 @@
 #define cglm_util_h
 
 #include "common.h"
-#include <stdbool.h>
 
 #define GLM_MIN(X, Y) (((X) < (Y)) ? (X) : (Y))
 #define GLM_MAX(X, Y) (((X) > (Y)) ? (X) : (Y))
