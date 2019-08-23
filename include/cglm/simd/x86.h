@@ -114,6 +114,12 @@ glmm_norm(__m128 a) {
 }
 
 static inline
+float
+glmm_norm2(__m128 a) {
+  return _mm_cvtss_f32(glmm_vhadds(_mm_mul_ps(a, a)));
+}
+
+static inline
 __m128
 glmm_load3(float v[3]) {
   __m128i xy;

@@ -43,6 +43,7 @@
    CGLM_INLINE void  glm_vec4_normalize(vec4 v);
    CGLM_INLINE void  glm_vec4_normalize_to(vec4 vec, vec4 dest);
    CGLM_INLINE float glm_vec4_distance(vec4 a, vec4 b);
+   CGLM_INLINE float glm_vec4_distance2(vec4 a, vec4 b);
    CGLM_INLINE void  glm_vec4_maxv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
@@ -697,14 +698,36 @@ CGLM_INLINE
 float
 glm_vec4_distance(vec4 a, vec4 b) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
-  return glmm_norm(_mm_sub_ps(glmm_load(b), glmm_load(a)));
+  return glmm_norm(_mm_sub_ps(glmm_load(a), glmm_load(b)));
 #elif defined(CGLM_NEON_FP)
   return glmm_norm(vsubq_f32(glmm_load(a), glmm_load(b)));
 #else
-  return sqrtf(glm_pow2(b[0] - a[0])
-             + glm_pow2(b[1] - a[1])
-             + glm_pow2(b[2] - a[2])
-             + glm_pow2(b[3] - a[3]));
+  return sqrtf(glm_pow2(a[0] - b[0])
+             + glm_pow2(a[1] - b[1])
+             + glm_pow2(a[2] - b[2])
+             + glm_pow2(a[3] - b[3]));
+#endif
+}
+
+/**
+ * @brief squared distance between two vectors
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ * @return returns squared distance
+ */
+CGLM_INLINE
+float
+glm_vec4_distance2(vec4 a, vec4 b) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  return glmm_norm2(_mm_sub_ps(glmm_load(a), glmm_load(b)));
+#elif defined(CGLM_NEON_FP)
+  return glmm_norm2(vsubq_f32(glmm_load(a), glmm_load(b)));
+#else
+  return glm_pow2(a[0] - b[0])
+       + glm_pow2(a[1] - b[1])
+       + glm_pow2(a[2] - b[2])
+       + glm_pow2(a[3] - b[3]);
 #endif
 }
 

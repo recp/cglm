@@ -132,10 +132,14 @@ glmc_vec4_negate(vec4 v);
 CGLM_EXPORT
 void
 glmc_vec4_negate_to(vec4 v, vec4 dest);
-
+    
 CGLM_EXPORT
 float
 glmc_vec4_distance(vec4 a, vec4 b);
+    
+CGLM_EXPORT
+float
+glmc_vec4_distance2(vec4 a, vec4 b);
 
 CGLM_EXPORT
 void

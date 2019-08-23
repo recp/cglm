@@ -43,6 +43,7 @@
    CGLM_INLINE vec4s glms_vec4_inv(vec4s v);
    CGLM_INLINE vec4s glms_vec4_normalize(vec4s v);
    CGLM_INLINE float glms_vec4_distance(vec4s a, vec4s b);
+   CGLM_INLINE float glms_vec4_distance2(vec4s a, vec4s b);
    CGLM_INLINE vec4s glms_vec4_maxv(vec4s a, vec4s b);
    CGLM_INLINE vec4s glms_vec4_minv(vec4s a, vec4s b);
    CGLM_INLINE vec4s glms_vec4_clamp(vec4s v, float minVal, float maxVal);
@@ -499,6 +500,19 @@ CGLM_INLINE
 float
 glms_vec4_distance(vec4s a, vec4s b) {
   return glm_vec4_distance(a.raw, b.raw);
+}
+
+/**
+ * @brief squared distance between two vectors
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ * @return returns squared distance
+ */
+CGLM_INLINE
+float
+glms_vec4_distance2(vec4s a, vec4s b) {
+  return glm_vec4_distance2(a.raw, b.raw);
 }
 
 /*!

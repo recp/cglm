@@ -45,13 +45,13 @@
    CGLM_INLINE vec3s glms_vec3_normalize(vec3s v);
    CGLM_INLINE vec3s glms_vec3_cross(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_crossn(vec3s a, vec3s b);
-   CGLM_INLINE float glms_vec3_distance(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_angle(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_rotate(vec3s v, float angle, vec3s axis);
    CGLM_INLINE vec3s glms_vec3_rotate_m4(mat4s m, vec3s v);
    CGLM_INLINE vec3s glms_vec3_rotate_m3(mat3s m, vec3s v);
    CGLM_INLINE vec3s glms_vec3_proj(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_center(vec3s a, vec3s b);
+   CGLM_INLINE float glms_vec3_distance(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_distance2(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_maxv(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_minv(vec3s a, vec3s b);
@@ -599,19 +599,6 @@ glms_vec3_center(vec3s a, vec3s b) {
 }
 
 /**
- * @brief squared distance between two vectors
- *
- * @param[in] a vector1
- * @param[in] b vector2
- * @return      squared distance (distance * distance)
- */
-CGLM_INLINE
-float
-glms_vec3_distance2(vec3s a, vec3s b) {
-  return glm_vec3_distance2(a.raw, b.raw);
-}
-
-/**
  * @brief distance between two vectors
  *
  * @param[in] a vector1
@@ -622,6 +609,19 @@ CGLM_INLINE
 float
 glms_vec3_distance(vec3s a, vec3s b) {
   return glm_vec3_distance(a.raw, b.raw);
+}
+
+/**
+ * @brief squared distance between two vectors
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ * @return      squared distance (distance * distance)
+ */
+CGLM_INLINE
+float
+glms_vec3_distance2(vec3s a, vec3s b) {
+  return glm_vec3_distance2(a.raw, b.raw);
 }
 
 /*!

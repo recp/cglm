@@ -214,14 +214,14 @@ glmc_vec3_center(vec3 a, vec3 b, vec3 dest) {
 
 CGLM_EXPORT
 float
-glmc_vec3_distance2(vec3 a, vec3 b) {
-  return glm_vec3_distance2(a, b);
+glmc_vec3_distance(vec3 a, vec3 b) {
+  return glm_vec3_distance(a, b);
 }
 
 CGLM_EXPORT
 float
-glmc_vec3_distance(vec3 a, vec3 b) {
-  return glm_vec3_distance(a, b);
+glmc_vec3_distance2(vec3 a, vec3 b) {
+  return glm_vec3_distance2(a, b);
 }
 
 CGLM_EXPORT
