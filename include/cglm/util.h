@@ -202,7 +202,7 @@ glm_lerpc(float from, float to, float t) {
 }
 
 /*!
- * @brief threshold function (according to OpenCL specs)
+ * @brief threshold function
  *
  * @param[in]   edge    threshold
  * @param[in]   x       value to test against threshold
@@ -214,7 +214,8 @@ glm_step(float edge, float x) {
   /* branching - no type conversion */
   return (x < edge) ? 0.0f : 1.0f;
   /*
-   * An alternative implementation could be:
+   * An alternative implementation without branching
+   * but with type conversion could be:
    * return !(x < edge);
    */
 }
