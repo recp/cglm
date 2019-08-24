@@ -715,7 +715,7 @@ CGLM_INLINE
 vec3s
 glms_vec3_step(float edge, vec4 x) {
   vec3s r;
-  glm_vec3_step(edge.raw, x, r.raw);
+  glm_vec3_step(edge, x.raw, r.raw);
   return r;
 }
 
@@ -731,7 +731,7 @@ CGLM_INLINE
 vec3s
 glms_vec3_smoothstep(float edge0, float edge1, vec4 x) {
   vec3s r;
-  glm_vec3_smoothstep(edge0.raw, edge1.raw, x, r.raw);
+  glm_vec3_smoothstep(edge0, edge1, x.raw, r.raw);
   return r;
 }
 
