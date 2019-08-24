@@ -210,15 +210,13 @@ glm_lerpc(float from, float to, float t) {
  */
 CGLM_INLINE
 float
-glm_step(float edge, float x)
-{
-#if 1
-  /* type conversion - no branching */
-  return !(x < edge);
-#else
+glm_step(float edge, float x) {
   /* branching - no type conversion */
   return (x < edge) ? 0.0f : 1.0f;
-#endif
+  /*
+   * An alternative implementation could be:
+   * return !(x < edge);
+   */
 }
 
 /*!
