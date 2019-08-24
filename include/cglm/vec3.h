@@ -806,9 +806,9 @@ glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec3_step(float edge, vec3 x, vec3 dest) {
-    dest[0] = glm_step(edge, x[0]);
-    dest[1] = glm_step(edge, x[1]);
-    dest[2] = glm_step(edge, x[2]);
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
 }
 
 /*!
@@ -822,9 +822,9 @@ glm_vec3_step(float edge, vec3 x, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec3_smoothstep(float edge0, float edge1, vec3 x, vec3 dest) {
-    dest[0] = glm_smoothstep(edge0, edge1, x[0]);
-    dest[1] = glm_smoothstep(edge0, edge1, x[1]);
-    dest[2] = glm_smoothstep(edge0, edge1, x[2]);
+  dest[0] = glm_smoothstep(edge0, edge1, x[0]);
+  dest[1] = glm_smoothstep(edge0, edge1, x[1]);
+  dest[2] = glm_smoothstep(edge0, edge1, x[2]);
 }
 
 /*!
