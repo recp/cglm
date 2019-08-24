@@ -36,6 +36,7 @@
    CGLM_INLINE void glm_quat_mat3(versor q, mat3 dest);
    CGLM_INLINE void glm_quat_mat3t(versor q, mat3 dest);
    CGLM_INLINE void glm_quat_lerp(versor from, versor to, float t, versor dest);
+   CGLM_INLINE void glm_quat_lerpc(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
    CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
@@ -601,13 +602,28 @@ glm_quat_mat3t(versor q, mat3 dest) {
  *
  * @param[in]   from  from
  * @param[in]   to    to
- * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @param[in]   t     interpolant (amount)
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE
 void
 glm_quat_lerp(versor from, versor to, float t, versor dest) {
   glm_vec4_lerp(from, to, t, dest);
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        using linear interpolation (LERP)
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_lerpc(versor from, versor to, float t, versor dest) {
+  glm_vec4_lerpc(from, to, t, dest);
 }
 
 /*!
