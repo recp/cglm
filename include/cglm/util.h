@@ -213,11 +213,11 @@ float
 glm_step(float edge, float x)
 {
 #if 1
-    /* type conversion - no branching */
-    return !(x < edge);
+  /* type conversion - no branching */
+  return !(x < edge);
 #else
-    /* branching - no type conversion */
-    return (x < edge) ? 0.0f : 1.0f;
+  /* branching - no type conversion */
+  return (x < edge) ? 0.0f : 1.0f;
 #endif
 }
 
