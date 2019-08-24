@@ -48,6 +48,9 @@
    CGLM_INLINE vec4s glms_vec4_minv(vec4s a, vec4s b);
    CGLM_INLINE vec4s glms_vec4_clamp(vec4s v, float minVal, float maxVal);
    CGLM_INLINE vec4s glms_vec4_lerp(vec4s from, vec4s to, float t);
+   CGLM_INLINE vec4s glms_vec4_step(float edge, vec4s x);
+   CGLM_INLINE vec4s glms_vec4_smoothstep(float edge0, float edge1, vec4s x);
+   CGLM_INLINE vec4s glms_vec4_smoothinterp(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
  */

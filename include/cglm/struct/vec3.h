@@ -58,8 +58,8 @@
    CGLM_INLINE vec3s glms_vec3_ortho(vec3s v);
    CGLM_INLINE vec3s glms_vec3_clamp(vec3s v, float minVal, float maxVal);
    CGLM_INLINE vec3s glms_vec3_lerp(vec3s from, vec3s to, float t);
-   CGLM_INLINE vec3s glms_vec3_step(vec3s edge, float x);
-   CGLM_INLINE vec3s glms_vec3_smoothstep(vec3s edge0, vec3s edge1, float x);
+   CGLM_INLINE vec3s glms_vec3_step(float edge, vec3s x);
+   CGLM_INLINE vec3s glms_vec3_smoothstep(float edge0, float edge1, vec3s x);
    CGLM_INLINE vec3s glms_vec3_smoothinterp(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
 
@@ -713,7 +713,7 @@ glms_vec3_lerp(vec3s from, vec3s to, float t) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_step(float edge, vec4 x) {
+glms_vec3_step(float edge, vec3s x) {
   vec3s r;
   glm_vec3_step(edge, x.raw, r.raw);
   return r;
@@ -729,7 +729,7 @@ glms_vec3_step(float edge, vec4 x) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_smoothstep(float edge0, float edge1, vec4 x) {
+glms_vec3_smoothstep(float edge0, float edge1, vec3s x) {
   vec3s r;
   glm_vec3_smoothstep(edge0, edge1, x.raw, r.raw);
   return r;
