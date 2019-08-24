@@ -750,7 +750,7 @@ glms_vec3_step_uni(float edge, vec3s x) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_step(float edge, vec3s x) {
+glms_vec3_step(vec3s edge, vec3s x) {
   vec3s r;
   glm_vec3_step(edge.raw, x.raw, r.raw);
   return r;
