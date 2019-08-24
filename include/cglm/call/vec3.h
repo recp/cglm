@@ -179,10 +179,22 @@ glmc_vec3_clamp(vec3 v, float minVal, float maxVal);
 CGLM_EXPORT
 void
 glmc_vec3_ortho(vec3 v, vec3 dest);
-
+    
 CGLM_EXPORT
 void
 glmc_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec3_step(float edge, vec3 x, vec3 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec3_smoothstep(float edge0, float edge1, vec3 x, vec3 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest);
 
 /* ext */
 

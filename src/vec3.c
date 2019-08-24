@@ -254,6 +254,24 @@ glmc_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
   glm_vec3_lerp(from, to, t, dest);
 }
 
+CGLM_EXPORT
+void
+glmc_vec3_step(float edge, vec3 x, vec3 dest) {
+  glm_vec3_step(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothstep(float edge0, float edge1, vec3 x, vec3 dest) {
+  glm_vec3_smoothstep(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_smoothinterp(from, to, t, dest);
+}
+
 /* ext */
 
 CGLM_EXPORT

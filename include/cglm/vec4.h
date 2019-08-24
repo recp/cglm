@@ -47,7 +47,10 @@
    CGLM_INLINE void  glm_vec4_maxv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_minv(vec4 a, vec4 b, vec4 dest);
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
-   CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest)
+   CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest);
+   CGLM_INLINE void  glm_vec4_step(float edge, vec4 x, vec4 dest);
+   CGLM_INLINE void  glm_vec4_smoothstep(float edge0, float edge1, vec4 x, vec4 dest);
+   CGLM_INLINE void  glm_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
 
  DEPRECATED:
@@ -800,9 +803,9 @@ glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
 }
 
 /*!
- * @brief linear interpolation between two vector
+ * @brief linear interpolation between two vectors
  *
- * formula:  from + s * (to - from)
+ * formula:  from + t * (to - from)
  *
  * @param[in]   from from value
  * @param[in]   to   to value
@@ -816,6 +819,61 @@ glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
 
   /* from + s * (to - from) */
   glm_vec4_broadcast(glm_clamp_zo(t), s);
+  glm_vec4_sub(to, from, v);
+  glm_vec4_mul(s, v, v);
+  glm_vec4_add(from, v, dest);
+}
+
+/*!
+ * @brief threshold function (according to OpenCL specs)
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec4_step(float edge, vec4 x, vec4 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
+  dest[3] = glm_step(edge, x[3]);
+}
+
+/*!
+ * @brief threshold function with a smooth transition (according to OpenCL specs)
+ *
+ * @param[in]   edge0   low threshold
+ * @param[in]   edge1   high threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec4_smoothstep(float edge0, float edge1, vec4 x, vec4 dest) {
+  dest[0] = glm_smoothstep(edge0, edge1, x[0]);
+  dest[1] = glm_smoothstep(edge0, edge1, x[1]);
+  dest[2] = glm_smoothstep(edge0, edge1, x[2]);
+  dest[3] = glm_smoothstep(edge0, edge1, x[3]);
+}
+
+/*!
+ * @brief smooth Hermite interpolation between two vectors
+ *
+ * formula:  t^2 * (3 - 2*t)
+ *
+ * @param[in]   from    from value
+ * @param[in]   to      to value
+ * @param[in]   t       interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest) {
+  vec4 s, v;
+    
+  /* from + smoothstep * (to - from) */
+  glm_vec4_broadcast(glm_smooth(glm_clamp_zo(t)), s);
   glm_vec4_sub(to, from, v);
   glm_vec4_mul(s, v, v);
   glm_vec4_add(from, v, dest);

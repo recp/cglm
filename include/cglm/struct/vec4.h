@@ -561,7 +561,7 @@ glms_vec4_clamp(vec4s v, float minVal, float maxVal) {
 }
 
 /*!
- * @brief linear interpolation between two vector
+ * @brief linear interpolation between two vectors
  *
  * formula:  from + s * (to - from)
  *
@@ -575,6 +575,55 @@ vec4s
 glms_vec4_lerp(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_lerp(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold function (according to OpenCL specs)
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @returns             0.0 if x < edge, else 1.0
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_step(float edge, vec4s x) {
+  vec4s r;
+  glm_vec4_step(edge, x.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold function with a smooth transition (according to OpenCL specs)
+ *
+ * @param[in]   edge0   low threshold
+ * @param[in]   edge1   high threshold
+ * @param[in]   x       value to test against threshold
+ * @returns             destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_smoothstep(float edge0, float edge1, vec4s x) {
+  vec4s r;
+  glm_vec4_smoothstep(edge0, edge1, x.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief smooth Hermite interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from    from value
+ * @param[in]   to      to value
+ * @param[in]   t       interpolant (amount) clamped between 0 and 1
+ * @returns             destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_smoothinterp(vec4s from, vec4s to, float t) {
+  vec4s r;
+  glm_vec4_smoothinterp(from.raw, to.raw, t, r.raw);
   return r;
 }
 

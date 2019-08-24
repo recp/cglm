@@ -58,6 +58,9 @@
    CGLM_INLINE vec3s glms_vec3_ortho(vec3s v);
    CGLM_INLINE vec3s glms_vec3_clamp(vec3s v, float minVal, float maxVal);
    CGLM_INLINE vec3s glms_vec3_lerp(vec3s from, vec3s to, float t);
+   CGLM_INLINE vec3s glms_vec3_step(vec3s edge, float x);
+   CGLM_INLINE vec3s glms_vec3_smoothstep(vec3s edge0, vec3s edge1, float x);
+   CGLM_INLINE vec3s glms_vec3_smoothinterp(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
 
  Convenient:
@@ -684,7 +687,7 @@ glms_vec3_clamp(vec3s v, float minVal, float maxVal) {
 }
 
 /*!
- * @brief linear interpolation between two vector
+ * @brief linear interpolation between two vectors
  *
  * formula:  from + s * (to - from)
  *
@@ -698,6 +701,55 @@ vec3s
 glms_vec3_lerp(vec3s from, vec3s to, float t) {
   vec3s r;
   glm_vec3_lerp(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold function (according to OpenCL specs)
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @returns             0.0 if x < edge, else 1.0
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_step(float edge, vec4 x) {
+  vec3s r;
+  glm_vec3_step(edge.raw, x, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold function with a smooth transition (according to OpenCL specs)
+ *
+ * @param[in]   edge0   low threshold
+ * @param[in]   edge1   high threshold
+ * @param[in]   x       value to test against threshold
+ * @returns             destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_smoothstep(float edge0, float edge1, vec4 x) {
+  vec3s r;
+  glm_vec3_smoothstep(edge0.raw, edge1.raw, x, r.raw);
+  return r;
+}
+
+/*!
+ * @brief smooth Hermite interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from    from value
+ * @param[in]   to      to value
+ * @param[in]   t       interpolant (amount) clamped between 0 and 1
+ * @returns             destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_smoothinterp(vec3s from, vec3s to, float t) {
+  vec3s r;
+  glm_vec3_smoothinterp(from.raw, to.raw, t, r.raw);
   return r;
 }
 
