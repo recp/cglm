@@ -214,6 +214,48 @@ glmc_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_lerpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
+  glm_vec4_step_uni(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_step(vec4 edge, vec4 x, vec4 dest) {
+  glm_vec4_step(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep_uni(float edge0, float edge1, vec4 x, vec4 dest) {
+  glm_vec4_smoothstep_uni(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep(vec4 edge0, vec4 edge1, vec4 x, vec4 dest) {
+  glm_vec4_smoothstep(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_smoothinterp(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_smoothinterpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec4_cubic(float s, vec4 dest) {
   glm_vec4_cubic(s, dest);
 }

@@ -152,10 +152,50 @@ glmc_vec4_minv(vec4 a, vec4 b, vec4 dest);
 CGLM_EXPORT
 void
 glmc_vec4_clamp(vec4 v, float minVal, float maxVal);
-
+    
 CGLM_EXPORT
 void
 glmc_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest);
+    
+CGLM_INLINE
+void
+glmc_vec4_mix(vec4 from, vec4 to, float t, vec4 dest) {
+  glmc_vec4_lerp(from, to, t, dest);
+}
+
+CGLM_INLINE
+void
+glmc_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
+  glmc_vec4_lerpc(from, to, t, dest);
+}
+    
+CGLM_EXPORT
+void
+glmc_vec4_step_uni(float edge, vec4 x, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_step(vec4 edge, vec4 x, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep_uni(float edge0, float edge1, vec4 x, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_smoothstep(vec4 edge0, vec4 edge1, vec4 x, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest);
 
 CGLM_EXPORT
 void
