@@ -59,6 +59,8 @@
    CGLM_INLINE vec3s glms_vec3_clamp(vec3s v, float minVal, float maxVal);
    CGLM_INLINE vec3s glms_vec3_lerp(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_lerpc(vec3s from, vec3s to, float t);
+   CGLM_INLINE vec3s glms_vec3_mix(vec3s from, vec3s to, float t);
+   CGLM_INLINE vec3s glms_vec3_mixc(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_step_uni(float edge, vec3s x);
    CGLM_INLINE vec3s glms_vec3_step(vec3s edge, vec3s x);
    CGLM_INLINE vec3s glms_vec3_smoothstep_uni(float edge0, float edge1, vec3s x);
@@ -723,6 +725,42 @@ vec3s
 glms_vec3_lerpc(vec3s from, vec3s to, float t) {
   vec3s r;
   glm_vec3_lerpc(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from  from value
+ * @param[in]   to    to value
+ * @param[in]   t     interpolant (amount)
+ * @returns           destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_mix(vec3s from, vec3s to, float t) {
+  vec3s r;
+  glm_vec3_mix(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from  from value
+ * @param[in]   to    to value
+ * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @returns           destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_mixc(vec3s from, vec3s to, float t) {
+  vec3s r;
+  glm_vec3_mixc(from.raw, to.raw, t, r.raw);
   return r;
 }
 

@@ -49,6 +49,8 @@
    CGLM_INLINE vec4s glms_vec4_clamp(vec4s v, float minVal, float maxVal);
    CGLM_INLINE vec4s glms_vec4_lerp(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_lerpc(vec4s from, vec4s to, float t);
+   CGLM_INLINE vec4s glms_vec4_mix(vec4s from, vec4s to, float t);
+   CGLM_INLINE vec4s glms_vec4_mixc(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_step_uni(float edge, vec4s x);
    CGLM_INLINE vec4s glms_vec4_step(vec4s edge, vec4s x);
    CGLM_INLINE vec4s glms_vec4_smoothstep_uni(float edge0, float edge1, vec4s x);
@@ -600,6 +602,42 @@ vec4s
 glms_vec4_lerpc(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_lerpc(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from  from value
+ * @param[in]   to    to value
+ * @param[in]   t     interpolant (amount)
+ * @returns           destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_mix(vec4s from, vec4s to, float t) {
+  vec4s r;
+  glm_vec4_mix(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from  from value
+ * @param[in]   to    to value
+ * @param[in]   t     interpolant (amount) clamped between 0 and 1
+ * @returns           destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_mixc(vec4s from, vec4s to, float t) {
+  vec4s r;
+  glm_vec4_mixc(from.raw, to.raw, t, r.raw);
   return r;
 }
 

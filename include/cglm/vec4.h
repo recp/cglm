@@ -845,6 +845,38 @@ glm_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
 }
 
 /*!
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + t * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount)
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_mix(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_lerp(from, to, t, dest);
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
+ *
+ * formula:  from + t * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_lerpc(from, to, t, dest);
+}
+
+/*!
  * @brief threshold function (unidimensional)
  *
  * @param[in]   edge    threshold

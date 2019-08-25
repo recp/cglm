@@ -220,6 +220,18 @@ glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec4_mix(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_mix(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
+  glm_vec4_mixc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
   glm_vec4_step_uni(edge, x, dest);
 }

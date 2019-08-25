@@ -190,6 +190,14 @@ glmc_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest);
     
 CGLM_EXPORT
 void
+glmc_vec3_mix(vec3 from, vec3 to, float t, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest);
+    
+CGLM_EXPORT
+void
 glmc_vec3_step_uni(float edge, vec3 x, vec3 dest);
     
 CGLM_EXPORT

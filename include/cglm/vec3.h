@@ -62,6 +62,8 @@
    CGLM_INLINE void  glm_vec3_clamp(vec3 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mix(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_step_uni(float edge, vec3 x, vec3 dest);
    CGLM_INLINE void  glm_vec3_step(vec3 edge, vec3 x, vec3 dest);
    CGLM_INLINE void  glm_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest);
@@ -814,6 +816,38 @@ CGLM_INLINE
 void
 glm_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest) {
   glm_vec3_lerp(from, to, glm_clamp_zo(t), dest);
+}
+
+/*!
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount)
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_mix(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerp(from, to, t, dest);
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerpc(from, to, t, dest);
 }
 
 /*!
