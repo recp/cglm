@@ -161,13 +161,17 @@ CGLM_EXPORT
 void
 glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest);
     
-CGLM_EXPORT
+CGLM_INLINE
 void
-glmc_vec4_mix(vec4 from, vec4 to, float t, vec4 dest);
+glmc_vec4_mix(vec4 from, vec4 to, float t, vec4 dest) {
+  glmc_vec4_lerp(from, to, t, dest);
+}
 
-CGLM_EXPORT
+CGLM_INLINE
 void
-glmc_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest);
+glmc_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
+  glmc_vec4_lerpc(from, to, t, dest);
+}
     
 CGLM_EXPORT
 void
