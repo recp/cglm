@@ -49,6 +49,22 @@ glm_vec4_broadcast(float val, vec4 d) {
 }
 
 /*!
+ * @brief fill a vector with specified value
+ *
+ * @param v   dest
+ * @param val value
+ */
+CGLM_INLINE
+void
+glm_vec4_fill(vec4 v, float val) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(v, _mm_set1_ps(val));
+#else
+  v[0] = v[1] = v[2] = v[3] = val;
+#endif
+}
+
+/*!
  * @brief check if vector is equal to value (without epsilon)
  *
  * @param v   vector

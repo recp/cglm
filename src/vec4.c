@@ -275,6 +275,12 @@ glmc_vec4_broadcast(float val, vec4 d) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec4_fill(vec4 v, float val) {
+  glm_vec4_fill(v, val);
+}
+
+CGLM_EXPORT
 bool
 glmc_vec4_eq(vec4 v, float val) {
   return glm_vec4_eq(v, val);

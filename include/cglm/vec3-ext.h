@@ -45,6 +45,18 @@ glm_vec3_broadcast(float val, vec3 d) {
 }
 
 /*!
+ * @brief fill a vector with specified value
+ *
+ * @param[out] v   dest
+ * @param[in]  val value
+ */
+CGLM_INLINE
+void
+glm_vec3_fill(vec3 v, float val) {
+  v[0] = v[1] = v[2] = val;
+}
+
+/*!
  * @brief check if vector is equal to value (without epsilon)
  *
  * @param[in] v   vector

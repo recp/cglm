@@ -311,6 +311,12 @@ glmc_vec3_broadcast(float val, vec3 d) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec3_fill(vec3 v, float val) {
+  glm_vec3_fill(v, val);
+}
+
+CGLM_EXPORT
 bool
 glmc_vec3_eq(vec3 v, float val) {
   return glm_vec3_eq(v, val);
