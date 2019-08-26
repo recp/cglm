@@ -133,7 +133,7 @@ glmm_load3(float v[3]) {
 
 static inline
 void
-glmm_store3(__m128 vx, float v[3]) {
+glmm_store3(float v[3], __m128 vx) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
