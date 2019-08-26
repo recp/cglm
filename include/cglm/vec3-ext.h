@@ -12,6 +12,7 @@
 /*
  Functions:
    CGLM_INLINE void  glm_vec3_broadcast(float val, vec3 d);
+   CGLM_INLINE void  glm_vec3_fill(vec3 v, float val);
    CGLM_INLINE bool  glm_vec3_eq(vec3 v, float val);
    CGLM_INLINE bool  glm_vec3_eq_eps(vec3 v, float val);
    CGLM_INLINE bool  glm_vec3_eq_all(vec3 v);
@@ -42,6 +43,18 @@ CGLM_INLINE
 void
 glm_vec3_broadcast(float val, vec3 d) {
   d[0] = d[1] = d[2] = val;
+}
+
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param[out] v   dest
+ * @param[in]  val value
+ */
+CGLM_INLINE
+void
+glm_vec3_fill(vec3 v, float val) {
+  v[0] = v[1] = v[2] = val;
 }
 
 /*!

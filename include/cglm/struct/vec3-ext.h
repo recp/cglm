@@ -12,6 +12,7 @@
 /*
  Functions:
    CGLM_INLINE vec3s glms_vec3_broadcast(float val);
+   CGLM_INLINE vec3s glms_vec3_fill(float val);
    CGLM_INLINE bool  glms_vec3_eq(vec3s v, float val);
    CGLM_INLINE bool  glms_vec3_eq_eps(vec3s v, float val);
    CGLM_INLINE bool  glms_vec3_eq_all(vec3s v);
@@ -45,6 +46,20 @@ vec3s
 glms_vec3_broadcast(float val) {
   vec3s r;
   glm_vec3_broadcast(val, r.raw);
+  return r;
+}
+
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param[in]  val  value
+ * @returns         dest
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_fill(float val) {
+  vec3s r;
+  glm_vec3_fill(r.raw, val);
   return r;
 }
 

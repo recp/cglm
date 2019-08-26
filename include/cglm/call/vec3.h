@@ -233,6 +233,10 @@ glmc_vec3_mulv(vec3 a, vec3 b, vec3 d);
 CGLM_EXPORT
 void
 glmc_vec3_broadcast(float val, vec3 d);
+    
+CGLM_EXPORT
+void
+glmc_vec3_fill(vec3 v, float val);
 
 CGLM_EXPORT
 bool
