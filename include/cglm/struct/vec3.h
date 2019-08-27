@@ -24,6 +24,8 @@
    CGLM_INLINE float glms_vec3_dot(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_norm2(vec3s v);
    CGLM_INLINE float glms_vec3_norm(vec3s v);
+   CGLM_INLINE float glms_vec3_norm_one(vec3s v);
+   CGLM_INLINE float glms_vec3_norm_inf(vec3s v);
    CGLM_INLINE vec3s glms_vec3_add(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_adds(vec3s a, float s);
    CGLM_INLINE vec3s glms_vec3_sub(vec3s a, vec3s b);
@@ -210,6 +212,32 @@ CGLM_INLINE
 float
 glms_vec3_norm(vec3s v) {
   return glm_vec3_norm(v.raw);
+}
+
+/*!
+ * @brief L1 norm of vec3
+ *
+ * @param[in] v vector
+ *
+ * @return L1 norm
+ */
+CGLM_INLINE
+float
+glms_vec3_norm_one(vec3s v) {
+  return glm_vec3_norm_one(v.raw);
+}
+
+/*!
+ * @brief Infinity norm of vec3
+ *
+ * @param[in] v vector
+ *
+ * @return Infinity norm
+ */
+CGLM_INLINE
+float
+glms_vec3_norm_inf(vec3s v) {
+  return glm_vec3_norm_inf(v.raw);
 }
 
 /*!

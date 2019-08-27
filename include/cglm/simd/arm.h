@@ -14,6 +14,12 @@
 #define glmm_store(p, a)  vst1q_f32(p, a)
 
 static inline
+float32x4_t
+glmm_abs(float32x4_t v) {
+  return vabsq_f32(v);
+}
+
+static inline
 float
 glmm_hadd(float32x4_t v) {
 #if defined(__aarch64__)
