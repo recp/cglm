@@ -13,6 +13,40 @@
    GLM_VEC2_ZERO
 
  Functions:
+   CGLM_INLINE void  glm_vec2(float * __restrict v, vec2 dest)
+   CGLM_INLINE void  glm_vec2_copy(vec2 a, vec2 dest)
+   CGLM_INLINE void  glm_vec2_zero(vec2 v)
+   CGLM_INLINE void  glm_vec2_one(vec2 v)
+   CGLM_INLINE float glm_vec2_dot(vec2 a, vec2 b)
+   CGLM_INLINE float glm_vec2_cross(vec2 a, vec2 b)
+   CGLM_INLINE float glm_vec2_norm2(vec2 v)
+   CGLM_INLINE float glm_vec2_norm(vec2 vec)
+   CGLM_INLINE void  glm_vec2_add(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_adds(vec2 v, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_sub(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_subs(vec2 v, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_mul(vec2 a, vec2 b, vec2 d)
+   CGLM_INLINE void  glm_vec2_scale(vec2 v, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_scale_as(vec2 v, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_div(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_divs(vec2 v, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_addadd(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_subadd(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_muladd(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_muladds(vec2 a, float s, vec2 dest)
+   CGLM_INLINE void  glm_vec2_maxadd(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_minadd(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_negate_to(vec2 v, vec2 dest)
+   CGLM_INLINE void  glm_vec2_negate(vec2 v)
+   CGLM_INLINE void  glm_vec2_normalize(vec2 v)
+   CGLM_INLINE void  glm_vec2_normalize_to(vec2 vec, vec2 dest)
+   CGLM_INLINE void  glm_vec2_rotate(vec2 v, float angle, vec2 dest)
+   CGLM_INLINE float glm_vec2_distance2(vec2 a, vec2 b)
+   CGLM_INLINE float glm_vec2_distance(vec2 a, vec2 b)
+   CGLM_INLINE void  glm_vec2_maxv(vec2 v1, vec2 v2, vec2 dest)
+   CGLM_INLINE void  glm_vec2_minv(vec2 v1, vec2 v2, vec2 dest)
+   CGLM_INLINE void  glm_vec2_clamp(vec2 v, float minVal, float maxVal)
+   CGLM_INLINE void  glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest)
 
  */
 
@@ -430,6 +464,32 @@ glm_vec2_normalize_to(vec2 vec, vec2 dest) {
   }
 
   glm_vec2_scale(vec, 1.0f / norm, dest);
+}
+
+/*!
+ * @brief rotate vec2 around origin by angle (CCW: counterclockwise)
+ *
+ * Formula:
+ *   𝑥2 = cos(a)𝑥1 − sin(a)𝑦1
+ *   𝑦2 = sin(a)𝑥1 + cos(a)𝑦1
+ *
+ * @param[in]  v     vector to rotate
+ * @param[in]  angle angle by radians
+ * @param[out] dest  destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_rotate(vec2 v, float angle, vec2 dest) {
+  float c, s, x1, y1;
+
+  c  = cosf(angle);
+  s  = sinf(angle);
+
+  x1 = v[0];
+  y1 = v[1];
+
+  dest[0] = c * x1 - s * y1;
+  dest[1] = s * x1 + c * y1;
 }
 
 /**
