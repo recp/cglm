@@ -250,7 +250,7 @@ glm_vec3_fract(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 float
-glm_vec3_hadd(vec3 v) {   // could overflow
+glm_vec3_hadd(vec3 v) {   /* could overflow */
   return v[0] + v[1] + v[2];
 }
 

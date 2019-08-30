@@ -284,7 +284,7 @@ glm_vec4_fract(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 float
-glm_vec4_hadd(vec4 v) {   // could overflow
+glm_vec4_hadd(vec4 v) {   /* could overflow */
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glmm_hadd(glmm_load(v));
 #else
