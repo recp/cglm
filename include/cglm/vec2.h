@@ -231,15 +231,15 @@ glm_vec2_subs(vec2 v, float s, vec2 dest) {
 /*!
  * @brief multiply two vector (component-wise multiplication)
  *
- * @param a v1
- * @param b v2
- * @param d v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
+ * @param a    v1
+ * @param b    v2
+ * @param dest v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
  */
 CGLM_INLINE
 void
-glm_vec2_mul(vec2 a, vec2 b, vec2 d) {
-  d[0] = a[0] * b[0];
-  d[1] = a[1] * b[1];
+glm_vec2_mul(vec2 a, vec2 b, vec2 dest) {
+  dest[0] = a[0] * b[0];
+  dest[1] = a[1] * b[1];
 }
 
 /*!
@@ -448,22 +448,22 @@ glm_vec2_normalize(vec2 v) {
 /*!
  * @brief normalize vector to dest
  *
- * @param[in]  vec  source
+ * @param[in]  v    source
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec2_normalize_to(vec2 vec, vec2 dest) {
+glm_vec2_normalize_to(vec2 v, vec2 dest) {
   float norm;
 
-  norm = glm_vec2_norm(vec);
+  norm = glm_vec2_norm(v);
 
   if (norm == 0.0f) {
     glm_vec2_zero(dest);
     return;
   }
 
-  glm_vec2_scale(vec, 1.0f / norm, dest);
+  glm_vec2_scale(v, 1.0f / norm, dest);
 }
 
 /*!
@@ -521,43 +521,43 @@ glm_vec2_distance(vec2 a, vec2 b) {
 /*!
  * @brief max values of vectors
  *
- * @param[in]  v1   vector1
- * @param[in]  v2   vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec2_maxv(vec2 v1, vec2 v2, vec2 dest) {
-  dest[0] = glm_max(v1[0], v2[0]);
-  dest[1] = glm_max(v1[1], v2[1]);
+glm_vec2_maxv(vec2 a, vec2 b, vec2 dest) {
+  dest[0] = glm_max(a[0], b[0]);
+  dest[1] = glm_max(a[1], b[1]);
 }
 
 /*!
  * @brief min values of vectors
  *
- * @param[in]  v1   vector1
- * @param[in]  v2   vector2
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_vec2_minv(vec2 v1, vec2 v2, vec2 dest) {
-  dest[0] = glm_min(v1[0], v2[0]);
-  dest[1] = glm_min(v1[1], v2[1]);
+glm_vec2_minv(vec2 a, vec2 b, vec2 dest) {
+  dest[0] = glm_min(a[0], b[0]);
+  dest[1] = glm_min(a[1], b[1]);
 }
 
 /*!
  * @brief clamp vector's individual members between min and max values
  *
  * @param[in, out]  v      vector
- * @param[in]       minVal minimum value
- * @param[in]       maxVal maximum value
+ * @param[in]       minval minimum value
+ * @param[in]       maxval maximum value
  */
 CGLM_INLINE
 void
-glm_vec2_clamp(vec2 v, float minVal, float maxVal) {
-  v[0] = glm_clamp(v[0], minVal, maxVal);
-  v[1] = glm_clamp(v[1], minVal, maxVal);
+glm_vec2_clamp(vec2 v, float minval, float maxval) {
+  v[0] = glm_clamp(v[0], minval, maxval);
+  v[1] = glm_clamp(v[1], minval, maxval);
 }
 
 /*!
