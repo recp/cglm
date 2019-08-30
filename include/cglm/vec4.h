@@ -240,7 +240,8 @@ glm_vec4_norm2(vec4 v) {
 }
 
 /*!
- * @brief norm (magnitude) of vec4
+ * @brief euclidean norm (magnitude), also called L2 norm
+ *        this will give magnitude of vector in euclidean space
  *
  * @param[in] v vector
  *
