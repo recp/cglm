@@ -114,6 +114,12 @@ glmm_norm(__m128 a) {
 }
 
 static inline
+float
+glmm_norm2(__m128 a) {
+  return _mm_cvtss_f32(glmm_vhadds(_mm_mul_ps(a, a)));
+}
+
+static inline
 __m128
 glmm_load3(float v[3]) {
   __m128i xy;
@@ -127,7 +133,7 @@ glmm_load3(float v[3]) {
 
 static inline
 void
-glmm_store3(__m128 vx, float v[3]) {
+glmm_store3(float v[3], __m128 vx) {
   _mm_storel_pi((__m64 *)&v[0], vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }

@@ -37,5 +37,11 @@ glmm_norm(float32x4_t a) {
   return sqrtf(glmm_dot(a, a));
 }
 
+static inline
+float
+glmm_norm2(float32x4_t a) {
+  return glmm_dot(a, a);
+}
+
 #endif
 #endif /* cglm_simd_arm_h */

@@ -12,6 +12,7 @@
 /*
  Functions:
    CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
+   CGLM_INLINE void  glm_vec4_fill(vec4 v, float val);
    CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
    CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
    CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
@@ -45,6 +46,22 @@ glm_vec4_broadcast(float val, vec4 d) {
   glmm_store(d, _mm_set1_ps(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
+#endif
+}
+
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param v   dest
+ * @param val value
+ */
+CGLM_INLINE
+void
+glm_vec4_fill(vec4 v, float val) {
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(v, _mm_set1_ps(val));
+#else
+  v[0] = v[1] = v[2] = v[3] = val;
 #endif
 }
 

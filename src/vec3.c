@@ -214,14 +214,14 @@ glmc_vec3_center(vec3 a, vec3 b, vec3 dest) {
 
 CGLM_EXPORT
 float
-glmc_vec3_distance2(vec3 a, vec3 b) {
-  return glm_vec3_distance2(a, b);
+glmc_vec3_distance(vec3 a, vec3 b) {
+  return glm_vec3_distance(a, b);
 }
 
 CGLM_EXPORT
 float
-glmc_vec3_distance(vec3 a, vec3 b) {
-  return glm_vec3_distance(a, b);
+glmc_vec3_distance2(vec3 a, vec3 b) {
+  return glm_vec3_distance2(a, b);
 }
 
 CGLM_EXPORT
@@ -254,6 +254,48 @@ glmc_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
   glm_vec3_lerp(from, to, t, dest);
 }
 
+CGLM_EXPORT
+void
+glmc_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_step_uni(float edge, vec3 x, vec3 dest) {
+  glm_vec3_step_uni(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_step(vec3 edge, vec3 x, vec3 dest) {
+  glm_vec3_step(edge, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest) {
+  glm_vec3_smoothstep_uni(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothstep(vec3 edge0, vec3 edge1, vec3 x, vec3 dest) {
+  glm_vec3_smoothstep(edge0, edge1, x, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_smoothinterp(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_smoothinterpc(from, to, t, dest);
+}
+
 /* ext */
 
 CGLM_EXPORT
@@ -266,6 +308,12 @@ CGLM_EXPORT
 void
 glmc_vec3_broadcast(float val, vec3 d) {
   glm_vec3_broadcast(val, d);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_fill(vec3 v, float val) {
+  glm_vec3_fill(v, val);
 }
 
 CGLM_EXPORT

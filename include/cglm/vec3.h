@@ -48,19 +48,28 @@
    CGLM_INLINE void  glm_vec3_normalize_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_cross(vec3 a, vec3 b, vec3 d);
    CGLM_INLINE void  glm_vec3_crossn(vec3 a, vec3 b, vec3 dest);
-   CGLM_INLINE float glm_vec3_distance(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_angle(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec3_rotate(vec3 v, float angle, vec3 axis);
    CGLM_INLINE void  glm_vec3_rotate_m4(mat4 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_rotate_m3(mat3 m, vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_proj(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_center(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE float glm_vec3_distance(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_distance2(vec3 a, vec3 b);
    CGLM_INLINE void  glm_vec3_maxv(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_minv(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_ortho(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_clamp(vec3 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mix(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_step_uni(float edge, vec3 x, vec3 dest);
+   CGLM_INLINE void  glm_vec3_step(vec3 edge, vec3 x, vec3 dest);
+   CGLM_INLINE void  glm_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest);
+   CGLM_INLINE void  glm_vec3_smoothstep(vec3 edge0, vec3 edge1, vec3 x, vec3 dest);
+   CGLM_INLINE void  glm_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest);
+   CGLM_INLINE void  glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
 
  Convenient:
@@ -191,7 +200,8 @@ glm_vec3_norm2(vec3 v) {
 }
 
 /*!
- * @brief norm (magnitude) of vec3
+ * @brief euclidean norm (magnitude), also called L2 norm
+ *        this will give magnitude of vector in euclidean space
  *
  * @param[in] v vector
  *
@@ -694,9 +704,9 @@ glm_vec3_center(vec3 a, vec3 b, vec3 dest) {
 CGLM_INLINE
 float
 glm_vec3_distance2(vec3 a, vec3 b) {
-  return glm_pow2(b[0] - a[0])
-       + glm_pow2(b[1] - a[1])
-       + glm_pow2(b[2] - a[2]);
+  return glm_pow2(a[0] - b[0])
+       + glm_pow2(a[1] - b[1])
+       + glm_pow2(a[2] - b[2]);
 }
 
 /**
@@ -772,7 +782,29 @@ glm_vec3_clamp(vec3 v, float minVal, float maxVal) {
 }
 
 /*!
- * @brief linear interpolation between two vector
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount)
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
+  vec3 s, v;
+
+  /* from + s * (to - from) */
+  glm_vec3_broadcast(t, s);
+  glm_vec3_sub(to, from, v);
+  glm_vec3_mul(s, v, v);
+  glm_vec3_add(from, v, dest);
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
  *
  * formula:  from + s * (to - from)
  *
@@ -783,14 +815,140 @@ glm_vec3_clamp(vec3 v, float minVal, float maxVal) {
  */
 CGLM_INLINE
 void
-glm_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest) {
-  vec3 s, v;
+glm_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerp(from, to, glm_clamp_zo(t), dest);
+}
 
+/*!
+ * @brief linear interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount)
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_mix(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerp(from, to, t, dest);
+}
+
+/*!
+ * @brief linear interpolation between two vectors (clamped)
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_lerpc(from, to, t, dest);
+}
+
+/*!
+ * @brief threshold function (unidimensional)
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_step_uni(float edge, vec3 x, vec3 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
+}
+
+/*!
+ * @brief threshold function
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_step(vec3 edge, vec3 x, vec3 dest) {
+  dest[0] = glm_step(edge[0], x[0]);
+  dest[1] = glm_step(edge[1], x[1]);
+  dest[2] = glm_step(edge[2], x[2]);
+}
+
+/*!
+ * @brief threshold function with a smooth transition (unidimensional)
+ *
+ * @param[in]   edge0   low threshold
+ * @param[in]   edge1   high threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest) {
+  dest[0] = glm_smoothstep(edge0, edge1, x[0]);
+  dest[1] = glm_smoothstep(edge0, edge1, x[1]);
+  dest[2] = glm_smoothstep(edge0, edge1, x[2]);
+}
+
+/*!
+ * @brief threshold function with a smooth transition
+ *
+ * @param[in]   edge0   low threshold
+ * @param[in]   edge1   high threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_smoothstep(vec3 edge0, vec3 edge1, vec3 x, vec3 dest) {
+  dest[0] = glm_smoothstep(edge0[0], edge1[0], x[0]);
+  dest[1] = glm_smoothstep(edge0[1], edge1[1], x[1]);
+  dest[2] = glm_smoothstep(edge0[2], edge1[2], x[2]);
+}
+
+/*!
+ * @brief smooth Hermite interpolation between two vectors
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount)
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest) {
+  vec3 s, v;
+    
   /* from + s * (to - from) */
-  glm_vec3_broadcast(glm_clamp_zo(t), s);
+  glm_vec3_broadcast(glm_smooth(t), s);
   glm_vec3_sub(to, from, v);
   glm_vec3_mul(s, v, v);
   glm_vec3_add(from, v, dest);
+}
+
+/*!
+ * @brief smooth Hermite interpolation between two vectors (clamped)
+ *
+ * formula:  from + s * (to - from)
+ *
+ * @param[in]   from from value
+ * @param[in]   to   to value
+ * @param[in]   t    interpolant (amount) clamped between 0 and 1
+ * @param[out]  dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
+  glm_vec3_smoothinterp(from, to, glm_clamp_zo(t), dest);
 }
 
 /*!
