@@ -5,7 +5,11 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: [8, 10, 12]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
     
     steps:
     - uses: actions/checkout@v1
@@ -19,5 +23,3 @@ jobs:
       run: make
     - name: make check
       run: make check
-    - name: make distcheck
-      run: make distcheck
