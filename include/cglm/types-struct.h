@@ -10,6 +10,16 @@
 
 #include "types.h"
 
+typedef union vec2s {
+#ifndef CGLM_NO_ANONYMOUS_STRUCT
+  struct {
+    float x;
+    float y;
+  };
+#endif
+  vec2 raw;
+} vec2s;
+
 typedef union vec3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
@@ -61,6 +71,17 @@ typedef union CGLM_ALIGN_IF(16) versors {
   vec4 raw;
 } versors;
 
+typedef union mat2s {
+#ifndef CGLM_NO_ANONYMOUS_STRUCT
+  struct {
+    float m00, m01;
+    float m10, m11;
+  };
+#endif
+  vec2s col[2];
+  mat2  raw;
+} mat2s;
+
 typedef union mat3s {
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
@@ -70,7 +91,7 @@ typedef union mat3s {
   };
 #endif
   vec3s col[3];
-  mat3 raw;
+  mat3  raw;
 } mat3s;
 
 typedef union CGLM_ALIGN_MAT mat4s {
@@ -83,7 +104,7 @@ typedef union CGLM_ALIGN_MAT mat4s {
   };
 #endif
   vec4s col[4];
-  mat4 raw;
+  mat4  raw;
 } mat4s;
 
 #endif /* cglm_types_struct_h */
