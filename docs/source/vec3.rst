@@ -158,7 +158,8 @@ Functions documentation
 
 .. c:function:: float  glm_vec3_norm(vec3 vec)
 
-    norm (magnitude) of vec3
+    | euclidean norm (magnitude), also called L2 norm
+    | this will give magnitude of vector in euclidean space
 
     Parameters:
       | *[in]*  **vec**   vector
