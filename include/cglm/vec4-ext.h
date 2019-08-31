@@ -278,13 +278,14 @@ glm_vec4_fract(vec4 v, vec4 dest) {
 
 /*!
  * @brief vector reduction by summation
+ * @warning could overflow
  *
- * @param[in]  v    vector
- * @return     sum of all vector's elements
+ * @param[in]   v    vector
+ * @return      sum of all vector's elements
  */
 CGLM_INLINE
 float
-glm_vec4_hadd(vec4 v) {   /* could overflow */
+glm_vec4_hadd(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glmm_hadd(glmm_load(v));
 #else

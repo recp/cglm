@@ -229,6 +229,7 @@ glms_vec3_fract(vec3s v) {
 
 /*!
  * @brief vector reduction by summation
+ * @warning could overflow
  *
  * @param[in]  v    vector
  * @return     sum of all vector's elements
