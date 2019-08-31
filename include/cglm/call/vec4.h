@@ -56,6 +56,14 @@ glmc_vec4_norm(vec4 v);
 CGLM_EXPORT
 float
 glmc_vec4_norm2(vec4 v);
+    
+CGLM_EXPORT
+float
+glmc_vec4_norm_one(vec4 v);
+
+CGLM_EXPORT
+float
+glmc_vec4_norm_inf(vec4 v);
 
 CGLM_EXPORT
 void
@@ -258,6 +266,18 @@ glmc_vec4_isvalid(vec4 v);
 CGLM_EXPORT
 void
 glmc_vec4_sign(vec4 v, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_abs(vec4 v, vec4 dest);
+    
+CGLM_EXPORT
+void
+glmc_vec4_fract(vec4 v, vec4 dest);
+    
+CGLM_EXPORT
+float
+glmc_vec4_hadd(vec4 v);
 
 CGLM_EXPORT
 void
