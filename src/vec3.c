@@ -75,6 +75,18 @@ glmc_vec3_norm2(vec3 v) {
 }
 
 CGLM_EXPORT
+float
+glmc_vec3_norm_one(vec3 v) {
+  return glm_vec3_norm_one(v);
+}
+
+CGLM_EXPORT
+float
+glmc_vec3_norm_inf(vec3 v) {
+  return glm_vec3_norm_inf(v);
+}
+
+CGLM_EXPORT
 void
 glmc_vec3_add(vec3 a, vec3 b, vec3 dest) {
   glm_vec3_add(a, b, dest);
@@ -380,6 +392,24 @@ CGLM_EXPORT
 void
 glmc_vec3_sign(vec3 v, vec3 dest) {
   glm_vec3_sign(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_abs(vec3 v, vec3 dest) {
+  glm_vec3_abs(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_fract(vec3 v, vec3 dest) {
+  glm_vec3_fract(v, dest);
+}
+
+CGLM_EXPORT
+float
+glmc_vec3_hadd(vec3 v) {
+  return glm_vec3_hadd(v);
 }
 
 CGLM_EXPORT

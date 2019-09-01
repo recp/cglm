@@ -24,6 +24,9 @@
    CGLM_INLINE bool  glms_vec4_isinf(vec4s v);
    CGLM_INLINE bool  glms_vec4_isvalid(vec4s v);
    CGLM_INLINE vec4s glms_vec4_sign(vec4s v);
+   CGLM_INLINE vec4s glms_vec4_abs(vec4s v);
+   CGLM_INLINE vec4s glms_vec4_fract(vec4s v);
+   CGLM_INLINE float glms_vec4_hadd(vec4s v);
    CGLM_INLINE vec4s glms_vec4_sqrt(vec4s v);
  */
 
@@ -194,6 +197,47 @@ glms_vec4_sign(vec4s v) {
   vec4s r;
   glm_vec4_sign(v.raw, r.raw);
   return r;
+}
+
+/*!
+ * @brief absolute value of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_abs(vec4s v) {
+  vec4s r;
+  glm_vec4_abs(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns          dest destination vector
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_fract(vec4s v) {
+  vec4s r;
+  glm_vec4_fract(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief vector reduction by summation
+ * @warning could overflow
+ *
+ * @param[in]  v    vector
+ * @return     sum of all vector's elements
+ */
+CGLM_INLINE
+float
+glms_vec4_hadd(vec4s v) {
+  return glm_vec4_hadd(v.raw);
 }
 
 /*!

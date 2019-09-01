@@ -23,6 +23,8 @@
    CGLM_INLINE float glm_vec3_dot(vec3 a, vec3 b);
    CGLM_INLINE float glm_vec3_norm2(vec3 v);
    CGLM_INLINE float glm_vec3_norm(vec3 v);
+   CGLM_INLINE float glm_vec3_norm_one(vec3 v);
+   CGLM_INLINE float glm_vec3_norm_inf(vec3 v);
    CGLM_INLINE void  glm_vec3_add(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_adds(vec3 a, float s, vec3 dest);
    CGLM_INLINE void  glm_vec3_sub(vec3 a, vec3 b, vec3 dest);
@@ -211,6 +213,49 @@ CGLM_INLINE
 float
 glm_vec3_norm(vec3 v) {
   return sqrtf(glm_vec3_norm2(v));
+}
+
+/*!
+ * @brief L1 norm of vec3
+ * Also known as Manhattan Distance or Taxicab norm.
+ * L1 Norm is the sum of the magnitudes of the vectors in a space.
+ * It is calculated as the sum of the absolute values of the vector components.
+ * In this norm, all the components of the vector are weighted equally.
+ *
+ * This computes:
+ * R = |v[0]| + |v[1]| + |v[2]|
+ *
+ * @param[in] v vector
+ *
+ * @return L1 norm
+ */
+CGLM_INLINE
+float
+glm_vec3_norm_one(vec3 v) {
+  vec3 t;
+  glm_vec3_abs(v, t);
+  return glm_vec3_hadd(t);
+}
+
+/*!
+ * @brief infinity norm of vec3
+ * Also known as Maximum norm.
+ * Infinity Norm is the largest magnitude among each element of a vector.
+ * It is calculated as the maximum of the absolute values of the vector components.
+ *
+ * This computes:
+ * inf norm = max(|v[0]|, |v[1]|, |v[2]|)
+ *
+ * @param[in] v vector
+ *
+ * @return infinity norm
+ */
+CGLM_INLINE
+float
+glm_vec3_norm_inf(vec3 v) {
+  vec3 t;
+  glm_vec3_abs(v, t);
+  return glm_vec3_max(t);
 }
 
 /*!
