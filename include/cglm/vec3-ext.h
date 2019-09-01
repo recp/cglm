@@ -24,6 +24,9 @@
    CGLM_INLINE bool  glm_vec3_isinf(vec3 v);
    CGLM_INLINE bool  glm_vec3_isvalid(vec3 v);
    CGLM_INLINE void  glm_vec3_sign(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_abs(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_fract(vec3 v, vec3 dest);
+   CGLM_INLINE float glm_vec3_hadd(vec3 v);
    CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
 
@@ -209,6 +212,47 @@ glm_vec3_sign(vec3 v, vec3 dest) {
   dest[0] = glm_signf(v[0]);
   dest[1] = glm_signf(v[1]);
   dest[2] = glm_signf(v[2]);
+}
+
+/*!
+ * @brief absolute value of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_abs(vec3 v, vec3 dest) {
+  dest[0] = fabsf(v[0]);
+  dest[1] = fabsf(v[1]);
+  dest[2] = fabsf(v[2]);
+}
+
+/*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_fract(vec3 v, vec3 dest) {
+  dest[0] = fminf(v[0] - floorf(v[0]), 0x1.fffffep-1f);
+  dest[1] = fminf(v[1] - floorf(v[1]), 0x1.fffffep-1f);
+  dest[2] = fminf(v[2] - floorf(v[2]), 0x1.fffffep-1f);
+}
+
+/*!
+ * @brief vector reduction by summation
+ * @warning could overflow
+ *
+ * @param[in]  v    vector
+ * @return     sum of all vector's elements
+ */
+CGLM_INLINE
+float
+glm_vec3_hadd(vec3 v) {
+  return v[0] + v[1] + v[2];
 }
 
 /*!

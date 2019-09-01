@@ -44,6 +44,12 @@
 
 static inline
 __m128
+glmm_abs(__m128 x) {
+  return _mm_andnot_ps(_mm_set1_ps(-0.0f), x);
+}
+
+static inline
+__m128
 glmm_vhadds(__m128 v) {
 #if defined(__SSE3__)
   __m128 shuf, sums;
@@ -66,6 +72,38 @@ static inline
 float
 glmm_hadd(__m128 v) {
   return _mm_cvtss_f32(glmm_vhadds(v));
+}
+
+static inline
+__m128
+glmm_vhmin(__m128 v) {
+  __m128 x0, x1, x2;
+  x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
+  x1 = _mm_min_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
+  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  return _mm_min_ss(x1, x2);
+}
+
+static inline
+float
+glmm_hmin(__m128 v) {
+  return _mm_cvtss_f32(glmm_vhmin(v));
+}
+
+static inline
+__m128
+glmm_vhmax(__m128 v) {
+  __m128 x0, x1, x2;
+  x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
+  x1 = _mm_max_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
+  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  return _mm_max_ss(x1, x2);
+}
+
+static inline
+float
+glmm_hmax(__m128 v) {
+  return _mm_cvtss_f32(glmm_vhmax(v));
 }
 
 static inline
@@ -117,6 +155,18 @@ static inline
 float
 glmm_norm2(__m128 a) {
   return _mm_cvtss_f32(glmm_vhadds(_mm_mul_ps(a, a)));
+}
+
+static inline
+float
+glmm_norm_one(__m128 a) {
+  return _mm_cvtss_f32(glmm_vhadds(glmm_abs(a)));
+}
+
+static inline
+float
+glmm_norm_inf(__m128 a) {
+  return _mm_cvtss_f32(glmm_vhmax(glmm_abs(a)));
 }
 
 static inline
