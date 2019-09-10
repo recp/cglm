@@ -7,8 +7,7 @@
 
 #include "test_common.h"
 
-void
-test_project(void **state) {
+TEST_IMPL(project) {
   mat4 model, view, proj, mvp;
   vec4 viewport = {0.0f, 0.0f, 800.0f, 600.0f};
   vec3 pos      = {13.0f, 45.0f, 0.74f};
@@ -25,7 +24,9 @@ test_project(void **state) {
 
   /* unprojected of projected vector must be same as original one */
   /* we used 0.01 because of projection floating point errors */
-  assert_true(fabsf(pos[0] - unprojected[0]) < 0.01);
-  assert_true(fabsf(pos[1] - unprojected[1]) < 0.01);
-  assert_true(fabsf(pos[2] - unprojected[2]) < 0.01);
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01);
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01);
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01);
+  
+  TEST_SUCCESS
 }

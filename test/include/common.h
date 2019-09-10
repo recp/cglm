@@ -30,11 +30,8 @@ typedef struct test_entry_t {
 } test_entry_t;
 
 #define TEST_DECLARE(FUN) test_status_t test_ ## FUN(void);
-#define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 }
+#define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
 #define TEST_LIST         static test_entry_t tests[] = 
-
-#define REAL_ASSERT(__VA_ARGS__)(__VA_ARGS__)
-#define create(...) REAL_ASSERT(__VA_ARGS__)(__VA_ARGS__)
 
 #define ASSERT_EXT(expr, ...)                                                 \
   if (!(expr)) {                                                              \
@@ -51,9 +48,10 @@ typedef struct test_entry_t {
 #define ASSERT_ARG3(arg1, arg2, arg3, ...) arg3
 
 #define ASSERT_CHOOSER(...) ASSERT_ARG3(__VA_ARGS__, ASSERT_ARG2, ASSERT_ARG1)
-#define ASSERT(...) do { ASSERT_CHOOSER(__VA_ARGS__)(__VA_ARGS__) } while (0);
+#define ASSERT(...) do { ASSERT_CHOOSER(__VA_ARGS__)(__VA_ARGS__) } while(0);
 
-#define TEST_SUCCESS  return (test_status_t){NULL, 1};
+#define TEST_OK 1
+#define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
 
 #define TEST_IMPL(FUN)                                                        \
   test_status_t test_ ## FUN (void);                                          \
