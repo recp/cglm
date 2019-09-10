@@ -21,6 +21,8 @@ TEST_DECLARE(mat4_identity)
 TEST_DECLARE(mat4_mul)
 TEST_DECLARE(mat4_all)
 
+TEST_DECLARE(affine)
+
 /* mat3 */
 TEST_DECLARE(mat3_identity)
 TEST_DECLARE(mat3_mul)
@@ -39,6 +41,12 @@ TEST_DECLARE(clamp)
 /* euler */
 TEST_DECLARE(euler)
 
+/* quat */
+TEST_DECLARE(quat)
+
+/* bezier */
+TEST_DECLARE(bezier)
+
 /*****************************************************************************/
 
 TEST_LIST {
@@ -46,6 +54,8 @@ TEST_LIST {
   TEST_ENTRY(mat4_identity)
   TEST_ENTRY(mat4_mul)
   TEST_ENTRY(mat4_all)
+  
+  TEST_ENTRY(affine)
   
   /* mat3 */
   TEST_ENTRY(mat3_identity)
@@ -64,6 +74,12 @@ TEST_LIST {
   
   /* euler */
   TEST_ENTRY(euler)
+  
+  /* quat */
+  TEST_ENTRY(quat)
+  
+  /* bezier */
+  TEST_ENTRY(bezier)
 };
 
 #endif /* tests_h */
