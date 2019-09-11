@@ -62,7 +62,7 @@ test_vec4_clamp(vec4 v, float minVal, float maxVal) {
   v[3] = glm_clamp(v[3], minVal, maxVal);
 }
 
-TEST_IMPL(vec4_all) {
+TEST_IMPL(vec4) {
   vec4  v, v1, v2, v3, v4;
   vec4s vs1, vs2, vs3, vs4;
   int   i;

@@ -62,11 +62,11 @@ TEST_IMPL(mat4_mul) {
 }
 
 TEST_IMPL(mat4_all) {
-  mat4  m1 = GLM_MAT4_IDENTITY_INIT;
-  mat4  m3;
-  mat4  m4 = GLM_MAT4_ZERO_INIT;
-  mat4  m5;
-  int   i;
+  mat4 m1 = GLM_MAT4_IDENTITY_INIT;
+  mat4 m3;
+  mat4 m4 = GLM_MAT4_ZERO_INIT;
+  mat4 m5;
+  int  i;
 
   for (i = 0; i < 100000; i++) {
     test_rand_mat4(m3);
