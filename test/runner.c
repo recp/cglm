@@ -55,9 +55,9 @@ main(int argc, const char * argv[]) {
           CYAN "\ncglm test results:\n" RESET
           "------------------\n"
           
-          BOLDMAGENTA "%d" RESET " tests are runned, "
-          BOLDGREEN   "%d" RESET " are passed, "
-          BOLDRED     "%d" RESET " are failed\n\n",
+          MAGENTA "%d" RESET " tests are runned, "
+          GREEN   "%d" RESET " are passed, "
+          RED     "%d" RESET " are failed\n\n" RESET,
           passed + failed,
           passed,
           failed);
