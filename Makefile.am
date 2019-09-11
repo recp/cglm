@@ -140,8 +140,8 @@ libcglm_la_SOURCES=\
     src/bezier.c
 
 test_tests_SOURCES=\
+    test/runner.c \
     test/src/test_common.c \
-    test/src/test_main.c \
     test/src/test_mat4.c \
     test/src/test_cam.c \
     test/src/test_project.c \
@@ -160,7 +160,7 @@ pkgconfig_DATA=cglm.pc
 # the source directory that post-build.sh is in. When not
 # using a prefix, $VPATH will be unset, so we need to fall
 # back to using . to run the script.
-export VPATH
+#export VPATH
 
-all-local:
-	sh $${VPATH:-.}/post-build.sh
+# all-local:
+#	sh $${VPATH:-.}/post-build.sh

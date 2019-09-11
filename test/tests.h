@@ -47,6 +47,12 @@ TEST_DECLARE(quat)
 /* bezier */
 TEST_DECLARE(bezier)
 
+/* vec3 */
+TEST_DECLARE(vec3)
+
+/* vec4 */
+TEST_DECLARE(vec4)
+
 /*****************************************************************************/
 
 TEST_LIST {
@@ -80,6 +86,12 @@ TEST_LIST {
   
   /* bezier */
   TEST_ENTRY(bezier)
+
+  /* vec3 */
+  TEST_ENTRY(vec3)
+
+  /* vec4 */
+  TEST_ENTRY(vec4)
 };
 
 #endif /* tests_h */
