@@ -169,16 +169,10 @@ TEST_IMPL(vec4) {
   test_vec4_minv(v1, v2, v4);
   ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
-  glm_vec4_print(v3, stderr);
-  glm_vec4_print(v4, stderr);
-
   /* clamp */
   glm_vec4_clamp(v3, 0.1, 0.8);
   test_vec4_clamp(v4, 0.1, 0.8);
   ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
-
-  glm_vec4_print(v3, stderr);
-  glm_vec4_print(v4, stderr);
 
   ASSERT(v3[0] >= 0.0999 && v3[0] <= 0.80001) /* rounding erros */
   ASSERT(v3[1] >= 0.0999 && v3[1] <= 0.80001)

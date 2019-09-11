@@ -18,7 +18,9 @@ main(int argc, const char * argv[]) {
 
   passed = failed = 0;
   count  = sizeof(tests) / sizeof(tests[0]);
-
+ 
+  fprintf(stderr, CYAN "\nWelcome to cglm tests\n\n" RESET);
+  
   for (i = 0; i < count; i++) {
     entry = tests + i;
     st    = entry->entry();
@@ -33,13 +35,18 @@ main(int argc, const char * argv[]) {
       passed++;
     }
   }
-
+  
+  if (failed == 0) {
+    fprintf(stderr, BOLDGREEN "  All tests are passed 🎉\n" RESET);
+  }
+ 
   fprintf(stderr,
-          "\nCGLM TEST RESULTS:\n"
+          CYAN "\ncglm test results:\n" RESET
           "------------------\n"
-          "TOTAL\t: %d\n"
-          "PASSED\t: %d\n"
-          "FAILED\t: %d\n\n",
+          
+          BOLDMAGENTA "%d" RESET " tests are runned, "
+          BOLDGREEN   "%d" RESET " are passed, "
+          BOLDRED     "%d" RESET " are failed\n\n",
           passed + failed,
           passed,
           failed);

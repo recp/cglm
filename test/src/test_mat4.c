@@ -100,10 +100,6 @@ TEST_IMPL(mat4_all) {
     ASSERT(test_assert_mat4_eq2(m3, m5, 0.0009f).status == TEST_OK)
   }
 
-  /* print */
-  glm_mat4_print(m3, stderr);
-  glm_mat4_print(m4, stderr);
-
   /* test determinant */
   ASSERT(glm_mat4_det(m1) == glmc_mat4_det(m1))
 #if defined( __SSE2__ )

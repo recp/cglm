@@ -29,6 +29,24 @@ typedef struct test_entry_t {
   int    show_output;
 } test_entry_t;
 
+#define RESET       "\033[0m"
+#define BLACK       "\033[30m"             /* Black */
+#define RED         "\033[31m"             /* Red */
+#define GREEN       "\033[32m"             /* Green */
+#define YELLOW      "\033[33m"             /* Yellow */
+#define BLUE        "\033[34m"             /* Blue */
+#define MAGENTA     "\033[35m"             /* Magenta */
+#define CYAN        "\033[36m"             /* Cyan */
+#define WHITE       "\033[37m"             /* White */
+#define BOLDBLACK   "\033[1m\033[30m"      /* Bold Black */
+#define BOLDRED     "\033[1m\033[31m"      /* Bold Red */
+#define BOLDGREEN   "\033[1m\033[32m"      /* Bold Green */
+#define BOLDYELLOW  "\033[1m\033[33m"      /* Bold Yellow */
+#define BOLDBLUE    "\033[1m\033[34m"      /* Bold Blue */
+#define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
+#define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
+#define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+
 #define TEST_DECLARE(FUN) test_status_t test_ ## FUN(void);
 #define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
 #define TEST_LIST         static test_entry_t tests[] = 
@@ -36,7 +54,7 @@ typedef struct test_entry_t {
 #define ASSERT_EXT(expr, ...)                                                 \
   if (!(expr)) {                                                              \
     fprintf(stderr,                                                           \
-            "Assertion failed in %s on line %d: %s\n",                        \
+            RED "  assert fail" RESET " in " BOLDCYAN "%s " RESET "on " BOLDMAGENTA "line %d" RESET " : " BOLDWHITE " ASSERT(%s)\n" RESET,                        \
             __FILE__,                                                         \
             __LINE__,                                                         \
             #expr);                                                           \
