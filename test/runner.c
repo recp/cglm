@@ -26,18 +26,29 @@ main(int argc, const char * argv[]) {
     st    = entry->entry();
 
     if (!st.status) {
+      fprintf(stderr,
+              BOLDRED  "  𐄂" BOLDWHITE " %s " RESET,
+              entry->name);
       if (st.msg) {
-        fprintf(stderr, "TEST FAIL (%s): %s\n", entry->name, st.msg);
+        fprintf(stderr,
+                YELLOW "- %s" RESET,
+                st.msg);
       }
+
+      fprintf(stderr, "\n");
 
       failed++;
     } else {
+      fprintf(stderr,
+              GREEN  "  ✔︎" RESET " %s\n"
+              ,
+              entry->name);
       passed++;
     }
   }
   
   if (failed == 0) {
-    fprintf(stderr, BOLDGREEN "  All tests are passed 🎉\n" RESET);
+    fprintf(stderr, BOLDGREEN "\n  All tests are passed 🎉\n" RESET);
   }
  
   fprintf(stderr,

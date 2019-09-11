@@ -51,14 +51,17 @@ typedef struct test_entry_t {
 #define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
 #define TEST_LIST         static test_entry_t tests[] = 
 
-#define ASSERT_EXT(expr, ...)                                                 \
+#define ASSERT_EXT(expr, msg)                                                 \
   if (!(expr)) {                                                              \
     fprintf(stderr,                                                           \
-            RED "  assert fail" RESET " in " BOLDCYAN "%s " RESET "on " BOLDMAGENTA "line %d" RESET " : " BOLDWHITE " ASSERT(%s)\n" RESET,                        \
+            RED "  assert fail" RESET                                         \
+            " in " BOLDCYAN "%s " RESET                                       \
+            "on " BOLDMAGENTA "line %d" RESET                                 \
+            " : " BOLDWHITE " ASSERT(%s)\n" RESET,                            \
             __FILE__,                                                         \
             __LINE__,                                                         \
             #expr);                                                           \
-    return (test_status_t){__VA_ARGS__, 0};                                   \
+    return (test_status_t){msg, 0};                                           \
   }
 
 #define ASSERT_ARG1(expr)                  ASSERT_EXT(expr, NULL)
