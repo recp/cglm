@@ -7,7 +7,6 @@
 #******************************************************************************
 
 ACLOCAL_AMFLAGS = -I m4
-
 AM_CFLAGS = -Wall \
             -std=gnu99 \
             -O3 \
@@ -19,12 +18,9 @@ lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 
 checkLDFLAGS = -L./.libs \
-               -L./test/lib/cmocka/build/src \
-               -lcmocka \
                -lm \
                -lcglm
-checkCFLAGS = -I./test/lib/cmocka/include \
-              -I./include
+checkCFLAGS = -I./include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
