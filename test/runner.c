@@ -9,12 +9,14 @@
 #include "tests.h"
 
 #include <stdlib.h>
+#include <time.h>
 
 int
 main(int argc, const char * argv[]) {
   test_entry_t *entry;
   test_status_t st;
   int32_t       i, count, passed, failed;
+  double        start, end, elapsed;
 
   passed = failed = 0;
   count  = sizeof(tests) / sizeof(tests[0]);
@@ -22,8 +24,11 @@ main(int argc, const char * argv[]) {
   fprintf(stderr, CYAN "\nWelcome to cglm tests\n\n" RESET);
   
   for (i = 0; i < count; i++) {
-    entry = tests + i;
-    st    = entry->entry();
+    entry   = tests + i;
+    start   = clock();
+    st      = entry->entry();
+    end     = clock();
+    elapsed = (end - start) / CLOCKS_PER_SEC;
 
     if (!st.status) {
       fprintf(stderr,
@@ -39,10 +44,14 @@ main(int argc, const char * argv[]) {
 
       failed++;
     } else {
-      fprintf(stderr,
-              GREEN  "  ✔︎" RESET " %s\n"
-              ,
-              entry->name);
+      fprintf(stderr, GREEN  "  ✔︎" RESET " %s - " , entry->name);
+      
+      if (elapsed > 0.01)
+        fprintf(stderr, YELLOW "%.2f", elapsed);
+      else
+        fprintf(stderr, "0");
+
+      fprintf(stderr, "s\n" RESET);
       passed++;
     }
   }
@@ -58,7 +67,7 @@ main(int argc, const char * argv[]) {
           MAGENTA "%d" RESET " tests are runned, "
           GREEN   "%d" RESET " %s passed, "
           RED     "%d" RESET " %s failed\n\n" RESET,
-          passed + failed,
+          count,
           passed,
           passed > 1 ? "are" : "is",
           failed,
