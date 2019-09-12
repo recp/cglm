@@ -70,6 +70,7 @@ typedef struct test_entry_t {
 
 #define ASSERT_CHOOSER(...) ASSERT_ARG3(__VA_ARGS__, ASSERT_ARG2, ASSERT_ARG1)
 #define ASSERT(...) do { ASSERT_CHOOSER(__VA_ARGS__)(__VA_ARGS__) } while(0);
+#define ASSERTIFY(expr) ASSERT((expr).status == 1, (expr).msg)
 
 #define TEST_OK 1
 #define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};

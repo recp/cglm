@@ -50,8 +50,8 @@ TEST_IMPL(bezier) {
   Bs_plain = test_bezier_plain(s, p0, c0, c1, p1);
 
   ASSERT(glm_eq(Bs,  Bs_plain));
-  ASSERT(test_assert_eqf(smc, Bs_plain).status == 1)
-  ASSERT(test_assert_eqf(Bs,  smc).status == 1)
+  ASSERTIFY(test_assert_eqf(smc, Bs_plain))
+  ASSERTIFY(test_assert_eqf(Bs,  smc))
 
   /* test cubic hermite */
   smc      = glm_smc(s, GLM_HERMITE_MAT, (vec4){p0, p1, c0, c1});

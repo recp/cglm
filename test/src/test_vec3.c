@@ -15,11 +15,11 @@ TEST_IMPL(vec3) {
 
   /* test zero */
   glm_vec3_zero(v);
-  ASSERT(test_assert_vec3_eq(GLM_VEC3_ZERO, v).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(GLM_VEC3_ZERO, v))
 
   /* test one */
   glm_vec3_one(v);
-  ASSERT(test_assert_vec3_eq(GLM_VEC3_ONE, v).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(GLM_VEC3_ONE, v))
 
   /* adds, subs, div, divs, mul */
   glm_vec3_add(v, GLM_VEC3_ONE, v);
@@ -50,7 +50,7 @@ TEST_IMPL(vec3) {
   glm_vec3_normalize_to(v, v1);
   glm_vec3_scale(v1, 0.8f, v1);
   glm_vec3_scale_as(v, 0.8f, v);
-  ASSERT(test_assert_vec3_eq(v1, v).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, v))
 
   /* addadd, subadd, muladd */
   glm_vec3_one(v);
@@ -73,8 +73,8 @@ TEST_IMPL(vec3) {
   glm_mat4_pick3(rot1, rot1m3);
   glm_vec3_rotate_m3(rot1m3, v, v2);
 
-  ASSERT(test_assert_vec3_eq(v1, v2).status == 1)
-  ASSERT(test_assert_vec3_eq(v1, GLM_ZUP).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
+  ASSERTIFY(test_assert_vec3_eq(v1, GLM_ZUP))
 
   /* structs */
   vs1 = test_rand_vec3s();
@@ -82,7 +82,7 @@ TEST_IMPL(vec3) {
 
   vs3 = glms_vec3_add(vs1, vs2);
   vs4 = glms_vec3_maxv(vs1, vs3);
-  ASSERT(test_assert_vec3s_eq(vs3, vs4).status == 1)
+  ASSERTIFY(test_assert_vec3s_eq(vs3, vs4))
 
   /* swizzle */
 
@@ -91,24 +91,24 @@ TEST_IMPL(vec3) {
   v1[1] = 2;
   v1[2] = 3;
   glm_vec3_swizzle(v1, GLM_ZYX, v1);
-  ASSERT(test_assert_vec3_eq(v1, (vec3){3, 2, 1}).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, (vec3){3, 2, 1}))
 
   glm_vec3_swizzle(v1, GLM_XXX, v1);
-  ASSERT(test_assert_vec3_eq(v1, (vec3){3, 3, 3}).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, (vec3){3, 3, 3}))
 
   v1[0] = 1;
   v1[1] = 2;
   v1[2] = 3;
 
   glm_vec3_swizzle(v1, GLM_YYY, v1);
-  ASSERT(test_assert_vec3_eq(v1, (vec3){2, 2, 2}).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, (vec3){2, 2, 2}))
 
   v1[0] = 1;
   v1[1] = 2;
   v1[2] = 3;
 
   glm_vec3_swizzle(v1, GLM_ZZZ, v1);
-  ASSERT(test_assert_vec3_eq(v1, (vec3){3, 3, 3}).status == 1)
+  ASSERTIFY(test_assert_vec3_eq(v1, (vec3){3, 3, 3}))
 
   TEST_SUCCESS
 }
