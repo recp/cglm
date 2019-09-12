@@ -7,7 +7,6 @@
 #******************************************************************************
 
 ACLOCAL_AMFLAGS = -I m4
-
 AM_CFLAGS = -Wall \
             -std=gnu99 \
             -O3 \
@@ -19,12 +18,9 @@ lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 
 checkLDFLAGS = -L./.libs \
-               -L./test/lib/cmocka/build/src \
-               -lcmocka \
                -lm \
                -lcglm
-checkCFLAGS = -I./test/lib/cmocka/include \
-              -I./include
+checkCFLAGS = -I./include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
@@ -140,8 +136,8 @@ libcglm_la_SOURCES=\
     src/bezier.c
 
 test_tests_SOURCES=\
+    test/runner.c \
     test/src/test_common.c \
-    test/src/test_main.c \
     test/src/test_mat4.c \
     test/src/test_cam.c \
     test/src/test_project.c \
@@ -160,7 +156,7 @@ pkgconfig_DATA=cglm.pc
 # the source directory that post-build.sh is in. When not
 # using a prefix, $VPATH will be unset, so we need to fall
 # back to using . to run the script.
-export VPATH
+#export VPATH
 
-all-local:
-	sh $${VPATH:-.}/post-build.sh
+# all-local:
+#	sh $${VPATH:-.}/post-build.sh

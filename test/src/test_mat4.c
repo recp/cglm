@@ -10,45 +10,63 @@
 #define m 4
 #define n 4
 
-void
-test_mat4(void **state) {
-  mat4  m1 = GLM_MAT4_IDENTITY_INIT;
-  mat4  m2 = GLM_MAT4_IDENTITY_INIT;
-  mat4  m3;
-  mat4  m4 = GLM_MAT4_ZERO_INIT;
-  mat4  m5;
-  int   i, j, k;
-
+TEST_IMPL(mat4_identity) {
+  mat4 m1 = GLM_MAT4_IDENTITY_INIT;
+  mat4 m2 = GLM_MAT4_IDENTITY_INIT;
+  mat4 m3;
+  int  i, j;
+  
   /* test identity matrix multiplication */
   glm_mat4_mul(m1, m2, m3);
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
-      if (i == j)
-        assert_true(glm_eq(m3[i][j], 1.0f));
-      else
-        assert_true(glm_eq(m3[i][j], 0.0f));
+      if (i == j) {
+        ASSERT(glm_eq(m3[i][j], 1.0f))
+      } else {
+        ASSERT(glm_eq(m3[i][j], 0.0f))
+      }
     }
   }
+  
+  TEST_SUCCESS
+}
 
+TEST_IMPL(mat4_mul) {
+  mat4  m1 = GLM_MAT4_IDENTITY_INIT;
+  mat4  m2 = GLM_MAT4_IDENTITY_INIT;
+  mat4  m3;
+  mat4  m4 = GLM_MAT4_ZERO_INIT;
+  int   i, j, k;
+  
   /* test random matrices */
   /* random matrices */
   test_rand_mat4(m1);
   test_rand_mat4(m2);
-
+  
   glm_mat4_mul(m1, m2, m3);
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       for (k = 0; k < m; k++)
-        /* column-major */
+      /* column-major */
         m4[i][j] += m1[k][j] * m2[i][k];
     }
   }
-
-  test_assert_mat4_eq(m3, m4);
-
+  
+  ASSERT(test_assert_mat4_eq(m3, m4).status == TEST_OK)
+  
   /* test pre compiled */
   glmc_mat4_mul(m1, m2, m3);
-  test_assert_mat4_eq(m3, m4);
+  ASSERT(test_assert_mat4_eq(m3, m4).status == TEST_OK)
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(mat4_all) {
+  mat4 m1 = GLM_MAT4_IDENTITY_INIT;
+  mat4 m3;
+  mat4 m4 = GLM_MAT4_ZERO_INIT;
+  mat4 m5;
+  int  i;
 
   for (i = 0; i < 100000; i++) {
     test_rand_mat4(m3);
@@ -57,14 +75,14 @@ test_mat4(void **state) {
     /* test inverse precise */
     glm_mat4_inv_precise(m3, m4);
     glm_mat4_inv_precise(m4, m5);
-    test_assert_mat4_eq(m3, m5);
+    ASSERT(test_assert_mat4_eq(m3, m5).status == TEST_OK)
     
     test_rand_mat4(m3);
     test_rand_mat4(m4);
 
     glmc_mat4_inv_precise(m3, m4);
     glmc_mat4_inv_precise(m4, m5);
-    test_assert_mat4_eq(m3, m5);
+    ASSERT(test_assert_mat4_eq(m3, m5).status == TEST_OK)
     
     /* test inverse rcp */
     test_rand_mat4(m3);
@@ -72,23 +90,21 @@ test_mat4(void **state) {
     
     glm_mat4_inv_fast(m3, m4);
     glm_mat4_inv_fast(m4, m5);
-    test_assert_mat4_eq2(m3, m5, 0.0009f);
+    ASSERT(test_assert_mat4_eq2(m3, m5, 0.0009f).status == TEST_OK)
     
     test_rand_mat4(m3);
     test_rand_mat4(m4);
     
     glmc_mat4_inv(m3, m4);
     glmc_mat4_inv(m4, m5);
-    test_assert_mat4_eq2(m3, m5, 0.0009f);
+    ASSERT(test_assert_mat4_eq2(m3, m5, 0.0009f).status == TEST_OK)
   }
 
-  /* print */
-  glm_mat4_print(m3, stderr);
-  glm_mat4_print(m4, stderr);
-
   /* test determinant */
-  assert_int_equal(glm_mat4_det(m1), glmc_mat4_det(m1));
+  ASSERT(glm_mat4_det(m1) == glmc_mat4_det(m1))
 #if defined( __SSE2__ )
-  assert_int_equal(glmc_mat4_det(m1), glm_mat4_det_sse2(m1));
+  ASSERT(glmc_mat4_det(m1) == glm_mat4_det_sse2(m1))
 #endif
+  
+  TEST_SUCCESS
 }

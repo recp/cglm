@@ -7,25 +7,24 @@
 
 #include "test_common.h"
 
-void
-test_camera_lookat(void **state) {
-  mat4  view1, view2;
+TEST_IMPL(camera_lookat) {
+  mat4 view1, view2;
   vec3 center,
-       eye    = {0.024f, 14.6f, 67.04f},
-       dir    = {0.0f, 0.0f, -1.0f},
-       up     = {0.0f, 1.0f, 0.0f}
-  ;
+       eye = {0.024f, 14.6f, 67.04f},
+       dir = {0.0f, 0.0f, -1.0f},
+       up  = {0.0f, 1.0f, 0.0f};
 
   glm_vec3_add(eye, dir, center);
   glm_lookat(eye, center, up, view1);
 
   glm_look(eye, dir, up, view2);
 
-  test_assert_mat4_eq(view1, view2);
+  ASSERT(test_assert_mat4_eq(view1, view2).status == 1)
+
+  TEST_SUCCESS
 }
 
-void
-test_camera_decomp(void **state) {
+TEST_IMPL(camera_decomp) {
   mat4  proj, proj2;
   vec4  sizes;
   float aspect, fovy, nearVal, farVal;
@@ -36,9 +35,9 @@ test_camera_decomp(void **state) {
   farVal  = 100.0f;
 
   glm_perspective(fovy, aspect, nearVal, farVal, proj);
-  assert_true(fabsf(aspect  - glm_persp_aspect(proj)) < FLT_EPSILON);
-  assert_true(fabsf(fovy    - glm_persp_fovy(proj))   < FLT_EPSILON);
-  assert_true(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < FLT_EPSILON);
+  ASSERT(fabsf(aspect  - glm_persp_aspect(proj)) < FLT_EPSILON)
+  ASSERT(fabsf(fovy    - glm_persp_fovy(proj))   < FLT_EPSILON)
+  ASSERT(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < FLT_EPSILON)
 
   glm_persp_sizes(proj, fovy, sizes);
 
@@ -50,5 +49,7 @@ test_camera_decomp(void **state) {
                farVal,
                proj2);
 
-  test_assert_mat4_eq(proj, proj2);
+  ASSERT(test_assert_mat4_eq(proj, proj2).status == 1)
+
+  TEST_SUCCESS
 }

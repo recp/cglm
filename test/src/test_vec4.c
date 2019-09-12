@@ -62,8 +62,7 @@ test_vec4_clamp(vec4 v, float minVal, float maxVal) {
   v[3] = glm_clamp(v[3], minVal, maxVal);
 }
 
-void
-test_vec4(void **state) {
+TEST_IMPL(vec4) {
   vec4  v, v1, v2, v3, v4;
   vec4s vs1, vs2, vs3, vs4;
   int   i;
@@ -75,7 +74,7 @@ test_vec4(void **state) {
     d1 = glm_vec4_dot(v, v);
     d2 = test_vec4_dot(v, v);
 
-    assert_true(fabsf(d1 - d2) <= 0.000009);
+    ASSERT(fabsf(d1 - d2) <= 0.000009)
 
     /* 2. test SIMD normalize */
     test_vec4_normalize_to(v, v1);
@@ -98,62 +97,65 @@ test_vec4(void **state) {
     test_rand_vec4(v1);
     test_rand_vec4(v2);
     d1 = glm_vec4_distance(v1, v2);
-    d2 = sqrtf(powf(v1[0]-v2[0], 2.0f) + pow(v1[1]-v2[1], 2.0f) + pow(v1[2]-v2[2], 2.0f) + pow(v1[3]-v2[3], 2.0f));
-    assert_true(fabsf(d1 - d2) <= 0.000009);
+    d2 = sqrtf(powf(v1[0] - v2[0], 2.0f)
+               + pow(v1[1] - v2[1], 2.0f)
+               + pow(v1[2] - v2[2], 2.0f)
+               + pow(v1[3] - v2[3], 2.0f));
+    ASSERT(fabsf(d1 - d2) <= 0.000009)
   }
 
   /* test zero */
   glm_vec4_zero(v);
-  test_assert_vec4_eq(GLM_VEC4_ZERO, v);
+  ASSERT(test_assert_vec4_eq(GLM_VEC4_ZERO, v).status == 1)
 
   /* test one */
   glm_vec4_one(v);
-  test_assert_vec4_eq(GLM_VEC4_ONE, v);
+  ASSERT(test_assert_vec4_eq(GLM_VEC4_ONE, v).status == 1)
 
   /* adds, subs, div, divs, mul */
   glm_vec4_add(v, GLM_VEC4_ONE, v);
-  assert_true(glmc_vec4_eq_eps(v, 2));
+  ASSERT(glmc_vec4_eq_eps(v, 2))
 
   glm_vec4_adds(v, 10, v);
-  assert_true(glmc_vec4_eq_eps(v, 12));
+  ASSERT(glmc_vec4_eq_eps(v, 12))
 
   glm_vec4_sub(v, GLM_VEC4_ONE, v);
-  assert_true(glmc_vec4_eq_eps(v, 11));
+  ASSERT(glmc_vec4_eq_eps(v, 11))
 
   glm_vec4_subs(v, 1, v);
-  assert_true(glmc_vec4_eq_eps(v, 10));
+  ASSERT(glmc_vec4_eq_eps(v, 10))
 
   glm_vec4_broadcast(2, v1);
   glm_vec4_div(v, v1, v);
-  assert_true(glmc_vec4_eq_eps(v, 5));
+  ASSERT(glmc_vec4_eq_eps(v, 5))
 
   glm_vec4_divs(v, 0.5, v);
-  assert_true(glmc_vec4_eq_eps(v, 10));
+  ASSERT(glmc_vec4_eq_eps(v, 10))
 
   glm_vec4_mul(v, v1, v);
-  assert_true(glmc_vec4_eq_eps(v, 20));
+  ASSERT(glmc_vec4_eq_eps(v, 20))
 
   glm_vec4_scale(v, 0.5, v);
-  assert_true(glmc_vec4_eq_eps(v, 10));
+  ASSERT(glmc_vec4_eq_eps(v, 10))
 
   glm_vec4_normalize_to(v, v1);
   glm_vec4_scale(v1, 0.8, v1);
   glm_vec4_scale_as(v, 0.8, v);
-  test_assert_vec4_eq(v1, v);
+  ASSERT(test_assert_vec4_eq(v1, v).status == 1)
 
   /* addadd, subadd, muladd */
   glm_vec4_one(v);
 
   glm_vec4_addadd(GLM_VEC4_ONE, GLM_VEC4_ONE, v);
-  assert_true(glmc_vec4_eq_eps(v, 3));
+  ASSERT(glmc_vec4_eq_eps(v, 3))
 
   glm_vec4_subadd(GLM_VEC4_ONE, GLM_VEC4_ZERO, v);
-  assert_true(glmc_vec4_eq_eps(v, 4));
+  ASSERT(glmc_vec4_eq_eps(v, 4))
 
   glm_vec4_broadcast(2, v1);
   glm_vec4_broadcast(3, v2);
   glm_vec4_muladd(v1, v2, v);
-  assert_true(glmc_vec4_eq_eps(v, 10));
+  ASSERT(glmc_vec4_eq_eps(v, 10))
 
   /* min, max */
   test_rand_vec4(v1);
@@ -161,27 +163,21 @@ test_vec4(void **state) {
 
   glm_vec4_maxv(v1, v2, v3);
   test_vec4_maxv(v1, v2, v4);
-  test_assert_vec4_eq(v3, v4);
+  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
   glm_vec4_minv(v1, v2, v3);
   test_vec4_minv(v1, v2, v4);
-  test_assert_vec4_eq(v3, v4);
-
-  glm_vec4_print(v3, stderr);
-  glm_vec4_print(v4, stderr);
+  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
   /* clamp */
   glm_vec4_clamp(v3, 0.1, 0.8);
   test_vec4_clamp(v4, 0.1, 0.8);
-  test_assert_vec4_eq(v3, v4);
+  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
-  glm_vec4_print(v3, stderr);
-  glm_vec4_print(v4, stderr);
-
-  assert_true(v3[0] >= 0.0999 && v3[0] <= 0.80001); /* rounding erros */
-  assert_true(v3[1] >= 0.0999 && v3[1] <= 0.80001);
-  assert_true(v3[2] >= 0.0999 && v3[2] <= 0.80001);
-  assert_true(v3[3] >= 0.0999 && v3[3] <= 0.80001);
+  ASSERT(v3[0] >= 0.0999 && v3[0] <= 0.80001) /* rounding erros */
+  ASSERT(v3[1] >= 0.0999 && v3[1] <= 0.80001)
+  ASSERT(v3[2] >= 0.0999 && v3[2] <= 0.80001)
+  ASSERT(v3[3] >= 0.0999 && v3[3] <= 0.80001)
 
   /* swizzle */
 
@@ -192,10 +188,10 @@ test_vec4(void **state) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_WZYX, v1);
-  test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1});
+  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1}).status == 1)
 
   glm_vec4_swizzle(v1, GLM_XXXX, v1);
-  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}).status == 1)
 
   v1[0] = 1;
   v1[1] = 2;
@@ -203,7 +199,7 @@ test_vec4(void **state) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_YYYY, v1);
-  test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2});
+  ASSERT(test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2}).status == 1)
 
   v1[0] = 1;
   v1[1] = 2;
@@ -211,7 +207,7 @@ test_vec4(void **state) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_ZZZZ, v1);
-  test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3});
+  ASSERT(test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3}).status == 1)
 
   v1[0] = 1;
   v1[1] = 2;
@@ -219,7 +215,7 @@ test_vec4(void **state) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_WWWW, v1);
-  test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4});
+  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}).status == 1)
 
   /* structs */
   vs1 = test_rand_vec4s();
@@ -227,5 +223,7 @@ test_vec4(void **state) {
 
   vs3 = glms_vec4_add(vs1, vs2);
   vs4 = glms_vec4_maxv(vs1, vs3);
-  test_assert_vec4s_eq(vs3, vs4);
+  ASSERT(test_assert_vec4s_eq(vs3, vs4).status == 1)
+
+  TEST_SUCCESS
 }
