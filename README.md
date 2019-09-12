@@ -134,14 +134,10 @@ glm_inv_tr(modelMat);
 ### Unix (Autotools)
 
 ```bash
-$ sh ./build-deps.sh # run only once (dependencies) [Optional].
-$ # You can pass this step if you don't want to run `make check` for tests.
-$ # cglm uses cmocka for tests and it may reqiure cmake for building it
-$
 $ sh autogen.sh
 $ ./configure
 $ make
-$ make check # [Optional] (if you run `sh ./build-deps.sh`)
+$ make check # [Optional]
 $ [sudo] make install
 ```
 
