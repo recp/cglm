@@ -138,7 +138,7 @@ $ sh autogen.sh
 $ ./configure
 $ make
 $ make check # [Optional]
-$ [sudo] make install
+$ [sudo] make install # [Optional]
 ```
 
 This will also install pkg-config files so you can use
