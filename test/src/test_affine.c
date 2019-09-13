@@ -17,7 +17,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t1, t2, t3); /* R * T */
 
   glm_translate(t1, (vec3){34, 57, 36});
-  ASSERT(test_assert_mat4_eq(t1, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t1, t3))
 
   /* test rotate is postmultiplied */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -26,7 +26,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t2, t1, t3); /* T * R */
 
   glm_rotate(t2, GLM_PI_4f, GLM_YUP);
-  ASSERT(test_assert_mat4_eq(t2, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t2, t3))
 
   /* test scale is postmultiplied */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -37,7 +37,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t3, t4, t5); /* T * R * S */
 
   glm_scale(t3, (vec3){3, 5, 6});
-  ASSERT(test_assert_mat4_eq(t3, t5).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t3, t5))
 
   /* test translate_x */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -45,7 +45,7 @@ TEST_IMPL(affine) {
 
   glmc_mat4_mul(t1, t2, t3); /* R * T */
   glm_translate_x(t1, 34);
-  ASSERT(test_assert_mat4_eq(t1, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t1, t3))
 
   /* test translate_y */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -53,7 +53,7 @@ TEST_IMPL(affine) {
 
   glmc_mat4_mul(t1, t2, t3); /* R * T */
   glm_translate_y(t1, 57);
-  ASSERT(test_assert_mat4_eq(t1, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t1, t3))
 
   /* test translate_z */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -61,7 +61,7 @@ TEST_IMPL(affine) {
 
   glmc_mat4_mul(t1, t2, t3); /* R * T */
   glm_translate_z(t1, 36);
-  ASSERT(test_assert_mat4_eq(t1, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t1, t3))
 
   /* test rotate_x */
   glmc_rotate_make(t1, GLM_PI_4f, (vec3){1, 0, 0});
@@ -70,7 +70,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t2, t1, t3); /* T * R */
 
   glm_rotate_x(t2, GLM_PI_4f, t2);
-  ASSERT(test_assert_mat4_eq(t2, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t2, t3))
 
   /* test rotate_y */
   glmc_rotate_make(t1, GLM_PI_4f, (vec3){0, 1, 0});
@@ -79,7 +79,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t2, t1, t3); /* T * R */
 
   glm_rotate_y(t2, GLM_PI_4f, t2);
-  ASSERT(test_assert_mat4_eq(t2, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t2, t3))
 
   /* test rotate_z */
   glmc_rotate_make(t1, GLM_PI_4f, (vec3){0, 0, 1});
@@ -88,7 +88,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t2, t1, t3); /* T * R */
 
   glm_rotate_z(t2, GLM_PI_4f, t2);
-  ASSERT(test_assert_mat4_eq(t2, t3).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t2, t3))
 
   /* test rotate */
   glmc_rotate_make(t1, GLM_PI_4f, (vec3){0, 0, 1});
@@ -97,7 +97,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t2, t1, t3); /* T * R */
   glmc_rotate(t2, GLM_PI_4f, (vec3){0, 0, 1});
 
-  ASSERT(test_assert_mat4_eq(t3, t2).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t3, t2))
 
   /* test scale_uni */
   glmc_rotate_make(t1, GLM_PI_4f, GLM_YUP);
@@ -108,7 +108,7 @@ TEST_IMPL(affine) {
   glmc_mat4_mul(t3, t4, t5); /* T * R * S */
 
   glm_scale_uni(t3, 3);
-  ASSERT(test_assert_mat4_eq(t3, t5).status == 1)
+  ASSERTIFY(test_assert_mat4_eq(t3, t5))
 
   TEST_SUCCESS
 }

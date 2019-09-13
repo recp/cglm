@@ -52,7 +52,7 @@ TEST_IMPL(mat3_mul) {
     }
   }
   
-  ASSERT(test_assert_mat3_eq(m3, m4).status == 1)
+  ASSERTIFY(test_assert_mat3_eq(m3, m4))
   
   TEST_SUCCESS
 }
@@ -70,7 +70,7 @@ TEST_IMPL(mat3_inv) {
     /* test inverse precise */
     glmc_mat3_inv(m1, m2);
     glmc_mat3_inv(m2, m3);
-    ASSERT(test_assert_mat3_eq(m1, m3).status == 1)
+    ASSERTIFY(test_assert_mat3_eq(m1, m3))
   }
   
   TEST_SUCCESS

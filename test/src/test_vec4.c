@@ -106,11 +106,11 @@ TEST_IMPL(vec4) {
 
   /* test zero */
   glm_vec4_zero(v);
-  ASSERT(test_assert_vec4_eq(GLM_VEC4_ZERO, v).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(GLM_VEC4_ZERO, v))
 
   /* test one */
   glm_vec4_one(v);
-  ASSERT(test_assert_vec4_eq(GLM_VEC4_ONE, v).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(GLM_VEC4_ONE, v))
 
   /* adds, subs, div, divs, mul */
   glm_vec4_add(v, GLM_VEC4_ONE, v);
@@ -141,7 +141,7 @@ TEST_IMPL(vec4) {
   glm_vec4_normalize_to(v, v1);
   glm_vec4_scale(v1, 0.8f, v1);
   glm_vec4_scale_as(v, 0.8f, v);
-  ASSERT(test_assert_vec4_eq(v1, v).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, v))
 
   /* addadd, subadd, muladd */
   glm_vec4_one(v);
@@ -163,16 +163,16 @@ TEST_IMPL(vec4) {
 
   glm_vec4_maxv(v1, v2, v3);
   test_vec4_maxv(v1, v2, v4);
-  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v3, v4))
 
   glm_vec4_minv(v1, v2, v3);
   test_vec4_minv(v1, v2, v4);
-  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v3, v4))
 
   /* clamp */
   glm_vec4_clamp(v3, 0.1f, 0.8f);
   test_vec4_clamp(v4, 0.1f, 0.8f);
-  ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v3, v4))
 
   ASSERT(v3[0] >= 0.0999 && v3[0] <= 0.80001) /* rounding erros */
   ASSERT(v3[1] >= 0.0999 && v3[1] <= 0.80001)
@@ -188,10 +188,10 @@ TEST_IMPL(vec4) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_WZYX, v1);
-  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1}).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, (vec4){4, 3, 2, 1}))
 
   glm_vec4_swizzle(v1, GLM_XXXX, v1);
-  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}))
 
   v1[0] = 1;
   v1[1] = 2;
@@ -199,7 +199,7 @@ TEST_IMPL(vec4) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_YYYY, v1);
-  ASSERT(test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2}).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, (vec4){2, 2, 2, 2}))
 
   v1[0] = 1;
   v1[1] = 2;
@@ -207,7 +207,7 @@ TEST_IMPL(vec4) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_ZZZZ, v1);
-  ASSERT(test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3}).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, (vec4){3, 3, 3, 3}))
 
   v1[0] = 1;
   v1[1] = 2;
@@ -215,7 +215,7 @@ TEST_IMPL(vec4) {
   v1[3] = 4;
 
   glm_vec4_swizzle(v1, GLM_WWWW, v1);
-  ASSERT(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}).status == 1)
+  ASSERTIFY(test_assert_vec4_eq(v1, (vec4){4, 4, 4, 4}))
 
   /* structs */
   vs1 = test_rand_vec4s();
@@ -223,7 +223,7 @@ TEST_IMPL(vec4) {
 
   vs3 = glms_vec4_add(vs1, vs2);
   vs4 = glms_vec4_maxv(vs1, vs3);
-  ASSERT(test_assert_vec4s_eq(vs3, vs4).status == 1)
+  ASSERTIFY(test_assert_vec4s_eq(vs3, vs4))
 
   TEST_SUCCESS
 }
