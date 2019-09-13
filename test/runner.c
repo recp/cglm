@@ -32,7 +32,7 @@ main(int argc, const char * argv[]) {
 
     if (!st.status) {
       fprintf(stderr,
-              BOLDRED  "  𐄂" BOLDWHITE " %s " RESET,
+              BOLDRED  "  " FAIL_TEXT BOLDWHITE " %s " RESET,
               entry->name);
       if (st.msg) {
         fprintf(stderr,
@@ -44,7 +44,7 @@ main(int argc, const char * argv[]) {
 
       failed++;
     } else {
-      fprintf(stderr, GREEN  "  ✔︎" RESET " %s - " , entry->name);
+      fprintf(stderr, GREEN  "  " OK_TEXT RESET " %s - " , entry->name);
       
       if (elapsed > 0.01)
         fprintf(stderr, YELLOW "%.2f", elapsed);

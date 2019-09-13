@@ -98,9 +98,9 @@ TEST_IMPL(vec4) {
     test_rand_vec4(v2);
     d1 = glm_vec4_distance(v1, v2);
     d2 = sqrtf(powf(v1[0] - v2[0], 2.0f)
-               + pow(v1[1] - v2[1], 2.0f)
-               + pow(v1[2] - v2[2], 2.0f)
-               + pow(v1[3] - v2[3], 2.0f));
+               + powf(v1[1] - v2[1], 2.0f)
+               + powf(v1[2] - v2[2], 2.0f)
+               + powf(v1[3] - v2[3], 2.0f));
     ASSERT(fabsf(d1 - d2) <= 0.000009)
   }
 
@@ -129,18 +129,18 @@ TEST_IMPL(vec4) {
   glm_vec4_div(v, v1, v);
   ASSERT(glmc_vec4_eq_eps(v, 5))
 
-  glm_vec4_divs(v, 0.5, v);
+  glm_vec4_divs(v, 0.5f, v);
   ASSERT(glmc_vec4_eq_eps(v, 10))
 
   glm_vec4_mul(v, v1, v);
   ASSERT(glmc_vec4_eq_eps(v, 20))
 
-  glm_vec4_scale(v, 0.5, v);
+  glm_vec4_scale(v, 0.5f, v);
   ASSERT(glmc_vec4_eq_eps(v, 10))
 
   glm_vec4_normalize_to(v, v1);
-  glm_vec4_scale(v1, 0.8, v1);
-  glm_vec4_scale_as(v, 0.8, v);
+  glm_vec4_scale(v1, 0.8f, v1);
+  glm_vec4_scale_as(v, 0.8f, v);
   ASSERT(test_assert_vec4_eq(v1, v).status == 1)
 
   /* addadd, subadd, muladd */
@@ -170,8 +170,8 @@ TEST_IMPL(vec4) {
   ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
   /* clamp */
-  glm_vec4_clamp(v3, 0.1, 0.8);
-  test_vec4_clamp(v4, 0.1, 0.8);
+  glm_vec4_clamp(v3, 0.1f, 0.8f);
+  test_vec4_clamp(v4, 0.1f, 0.8f);
   ASSERT(test_assert_vec4_eq(v3, v4).status == 1)
 
   ASSERT(v3[0] >= 0.0999 && v3[0] <= 0.80001) /* rounding erros */

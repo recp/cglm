@@ -41,10 +41,10 @@ TEST_IMPL(camera_decomp) {
 
   glm_persp_sizes(proj, fovy, sizes);
 
-  glm_frustum(-sizes[0] * 0.5,
-               sizes[0] * 0.5,
-              -sizes[1] * 0.5,
-               sizes[1] * 0.5,
+  glm_frustum(-sizes[0] * 0.5f,
+               sizes[0] * 0.5f,
+              -sizes[1] * 0.5f,
+               sizes[1] * 0.5f,
                nearVal,
                farVal,
                proj2);

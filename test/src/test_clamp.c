@@ -8,8 +8,8 @@
 #include "test_common.h"
 
 TEST_IMPL(clamp) {
-  vec3 v3 = {15.07, 0.4, 17.3};
-  vec4 v4 = {5.07,  2.3, 1.3, 1.4};
+  vec3 v3 = {15.07f, 0.4f, 17.3f};
+  vec4 v4 = {5.07f,  2.3f, 1.3f, 1.4f};
 
   ASSERT(glm_clamp(1.6f, 0.0f, 1.0f)  == 1.0f)
   ASSERT(glm_clamp(-1.6f, 0.0f, 1.0f) == 0.0f)

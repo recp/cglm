@@ -27,7 +27,7 @@ TEST_IMPL(quat) {
   ASSERT(glm_eq(glm_quat_real(q4), cosf(glm_rad(0.0f) * 0.5f)))
 
   glm_quat_mat4(q4, rot1);
-  ASSERT(test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009).status == 1)
+  ASSERT(test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009f).status == 1)
 
   /* 1. test quat to mat and mat to quat */
   for (i = 0; i < 1000; i++) {
@@ -42,7 +42,7 @@ TEST_IMPL(quat) {
 
     /* 3. test first rot and second rotation */
     /* almost equal */
-    ASSERT(test_assert_mat4_eq2(inRot, outRot, 0.000009).status == 1);
+    ASSERT(test_assert_mat4_eq2(inRot, outRot, 0.000009f).status == 1);
 
     /* 4. test SSE mul and raw mul */
 #if defined( __SSE__ ) || defined( __SSE2__ )
@@ -62,7 +62,7 @@ TEST_IMPL(quat) {
   /* create view matrix with quaternion */
   glm_quat_look(eye, q3, view2);
 
-  ASSERT(test_assert_mat4_eq2(view1, view2, 0.000009).status == 1);
+  ASSERT(test_assert_mat4_eq2(view1, view2, 0.000009f).status == 1);
 
   /* 6. test quaternion rotation matrix result */
   test_rand_quat(q3);
@@ -72,7 +72,7 @@ TEST_IMPL(quat) {
   glm_quat_axis(q3, axis);
   glm_rotate_make(rot2, glm_quat_angle(q3), axis);
 
-  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009).status == 1);
+  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009f).status == 1);
 
   /* 7. test quaternion multiplication (hamilton product),
         final rotation = first rotation + second = quat1 * quat2
@@ -92,7 +92,7 @@ TEST_IMPL(quat) {
   glm_quat_mat4(q5, rot2);
 
   /* result must be same (almost) */
-  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009).status == 1)
+  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009f).status == 1)
 
   /* 8. test quaternion for look rotation */
 
@@ -168,7 +168,7 @@ TEST_IMPL(quat) {
   glm_quat_rotate(rot2, q3, rot2);
 
   /* result must be same (almost) */
-  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009).status == 1)
+  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009f).status == 1)
 
   glm_rotate_make(rot1, glm_rad(-90), GLM_ZUP);
   glm_translate(rot1, (vec3){-10.0, 45.0f, 8.0f});
@@ -179,7 +179,7 @@ TEST_IMPL(quat) {
   glm_translate(rot2, (vec3){-10.0, 45.0f, 8.0f});
 
   /* result must be same (almost) */
-  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009).status == 1)
+  ASSERT(test_assert_mat4_eq2(rot1, rot2, 0.000009f).status == 1)
 
   /* reverse */
   glm_rotate_make(rot1, glm_rad(-90), GLM_ZUP);
@@ -187,7 +187,7 @@ TEST_IMPL(quat) {
   glm_quat_rotate(rot1, q3, rot1);
 
   /* result must be identity */
-  ASSERT(test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009).status == 1)
+  ASSERT(test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009f).status == 1)
 
   test_rand_quat(q3);
 

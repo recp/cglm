@@ -78,4 +78,14 @@ typedef struct test_entry_t {
   test_status_t test_ ## FUN (void);                                          \
   test_status_t test_ ## FUN()
 
+#if defined(_WIN32)
+# define srand48(x) srand((int)(x))
+# define drand48() ((float)(rand() / RAND_MAX))
+# define OK_TEXT "ok:"
+# define FAIL_TEXT "fail:"
+#else
+# define OK_TEXT "✔︎"
+# define FAIL_TEXT "𐄂"
+#endif
+
 #endif /* common_h */
