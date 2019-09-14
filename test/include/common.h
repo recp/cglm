@@ -70,7 +70,21 @@ typedef struct test_entry_t {
 
 #define ASSERT_CHOOSER(...) ASSERT_ARG3(__VA_ARGS__, ASSERT_ARG2, ASSERT_ARG1)
 #define ASSERT(...) do { ASSERT_CHOOSER(__VA_ARGS__)(__VA_ARGS__) } while(0);
-#define ASSERTIFY(expr) ASSERT((expr).status == 1, (expr).msg)
+#define ASSERTIFY(expr) do {                                                  \
+    test_status_t ts; \
+    ts = expr; \
+    if (ts.status != 1) {                                                     \
+      fprintf(stderr,                                                         \
+              RED "  assert fail" RESET                                       \
+              " in " BOLDCYAN "%s " RESET                                     \
+              "on " BOLDMAGENTA "line %d" RESET                               \
+              " : " BOLDWHITE " ASSERTIFY(%s)\n" RESET,                       \
+              __FILE__,                                                       \
+              __LINE__,                                                       \
+              #expr);                                                         \
+      return (test_status_t){ts.msg, 0};                                      \
+    } \
+  } while(0);
 
 #define TEST_OK 1
 #define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
@@ -80,8 +94,7 @@ typedef struct test_entry_t {
   test_status_t test_ ## FUN()
 
 #if defined(_WIN32)
-# define srand48(x) srand((int)(x))
-# define drand48() ((float)(rand() / RAND_MAX))
+# define drand48() ((float)(rand() / (RAND_MAX + 1.0)))
 # define OK_TEXT "ok:"
 # define FAIL_TEXT "fail:"
 #else
