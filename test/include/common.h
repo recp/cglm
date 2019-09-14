@@ -97,9 +97,11 @@ typedef struct test_entry_t {
 # define drand48() ((float)(rand() / (RAND_MAX + 1.0)))
 # define OK_TEXT "ok:"
 # define FAIL_TEXT "fail:"
+# define FINAL_TEXT "^_^"
 #else
 # define OK_TEXT "✔︎"
 # define FAIL_TEXT "𐄂"
+# define FINAL_TEXT "🎉"
 #endif
 
 #endif /* common_h */

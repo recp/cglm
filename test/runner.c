@@ -74,7 +74,8 @@ main(int argc, const char * argv[]) {
   }
 
   if (failed == 0) {
-    fprintf(stderr, BOLDGREEN "\n  All tests are passed 🎉\n" RESET);
+    fprintf(stderr,
+            BOLDGREEN "\n  All tests are passed " FINAL_TEXT "\n" RESET);
   }
 
   fprintf(stderr,

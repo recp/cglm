@@ -63,10 +63,13 @@ test_vec4_clamp(vec4 v, float minVal, float maxVal) {
 }
 
 TEST_IMPL(vec4) {
-  vec4  v, v1, v2, v3, v4;
+  vec4  v, v1, v2, v3, v4, one, zero;
   vec4s vs1, vs2, vs3, vs4;
   int   i;
   float d1, d2;
+
+  glm_vec4_one(one);
+  glm_vec4_zero(zero);
 
   for (i = 0; i < 1000; i++) {
     /* 1. test SSE/SIMD dot product */
@@ -106,20 +109,20 @@ TEST_IMPL(vec4) {
 
   /* test zero */
   glm_vec4_zero(v);
-  ASSERTIFY(test_assert_vec4_eq(GLM_VEC4_ZERO, v))
+  ASSERTIFY(test_assert_vec4_eq(zero, v))
 
   /* test one */
   glm_vec4_one(v);
-  ASSERTIFY(test_assert_vec4_eq(GLM_VEC4_ONE, v))
+  ASSERTIFY(test_assert_vec4_eq(one, v))
 
   /* adds, subs, div, divs, mul */
-  glm_vec4_add(v, GLM_VEC4_ONE, v);
+  glm_vec4_add(v, one, v);
   ASSERT(glmc_vec4_eq_eps(v, 2))
 
   glm_vec4_adds(v, 10, v);
   ASSERT(glmc_vec4_eq_eps(v, 12))
 
-  glm_vec4_sub(v, GLM_VEC4_ONE, v);
+  glm_vec4_sub(v, one, v);
   ASSERT(glmc_vec4_eq_eps(v, 11))
 
   glm_vec4_subs(v, 1, v);
@@ -146,10 +149,10 @@ TEST_IMPL(vec4) {
   /* addadd, subadd, muladd */
   glm_vec4_one(v);
 
-  glm_vec4_addadd(GLM_VEC4_ONE, GLM_VEC4_ONE, v);
+  glm_vec4_addadd(one, one, v);
   ASSERT(glmc_vec4_eq_eps(v, 3))
 
-  glm_vec4_subadd(GLM_VEC4_ONE, GLM_VEC4_ZERO, v);
+  glm_vec4_subadd(one, zero, v);
   ASSERT(glmc_vec4_eq_eps(v, 4))
 
   glm_vec4_broadcast(2, v1);
