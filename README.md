@@ -166,6 +166,10 @@ if `msbuild` won't work (because of multi version VS) then try to build with `de
 $ devenv cglm.sln /Build Release
 ```
 
+#### Running Tests on Windows
+
+You can see test project in same visual studio solution file. It is enough to run that project to run tests.
+
 ### Building Docs
 First you need install Sphinx: http://www.sphinx-doc.org/en/master/usage/installation.html
 then:
