@@ -51,6 +51,13 @@ typedef struct test_entry_t {
 #define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
 #define TEST_LIST         static test_entry_t tests[] = 
 
+#define TEST_OK 1
+#define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
+
+#define TEST_IMPL(FUN)                                                        \
+  test_status_t test_ ## FUN (void);                                          \
+  test_status_t test_ ## FUN()
+
 #define ASSERT_EXT(expr, msg)                                                 \
   if (!(expr)) {                                                              \
     fprintf(stderr,                                                           \
@@ -73,7 +80,7 @@ typedef struct test_entry_t {
 #define ASSERTIFY(expr) do {                                                  \
     test_status_t ts; \
     ts = expr; \
-    if (ts.status != 1) {                                                     \
+    if (ts.status != TEST_OK) {                                               \
       fprintf(stderr,                                                         \
               RED "  assert fail" RESET                                       \
               " in " BOLDCYAN "%s " RESET                                     \
@@ -85,13 +92,6 @@ typedef struct test_entry_t {
       return (test_status_t){ts.msg, 0};                                      \
     } \
   } while(0);
-
-#define TEST_OK 1
-#define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
-
-#define TEST_IMPL(FUN)                                                        \
-  test_status_t test_ ## FUN (void);                                          \
-  test_status_t test_ ## FUN()
 
 #if defined(_WIN32)
 # define drand48() ((float)(rand() / (RAND_MAX + 1.0)))

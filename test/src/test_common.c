@@ -125,6 +125,50 @@ test_assert_mat3_eq(mat3 m1, mat3 m2) {
 }
 
 test_status_t
+test_assert_mat3_eqt(mat3 m1, mat3 m2) {
+  int i, j, k;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      for (k = 0; k < 3; k++)
+        ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat4_eq_identity(mat4 m4) {
+  int i, j;
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      if (i == j) {
+        ASSERT(glm_eq(m4[i][j], 1.0f))
+      } else {
+        ASSERT(glm_eq(m4[i][j], 0.0f))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat4_eq_zero(mat4 m4) {
+  int i, j;
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      ASSERT(glm_eq(m4[i][j], 0.0f))
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_eqf(float a, float b) {
   ASSERT(fabsf(a - b) <= 0.000009); /* rounding errors */
   

@@ -26,7 +26,16 @@ test_status_t
 test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps);
 
 test_status_t
+test_assert_mat4_eq_identity(mat4 m4);
+
+test_status_t
+test_assert_mat4_eq_zero(mat4 m4);
+
+test_status_t
 test_assert_mat3_eq(mat3 m1, mat3 m2);
+
+test_status_t
+test_assert_mat3_eqt(mat3 m1, mat3 m2);
 
 test_status_t
 test_assert_vec3_eq(vec3 v1, vec3 v2);
