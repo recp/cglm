@@ -446,6 +446,9 @@ glm_mat4_quat(mat4 m, versor dest) {
 /*!
  * @brief multiply vector with mat4
  *
+ * actually the result is vec4, after multiplication the last component
+ * is trimmed. if you need it don't use this func.
+ *
  * @param[in]  m    mat4(affine transform)
  * @param[in]  v    vec3
  * @param[in]  last 4th item to make it vec4
