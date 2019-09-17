@@ -97,6 +97,20 @@ test_assert_mat4_eq(mat4 m1, mat4 m2) {
 }
 
 test_status_t
+test_assert_mat4_eqt(mat4 m1, mat4 m2) {
+  int i, j, k;
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      for (k = 0; k < 4; k++)
+        ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009)
+    }
+  }
+  
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
   int i, j, k;
   

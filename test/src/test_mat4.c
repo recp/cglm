@@ -149,7 +149,7 @@ TEST_IMPL(glm_mat4_mul) {
   ASSERTIFY(test_assert_mat4_eq(m3, m4))
 
   /* test pre compiled */
-  glmc_mat4_mul(m1, m2, m3);
+  glm_mat4_mul(m1, m2, m3);
   ASSERTIFY(test_assert_mat4_eq(m3, m4))
 
   TEST_SUCCESS
@@ -239,22 +239,90 @@ TEST_IMPL(glm_mat4_trace3) {
 }
 
 TEST_IMPL(glm_mat4_quat) {
+  mat4   m1, m2;
+  versor q1, q2, q3;
+  vec3   axis1;
+  vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  
+  glm_quat(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+  glm_quat_mat4(q1, m1);
+  glm_mat4_quat(m1, q2);
+  
+  glm_rotate_make(m2, GLM_PI_4, axis2);
+  glm_mat4_quat(m1, q3);
+  
+  glm_quat_axis(q3, axis1);
+  
+  glm_vec3_normalize(axis1);
+  glm_vec3_normalize(axis2);
+  
+  ASSERT(glm_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q2))
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q3))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_transpose_to) {
+  mat4  mat = A_MATRIX;
+  mat4  m1;
+
+  glm_mat4_transpose_to(mat, m1);
+  
+  ASSERTIFY(test_assert_mat4_eqt(mat, m1))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_transpose) {
+  mat4 mat = A_MATRIX;
+  mat4 m1;
+
+  glm_mat4_copy(mat, m1);
+  glm_mat4_transpose(m1);
+  
+  ASSERTIFY(test_assert_mat4_eqt(mat, m1))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_scale_p) {
+  mat4 m1 = A_MATRIX;
+  mat4 m2 = A_MATRIX;
+  int i, j, k, scale;
+
+  scale = rand() % 100;
+  
+  glm_mat4_scale_p(m1, scale);
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      for (k = 0; k < 4; k++)
+        ASSERT(glm_eq(m1[i][j], m2[i][j] * scale))
+    }
+  }
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_scale) {
+  mat4 m1 = A_MATRIX;
+  mat4 m2 = A_MATRIX;
+  int i, j, k, scale;
+
+  scale = rand() % 100;
+  
+  glm_mat4_scale(m1, scale);
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      for (k = 0; k < 4; k++)
+        ASSERT(glm_eq(m1[i][j], m2[i][j] * scale))
+    }
+  }
+
   TEST_SUCCESS
 }
 
@@ -273,62 +341,94 @@ TEST_IMPL(glm_mat4_det) {
 }
 
 TEST_IMPL(glm_mat4_inv) {
-  mat4 m1 = GLM_MAT4_IDENTITY_INIT;
-  mat4 m3;
-  mat4 m4 = GLM_MAT4_ZERO_INIT;
-  mat4 m5;
+  mat4 m1, m2, m3;
   int  i;
 
   for (i = 0; i < 100000; i++) {
-    test_rand_mat4(m3);
-    test_rand_mat4(m4);
+    test_rand_mat4(m1);
+    test_rand_mat4(m2);
 
     /* test inverse precise */
-    glm_mat4_inv(m3, m4);
-    glm_mat4_inv(m4, m5);
-    ASSERTIFY(test_assert_mat4_eq(m3, m5))
-
-    test_rand_mat4(m3);
-    test_rand_mat4(m4);
-
-    glmc_mat4_inv_precise(m3, m4);
-    glmc_mat4_inv_precise(m4, m5);
-    ASSERTIFY(test_assert_mat4_eq(m3, m5))
-
-    /* test inverse rcp */
-    test_rand_mat4(m3);
-    test_rand_mat4(m4);
-
-    glm_mat4_inv_fast(m3, m4);
-    glm_mat4_inv_fast(m4, m5);
-    ASSERTIFY(test_assert_mat4_eq2(m3, m5, 0.0009f))
-
-    test_rand_mat4(m3);
-    test_rand_mat4(m4);
-
-    glmc_mat4_inv(m3, m4);
-    glmc_mat4_inv(m4, m5);
-    ASSERTIFY(test_assert_mat4_eq2(m3, m5, 0.0009f))
+    glm_mat4_inv(m1, m2);
+    glm_mat4_inv(m2, m3);
+    ASSERTIFY(test_assert_mat4_eq(m1, m3))
   }
 
-  /* test determinant */
-  ASSERT(glm_mat4_det(m1) == glmc_mat4_det(m1))
-#if defined( __SSE2__ )
-  ASSERT(glmc_mat4_det(m1) == glm_mat4_det_sse2(m1))
-#endif
+  TEST_SUCCESS
+}
+
+TEST_IMPL(glm_mat4_inv_precise) {
+  mat4 m1, m2, m3;
+  int  i;
+
+  for (i = 0; i < 100000; i++) {
+    test_rand_mat4(m1);
+    test_rand_mat4(m2);
+
+    glm_mat4_inv_precise(m1, m2);
+    glm_mat4_inv_precise(m2, m3);
+    ASSERTIFY(test_assert_mat4_eq(m1, m3))
+  }
 
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_inv_fast) {
+  mat4 m1, m2, m3;
+  int  i;
+  
+  for (i = 0; i < 100000; i++) {
+    test_rand_mat4(m1);
+    test_rand_mat4(m2);
+    
+    /* test inverse precise */
+    glm_mat4_inv_fast(m1, m2);
+    glm_mat4_inv_fast(m2, m3);
+    ASSERTIFY(test_assert_mat4_eq2(m1, m3, 0.0009f))
+  }
+  
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_swap_col) {
+  mat4 m1 = A_MATRIX;
+  mat4 m2 = A_MATRIX;
+  
+  glm_mat4_swap_col(m1, 0, 1);
+  glm_mat4_swap_col(m1, 2, 3);
+
+  ASSERTIFY(test_assert_vec4_eq(m1[0], m2[1]))
+  ASSERTIFY(test_assert_vec4_eq(m1[1], m2[0]))
+  ASSERTIFY(test_assert_vec4_eq(m1[2], m2[3]))
+  ASSERTIFY(test_assert_vec4_eq(m1[3], m2[2]))
+  
   TEST_SUCCESS
 }
 
 TEST_IMPL(glm_mat4_swap_row) {
+  mat4 m1 = A_MATRIX;
+  mat4 m2 = A_MATRIX;
+  
+  glm_mat4_swap_row(m1, 0, 1);
+  glm_mat4_swap_row(m1, 2, 3);
+  
+  ASSERT(glm_eq(m1[0][0], m2[0][1]))
+  ASSERT(glm_eq(m1[0][1], m2[0][0]))
+  ASSERT(glm_eq(m1[0][2], m2[0][3]))
+  ASSERT(glm_eq(m1[0][3], m2[0][2]))
+  ASSERT(glm_eq(m1[1][0], m2[1][1]))
+  ASSERT(glm_eq(m1[1][1], m2[1][0]))
+  ASSERT(glm_eq(m1[1][2], m2[1][3]))
+  ASSERT(glm_eq(m1[1][3], m2[1][2]))
+  ASSERT(glm_eq(m1[2][0], m2[2][1]))
+  ASSERT(glm_eq(m1[2][1], m2[2][0]))
+  ASSERT(glm_eq(m1[2][2], m2[2][3]))
+  ASSERT(glm_eq(m1[2][3], m2[2][2]))
+  ASSERT(glm_eq(m1[3][0], m2[3][1]))
+  ASSERT(glm_eq(m1[3][1], m2[3][0]))
+  ASSERT(glm_eq(m1[3][2], m2[3][3]))
+  ASSERT(glm_eq(m1[3][3], m2[3][2]))
+
   TEST_SUCCESS
 }
 
