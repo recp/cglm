@@ -39,7 +39,7 @@ branches:
 script:
   - sh ./autogen.sh
   - if [[ "$CC" == "gcc" && "$CODE_COVERAGE" == "ON" ]]; then
-      ./configure CFLAGS="-ftest-coverage -fprofile-arcs";
+      ./configure CFLAGS="-ftest-coverage -fprofile-arcs -coverage";
     else
       ./configure;
     fi
@@ -55,6 +55,7 @@ after_success:
         --exclude test
         --gcov-options '\-lp'
         --verbose;
+      bash <(curl -s https://codecov.io/bash)
     fi
 
 # after_failure:
