@@ -220,7 +220,7 @@ TEST_IMPL(GLM_PREFIX, mat4_trace) {
   mat4  mat = A_MATRIX;
   float trace;
 
-  trace = glm_mat4_trace(mat);
+  trace = GLM(mat4_trace)(mat);
 
   ASSERT(glm_eq(trace, mat[0][0] + mat[1][1] + mat[2][2] + mat[3][3]))
 
@@ -327,15 +327,36 @@ TEST_IMPL(GLM_PREFIX, mat4_scale) {
 }
 
 TEST_IMPL(GLM_PREFIX, mat4_det) {
-  mat4 m1 = GLM_MAT4_IDENTITY_INIT;
+  mat4 mat = GLM_MAT4_IDENTITY_INIT;
+  float t[6];
+  float a, b, c, d,
+        e, f, g, h,
+        i, j, k, l,
+        m, n, o, p;
+  float det1, det2;
 
-  test_rand_mat4(m1);
+  test_rand_mat4(mat);
 
-  /* test determinant */
-  ASSERT(glm_mat4_det(m1) == glmc_mat4_det(m1))
-#if defined( __SSE2__ )
-  ASSERT(glmc_mat4_det(m1) == glm_mat4_det_sse2(m1))
-#endif
+  a = mat[0][0]; b = mat[0][1]; c = mat[0][2]; d = mat[0][3];
+  e = mat[1][0]; f = mat[1][1]; g = mat[1][2]; h = mat[1][3];
+  i = mat[2][0]; j = mat[2][1]; k = mat[2][2]; l = mat[2][3];
+  m = mat[3][0]; n = mat[3][1]; o = mat[3][2]; p = mat[3][3];
+
+  t[0] = k * p - o * l;
+  t[1] = j * p - n * l;
+  t[2] = j * o - n * k;
+  t[3] = i * p - m * l;
+  t[4] = i * o - m * k;
+  t[5] = i * n - m * j;
+
+  det1 = a * (f * t[0] - g * t[1] + h * t[2])
+       - b * (e * t[0] - g * t[3] + h * t[4])
+       + c * (e * t[1] - f * t[3] + h * t[5])
+       - d * (e * t[2] - f * t[4] + g * t[5]);
+
+  det2 = GLM(mat4_det(mat));
+
+  ASSERT(glm_eq(det1, det2))
 
   TEST_SUCCESS
 }

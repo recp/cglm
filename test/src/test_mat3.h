@@ -120,7 +120,7 @@ TEST_IMPL(GLM_PREFIX, mat3_trace) {
   mat3  mat = A_MATRIX;
   float trace;
 
-  trace = glm_mat3_trace(mat);
+  trace = GLM(mat3_trace)(mat);
 
   ASSERT(glm_eq(trace, mat[0][0] + mat[1][1] + mat[2][2]))
 
@@ -146,7 +146,7 @@ TEST_IMPL(GLM_PREFIX, mat3_quat) {
   GLM(vec3_normalize)(axis1);
   GLM(vec3_normalize)(axis2);
 
-  glm_mat4_pick3(m2, m3);
+  GLM(mat4_pick3)(m2, m3);
 
   ASSERT(glm_eq(glm_quat_angle(q3), GLM_PI_4))
   ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
@@ -201,17 +201,19 @@ TEST_IMPL(GLM_PREFIX, mat3_scale) {
 
 TEST_IMPL(GLM_PREFIX, mat3_det) {
   mat3 mat;
-
-  float a = mat[0][0], b = mat[0][1], c = mat[0][2],
-        d = mat[1][0], e = mat[1][1], f = mat[1][2],
-        g = mat[2][0], h = mat[2][1], i = mat[2][2];
-
+  float a, b, c,
+        d, e, f,
+        g, h, i;
   float det1, det2;
 
-  det1 = a * (e * i - h * f) - d * (b * i - c * h) + g * (b * f - c * e);
-  det2 = glm_mat3_det(mat);
-
   test_rand_mat3(mat);
+
+  a = mat[0][0]; b = mat[0][1]; c = mat[0][2];
+  d = mat[1][0]; e = mat[1][1]; f = mat[1][2];
+  g = mat[2][0]; h = mat[2][1]; i = mat[2][2];
+
+  det1 = a * (e * i - h * f) - d * (b * i - c * h) + g * (b * f - c * e);
+  det2 = GLM(mat3_det)(mat);
 
   ASSERT(glm_eq(det1, det2))
 
@@ -229,8 +231,8 @@ TEST_IMPL(GLM_PREFIX, mat3_inv) {
     test_rand_mat3(m2);
 
     /* test inverse precise */
-    glmc_mat3_inv(m1, m2);
-    glmc_mat3_inv(m2, m3);
+    GLM(mat3_inv)(m1, m2);
+    GLM(mat3_inv)(m2, m3);
     ASSERTIFY(test_assert_mat3_eq(m1, m3))
   }
 
