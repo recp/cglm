@@ -54,8 +54,8 @@ after_success:
         --exclude lib
         --exclude test
         --gcov-options '\-lp'
-        --verbose;
-      bash <(curl -s https://codecov.io/bash)
+        --verbose &&
+      bash <(curl -s https://codecov.io/bash);
     fi
 
 # after_failure:
