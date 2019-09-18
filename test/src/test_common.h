@@ -41,6 +41,12 @@ test_status_t
 test_assert_mat3_eqt(mat3 m1, mat3 m2);
 
 test_status_t
+test_assert_mat3_eq_identity(mat3 m3);
+
+test_status_t
+test_assert_mat3_eq_zero(mat3 m3);
+
+test_status_t
 test_assert_vec3_eq(vec3 v1, vec3 v2);
 
 test_status_t

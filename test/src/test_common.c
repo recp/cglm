@@ -153,6 +153,36 @@ test_assert_mat3_eqt(mat3 m1, mat3 m2) {
 }
 
 test_status_t
+test_assert_mat3_eq_identity(mat3 m3) {
+  int i, j;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      if (i == j) {
+        ASSERT(glm_eq(m3[i][j], 1.0f))
+      } else {
+        ASSERT(glm_eq(m3[i][j], 0.0f))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat3_eq_zero(mat3 m3) {
+  int i, j;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 3; j++) {
+      ASSERT(glm_eq(m3[i][j], 0.0f))
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_mat4_eq_identity(mat4 m4) {
   int i, j;
 
