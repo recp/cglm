@@ -54,9 +54,17 @@ typedef struct test_entry_t {
 #define TEST_OK 1
 #define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
 
-#define TEST_IMPL(FUN)                                                        \
+#define TEST_IMPL_ARG1(FUN) \
   test_status_t test_ ## FUN (void);                                          \
   test_status_t test_ ## FUN()
+
+#define TEST_IMPL_ARG2(PREFIX, FUN) TEST_IMPL_ARG1(PREFIX ## FUN)
+#define TEST_IMPL_ARG3(arg1, arg2, arg3, ...) arg3
+
+#define TEST_IMPL_CHOOSER(...)                                                \
+  TEST_IMPL_ARG3(__VA_ARGS__, TEST_IMPL_ARG2, TEST_IMPL_ARG1)
+
+#define TEST_IMPL(...) TEST_IMPL_CHOOSER(__VA_ARGS__)(__VA_ARGS__)
 
 #define ASSERT_EXT(expr, msg)                                                 \
   if (!(expr)) {                                                              \
