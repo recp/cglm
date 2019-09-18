@@ -35,6 +35,10 @@ glmc_mat4_identity_array(mat4 * __restrict mat, size_t count);
 
 CGLM_EXPORT
 void
+glmc_mat4_zero(mat4 mat);
+
+CGLM_EXPORT
+void
 glmc_mat4_pick3(mat4 mat, mat3 dest);
 
 CGLM_EXPORT
