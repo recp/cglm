@@ -35,51 +35,41 @@ TEST_IMPL(MACRO_GLM_VEC3_ZERO_INIT) {
 }
 
 TEST_IMPL(MACRO_GLM_VEC3_ONE) {
-  vec3 v = GLM_VEC3_ONE;
-  
-  ASSERT(glm_eq(v[0], 1.0f))
-  ASSERT(glm_eq(v[1], 1.0f))
-  ASSERT(glm_eq(v[2], 1.0f))
+  ASSERT(glm_eq(GLM_VEC3_ONE[0], 1.0f))
+  ASSERT(glm_eq(GLM_VEC3_ONE[1], 1.0f))
+  ASSERT(glm_eq(GLM_VEC3_ONE[2], 1.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_VEC3_ZERO) {
-  vec3 v = GLM_VEC3_ZERO;
-  
-  ASSERT(glm_eq(v[0], 0.0f))
-  ASSERT(glm_eq(v[1], 0.0f))
-  ASSERT(glm_eq(v[2], 0.0f))
+  ASSERT(glm_eq(GLM_VEC3_ZERO[0], 0.0f))
+  ASSERT(glm_eq(GLM_VEC3_ZERO[1], 0.0f))
+  ASSERT(glm_eq(GLM_VEC3_ZERO[2], 0.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_YUP) {
-  vec3 v = GLM_YUP;
-  
-  ASSERT(glm_eq(v[0], 0.0f))
-  ASSERT(glm_eq(v[1], 1.0f))
-  ASSERT(glm_eq(v[2], 0.0f))
+  ASSERT(glm_eq(GLM_YUP[0], 0.0f))
+  ASSERT(glm_eq(GLM_YUP[1], 1.0f))
+  ASSERT(glm_eq(GLM_YUP[2], 0.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_ZUP) {
-  vec3 v = GLM_ZUP;
-  
-  ASSERT(glm_eq(v[0], 0.0f))
-  ASSERT(glm_eq(v[1], 0.0f))
-  ASSERT(glm_eq(v[2], 1.0f))
+  ASSERT(glm_eq(GLM_ZUP[0], 0.0f))
+  ASSERT(glm_eq(GLM_ZUP[1], 0.0f))
+  ASSERT(glm_eq(GLM_ZUP[2], 1.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_XUP) {
-  vec3 v = GLM_XUP;
-  
-  ASSERT(glm_eq(v[0], 1.0f))
-  ASSERT(glm_eq(v[1], 0.0f))
-  ASSERT(glm_eq(v[2], 0.0f))
+  ASSERT(glm_eq(GLM_XUP[0], 1.0f))
+  ASSERT(glm_eq(GLM_XUP[1], 0.0f))
+  ASSERT(glm_eq(GLM_XUP[2], 0.0f))
   
   TEST_SUCCESS
 }
