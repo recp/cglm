@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include <cglm/cglm.h>
 #include <cglm/struct.h>
@@ -102,13 +103,13 @@ typedef struct test_entry_t {
   } while(0);
 
 #if defined(_WIN32)
-# define drand48() ((float)(rand() / (RAND_MAX + 1.0)))
-# define OK_TEXT "ok:"
-# define FAIL_TEXT "fail:"
+# define drand48()  ((float)(rand() / (RAND_MAX + 1.0)))
+# define OK_TEXT    "ok:"
+# define FAIL_TEXT  "fail:"
 # define FINAL_TEXT "^_^"
 #else
-# define OK_TEXT "✔︎"
-# define FAIL_TEXT "𐄂"
+# define OK_TEXT    "✔︎"
+# define FAIL_TEXT  "𐄂"
 # define FINAL_TEXT "🎉"
 #endif
 
