@@ -173,6 +173,10 @@ TEST_DECLARE(glm_vec3_maxadd)
 TEST_DECLARE(glm_vec3_minadd)
 TEST_DECLARE(glm_vec3_negate_to)
 TEST_DECLARE(glm_vec3_negate)
+TEST_DECLARE(glm_vec3_normalize)
+TEST_DECLARE(glm_vec3_normalize_to)
+TEST_DECLARE(glm_vec3_cross)
+TEST_DECLARE(glm_vec3_crossn)
 
 TEST_DECLARE(glmc_vec3)
 TEST_DECLARE(glmc_vec3_copy)
@@ -200,6 +204,10 @@ TEST_DECLARE(glmc_vec3_maxadd)
 TEST_DECLARE(glmc_vec3_minadd)
 TEST_DECLARE(glmc_vec3_negate_to)
 TEST_DECLARE(glmc_vec3_negate)
+TEST_DECLARE(glmc_vec3_normalize)
+TEST_DECLARE(glmc_vec3_normalize_to)
+TEST_DECLARE(glmc_vec3_cross)
+TEST_DECLARE(glmc_vec3_crossn)
 
 /* vec4 */
 TEST_DECLARE(vec4)
@@ -367,6 +375,10 @@ TEST_LIST {
   TEST_ENTRY(glm_vec3_minadd)
   TEST_ENTRY(glm_vec3_negate_to)
   TEST_ENTRY(glm_vec3_negate)
+  TEST_ENTRY(glm_vec3_normalize)
+  TEST_ENTRY(glm_vec3_normalize_to)
+  TEST_ENTRY(glm_vec3_cross)
+  TEST_ENTRY(glm_vec3_crossn)
   
 
   TEST_ENTRY(glmc_vec3)
@@ -395,7 +407,11 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec3_minadd)
   TEST_ENTRY(glmc_vec3_negate_to)
   TEST_ENTRY(glmc_vec3_negate)
-  
+  TEST_ENTRY(glmc_vec3_normalize)
+  TEST_ENTRY(glmc_vec3_normalize_to)
+  TEST_ENTRY(glmc_vec3_cross)
+  TEST_ENTRY(glmc_vec3_crossn)
+
   /* vec4 */
   TEST_ENTRY(vec4)
 };

@@ -569,3 +569,83 @@ TEST_IMPL(GLM_PREFIX, vec3_negate) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_normalize) {
+  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2 = {2.0f, -3.0f, 4.0f};
+  float s  = 1.0f;
+  float norm;
+
+  GLM(vec3_normalize)(v2);
+
+  norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
+  if (norm == 0.0f) {
+    ASSERT(glm_eq(v1[0], 0.0f))
+    ASSERT(glm_eq(v1[1], 0.0f))
+    ASSERT(glm_eq(v1[2], 0.0f))
+
+    TEST_SUCCESS
+  }
+  
+  norm = s / norm;
+  
+  ASSERT(glm_eq(v1[0] * norm, v2[0]))
+  ASSERT(glm_eq(v1[1] * norm, v2[1]))
+  ASSERT(glm_eq(v1[2] * norm, v2[2]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
+  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2;
+  float s  = 1.0f;
+  float norm;
+
+  GLM(vec3_normalize_to)(v1, v2);
+
+  norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
+  if (norm == 0.0f) {
+    ASSERT(glm_eq(v1[0], 0.0f))
+    ASSERT(glm_eq(v1[1], 0.0f))
+    ASSERT(glm_eq(v1[2], 0.0f))
+
+    TEST_SUCCESS
+  }
+  
+  norm = s / norm;
+  
+  ASSERT(glm_eq(v1[0] * norm, v2[0]))
+  ASSERT(glm_eq(v1[1] * norm, v2[1]))
+  ASSERT(glm_eq(v1[2] * norm, v2[2]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_cross) {
+  /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
+  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
+  
+  GLM(vec3_cross)(v1, v2, v3);
+  
+  v4[0] = v1[1] * v2[2] - v1[2] * v2[1];
+  v4[1] = v1[2] * v2[0] - v1[0] * v2[2];
+  v4[2] = v1[0] * v2[1] - v1[1] * v2[0];
+  
+  ASSERTIFY(test_assert_vec3_eq(v3, v4))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_crossn) {
+  /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
+  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
+  
+  GLM(vec3_cross)(v1, v2, v3);
+  
+  v4[0] = v1[1] * v2[2] - v1[2] * v2[1];
+  v4[1] = v1[2] * v2[0] - v1[0] * v2[2];
+  v4[2] = v1[0] * v2[1] - v1[1] * v2[0];
+  
+  ASSERTIFY(test_assert_vec3_eq(v3, v4))
+
+  TEST_SUCCESS
+}
+
