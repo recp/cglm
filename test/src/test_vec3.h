@@ -649,3 +649,151 @@ TEST_IMPL(GLM_PREFIX, vec3_crossn) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_max) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
+
+  ASSERT(glm_eq(GLM(vec3_max)(v1),  2.104f))
+  ASSERT(glm_eq(GLM(vec3_max)(v2), -12.35f))
+  ASSERT(isinf(GLM(vec3_max)(v3)))
+  ASSERT(isnan(GLM(vec3_max)(v4)))
+  ASSERT(isnan(GLM(vec3_max)(v5)))
+  ASSERT(glm_eq(GLM(vec3_max)(v6),  11.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_min) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
+
+  ASSERT(glm_eq(GLM(vec3_min)(v1), -4.10f))
+  ASSERT(glm_eq(GLM(vec3_min)(v2), -43.502f))
+  ASSERT(glm_eq(GLM(vec3_min)(v3),  0.0f))
+  ASSERT(isnan(GLM(vec3_min)(v4)))
+  ASSERT(isnan(GLM(vec3_min)(v5)))
+  ASSERT(glm_eq(GLM(vec3_min)(v6), -11.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_isnan) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -1.0f, 11.0f};
+
+  ASSERT(!GLM(vec3_isnan)(v1))
+  ASSERT(!GLM(vec3_isnan)(v2))
+  ASSERT(!GLM(vec3_isnan)(v3))
+  ASSERT(GLM(vec3_isnan)(v4))
+  ASSERT(GLM(vec3_isnan)(v5))
+  ASSERT(!GLM(vec3_isnan)(v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_isinf) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -1.0f, 11.0f};
+
+  ASSERT(!GLM(vec3_isinf)(v1))
+  ASSERT(!GLM(vec3_isinf)(v2))
+  ASSERT(GLM(vec3_isinf)(v3))
+  ASSERT(GLM(vec3_isinf)(v4))
+  ASSERT(!GLM(vec3_isinf)(v5))
+  ASSERT(!GLM(vec3_isinf)(v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_isvalid) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -1.0f, 11.0f};
+
+  ASSERT(GLM(vec3_isvalid)(v1))
+  ASSERT(GLM(vec3_isvalid)(v2))
+  ASSERT(!GLM(vec3_isvalid)(v3))
+  ASSERT(!GLM(vec3_isvalid)(v4))
+  ASSERT(!GLM(vec3_isvalid)(v5))
+  ASSERT(GLM(vec3_isvalid)(v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_sign) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3, v4;
+  vec3  v5 = {1.0f, -1.0f, -1.0f}, v6 = {-1.0f, -1.0f, -1.0f};
+
+  GLM(vec3_sign)(v1, v3);
+  GLM(vec3_sign)(v2, v4);
+
+  ASSERTIFY(test_assert_vec3_eq(v3, v5))
+  ASSERTIFY(test_assert_vec3_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_abs) {
+  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3  v3, v4;
+  vec3  v5 = {2.104f, 3.012f, 4.10f}, v6 = {12.35f, 31.140f, 43.502f};
+
+  GLM(vec3_abs)(v1, v3);
+  GLM(vec3_abs)(v2, v4);
+
+  ASSERTIFY(test_assert_vec3_eq(v3, v5))
+  ASSERTIFY(test_assert_vec3_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_fract) {
+  vec3  v1 = {2.104f, 3.012f, 4.10f}, v2 = {12.35f, 31.140f, 43.502f}, v3, v4;
+  vec3  v5 = {0.104f, 0.012f, 0.10f}, v6 = {0.35f, 0.140f, 0.502f};
+
+  GLM(vec3_fract)(v1, v3);
+  GLM(vec3_fract)(v2, v4);
+
+  ASSERTIFY(test_assert_vec3_eq(v3, v5))
+  ASSERTIFY(test_assert_vec3_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_hadd) {
+  vec3  v1 = {2.0f, 3.0f, 4.0f}, v2 = {12.0f, 31.0f, 43.0f};
+  float r1, r2, r3, r4;
+  
+  r1 = GLM(vec3_hadd)(v1);
+  r2 = GLM(vec3_hadd)(v2);
+  
+  r3 = v1[0] + v1[1] + v1[2];
+  r4 = v2[0] + v2[1] + v2[2];
+
+  ASSERT(glm_eq(r1, r3))
+  ASSERT(glm_eq(r2, r4))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_sqrt) {
+  vec3  v1 = {2.0f, 3.0f, 4.0f}, v2 = {12.0f, 31.0f, 43.0f}, v3, v4;
+  
+  GLM(vec3_sqrt)(v1, v3);
+  GLM(vec3_sqrt)(v2, v4);
+
+  ASSERT(glm_eq(sqrtf(v1[0]), v3[0]))
+  ASSERT(glm_eq(sqrtf(v1[1]), v3[1]))
+  ASSERT(glm_eq(sqrtf(v1[2]), v3[2]))
+
+  ASSERT(glm_eq(sqrtf(v2[0]), v4[0]))
+  ASSERT(glm_eq(sqrtf(v2[1]), v4[1]))
+  ASSERT(glm_eq(sqrtf(v2[2]), v4[2]))
+
+  TEST_SUCCESS
+}
