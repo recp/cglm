@@ -595,7 +595,7 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
-  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2;
+  vec3 v1 = {2.0f, -3.0f, 4.0f}, v2;
   float s  = 1.0f;
   float norm;
 
@@ -621,7 +621,7 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
 
 TEST_IMPL(GLM_PREFIX, vec3_cross) {
   /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
-  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
+  vec3 v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
   
   GLM(vec3_cross)(v1, v2, v3);
   
@@ -636,7 +636,7 @@ TEST_IMPL(GLM_PREFIX, vec3_cross) {
 
 TEST_IMPL(GLM_PREFIX, vec3_crossn) {
   /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
-  vec3  v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
+  vec3 v1 = {2.0f, -3.0f, 4.0f}, v2 = {12.0f, -31.0f, 43.0f}, v3, v4;
   
   GLM(vec3_cross)(v1, v2, v3);
   
@@ -649,10 +649,134 @@ TEST_IMPL(GLM_PREFIX, vec3_crossn) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_broadcast) {
+  vec3 v1, v2, v3;
+  vec3 v5 = {-1.456f, -1.456f, -1.456f};
+  vec3 v6 = {11.0f, 11.0f, 11.0f};
+  vec3 v7 = {78.0f, 78.0f, 78.0f};
+
+  glm_vec3_broadcast(-1.456f, v1);
+  glm_vec3_broadcast(11.0f,   v2);
+  glm_vec3_broadcast(78.0f,   v3);
+
+  ASSERTIFY(test_assert_vec3_eq(v1, v5))
+  ASSERTIFY(test_assert_vec3_eq(v2, v6))
+  ASSERTIFY(test_assert_vec3_eq(v3, v7))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_fill) {
+  vec3 v1, v2, v3;
+  vec3 v5 = {-1.456f, -1.456f, -1.456f};
+  vec3 v6 = {11.0f, 11.0f, 11.0f};
+  vec3 v7 = {78.0f, 78.0f, 78.0f};
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.0f);
+
+  ASSERTIFY(test_assert_vec3_eq(v1, v5))
+  ASSERTIFY(test_assert_vec3_eq(v2, v6))
+  ASSERTIFY(test_assert_vec3_eq(v3, v7))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_eq) {
+  vec3 v1, v2, v3;
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.1f);
+
+  ASSERT(GLM(vec3_eq)(v1, -1.456f))
+  ASSERT(GLM(vec3_eq)(v2, 11.0f))
+  ASSERT(!GLM(vec3_eq)(v3, 78.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_eq_eps) {
+  vec3 v1, v2, v3;
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.1f);
+
+  ASSERT(GLM(vec3_eq_eps)(v1, -1.456f))
+  ASSERT(GLM(vec3_eq_eps)(v2, 11.0f))
+  ASSERT(!GLM(vec3_eq_eps)(v3, 78.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_eq_all) {
+  vec3 v1, v2, v3;
+  vec3 v4 = {2.104f, -3.012f, -4.10f};
+  vec3 v5 = {-12.35f, -31.140f, -43.502f};
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.0f);
+
+  ASSERT(GLM(vec3_eq_all)(v1))
+  ASSERT(GLM(vec3_eq_all)(v2))
+  ASSERT(GLM(vec3_eq_all)(v3))
+  ASSERT(!GLM(vec3_eq_all)(v4))
+  ASSERT(!GLM(vec3_eq_all)(v5))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_eqv) {
+  vec3 v1, v2, v3, v4, v5;
+  vec3 v6 = {-1.456f, -1.456f, -1.456f};
+  vec3 v7 = {11.0f, 11.0f, 11.0f};
+  vec3 v8 = {78.0f, 78.0f, -43.502f};
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.0f);
+
+  test_rand_vec3(v4);
+  test_rand_vec3(v5);
+
+  ASSERT(GLM(vec3_eqv)(v1, v6))
+  ASSERT(GLM(vec3_eqv)(v2, v7))
+  ASSERT(!GLM(vec3_eqv)(v3, v8))
+  ASSERT(!GLM(vec3_eqv)(v4, v5))
+  ASSERT(GLM(vec3_eqv)(v5, v5))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_eqv_eps) {
+  vec3 v1, v2, v3, v4, v5;
+  vec3 v6 = {-1.456f, -1.456f, -1.456f};
+  vec3 v7 = {11.0f, 11.0f, 11.0f};
+  vec3 v8 = {78.0f, 78.0f, -43.502f};
+
+  glm_vec3_fill(v1, -1.456f);
+  glm_vec3_fill(v2, 11.0f);
+  glm_vec3_fill(v3, 78.0f);
+
+  test_rand_vec3(v4);
+  test_rand_vec3(v5);
+
+  ASSERT(GLM(vec3_eqv_eps)(v1, v6))
+  ASSERT(GLM(vec3_eqv_eps)(v2, v7))
+  ASSERT(!GLM(vec3_eqv_eps)(v3, v8))
+  ASSERT(!GLM(vec3_eqv_eps)(v4, v5))
+  ASSERT(GLM(vec3_eqv_eps)(v5, v5))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec3_max) {
-  vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
-  vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
-  vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
+  vec3 v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+  vec3 v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
+  vec3 v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
 
   ASSERT(glm_eq(GLM(vec3_max)(v1),  2.104f))
   ASSERT(glm_eq(GLM(vec3_max)(v2), -12.35f))
