@@ -380,15 +380,23 @@ TEST_IMPL(GLM_PREFIX, mat4_inv) {
 
 TEST_IMPL(GLM_PREFIX, mat4_inv_precise) {
   mat4 m1, m2, m3;
+  mat4 m4, m5, m6;
   int  i;
 
   for (i = 0; i < 100000; i++) {
     test_rand_mat4(m1);
     test_rand_mat4(m2);
-
+    
     glm_mat4_inv_precise(m1, m2);
     glm_mat4_inv_precise(m2, m3);
     ASSERTIFY(test_assert_mat4_eq(m1, m3))
+    
+    test_rand_mat4(m4);
+    test_rand_mat4(m5);
+    
+    glmc_mat4_inv_precise(m4, m5);
+    glmc_mat4_inv_precise(m5, m6);
+    ASSERTIFY(test_assert_mat4_eq(m4, m6))
   }
 
   TEST_SUCCESS
