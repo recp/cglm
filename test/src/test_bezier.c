@@ -49,7 +49,7 @@ TEST_IMPL(bezier) {
   Bs       = glm_bezier(s, p0, c0, c1, p1);
   Bs_plain = test_bezier_plain(s, p0, c0, c1, p1);
 
-  ASSERT(glm_eq(Bs,  Bs_plain));
+  ASSERT(test_eq(Bs,  Bs_plain));
   ASSERTIFY(test_assert_eqf(smc, Bs_plain))
   ASSERTIFY(test_assert_eqf(Bs,  smc))
 
@@ -58,9 +58,9 @@ TEST_IMPL(bezier) {
   Bs       = glm_hermite(s, p0, c0, c1, p1);
   Bs_plain = test_hermite_plain(s, p0, c0, c1, p1);
 
-  ASSERT(glm_eq(Bs,  Bs_plain));
-  ASSERT(glm_eq(smc, Bs_plain));
-  ASSERT(glm_eq(Bs,  smc));
+  ASSERT(test_eq(Bs,  Bs_plain));
+  ASSERT(test_eq(smc, Bs_plain));
+  ASSERT(test_eq(Bs,  smc));
   
   TEST_SUCCESS
 }

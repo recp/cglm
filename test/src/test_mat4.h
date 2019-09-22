@@ -117,10 +117,10 @@ TEST_IMPL(GLM_PREFIX, mat4_ins3) {
     }
   }
 
-  ASSERT(glm_eq(m1[3][0], 0.0f))
-  ASSERT(glm_eq(m1[3][1], 0.0f))
-  ASSERT(glm_eq(m1[3][2], 0.0f))
-  ASSERT(glm_eq(m1[3][3], 1.0f))
+  ASSERT(test_eq(m1[3][0], 0.0f))
+  ASSERT(test_eq(m1[3][1], 0.0f))
+  ASSERT(test_eq(m1[3][2], 0.0f))
+  ASSERT(test_eq(m1[3][3], 1.0f))
 
   TEST_SUCCESS
 }
@@ -184,7 +184,7 @@ TEST_IMPL(GLM_PREFIX, mat4_mulv) {
   GLM(mat4_mulv)(mat, v, res);
 
   for (i = 0; i < 4; i++) {
-    ASSERT(glm_eq(res[i],
+    ASSERT(test_eq(res[i],
                   v[0] * mat[0][i]
                 + v[1] * mat[1][i]
                 + v[2] * mat[2][i]
@@ -206,7 +206,7 @@ TEST_IMPL(GLM_PREFIX, mat4_mulv3) {
   GLM(mat4_mulv3)(mat, v, last, res);
 
   for (i = 0; i < 3; i++) {
-    ASSERT(glm_eq(res[i],
+    ASSERT(test_eq(res[i],
                   v[0] * mat[0][i]
                   + v[1] * mat[1][i]
                   + v[2] * mat[2][i]
@@ -222,7 +222,7 @@ TEST_IMPL(GLM_PREFIX, mat4_trace) {
 
   trace = GLM(mat4_trace)(mat);
 
-  ASSERT(glm_eq(trace, mat[0][0] + mat[1][1] + mat[2][2] + mat[3][3]))
+  ASSERT(test_eq(trace, mat[0][0] + mat[1][1] + mat[2][2] + mat[3][3]))
 
   TEST_SUCCESS
 }
@@ -233,7 +233,7 @@ TEST_IMPL(GLM_PREFIX, mat4_trace3) {
 
   trace = GLM(mat4_trace3)(mat);
 
-  ASSERT(glm_eq(trace, mat[0][0] + mat[1][1] + mat[2][2]))
+  ASSERT(test_eq(trace, mat[0][0] + mat[1][1] + mat[2][2]))
 
   TEST_SUCCESS
 }
@@ -256,7 +256,7 @@ TEST_IMPL(GLM_PREFIX, mat4_quat) {
   GLM(vec3_normalize)(axis1);
   GLM(vec3_normalize)(axis2);
   
-  ASSERT(glm_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
   ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
   ASSERTIFY(test_assert_vec4_eq(q1, q2))
   ASSERTIFY(test_assert_mat4_eq(m1, m2))
@@ -300,7 +300,7 @@ TEST_IMPL(GLM_PREFIX, mat4_scale_p) {
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
       for (k = 0; k < 4; k++)
-        ASSERT(glm_eq(m1[i][j], m2[i][j] * scale))
+        ASSERT(test_eq(m1[i][j], m2[i][j] * scale))
     }
   }
 
@@ -319,7 +319,7 @@ TEST_IMPL(GLM_PREFIX, mat4_scale) {
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
       for (k = 0; k < 4; k++)
-        ASSERT(glm_eq(m1[i][j], m2[i][j] * scale))
+        ASSERT(test_eq(m1[i][j], m2[i][j] * scale))
     }
   }
 
@@ -356,7 +356,7 @@ TEST_IMPL(GLM_PREFIX, mat4_det) {
 
   det2 = GLM(mat4_det(mat));
 
-  ASSERT(glm_eq(det1, det2))
+  ASSERT(test_eq(det1, det2))
 
   TEST_SUCCESS
 }
@@ -441,22 +441,22 @@ TEST_IMPL(GLM_PREFIX, mat4_swap_row) {
   GLM(mat4_swap_row)(m1, 0, 1);
   GLM(mat4_swap_row)(m1, 2, 3);
   
-  ASSERT(glm_eq(m1[0][0], m2[0][1]))
-  ASSERT(glm_eq(m1[0][1], m2[0][0]))
-  ASSERT(glm_eq(m1[0][2], m2[0][3]))
-  ASSERT(glm_eq(m1[0][3], m2[0][2]))
-  ASSERT(glm_eq(m1[1][0], m2[1][1]))
-  ASSERT(glm_eq(m1[1][1], m2[1][0]))
-  ASSERT(glm_eq(m1[1][2], m2[1][3]))
-  ASSERT(glm_eq(m1[1][3], m2[1][2]))
-  ASSERT(glm_eq(m1[2][0], m2[2][1]))
-  ASSERT(glm_eq(m1[2][1], m2[2][0]))
-  ASSERT(glm_eq(m1[2][2], m2[2][3]))
-  ASSERT(glm_eq(m1[2][3], m2[2][2]))
-  ASSERT(glm_eq(m1[3][0], m2[3][1]))
-  ASSERT(glm_eq(m1[3][1], m2[3][0]))
-  ASSERT(glm_eq(m1[3][2], m2[3][3]))
-  ASSERT(glm_eq(m1[3][3], m2[3][2]))
+  ASSERT(test_eq(m1[0][0], m2[0][1]))
+  ASSERT(test_eq(m1[0][1], m2[0][0]))
+  ASSERT(test_eq(m1[0][2], m2[0][3]))
+  ASSERT(test_eq(m1[0][3], m2[0][2]))
+  ASSERT(test_eq(m1[1][0], m2[1][1]))
+  ASSERT(test_eq(m1[1][1], m2[1][0]))
+  ASSERT(test_eq(m1[1][2], m2[1][3]))
+  ASSERT(test_eq(m1[1][3], m2[1][2]))
+  ASSERT(test_eq(m1[2][0], m2[2][1]))
+  ASSERT(test_eq(m1[2][1], m2[2][0]))
+  ASSERT(test_eq(m1[2][2], m2[2][3]))
+  ASSERT(test_eq(m1[2][3], m2[2][2]))
+  ASSERT(test_eq(m1[3][0], m2[3][1]))
+  ASSERT(test_eq(m1[3][1], m2[3][0]))
+  ASSERT(test_eq(m1[3][2], m2[3][3]))
+  ASSERT(test_eq(m1[3][3], m2[3][2]))
 
   TEST_SUCCESS
 }
@@ -479,7 +479,7 @@ TEST_IMPL(GLM_PREFIX, mat4_rmc) {
   
   r2 = v[0] * v1[0] + v[1] * v1[1] + v[2] * v1[2] + v[3] * v1[3];
 
-  ASSERT(glm_eq(r1, r2))
+  ASSERT(test_eq(r1, r2))
 
   TEST_SUCCESS
 }

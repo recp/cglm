@@ -82,4 +82,10 @@ test_rand(void);
 void
 test_rand_quat(versor q);
 
+CGLM_INLINE
+bool
+test_eq(float a, float b) {
+  return fabsf(a - b) <= 1e-6;
+}
+
 #endif /* test_common_h */

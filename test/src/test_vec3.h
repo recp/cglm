@@ -17,9 +17,9 @@
 TEST_IMPL(MACRO_GLM_VEC3_ONE_INIT) {
   vec3 v = GLM_VEC3_ONE_INIT;
   
-  ASSERT(glm_eq(v[0], 1.0f))
-  ASSERT(glm_eq(v[1], 1.0f))
-  ASSERT(glm_eq(v[2], 1.0f))
+  ASSERT(test_eq(v[0], 1.0f))
+  ASSERT(test_eq(v[1], 1.0f))
+  ASSERT(test_eq(v[2], 1.0f))
   
   TEST_SUCCESS
 }
@@ -27,49 +27,49 @@ TEST_IMPL(MACRO_GLM_VEC3_ONE_INIT) {
 TEST_IMPL(MACRO_GLM_VEC3_ZERO_INIT) {
   vec3 v = GLM_VEC3_ZERO_INIT;
   
-  ASSERT(glm_eq(v[0], 0.0f))
-  ASSERT(glm_eq(v[1], 0.0f))
-  ASSERT(glm_eq(v[2], 0.0f))
+  ASSERT(test_eq(v[0], 0.0f))
+  ASSERT(test_eq(v[1], 0.0f))
+  ASSERT(test_eq(v[2], 0.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_VEC3_ONE) {
-  ASSERT(glm_eq(GLM_VEC3_ONE[0], 1.0f))
-  ASSERT(glm_eq(GLM_VEC3_ONE[1], 1.0f))
-  ASSERT(glm_eq(GLM_VEC3_ONE[2], 1.0f))
+  ASSERT(test_eq(GLM_VEC3_ONE[0], 1.0f))
+  ASSERT(test_eq(GLM_VEC3_ONE[1], 1.0f))
+  ASSERT(test_eq(GLM_VEC3_ONE[2], 1.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_VEC3_ZERO) {
-  ASSERT(glm_eq(GLM_VEC3_ZERO[0], 0.0f))
-  ASSERT(glm_eq(GLM_VEC3_ZERO[1], 0.0f))
-  ASSERT(glm_eq(GLM_VEC3_ZERO[2], 0.0f))
+  ASSERT(test_eq(GLM_VEC3_ZERO[0], 0.0f))
+  ASSERT(test_eq(GLM_VEC3_ZERO[1], 0.0f))
+  ASSERT(test_eq(GLM_VEC3_ZERO[2], 0.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_YUP) {
-  ASSERT(glm_eq(GLM_YUP[0], 0.0f))
-  ASSERT(glm_eq(GLM_YUP[1], 1.0f))
-  ASSERT(glm_eq(GLM_YUP[2], 0.0f))
+  ASSERT(test_eq(GLM_YUP[0], 0.0f))
+  ASSERT(test_eq(GLM_YUP[1], 1.0f))
+  ASSERT(test_eq(GLM_YUP[2], 0.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_ZUP) {
-  ASSERT(glm_eq(GLM_ZUP[0], 0.0f))
-  ASSERT(glm_eq(GLM_ZUP[1], 0.0f))
-  ASSERT(glm_eq(GLM_ZUP[2], 1.0f))
+  ASSERT(test_eq(GLM_ZUP[0], 0.0f))
+  ASSERT(test_eq(GLM_ZUP[1], 0.0f))
+  ASSERT(test_eq(GLM_ZUP[2], 1.0f))
   
   TEST_SUCCESS
 }
 
 TEST_IMPL(MACRO_GLM_XUP) {
-  ASSERT(glm_eq(GLM_XUP[0], 1.0f))
-  ASSERT(glm_eq(GLM_XUP[1], 0.0f))
-  ASSERT(glm_eq(GLM_XUP[2], 0.0f))
+  ASSERT(test_eq(GLM_XUP[0], 1.0f))
+  ASSERT(test_eq(GLM_XUP[1], 0.0f))
+  ASSERT(test_eq(GLM_XUP[2], 0.0f))
   
   TEST_SUCCESS
 }
@@ -182,9 +182,9 @@ TEST_IMPL(MACRO_glm_vec3_mulv) {
 
   ASSERTIFY(test_assert_vec3_eq(v3, v4))
 
-  ASSERT(glm_eq(v1[0] * v2[0], v3[0]))
-  ASSERT(glm_eq(v1[1] * v2[1], v3[1]))
-  ASSERT(glm_eq(v1[2] * v2[2], v3[2]))
+  ASSERT(test_eq(v1[0] * v2[0], v3[0]))
+  ASSERT(test_eq(v1[1] * v2[1], v3[1]))
+  ASSERT(test_eq(v1[2] * v2[2], v3[2]))
   
   TEST_SUCCESS
 }
@@ -199,9 +199,9 @@ TEST_IMPL(GLM_PREFIX, vec3) {
   
   GLM(vec3)(v4, v3);
   
-  ASSERT(glm_eq(v3[0], v4[0]))
-  ASSERT(glm_eq(v3[1], v4[1]))
-  ASSERT(glm_eq(v3[2], v4[2]))
+  ASSERT(test_eq(v3[0], v4[0]))
+  ASSERT(test_eq(v3[1], v4[1]))
+  ASSERT(test_eq(v3[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -251,7 +251,7 @@ TEST_IMPL(GLM_PREFIX, vec3_dot) {
   dot1 = GLM(vec3_dot)(a, b);
   dot2 = a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   
-  ASSERT(glm_eq(dot1, dot2))
+  ASSERT(test_eq(dot1, dot2))
   
   TEST_SUCCESS
 }
@@ -263,7 +263,7 @@ TEST_IMPL(GLM_PREFIX, vec3_norm2) {
   n1 = GLM(vec3_norm2)(a);
   n2 = a[0] * a[0] + a[1] * a[1] + a[2] * a[2];
 
-  ASSERT(glm_eq(n1, n2))
+  ASSERT(test_eq(n1, n2))
 
   TEST_SUCCESS
 }
@@ -275,7 +275,7 @@ TEST_IMPL(GLM_PREFIX, vec3_norm) {
   n1 = GLM(vec3_norm)(a);
   n2 = sqrtf(a[0] * a[0] + a[1] * a[1] + a[2] * a[2]);
 
-  ASSERT(glm_eq(n1, n2))
+  ASSERT(test_eq(n1, n2))
 
   TEST_SUCCESS
 }
@@ -287,7 +287,7 @@ TEST_IMPL(GLM_PREFIX, vec3_norm_one) {
   n1 = GLM(vec3_norm_one)(a);
   n2 = fabsf(a[0]) + fabsf(a[1]) + fabsf(a[2]);
 
-  ASSERT(glm_eq(n1, n2))
+  ASSERT(test_eq(n1, n2))
 
   TEST_SUCCESS
 }
@@ -305,7 +305,7 @@ TEST_IMPL(GLM_PREFIX, vec3_norm_inf) {
   if (fabsf(a[1]) < fabsf(a[2]))
     n2 = fabsf(a[2]);
   
-  ASSERT(glm_eq(n1, n2))
+  ASSERT(test_eq(n1, n2))
 
   TEST_SUCCESS
 }
@@ -381,9 +381,9 @@ TEST_IMPL(GLM_PREFIX, vec3_mul) {
   
   GLM(vec3_mul)(v1, v2, v3);
 
-  ASSERT(glm_eq(v1[0] * v2[0], v3[0]))
-  ASSERT(glm_eq(v1[1] * v2[1], v3[1]))
-  ASSERT(glm_eq(v1[2] * v2[2], v3[2]))
+  ASSERT(test_eq(v1[0] * v2[0], v3[0]))
+  ASSERT(test_eq(v1[1] * v2[1], v3[1]))
+  ASSERT(test_eq(v1[2] * v2[2], v3[2]))
   
   TEST_SUCCESS
 }
@@ -394,9 +394,9 @@ TEST_IMPL(GLM_PREFIX, vec3_scale) {
   
   GLM(vec3_scale)(v1, s, v2);
 
-  ASSERT(glm_eq(v1[0] * s, v2[0]))
-  ASSERT(glm_eq(v1[1] * s, v2[1]))
-  ASSERT(glm_eq(v1[2] * s, v2[2]))
+  ASSERT(test_eq(v1[0] * s, v2[0]))
+  ASSERT(test_eq(v1[1] * s, v2[1]))
+  ASSERT(test_eq(v1[2] * s, v2[2]))
   
   TEST_SUCCESS
 }
@@ -410,18 +410,18 @@ TEST_IMPL(GLM_PREFIX, vec3_scale_as) {
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
   if (norm == 0.0f) {
-    ASSERT(glm_eq(v1[0], 0.0f))
-    ASSERT(glm_eq(v1[1], 0.0f))
-    ASSERT(glm_eq(v1[2], 0.0f))
+    ASSERT(test_eq(v1[0], 0.0f))
+    ASSERT(test_eq(v1[1], 0.0f))
+    ASSERT(test_eq(v1[2], 0.0f))
 
     TEST_SUCCESS
   }
   
   norm = s / norm;
   
-  ASSERT(glm_eq(v1[0] * norm, v2[0]))
-  ASSERT(glm_eq(v1[1] * norm, v2[1]))
-  ASSERT(glm_eq(v1[2] * norm, v2[2]))
+  ASSERT(test_eq(v1[0] * norm, v2[0]))
+  ASSERT(test_eq(v1[1] * norm, v2[1]))
+  ASSERT(test_eq(v1[2] * norm, v2[2]))
 
   TEST_SUCCESS
 }
@@ -433,9 +433,9 @@ TEST_IMPL(GLM_PREFIX, vec3_div) {
   
   GLM(vec3_div)(v1, v2, v3);
 
-  ASSERT(glm_eq(v1[0] / v2[0], v3[0]))
-  ASSERT(glm_eq(v1[1] / v2[1], v3[1]))
-  ASSERT(glm_eq(v1[2] / v2[2], v3[2]))
+  ASSERT(test_eq(v1[0] / v2[0], v3[0]))
+  ASSERT(test_eq(v1[1] / v2[1], v3[1]))
+  ASSERT(test_eq(v1[2] / v2[2], v3[2]))
   
   TEST_SUCCESS
 }
@@ -446,9 +446,9 @@ TEST_IMPL(GLM_PREFIX, vec3_divs) {
   
   GLM(vec3_divs)(v1, s, v2);
 
-  ASSERT(glm_eq(v1[0] / s, v2[0]))
-  ASSERT(glm_eq(v1[1] / s, v2[1]))
-  ASSERT(glm_eq(v1[2] / s, v2[2]))
+  ASSERT(test_eq(v1[0] / s, v2[0]))
+  ASSERT(test_eq(v1[1] / s, v2[1]))
+  ASSERT(test_eq(v1[2] / s, v2[2]))
   
   TEST_SUCCESS
 }
@@ -461,9 +461,9 @@ TEST_IMPL(GLM_PREFIX, vec3_addadd) {
   
   GLM(vec3_addadd)(v1, v2, v4);
 
-  ASSERT(glm_eq(v3[0] + v1[0] + v2[0], v4[0]))
-  ASSERT(glm_eq(v3[1] + v1[1] + v2[1], v4[1]))
-  ASSERT(glm_eq(v3[2] + v1[2] + v2[2], v4[2]))
+  ASSERT(test_eq(v3[0] + v1[0] + v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] + v1[1] + v2[1], v4[1]))
+  ASSERT(test_eq(v3[2] + v1[2] + v2[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -476,9 +476,9 @@ TEST_IMPL(GLM_PREFIX, vec3_subadd) {
   
   GLM(vec3_subadd)(v1, v2, v4);
 
-  ASSERT(glm_eq(v3[0] + v1[0] - v2[0], v4[0]))
-  ASSERT(glm_eq(v3[1] + v1[1] - v2[1], v4[1]))
-  ASSERT(glm_eq(v3[2] + v1[2] - v2[2], v4[2]))
+  ASSERT(test_eq(v3[0] + v1[0] - v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] + v1[1] - v2[1], v4[1]))
+  ASSERT(test_eq(v3[2] + v1[2] - v2[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -491,9 +491,9 @@ TEST_IMPL(GLM_PREFIX, vec3_muladd) {
   
   GLM(vec3_muladd)(v1, v2, v4);
 
-  ASSERT(glm_eq(v3[0] + v1[0] * v2[0], v4[0]))
-  ASSERT(glm_eq(v3[1] + v1[1] * v2[1], v4[1]))
-  ASSERT(glm_eq(v3[2] + v1[2] * v2[2], v4[2]))
+  ASSERT(test_eq(v3[0] + v1[0] * v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] + v1[1] * v2[1], v4[1]))
+  ASSERT(test_eq(v3[2] + v1[2] * v2[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -506,9 +506,9 @@ TEST_IMPL(GLM_PREFIX, vec3_muladds) {
   
   GLM(vec3_muladds)(v1, s, v3);
 
-  ASSERT(glm_eq(v2[0] + v1[0] * s, v3[0]))
-  ASSERT(glm_eq(v2[1] + v1[1] * s, v3[1]))
-  ASSERT(glm_eq(v2[2] + v1[2] * s, v3[2]))
+  ASSERT(test_eq(v2[0] + v1[0] * s, v3[0]))
+  ASSERT(test_eq(v2[1] + v1[1] * s, v3[1]))
+  ASSERT(test_eq(v2[2] + v1[2] * s, v3[2]))
   
   TEST_SUCCESS
 }
@@ -521,9 +521,9 @@ TEST_IMPL(GLM_PREFIX, vec3_maxadd) {
   
   GLM(vec3_maxadd)(v1, v2, v4);
 
-  ASSERT(glm_eq(v3[0] + glm_max(v1[0], v2[0]), v4[0]))
-  ASSERT(glm_eq(v3[1] + glm_max(v1[1], v2[1]), v4[1]))
-  ASSERT(glm_eq(v3[2] + glm_max(v1[2], v2[2]), v4[2]))
+  ASSERT(test_eq(v3[0] + glm_max(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] + glm_max(v1[1], v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] + glm_max(v1[2], v2[2]), v4[2]))
   
   TEST_SUCCESS
 }
@@ -536,9 +536,9 @@ TEST_IMPL(GLM_PREFIX, vec3_minadd) {
   
   GLM(vec3_minadd)(v1, v2, v4);
 
-  ASSERT(glm_eq(v3[0] + glm_min(v1[0], v2[0]), v4[0]))
-  ASSERT(glm_eq(v3[1] + glm_min(v1[1], v2[1]), v4[1]))
-  ASSERT(glm_eq(v3[2] + glm_min(v1[2], v2[2]), v4[2]))
+  ASSERT(test_eq(v3[0] + glm_min(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] + glm_min(v1[1], v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] + glm_min(v1[2], v2[2]), v4[2]))
   
   TEST_SUCCESS
 }
@@ -551,13 +551,13 @@ TEST_IMPL(GLM_PREFIX, vec3_negate_to) {
   GLM(vec3_negate_to)(v1, v3);
   GLM(vec3_negate_to)(v2, v4);
 
-  ASSERT(glm_eq(-v1[0], v3[0]))
-  ASSERT(glm_eq(-v1[1], v3[1]))
-  ASSERT(glm_eq(-v1[2], v3[2]))
+  ASSERT(test_eq(-v1[0], v3[0]))
+  ASSERT(test_eq(-v1[1], v3[1]))
+  ASSERT(test_eq(-v1[2], v3[2]))
   
-  ASSERT(glm_eq(-v2[0], v4[0]))
-  ASSERT(glm_eq(-v2[1], v4[1]))
-  ASSERT(glm_eq(-v2[2], v4[2]))
+  ASSERT(test_eq(-v2[0], v4[0]))
+  ASSERT(test_eq(-v2[1], v4[1]))
+  ASSERT(test_eq(-v2[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -571,13 +571,13 @@ TEST_IMPL(GLM_PREFIX, vec3_negate) {
   GLM(vec3_negate)(v1);
   GLM(vec3_negate)(v2);
 
-  ASSERT(glm_eq(-v1[0], v3[0]))
-  ASSERT(glm_eq(-v1[1], v3[1]))
-  ASSERT(glm_eq(-v1[2], v3[2]))
+  ASSERT(test_eq(-v1[0], v3[0]))
+  ASSERT(test_eq(-v1[1], v3[1]))
+  ASSERT(test_eq(-v1[2], v3[2]))
   
-  ASSERT(glm_eq(-v2[0], v4[0]))
-  ASSERT(glm_eq(-v2[1], v4[1]))
-  ASSERT(glm_eq(-v2[2], v4[2]))
+  ASSERT(test_eq(-v2[0], v4[0]))
+  ASSERT(test_eq(-v2[1], v4[1]))
+  ASSERT(test_eq(-v2[2], v4[2]))
   
   TEST_SUCCESS
 }
@@ -591,18 +591,18 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize) {
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
   if (norm == 0.0f) {
-    ASSERT(glm_eq(v1[0], 0.0f))
-    ASSERT(glm_eq(v1[1], 0.0f))
-    ASSERT(glm_eq(v1[2], 0.0f))
+    ASSERT(test_eq(v1[0], 0.0f))
+    ASSERT(test_eq(v1[1], 0.0f))
+    ASSERT(test_eq(v1[2], 0.0f))
 
     TEST_SUCCESS
   }
   
   norm = s / norm;
   
-  ASSERT(glm_eq(v1[0] * norm, v2[0]))
-  ASSERT(glm_eq(v1[1] * norm, v2[1]))
-  ASSERT(glm_eq(v1[2] * norm, v2[2]))
+  ASSERT(test_eq(v1[0] * norm, v2[0]))
+  ASSERT(test_eq(v1[1] * norm, v2[1]))
+  ASSERT(test_eq(v1[2] * norm, v2[2]))
 
   TEST_SUCCESS
 }
@@ -616,18 +616,18 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
   if (norm == 0.0f) {
-    ASSERT(glm_eq(v1[0], 0.0f))
-    ASSERT(glm_eq(v1[1], 0.0f))
-    ASSERT(glm_eq(v1[2], 0.0f))
+    ASSERT(test_eq(v1[0], 0.0f))
+    ASSERT(test_eq(v1[1], 0.0f))
+    ASSERT(test_eq(v1[2], 0.0f))
 
     TEST_SUCCESS
   }
   
   norm = s / norm;
   
-  ASSERT(glm_eq(v1[0] * norm, v2[0]))
-  ASSERT(glm_eq(v1[1] * norm, v2[1]))
-  ASSERT(glm_eq(v1[2] * norm, v2[2]))
+  ASSERT(test_eq(v1[0] * norm, v2[0]))
+  ASSERT(test_eq(v1[1] * norm, v2[1]))
+  ASSERT(test_eq(v1[2] * norm, v2[2]))
 
   TEST_SUCCESS
 }
@@ -793,12 +793,12 @@ TEST_IMPL(GLM_PREFIX, vec3_max) {
   vec3 v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
   vec3 v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
 
-  ASSERT(glm_eq(GLM(vec3_max)(v1),  2.104f))
-  ASSERT(glm_eq(GLM(vec3_max)(v2), -12.35f))
+  ASSERT(test_eq(GLM(vec3_max)(v1),  2.104f))
+  ASSERT(test_eq(GLM(vec3_max)(v2), -12.35f))
   ASSERT(isinf(GLM(vec3_max)(v3)))
   ASSERT(isnan(GLM(vec3_max)(v4)))
   ASSERT(isnan(GLM(vec3_max)(v5)))
-  ASSERT(glm_eq(GLM(vec3_max)(v6),  11.0f))
+  ASSERT(test_eq(GLM(vec3_max)(v6),  11.0f))
 
   TEST_SUCCESS
 }
@@ -808,12 +808,12 @@ TEST_IMPL(GLM_PREFIX, vec3_min) {
   vec3  v3 = {INFINITY, 0.0f, 0.0f}, v4 = {NAN, INFINITY, 2.0f};
   vec3  v5 = {NAN, -1.0f, -1.0f}, v6 = {-1.0f, -11.0f, 11.0f};
 
-  ASSERT(glm_eq(GLM(vec3_min)(v1), -4.10f))
-  ASSERT(glm_eq(GLM(vec3_min)(v2), -43.502f))
-  ASSERT(glm_eq(GLM(vec3_min)(v3),  0.0f))
+  ASSERT(test_eq(GLM(vec3_min)(v1), -4.10f))
+  ASSERT(test_eq(GLM(vec3_min)(v2), -43.502f))
+  ASSERT(test_eq(GLM(vec3_min)(v3),  0.0f))
   ASSERT(isnan(GLM(vec3_min)(v4)))
   ASSERT(isnan(GLM(vec3_min)(v5)))
-  ASSERT(glm_eq(GLM(vec3_min)(v6), -11.0f))
+  ASSERT(test_eq(GLM(vec3_min)(v6), -11.0f))
 
   TEST_SUCCESS
 }
@@ -914,8 +914,8 @@ TEST_IMPL(GLM_PREFIX, vec3_hadd) {
   r3 = v1[0] + v1[1] + v1[2];
   r4 = v2[0] + v2[1] + v2[2];
 
-  ASSERT(glm_eq(r1, r3))
-  ASSERT(glm_eq(r2, r4))
+  ASSERT(test_eq(r1, r3))
+  ASSERT(test_eq(r2, r4))
 
   TEST_SUCCESS
 }
@@ -926,13 +926,13 @@ TEST_IMPL(GLM_PREFIX, vec3_sqrt) {
   GLM(vec3_sqrt)(v1, v3);
   GLM(vec3_sqrt)(v2, v4);
 
-  ASSERT(glm_eq(sqrtf(v1[0]), v3[0]))
-  ASSERT(glm_eq(sqrtf(v1[1]), v3[1]))
-  ASSERT(glm_eq(sqrtf(v1[2]), v3[2]))
+  ASSERT(test_eq(sqrtf(v1[0]), v3[0]))
+  ASSERT(test_eq(sqrtf(v1[1]), v3[1]))
+  ASSERT(test_eq(sqrtf(v1[2]), v3[2]))
 
-  ASSERT(glm_eq(sqrtf(v2[0]), v4[0]))
-  ASSERT(glm_eq(sqrtf(v2[1]), v4[1]))
-  ASSERT(glm_eq(sqrtf(v2[2]), v4[2]))
+  ASSERT(test_eq(sqrtf(v2[0]), v4[0]))
+  ASSERT(test_eq(sqrtf(v2[1]), v4[1]))
+  ASSERT(test_eq(sqrtf(v2[2]), v4[2]))
 
   TEST_SUCCESS
 }

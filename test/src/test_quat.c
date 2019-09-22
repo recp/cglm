@@ -24,7 +24,7 @@ TEST_IMPL(quat) {
 
   /* 0. test identiy quat */
   glm_quat_identity(q4);
-  ASSERT(glm_eq(glm_quat_real(q4), cosf(glm_rad(0.0f) * 0.5f)))
+  ASSERT(test_eq(glm_quat_real(q4), cosf(glm_rad(0.0f) * 0.5f)))
 
   glm_quat_mat4(q4, rot1);
   ASSERTIFY(test_assert_mat4_eq2(rot1, GLM_MAT4_IDENTITY, 0.000009f))
@@ -121,7 +121,7 @@ TEST_IMPL(quat) {
   /* 9. test imag, real */
 
   /* 9.1 real */
-  ASSERT(glm_eq(glm_quat_real(q4), cosf(glm_rad(-90.0f) * 0.5f)))
+  ASSERT(test_eq(glm_quat_real(q4), cosf(glm_rad(-90.0f) * 0.5f)))
 
   /* 9.1 imag */
   glm_quat_imag(q4, imag);

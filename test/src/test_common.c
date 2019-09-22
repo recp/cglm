@@ -159,9 +159,9 @@ test_assert_mat3_eq_identity(mat3 m3) {
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
       if (i == j) {
-        ASSERT(glm_eq(m3[i][j], 1.0f))
+        ASSERT(test_eq(m3[i][j], 1.0f))
       } else {
-        ASSERT(glm_eq(m3[i][j], 0.0f))
+        ASSERT(test_eq(m3[i][j], 0.0f))
       }
     }
   }
@@ -175,7 +175,7 @@ test_assert_mat3_eq_zero(mat3 m3) {
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
-      ASSERT(glm_eq(m3[i][j], 0.0f))
+      ASSERT(test_eq(m3[i][j], 0.0f))
     }
   }
 
@@ -189,9 +189,9 @@ test_assert_mat4_eq_identity(mat4 m4) {
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
       if (i == j) {
-        ASSERT(glm_eq(m4[i][j], 1.0f))
+        ASSERT(test_eq(m4[i][j], 1.0f))
       } else {
-        ASSERT(glm_eq(m4[i][j], 0.0f))
+        ASSERT(test_eq(m4[i][j], 0.0f))
       }
     }
   }
@@ -205,7 +205,7 @@ test_assert_mat4_eq_zero(mat4 m4) {
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      ASSERT(glm_eq(m4[i][j], 0.0f))
+      ASSERT(test_eq(m4[i][j], 0.0f))
     }
   }
 

@@ -84,9 +84,9 @@ TEST_IMPL(GLM_PREFIX, project) {
   GLM(project)(pos, mvp, viewport, projected);
   GLM(unproject)(projected, mvp, viewport, unprojected);
 
-  ASSERT(glm_eq(pos[0], unprojected[0]))
-  ASSERT(glm_eq(pos[1], unprojected[1]))
-  ASSERT(glm_eq(pos[2], unprojected[2]))
+  ASSERT(test_eq(pos[0], unprojected[0]))
+  ASSERT(test_eq(pos[1], unprojected[1]))
+  ASSERT(test_eq(pos[2], unprojected[2]))
 
   TEST_SUCCESS
 }
