@@ -239,13 +239,13 @@ glmc_vec3_distance2(vec3 a, vec3 b) {
 CGLM_EXPORT
 void
 glmc_vec3_maxv(vec3 a, vec3 b, vec3 dest) {
-  glm_vec3_minv(a, b, dest);
+  glm_vec3_maxv(a, b, dest);
 }
 
 CGLM_EXPORT
 void
 glmc_vec3_minv(vec3 a, vec3 b, vec3 dest) {
-  glm_vec3_maxv(a, b, dest);
+  glm_vec3_minv(a, b, dest);
 }
 
 CGLM_EXPORT
