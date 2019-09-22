@@ -934,7 +934,7 @@ TEST_IMPL(GLM_PREFIX, vec3_distance2) {
   float d;
 
   d = GLM(vec3_distance2)(v1, v2);
-  ASSERT(test_eq(d, 30.0f))
+  ASSERT(test_eq(d, 30.0f * 30.0f))
 
   d = GLM(vec3_distance2)(v3, v4);
   ASSERT(test_eq(powf(v3[0] - v4[0], 2.0f)
