@@ -664,6 +664,208 @@ TEST_IMPL(GLM_PREFIX, vec3_crossn) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_rotate) {
+  vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
+
+  /* rotate X around Y = -Z */
+  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_YUP);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  /* rotate -Z around X = Y */
+  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_XUP);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate Y around Z = -X */
+  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_ZUP);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around X by 90deg */
+  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_XUP);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around Z by 90deg */
+  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_ZUP);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_rotate_m4) {
+  vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
+  mat4 x, y, z;
+
+  glm_rotate_make(x, GLM_PI_2, GLM_XUP);
+  glm_rotate_make(y, GLM_PI_2, GLM_YUP);
+  glm_rotate_make(z, GLM_PI_2, GLM_ZUP);
+
+  /* rotate X around Y = -Z */
+  GLM(vec3_rotate_m4)(y, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  /* rotate -Z around X = Y */
+  GLM(vec3_rotate_m4)(x, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate Y around X = -X */
+  GLM(vec3_rotate_m4)(z, v1, v1);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m4)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m4)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m4)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around X by 90deg */
+  GLM(vec3_rotate_m4)(x, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around Z by 90deg */
+  GLM(vec3_rotate_m4)(z, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+
+TEST_IMPL(GLM_PREFIX, vec3_rotate_m3) {
+  vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
+  mat4 x0, y0, z0;
+  mat3 x, y, z;
+
+  glm_rotate_make(x0, GLM_PI_2, GLM_XUP);
+  glm_rotate_make(y0, GLM_PI_2, GLM_YUP);
+  glm_rotate_make(z0, GLM_PI_2, GLM_ZUP);
+
+  glm_mat4_pick3(x0, x);
+  glm_mat4_pick3(y0, y);
+  glm_mat4_pick3(z0, z);
+
+  /* rotate X around Y = -Z */
+  GLM(vec3_rotate_m3)(y, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  /* rotate -Z around X = Y */
+  GLM(vec3_rotate_m3)(x, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate Y around Z = -X */
+  GLM(vec3_rotate_m3)(z, v1, v1);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m3)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m3)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  GLM(vec3_rotate_m3)(y, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around X by 90deg */
+  GLM(vec3_rotate_m3)(x, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around Z by 90deg */
+  GLM(vec3_rotate_m3)(z, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec3_broadcast) {
   vec3 v1, v2, v3;
   vec3 v5 = {-1.456f, -1.456f, -1.456f};
