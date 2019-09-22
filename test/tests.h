@@ -112,7 +112,13 @@ TEST_DECLARE(camera_lookat)
 TEST_DECLARE(camera_decomp)
 
 /* project */
-TEST_DECLARE(project)
+TEST_DECLARE(glm_unprojecti)
+TEST_DECLARE(glm_unproject)
+TEST_DECLARE(glm_project)
+
+TEST_DECLARE(glmc_unprojecti)
+TEST_DECLARE(glmc_unproject)
+TEST_DECLARE(glmc_project)
 
 /* utils */
 TEST_DECLARE(clamp)
@@ -347,7 +353,13 @@ TEST_LIST {
   TEST_ENTRY(camera_decomp)
   
   /* project */
-  TEST_ENTRY(project)
+  TEST_ENTRY(glm_unprojecti)
+  TEST_ENTRY(glm_unproject)
+  TEST_ENTRY(glm_project)
+  
+  TEST_ENTRY(glmc_unprojecti)
+  TEST_ENTRY(glmc_unproject)
+  TEST_ENTRY(glmc_project)
   
   /* utils */
   TEST_ENTRY(clamp)
