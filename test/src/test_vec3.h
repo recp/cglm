@@ -1012,6 +1012,153 @@ TEST_IMPL(GLM_PREFIX, vec3_minv) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_ortho) {
+  vec3  v1, v2, v3;
+  vec3  v5, v6, v7;
+  float a;
+
+  test_rand_vec3(v1);
+  test_rand_vec3(v2);
+  test_rand_vec3(v3);
+
+  GLM(vec3_ortho)(v1, v5);
+  GLM(vec3_ortho)(v2, v6);
+  GLM(vec3_ortho)(v3, v7);
+  
+  a = glm_vec3_angle(v1, v5);
+  ASSERT(!isinf(a))
+  ASSERT(!isnan(a))
+  ASSERT(test_eq(a, GLM_PI_2))
+  
+  a = glm_vec3_angle(v2, v6);
+  ASSERT(!isinf(a))
+  ASSERT(!isnan(a))
+  ASSERT(test_eq(a, GLM_PI_2))
+  
+  a = glm_vec3_angle(v3, v7);
+  ASSERT(!isinf(a))
+  ASSERT(!isnan(a))
+  ASSERT(test_eq(a, GLM_PI_2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_clamp) {
+  vec3 v1 = {-1.456f, -11.456f, 31.456f};
+  vec3 v2 = {0.110f, 111.0f, 11.0f};
+  vec3 v3 = {78.0f, 32.0f, -78.0f};
+
+  GLM(vec3_clamp)(v1, -1.03f, 30.0f);
+  GLM(vec3_clamp)(v2,  0.11f, 111.0f);
+  GLM(vec3_clamp)(v3, -88.0f, 70.0f);
+
+  ASSERT(test_eq(v1[0], -1.03f))
+  ASSERT(test_eq(v1[1], -1.03f))
+  ASSERT(test_eq(v1[2],  30.0f))
+  
+  ASSERT(test_eq(v2[0],  0.11f))
+  ASSERT(test_eq(v2[1],  111.0f))
+  ASSERT(test_eq(v2[2],  11.0f))
+  
+  ASSERT(test_eq(v3[0],  70.0f))
+  ASSERT(test_eq(v3[1],  32.0f))
+  ASSERT(test_eq(v3[2], -78.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_lerp) {
+  vec3 v1 = {-100.0f, -200.0f, -10.0f};
+  vec3 v2 = {100.0f, 200.0f, 10.0f};
+  vec3 v3;
+
+  GLM(vec3_lerp)(v1, v2, 0.5f, v3);
+  ASSERT(test_eq(v3[0], 0.0f))
+  ASSERT(test_eq(v3[1], 0.0f))
+  ASSERT(test_eq(v3[2], 0.0f))
+  
+  GLM(vec3_lerp)(v1, v2, 0.75f, v3);
+  ASSERT(test_eq(v3[0], 50.0f))
+  ASSERT(test_eq(v3[1], 100.03f))
+  ASSERT(test_eq(v3[2], 5.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_lerpc) {
+  vec3 v1 = {-100.0f, -200.0f, -10.0f};
+  vec3 v2 = {100.0f, 200.0f, 10.0f};
+  vec3 v3;
+
+  GLM(vec3_lerpc)(v1, v2, 0.5f, v3);
+  ASSERT(test_eq(v3[0], 0.0f))
+  ASSERT(test_eq(v3[1], 0.0f))
+  ASSERT(test_eq(v3[2], 0.0f))
+  
+  GLM(vec3_lerpc)(v1, v2, 0.75f, v3);
+  ASSERT(test_eq(v3[0], 50.0f))
+  ASSERT(test_eq(v3[1], 100.03f))
+  ASSERT(test_eq(v3[2], 5.0f))
+  
+  GLM(vec3_lerpc)(v1, v2, -1.75f, v3);
+  ASSERT(test_eq(v3[0], -100.0f))
+  ASSERT(test_eq(v3[1], -200.0f))
+  ASSERT(test_eq(v3[2], -10.0f))
+  
+  GLM(vec3_lerpc)(v1, v2, 1.75f, v3);
+  ASSERT(test_eq(v3[0], 100.0f))
+  ASSERT(test_eq(v3[1], 200.0f))
+  ASSERT(test_eq(v3[2], 10.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_mix) {
+  vec3 v1 = {-100.0f, -200.0f, -10.0f};
+  vec3 v2 = {100.0f, 200.0f, 10.0f};
+  vec3 v3;
+
+  GLM(vec3_mix)(v1, v2, 0.5f, v3);
+  ASSERT(test_eq(v3[0], 0.0f))
+  ASSERT(test_eq(v3[1], 0.0f))
+  ASSERT(test_eq(v3[2], 0.0f))
+  
+  GLM(vec3_mix)(v1, v2, 0.75f, v3);
+  ASSERT(test_eq(v3[0], 50.0f))
+  ASSERT(test_eq(v3[1], 100.0f))
+  ASSERT(test_eq(v3[2], 5.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_mixc) {
+  vec3 v1 = {-100.0f, -200.0f, -10.0f};
+  vec3 v2 = {100.0f, 200.0f, 10.0f};
+  vec3 v3;
+
+  GLM(vec3_mixc)(v1, v2, 0.5f, v3);
+  ASSERT(test_eq(v3[0], 0.0f))
+  ASSERT(test_eq(v3[1], 0.0f))
+  ASSERT(test_eq(v3[2], 0.0f))
+  
+  GLM(vec3_mixc)(v1, v2, 0.75f, v3);
+  ASSERT(test_eq(v3[0], 50.0f))
+  ASSERT(test_eq(v3[1], 100.0f))
+  ASSERT(test_eq(v3[2], 5.0f))
+  
+  GLM(vec3_mixc)(v1, v2, -1.75f, v3);
+  ASSERT(test_eq(v3[0], -100.0f))
+  ASSERT(test_eq(v3[1], -200.0f))
+  ASSERT(test_eq(v3[2], -10.0f))
+  
+  GLM(vec3_mixc)(v1, v2, 1.75f, v3);
+  ASSERT(test_eq(v3[0], 100.0f))
+  ASSERT(test_eq(v3[1], 200.0f))
+  ASSERT(test_eq(v3[2], 10.0f))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec3_broadcast) {
   vec3 v1, v2, v3;
   vec3 v5 = {-1.456f, -1.456f, -1.456f};
