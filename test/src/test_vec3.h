@@ -620,6 +620,10 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize) {
   ASSERT(test_eq(v1[1] * norm, v2[1]))
   ASSERT(test_eq(v1[2] * norm, v2[2]))
 
+  glm_vec3_zero(v1);
+  GLM(vec3_normalize)(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, GLM_VEC3_ZERO))
+
   TEST_SUCCESS
 }
 
@@ -644,6 +648,10 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
   ASSERT(test_eq(v1[0] * norm, v2[0]))
   ASSERT(test_eq(v1[1] * norm, v2[1]))
   ASSERT(test_eq(v1[2] * norm, v2[2]))
+
+  glm_vec3_zero(v1);
+  GLM(vec3_normalize_to)(v1, v2);
+  ASSERTIFY(test_assert_vec3_eq(v2, GLM_VEC3_ZERO))
 
   TEST_SUCCESS
 }
@@ -672,6 +680,10 @@ TEST_IMPL(GLM_PREFIX, normalize) {
   ASSERT(test_eq(v1[1] * norm, v2[1]))
   ASSERT(test_eq(v1[2] * norm, v2[2]))
 
+  glm_vec3_zero(v1);
+  GLM(vec3_normalize)(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, GLM_VEC3_ZERO))
+
   TEST_SUCCESS
 }
 
@@ -698,6 +710,10 @@ TEST_IMPL(GLM_PREFIX, normalize_to) {
   ASSERT(test_eq(v1[0] * norm, v2[0]))
   ASSERT(test_eq(v1[1] * norm, v2[1]))
   ASSERT(test_eq(v1[2] * norm, v2[2]))
+
+  glm_vec3_zero(v1);
+  GLM(vec3_normalize_to)(v1, v2);
+  ASSERTIFY(test_assert_vec3_eq(v2, GLM_VEC3_ZERO))
 
   TEST_SUCCESS
 }
