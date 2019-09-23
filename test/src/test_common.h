@@ -88,4 +88,10 @@ test_eq(float a, float b) {
   return fabsf(a - b) <= 1e-6;
 }
 
+CGLM_INLINE
+bool
+test_eq_th(float a, float b, float th) {
+  return fabsf(a - b) <= th;
+}
+
 #endif /* test_common_h */
