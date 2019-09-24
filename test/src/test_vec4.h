@@ -1053,6 +1053,32 @@ TEST_IMPL(GLM_PREFIX, vec4_smoothinterpc) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec4_cubic) {
+  vec4 v1 = {125.0f, 25.0f, 5.0f, 1.0f};
+  vec4 v2 = {216.0f, 36.0f, 6.0f, 1.0f};
+  vec4 v3, v4;
+
+  ASSERT(test_eq(v1[0], v1[2] * v1[2] * v1[2]))
+  ASSERT(test_eq(v1[1], v1[2] * v1[2]))
+  ASSERT(test_eq(v1[3], 1.0f))
+
+  ASSERT(test_eq(v2[0], v2[2] * v2[2] * v2[2]))
+  ASSERT(test_eq(v2[1], v2[2] * v2[2]))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(vec4_cubic)(test_rand(), v3);
+  ASSERT(test_eq(v3[0], v3[2] * v3[2] * v3[2]))
+  ASSERT(test_eq(v3[1], v3[2] * v3[2]))
+  ASSERT(test_eq(v3[3], 1.0f))
+
+  GLM(vec4_cubic)(test_rand(), v4);
+  ASSERT(test_eq(v4[0], v4[2] * v4[2] * v4[2]))
+  ASSERT(test_eq(v4[1], v4[2] * v4[2]))
+  ASSERT(test_eq(v4[3], 1.0f))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   vec4 v;
 
