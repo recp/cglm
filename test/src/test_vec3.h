@@ -315,10 +315,10 @@ TEST_IMPL(GLM_PREFIX, vec3_norm_inf) {
   n1 = GLM(vec3_norm_inf)(a);
   n2 = fabsf(a[0]);
   
-  if (fabsf(a[0]) < fabsf(a[1]))
+  if (n2 < fabsf(a[1]))
     n2 = fabsf(a[1]);
   
-  if (fabsf(a[1]) < fabsf(a[2]))
+  if (n2 < fabsf(a[2]))
     n2 = fabsf(a[2]);
   
   ASSERT(test_eq(n1, n2))
