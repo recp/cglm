@@ -1182,7 +1182,7 @@ TEST_IMPL(GLM_PREFIX, vec3_lerp) {
   
   GLM(vec3_lerp)(v1, v2, 0.75f, v3);
   ASSERT(test_eq(v3[0], 50.0f))
-  ASSERT(test_eq(v3[1], 100.03f))
+  ASSERT(test_eq(v3[1], 100.0f))
   ASSERT(test_eq(v3[2], 5.0f))
 
   TEST_SUCCESS
@@ -1200,7 +1200,7 @@ TEST_IMPL(GLM_PREFIX, vec3_lerpc) {
   
   GLM(vec3_lerpc)(v1, v2, 0.75f, v3);
   ASSERT(test_eq(v3[0], 50.0f))
-  ASSERT(test_eq(v3[1], 100.03f))
+  ASSERT(test_eq(v3[1], 100.0f))
   ASSERT(test_eq(v3[2], 5.0f))
   
   GLM(vec3_lerpc)(v1, v2, -1.75f, v3);
