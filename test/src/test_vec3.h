@@ -1011,11 +1011,11 @@ TEST_IMPL(GLM_PREFIX, vec3_proj) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_center) {
-  vec3 v1 = {30.0f,  0.0f, 0.0f},
+  vec3 v1 = {30.0f, 0.0f, 0.0f},
        v2 = {0.0f, 0.0f, 0.0f},
-       v3 = {15.0f,  0.0f, 0.0f},
-       v4 = {3.0f,  10.0f, 120.0f},
-       v5 = {0.46f,  4.0f, 14.0f},
+       v3 = {15.0f, 0.0f, 0.0f},
+       v4 = {3.0f, 10.0f, 120.0f},
+       v5 = {0.46f, 4.0f, 14.0f},
        v6;
 
   GLM(vec3_center)(v1, v2, v6);
@@ -1030,10 +1030,10 @@ TEST_IMPL(GLM_PREFIX, vec3_center) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_distance2) {
-  vec3 v1 = {30.0f,  0.0f, 0.0f},
+  vec3 v1 = {30.0f, 0.0f, 0.0f},
        v2 = {0.0f, 0.0f, 0.0f},
-       v3 = {3.0f,  10.0f, 120.0f},
-       v4 = {0.46f,  4.0f, 14.0f};
+       v3 = {3.0f, 10.0f, 120.0f},
+       v4 = {0.46f, 4.0f, 14.0f};
   float d;
 
   d = GLM(vec3_distance2)(v1, v2);
@@ -1048,10 +1048,10 @@ TEST_IMPL(GLM_PREFIX, vec3_distance2) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_distance) {
-  vec3 v1 = {30.0f,  0.0f, 0.0f},
+  vec3 v1 = {30.0f, 0.0f, 0.0f},
        v2 = {0.0f, 0.0f, 0.0f},
-       v3 = {3.0f,  10.0f, 120.0f},
-       v4 = {0.46f,  4.0f, 14.0f};
+       v3 = {3.0f, 10.0f, 120.0f},
+       v4 = {0.46f, 4.0f, 14.0f};
   float d;
 
   d = GLM(vec3_distance)(v1, v2);

@@ -342,6 +342,11 @@ TEST_DECLARE(glm_vec4_negate_to)
 TEST_DECLARE(glm_vec4_negate)
 TEST_DECLARE(glm_vec4_normalize)
 TEST_DECLARE(glm_vec4_normalize_to)
+TEST_DECLARE(glm_vec4_distance2)
+TEST_DECLARE(glm_vec4_distance)
+TEST_DECLARE(glm_vec4_maxv)
+TEST_DECLARE(glm_vec4_minv)
+TEST_DECLARE(glm_vec4_clamp)
 
 TEST_DECLARE(glmc_vec4)
 TEST_DECLARE(glmc_vec4_copy3)
@@ -373,6 +378,11 @@ TEST_DECLARE(glmc_vec4_negate_to)
 TEST_DECLARE(glmc_vec4_negate)
 TEST_DECLARE(glmc_vec4_normalize)
 TEST_DECLARE(glmc_vec4_normalize_to)
+TEST_DECLARE(glmc_vec4_distance2)
+TEST_DECLARE(glmc_vec4_distance)
+TEST_DECLARE(glmc_vec4_maxv)
+TEST_DECLARE(glmc_vec4_minv)
+TEST_DECLARE(glmc_vec4_clamp)
 
 
 /*****************************************************************************/
@@ -706,6 +716,11 @@ TEST_LIST {
   TEST_ENTRY(glm_vec4_negate)
   TEST_ENTRY(glm_vec4_normalize)
   TEST_ENTRY(glm_vec4_normalize_to)
+  TEST_ENTRY(glm_vec4_distance2)
+  TEST_ENTRY(glm_vec4_distance)
+  TEST_ENTRY(glm_vec4_maxv)
+  TEST_ENTRY(glm_vec4_minv)
+  TEST_ENTRY(glm_vec4_clamp)
 
   TEST_ENTRY(glmc_vec4)
   TEST_ENTRY(glmc_vec4_copy3)
@@ -737,6 +752,11 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec4_negate)
   TEST_ENTRY(glmc_vec4_normalize)
   TEST_ENTRY(glmc_vec4_normalize_to)
+  TEST_ENTRY(glmc_vec4_distance2)
+  TEST_ENTRY(glmc_vec4_distance)
+  TEST_ENTRY(glmc_vec4_maxv)
+  TEST_ENTRY(glmc_vec4_minv)
+  TEST_ENTRY(glmc_vec4_clamp)
 };
 
 #endif /* tests_h */
