@@ -231,3 +231,196 @@ TEST_IMPL(GLM_PREFIX, quat_dot) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, quat_conjugate) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+  versor d, e;
+
+  GLM(quat_conjugate)(a, d);
+  GLM(quat_conjugate)(b, e);
+
+  ASSERT(test_eq(d[0], -a[0]))
+  ASSERT(test_eq(d[1], -a[1]))
+  ASSERT(test_eq(d[2], -a[2]))
+  ASSERT(test_eq(d[3],  a[3]))
+
+  ASSERT(test_eq(e[0], -b[0]))
+  ASSERT(test_eq(e[1], -b[1]))
+  ASSERT(test_eq(e[2], -b[2]))
+  ASSERT(test_eq(e[3],  b[3]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_inv) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+  versor d, e;
+  float n1, n2;
+
+  n1 = 1.0f / glm_vec4_norm2(a);
+  n2 = 1.0f / glm_vec4_norm2(b);
+
+  GLM(quat_inv)(a, d);
+  GLM(quat_inv)(b, e);
+
+  ASSERT(test_eq(d[0], -a[0] * n1))
+  ASSERT(test_eq(d[1], -a[1] * n1))
+  ASSERT(test_eq(d[2], -a[2] * n1))
+  ASSERT(test_eq(d[3],  a[3] * n1))
+
+  ASSERT(test_eq(e[0], -b[0] * n2))
+  ASSERT(test_eq(e[1], -b[1] * n2))
+  ASSERT(test_eq(e[2], -b[2] * n2))
+  ASSERT(test_eq(e[3],  b[3] * n2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_add) {
+  versor a = {-10.0f, 9.0f, -8.0f, 56.0f};
+  versor b = {12.0f, 19.0f, -18.0f, 1.0f};
+  versor c, d;
+
+  c[0] = a[0] + b[0];
+  c[1] = a[1] + b[1];
+  c[2] = a[2] + b[2];
+  c[3] = a[3] + b[3];
+
+  GLM(quat_add)(a, b, d);
+
+  ASSERTIFY(test_assert_quat_eq(c, d))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_sub) {
+  vec4 a = {-10.0f, 9.0f, -8.0f, 56.0f};
+  vec4 b = {12.0f, 19.0f, -18.0f, 1.0f};
+  vec4 c, d;
+
+  c[0] = a[0] - b[0];
+  c[1] = a[1] - b[1];
+  c[2] = a[2] - b[2];
+  c[3] = a[3] - b[3];
+
+  GLM(quat_sub)(a, b, d);
+
+  ASSERTIFY(test_assert_quat_eq(c, d))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_real) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+
+  ASSERT(test_eq(GLM(quat_real)(a), 78.0f))
+  ASSERT(test_eq(GLM(quat_real)(b), 4.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_imag) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+  vec3   d, e;
+
+  GLM(quat_imag)(a, d);
+  GLM(quat_imag)(b, e);
+
+  ASSERT(test_eq(d[0], a[0]))
+  ASSERT(test_eq(d[1], a[1]))
+  ASSERT(test_eq(d[2], a[2]))
+
+  ASSERT(test_eq(e[0], b[0]))
+  ASSERT(test_eq(e[1], b[1]))
+  ASSERT(test_eq(e[2], b[2]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_imagn) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+  vec3   d, e;
+
+  GLM(quat_imag)(a, d);
+  GLM(quat_imag)(b, e);
+
+  glm_vec3_normalize(a);
+  glm_vec3_normalize(b);
+  glm_vec3_normalize(d);
+  glm_vec3_normalize(e);
+
+  ASSERT(test_eq(d[0], a[0]))
+  ASSERT(test_eq(d[1], a[1]))
+  ASSERT(test_eq(d[2], a[2]))
+
+  ASSERT(test_eq(e[0], b[0]))
+  ASSERT(test_eq(e[1], b[1]))
+  ASSERT(test_eq(e[2], b[2]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_imaglen) {
+  versor a = {10.0f, 9.0f, 8.0f, 78.0f};
+  versor b = {1.0f, 2.0f, 3.0f, 4.0f};
+
+  ASSERT(test_eq(GLM(quat_imaglen)(a), glm_vec3_norm(a)));
+  ASSERT(test_eq(GLM(quat_imaglen)(b), glm_vec3_norm(b)));
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_angle) {
+  versor q1 = {1.0f, 2.0f, 3.0f, 4.0f}, q2, q3;
+  vec3   v1;
+  float  a1, a2, a3;
+
+  test_rand_vec3(v1);
+  GLM(quatv)(q1, glm_rad(60.140f), v1);
+  GLM(quatv)(q2, glm_rad(160.04f), v1);
+  GLM(quatv)(q3, glm_rad(20.350f), v1);
+
+  a1 = GLM(quat_angle)(q1);
+  a2 = GLM(quat_angle)(q2);
+  a3 = GLM(quat_angle)(q3);
+
+  ASSERT(test_eq(a1, glm_rad(60.140f)))
+  ASSERT(test_eq(a2, glm_rad(160.04f)))
+  ASSERT(test_eq(a3, glm_rad(20.350f)))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_axis) {
+  versor q1 = {1.0f, 2.0f, 3.0f, 4.0f}, q2, q3;
+  vec3   v1, v2;
+
+  test_rand_vec3(v1);
+  GLM(quatv)(q1, glm_rad(60.0f), v1);
+
+  glm_quat_axis(q1, v2);
+  glm_vec3_normalize(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
+
+  test_rand_vec3(v1);
+  GLM(quatv)(q2, glm_rad(60.0f), v1);
+
+  glm_quat_axis(q2, v2);
+  glm_vec3_normalize(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
+
+  test_rand_vec3(v1);
+  GLM(quatv)(q3, glm_rad(60.0f), v1);
+
+  glm_quat_axis(q3, v2);
+  glm_vec3_normalize(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
+
+  TEST_SUCCESS
+}
+
