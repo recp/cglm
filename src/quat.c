@@ -59,7 +59,7 @@ glmc_quat_normalize_to(versor q, versor dest) {
 CGLM_EXPORT
 void
 glmc_quat_normalize(versor q) {
-  glm_quat_norm(q);
+  glm_quat_normalize(q);
 }
 
 CGLM_EXPORT
