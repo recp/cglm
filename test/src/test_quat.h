@@ -346,8 +346,8 @@ TEST_IMPL(GLM_PREFIX, quat_imagn) {
   versor b = {1.0f, 2.0f, 3.0f, 4.0f};
   vec3   d, e;
 
-  GLM(quat_imag)(a, d);
-  GLM(quat_imag)(b, e);
+  GLM(quat_imagn)(a, d);
+  GLM(quat_imagn)(b, e);
 
   glm_vec3_normalize(a);
   glm_vec3_normalize(b);
@@ -424,3 +424,234 @@ TEST_IMPL(GLM_PREFIX, quat_axis) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, quat_mul) {
+  versor q1 = {2.0f, 3.0f, 4.0f, 5.0f};
+  versor q2 = {6.0f, 7.0f, 8.0f, 9.0f};
+  versor q3;
+  versor q4;
+  vec3   v1 = {1.5f, 2.5f, 3.5f};
+
+  GLM(quat_mul)(q1, q2, q3);
+
+  ASSERT(test_eq(q3[0], q1[3] * q2[0] + q1[0] * q2[3] + q1[1] * q2[2] - q1[2] * q2[1]))
+  ASSERT(test_eq(q3[1], q1[3] * q2[1] - q1[0] * q2[2] + q1[1] * q2[3] + q1[2] * q2[0]))
+  ASSERT(test_eq(q3[2], q1[3] * q2[2] + q1[0] * q2[1] - q1[1] * q2[0] + q1[2] * q2[3]))
+  ASSERT(test_eq(q3[3], q1[3] * q2[3] - q1[0] * q2[0] - q1[1] * q2[1] - q1[2] * q2[2]))
+
+  glm_quatv(q1, glm_rad(30.0f), v1);
+  glm_quatv(q2, glm_rad(20.0f), v1);
+  glm_quatv(q3, glm_rad(50.0f), v1);
+
+  GLM(quat_mul)(q1, q2, q4);
+
+  ASSERTIFY(test_assert_quat_eq(q3, q4))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_mat4) {
+  mat4   m1, m2;
+  versor q1, q2, q3;
+  vec3   axis1;
+  vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  int    i;
+
+  GLM(quat)(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+  GLM(quat_mat4)(q1, m1);
+  GLM(mat4_quat)(m1, q2);
+
+  GLM(rotate_make)(m2, GLM_PI_4, axis2);
+  GLM(mat4_quat)(m1, q3);
+
+  GLM(quat_axis)(q3, axis1);
+
+  GLM(vec3_normalize)(axis1);
+  GLM(vec3_normalize)(axis2);
+
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q2))
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q3))
+
+  /* 1. test quat to mat and mat to quat */
+  for (i = 0; i < 1000; i++) {
+    test_rand_quat(q1);
+
+    GLM(quat_mat4)(q1, m1);
+    GLM(mat4_quat)(m1, q2);
+    GLM(quat_mat4)(q2, m2);
+
+    /* 2. test first quat and generated one equality */
+    ASSERTIFY(test_assert_quat_eq_abs(q1, q2));
+
+    /* 3. test first rot and second rotation */
+    /* almost equal */
+    ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_mat4t) {
+  mat4   m1, m2;
+  versor q1, q2, q3;
+  vec3   axis1;
+  vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  int    i;
+
+  GLM(quat)(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+
+  GLM(quat_mat4t)(q1, m1);
+  glm_mat4_transpose(m1);
+
+  GLM(mat4_quat)(m1, q2);
+
+  GLM(rotate_make)(m2, GLM_PI_4, axis2);
+  GLM(mat4_quat)(m1, q3);
+
+  GLM(quat_axis)(q3, axis1);
+
+  GLM(vec3_normalize)(axis1);
+  GLM(vec3_normalize)(axis2);
+
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q2))
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q3))
+
+  /* 1. test quat to mat and mat to quat */
+  for (i = 0; i < 1000; i++) {
+    test_rand_quat(q1);
+
+    GLM(quat_mat4t)(q1, m1);
+    glm_mat4_transpose(m1);
+
+    GLM(mat4_quat)(m1, q2);
+
+    GLM(quat_mat4t)(q2, m2);
+    glm_mat4_transpose(m2);
+
+    /* 2. test first quat and generated one equality */
+    ASSERTIFY(test_assert_quat_eq_abs(q1, q2));
+
+    /* 3. test first rot and second rotation */
+    /* almost equal */
+    ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_mat3) {
+  mat4   m1, m2;
+  mat3   m3;
+  versor q1, q2, q3;
+  vec3   axis1;
+  vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  int    i;
+
+  GLM(quat)(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+  GLM(quat_mat3)(q1, m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+
+  GLM(mat4_quat)(m1, q2);
+
+  GLM(rotate_make)(m2, GLM_PI_4, axis2);
+  GLM(mat4_quat)(m1, q3);
+
+  GLM(quat_axis)(q3, axis1);
+
+  GLM(vec3_normalize)(axis1);
+  GLM(vec3_normalize)(axis2);
+
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q2))
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q3))
+
+  /* 1. test quat to mat and mat to quat */
+  for (i = 0; i < 1000; i++) {
+    test_rand_quat(q1);
+
+    GLM(quat_mat3)(q1, m3);
+    glm_mat4_identity(m1);
+    glm_mat4_ins3(m3, m1);
+
+    GLM(mat4_quat)(m1, q2);
+
+    GLM(quat_mat3)(q2, m3);
+    glm_mat4_identity(m2);
+    glm_mat4_ins3(m3, m2);
+
+    /* 2. test first quat and generated one equality */
+    ASSERTIFY(test_assert_quat_eq_abs(q1, q2));
+
+    /* 3. test first rot and second rotation */
+    /* almost equal */
+    ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_mat3t) {
+  mat4   m1, m2;
+  mat3   m3;
+  versor q1, q2, q3;
+  vec3   axis1;
+  vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  int    i;
+
+  GLM(quat)(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+
+  GLM(quat_mat3t)(q1, m3);
+  glm_mat3_transpose(m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+
+  GLM(mat4_quat)(m1, q2);
+
+  GLM(rotate_make)(m2, GLM_PI_4, axis2);
+  GLM(mat4_quat)(m1, q3);
+
+  GLM(quat_axis)(q3, axis1);
+
+  GLM(vec3_normalize)(axis1);
+  GLM(vec3_normalize)(axis2);
+
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q2))
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  ASSERTIFY(test_assert_vec4_eq(q1, q3))
+
+  /* 1. test quat to mat and mat to quat */
+  for (i = 0; i < 1000; i++) {
+    test_rand_quat(q1);
+
+    GLM(quat_mat3t)(q1, m3);
+    glm_mat3_transpose(m3);
+    glm_mat4_identity(m1);
+    glm_mat4_ins3(m3, m1);
+
+    GLM(mat4_quat)(m1, q2);
+
+    GLM(quat_mat3t)(q2, m3);
+    glm_mat3_transpose(m3);
+    glm_mat4_identity(m2);
+    glm_mat4_ins3(m3, m2);
+
+    /* 2. test first quat and generated one equality */
+    ASSERTIFY(test_assert_quat_eq_abs(q1, q2));
+
+    /* 3. test first rot and second rotation */
+    /* almost equal */
+    ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
+  }
+
+  TEST_SUCCESS
+}
