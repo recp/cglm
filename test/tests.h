@@ -128,6 +128,30 @@ TEST_DECLARE(euler)
 
 /* quat */
 TEST_DECLARE(quat)
+TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY_INIT)
+TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY)
+
+TEST_DECLARE(glm_quat_identity)
+TEST_DECLARE(glm_quat_identity_array)
+TEST_DECLARE(glm_quat_init)
+TEST_DECLARE(glm_quatv)
+TEST_DECLARE(glm_quat)
+TEST_DECLARE(glm_quat_copy)
+TEST_DECLARE(glm_quat_norm)
+TEST_DECLARE(glm_quat_normalize_to)
+TEST_DECLARE(glm_quat_normalize)
+TEST_DECLARE(glm_quat_dot)
+
+TEST_DECLARE(glmc_quat_identity)
+TEST_DECLARE(glmc_quat_identity_array)
+TEST_DECLARE(glmc_quat_init)
+TEST_DECLARE(glmc_quatv)
+TEST_DECLARE(glmc_quat)
+TEST_DECLARE(glmc_quat_copy)
+TEST_DECLARE(glmc_quat_norm)
+TEST_DECLARE(glmc_quat_normalize_to)
+TEST_DECLARE(glmc_quat_normalize)
+TEST_DECLARE(glmc_quat_dot)
 
 /* bezier */
 TEST_DECLARE(bezier)
@@ -557,7 +581,31 @@ TEST_LIST {
   
   /* quat */
   TEST_ENTRY(quat)
-  
+  TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY_INIT)
+  TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY)
+
+  TEST_ENTRY(glm_quat_identity)
+  TEST_ENTRY(glm_quat_identity_array)
+  TEST_ENTRY(glm_quat_init)
+  TEST_ENTRY(glm_quatv)
+  TEST_ENTRY(glm_quat)
+  TEST_ENTRY(glm_quat_copy)
+  TEST_ENTRY(glm_quat_norm)
+  TEST_ENTRY(glm_quat_normalize_to)
+  TEST_ENTRY(glm_quat_normalize)
+  TEST_ENTRY(glm_quat_dot)
+
+  TEST_ENTRY(glmc_quat_identity)
+  TEST_ENTRY(glmc_quat_identity_array)
+  TEST_ENTRY(glmc_quat_init)
+  TEST_ENTRY(glmc_quatv)
+  TEST_ENTRY(glmc_quat)
+  TEST_ENTRY(glmc_quat_copy)
+  TEST_ENTRY(glmc_quat_norm)
+  TEST_ENTRY(glmc_quat_normalize_to)
+  TEST_ENTRY(glmc_quat_normalize)
+  TEST_ENTRY(glmc_quat_dot)
+
   /* bezier */
   TEST_ENTRY(bezier)
 

@@ -7,6 +7,26 @@
 
 #include "test_common.h"
 
+/* test inline quat */
+
+#define GLM_PREFIX glm_
+#define GLM(X) (glm_ ## X)
+
+#include "test_quat.h"
+
+#undef GLM
+#undef GLM_PREFIX
+
+/* test pre-compiled quat */
+
+#define GLM_PREFIX glmc_
+#define GLM(X) (glmc_ ## X)
+
+#include "test_quat.h"
+
+#undef GLM
+#undef GLM_PREFIX
+
 CGLM_INLINE
 void
 test_quat_mul_raw(versor p, versor q, versor dest) {

@@ -71,6 +71,10 @@ main(int argc, const char * argv[]) {
       fprintf(stderr, "\n" RESET);
       passed++;
     }
+
+    struct timespec t;
+    t.tv_nsec = 100000000 * 0.5;
+//    nanosleep(&t, NULL);
   }
 
   if (failed == 0) {

@@ -62,6 +62,9 @@ test_status_t
 test_assert_quat_eq(versor v1, versor v2);
 
 test_status_t
+test_assert_quat_eq_identity(versor q) ;
+
+test_status_t
 test_assert_quat_eq_abs(versor v1, versor v2);
 
 void

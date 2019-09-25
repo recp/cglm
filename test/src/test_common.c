@@ -272,3 +272,14 @@ test_assert_quat_eq(versor v1, versor v2) {
   TEST_SUCCESS
 }
 
+test_status_t
+test_assert_quat_eq_identity(versor q) {
+  versor p = GLM_QUAT_IDENTITY_INIT;
+
+  ASSERT(fabsf(q[0] - p[0]) <= 0.000009); /* rounding errors */
+  ASSERT(fabsf(q[1] - p[1]) <= 0.000009);
+  ASSERT(fabsf(q[2] - p[2]) <= 0.000009);
+  ASSERT(fabsf(q[3] - p[3]) <= 0.000009);
+
+  TEST_SUCCESS
+}
