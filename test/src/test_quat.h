@@ -661,13 +661,13 @@ TEST_IMPL(GLM_PREFIX, quat_lerp) {
   versor v2 = {100.0f, 200.0f, 10.0f, 10.0f};
   versor v3;
 
-  GLM(vec4_lerp)(v1, v2, 0.5f, v3);
+  GLM(quat_lerp)(v1, v2, 0.5f, v3);
   ASSERT(test_eq(v3[0], 0.0f))
   ASSERT(test_eq(v3[1], 0.0f))
   ASSERT(test_eq(v3[2], 0.0f))
   ASSERT(test_eq(v3[3], 0.0f))
 
-  GLM(vec4_lerp)(v1, v2, 0.75f, v3);
+  GLM(quat_lerp)(v1, v2, 0.75f, v3);
   ASSERT(test_eq(v3[0], 50.0f))
   ASSERT(test_eq(v3[1], 100.0f))
   ASSERT(test_eq(v3[2], 5.0f))
@@ -681,25 +681,25 @@ TEST_IMPL(GLM_PREFIX, quat_lerpc) {
   versor v2 = {100.0f, 200.0f, 10.0f, 10.0f};
   versor v3;
 
-  GLM(vec4_lerpc)(v1, v2, 0.5f, v3);
+  GLM(quat_lerpc)(v1, v2, 0.5f, v3);
   ASSERT(test_eq(v3[0], 0.0f))
   ASSERT(test_eq(v3[1], 0.0f))
   ASSERT(test_eq(v3[2], 0.0f))
   ASSERT(test_eq(v3[3], 0.0f))
 
-  GLM(vec4_lerpc)(v1, v2, 0.75f, v3);
+  GLM(quat_lerpc)(v1, v2, 0.75f, v3);
   ASSERT(test_eq(v3[0], 50.0f))
   ASSERT(test_eq(v3[1], 100.0f))
   ASSERT(test_eq(v3[2], 5.0f))
   ASSERT(test_eq(v3[3], 5.0f))
 
-  GLM(vec4_lerpc)(v1, v2, -1.75f, v3);
+  GLM(quat_lerpc)(v1, v2, -1.75f, v3);
   ASSERT(test_eq(v3[0], -100.0f))
   ASSERT(test_eq(v3[1], -200.0f))
   ASSERT(test_eq(v3[2], -10.0f))
   ASSERT(test_eq(v3[3], -10.0f))
 
-  GLM(vec4_lerpc)(v1, v2, 1.75f, v3);
+  GLM(quat_lerpc)(v1, v2, 1.75f, v3);
   ASSERT(test_eq(v3[0], 100.0f))
   ASSERT(test_eq(v3[1], 200.0f))
   ASSERT(test_eq(v3[2], 10.0f))
