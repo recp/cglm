@@ -739,3 +739,26 @@ TEST_IMPL(GLM_PREFIX, quat_slerp) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, quat_look) {
+  versor q1;
+  vec3   v1 = {0.0f, 1.0f, 0.0f};
+  mat4   m1, m2;
+  
+  glm_quat(q1, glm_rad(90.0f), 0.0f, 1.0f, 0.0f);
+  GLM(quat_look)(v1, q1, m1);
+
+  glm_look(v1, (vec3){-1.0f, 0.0f, 0.0f}, GLM_YUP, m2);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+  
+  glm_quat(q1, glm_rad(180.0f), 0.0f, 1.0f, 0.0f);
+  GLM(quat_look)(v1, q1, m1);
+
+  glm_look(v1, (vec3){0.0f, 0.0f, 1.0f}, GLM_YUP, m2);
+
+  glm_mat4_print(m1, stderr);
+  glm_mat4_print(m2, stderr);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+  
+  TEST_SUCCESS
+}

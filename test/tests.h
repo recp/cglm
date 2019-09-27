@@ -159,6 +159,7 @@ TEST_DECLARE(glm_quat_mat3t)
 TEST_DECLARE(glm_quat_lerp)
 TEST_DECLARE(glm_quat_lerpc)
 TEST_DECLARE(glm_quat_slerp)
+TEST_DECLARE(glm_quat_look)
 
 TEST_DECLARE(glmc_quat_identity)
 TEST_DECLARE(glmc_quat_identity_array)
@@ -188,6 +189,7 @@ TEST_DECLARE(glmc_quat_mat3t)
 TEST_DECLARE(glmc_quat_lerp)
 TEST_DECLARE(glmc_quat_lerpc)
 TEST_DECLARE(glmc_quat_slerp)
+TEST_DECLARE(glmc_quat_look)
 
 /* bezier */
 TEST_DECLARE(bezier)
@@ -648,6 +650,7 @@ TEST_LIST {
   TEST_ENTRY(glm_quat_lerp)
   TEST_ENTRY(glm_quat_lerpc)
   TEST_ENTRY(glm_quat_slerp)
+  TEST_ENTRY(glm_quat_look)
 
   TEST_ENTRY(glmc_quat_identity)
   TEST_ENTRY(glmc_quat_identity_array)
@@ -677,6 +680,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_quat_lerp)
   TEST_ENTRY(glmc_quat_lerpc)
   TEST_ENTRY(glmc_quat_slerp)
+  TEST_ENTRY(glmc_quat_look)
 
   /* bezier */
   TEST_ENTRY(bezier)
