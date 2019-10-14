@@ -52,6 +52,9 @@ typedef struct test_entry_t {
 #define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
 #define TEST_LIST         static test_entry_t tests[] = 
 
+/* __VA_ARGS__ workaround for MSVC: https://stackoverflow.com/a/5134656 */
+#define EXPAND(x) x
+
 #define TEST_OK 1
 #define TEST_SUCCESS  return (test_status_t){NULL, TEST_OK};
 
@@ -63,9 +66,9 @@ typedef struct test_entry_t {
 #define TEST_IMPL_ARG3(arg1, arg2, arg3, ...) arg3
 
 #define TEST_IMPL_CHOOSER(...)                                                \
-  TEST_IMPL_ARG3(__VA_ARGS__, TEST_IMPL_ARG2, TEST_IMPL_ARG1)
+  EXPAND(TEST_IMPL_ARG3(__VA_ARGS__, TEST_IMPL_ARG2, TEST_IMPL_ARG1))
 
-#define TEST_IMPL(...) TEST_IMPL_CHOOSER(__VA_ARGS__)(__VA_ARGS__)
+#define TEST_IMPL(...) EXPAND(TEST_IMPL_CHOOSER(__VA_ARGS__)(__VA_ARGS__))
 
 #define ASSERT_EXT(expr, msg)                                                 \
   if (!(expr)) {                                                              \

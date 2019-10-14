@@ -36,6 +36,12 @@
   <ItemGroup>
     <ClInclude Include="..\test\include\common.h" />
     <ClInclude Include="..\test\src\test_common.h" />
+    <ClInclude Include="..\test\src\test_mat3.h" />
+    <ClInclude Include="..\test\src\test_mat4.h" />
+    <ClInclude Include="..\test\src\test_project.h" />
+    <ClInclude Include="..\test\src\test_quat.h" />
+    <ClInclude Include="..\test\src\test_vec3.h" />
+    <ClInclude Include="..\test\src\test_vec4.h" />
     <ClInclude Include="..\test\tests.h" />
   </ItemGroup>
   <ItemGroup>

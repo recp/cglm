@@ -781,12 +781,12 @@ TEST_IMPL(GLM_PREFIX, vec3_angle) {
   a = GLM(vec3_angle)(v1, v2);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
-  ASSERT(test_eq(a, GLM_PI_4))
+  ASSERT(test_eq(a, GLM_PI_4f))
 
   a = GLM(vec3_angle)(v1, v3);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
-  ASSERT(test_eq(a, GLM_PI_2))
+  ASSERT(test_eq(a, GLM_PI_2f))
 
   TEST_SUCCESS
 }
@@ -795,56 +795,56 @@ TEST_IMPL(GLM_PREFIX, vec3_rotate) {
   vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
 
   /* rotate X around Y = -Z */
-  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_YUP);
+  GLM(vec3_rotate)(v1, GLM_PI_2f, GLM_YUP);
 
   ASSERT(test_eq(v1[0],  0.0f))
   ASSERT(test_eq(v1[1],  0.0f))
   ASSERT(test_eq(v1[2], -1.0f))
 
   /* rotate -Z around X = Y */
-  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_XUP);
+  GLM(vec3_rotate)(v1, GLM_PI_2f, GLM_XUP);
 
   ASSERT(test_eq(v1[0],  0.0f))
   ASSERT(test_eq(v1[1],  1.0f))
   ASSERT(test_eq(v1[2],  0.0f))
 
   /* rotate Y around Z = -X */
-  GLM(vec3_rotate)(v1, GLM_PI_2, GLM_ZUP);
+  GLM(vec3_rotate)(v1, GLM_PI_2f, GLM_ZUP);
 
   ASSERT(test_eq(v1[0], -1.0f))
   ASSERT(test_eq(v1[1],  0.0f))
   ASSERT(test_eq(v1[2],  0.0f))
 
   /* rotate v2 around Y by 90deg */
-  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+  GLM(vec3_rotate)(v2, GLM_PI_2f, GLM_YUP);
 
   ASSERT(test_eq(v2[0],  1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
   ASSERT(test_eq(v2[2], -1.0f))
 
   /* rotate v2 around Y by 90deg */
-  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+  GLM(vec3_rotate)(v2, GLM_PI_2f, GLM_YUP);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
   ASSERT(test_eq(v2[2], -1.0f))
 
   /* rotate v2 around Y by 90deg */
-  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_YUP);
+  GLM(vec3_rotate)(v2, GLM_PI_2f, GLM_YUP);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
   ASSERT(test_eq(v2[2],  1.0f))
 
   /* rotate v2 around X by 90deg */
-  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_XUP);
+  GLM(vec3_rotate)(v2, GLM_PI_2f, GLM_XUP);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1], -1.0f))
   ASSERT(test_eq(v2[2],  1.0f))
 
   /* rotate v2 around Z by 90deg */
-  GLM(vec3_rotate)(v2, GLM_PI_2, GLM_ZUP);
+  GLM(vec3_rotate)(v2, GLM_PI_2f, GLM_ZUP);
 
   ASSERT(test_eq(v2[0],  1.0f))
   ASSERT(test_eq(v2[1], -1.0f))
@@ -857,9 +857,9 @@ TEST_IMPL(GLM_PREFIX, vec3_rotate_m4) {
   vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
   mat4 x, y, z;
 
-  glm_rotate_make(x, GLM_PI_2, GLM_XUP);
-  glm_rotate_make(y, GLM_PI_2, GLM_YUP);
-  glm_rotate_make(z, GLM_PI_2, GLM_ZUP);
+  glm_rotate_make(x, GLM_PI_2f, GLM_XUP);
+  glm_rotate_make(y, GLM_PI_2f, GLM_YUP);
+  glm_rotate_make(z, GLM_PI_2f, GLM_ZUP);
 
   /* rotate X around Y = -Z */
   GLM(vec3_rotate_m4)(y, v1, v1);
@@ -926,9 +926,9 @@ TEST_IMPL(GLM_PREFIX, vec3_rotate_m3) {
   mat4 x0, y0, z0;
   mat3 x, y, z;
 
-  glm_rotate_make(x0, GLM_PI_2, GLM_XUP);
-  glm_rotate_make(y0, GLM_PI_2, GLM_YUP);
-  glm_rotate_make(z0, GLM_PI_2, GLM_ZUP);
+  glm_rotate_make(x0, GLM_PI_2f, GLM_XUP);
+  glm_rotate_make(y0, GLM_PI_2f, GLM_YUP);
+  glm_rotate_make(z0, GLM_PI_2f, GLM_ZUP);
 
   glm_mat4_pick3(x0, x);
   glm_mat4_pick3(y0, y);
@@ -1131,17 +1131,17 @@ TEST_IMPL(GLM_PREFIX, vec3_ortho) {
   a = glm_vec3_angle(v1, v5);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
-  ASSERT(test_eq(a, GLM_PI_2))
+  ASSERT(test_eq(a, GLM_PI_2f))
   
   a = glm_vec3_angle(v2, v6);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
-  ASSERT(test_eq(a, GLM_PI_2))
+  ASSERT(test_eq(a, GLM_PI_2f))
   
   a = glm_vec3_angle(v3, v7);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
-  ASSERT(test_eq(a, GLM_PI_2))
+  ASSERT(test_eq(a, GLM_PI_2f))
 
   TEST_SUCCESS
 }
@@ -1314,14 +1314,14 @@ TEST_IMPL(GLM_PREFIX, vec3_smoothstep_uni) {
   vec3 v2;
 
   GLM(vec3_smoothstep_uni)(-200.0f, -100.0f, v1, v2);
-  ASSERT(test_eq_th(v2[0], 1.0f, 1e-5))
-  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5))
-  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5))
+  ASSERT(test_eq_th(v2[0], 1.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5f))
   
   GLM(vec3_smoothstep_uni)(-250.0f, -200.0f, v1, v2);
-  ASSERT(test_eq_th(v2[0], 1.0f, 1e-5))
-  ASSERT(test_eq_th(v2[1], 1.0f, 1e-5))
-  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5))
+  ASSERT(test_eq_th(v2[0], 1.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[1], 1.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5f))
   
   GLM(vec3_smoothstep_uni)(-200.0f, 200, v1, v2);
   ASSERT(v2[0] > 0.0f && v2[0] < 0.25f)
@@ -1342,19 +1342,19 @@ TEST_IMPL(GLM_PREFIX, vec3_smoothstep) {
   vec3 v2;
 
   GLM(vec3_smoothstep)(e1_0, e1_1, v1, v2);
-  ASSERT(test_eq_th(v2[0], 0.0f, 1e-5))
-  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5))
+  ASSERT(test_eq_th(v2[0], 0.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5f))
   ASSERT(v2[2] > 0.0f && v2[2] < 0.1f)
   
   GLM(vec3_smoothstep)(e2_0, e2_1, v1, v2);
   ASSERT(v2[0] > 0.0f && v2[0] < 0.25f)
   ASSERT(v2[1] > 0.0f && v2[1] < 0.15f)
-  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5))
+  ASSERT(test_eq_th(v2[2], 1.0f, 1e-5f))
   
   GLM(vec3_smoothstep)(e3_0, e3_1, v1, v2);
-  ASSERT(test_eq_th(v2[0], 0.0f, 1e-5))
-  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5))
-  ASSERT(test_eq_th(v2[2], 0.0f, 1e-5))
+  ASSERT(test_eq_th(v2[0], 0.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[1], 0.0f, 1e-5f))
+  ASSERT(test_eq_th(v2[2], 0.0f, 1e-5f))
 
   TEST_SUCCESS
 }
@@ -1368,7 +1368,7 @@ TEST_IMPL(GLM_PREFIX, vec3_smoothinterp) {
   vec3 e3_1 = {100.0f, 200.0f, 10.0f};
   vec3 v2;
 
-  GLM(vec3_smoothinterp)(e1_0, e1_1, 0.5, v2);
+  GLM(vec3_smoothinterp)(e1_0, e1_1, 0.5f, v2);
   ASSERT(v2[0] >= e1_0[0] && v2[0] <= e1_1[0])
   ASSERT(v2[1] >= e1_0[1] && v2[1] <= e1_1[1])
   ASSERT(v2[2] >= e1_0[2] && v2[2] <= e1_1[2])
@@ -1395,17 +1395,17 @@ TEST_IMPL(GLM_PREFIX, vec3_smoothinterpc) {
   vec3 e3_1 = {100.0f, 200.0f, 10.0f};
   vec3 v2;
 
-  GLM(vec3_smoothinterpc)(e1_0, e1_1, -0.5, v2);
+  GLM(vec3_smoothinterpc)(e1_0, e1_1, -0.5f, v2);
   ASSERT(v2[0] >= e1_0[0] && v2[0] <= e1_1[0])
   ASSERT(v2[1] >= e1_0[1] && v2[1] <= e1_1[1])
   ASSERT(v2[2] >= e1_0[2] && v2[2] <= e1_1[2])
 
-  GLM(vec3_smoothinterpc)(e2_0, e2_1, 0.5, v2);
+  GLM(vec3_smoothinterpc)(e2_0, e2_1, 0.5f, v2);
   ASSERT(v2[0] >= e2_0[0] && v2[0] <= e2_1[0])
   ASSERT(v2[1] >= e2_0[1] && v2[1] <= e2_1[1])
   ASSERT(v2[2] >= e2_0[2] && v2[2] <= e2_1[2])
 
-  GLM(vec3_smoothinterpc)(e3_0, e3_1, 2.0, v2);
+  GLM(vec3_smoothinterpc)(e3_0, e3_1, 2.0f, v2);
   ASSERT(v2[0] >= e3_0[0] && v2[0] <= e3_1[0])
   ASSERT(v2[1] >= e3_0[1] && v2[1] <= e3_1[1])
   ASSERT(v2[2] >= e3_0[2] && v2[2] <= e3_1[2])

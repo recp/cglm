@@ -244,11 +244,11 @@ TEST_IMPL(GLM_PREFIX, mat4_quat) {
   vec3   axis1;
   vec3   axis2 = {1.9f, 2.3f, 4.5f};
   
-  GLM(quat)(q1, GLM_PI_4, 1.9f, 2.3f, 4.5f);
+  GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
   GLM(quat_mat4)(q1, m1);
   GLM(mat4_quat)(m1, q2);
   
-  GLM(rotate_make)(m2, GLM_PI_4, axis2);
+  GLM(rotate_make)(m2, GLM_PI_4f, axis2);
   GLM(mat4_quat)(m1, q3);
   
   GLM(quat_axis)(q3, axis1);
@@ -256,7 +256,7 @@ TEST_IMPL(GLM_PREFIX, mat4_quat) {
   GLM(vec3_normalize)(axis1);
   GLM(vec3_normalize)(axis2);
   
-  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4))
+  ASSERT(test_eq(glm_quat_angle(q3), GLM_PI_4f))
   ASSERTIFY(test_assert_vec3_eq(axis1, axis2))
   ASSERTIFY(test_assert_vec4_eq(q1, q2))
   ASSERTIFY(test_assert_mat4_eq(m1, m2))
@@ -295,7 +295,7 @@ TEST_IMPL(GLM_PREFIX, mat4_scale_p) {
 
   scale = rand() % 100;
   
-  GLM(mat4_scale_p)(m1, scale);
+  GLM(mat4_scale_p)(m1, (float)scale);
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
@@ -314,7 +314,7 @@ TEST_IMPL(GLM_PREFIX, mat4_scale) {
 
   scale = rand() % 100;
   
-  GLM(mat4_scale)(m1, scale);
+  GLM(mat4_scale)(m1, (float)scale);
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {

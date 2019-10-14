@@ -61,5 +61,23 @@
     <ClInclude Include="..\test\include\common.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_mat3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat4.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_project.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_quat.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec4.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
