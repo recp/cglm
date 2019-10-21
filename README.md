@@ -33,7 +33,7 @@ https://github.com/g-truc/glm
 #### Note for new comers (Important):
 - `vec4` and `mat4` variables must be aligned. (There will be unaligned versions later)
 - **in** and **[in, out]** parameters must be initialized (please). But **[out]** parameters not, initializing out param is  also redundant
-- All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just incliude headers.
+- All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just include headers.
 - if your debugger takes you to cglm headers then make sure you are not trying to copy vec4 to vec3 or alig issues...
 - Welcome!
 
