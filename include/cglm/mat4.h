@@ -723,4 +723,36 @@ glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
   return glm_vec4_dot(r, tmp);
 }
 
+#if defined(__APPLE__)                                                        \
+    && defined(SIMD_BASE)                                                     \
+    && defined(SIMD_COMPILER_HAS_REQUIRED_FEATURES)                           \
+    && defined(SIMD_VECTOR_TYPES)
+simd_float4x4
+glm_mat4_applesimd(mat4 m) {
+  simd_float4x4 t;
+  
+  t.columns[0][0] = m[0][0];
+  t.columns[0][0] = m[0][1];
+  t.columns[0][0] = m[0][2];
+  t.columns[0][0] = m[0][3];
+  
+  t.columns[1][0] = m[1][0];
+  t.columns[1][1] = m[1][1];
+  t.columns[1][2] = m[1][2];
+  t.columns[1][3] = m[1][3];
+  
+  t.columns[2][0] = m[2][0];
+  t.columns[2][1] = m[2][1];
+  t.columns[2][2] = m[2][2];
+  t.columns[2][3] = m[2][3];
+  
+  t.columns[3][0] = m[3][0];
+  t.columns[3][1] = m[3][1];
+  t.columns[3][2] = m[3][2];
+  t.columns[3][3] = m[3][3];
+  
+  return t;
+}
+#endif
+
 #endif /* cglm_mat_h */
