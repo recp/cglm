@@ -30,14 +30,16 @@ test_tests_CFLAGS  = $(checkCFLAGS)
 
 cglmdir=$(includedir)/cglm
 cglm_HEADERS = include/cglm/version.h \
+               include/cglm/common.h \
+               include/cglm/types.h \
+               include/cglm/types-struct.h \
                include/cglm/cglm.h \
                include/cglm/call.h \
+               include/cglm/struct.h \
                include/cglm/cam.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
-               include/cglm/types.h \
-               include/cglm/common.h \
                include/cglm/affine.h \
                include/cglm/vec3.h \
                include/cglm/vec3-ext.h \
@@ -56,9 +58,9 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
                include/cglm/bezier.h \
-               include/cglm/types-struct.h \
-               include/cglm/struct.h
-
+               include/cglm/bezier.h \
+               include/cglm/applesimd.h
+               
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
