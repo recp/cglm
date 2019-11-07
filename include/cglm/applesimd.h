@@ -15,6 +15,10 @@
 
 #include "common.h"
 
+/*!
+* @brief converts mat4 to Apple's simd type simd_float4x4
+* @return simd_float4x4
+*/
 CGLM_INLINE
 simd_float4x4
 glm_mat4_applesimd(mat4 m) {
@@ -43,6 +47,10 @@ glm_mat4_applesimd(mat4 m) {
   return t;
 }
 
+/*!
+* @brief converts mat3 to Apple's simd type simd_float3x3
+* @return simd_float3x3
+*/
 CGLM_INLINE
 simd_float3x3
 glm_mat3_applesimd(mat3 m) {
@@ -63,12 +71,20 @@ glm_mat3_applesimd(mat3 m) {
   return t;
 }
 
+/*!
+* @brief converts vec4 to Apple's simd type simd_float4
+* @return simd_float4
+*/
 CGLM_INLINE
 simd_float4
 glm_vec4_applesimd(vec4 v) {
   return (simd_float4){v[0], v[1], v[2], v[3]};
 }
 
+/*!
+* @brief converts vec3 to Apple's simd type simd_float3
+* @return v
+*/
 CGLM_INLINE
 simd_float3
 glm_vec3_applesimd(vec3 v) {
