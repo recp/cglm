@@ -88,6 +88,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - easing functions
 - curves
 - curve interpolation helpers (S*M*C, deCasteljau...)
+- helpers to convert cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
 - and others...
 
 <hr />
