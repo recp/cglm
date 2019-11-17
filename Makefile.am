@@ -58,7 +58,6 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
                include/cglm/bezier.h \
-               include/cglm/bezier.h \
                include/cglm/applesimd.h
                
 cglm_calldir=$(includedir)/cglm/call
