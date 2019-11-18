@@ -180,7 +180,7 @@ glms_vec4_unpack(vec4 dst[], vec4s src[], size_t len) {
  */
 CGLM_INLINE
 vec4s
-glms_vec4_zero() {
+glms_vec4_zero(void) {
   vec4s r;
   glm_vec4_zero(r.raw);
   return r;
@@ -193,7 +193,7 @@ glms_vec4_zero() {
  */
 CGLM_INLINE
 vec4s
-glms_vec4_one() {
+glms_vec4_one(void) {
   vec4s r;
   glm_vec4_one(r.raw);
   return r;

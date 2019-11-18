@@ -11,7 +11,7 @@
    GLMS_QUAT_IDENTITY
 
  Functions:
-   CGLM_INLINE versors glms_quat_identity()
+   CGLM_INLINE versors glms_quat_identity(void)
    CGLM_INLINE void    glms_quat_identity_array(versor *q, size_t count)
    CGLM_INLINE versors glms_quat_init(float x, float y, float z, float w)
    CGLM_INLINE versors glms_quatv(float angle, vec3s axis)
@@ -72,7 +72,7 @@
  */
 CGLM_INLINE
 versors
-glms_quat_identity() {
+glms_quat_identity(void) {
   versors dest;
   glm_quat_identity(dest.raw);
   return dest;
