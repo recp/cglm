@@ -21,7 +21,8 @@ libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 checkLDFLAGS = -L./.libs \
                -lm \
                -lcglm
-checkCFLAGS = -I./include
+checkCFLAGS = $(AM_CFLAGS) \
+              -I./include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
