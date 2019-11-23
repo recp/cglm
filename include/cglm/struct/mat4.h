@@ -20,9 +20,9 @@
  Functions:
    CGLM_INLINE mat4s   glms_mat4_ucopy(mat4s mat);
    CGLM_INLINE mat4s   glms_mat4_copy(mat4s mat);
-   CGLM_INLINE mat4s   glms_mat4_identity();
+   CGLM_INLINE mat4s   glms_mat4_identity(void);
    CGLM_INLINE void    glms_mat4_identity_array(mat4s * __restrict mat, size_t count);
-   CGLM_INLINE mat4s   glms_mat4_zero();
+   CGLM_INLINE mat4s   glms_mat4_zero(void);
    CGLM_INLINE mat3s   glms_mat4_pick3(mat4s mat);
    CGLM_INLINE mat3s   glms_mat4_pick3t(mat4s mat);
    CGLM_INLINE mat4s   glms_mat4_ins3(mat3s mat);
@@ -114,7 +114,7 @@ glms_mat4_copy(mat4s mat) {
  */
 CGLM_INLINE
 mat4s
-glms_mat4_identity() {
+glms_mat4_identity(void) {
   mat4s r;
   glm_mat4_identity(r.raw);
   return r;
@@ -146,7 +146,7 @@ glms_mat4_identity_array(mat4s * __restrict mat, size_t count) {
  */
 CGLM_INLINE
 mat4s
-glms_mat4_zero() {
+glms_mat4_zero(void) {
   mat4s r;
   glm_mat4_zero(r.raw);
   return r;

@@ -19,8 +19,8 @@
    CGLM_INLINE vec3s glms_vec3(vec4s v4);
    CGLM_INLINE void  glms_vec3_pack(vec3s dst[], vec3 src[], size_t len);
    CGLM_INLINE void  glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len);
-   CGLM_INLINE vec3s glms_vec3_zero();
-   CGLM_INLINE vec3s glms_vec3_one();
+   CGLM_INLINE vec3s glms_vec3_zero(void);
+   CGLM_INLINE vec3s glms_vec3_one(void);
    CGLM_INLINE float glms_vec3_dot(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_norm2(vec3s v);
    CGLM_INLINE float glms_vec3_norm(vec3s v);
@@ -151,7 +151,7 @@ glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_zero() {
+glms_vec3_zero(void) {
   vec3s r;
   glm_vec3_zero(r.raw);
   return r;
@@ -164,7 +164,7 @@ glms_vec3_zero() {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_one() {
+glms_vec3_one(void) {
   vec3s r;
   glm_vec3_one(r.raw);
   return r;

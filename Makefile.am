@@ -12,7 +12,8 @@ AM_CFLAGS = -Wall \
             -O3 \
             -Wstrict-aliasing=2 \
             -fstrict-aliasing \
-            -pedantic
+            -pedantic \
+            -Werror=strict-prototypes
 
 lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
