@@ -8,7 +8,7 @@
 
 ACLOCAL_AMFLAGS = -I m4
 AM_CFLAGS = -Wall \
-            -std=gnu99 \
+            -std=gnu11 \
             -O3 \
             -Wstrict-aliasing=2 \
             -fstrict-aliasing \
