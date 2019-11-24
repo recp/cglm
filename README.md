@@ -131,6 +131,21 @@ glm_mul(T, R, modelMat);
 glm_inv_tr(modelMat);
 ```
 
+### Struct API
+
+The struct API works as follows, note the `s` suffix on types, the `glms_` prefix on functions and the `GLMS_` prefix on constants:
+
+```C
+#include <cglm/struct.h>
+
+mat4s mat = GLMS_MAT4_IDENTITY_INIT;
+mat4s inv = glms_mat4_inv(mat);
+```
+
+Struct functions generally take their parameters as *values* and *return* their results, rather than taking pointers and writing to out parameters. That means your parameters can usually be `const`, if you're into that.
+
+The types used are actually unions that allow access to the same data multiple ways. One of those ways involves anonymous structures, available since C11. MSVC also supports it for earlier C versions out of the box and GCC/Clang do if you enable `-fms-extensions`. To explicitly enable these anonymous structures, `#define CGLM_USE_ANONYMOUS_STRUCT` to `1`, to disable them, to `0`. For backward compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` (value is irrelevant) to disable them. If you don't specify explicitly, cglm will do a best guess based on your compiler and the C version you're using.
+
 ## Build
 
 ### Unix (Autotools)
