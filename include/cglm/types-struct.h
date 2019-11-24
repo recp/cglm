@@ -10,9 +10,35 @@
 
 #include "types.h"
 
+/*
+ * Anonymous structs are available since C11, but we'd like to be compatible
+ * with C99 and C89 too. So let's figure out if we should be using them or not.
+ * It's simply a convenience feature, you can e.g. build the library with
+ * anonymous structs and your application without them and they'll still be
+ * compatible, cglm doesn't use the anonymous structs internally.
+ */
+#ifndef CGLM_USE_ANONYMOUS_STRUCT
+    /* If the user doesn't explicitly specify if they want anonymous structs or
+     * not, then we'll try to intuit an appropriate choice. */
+#   if defined(CGLM_NO_ANONYMOUS_STRUCT)
+        /* The user has defined CGLM_NO_ANONYMOUS_STRUCT. This used to be the
+         * only #define governing the use of anonymous structs, so for backward
+         * compatibility, we still honor that choice and disable them. */
+#       define CGLM_USE_ANONYMOUS_STRUCT 0
+#   elif __STDC_VERSION__ >= 20112L || defined(_MSVC_VER)
+        /* We're compiling for C11 or this is the MSVC compiler. In either
+         * case, anonymous structs are available, so use them. */
+#       define CGLM_USE_ANONYMOUS_STRUCT 1
+#   else
+        /* Otherwise, we're presumably building for C99 or C89 and can't rely
+         * on anonymous structs being available. Turn them off. */
+#       define CGLM_USE_ANONYMOUS_STRUCT 0
+#   endif
+#endif
+
 typedef union vec2s {
   vec2 raw;
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
     float y;
@@ -22,7 +48,7 @@ typedef union vec2s {
 
 typedef union vec3s {
   vec3 raw;
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
     float y;
@@ -33,7 +59,7 @@ typedef union vec3s {
 
 typedef union ivec3s {
   ivec3 raw;
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int x;
     int y;
@@ -44,7 +70,7 @@ typedef union ivec3s {
 
 typedef union CGLM_ALIGN_IF(16) vec4s {
   vec4 raw;
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
     float y;
@@ -56,7 +82,7 @@ typedef union CGLM_ALIGN_IF(16) vec4s {
 
 typedef union CGLM_ALIGN_IF(16) versors {
   vec4 raw;
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
     float y;
@@ -74,7 +100,7 @@ typedef union CGLM_ALIGN_IF(16) versors {
 typedef union mat3s {
   mat3 raw;
   vec3s col[3];
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
     float m10, m11, m12;
@@ -86,7 +112,7 @@ typedef union mat3s {
 typedef union CGLM_ALIGN_MAT mat4s {
   mat4 raw;
   vec4s col[4];
-#ifndef CGLM_NO_ANONYMOUS_STRUCT
+#if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
     float m10, m11, m12, m13;
