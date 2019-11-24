@@ -11,16 +11,17 @@
 #include "types.h"
 
 typedef union vec2s {
+  vec2 raw;
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float x;
     float y;
   };
 #endif
-  vec2 raw;
 } vec2s;
 
 typedef union vec3s {
+  vec3 raw;
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -28,10 +29,10 @@ typedef union vec3s {
     float z;
   };
 #endif
-  vec3 raw;
 } vec3s;
 
 typedef union ivec3s {
+  ivec3 raw;
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     int x;
@@ -39,10 +40,10 @@ typedef union ivec3s {
     int z;
   };
 #endif
-  ivec3 raw;
 } ivec3s;
 
 typedef union CGLM_ALIGN_IF(16) vec4s {
+  vec4 raw;
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -51,10 +52,10 @@ typedef union CGLM_ALIGN_IF(16) vec4s {
     float w;
   };
 #endif
-  vec4 raw;
 } vec4s;
 
 typedef union CGLM_ALIGN_IF(16) versors {
+  vec4 raw;
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -68,10 +69,11 @@ typedef union CGLM_ALIGN_IF(16) versors {
     float real;
   };
 #endif
-  vec4 raw;
 } versors;
 
 typedef union mat3s {
+  mat3 raw;
+  vec3s col[3];
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
@@ -79,11 +81,11 @@ typedef union mat3s {
     float m20, m21, m22;
   };
 #endif
-  vec3s col[3];
-  mat3 raw;
 } mat3s;
 
 typedef union CGLM_ALIGN_MAT mat4s {
+  mat4 raw;
+  vec4s col[4];
 #ifndef CGLM_NO_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
@@ -92,8 +94,6 @@ typedef union CGLM_ALIGN_MAT mat4s {
     float m30, m31, m32, m33;
   };
 #endif
-  vec4s col[4];
-  mat4 raw;
 } mat4s;
 
 #endif /* cglm_types_struct_h */
