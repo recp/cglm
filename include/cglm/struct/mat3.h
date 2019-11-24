@@ -38,12 +38,8 @@
 #include "../mat3.h"
 #include "vec3.h"
 
-#define GLMS_MAT3_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f,                         \
-                                   0.0f, 1.0f, 0.0f,                         \
-                                   0.0f, 0.0f, 1.0f}}
-#define GLMS_MAT3_ZERO_INIT      {{0.0f, 0.0f, 0.0f,                         \
-                                   0.0f, 0.0f, 0.0f,                         \
-                                   0.0f, 0.0f, 0.0f}}
+#define GLMS_MAT3_IDENTITY_INIT  {GLM_MAT3_IDENTITY_INIT}
+#define GLMS_MAT3_ZERO_INIT      {GLM_MAT3_ZERO_INIT}
 
 /* for C only */
 #define GLMS_MAT3_IDENTITY ((mat3s)GLMS_MAT3_IDENTITY_INIT)

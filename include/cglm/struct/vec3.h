@@ -86,15 +86,15 @@
 #include "../vec3.h"
 #include "vec3-ext.h"
 
-#define GLMS_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
-#define GLMS_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
+#define GLMS_VEC3_ONE_INIT   {GLM_VEC3_ONE_INIT}
+#define GLMS_VEC3_ZERO_INIT  {GLM_VEC3_ZERO_INIT}
 
 #define GLMS_VEC3_ONE  ((vec3s)GLMS_VEC3_ONE_INIT)
 #define GLMS_VEC3_ZERO ((vec3s)GLMS_VEC3_ZERO_INIT)
 
-#define GLMS_YUP  ((vec3s){0.0f, 1.0f, 0.0f})
-#define GLMS_ZUP  ((vec3s){0.0f, 0.0f, 1.0f})
-#define GLMS_XUP  ((vec3s){1.0f, 0.0f, 0.0f})
+#define GLMS_YUP  ((vec3s){{0.0f, 1.0f, 0.0f}})
+#define GLMS_ZUP  ((vec3s){{0.0f, 0.0f, 1.0f}})
+#define GLMS_XUP  ((vec3s){{1.0f, 0.0f, 0.0f}})
 
 /*!
  * @brief init vec3 using vec4
