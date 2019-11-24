@@ -504,6 +504,19 @@ TEST_DECLARE(glmc_vec4_fract)
 TEST_DECLARE(glmc_vec4_hadd)
 TEST_DECLARE(glmc_vec4_sqrt)
 
+/* structs */
+
+TEST_DECLARE(mat3s_identity_init)
+TEST_DECLARE(mat3s_zero_init)
+TEST_DECLARE(mat4s_identity_init)
+TEST_DECLARE(mat4s_zero_init)
+TEST_DECLARE(quats_zero_init)
+TEST_DECLARE(vec3s_one_init)
+TEST_DECLARE(vec3s_zero_init)
+TEST_DECLARE(vec4s_black_init)
+TEST_DECLARE(vec4s_one_init)
+TEST_DECLARE(vec4s_zero_init)
+
 /*****************************************************************************/
 
 TEST_LIST {
@@ -996,6 +1009,18 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec4_fract)
   TEST_ENTRY(glmc_vec4_hadd)
   TEST_ENTRY(glmc_vec4_sqrt)
+
+  /* structs */
+  TEST_ENTRY(mat3s_identity_init)
+  TEST_ENTRY(mat3s_zero_init)
+  TEST_ENTRY(mat4s_identity_init)
+  TEST_ENTRY(mat4s_zero_init)
+  TEST_ENTRY(quats_zero_init)
+  TEST_ENTRY(vec3s_one_init)
+  TEST_ENTRY(vec3s_zero_init)
+  TEST_ENTRY(vec4s_black_init)
+  TEST_ENTRY(vec4s_one_init)
+  TEST_ENTRY(vec4s_zero_init)
 };
 
 #endif /* tests_h */

@@ -151,7 +151,8 @@ test_tests_SOURCES=\
     test/src/test_vec3.c \
     test/src/test_mat3.c \
     test/src/test_affine.c \
-    test/src/test_bezier.c
+    test/src/test_bezier.c \
+    test/src/test_struct.c
 
 pkgconfig_DATA=cglm.pc
 
