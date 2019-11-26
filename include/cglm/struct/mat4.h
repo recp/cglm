@@ -53,15 +53,8 @@
 #include "vec4.h"
 #include "vec3.h"
 
-#define GLMS_MAT4_IDENTITY_INIT  {1.0f, 0.0f, 0.0f, 0.0f,                    \
-                                  0.0f, 1.0f, 0.0f, 0.0f,                    \
-                                  0.0f, 0.0f, 1.0f, 0.0f,                    \
-                                  0.0f, 0.0f, 0.0f, 1.0f}
-
-#define GLMS_MAT4_ZERO_INIT      {0.0f, 0.0f, 0.0f, 0.0f,                    \
-                                  0.0f, 0.0f, 0.0f, 0.0f,                    \
-                                  0.0f, 0.0f, 0.0f, 0.0f,                    \
-                                  0.0f, 0.0f, 0.0f, 0.0f}
+#define GLMS_MAT4_IDENTITY_INIT  {GLM_MAT4_IDENTITY_INIT}
+#define GLMS_MAT4_ZERO_INIT      {GLM_MAT4_ZERO_INIT}
 
 /* for C only */
 #define GLMS_MAT4_IDENTITY ((mat4s)GLMS_MAT4_IDENTITY_INIT)

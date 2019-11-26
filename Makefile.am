@@ -8,7 +8,7 @@
 
 ACLOCAL_AMFLAGS = -I m4
 AM_CFLAGS = -Wall \
-            -std=gnu99 \
+            -std=gnu11 \
             -O3 \
             -Wstrict-aliasing=2 \
             -fstrict-aliasing \
@@ -21,7 +21,8 @@ libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 checkLDFLAGS = -L./.libs \
                -lm \
                -lcglm
-checkCFLAGS = -I./include
+checkCFLAGS = $(AM_CFLAGS) \
+              -I./include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
@@ -150,7 +151,8 @@ test_tests_SOURCES=\
     test/src/test_vec3.c \
     test/src/test_mat3.c \
     test/src/test_affine.c \
-    test/src/test_bezier.c
+    test/src/test_bezier.c \
+    test/src/test_struct.c
 
 pkgconfig_DATA=cglm.pc
 

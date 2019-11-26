@@ -7,12 +7,12 @@
 
 /*
  Macros:
-   GLM_VEC4_ONE_INIT
-   GLM_VEC4_BLACK_INIT
-   GLM_VEC4_ZERO_INIT
-   GLM_VEC4_ONE
-   GLM_VEC4_BLACK
-   GLM_VEC4_ZERO
+   GLMS_VEC4_ONE_INIT
+   GLMS_VEC4_BLACK_INIT
+   GLMS_VEC4_ZERO_INIT
+   GLMS_VEC4_ONE
+   GLMS_VEC4_BLACK
+   GLMS_VEC4_ZERO
 
  Functions:
    CGLM_INLINE vec4s glms_vec4(vec3s v3, float last);
@@ -72,9 +72,9 @@
 #include "../vec4.h"
 #include "vec4-ext.h"
 
-#define GLMS_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
-#define GLMS_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
-#define GLMS_VEC4_ZERO_INIT  {0.0f, 0.0f, 0.0f, 0.0f}
+#define GLMS_VEC4_ONE_INIT   {GLM_VEC4_ONE_INIT}
+#define GLMS_VEC4_BLACK_INIT {GLM_VEC4_BLACK_INIT}
+#define GLMS_VEC4_ZERO_INIT  {GLM_VEC4_ZERO_INIT}
 
 #define GLMS_VEC4_ONE        ((vec4s)GLM_VEC4_ONE_INIT)
 #define GLMS_VEC4_BLACK      ((vec4s)GLM_VEC4_BLACK_INIT)

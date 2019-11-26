@@ -62,7 +62,7 @@
  * ----------------------------------------------------------------------------
  */
 
-#define GLMS_QUAT_IDENTITY_INIT  GLM_QUAT_IDENTITY_INIT
+#define GLMS_QUAT_IDENTITY_INIT  {GLM_QUAT_IDENTITY_INIT}
 #define GLMS_QUAT_IDENTITY       ((versors)GLMS_QUAT_IDENTITY_INIT)
 
 /*!
