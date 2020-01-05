@@ -16,7 +16,7 @@
    CGLM_INLINE mat4s glms_scale_make(vec3s v);
    CGLM_INLINE mat4s glms_scale(mat4s m, vec3s v);
    CGLM_INLINE mat4s glms_scale_uni(mat4s m, float s);
-   CGLM_INLINE mat4s glmx_rotate_x(mat4s m, float angle);
+   CGLM_INLINE mat4s glms_rotate_x(mat4s m, float angle);
    CGLM_INLINE mat4s glms_rotate_y(mat4s m, float angle);
    CGLM_INLINE mat4s glms_rotate_z(mat4s m, float angle);
    CGLM_INLINE mat4s glms_rotate_make(float angle, vec3s axis);
@@ -169,7 +169,7 @@ glms_scale_uni(mat4s m, float s) {
  */
 CGLM_INLINE
 mat4s
-glmx_rotate_x(mat4s m, float angle) {
+glms_rotate_x(mat4s m, float angle) {
   mat4s r;
   glm_rotate_x(m.raw, angle, r.raw);
   return r;
