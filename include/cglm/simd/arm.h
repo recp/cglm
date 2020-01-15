@@ -34,17 +34,19 @@ glmm_hadd(float32x4_t v) {
 static inline
 float
 glmm_hmin(float32x4_t v) {
-  v = vpmin_f32(vget_low_f32(v), vget_high_f32(v));
-  v = vpmin_f32(v, v);
-  return vget_lane_f32(v, 0);
+  float32x2_t t;
+  t = vpmin_f32(vget_low_f32(v), vget_high_f32(v));
+  t = vpmin_f32(t, t);
+  return vget_lane_f32(t, 0);
 }
 
 static inline
 float
 glmm_hmax(float32x4_t v) {
-  v = vpmax_f32(vget_low_f32(v), vget_high_f32(v));
-  v = vpmax_f32(v, v);
-  return vget_lane_f32(v, 0);
+  float32x2_t t;
+  t = vpmax_f32(vget_low_f32(v), vget_high_f32(v));
+  t = vpmax_f32(t, t);
+  return vget_lane_f32(t, 0);
 }
 
 static inline
