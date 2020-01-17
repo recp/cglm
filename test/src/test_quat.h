@@ -754,7 +754,7 @@ TEST_IMPL(GLM_PREFIX, quat_look) {
   glm_quat(q1, glm_rad(180.0f), 1.0f, 0.0f, 0.0f);
   GLM(quat_look)(v1, q1, m1);
   
-  glm_look(v1, (vec3){0.0f, 0.0f, 1.0f}, GLM_YUP, m2);
+  glm_look(v1, (vec3){0.0f, 0.0f, 1.0f}, (vec3){0.0f, -1.0f, 0.0f}, m2);
 
   ASSERTIFY(test_assert_mat4_eq(m1, m2));
 
