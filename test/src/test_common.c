@@ -9,8 +9,6 @@
 void
 test_rand_mat4(mat4 dest) {
   glm_mat4_copy(GLM_MAT4_IDENTITY, dest);
-  
-  srand((unsigned int)time(NULL));
 
   /* random position */
   dest[3][0] = drand48();
@@ -28,8 +26,6 @@ void
 test_rand_mat3(mat3 dest) {
   mat4 m4;
 
-  srand((unsigned int)time(NULL));
-
   /* random rotatation around random axis with random angle */
   glm_rotate_make(m4, drand48(), (vec3){drand48(), drand48(), drand48()});
   glm_mat4_pick3(m4, dest);
@@ -37,8 +33,6 @@ test_rand_mat3(mat3 dest) {
 
 void
 test_rand_vec3(vec3 dest) {
-  srand((unsigned int)time(NULL));
-
   dest[0] = drand48();
   dest[1] = drand48();
   dest[2] = drand48();
@@ -53,8 +47,6 @@ test_rand_vec3s() {
 
 void
 test_rand_vec4(vec4 dest) {
-  srand((unsigned int)time(NULL));
-
   dest[0] = drand48();
   dest[1] = drand48();
   dest[2] = drand48();
@@ -70,14 +62,11 @@ test_rand_vec4s() {
 
 float
 test_rand(void) {
-  srand((unsigned int)time(NULL));
   return drand48();
 }
 
 void
 test_rand_quat(versor q) {
-  srand((unsigned int)time(NULL));
-
   glm_quat(q, drand48(), drand48(), drand48(), drand48());
   glm_quat_normalize(q);
 }

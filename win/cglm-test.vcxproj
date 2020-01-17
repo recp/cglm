@@ -30,6 +30,7 @@
     <ClCompile Include="..\test\src\test_mat4.c" />
     <ClCompile Include="..\test\src\test_project.c" />
     <ClCompile Include="..\test\src\test_quat.c" />
+    <ClCompile Include="..\test\src\test_struct.c" />
     <ClCompile Include="..\test\src\test_vec3.c" />
     <ClCompile Include="..\test\src\test_vec4.c" />
   </ItemGroup>

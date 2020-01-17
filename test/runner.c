@@ -25,6 +25,8 @@ main(int argc, const char * argv[]) {
 
   fprintf(stderr, CYAN "\nWelcome to cglm tests\n\n" RESET);
 
+  srand((unsigned int)time(NULL));
+
   for (i = 0; i < count; i++) {
     int32_t len;
 
