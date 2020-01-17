@@ -251,7 +251,7 @@ CGLM_INLINE
 vec3s
 glms_quat_imagn(versors q) {
   vec3s dest;
-  glm_normalize_to(q.imag.raw, dest.raw);
+  glm_normalize_to(q.raw, dest.raw);
   return dest;
 }
 
