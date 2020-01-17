@@ -18,22 +18,26 @@
  * compatible, cglm doesn't use the anonymous structs internally.
  */
 #ifndef CGLM_USE_ANONYMOUS_STRUCT
-    /* If the user doesn't explicitly specify if they want anonymous structs or
-     * not, then we'll try to intuit an appropriate choice. */
-#   if defined(CGLM_NO_ANONYMOUS_STRUCT)
-        /* The user has defined CGLM_NO_ANONYMOUS_STRUCT. This used to be the
-         * only #define governing the use of anonymous structs, so for backward
-         * compatibility, we still honor that choice and disable them. */
-#       define CGLM_USE_ANONYMOUS_STRUCT 0
-#   elif __STDC_VERSION__ >= 20112L || defined(_MSVC_VER)
-        /* We're compiling for C11 or this is the MSVC compiler. In either
-         * case, anonymous structs are available, so use them. */
-#       define CGLM_USE_ANONYMOUS_STRUCT 1
-#   else
-        /* Otherwise, we're presumably building for C99 or C89 and can't rely
-         * on anonymous structs being available. Turn them off. */
-#       define CGLM_USE_ANONYMOUS_STRUCT 0
-#   endif
+   /* If the user doesn't explicitly specify if they want anonymous structs or
+    * not, then we'll try to intuit an appropriate choice. */
+#  if defined(CGLM_NO_ANONYMOUS_STRUCT)
+     /* The user has defined CGLM_NO_ANONYMOUS_STRUCT. This used to be the
+      * only #define governing the use of anonymous structs, so for backward
+      * compatibility, we still honor that choice and disable them. */
+#    define CGLM_USE_ANONYMOUS_STRUCT 0
+#  elif __STDC_VERSION__ >= 20112L || defined(_MSVC_VER)
+     /* We're compiling for C11 or this is the MSVC compiler. In either
+      * case, anonymous structs are available, so use them. */
+#    define CGLM_USE_ANONYMOUS_STRUCT 1
+#  elif defined(_MSC_VER) && (_MSC_VER >= 1900) /*  Visual Studio 2015 */
+     /* We can support anonymous structs
+      * since Visual Studio 2015 or 2017 (1910) maybe? */
+#    define CGLM_USE_ANONYMOUS_STRUCT 1
+#  else
+     /* Otherwise, we're presumably building for C99 or C89 and can't rely
+      * on anonymous structs being available. Turn them off. */
+#    define CGLM_USE_ANONYMOUS_STRUCT 0
+#  endif
 #endif
 
 typedef union vec2s {
