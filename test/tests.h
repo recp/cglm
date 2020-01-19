@@ -120,6 +120,10 @@ TEST_DECLARE(glmc_unprojecti)
 TEST_DECLARE(glmc_unproject)
 TEST_DECLARE(glmc_project)
 
+/* plane */
+TEST_DECLARE(glm_plane_normalize)
+TEST_DECLARE(glmc_plane_normalize)
+
 /* utils */
 TEST_DECLARE(clamp)
 
@@ -622,6 +626,10 @@ TEST_LIST {
   TEST_ENTRY(glmc_unprojecti)
   TEST_ENTRY(glmc_unproject)
   TEST_ENTRY(glmc_project)
+  
+  /* plane */
+  TEST_ENTRY(glm_plane_normalize)
+  TEST_ENTRY(glmc_plane_normalize)
   
   /* utils */
   TEST_ENTRY(clamp)
