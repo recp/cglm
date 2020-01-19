@@ -483,3 +483,6 @@ TEST_IMPL(GLM_PREFIX, mat4_rmc) {
 
   TEST_SUCCESS
 }
+
+#undef A_MATRIX
+#undef A_MATRIX3

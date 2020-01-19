@@ -32,25 +32,10 @@
     <ClCompile Include="..\test\src\test_euler.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\src\test_mat3.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_mat4.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_project.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_quat.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_vec3.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_vec4.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\src\test_struct.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\tests.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>

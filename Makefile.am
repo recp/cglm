@@ -141,15 +141,10 @@ libcglm_la_SOURCES=\
 test_tests_SOURCES=\
     test/runner.c \
     test/src/test_common.c \
-    test/src/test_mat4.c \
+    test/src/tests.c \
     test/src/test_cam.c \
-    test/src/test_project.c \
     test/src/test_clamp.c \
     test/src/test_euler.c \
-    test/src/test_quat.c \
-    test/src/test_vec4.c \
-    test/src/test_vec3.c \
-    test/src/test_mat3.c \
     test/src/test_affine.c \
     test/src/test_bezier.c \
     test/src/test_struct.c

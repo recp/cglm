@@ -307,3 +307,5 @@ TEST_IMPL(GLM_PREFIX, mat3_rmc) {
 
   TEST_SUCCESS
 }
+
+#undef A_MATRIX
