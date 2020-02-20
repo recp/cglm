@@ -760,3 +760,48 @@ TEST_IMPL(GLM_PREFIX, quat_look) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, quat_for) {
+  versor q1, q2;
+
+  glm_quat(q1, glm_rad(90.0f), 0.0f, 1.0f, 0.0f);
+  GLM(quat_for)((vec3){-1.0f, 0.0f, 0.0f}, (vec3){0.0f, 1.0f, 0.0f}, q2);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  glm_quat(q2, glm_rad(90.0f), 1.0f, 0.0f, 0.0f);
+  GLM(quat_for)((vec3){0.0f, 1.0f, 0.0f}, (vec3){0.0f, 0.0f, 1.0f}, q1);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  glm_quat(q2, glm_rad(180.0f), 1.0f, 0.0f, 0.0f);
+  GLM(quat_for)((vec3){0.0f, 0.0f, 1.0f}, (vec3){0.0f, -1.0f, 0.0f}, q1);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_forp) {
+  versor q1, q2;
+
+  glm_quat(q1, glm_rad(90.0f), 0.0f, 1.0f, 0.0f);
+  GLM(quat_forp)((vec3){2.0f, 0.0f, 0.0f},
+                 (vec3){1.0f, 0.0f, 0.0f}, 
+                 (vec3){0.0f, 1.0f, 0.0f}, 
+                 q2);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  glm_quat(q2, glm_rad(90.0f), 1.0f, 0.0f, 0.0f);
+  GLM(quat_forp)((vec3){0.0f, 1.0f, 0.0f}, 
+                 (vec3){0.0f, 2.0f, 0.0f},
+                 (vec3){0.0f, 0.0f, 1.0f},
+                 q1);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  glm_quat(q2, glm_rad(180.0f), 1.0f, 0.0f, 0.0f);
+  GLM(quat_forp)((vec3){0.0f, 1.0f, 1.0f}, 
+                 (vec3){0.0f, 1.0f, 2.0f},
+                 (vec3){0.0f, -1.0f, 0.0f},
+                 q1);
+  ASSERTIFY(test_assert_quat_eq(q1, q2));
+
+  TEST_SUCCESS
+}

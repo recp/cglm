@@ -443,9 +443,9 @@ glms_quat_look(vec3s eye, versors ori) {
  */
 CGLM_INLINE
 versors
-glms_quat_for(vec3s dir, vec3s fwd, vec3s up) {
+glms_quat_for(vec3s dir, vec3s up) {
   versors dest;
-  glm_quat_for(dir.raw, fwd.raw, up.raw, dest.raw);
+  glm_quat_for(dir.raw, up.raw, dest.raw);
   return dest;
 }
 
@@ -461,9 +461,9 @@ glms_quat_for(vec3s dir, vec3s fwd, vec3s up) {
  */
 CGLM_INLINE
 versors
-glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up) {
+glms_quat_forp(vec3s from, vec3s to, vec3s up) {
   versors dest;
-  glm_quat_forp(from.raw, to.raw, fwd.raw, up.raw, dest.raw);
+  glm_quat_forp(from.raw, to.raw, up.raw, dest.raw);
   return dest;
 }
 

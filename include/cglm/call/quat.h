@@ -131,11 +131,11 @@ glmc_quat_look(vec3 eye, versor ori, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
+glmc_quat_for(vec3 dir, vec3 up, versor dest);
 
 CGLM_EXPORT
 void
-glmc_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest);
+glmc_quat_forp(vec3 from, vec3 to, vec3 up, versor dest);
 
 CGLM_EXPORT
 void

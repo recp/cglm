@@ -693,32 +693,23 @@ glm_quat_look(vec3 eye, versor ori, mat4 dest) {
  * @brief creates look rotation quaternion
  *
  * @param[in]   dir   direction to look
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @param[out]  dest  destination quaternion
  */
 CGLM_INLINE
 void
-glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
-  CGLM_ALIGN(8) vec3 axis;
-  float dot, angle;
+glm_quat_for(vec3 dir, vec3 up, versor dest) {
+  CGLM_ALIGN_MAT mat3 m;
 
-  dot = glm_vec3_dot(dir, fwd);
-  if (fabsf(dot + 1.0f)  < 0.000001f) {
-    glm_quat_init(dest, up[0], up[1], up[2], GLM_PIf);
-    return;
-  }
+  glm_vec3_normalize_to(dir, m[2]); 
 
-  if (fabsf(dot - 1.0f) < 0.000001f) {
-    glm_quat_identity(dest);
-    return;
-  }
+  /* No need to negate in LH, but we use RH here */
+  glm_vec3_negate(m[2]);
+  
+  glm_vec3_crossn(up, m[2], m[0]);
+  glm_vec3_cross(m[2], m[0], m[1]);
 
-  angle = acosf(dot);
-  glm_cross(fwd, dir, axis);
-  glm_normalize(axis);
-
-  glm_quatv(dest, angle, axis);
+  glm_mat3_quat(m, dest);
 }
 
 /*!
@@ -733,10 +724,10 @@ glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
  */
 CGLM_INLINE
 void
-glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
+glm_quat_forp(vec3 from, vec3 to, vec3 up, versor dest) {
   CGLM_ALIGN(8) vec3 dir;
   glm_vec3_sub(to, from, dir);
-  glm_quat_for(dir, fwd, up, dest);
+  glm_quat_for(dir, up, dest);
 }
 
 /*!
