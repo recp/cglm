@@ -163,4 +163,62 @@ TEST_IMPL(GLM_PREFIX, translate_make) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, scale_to) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale_make) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale_uni) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_x) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_y) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_z) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_make) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_at) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, rotate_atm) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, decompose_scalev) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, uniscaled) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, decompose_rs) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, decompose) {
+  TEST_SUCCESS
 }
