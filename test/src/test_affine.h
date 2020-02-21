@@ -8,7 +8,6 @@
 #include "test_common.h"
 
 TEST_IMPL(GLM_PREFIX, translate) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -34,7 +33,6 @@ TEST_IMPL(GLM_PREFIX, translate) {
 }
 
 TEST_IMPL(GLM_PREFIX, translate_to) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1, m2;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -60,7 +58,6 @@ TEST_IMPL(GLM_PREFIX, translate_to) {
 }
 
 TEST_IMPL(GLM_PREFIX, translate_x) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -86,7 +83,6 @@ TEST_IMPL(GLM_PREFIX, translate_x) {
 }
 
 TEST_IMPL(GLM_PREFIX, translate_y) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -112,7 +108,6 @@ TEST_IMPL(GLM_PREFIX, translate_y) {
 }
 
 TEST_IMPL(GLM_PREFIX, translate_z) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -138,8 +133,7 @@ TEST_IMPL(GLM_PREFIX, translate_z) {
 }
 
 TEST_IMPL(GLM_PREFIX, translate_make) {
-  mat4 t1, t2, t3, t4, t5;
-  mat4 m1, m2;
+  mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
   glm_mat4_identity(m1);
@@ -164,7 +158,6 @@ TEST_IMPL(GLM_PREFIX, translate_make) {
 }
 
 TEST_IMPL(GLM_PREFIX, scale_to) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1, m2;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -190,7 +183,6 @@ TEST_IMPL(GLM_PREFIX, scale_to) {
 }
 
 TEST_IMPL(GLM_PREFIX, scale_make) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -214,7 +206,6 @@ TEST_IMPL(GLM_PREFIX, scale_make) {
 }
 
 TEST_IMPL(GLM_PREFIX, scale) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 
@@ -240,7 +231,6 @@ TEST_IMPL(GLM_PREFIX, scale) {
 }
 
 TEST_IMPL(GLM_PREFIX, scale_uni) {
-  mat4 t1, t2, t3, t4, t5;
   mat4 m1;
   vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
 

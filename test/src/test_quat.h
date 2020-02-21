@@ -967,7 +967,7 @@ TEST_IMPL(GLM_PREFIX, quat_rotate_at) {
 }
 
 TEST_IMPL(GLM_PREFIX, quat_rotate_atm) {
-  mat4   m1 = GLM_MAT4_IDENTITY_INIT, m2;
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
   versor q1;
   vec4   v1 = {1.0f, 0.0f, 0.0f, 1.0f};
 
