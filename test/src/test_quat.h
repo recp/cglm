@@ -805,3 +805,86 @@ TEST_IMPL(GLM_PREFIX, quat_forp) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, quat_rotatev) {
+  vec3   v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};
+  versor q;
+
+  /* rotate X around Y = -Z */
+  glm_quatv(q, GLM_PI_2f, GLM_YUP);
+  GLM(quat_rotatev)(q, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  /* rotate -Z around X = Y */
+  glm_quatv(q, GLM_PI_2f, GLM_XUP);
+  GLM(quat_rotatev)(q, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate Y around Z = -X */
+  glm_quatv(q, GLM_PI_2f, GLM_ZUP);
+  GLM(quat_rotatev)(q, v1, v1);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate v2 around Y by 90deg */
+  glm_quatv(q, GLM_PI_2f, GLM_YUP);
+  GLM(quat_rotatev)(q, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  glm_quatv(q, GLM_PI_2f, GLM_YUP);
+  GLM(quat_rotatev)(q, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2], -1.0f))
+
+  /* rotate v2 around Y by 90deg */
+  glm_quatv(q, GLM_PI_2f, GLM_YUP);
+  GLM(quat_rotatev)(q, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1],  1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around X by 90deg */
+  glm_quatv(q, GLM_PI_2f, GLM_XUP);
+  GLM(quat_rotatev)(q, v2, v2);
+
+  ASSERT(test_eq(v2[0], -1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  /* rotate v2 around Z by 90deg */
+  glm_quatv(q, GLM_PI_2f, GLM_ZUP);
+  GLM(quat_rotatev)(q, v2, v2);
+
+  ASSERT(test_eq(v2[0],  1.0f))
+  ASSERT(test_eq(v2[1], -1.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_rotate) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_rotate_at) {
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quat_rotate_atm) {
+  TEST_SUCCESS
+}
