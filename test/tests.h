@@ -23,6 +23,10 @@ TEST_DECLARE(glm_translate_x)
 TEST_DECLARE(glm_translate_y)
 TEST_DECLARE(glm_translate_z)
 TEST_DECLARE(glm_translate_make)
+TEST_DECLARE(glm_scale_to)
+TEST_DECLARE(glm_scale_make)
+TEST_DECLARE(glm_scale)
+TEST_DECLARE(glm_scale_uni)
 
 TEST_DECLARE(glmc_translate)
 TEST_DECLARE(glmc_translate_to)
@@ -30,6 +34,10 @@ TEST_DECLARE(glmc_translate_x)
 TEST_DECLARE(glmc_translate_y)
 TEST_DECLARE(glmc_translate_z)
 TEST_DECLARE(glmc_translate_make)
+TEST_DECLARE(glmc_scale_to)
+TEST_DECLARE(glmc_scale_make)
+TEST_DECLARE(glmc_scale)
+TEST_DECLARE(glmc_scale_uni)
 
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
@@ -558,6 +566,10 @@ TEST_LIST {
   TEST_ENTRY(glm_translate_y)
   TEST_ENTRY(glm_translate_z)
   TEST_ENTRY(glm_translate_make)
+  TEST_ENTRY(glm_scale_to)
+  TEST_ENTRY(glm_scale_make)
+  TEST_ENTRY(glm_scale)
+  TEST_ENTRY(glm_scale_uni)
 
   TEST_ENTRY(glmc_translate)
   TEST_ENTRY(glmc_translate_to)
@@ -565,6 +577,10 @@ TEST_LIST {
   TEST_ENTRY(glmc_translate_y)
   TEST_ENTRY(glmc_translate_z)
   TEST_ENTRY(glmc_translate_make)
+  TEST_ENTRY(glmc_scale_to)
+  TEST_ENTRY(glmc_scale_make)
+  TEST_ENTRY(glmc_scale)
+  TEST_ENTRY(glmc_scale_uni)
 
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)

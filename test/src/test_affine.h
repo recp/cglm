@@ -164,18 +164,104 @@ TEST_IMPL(GLM_PREFIX, translate_make) {
 }
 
 TEST_IMPL(GLM_PREFIX, scale_to) {
+  mat4 t1, t2, t3, t4, t5;
+  mat4 m1, m2;
+  vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat4_identity(m1);
+  GLM(scale_to)(m1, (vec3){13.0f, 11.0f, 7.0f}, m2);
+  glm_mat4_mulv(m2, v1, v2);
+
+  ASSERT(test_eq(v2[0], 13.0f))
+  ASSERT(test_eq(v2[1], 22.0f))
+  ASSERT(test_eq(v2[2], 21.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  glm_mat4_identity(m1);
+  GLM(scale_to)(m1, (vec3){1.0f, -1.0f, -5.0f}, m2);
+  glm_mat4_mulv(m2, v2, v2);
+
+  ASSERT(test_eq(v2[0],  13.0f))
+  ASSERT(test_eq(v2[1], -22.0f))
+  ASSERT(test_eq(v2[2], -105.0f))
+  ASSERT(test_eq(v2[3],  1.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, scale_make) {
+  mat4 t1, t2, t3, t4, t5;
+  mat4 m1;
+  vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
+
+  GLM(scale_make)(m1, (vec3){13.0f, 11.0f, 7.0f});
+  glm_mat4_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 13.0f))
+  ASSERT(test_eq(v2[1], 22.0f))
+  ASSERT(test_eq(v2[2], 21.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(scale_make)(m1, (vec3){1.0f, -1.0f, -5.0f});
+  glm_mat4_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0],  13.0f))
+  ASSERT(test_eq(v2[1], -22.0f))
+  ASSERT(test_eq(v2[2], -105.0f))
+  ASSERT(test_eq(v2[3],  1.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, scale) {
+  mat4 t1, t2, t3, t4, t5;
+  mat4 m1;
+  vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat4_identity(m1);
+  GLM(scale)(m1, (vec3){13.0f, 11.0f, 7.0f});
+  glm_mat4_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 13.0f))
+  ASSERT(test_eq(v2[1], 22.0f))
+  ASSERT(test_eq(v2[2], 21.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  glm_mat4_identity(m1);
+  GLM(scale)(m1, (vec3){1.0f, -1.0f, -5.0f});
+  glm_mat4_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0],  13.0f))
+  ASSERT(test_eq(v2[1], -22.0f))
+  ASSERT(test_eq(v2[2], -105.0f))
+  ASSERT(test_eq(v2[3],  1.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, scale_uni) {
+  mat4 t1, t2, t3, t4, t5;
+  mat4 m1;
+  vec4 v1 = {1.0f, 2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat4_identity(m1);
+  GLM(scale_uni)(m1, 13.0f);
+  glm_mat4_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 13.0f))
+  ASSERT(test_eq(v2[1], 26.0f))
+  ASSERT(test_eq(v2[2], 39.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  glm_mat4_identity(m1);
+  GLM(scale_uni)(m1, -5.0f);
+  glm_mat4_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0], -65.0f))
+  ASSERT(test_eq(v2[1], -130.0f))
+  ASSERT(test_eq(v2[2], -195.0f))
+  ASSERT(test_eq(v2[3],  1.0f))
+
   TEST_SUCCESS
 }
 
