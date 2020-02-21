@@ -266,18 +266,129 @@ TEST_IMPL(GLM_PREFIX, scale_uni) {
 }
 
 TEST_IMPL(GLM_PREFIX, rotate_x) {
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
+  vec4   v1 = {0.0f, 1.0f, 0.0f, 1.0f}, v2 = {0.0f, 1.0f, 0.0f, 1.0f};
+
+  GLM(rotate_x)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0], 0.0f))
+  ASSERT(test_eq(v1[1], 0.0f))
+  ASSERT(test_eq(v1[2], 1.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_x)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1], -1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_x)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, rotate_y) {
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
+  vec4   v1 = {1.0f, 0.0f, 0.0f, 1.0f}, v2 = {1.0f, 0.0f, 0.0f, 1.0f};
+
+  GLM(rotate_y)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_y)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_y)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0], 0.0f))
+  ASSERT(test_eq(v1[1], 0.0f))
+  ASSERT(test_eq(v1[2], 1.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, rotate_z) {
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
+  vec4   v1 = {0.0f, 1.0f, 0.0f, 1.0f}, v2 = {0.0f, 1.0f, 0.0f, 1.0f};
+
+  GLM(rotate_z)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0], -1.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_z)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1], -1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  glm_vec3_copy(v2, v1);
+
+  GLM(rotate_z)(m1, GLM_PI_2f, m1);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0], 1.0f))
+  ASSERT(test_eq(v1[1], 0.0f))
+  ASSERT(test_eq(v1[2], 0.0f))
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, rotate_make) {
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
+  vec4   v1 = {1.0f, 0.0f, 0.0f, 1.0f};
+
+  /* rotate X around Y = -Z */
+  GLM(rotate_make)(m1, GLM_PI_2f, GLM_YUP);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  /* rotate -Z around X = Y */
+  GLM(rotate_make)(m1, GLM_PI_2f, GLM_XUP);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  /* rotate Y around X = +Z */
+  GLM(rotate_make)(m1, GLM_PI_2f, GLM_XUP);
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  1.0f))
+
   TEST_SUCCESS
 }
 
