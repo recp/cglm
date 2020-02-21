@@ -925,7 +925,7 @@ TEST_IMPL(GLM_PREFIX, quat_rotate) {
 }
 
 TEST_IMPL(GLM_PREFIX, quat_rotate_at) {
-  mat4   m1 = GLM_MAT4_IDENTITY_INIT, m2;
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT;
   versor q1;
   vec4   v1 = {1.0f, 0.0f, 0.0f, 1.0f};
 
@@ -938,7 +938,6 @@ TEST_IMPL(GLM_PREFIX, quat_rotate_at) {
   ASSERT(test_eq(v1[2], -0.5f))
 
   glm_mat4_identity(m1);
-  glm_mat4_identity(m2);
 
   glm_quatv(q1, GLM_PI_2f, GLM_ZUP);
   GLM(quat_rotate_at)(m1, q1, (vec3){0.0f, 0.0f, 0.0f});
@@ -949,7 +948,6 @@ TEST_IMPL(GLM_PREFIX, quat_rotate_at) {
   ASSERT(test_eq(v1[2], -0.5f))
 
   glm_mat4_identity(m1);
-  glm_mat4_identity(m2);
 
   v1[0] = 1.0f;
   v1[1] = 1.0f;

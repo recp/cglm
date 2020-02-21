@@ -31,6 +31,9 @@ TEST_DECLARE(glm_rotate_x)
 TEST_DECLARE(glm_rotate_y)
 TEST_DECLARE(glm_rotate_z)
 TEST_DECLARE(glm_rotate_make)
+TEST_DECLARE(glm_rotate)
+TEST_DECLARE(glm_rotate_at)
+TEST_DECLARE(glm_rotate_atm)
 
 TEST_DECLARE(glmc_translate)
 TEST_DECLARE(glmc_translate_to)
@@ -46,6 +49,9 @@ TEST_DECLARE(glmc_rotate_x)
 TEST_DECLARE(glmc_rotate_y)
 TEST_DECLARE(glmc_rotate_z)
 TEST_DECLARE(glmc_rotate_make)
+TEST_DECLARE(glmc_rotate)
+TEST_DECLARE(glmc_rotate_at)
+TEST_DECLARE(glmc_rotate_atm)
 
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
@@ -582,6 +588,9 @@ TEST_LIST {
   TEST_ENTRY(glm_rotate_y)
   TEST_ENTRY(glm_rotate_z)
   TEST_ENTRY(glm_rotate_make)
+  TEST_ENTRY(glm_rotate)
+  TEST_ENTRY(glm_rotate_at)
+  TEST_ENTRY(glm_rotate_atm)
 
   TEST_ENTRY(glmc_translate)
   TEST_ENTRY(glmc_translate_to)
@@ -597,6 +606,9 @@ TEST_LIST {
   TEST_ENTRY(glmc_rotate_y)
   TEST_ENTRY(glmc_rotate_z)
   TEST_ENTRY(glmc_rotate_make)
+  TEST_ENTRY(glmc_rotate)
+  TEST_ENTRY(glmc_rotate_at)
+  TEST_ENTRY(glmc_rotate_atm)
 
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)
