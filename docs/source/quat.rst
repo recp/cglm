@@ -324,26 +324,24 @@ Functions documentation
       | *[in]*  **ori**   orientation in world space as quaternion
       | *[out]* **dest**  result matrix
 
-.. c:function:: void  glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest)
+.. c:function:: void  glm_quat_for(vec3 dir, vec3 up, versor dest)
 
     | creates look rotation quaternion
 
     Parameters:
       | *[in]*  **dir**   direction to look
-      | *[in]*  **fwd**   forward vector
       | *[in]*  **up**    up vector
       | *[out]* **dest**  result matrix
 
-.. c:function:: void  glm_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest)
+.. c:function:: void  glm_quat_forp(vec3 from, vec3 to, vec3 up, versor dest)
 
-    | creates look rotation quaternion using source and  destination positions p suffix stands for position
+    | creates look rotation quaternion using source and destination positions p suffix stands for position
 
     | this is similar to glm_quat_for except this computes direction for glm_quat_for for you.
 
     Parameters:
       | *[in]*  **from**  source point
       | *[in]*  **to**    destination point
-      | *[in]*  **fwd**   forward vector
       | *[in]*  **up**    up vector
       | *[out]* **dest**  result matrix
 

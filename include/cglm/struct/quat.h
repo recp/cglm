@@ -437,7 +437,6 @@ glms_quat_look(vec3s eye, versors ori) {
  * @brief creates look rotation quaternion
  *
  * @param[in]   dir   direction to look
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @returns  destination quaternion
  */
@@ -455,7 +454,6 @@ glms_quat_for(vec3s dir, vec3s up) {
  *
  * @param[in]   from  source point
  * @param[in]   to    destination point
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @returns  destination quaternion
  */

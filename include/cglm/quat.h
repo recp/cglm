@@ -718,7 +718,6 @@ glm_quat_for(vec3 dir, vec3 up, versor dest) {
  *
  * @param[in]   from  source point
  * @param[in]   to    destination point
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @param[out]  dest  destination quaternion
  */
