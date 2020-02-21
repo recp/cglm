@@ -878,6 +878,49 @@ TEST_IMPL(GLM_PREFIX, quat_rotatev) {
 }
 
 TEST_IMPL(GLM_PREFIX, quat_rotate) {
+  mat4   m1 = GLM_MAT4_IDENTITY_INIT, m2;
+  versor q1;
+  vec4   v1 = {1.0f, 0.0f, 0.0f, 1.0f};
+
+  /* rotate X around Y = -Z */
+  glm_quatv(q1, GLM_PI_2f, GLM_YUP);
+  GLM(quat_rotate)(m1, q1, m1);
+  glm_rotate_make(m2, GLM_PI_2f, GLM_YUP);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2], -1.0f))
+
+  glm_mat4_identity(m1);
+  glm_mat4_identity(m2);
+  
+  /* rotate -Z around X = Y */
+  glm_quatv(q1, GLM_PI_2f, GLM_XUP);
+  GLM(quat_rotate)(m1, q1, m1);
+  glm_rotate(m2, GLM_PI_2f, GLM_XUP);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  1.0f))
+  ASSERT(test_eq(v1[2],  0.0f))
+
+  glm_mat4_identity(m1);
+  glm_mat4_identity(m2);
+
+  /* rotate Y around X = +Z */
+  glm_quatv(q1, GLM_PI_2f, GLM_XUP);
+  GLM(quat_rotate)(m1, q1, m1);
+  glm_rotate(m2, GLM_PI_2f, GLM_XUP);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2))
+  glm_mat4_mulv(m1, v1, v1);
+
+  ASSERT(test_eq(v1[0],  0.0f))
+  ASSERT(test_eq(v1[1],  0.0f))
+  ASSERT(test_eq(v1[2],  1.0f))
+
   TEST_SUCCESS
 }
 
