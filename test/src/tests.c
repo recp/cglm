@@ -19,6 +19,7 @@
 #include "test_quat.h"
 #include "test_project.h"
 #include "test_plane.h"
+#include "test_affine.h"
 
 #undef GLM
 #undef GLM_PREFIX
@@ -36,6 +37,7 @@
 #include "test_quat.h"
 #include "test_project.h"
 #include "test_plane.h"
+#include "test_affine.h"
 
 #undef GLM
 #undef GLM_PREFIX
