@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="..\test\runner.c" />
     <ClCompile Include="..\test\src\tests.c" />
-    <ClCompile Include="..\test\src\test_affine.c" />
     <ClCompile Include="..\test\src\test_bezier.c" />
     <ClCompile Include="..\test\src\test_cam.c" />
     <ClCompile Include="..\test\src\test_clamp.c" />

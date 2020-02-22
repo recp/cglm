@@ -14,9 +14,6 @@
     <ClCompile Include="..\test\runner.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\src\test_affine.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\src\test_bezier.c">
       <Filter>src</Filter>
     </ClCompile>

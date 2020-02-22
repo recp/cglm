@@ -34,6 +34,10 @@ TEST_DECLARE(glm_rotate_make)
 TEST_DECLARE(glm_rotate)
 TEST_DECLARE(glm_rotate_at)
 TEST_DECLARE(glm_rotate_atm)
+TEST_DECLARE(glm_decompose_scalev)
+TEST_DECLARE(glm_uniscaled)
+TEST_DECLARE(glm_decompose_rs)
+TEST_DECLARE(glm_decompose)
 
 TEST_DECLARE(glmc_translate)
 TEST_DECLARE(glmc_translate_to)
@@ -52,6 +56,10 @@ TEST_DECLARE(glmc_rotate_make)
 TEST_DECLARE(glmc_rotate)
 TEST_DECLARE(glmc_rotate_at)
 TEST_DECLARE(glmc_rotate_atm)
+TEST_DECLARE(glmc_decompose_scalev)
+TEST_DECLARE(glmc_uniscaled)
+TEST_DECLARE(glmc_decompose_rs)
+TEST_DECLARE(glmc_decompose)
 
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
@@ -106,8 +114,6 @@ TEST_DECLARE(glmc_mat4_inv_fast)
 TEST_DECLARE(glmc_mat4_swap_col)
 TEST_DECLARE(glmc_mat4_swap_row)
 TEST_DECLARE(glmc_mat4_rmc)
-
-TEST_DECLARE(affine)
 
 /* mat3 */
 TEST_DECLARE(glm_mat3_copy)
@@ -591,6 +597,10 @@ TEST_LIST {
   TEST_ENTRY(glm_rotate)
   TEST_ENTRY(glm_rotate_at)
   TEST_ENTRY(glm_rotate_atm)
+  TEST_ENTRY(glm_decompose_scalev)
+  TEST_ENTRY(glm_uniscaled)
+  TEST_ENTRY(glm_decompose_rs)
+  TEST_ENTRY(glm_decompose)
 
   TEST_ENTRY(glmc_translate)
   TEST_ENTRY(glmc_translate_to)
@@ -609,6 +619,10 @@ TEST_LIST {
   TEST_ENTRY(glmc_rotate)
   TEST_ENTRY(glmc_rotate_at)
   TEST_ENTRY(glmc_rotate_atm)
+  TEST_ENTRY(glmc_decompose_scalev)
+  TEST_ENTRY(glmc_uniscaled)
+  TEST_ENTRY(glmc_decompose_rs)
+  TEST_ENTRY(glmc_decompose)
 
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)
@@ -664,7 +678,6 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat4_swap_row)
   TEST_ENTRY(glmc_mat4_rmc)
   
-  TEST_ENTRY(affine)
   
   /* mat3 */
   TEST_ENTRY(glm_mat3_copy)
