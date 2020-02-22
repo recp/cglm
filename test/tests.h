@@ -16,6 +16,15 @@
  *   2. use TEST_ENTRY() to add test to list
  */
 
+/* affine mat */
+TEST_DECLARE(glm_mul)
+TEST_DECLARE(glm_mul)
+TEST_DECLARE(glm_inv_tr)
+
+TEST_DECLARE(glmc_mul)
+TEST_DECLARE(glmc_mul_rot)
+TEST_DECLARE(glmc_inv_tr)
+
 /* affine */
 TEST_DECLARE(glm_translate)
 TEST_DECLARE(glm_translate_to)
@@ -579,6 +588,15 @@ TEST_DECLARE(vec4s_zero_init)
 /*****************************************************************************/
 
 TEST_LIST {
+  /* affine mat */
+  TEST_ENTRY(glm_mul)
+  TEST_ENTRY(glm_mul)
+  TEST_ENTRY(glm_inv_tr)
+
+  TEST_ENTRY(glmc_mul)
+  TEST_ENTRY(glmc_mul_rot)
+  TEST_ENTRY(glmc_inv_tr)
+
   /* affine */
   TEST_ENTRY(glm_translate)
   TEST_ENTRY(glm_translate_to)

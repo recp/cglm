@@ -20,6 +20,7 @@
 #include "test_project.h"
 #include "test_plane.h"
 #include "test_affine.h"
+#include "test_affine_mat.h"
 
 #undef GLM
 #undef GLM_PREFIX
@@ -38,6 +39,7 @@
 #include "test_project.h"
 #include "test_plane.h"
 #include "test_affine.h"
+#include "test_affine_mat.h"
 
 #undef GLM
 #undef GLM_PREFIX
