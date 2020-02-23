@@ -45,7 +45,7 @@ TEST_IMPL(GLM_PREFIX, mul_rot) {
   glm_rotate(m1, drand48(), (vec3){drand48(), drand48(), drand48()});
   glm_rotate(m2, drand48(), (vec3){drand48(), drand48(), drand48()});
 
-  GLM(mul)(m1, m2, m3);
+  GLM(mul_rot)(m1, m2, m3);
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
       for (k = 0; k < 4; k++)
@@ -57,14 +57,14 @@ TEST_IMPL(GLM_PREFIX, mul_rot) {
   ASSERTIFY(test_assert_mat4_eq(m3, m4))
 
   /* test pre compiled */
-  GLM(mul)(m1, m2, m3);
+  GLM(mul_rot)(m1, m2, m3);
   ASSERTIFY(test_assert_mat4_eq(m3, m4))
 
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, inv_tr) {
-  mat4 m1, m2, m3;
+  mat4 m1, m2;
   int  i;
 
   for (i = 0; i < 10000; i++) {
