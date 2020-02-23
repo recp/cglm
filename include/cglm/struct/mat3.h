@@ -14,9 +14,9 @@
 
  Functions:
    CGLM_INLINE mat3s  glms_mat3_copy(mat3s mat);
-   CGLM_INLINE mat3s  glms_mat3_identity();
+   CGLM_INLINE mat3s  glms_mat3_identity(void);
    CGLM_INLINE void   glms_mat3_identity_array(mat3s * __restrict mat, size_t count);
-   CGLM_INLINE mat3s  glms_mat3_zero();
+   CGLM_INLINE mat3s  glms_mat3_zero(void);
    CGLM_INLINE mat3s  glms_mat3_mul(mat3s m1, mat3s m2);
    CGLM_INLINE ma3s   glms_mat3_transpose(mat3s m);
    CGLM_INLINE vec3s  glms_mat3_mulv(mat3s m, vec3s v);
@@ -38,12 +38,8 @@
 #include "../mat3.h"
 #include "vec3.h"
 
-#define GLMS_MAT3_IDENTITY_INIT  {1.0f, 0.0f, 0.0f,                          \
-                                  0.0f, 1.0f, 0.0f,                          \
-                                  0.0f, 0.0f, 1.0f}
-#define GLMS_MAT3_ZERO_INIT      {0.0f, 0.0f, 0.0f,                          \
-                                  0.0f, 0.0f, 0.0f,                          \
-                                  0.0f, 0.0f, 0.0f}
+#define GLMS_MAT3_IDENTITY_INIT  {GLM_MAT3_IDENTITY_INIT}
+#define GLMS_MAT3_ZERO_INIT      {GLM_MAT3_ZERO_INIT}
 
 /* for C only */
 #define GLMS_MAT3_IDENTITY ((mat3s)GLMS_MAT3_IDENTITY_INIT)
@@ -79,7 +75,7 @@ glms_mat3_copy(mat3s mat) {
  */
 CGLM_INLINE
 mat3s
-glms_mat3_identity() {
+glms_mat3_identity(void) {
   mat3s r;
   glm_mat3_identity(r.raw);
   return r;
@@ -111,7 +107,7 @@ glms_mat3_identity_array(mat3s * __restrict mat, size_t count) {
  */
 CGLM_INLINE
 mat3s
-glms_mat3_zero() {
+glms_mat3_zero(void) {
   mat3s r;
   glm_mat3_zero(r.raw);
   return r;

@@ -57,6 +57,13 @@ For instance you may called **glm_vec4_** functions for **vec3** data type.
 It will try to write 32 byte but since **vec3** is 24 byte it should throw
 memory access error or exit the app without saying anything.
 
+**UPDATE - IMPORTANT:** 
+
+  | On MSVC or some other compilers, if alignment is enabled (default) then double check alignment requirements if you got a crash.
+
+  | If you send GLM_VEC4_ONE or similar macros directly to a function, it may be crashed.
+  | Because compiler may not apply alignment as defined on **typedef** to that macro while passing it (on stack) to a function.
+
 Wrong Results:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

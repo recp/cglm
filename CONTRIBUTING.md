@@ -1,11 +1,11 @@
 # CONTRIBUTING
 
-Any contributions (code, documentation, ...) are welcome. This project uses [cmocka](http://cmocka.org) for testing, you may need to check their documentation 
+Any contributions (code, documentation, ...) are welcome.
 
 # New Features
 - This library may not accept all new features, it is better to create an issue and get approval before coding
 - You must add test for every new feature
-- The feature must be compiled in both UNIX/POSIX systems (e.g. macos, linux...) and Windows
+- The feature must be compiled on both UNIX/POSIX systems (e.g. macos, linux...) and Windows
 
 # Code Style
 This library is written with C99, don't try to add C++ files (yes it can compiled into lib),

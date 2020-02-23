@@ -3,6 +3,7 @@
  [![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
+[![codecov](https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg)](https://codecov.io/gh/recp/cglm)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
 [![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers)
 [![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
@@ -32,7 +33,7 @@ https://github.com/g-truc/glm
 #### Note for new comers (Important):
 - `vec4` and `mat4` variables must be aligned. (There will be unaligned versions later)
 - **in** and **[in, out]** parameters must be initialized (please). But **[out]** parameters not, initializing out param is  also redundant
-- All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just incliude headers.
+- All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just include headers.
 - if your debugger takes you to cglm headers then make sure you are not trying to copy vec4 to vec3 or alig issues...
 - Welcome!
 
@@ -87,6 +88,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - easing functions
 - curves
 - curve interpolation helpers (S*M*C, deCasteljau...)
+- helpers to convert cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
 - and others...
 
 <hr />
@@ -129,20 +131,31 @@ glm_mul(T, R, modelMat);
 glm_inv_tr(modelMat);
 ```
 
+### Struct API
+
+The struct API works as follows, note the `s` suffix on types, the `glms_` prefix on functions and the `GLMS_` prefix on constants:
+
+```C
+#include <cglm/struct.h>
+
+mat4s mat = GLMS_MAT4_IDENTITY_INIT;
+mat4s inv = glms_mat4_inv(mat);
+```
+
+Struct functions generally take their parameters as *values* and *return* their results, rather than taking pointers and writing to out parameters. That means your parameters can usually be `const`, if you're into that.
+
+The types used are actually unions that allow access to the same data multiple ways. One of those ways involves anonymous structures, available since C11. MSVC also supports it for earlier C versions out of the box and GCC/Clang do if you enable `-fms-extensions`. To explicitly enable these anonymous structures, `#define CGLM_USE_ANONYMOUS_STRUCT` to `1`, to disable them, to `0`. For backward compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` (value is irrelevant) to disable them. If you don't specify explicitly, cglm will do a best guess based on your compiler and the C version you're using.
+
 ## Build
 
 ### Unix (Autotools)
 
 ```bash
-$ sh ./build-deps.sh # run only once (dependencies) [Optional].
-$ # You can pass this step if you don't want to run `make check` for tests.
-$ # cglm uses cmocka for tests and it may reqiure cmake for building it
-$
 $ sh autogen.sh
 $ ./configure
 $ make
-$ make check # [Optional] (if you run `sh ./build-deps.sh`)
-$ [sudo] make install
+$ make check # [Optional]
+$ [sudo] make install # [Optional]
 ```
 
 This will also install pkg-config files so you can use
@@ -169,6 +182,10 @@ if `msbuild` won't work (because of multi version VS) then try to build with `de
 ```Powershell
 $ devenv cglm.sln /Build Release
 ```
+
+#### Running Tests on Windows
+
+You can see test project in same visual studio solution file. It is enough to run that project to run tests.
 
 ### Building Docs
 First you need install Sphinx: http://www.sphinx-doc.org/en/master/usage/installation.html

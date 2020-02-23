@@ -111,9 +111,10 @@
 #define GLM_VEC3_ONE  ((vec3)GLM_VEC3_ONE_INIT)
 #define GLM_VEC3_ZERO ((vec3)GLM_VEC3_ZERO_INIT)
 
-#define GLM_YUP  ((vec3){0.0f, 1.0f, 0.0f})
-#define GLM_ZUP  ((vec3){0.0f, 0.0f, 1.0f})
-#define GLM_XUP  ((vec3){1.0f, 0.0f, 0.0f})
+#define GLM_YUP       ((vec3){0.0f,  1.0f,  0.0f})
+#define GLM_ZUP       ((vec3){0.0f,  0.0f,  1.0f})
+#define GLM_XUP       ((vec3){1.0f,  0.0f,  0.0f})
+#define GLM_FORWARD   ((vec3){0.0f,  0.0f, -1.0f})
 
 #define GLM_XXX GLM_SHUFFLE3(0, 0, 0)
 #define GLM_YYY GLM_SHUFFLE3(1, 1, 1)
@@ -997,6 +998,27 @@ glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
 }
 
 /*!
+ * @brief swizzle vector components
+ *
+ * you can use existin masks e.g. GLM_XXX, GLM_ZYX
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
+  vec3 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+  t[2] = v[(mask & (3 << 4)) >> 4];
+
+  glm_vec3_copy(t, dest);
+}
+
+/*!
  * @brief vec3 cross product
  *
  * this is just convenient wrapper
@@ -1052,27 +1074,6 @@ CGLM_INLINE
 void
 glm_normalize_to(vec3 v, vec3 dest) {
   glm_vec3_normalize_to(v, dest);
-}
-
-/*!
- * @brief swizzle vector components
- *
- * you can use existin masks e.g. GLM_XXX, GLM_ZYX
- *
- * @param[in]  v    source
- * @param[in]  mask mask
- * @param[out] dest destination
- */
-CGLM_INLINE
-void
-glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
-  vec3 t;
-
-  t[0] = v[(mask & (3 << 0))];
-  t[1] = v[(mask & (3 << 2)) >> 2];
-  t[2] = v[(mask & (3 << 4)) >> 4];
-
-  glm_vec3_copy(t, dest);
 }
 
 #endif /* cglm_vec3_h */

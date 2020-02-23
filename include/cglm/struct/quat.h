@@ -11,7 +11,7 @@
    GLMS_QUAT_IDENTITY
 
  Functions:
-   CGLM_INLINE versors glms_quat_identity()
+   CGLM_INLINE versors glms_quat_identity(void)
    CGLM_INLINE void    glms_quat_identity_array(versor *q, size_t count)
    CGLM_INLINE versors glms_quat_init(float x, float y, float z, float w)
    CGLM_INLINE versors glms_quatv(float angle, vec3s axis)
@@ -62,7 +62,7 @@
  * ----------------------------------------------------------------------------
  */
 
-#define GLMS_QUAT_IDENTITY_INIT  GLM_QUAT_IDENTITY_INIT
+#define GLMS_QUAT_IDENTITY_INIT  {GLM_QUAT_IDENTITY_INIT}
 #define GLMS_QUAT_IDENTITY       ((versors)GLMS_QUAT_IDENTITY_INIT)
 
 /*!
@@ -72,7 +72,7 @@
  */
 CGLM_INLINE
 versors
-glms_quat_identity() {
+glms_quat_identity(void) {
   versors dest;
   glm_quat_identity(dest.raw);
   return dest;
@@ -251,7 +251,7 @@ CGLM_INLINE
 vec3s
 glms_quat_imagn(versors q) {
   vec3s dest;
-  glm_normalize_to(q.imag.raw, dest.raw);
+  glm_normalize_to(q.raw, dest.raw);
   return dest;
 }
 
@@ -437,15 +437,14 @@ glms_quat_look(vec3s eye, versors ori) {
  * @brief creates look rotation quaternion
  *
  * @param[in]   dir   direction to look
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @returns  destination quaternion
  */
 CGLM_INLINE
 versors
-glms_quat_for(vec3s dir, vec3s fwd, vec3s up) {
+glms_quat_for(vec3s dir, vec3s up) {
   versors dest;
-  glm_quat_for(dir.raw, fwd.raw, up.raw, dest.raw);
+  glm_quat_for(dir.raw, up.raw, dest.raw);
   return dest;
 }
 
@@ -455,15 +454,14 @@ glms_quat_for(vec3s dir, vec3s fwd, vec3s up) {
  *
  * @param[in]   from  source point
  * @param[in]   to    destination point
- * @param[in]   fwd   forward vector
  * @param[in]   up    up vector
  * @returns  destination quaternion
  */
 CGLM_INLINE
 versors
-glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up) {
+glms_quat_forp(vec3s from, vec3s to, vec3s up) {
   versors dest;
-  glm_quat_forp(from.raw, to.raw, fwd.raw, up.raw, dest.raw);
+  glm_quat_forp(from.raw, to.raw, up.raw, dest.raw);
   return dest;
 }
 

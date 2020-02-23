@@ -7,23 +7,21 @@
 #******************************************************************************
 
 ACLOCAL_AMFLAGS = -I m4
-
 AM_CFLAGS = -Wall \
-            -std=gnu99 \
+            -std=gnu11 \
             -O3 \
             -Wstrict-aliasing=2 \
             -fstrict-aliasing \
-            -pedantic
+            -pedantic \
+            -Werror=strict-prototypes
 
 lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0
 
 checkLDFLAGS = -L./.libs \
-               -L./test/lib/cmocka/build/src \
-               -lcmocka \
                -lm \
                -lcglm
-checkCFLAGS = -I./test/lib/cmocka/include \
+checkCFLAGS = $(AM_CFLAGS) \
               -I./include
 
 check_PROGRAMS = test/tests
@@ -34,14 +32,16 @@ test_tests_CFLAGS  = $(checkCFLAGS)
 
 cglmdir=$(includedir)/cglm
 cglm_HEADERS = include/cglm/version.h \
+               include/cglm/common.h \
+               include/cglm/types.h \
+               include/cglm/types-struct.h \
                include/cglm/cglm.h \
                include/cglm/call.h \
+               include/cglm/struct.h \
                include/cglm/cam.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
-               include/cglm/types.h \
-               include/cglm/common.h \
                include/cglm/affine.h \
                include/cglm/vec3.h \
                include/cglm/vec3-ext.h \
@@ -60,9 +60,8 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
                include/cglm/bezier.h \
-               include/cglm/types-struct.h \
-               include/cglm/struct.h
-
+               include/cglm/applesimd.h
+               
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
@@ -140,19 +139,14 @@ libcglm_la_SOURCES=\
     src/bezier.c
 
 test_tests_SOURCES=\
+    test/runner.c \
     test/src/test_common.c \
-    test/src/test_main.c \
-    test/src/test_mat4.c \
+    test/src/tests.c \
     test/src/test_cam.c \
-    test/src/test_project.c \
     test/src/test_clamp.c \
     test/src/test_euler.c \
-    test/src/test_quat.c \
-    test/src/test_vec4.c \
-    test/src/test_vec3.c \
-    test/src/test_mat3.c \
-    test/src/test_affine.c \
-    test/src/test_bezier.c
+    test/src/test_bezier.c \
+    test/src/test_struct.c
 
 pkgconfig_DATA=cglm.pc
 
@@ -160,7 +154,7 @@ pkgconfig_DATA=cglm.pc
 # the source directory that post-build.sh is in. When not
 # using a prefix, $VPATH will be unset, so we need to fall
 # back to using . to run the script.
-export VPATH
+#export VPATH
 
-all-local:
-	sh $${VPATH:-.}/post-build.sh
+# all-local:
+#	sh $${VPATH:-.}/post-build.sh

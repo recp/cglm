@@ -19,8 +19,8 @@
    CGLM_INLINE vec3s glms_vec3(vec4s v4);
    CGLM_INLINE void  glms_vec3_pack(vec3s dst[], vec3 src[], size_t len);
    CGLM_INLINE void  glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len);
-   CGLM_INLINE vec3s glms_vec3_zero();
-   CGLM_INLINE vec3s glms_vec3_one();
+   CGLM_INLINE vec3s glms_vec3_zero(void);
+   CGLM_INLINE vec3s glms_vec3_one(void);
    CGLM_INLINE float glms_vec3_dot(vec3s a, vec3s b);
    CGLM_INLINE float glms_vec3_norm2(vec3s v);
    CGLM_INLINE float glms_vec3_norm(vec3s v);
@@ -86,15 +86,15 @@
 #include "../vec3.h"
 #include "vec3-ext.h"
 
-#define GLMS_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
-#define GLMS_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
+#define GLMS_VEC3_ONE_INIT   {GLM_VEC3_ONE_INIT}
+#define GLMS_VEC3_ZERO_INIT  {GLM_VEC3_ZERO_INIT}
 
 #define GLMS_VEC3_ONE  ((vec3s)GLMS_VEC3_ONE_INIT)
 #define GLMS_VEC3_ZERO ((vec3s)GLMS_VEC3_ZERO_INIT)
 
-#define GLMS_YUP  ((vec3s){0.0f, 1.0f, 0.0f})
-#define GLMS_ZUP  ((vec3s){0.0f, 0.0f, 1.0f})
-#define GLMS_XUP  ((vec3s){1.0f, 0.0f, 0.0f})
+#define GLMS_YUP  ((vec3s){{0.0f, 1.0f, 0.0f}})
+#define GLMS_ZUP  ((vec3s){{0.0f, 0.0f, 1.0f}})
+#define GLMS_XUP  ((vec3s){{1.0f, 0.0f, 0.0f}})
 
 /*!
  * @brief init vec3 using vec4
@@ -151,7 +151,7 @@ glms_vec3_unpack(vec3 dst[], vec3s src[], size_t len) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_zero() {
+glms_vec3_zero(void) {
   vec3s r;
   glm_vec3_zero(r.raw);
   return r;
@@ -164,7 +164,7 @@ glms_vec3_zero() {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_one() {
+glms_vec3_one(void) {
   vec3s r;
   glm_vec3_one(r.raw);
   return r;

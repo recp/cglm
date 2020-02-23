@@ -37,10 +37,9 @@ branches:
     - master
 
 script:
-  - sh ./build-deps.sh
   - sh ./autogen.sh
   - if [[ "$CC" == "gcc" && "$CODE_COVERAGE" == "ON" ]]; then
-      ./configure CFLAGS="-ftest-coverage -fprofile-arcs";
+      ./configure CFLAGS="-ftest-coverage -fprofile-arcs -coverage";
     else
       ./configure;
     fi
@@ -49,14 +48,15 @@ script:
 
 after_success:
   - if [[ "$CC" == "gcc" && "$CODE_COVERAGE" == "ON" ]]; then
-      pip install --user cpp-coveralls && 
+      pip install --user cpp-coveralls &&
       coveralls
         --build-root .
         --exclude lib
         --exclude test
         --gcov-options '\-lp'
-        --verbose;
+        --verbose &&
+      bash <(curl -s https://codecov.io/bash);
     fi
 
-after_failure:
-  - cat ./test-suite.log
+# after_failure:
+#   - cat ./test-suite.log

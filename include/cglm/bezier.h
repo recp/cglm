@@ -22,9 +22,9 @@
 #define GLM_BEZIER_MAT  ((mat4)GLM_BEZIER_MAT_INIT)
 #define GLM_HERMITE_MAT ((mat4)GLM_HERMITE_MAT_INIT)
 
-#define CGLM_DECASTEL_EPS   1e-9
-#define CGLM_DECASTEL_MAX   1000
-#define CGLM_DECASTEL_SMALL 1e-20
+#define CGLM_DECASTEL_EPS   1e-9f
+#define CGLM_DECASTEL_MAX   1000.0f
+#define CGLM_DECASTEL_SMALL 1e-20f
 
 /*!
  * @brief cubic bezier interpolation

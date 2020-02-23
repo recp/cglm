@@ -59,7 +59,7 @@ glmc_quat_normalize_to(versor q, versor dest) {
 CGLM_EXPORT
 void
 glmc_quat_normalize(versor q) {
-  glm_quat_norm(q);
+  glm_quat_normalize(q);
 }
 
 CGLM_EXPORT
@@ -184,14 +184,14 @@ glmc_quat_look(vec3 eye, versor ori, mat4 dest) {
 
 CGLM_EXPORT
 void
-glmc_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest) {
-  glm_quat_for(dir, fwd, up, dest);
+glmc_quat_for(vec3 dir, vec3 up, versor dest) {
+  glm_quat_for(dir, up, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_quat_forp(vec3 from, vec3 to, vec3 fwd, vec3 up, versor dest) {
-  glm_quat_forp(from, to, fwd, up, dest);
+glmc_quat_forp(vec3 from, vec3 to, vec3 up, versor dest) {
+  glm_quat_forp(from, to, up, dest);
 }
 
 CGLM_EXPORT

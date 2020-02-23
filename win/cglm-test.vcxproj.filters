@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\test\runner.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_bezier.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_cam.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_clamp.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_common.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_euler.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_struct.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\tests.c">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\test\tests.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\include\common.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat4.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_project.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_quat.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec4.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

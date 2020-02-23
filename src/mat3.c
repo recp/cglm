@@ -22,6 +22,12 @@ glmc_mat3_identity(mat3 mat) {
 
 CGLM_EXPORT
 void
+glmc_mat3_zero(mat3 mat) {
+  glm_mat3_zero(mat);
+}
+
+CGLM_EXPORT
+void
 glmc_mat3_identity_array(mat3 * __restrict mat, size_t count) {
   glm_mat3_identity_array(mat, count);
 }

@@ -319,10 +319,7 @@ glm_perspective_resize(float aspect, mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_lookat(vec3 eye,
-           vec3 center,
-           vec3 up,
-           mat4 dest) {
+glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest) {
   CGLM_ALIGN(8) vec3 f, u, s;
 
   glm_vec3_sub(center, eye, f);
