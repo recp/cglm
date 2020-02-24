@@ -233,7 +233,7 @@ glm_vec2_subs(vec2 v, float s, vec2 dest) {
  *
  * @param a    v1
  * @param b    v2
- * @param dest v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
+ * @param dest v3 = (a[0] * b[0], a[1] * b[1])
  */
 CGLM_INLINE
 void
@@ -282,7 +282,7 @@ glm_vec2_scale_as(vec2 v, float s, vec2 dest) {
  *
  * @param[in]  a    vector 1
  * @param[in]  b    vector 2
- * @param[out] dest result = (a[0]/b[0], a[1]/b[1], a[2]/b[2])
+ * @param[out] dest result = (a[0]/b[0], a[1]/b[1])
  */
 CGLM_INLINE
 void
@@ -296,7 +296,7 @@ glm_vec2_div(vec2 a, vec2 b, vec2 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest result = (a[0]/s, a[1]/s, a[2]/s)
+ * @param[out] dest result = (a[0]/s, a[1]/s)
  */
 CGLM_INLINE
 void
@@ -438,7 +438,7 @@ glm_vec2_normalize(vec2 v) {
   norm = glm_vec2_norm(v);
 
   if (norm == 0.0f) {
-    v[0] = v[1] = v[2] = 0.0f;
+    v[0] = v[1] = 0.0f;
     return;
   }
 
