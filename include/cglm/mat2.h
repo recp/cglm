@@ -245,7 +245,7 @@ glm_mat2_inv(mat2 mat, mat2 dest) {
   float a = mat[0][0], b = mat[0][1],
         c = mat[1][0], d = mat[1][1];
 
-  det = 1.0f / (a * d - c * b);
+  det = 1.0f / (a * d - b * c);
 
   dest[0][0] =  d * det;
   dest[0][1] = -b * det;

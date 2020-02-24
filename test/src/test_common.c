@@ -32,6 +32,14 @@ test_rand_mat3(mat3 dest) {
 }
 
 void
+test_rand_mat2(mat2 dest) {
+  dest[0][0] = drand48();
+  dest[0][1] = drand48();
+  dest[1][0] = drand48();
+  dest[1][1] = drand48();
+}
+
+void
 test_rand_vec3(vec3 dest) {
   dest[0] = drand48();
   dest[1] = drand48();
@@ -73,12 +81,11 @@ test_rand_quat(versor q) {
 
 test_status_t
 test_assert_mat4_eq(mat4 m1, mat4 m2) {
-  int i, j, k;
+  int i, j;
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      for (k = 0; k < 4; k++)
-        ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
     }
   }
 
@@ -87,12 +94,11 @@ test_assert_mat4_eq(mat4 m1, mat4 m2) {
 
 test_status_t
 test_assert_mat4_eqt(mat4 m1, mat4 m2) {
-  int i, j, k;
+  int i, j;
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      for (k = 0; k < 4; k++)
-        ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009)
     }
   }
 
@@ -101,12 +107,67 @@ test_assert_mat4_eqt(mat4 m1, mat4 m2) {
 
 test_status_t
 test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
-  int i, j, k;
+  int i, j;
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      for (k = 0; k < 4; k++)
-        ASSERT(fabsf(m1[i][j] - m2[i][j]) <= eps);
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= eps);
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat2_eqt(mat2 m1, mat2 m2) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 2; j++) {
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat2_eq(mat2 m1, mat2 m2) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 2; j++) {
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat2_eq_identity(mat2 m2) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 2; j++) {
+      if (i == j) {
+        ASSERT(test_eq(m2[i][j], 1.0f))
+      } else {
+        ASSERT(test_eq(m2[i][j], 0.0f))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat2_eq_zero(mat2 m2) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 2; j++) {
+      ASSERT(test_eq(m2[i][j], 0.0f))
     }
   }
 
@@ -115,12 +176,11 @@ test_assert_mat4_eq2(mat4 m1, mat4 m2, float eps) {
 
 test_status_t
 test_assert_mat3_eq(mat3 m1, mat3 m2) {
-  int i, j, k;
+  int i, j;
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
-      for (k = 0; k < 3; k++)
-        ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
     }
   }
 
@@ -129,12 +189,11 @@ test_assert_mat3_eq(mat3 m1, mat3 m2) {
 
 test_status_t
 test_assert_mat3_eqt(mat3 m1, mat3 m2) {
-  int i, j, k;
+  int i, j;
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
-      for (k = 0; k < 3; k++)
-        ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
     }
   }
 
