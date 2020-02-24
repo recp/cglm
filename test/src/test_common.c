@@ -47,7 +47,7 @@ test_rand_vec3(vec3 dest) {
 }
 
 vec3s
-test_rand_vec3s() {
+test_rand_vec3s(void) {
   vec3s r;
   test_rand_vec3(r.raw);
   return r;
@@ -62,7 +62,7 @@ test_rand_vec4(vec4 dest) {
 }
 
 vec4s
-test_rand_vec4s() {
+test_rand_vec4s(void) {
   vec4s r;
   test_rand_vec4(r.raw);
   return r;

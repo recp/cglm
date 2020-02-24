@@ -59,7 +59,7 @@
  */
 CGLM_INLINE
 mat2s
-glms_mat2_identity() {
+glms_mat2_identity(void) {
   mat2s r;
   glm_mat2_identity(r.raw);
   return r;
@@ -91,7 +91,7 @@ glms_mat2_identity_array(mat2s * __restrict mat, size_t count) {
  */
 CGLM_INLINE
 mat2s
-glms_mat2_zero() {
+glms_mat2_zero(void) {
   mat2s r;
   glm_mat2_zero(r.raw);
   return r;
