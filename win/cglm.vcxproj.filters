@@ -86,6 +86,12 @@
     <ClCompile Include="..\src\bezier.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\mat2.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vec2.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -254,7 +260,7 @@
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\vec2.h">
-        <Filter>include\cglm</Filter>
+      <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\affine.h">
       <Filter>include\cglm\struct</Filter>
@@ -314,6 +320,24 @@
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\types-struct.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\mat2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\vec2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\mat2.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\applesimd.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\mat2.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\vec2-ext.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>

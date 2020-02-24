@@ -64,5 +64,20 @@
     <ClInclude Include="..\test\src\test_vec4.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_affine.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_affine_mat.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat2.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_plane.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec2.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

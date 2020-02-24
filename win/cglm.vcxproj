@@ -28,18 +28,21 @@
     <ClCompile Include="..\src\euler.c" />
     <ClCompile Include="..\src\frustum.c" />
     <ClCompile Include="..\src\io.c" />
+    <ClCompile Include="..\src\mat2.c" />
     <ClCompile Include="..\src\mat3.c" />
     <ClCompile Include="..\src\mat4.c" />
     <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\project.c" />
     <ClCompile Include="..\src\quat.c" />
     <ClCompile Include="..\src\sphere.c" />
+    <ClCompile Include="..\src\vec2.c" />
     <ClCompile Include="..\src\vec3.c" />
     <ClCompile Include="..\src\vec4.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
+    <ClInclude Include="..\include\cglm\applesimd.h" />
     <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
     <ClInclude Include="..\include\cglm\call.h" />
@@ -52,12 +55,14 @@
     <ClInclude Include="..\include\cglm\call\euler.h" />
     <ClInclude Include="..\include\cglm\call\frustum.h" />
     <ClInclude Include="..\include\cglm\call\io.h" />
+    <ClInclude Include="..\include\cglm\call\mat2.h" />
     <ClInclude Include="..\include\cglm\call\mat3.h" />
     <ClInclude Include="..\include\cglm\call\mat4.h" />
     <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\project.h" />
     <ClInclude Include="..\include\cglm\call\quat.h" />
     <ClInclude Include="..\include\cglm\call\sphere.h" />
+    <ClInclude Include="..\include\cglm\call\vec2.h" />
     <ClInclude Include="..\include\cglm\call\vec3.h" />
     <ClInclude Include="..\include\cglm\call\vec4.h" />
     <ClInclude Include="..\include\cglm\cam.h" />
@@ -69,6 +74,7 @@
     <ClInclude Include="..\include\cglm\euler.h" />
     <ClInclude Include="..\include\cglm\frustum.h" />
     <ClInclude Include="..\include\cglm\io.h" />
+    <ClInclude Include="..\include\cglm\mat2.h" />
     <ClInclude Include="..\include\cglm\mat3.h" />
     <ClInclude Include="..\include\cglm\mat4.h" />
     <ClInclude Include="..\include\cglm\plane.h" />
@@ -94,6 +100,7 @@
     <ClInclude Include="..\include\cglm\struct\euler.h" />
     <ClInclude Include="..\include\cglm\struct\frustum.h" />
     <ClInclude Include="..\include\cglm\struct\io.h" />
+    <ClInclude Include="..\include\cglm\struct\mat2.h" />
     <ClInclude Include="..\include\cglm\struct\mat3.h" />
     <ClInclude Include="..\include\cglm\struct\mat4.h" />
     <ClInclude Include="..\include\cglm\struct\plane.h" />
@@ -107,6 +114,7 @@
     <ClInclude Include="..\include\cglm\types-struct.h" />
     <ClInclude Include="..\include\cglm\types.h" />
     <ClInclude Include="..\include\cglm\util.h" />
+    <ClInclude Include="..\include\cglm\vec2-ext.h" />
     <ClInclude Include="..\include\cglm\vec2.h" />
     <ClInclude Include="..\include\cglm\vec3-ext.h" />
     <ClInclude Include="..\include\cglm\vec3.h" />

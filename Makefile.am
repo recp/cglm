@@ -42,7 +42,10 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
+               include/cglm/mat2.h \
                include/cglm/affine.h \
+               include/cglm/vec2.h \
+               include/cglm/vec2-ext.h \
                include/cglm/vec3.h \
                include/cglm/vec3-ext.h \
                include/cglm/vec4.h \
@@ -65,6 +68,8 @@ cglm_HEADERS = include/cglm/version.h \
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
+                    include/cglm/call/mat2.h \
+                    include/cglm/call/vec2.h \
                     include/cglm/call/vec3.h \
                     include/cglm/call/vec4.h \
                     include/cglm/call/affine.h \
@@ -125,8 +130,10 @@ libcglm_la_SOURCES=\
     src/io.c \
     src/quat.c \
     src/cam.c \
+    src/vec2.c \
     src/vec3.c \
     src/vec4.c \
+    src/mat2.c \
     src/mat3.c \
     src/mat4.c \
     src/plane.c \
