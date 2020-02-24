@@ -233,7 +233,7 @@ TEST_IMPL(GLM_PREFIX, vec3_zero) {
   GLM(vec3_zero)(v2);
   
   ASSERTIFY(test_assert_vec3_eq(v1, GLM_VEC3_ZERO))
-  ASSERTIFY(test_assert_vec3_eq(v1, GLM_VEC3_ZERO))
+  ASSERTIFY(test_assert_vec3_eq(v2, GLM_VEC3_ZERO))
   
   TEST_SUCCESS
 }
@@ -335,9 +335,9 @@ TEST_IMPL(GLM_PREFIX, vec3_norm_inf) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_add) {
-  vec4 a = {-10.0f, 9.0f, -8.0f};
-  vec4 b = {12.0f, 19.0f, -18.0f};
-  vec4 c, d;
+  vec3 a = {-10.0f, 9.0f, -8.0f};
+  vec3 b = {12.0f, 19.0f, -18.0f};
+  vec3 c, d;
   
   c[0] = a[0] + b[0];
   c[1] = a[1] + b[1];
@@ -351,8 +351,8 @@ TEST_IMPL(GLM_PREFIX, vec3_add) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_adds) {
-  vec4  a = {-10.0f, 9.0f, -8.0f};
-  vec4  c, d;
+  vec3  a = {-10.0f, 9.0f, -8.0f};
+  vec3  c, d;
   float s = 7.0f;
   
   c[0] = a[0] + s;
@@ -367,9 +367,9 @@ TEST_IMPL(GLM_PREFIX, vec3_adds) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_sub) {
-  vec4 a = {-10.0f, 9.0f, -8.0f};
-  vec4 b = {12.0f, 19.0f, -18.0f};
-  vec4 c, d;
+  vec3 a = {-10.0f, 9.0f, -8.0f};
+  vec3 b = {12.0f, 19.0f, -18.0f};
+  vec3 c, d;
   
   c[0] = a[0] - b[0];
   c[1] = a[1] - b[1];
@@ -383,8 +383,8 @@ TEST_IMPL(GLM_PREFIX, vec3_sub) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_subs) {
-  vec4  a = {-10.0f, 9.0f, -8.0f};
-  vec4  c, d;
+  vec3  a = {-10.0f, 9.0f, -8.0f};
+  vec3  c, d;
   float s = 7.0f;
   
   c[0] = a[0] - s;
@@ -927,7 +927,6 @@ TEST_IMPL(GLM_PREFIX, vec3_rotate_m4) {
 
   TEST_SUCCESS
 }
-
 
 TEST_IMPL(GLM_PREFIX, vec3_rotate_m3) {
   vec3 v1 = {1.0f, 0.0f, 0.0f}, v2 = {1.0f, 1.0f, 1.0f};

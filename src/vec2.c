@@ -53,7 +53,7 @@ glmc_vec2_norm2(vec2 v) {
 CGLM_EXPORT
 float
 glmc_vec2_norm(vec2 v) {
-  return glm_vec2_norm2(v);
+  return glm_vec2_norm(v);
 }
 
 CGLM_EXPORT

@@ -35,7 +35,6 @@
 #include "../common.h"
 #include "../types-struct.h"
 #include "../mat2.h"
-#include "vec2.h"
 
 #define GLMS_MAT2_IDENTITY_INIT {1.0f, 0.0f, 0.0f, 1.0f}
 #define GLMS_MAT2_ZERO_INIT     {0.0f, 0.0f, 0.0f, 0.0f}

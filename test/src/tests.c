@@ -12,6 +12,7 @@
 #define GLM_PREFIX glm_
 #define GLM(X) (glm_ ## X)
 
+#include "test_vec2.h"
 #include "test_vec3.h"
 #include "test_vec4.h"
 #include "test_mat3.h"
@@ -31,6 +32,7 @@
 #define GLM_PREFIX glmc_
 #define GLM(X) (glmc_ ## X)
 
+#include "test_vec2.h"
 #include "test_vec3.h"
 #include "test_vec4.h"
 #include "test_mat3.h"
