@@ -35,10 +35,13 @@ Follow the :doc:`build` documentation for this
    euler
    mat4
    mat3
+   mat2
    vec3
    vec3-ext
    vec4
    vec4-ext
+   vec2
+   vec2-ext
    color
    plane
    project
