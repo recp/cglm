@@ -16,6 +16,9 @@ test_rand_mat4(mat4 dest);
 void
 test_rand_mat3(mat3 dest);
 
+void
+test_rand_mat2(mat2 dest);
+
 test_status_t
 test_assert_eqf(float a, float b);
 
@@ -35,7 +38,22 @@ test_status_t
 test_assert_mat4_eq_zero(mat4 m4);
 
 test_status_t
+test_assert_mat2_eqt(mat2 m1, mat2 m2);
+
+test_status_t
+test_assert_mat2_eq(mat2 m1, mat2 m2);
+
+test_status_t
+test_assert_mat2_eq_identity(mat2 m2);
+
+test_status_t
+test_assert_mat2_eq_zero(mat2 m2);
+
+test_status_t
 test_assert_mat3_eq(mat3 m1, mat3 m2);
+
+test_status_t
+test_assert_vec2_eq(vec2 v1, vec2 v2);
 
 test_status_t
 test_assert_mat3_eqt(mat3 m1, mat3 m2);

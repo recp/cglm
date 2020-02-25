@@ -217,7 +217,7 @@ TEST_IMPL(GLM_PREFIX, vec4_zero) {
   GLM(vec4_zero)(v2);
   
   ASSERTIFY(test_assert_vec4_eq(v1, GLM_VEC4_ZERO))
-  ASSERTIFY(test_assert_vec4_eq(v1, GLM_VEC4_ZERO))
+  ASSERTIFY(test_assert_vec4_eq(v2, GLM_VEC4_ZERO))
   
   TEST_SUCCESS
 }
@@ -230,7 +230,7 @@ TEST_IMPL(GLM_PREFIX, vec4_one) {
   GLM(vec4_one)(v2);
   
   ASSERTIFY(test_assert_vec4_eq(v1, GLM_VEC4_ONE))
-  ASSERTIFY(test_assert_vec4_eq(v1, GLM_VEC4_ONE))
+  ASSERTIFY(test_assert_vec4_eq(v2, GLM_VEC4_ONE))
   
   TEST_SUCCESS
 }

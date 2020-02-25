@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Header Files">
@@ -84,6 +84,12 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\bezier.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\mat2.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\vec2.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -253,6 +259,9 @@
     <ClInclude Include="..\include\cglm\call\bezier.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\vec2.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\cglm\struct\affine.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
@@ -312,6 +321,30 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\types-struct.h">
       <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\mat2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\vec2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\mat2.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\applesimd.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\mat2.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\vec2-ext.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\vec2.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\vec2-ext.h">
+      <Filter>include\cglm\struct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

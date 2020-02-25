@@ -101,8 +101,19 @@ typedef union CGLM_ALIGN_IF(16) versors {
 #endif
 } versors;
 
+typedef union mat2s {
+  mat2  raw;
+  vec2s col[2];
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    float m00, m01;
+    float m10, m11;
+  };
+#endif
+} mat2s;
+
 typedef union mat3s {
-  mat3 raw;
+  mat3  raw;
   vec3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
@@ -114,7 +125,7 @@ typedef union mat3s {
 } mat3s;
 
 typedef union CGLM_ALIGN_MAT mat4s {
-  mat4 raw;
+  mat4  raw;
   vec4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {

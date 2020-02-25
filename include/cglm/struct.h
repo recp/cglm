@@ -13,8 +13,10 @@ extern "C" {
 
 #include "cglm.h"
 #include "types-struct.h"
+#include "struct/vec2.h"
 #include "struct/vec3.h"
 #include "struct/vec4.h"
+#include "struct/mat2.h"
 #include "struct/mat3.h"
 #include "struct/mat4.h"
 #include "struct/affine.h"
