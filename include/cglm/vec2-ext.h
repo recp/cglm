@@ -7,7 +7,7 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_vec2_broadcast(float val, vec2 d);
+   CGLM_INLINE void  glm_vec2_fill(vec2 v, float val)
    CGLM_INLINE bool  glm_vec2_eq(vec2 v, float val);
    CGLM_INLINE bool  glm_vec2_eq_eps(vec2 v, float val);
    CGLM_INLINE bool  glm_vec2_eq_all(vec2 v);
@@ -31,13 +31,13 @@
 /*!
  * @brief fill a vector with specified value
  *
+ * @param[out] v   dest
  * @param[in]  val value
- * @param[out] d   dest
  */
 CGLM_INLINE
 void
-glm_vec2_broadcast(float val, vec2 d) {
-  d[0] = d[1] = val;
+glm_vec2_fill(vec2 v, float val) {
+  v[0] = v[1] = val;
 }
 
 /*!

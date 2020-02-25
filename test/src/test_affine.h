@@ -571,7 +571,7 @@ TEST_IMPL(GLM_PREFIX, decompose_rs) {
   glm_mat4_mul(m2, r, m2);
   glm_scale(m2, s1);
 
-  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001));
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001f));
 
   TEST_SUCCESS
 }
@@ -607,7 +607,7 @@ TEST_IMPL(GLM_PREFIX, decompose) {
   glm_mat4_mul(m2, r, m2);
   glm_scale(m2, s);
 
-  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001));
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001f));
 
   glm_mat4_identity(m1);
   glm_translate(m1, (vec3){56.0f, 13.0f, 90.0f});
@@ -628,7 +628,7 @@ TEST_IMPL(GLM_PREFIX, decompose) {
   glm_translate(m2, t);
   glm_mat4_mul(m2, r, m2);
   glm_scale(m2, s);
-  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001));
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00001f));
 
   TEST_SUCCESS
 }

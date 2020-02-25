@@ -576,7 +576,7 @@ glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
   vec2 s, v;
 
   /* from + s * (to - from) */
-  glm_vec2_broadcast(glm_clamp_zo(t), s);
+  glm_vec2_fill(s, glm_clamp_zo(t));
   glm_vec2_sub(to, from, v);
   glm_vec2_mul(s, v, v);
   glm_vec2_add(from, v, dest);

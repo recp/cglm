@@ -107,6 +107,8 @@ cglm_simd_neon_HEADERS = include/cglm/simd/neon/mat4.h
 cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/mat3.h \
+                      include/cglm/struct/vec2.h \
+                      include/cglm/struct/vec2-ext.h \
                       include/cglm/struct/vec3.h \
                       include/cglm/struct/vec3-ext.h \
                       include/cglm/struct/vec4.h \

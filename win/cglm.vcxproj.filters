@@ -340,5 +340,11 @@
     <ClInclude Include="..\include\cglm\vec2-ext.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\vec2.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\vec2-ext.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
