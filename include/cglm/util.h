@@ -325,4 +325,19 @@ glm_percentc(float from, float to, float current) {
   return glm_clamp(glm_percent(from, to, current), 0.0f, 1.0f);
 }
 
+/*!
+* @brief swap two float values
+*
+* @param[in]   a float value 1 (pointer)
+* @param[in]   b float value 2 (pointer)
+*/
+CGLM_INLINE
+void
+glm_swapf(float * __restrict a, float * __restrict b) {
+  float t;
+  t  = *a;
+  *a = *b;
+  *b = t;
+}
+
 #endif /* cglm_util_h */
