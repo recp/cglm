@@ -86,6 +86,7 @@
     <ClInclude Include="..\include\cglm\simd\intrin.h" />
     <ClInclude Include="..\include\cglm\simd\neon\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\affine.h" />
+    <ClInclude Include="..\include\cglm\simd\sse2\mat2.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />

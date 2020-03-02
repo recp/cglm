@@ -64,7 +64,7 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/curve.h \
                include/cglm/bezier.h \
                include/cglm/applesimd.h
-               
+
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
@@ -95,6 +95,7 @@ cglm_simd_sse2dir=$(includedir)/cglm/simd/sse2
 cglm_simd_sse2_HEADERS = include/cglm/simd/sse2/affine.h \
                          include/cglm/simd/sse2/mat4.h \
                          include/cglm/simd/sse2/mat3.h \
+                         include/cglm/simd/sse2/mat2.h \
                          include/cglm/simd/sse2/quat.h
 
 cglm_simd_avxdir=$(includedir)/cglm/simd/avx
@@ -107,6 +108,7 @@ cglm_simd_neon_HEADERS = include/cglm/simd/neon/mat4.h
 cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/mat3.h \
+                      include/cglm/struct/mat2.h \
                       include/cglm/struct/vec2.h \
                       include/cglm/struct/vec2-ext.h \
                       include/cglm/struct/vec3.h \
