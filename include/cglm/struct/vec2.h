@@ -464,9 +464,10 @@ glms_vec2_normalize(vec2s v) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_rotate(vec2s v, float angle, vec2s axis) {
-  glm_vec2_rotate(v.raw, angle, axis.raw);
-  return v;
+glms_vec2_rotate(vec2s v, float angle) {
+  vec2s r;
+  glm_vec2_rotate(v.raw, angle, r.raw);
+  return r;
 }
 
 /**
