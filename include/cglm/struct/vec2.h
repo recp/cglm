@@ -455,10 +455,9 @@ glms_vec2_normalize(vec2s v) {
 }
 
 /*!
- * @brief rotate vec2 around axis by angle using Rodrigues' rotation formula
+ * @brief rotate vec2 by angle using Rodrigues' rotation formula
  *
  * @param[in]     v     vector
- * @param[in]     axis  axis vector (must be unit vector)
  * @param[in]     angle angle by radians
  * @returns             rotated vector
  */
