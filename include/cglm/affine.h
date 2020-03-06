@@ -40,10 +40,6 @@
 #include "mat4.h"
 #include "affine-mat.h"
 
-CGLM_INLINE
-void
-glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
-
 /*!
  * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix

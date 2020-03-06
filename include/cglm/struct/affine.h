@@ -39,10 +39,6 @@
 #include "vec4.h"
 #include "mat4.h"
 
-CGLM_INLINE
-mat4s
-glms_mat4_mul(mat4s m1, mat4s m2);
-
 /*!
  * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix

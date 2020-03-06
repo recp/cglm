@@ -65,10 +65,6 @@
 
 CGLM_INLINE
 void
-glm_mat4_identity(mat4 mat);
-
-CGLM_INLINE
-void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
 
 CGLM_INLINE

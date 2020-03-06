@@ -66,7 +66,7 @@
 /*!
  * @brief init vec2 using vec2
  *
- * @param[in]  v4   vector3
+ * @param[in]  v3   vector3
  * @returns         destination
  */
 CGLM_INLINE
