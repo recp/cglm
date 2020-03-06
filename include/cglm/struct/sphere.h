@@ -42,9 +42,9 @@ glms_sphere_radii(vec4s s) {
  */
 CGLM_INLINE
 vec4s
-glms_sphere_transform(vec4s s, mat4 m) {
+glms_sphere_transform(vec4s s, mat4s m) {
   vec4s r;
-  glm_sphere_transform(s.raw, m, r.raw);
+  glm_sphere_transform(s.raw, m.raw, r.raw);
   return r;
 }
 
