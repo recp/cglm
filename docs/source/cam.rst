@@ -198,7 +198,7 @@ Functions documentation
 
     Parameters:
       | *[in]*  **eye**     eye vector
-      | *[in]*  **center**  direction vector
+      | *[in]*  **dir**     direction vector
       | *[in]*  **up**      up vector
       | *[out]* **dest**    result matrix
 
@@ -212,7 +212,7 @@ Functions documentation
 
     Parameters:
       | *[in]*  **eye**     eye vector
-      | *[in]*  **center**  direction vector
+      | *[in]*  **dir**     direction vector
       | *[out]* **dest**    result matrix
 
 .. c:function:: void  glm_persp_decomp(mat4 proj, float *nearVal, float *farVal, float *top, float *bottom, float *left, float *right)
