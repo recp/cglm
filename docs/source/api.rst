@@ -51,3 +51,4 @@ Follow the :doc:`build` documentation for this
    sphere
    curve
    bezier
+   version

@@ -146,7 +146,7 @@ Functions documentation
       | *[in]*  **b**   b
 
     Returns:
-       true if a and b equals
+       true if a and b are equal
 
 .. c:function:: float glm_percent(float from, float to, float current)
 
@@ -158,7 +158,7 @@ Functions documentation
       | *[in]*  **current**   value between from and to values
 
     Returns:
-       clamped normalized percent (0-100 in 0-1)
+       percentage of current value
 
 .. c:function:: float glm_percentc(float from, float to, float current)
 
@@ -171,3 +171,11 @@ Functions documentation
 
     Returns:
        clamped normalized percent (0-100 in 0-1)
+
+.. c:function:: void glm_swapf(float *a, float *b) 
+
+    swap two float values
+
+    Parameters:
+      | *[in]*  **a**      float 1
+      | *[in]*  **b**      float 2
