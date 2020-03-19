@@ -322,7 +322,7 @@ glm_percent(float from, float to, float current) {
 CGLM_INLINE
 float
 glm_percentc(float from, float to, float current) {
-  return glm_clamp(glm_percent(from, to, current), 0.0f, 1.0f);
+  return glm_clamp_zo(glm_percent(from, to, current));
 }
 
 /*!
