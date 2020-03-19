@@ -23,6 +23,7 @@ Functions:
 #. :c:func:`glm_max`
 #. :c:func:`glm_clamp`
 #. :c:func:`glm_lerp`
+#. :c:func:`glm_swapf`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
