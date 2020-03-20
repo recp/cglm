@@ -392,7 +392,7 @@ Functions documentation
     Parameters:
       | *[in, out]*  **v**      vector
       | *[in]*       **axis**   axis vector (will be normalized)
-      | *[out]*      **angle**  angle (radians)
+      | *[in]*       **angle**  angle (radians)
 
 .. c:function:: void  glm_vec3_rotate_m4(mat4 m, vec3 v, vec3 dest)
 
