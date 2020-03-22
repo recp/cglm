@@ -34,7 +34,6 @@
  | cglm doesn't claim the ownership of GraphicsGems source codes              |
  | and the algorithm itself. But cglm may change variable names or some piece |
  | of codes in order to apply optimizations or to make it usable in cglm.     |
- | The ownership of improvements                                              |
  |                                                                            |
  | Related issue: https://github.com/recp/cglm/issues/30                      |
  |                                                                            |
