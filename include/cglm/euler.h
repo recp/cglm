@@ -38,7 +38,7 @@
  | Related issue: https://github.com/recp/cglm/issues/30                      |
  |                                                                            |
  * -------------------------- GraphicsGems EULA ----------------------------- *
- | Related EULA for GraphicsGems can be found at and below, plus in CREDITS:  |
+ | Related EULA for GraphicsGems can be found at below, plus in CREDITS:      |
  |   http://www.realtimerendering.com/resources/GraphicsGems/                 |
  |                                                                            |
  | EULA: The Graphics Gems code is copyright-protected. In other words, you   |
