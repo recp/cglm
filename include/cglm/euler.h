@@ -18,24 +18,168 @@
    enum glm_euler_seq
 
  Functions:
-   CGLM_INLINE glm_euler_seq glm_euler_order(int newOrder[3]);
-   CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
-   CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xyz(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zyx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zxy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xzy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yzx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yxz(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_by_order(vec3         angles,
-                                       glm_euler_seq ord,
-                                       mat4         dest);
+   CGLM_INLINE glm_eul_mat4(vec3 ea, int order, mat4 dest)
  */
 
 #ifndef cglm_euler_h
 #define cglm_euler_h
 
 #include "common.h"
+#include "util.h"
+
+/* ---------- Notice for Ken Shoemake's algorithm Implementation -------------*
+ | Ken Shoemake's algorithm impl. is taken from this repo by permission:      |
+ |   https://github.com/erich666/GraphicsGems/blob/master/gemsiv/euler_angle  |
+ |                                                                            |
+ | cglm doesn't claim the ownership of GraphicsGems source codes              |
+ | and the algorithm itself. But cglm may change variable names or some piece |
+ | of codes in order to apply optimizations or to make it usable in cglm.     |
+ | The ownership of improvements                                              |
+ |                                                                            |
+ | Related issue: https://github.com/recp/cglm/issues/30                      |
+ |                                                                            |
+ * -------------------------- GraphicsGems EULA ----------------------------- *
+ | Related EULA for GraphicsGems can be found at and below, plus in CREDITS:  |
+ |   http://www.realtimerendering.com/resources/GraphicsGems/                 |
+ |                                                                            |
+ | EULA: The Graphics Gems code is copyright-protected. In other words, you   |
+ | cannot claim the text of the code as your own and resell it. Using the     |
+ | code is permitted in any program, product, or library, non-commercial or   |
+ | commercial. Giving credit is not required, though is a nice gesture.       |
+ | The code comes as-is, and if there are any flaws or problems with any Gems |
+ | code, nobody involved with Gems - authors, editors, publishers, or         |
+ | webmasters - are to be held responsible. Basically, don't be a jerk, and   |
+ | remember that anything free comes with no guarantee.                       |
+ * -------------------------------- END --------------------------------------*/
+
+/* Order type constants, constructors, extractors
+ * There are 24 possible conventions, designated by:
+ *	  o EulAxI = axis used initially
+ *	  o EulPar = parity of axis permutation
+ *	  o EulRep = repetition of initial axis as last
+ *	  o EulFrm = frame from which axes are taken
+ * Axes I,J,K will be a permutation of X,Y,Z.
+ * Axis H will be either I or K, depending on EulRep.
+ * Frame S takes axes from initial static frame.
+ * If ord = (AxI=X, Par=Even, Rep=No, Frm=S), then
+ * {a,b,c,ord} means Rz(c)Ry(b)Rx(a), where Rz(c)v
+ * rotates v around Z by c radians.			    
+*/
+
+#define EulFrmS	     0
+#define EulFrmR	     1
+#define EulFrm(ord)  ((unsigned)(ord)&1)
+#define EulRepNo     0
+#define EulRepYes    1
+#define EulRep(ord)  (((unsigned)(ord)>>1)&1)
+#define EulParEven   0
+#define EulParOdd    1
+#define EulPar(ord)  (((unsigned)(ord)>>2)&1)
+
+/*! this code is merely a quick (and legal!) way to set arrays,
+    EulSafe being 0,1,2,0 */
+#define EulSafe	     "\000\001\002\000"
+#define EulNext	     "\001\002\000\001"
+#define EulAxI(ord)  ((int)(EulSafe[(((unsigned)(ord)>>3)&3)]))
+#define EulAxJ(ord)  ((int)(EulNext[EulAxI(ord)+(EulPar(ord)==EulParOdd)]))
+#define EulAxK(ord)  ((int)(EulNext[EulAxI(ord)+(EulPar(ord)!=EulParOdd)]))
+#define EulAxH(ord)  ((EulRep(ord)==EulRepNo)?EulAxK(ord):EulAxI(ord))
+/*! EulGetOrd unpacks all useful information about order simultaneously. */
+#define EulGetOrd(ord,i,j,k,h,n,s,f)                                          \
+  {unsigned o=(unsigned)ord;f=o&1;o>>=1;s=o&1;o>>=1;\
+    n=o&1;o>>=1;i=EulSafe[o&3];j=EulNext[i+n];k=EulNext[i+1-n];h=s?k:i;}
+/*! EulOrd creates an order value between 0 and 23 from 4-tuple choices. */
+#define EulOrd(i,p,r,f)	   (((((((i)<<1)+(p))<<1)+(r))<<1)+(f))
+
+/* EulOrd first param: X = 0, Y = 1, Z = 2 */
+
+/*! Static axes */
+#define GLM_EUL_XYZs    EulOrd(0,EulParEven,EulRepNo,EulFrmS)
+#define GLM_EUL_XYXs    EulOrd(0,EulParEven,EulRepYes,EulFrmS)
+#define GLM_EUL_XZYs    EulOrd(0,EulParOdd,EulRepNo,EulFrmS)
+#define GLM_EUL_XZXs    EulOrd(0,EulParOdd,EulRepYes,EulFrmS)
+#define GLM_EUL_YZXs    EulOrd(1,EulParEven,EulRepNo,EulFrmS)
+#define GLM_EUL_YZYs    EulOrd(1,EulParEven,EulRepYes,EulFrmS)
+#define GLM_EUL_YXZs    EulOrd(1,EulParOdd,EulRepNo,EulFrmS)
+#define GLM_EUL_YXYs    EulOrd(1,EulParOdd,EulRepYes,EulFrmS)
+#define GLM_EUL_ZXYs    EulOrd(2,EulParEven,EulRepNo,EulFrmS)
+#define GLM_EUL_ZXZs    EulOrd(2,EulParEven,EulRepYes,EulFrmS)
+#define GLM_EUL_ZYXs    EulOrd(2,EulParOdd,EulRepNo,EulFrmS)
+#define GLM_EUL_ZYZs    EulOrd(2,EulParOdd,EulRepYes,EulFrmS)
+
+/*! Rotating axes */
+#define GLM_EUL_ZYXr    EulOrd(0,EulParEven,EulRepNo,EulFrmR)
+#define GLM_EUL_XYXr    EulOrd(0,EulParEven,EulRepYes,EulFrmR)
+#define GLM_EUL_YZXr    EulOrd(0,EulParOdd,EulRepNo,EulFrmR)
+#define GLM_EUL_XZXr    EulOrd(0,EulParOdd,EulRepYes,EulFrmR)
+#define GLM_EUL_XZYr    EulOrd(1,EulParEven,EulRepNo,EulFrmR)
+#define GLM_EUL_YZYr    EulOrd(1,EulParEven,EulRepYes,EulFrmR)
+#define GLM_EUL_ZXYr    EulOrd(1,EulParOdd,EulRepNo,EulFrmR)
+#define GLM_EUL_YXYr    EulOrd(1,EulParOdd,EulRepYes,EulFrmR)
+#define GLM_EUL_YXZr    EulOrd(2,EulParEven,EulRepNo,EulFrmR)
+#define GLM_EUL_ZXZr    EulOrd(2,EulParEven,EulRepYes,EulFrmR)
+#define GLM_EUL_XYZr    EulOrd(2,EulParOdd,EulRepNo,EulFrmR)
+#define GLM_EUL_ZYZr    EulOrd(2,EulParOdd,EulRepYes,EulFrmR)
+
+/*!
+ * @brief build matrix from euler angles
+ *
+ * @param[in]  ea     [Xangle, Yangle, Zangle, OrderCode]
+ * @param[out] dest   rotation matrix
+ */
+CGLM_INLINE
+void
+glm_eul_mat4(vec3 ea, int order, mat4 dest) {
+  float ti, tj, th, ci, cj, ch, si, sj, sh, cc, cs, sc, ss;
+  int   i, j, k, h, n, s, f;
+
+  EulGetOrd(order, i, j, k, h, n, s, f);
+  
+  if (f == EulFrmR)
+    glm_swapf(&ea[0], &ea[2]);
+  
+  if (n == EulParOdd)
+    glm_vec3_negate(ea);
+  
+  ti = ea[0]; tj = ea[1]; th = ea[2];
+  
+  ci = cosf(ti);  cj = cosf(tj);
+  ch = cosf(th);  si = sinf(ti);
+  sj = sinf(tj);  sh = sinf(th);
+  
+  cc = ci * ch;  cs = ci * sh;
+  sc = si * ch;  ss = si * sh;
+  
+  if (s == EulRepYes) {
+    dest[i][i] =  cj;
+    dest[i][j] =  sj * si;
+    dest[i][k] =  sj * ci;
+    dest[j][i] =  sj * sh;
+    dest[j][j] = -cj * ss + cc;
+    dest[j][k] = -cj * cs - sc;
+    dest[k][i] = -sj * ch;
+    dest[k][j] =  cj * sc + cs;
+    dest[k][k] =  cj * cc - ss;
+  } else {
+    dest[i][i] =  cj * ch;
+    dest[i][j] =  sj * sc - cs;
+    dest[i][k] =  sj * cc + ss;
+    dest[j][i] =  cj * sh;
+    dest[j][j] =  sj * ss + cc;
+    dest[j][k] =  sj * cs - sc;
+    dest[k][i] = -sj;
+    dest[k][j] =  cj * si;
+    dest[k][k] =  cj * ci;
+  }
+  
+  dest[3][0] = 0.f;
+  dest[3][1] = 0.f;
+  dest[3][2] = 0.f;
+  dest[0][3] = 0.f;
+  dest[1][3] = 0.f;
+  dest[2][3] = 0.f;
+  dest[3][3] = 1.f;
+}
 
 /*!
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
