@@ -65,14 +65,8 @@
  * rotates v around Z by c radians.			    
 */
 
-#define EulFrmS	     0
-#define EulFrmR	     1
-#define EulFrm(ord)  ((unsigned)(ord)&1)
-#define EulRepNo     0
-#define EulRepYes    1
 #define EulRep(ord)  (((unsigned)(ord)>>1)&1)
-#define EulParEven   0
-#define EulParOdd    1
+#define EulFrm(ord)  ((unsigned)(ord)&1)
 #define EulPar(ord)  (((unsigned)(ord)>>2)&1)
 
 /*! this code is merely a quick (and legal!) way to set arrays,
@@ -83,61 +77,60 @@
 #define EulAxJ(ord)  ((int)(EulNext[EulAxI(ord)+(EulPar(ord)==EulParOdd)]))
 #define EulAxK(ord)  ((int)(EulNext[EulAxI(ord)+(EulPar(ord)!=EulParOdd)]))
 #define EulAxH(ord)  ((EulRep(ord)==EulRepNo)?EulAxK(ord):EulAxI(ord))
+
 /*! EulGetOrd unpacks all useful information about order simultaneously. */
 #define EulGetOrd(ord,i,j,k,h,n,s,f)                                          \
   {unsigned o=(unsigned)ord;f=o&1;o>>=1;s=o&1;o>>=1;\
     n=o&1;o>>=1;i=EulSafe[o&3];j=EulNext[i+n];k=EulNext[i+1-n];h=s?k:i;}
-/*! EulOrd creates an order value between 0 and 23 from 4-tuple choices. */
-#define EulOrd(i,p,r,f)	   (((((((i)<<1)+(p))<<1)+(r))<<1)+(f))
 
-/* EulOrd first param: X = 0, Y = 1, Z = 2 */
-
-/*! Static axes */
-#define GLM_EUL_XYZs    EulOrd(0,EulParEven,EulRepNo,EulFrmS)
-#define GLM_EUL_XYXs    EulOrd(0,EulParEven,EulRepYes,EulFrmS)
-#define GLM_EUL_XZYs    EulOrd(0,EulParOdd,EulRepNo,EulFrmS)
-#define GLM_EUL_XZXs    EulOrd(0,EulParOdd,EulRepYes,EulFrmS)
-#define GLM_EUL_YZXs    EulOrd(1,EulParEven,EulRepNo,EulFrmS)
-#define GLM_EUL_YZYs    EulOrd(1,EulParEven,EulRepYes,EulFrmS)
-#define GLM_EUL_YXZs    EulOrd(1,EulParOdd,EulRepNo,EulFrmS)
-#define GLM_EUL_YXYs    EulOrd(1,EulParOdd,EulRepYes,EulFrmS)
-#define GLM_EUL_ZXYs    EulOrd(2,EulParEven,EulRepNo,EulFrmS)
-#define GLM_EUL_ZXZs    EulOrd(2,EulParEven,EulRepYes,EulFrmS)
-#define GLM_EUL_ZYXs    EulOrd(2,EulParOdd,EulRepNo,EulFrmS)
-#define GLM_EUL_ZYZs    EulOrd(2,EulParOdd,EulRepYes,EulFrmS)
-
-/*! Rotating axes */
-#define GLM_EUL_ZYXr    EulOrd(0,EulParEven,EulRepNo,EulFrmR)
-#define GLM_EUL_XYXr    EulOrd(0,EulParEven,EulRepYes,EulFrmR)
-#define GLM_EUL_YZXr    EulOrd(0,EulParOdd,EulRepNo,EulFrmR)
-#define GLM_EUL_XZXr    EulOrd(0,EulParOdd,EulRepYes,EulFrmR)
-#define GLM_EUL_XZYr    EulOrd(1,EulParEven,EulRepNo,EulFrmR)
-#define GLM_EUL_YZYr    EulOrd(1,EulParEven,EulRepYes,EulFrmR)
-#define GLM_EUL_ZXYr    EulOrd(1,EulParOdd,EulRepNo,EulFrmR)
-#define GLM_EUL_YXYr    EulOrd(1,EulParOdd,EulRepYes,EulFrmR)
-#define GLM_EUL_YXZr    EulOrd(2,EulParEven,EulRepNo,EulFrmR)
-#define GLM_EUL_ZXZr    EulOrd(2,EulParEven,EulRepYes,EulFrmR)
-#define GLM_EUL_XYZr    EulOrd(2,EulParOdd,EulRepNo,EulFrmR)
-#define GLM_EUL_ZYZr    EulOrd(2,EulParOdd,EulRepYes,EulFrmR)
+typedef enum glm_eul_order {
+  /*! Static axes */
+  GLM_EUL_XYZs  = 0,
+  GLM_EUL_XYXs  = 2,
+  GLM_EUL_XZYs  = 4,
+  GLM_EUL_XZXs  = 6,
+  GLM_EUL_YZXs  = 8,
+  GLM_EUL_YZYs  = 10,
+  GLM_EUL_YXZs  = 12,
+  GLM_EUL_YXYs  = 14,
+  GLM_EUL_ZXYs  = 16,
+  GLM_EUL_ZXZs  = 18,
+  GLM_EUL_ZYXs  = 20,
+  GLM_EUL_ZYZs  = 22,
+  
+  /*! Rotating axes */
+  GLM_EUL_ZYXr  = 1,
+  GLM_EUL_XYXr  = 3,
+  GLM_EUL_YZXr  = 5,
+  GLM_EUL_XZXr  = 7,
+  GLM_EUL_XZYr  = 9,
+  GLM_EUL_YZYr  = 11,
+  GLM_EUL_ZXYr  = 13,
+  GLM_EUL_YXYr  = 15,
+  GLM_EUL_YXZr  = 17,
+  GLM_EUL_ZXZr  = 19,
+  GLM_EUL_XYZr  = 21,
+  GLM_EUL_ZYZr  = 23
+} glm_eul_order;
 
 /*!
  * @brief build matrix from euler angles
  *
- * @param[in]  ea     [Xangle, Yangle, Zangle, OrderCode]
+ * @param[in]  ea     [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
 CGLM_INLINE
 void
-glm_eul_mat4(vec3 ea, int order, mat4 dest) {
+glm_eul_mat4(vec3 ea, glm_eul_order order, mat4 dest) {
   float ti, tj, th, ci, cj, ch, si, sj, sh, cc, cs, sc, ss;
-  int   i, j, k, h, n, s, f;
+  int   i, j, k, h, parOdd, repYes, frmR;
 
-  EulGetOrd(order, i, j, k, h, n, s, f);
+  EulGetOrd(order, i, j, k, h, parOdd, repYes, frmR);
   
-  if (f == EulFrmR)
+  if (frmR == 1)
     glm_swapf(&ea[0], &ea[2]);
   
-  if (n == EulParOdd)
+  if (parOdd == 1)
     glm_vec3_negate(ea);
   
   ti = ea[0]; tj = ea[1]; th = ea[2];
@@ -149,7 +142,7 @@ glm_eul_mat4(vec3 ea, int order, mat4 dest) {
   cc = ci * ch;  cs = ci * sh;
   sc = si * ch;  ss = si * sh;
   
-  if (s == EulRepYes) {
+  if (repYes == 1) {
     dest[i][i] =  cj;
     dest[i][j] =  sj * si;
     dest[i][k] =  sj * ci;
