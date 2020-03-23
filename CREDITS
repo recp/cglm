@@ -65,3 +65,19 @@ https://forums.khronos.org/showthread.php/10651-Animation-TCB-Spline-Interpolati
 12. vec2 cross product
 http://allenchou.net/2013/07/cross-product-of-2d-vectors/
 
+13. Ken Shoemake's algorithm Implementation and Euler
+Ken Shoemake's algorithm impl. is taken from this repo by permission:
+  https://github.com/erich666/GraphicsGems/blob/master/gemsiv/euler_angle
+
+* -------------------------- GraphicsGems EULA ----------------------------- *
+|   http://www.realtimerendering.com/resources/GraphicsGems/                 |
+|                                                                            |
+| EULA: The Graphics Gems code is copyright-protected. In other words, you   |
+| cannot claim the text of the code as your own and resell it. Using the     |
+| code is permitted in any program, product, or library, non-commercial or   |
+| commercial. Giving credit is not required, though is a nice gesture.       |
+| The code comes as-is, and if there are any flaws or problems with any Gems |
+| code, nobody involved with Gems - authors, editors, publishers, or         |
+| webmasters - are to be held responsible. Basically, don't be a jerk, and   |
+| remember that anything free comes with no guarantee.                       |
+* -------------------------------- END --------------------------------------*/
