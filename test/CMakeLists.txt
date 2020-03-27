@@ -29,13 +29,11 @@ if(LDFLAGS)
   target_compile_options(${TEST_MAIN} PRIVATE ${LDFLAGS})
 endif()
 
-# set(C_STANDARD 99)
-# set(C_STANDARD_REQUIRED YES)
-
-# if(CGLM_USE_C11)
-#   set(C_STANDARD 11)
-# endif()
-
 add_test(
     NAME cglm.${TEST_MAIN}
     COMMAND ${TEST_MAIN} ${TEST_RUNNER_PARAMS})
+
+add_custom_target(check
+  make
+  COMMAND ${CMAKE_CTEST_COMMAND} -V
+  DEPENDS cglm)
