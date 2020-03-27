@@ -3,16 +3,30 @@ project(cglm LANGUAGES C)
 
 set(C_STANDARD 99)
 set(C_STANDARD_REQUIRED YES)
-set(C_EXTENSIONS NO)
 
 set(CGLM_BUILD)
 option(CGLM_STATIC "Static build" ON)
 option(CGLM_SHARED "Shared build" OFF)
+option(CGLM_USE_C11 "" OFF)
 
 if(CGLM_STATIC AND NOT CGLM_SHARED)
   set(CGLM_BUILD STATIC)
 else(CGLM_SHARED)
   set(CGLM_BUILD SHARED)
+endif()
+
+if(CGLM_USE_C11)
+  set(C_STANDARD 99)
+endif()
+
+if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
+  list(APPEND LDFLAGS "/W4")
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
+  set(C_EXTENSIONS YES)
+  list(APPEND LDFLAGS "-Wall" "-Wpedantic" "-Wstrict-aliasing=2")
+  list(APPEND LDFLAGS "-Werror=strict-prototypes" "-fstrict-aliasing" "-O3")
+elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "CLANG")
+  list(APPEND LDFLAGS "-Wall" "-Weverything" "-Wpedantic")
 endif()
 
 set(HEADERS
@@ -131,6 +145,10 @@ target_include_directories(cglm PUBLIC
   $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_PREFIX}>
 )
 
+if(LDFLAGS)
+  target_compile_options(cglm PRIVATE ${LDFLAGS})
+endif()
+
 install(
 	TARGETS	cglm
 	EXPORT cglm
@@ -146,6 +164,5 @@ if(CGLM_SHARED)
 		LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib COMPONENT development NAMELINK_ONLY
 	)
 endif()
-
 
 install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/cglm COMPONENT development)
