@@ -148,6 +148,29 @@ The types used are actually unions that allow access to the same data multiple w
 
 ## Build
 
+### CMake (All platforms)
+```bash
+$ mkdir build
+$ cd build
+$ cmake .. # [Optional] -DCGLM_SHARED=ON
+$ make
+$ sudo make install # [Optional]
+```
+
+#### Use with your CMake project
+* Example:
+```cmake
+cmake_minimum_required(VERSION 3.8.2)
+
+project(<Your Project Name>)
+
+add_executable(${PROJECT_NAME} src/main.c)
+target_link_libraries(${LIBRARY_NAME} PRIVATE
+  cglm)
+
+add_subdirectory(external/cglm/)
+```
+
 ### Unix (Autotools)
 
 ```bash
