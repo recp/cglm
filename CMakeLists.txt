@@ -8,6 +8,7 @@ set(CGLM_BUILD)
 option(CGLM_STATIC "Static build" ON)
 option(CGLM_SHARED "Shared build" OFF)
 option(CGLM_USE_C11 "" OFF)
+option(CGLM_USE_TEST "Enable Tests" OFF)
 
 if(CGLM_STATIC AND NOT CGLM_SHARED)
   set(CGLM_BUILD STATIC)
@@ -16,7 +17,7 @@ else(CGLM_SHARED)
 endif()
 
 if(CGLM_USE_C11)
-  set(C_STANDARD 99)
+  set(C_STANDARD 11)
 endif()
 
 if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
@@ -141,8 +142,7 @@ add_library(cglm
   )
 
 target_include_directories(cglm PUBLIC
-  ${CMAKE_CURRENT_LIST_DIR}/include
-  $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/${CMAKE_INSTALL_PREFIX}>
+  ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
 if(LDFLAGS)
@@ -166,3 +166,9 @@ if(CGLM_SHARED)
 endif()
 
 install(FILES ${HEADERS} DESTINATION ${CMAKE_INSTALL_PREFIX}/include/cglm COMPONENT development)
+
+# Test Configuration
+if(CGLM_USE_TEST)
+  enable_testing()
+  add_subdirectory(test)
+endif()
