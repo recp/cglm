@@ -9,7 +9,10 @@ option(CGLM_SHARED "Shared build" ON)
 option(CGLM_STATIC "Static build" OFF)
 option(CGLM_USE_C99 "" OFF)
 option(CGLM_USE_TEST "Enable Tests" OFF)
+
 option(CGLM_INSTALL_PATH "")
+option(CGLM_INSTALL_LIBDIR "")
+option(CGLM_INSTALL_INCDIR "")
 
 if(NOT CGLM_STATIC AND CGLM_SHARED)
   set(CGLM_BUILD SHARED)
@@ -151,13 +154,14 @@ if(LDFLAGS)
 endif()
 
 if(NOT CGLM_INSTALL_PATH)
-  set(CGLM_INSTALL_PATH "")
+  set(CGLM_INSTALL_PATH ".")
 endif()
+
 if(NOT CGLM_INSTALL_LIBDIR)
-  set(CGLM_INSTALL_LIBDIR "${CGLM_INSTALL_PATH}lib")
+  set(CGLM_INSTALL_LIBDIR "${CGLM_INSTALL_PATH}/lib")
 endif()
 if(NOT CGLM_INSTALL_INCDIR )
-  set(CGLM_INSTALL_INCDIR "${CGLM_INSTALL_PATH}include/clgm")
+  set(CGLM_INSTALL_INCDIR "${CGLM_INSTALL_PATH}/include/clgm")
 endif()
 
 install(
