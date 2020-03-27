@@ -35,17 +35,6 @@ elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "CLANG")
 endif()
 
 set(HEADERS
-  include/cglm/simd/arm.h
-  include/cglm/simd/x86.h
-  include/cglm/simd/sse2/mat3.h
-  include/cglm/simd/sse2/quat.h
-  include/cglm/simd/sse2/mat2.h
-  include/cglm/simd/sse2/mat4.h
-  include/cglm/simd/sse2/affine.h
-  include/cglm/simd/intrin.h
-  include/cglm/simd/avx/mat4.h
-  include/cglm/simd/avx/affine.h
-  include/cglm/simd/neon/mat4.h
   include/cglm/sphere.h
   include/cglm/ease.h
   include/cglm/applesimd.h
@@ -66,6 +55,22 @@ set(HEADERS
   include/cglm/quat.h
   include/cglm/call.h
   include/cglm/plane.h
+  include/cglm/vec2.h
+  include/cglm/cglm.h
+  include/cglm/mat2.h
+  include/cglm/mat4.h
+  include/cglm/curve.h
+  include/cglm/affine.h
+  include/cglm/vec3.h
+  include/cglm/frustum.h
+  include/cglm/vec4.h
+  include/cglm/struct.h
+  include/cglm/color.h
+  include/cglm/types-struct.h
+  include/cglm/bezier.h
+  )
+
+set(HEADERS_CALL
   include/cglm/call/sphere.h
   include/cglm/call/ease.h
   include/cglm/call/io.h
@@ -85,6 +90,29 @@ set(HEADERS
   include/cglm/call/frustum.h
   include/cglm/call/vec4.h
   include/cglm/call/bezier.h
+  )
+
+set(HEADERS_SIMD
+  include/cglm/simd/arm.h
+  include/cglm/simd/x86.h
+  include/cglm/simd/intrin.h
+  include/cglm/simd/neon/mat4.h
+  )
+set(HEADERS_SIMD_AVX
+   include/cglm/simd/avx/mat4.h
+   include/cglm/simd/avx/affine.h
+   )
+set(HEADERS_SIMD_SSE2
+  include/cglm/simd/sse2/mat3.h
+  include/cglm/simd/sse2/quat.h
+  include/cglm/simd/sse2/mat2.h
+  include/cglm/simd/sse2/mat4.h
+  include/cglm/simd/sse2/affine.h
+  )
+
+
+
+set(HEADERS_STRUCT
   include/cglm/struct/sphere.h
   include/cglm/struct/io.h
   include/cglm/struct/mat3.h
@@ -106,20 +134,7 @@ set(HEADERS
   include/cglm/struct/frustum.h
   include/cglm/struct/vec4.h
   include/cglm/struct/color.h
-  include/cglm/vec2.h
-  include/cglm/cglm.h
-  include/cglm/mat2.h
-  include/cglm/mat4.h
-  include/cglm/curve.h
-  include/cglm/affine.h
-  include/cglm/vec3.h
-  include/cglm/frustum.h
-  include/cglm/vec4.h
-  include/cglm/struct.h
-  include/cglm/color.h
-  include/cglm/types-struct.h
-  include/cglm/bezier.h
-)
+  )
 
 add_library(cglm
   ${CGLM_BUILD}
@@ -161,7 +176,7 @@ if(NOT CGLM_INSTALL_LIBDIR)
   set(CGLM_INSTALL_LIBDIR "${CGLM_INSTALL_PATH}/lib")
 endif()
 if(NOT CGLM_INSTALL_INCDIR )
-  set(CGLM_INSTALL_INCDIR "${CGLM_INSTALL_PATH}/include/clgm")
+  set(CGLM_INSTALL_INCDIR "${CGLM_INSTALL_PATH}include")
 endif()
 
 install(
@@ -181,7 +196,11 @@ if(CGLM_SHARED)
 endif()
 
 
-install(FILES ${HEADERS} DESTINATION ${CGLM_INSTALL_INCDIR} COMPONENT development)
+INSTALL(DIRECTORY include/ DESTINATION ${CGLM_INSTALL_INCDIR}
+  COMPONENT development
+  FILE_PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE
+  # PATTERN "cglm/*"
+  )
 
 # Test Configuration
 if(CGLM_USE_TEST)
