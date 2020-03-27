@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 3.8.2)
 project(cglm LANGUAGES C)
 
-set(C_STANDARD 99)
+set(C_STANDARD 11)
 set(C_STANDARD_REQUIRED YES)
 
 set(CGLM_BUILD)
-option(CGLM_STATIC "Static build" ON)
-option(CGLM_SHARED "Shared build" OFF)
-option(CGLM_USE_C11 "" OFF)
+option(CGLM_SHARED "Shared build" ON)
+option(CGLM_STATIC "Static build" OFF)
+option(CGLM_USE_C99 "" OFF)
 option(CGLM_USE_TEST "Enable Tests" OFF)
 
-if(CGLM_STATIC AND NOT CGLM_SHARED)
-  set(CGLM_BUILD STATIC)
-else(CGLM_SHARED)
+if(NOT CGLM_STATIC AND CGLM_SHARED)
   set(CGLM_BUILD SHARED)
+else(CGLM_STATIC)
+  set(CGLM_BUILD STATIC)
 endif()
 
-if(CGLM_USE_C11)
-  set(C_STANDARD 11)
+if(CGLM_USE_C99)
+  set(C_STANDARD 99)
 endif()
 
 if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
