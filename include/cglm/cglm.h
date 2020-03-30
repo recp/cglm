@@ -30,5 +30,6 @@
 #include "ease.h"
 #include "curve.h"
 #include "bezier.h"
+#include "ray.h"
 
 #endif /* cglm_h */

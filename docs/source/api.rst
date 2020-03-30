@@ -52,3 +52,4 @@ Follow the :doc:`build` documentation for this
    curve
    bezier
    version
+   ray
