@@ -65,3 +65,9 @@ https://forums.khronos.org/showthread.php/10651-Animation-TCB-Spline-Interpolati
 12. vec2 cross product
 http://allenchou.net/2013/07/cross-product-of-2d-vectors/
 
+13. Ray triangle intersect
+Möller–Trumbore ray-triangle intersection algorithm, from "Fast, Minimum Storage Ray/Triangle Intersection"
+Authors:
+  Thomas Möller (tompa@clarus.se)
+  Ben Trumbore (wbt@graphics.cornell.edu)
+Link to paper: http://webserver2.tecgraf.puc-rio.br/~mgattass/cg/trbRR/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf

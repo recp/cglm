@@ -34,6 +34,7 @@
     <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\project.c" />
     <ClCompile Include="..\src\quat.c" />
+    <ClCompile Include="..\src\ray.c" />
     <ClCompile Include="..\src\sphere.c" />
     <ClCompile Include="..\src\vec2.c" />
     <ClCompile Include="..\src\vec3.c" />
@@ -61,6 +62,7 @@
     <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\project.h" />
     <ClInclude Include="..\include\cglm\call\quat.h" />
+    <ClInclude Include="..\include\cglm\call\ray.h" />
     <ClInclude Include="..\include\cglm\call\sphere.h" />
     <ClInclude Include="..\include\cglm\call\vec2.h" />
     <ClInclude Include="..\include\cglm\call\vec3.h" />
@@ -80,6 +82,7 @@
     <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\project.h" />
     <ClInclude Include="..\include\cglm\quat.h" />
+    <ClInclude Include="..\include\cglm\ray.h" />
     <ClInclude Include="..\include\cglm\simd\arm.h" />
     <ClInclude Include="..\include\cglm\simd\avx\affine.h" />
     <ClInclude Include="..\include\cglm\simd\avx\mat4.h" />

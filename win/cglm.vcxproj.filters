@@ -92,6 +92,9 @@
     <ClCompile Include="..\src\vec2.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ray.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -122,6 +125,9 @@
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\call\vec4.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\ray.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\simd\avx\affine.h">
@@ -239,6 +245,9 @@
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\ease.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\ray.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\simd\arm.h">
