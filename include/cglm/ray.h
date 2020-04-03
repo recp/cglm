@@ -42,7 +42,7 @@ glm_ray_triangle(vec3   origin,
                  float *d) {
   vec3        edge1, edge2, p, t, q;
   float       det, inv_det, u, v, dist;
-  const float epsilon = 0.000001;
+  const float epsilon = 0.000001f;
 
   glm_vec3_sub(v1, v0, edge1);
   glm_vec3_sub(v2, v0, edge2);
@@ -54,32 +54,28 @@ glm_ray_triangle(vec3   origin,
   if (det > -epsilon && det < epsilon)
     return 0;
 
-  inv_det = 1.0 / det;
+  inv_det = 1.0f / det;
 
   glm_vec3_sub(origin, v0, t);
 
   u = inv_det * glm_vec3_dot(t, p);
 
-  if (u < 0.0 || u > 1.0)
+  if (u < 0.0f || u > 1.0f)
     return 0;
 
   glm_vec3_cross(t, edge1, q);
 
   v = inv_det * glm_vec3_dot(direction, q);
 
-  if (v < 0.0 || u + v > 1.0)
+  if (v < 0.0f || u + v > 1.0f)
     return 0;
 
   dist = inv_det * glm_vec3_dot(edge2, q);
-  if (dist > epsilon) {
-    if (d != NULL) {
+
+  if (d)
       *d = dist;
-    }
 
-    return 1;
-  }
-
-  return 0;
+  return dist > epsilon;
 }
 
 #endif
