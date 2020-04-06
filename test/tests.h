@@ -220,6 +220,7 @@ TEST_DECLARE(euler)
 
 /* ray */
 TEST_DECLARE(glm_ray_triangle)
+TEST_DECLARE(glmc_ray_triangle)
 
 /* quat */
 TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY_INIT)
@@ -910,6 +911,7 @@ TEST_LIST {
   
   /* ray */
   TEST_ENTRY(glm_ray_triangle)
+  TEST_ENTRY(glmc_ray_triangle)
 
   /* quat */
   TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY_INIT)
