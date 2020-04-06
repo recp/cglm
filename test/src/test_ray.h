@@ -11,7 +11,7 @@ TEST_IMPL(GLM_PREFIX, ray_triangle) {
   // Check whether a simple hit is recognized with the right distance
   vec3 origin    = {0.0f, 0.0f, 0.0f};
   vec3 direction = {1.0f, 0.0f, 0.0f};
-  vec3 opposite = {-1.0f, 0.0f, 0.0f};
+  vec3 opposite  = {-1.0f, 0.0f, 0.0f};
   vec3 v0        = {5.0f, -1.0f, 1.0f};
   vec3 v1        = {5.0f, -1.0f, -1.0f};
   vec3 v2        = {5.0f, 1.0f, 0.0f};
