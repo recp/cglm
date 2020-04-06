@@ -218,6 +218,9 @@ TEST_DECLARE(clamp)
 /* euler */
 TEST_DECLARE(euler)
 
+/* ray */
+TEST_DECLARE(glm_ray_triangle)
+
 /* quat */
 TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY_INIT)
 TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY)
@@ -905,6 +908,9 @@ TEST_LIST {
   /* euler */
   TEST_ENTRY(euler)
   
+  /* ray */
+  TEST_ENTRY(glm_ray_triangle)
+
   /* quat */
   TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY_INIT)
   TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY)

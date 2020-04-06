@@ -23,6 +23,7 @@
 #include "test_plane.h"
 #include "test_affine.h"
 #include "test_affine_mat.h"
+#include "test_ray.h"
 
 #undef GLM
 #undef GLM_PREFIX
