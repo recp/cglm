@@ -79,5 +79,8 @@
     <ClInclude Include="..\test\src\test_vec2.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_ray.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
