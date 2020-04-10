@@ -31,6 +31,7 @@ extern "C" {
 #include "call/ease.h"
 #include "call/curve.h"
 #include "call/bezier.h"
+#include "call/ray.h"
 
 #ifdef __cplusplus
 }

@@ -42,6 +42,7 @@
     <ClInclude Include="..\test\src\test_vec2.h" />
     <ClInclude Include="..\test\src\test_vec3.h" />
     <ClInclude Include="..\test\src\test_vec4.h" />
+    <ClInclude Include="..\test\src\test_ray.h" />
     <ClInclude Include="..\test\tests.h" />
   </ItemGroup>
   <ItemGroup>

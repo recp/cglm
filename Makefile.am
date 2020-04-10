@@ -63,7 +63,8 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/ease.h \
                include/cglm/curve.h \
                include/cglm/bezier.h \
-               include/cglm/applesimd.h
+               include/cglm/applesimd.h \
+               include/cglm/ray.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -84,7 +85,8 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/sphere.h \
                     include/cglm/call/ease.h \
                     include/cglm/call/curve.h \
-                    include/cglm/call/bezier.h
+                    include/cglm/call/bezier.h \
+                    include/cglm/call/ray.h
 
 cglm_simddir=$(includedir)/cglm/simd
 cglm_simd_HEADERS = include/cglm/simd/intrin.h \
@@ -147,7 +149,8 @@ libcglm_la_SOURCES=\
     src/sphere.c \
     src/ease.c \
     src/curve.c \
-    src/bezier.c
+    src/bezier.c \
+    src/ray.c
 
 test_tests_SOURCES=\
     test/runner.c \
