@@ -19,54 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\src\affine.c" />
-    <ClCompile Include="..\src\bezier.c" />
-    <ClCompile Include="..\src\box.c" />
-    <ClCompile Include="..\src\cam.c" />
-    <ClCompile Include="..\src\curve.c" />
-    <ClCompile Include="..\src\ease.c" />
-    <ClCompile Include="..\src\euler.c" />
-    <ClCompile Include="..\src\frustum.c" />
-    <ClCompile Include="..\src\io.c" />
-    <ClCompile Include="..\src\mat2.c" />
-    <ClCompile Include="..\src\mat3.c" />
-    <ClCompile Include="..\src\mat4.c" />
-    <ClCompile Include="..\src\plane.c" />
-    <ClCompile Include="..\src\project.c" />
-    <ClCompile Include="..\src\quat.c" />
-    <ClCompile Include="..\src\ray.c" />
-    <ClCompile Include="..\src\sphere.c" />
-    <ClCompile Include="..\src\vec2.c" />
-    <ClCompile Include="..\src\vec3.c" />
-    <ClCompile Include="..\src\vec4.c" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
     <ClInclude Include="..\include\cglm\applesimd.h" />
     <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
-    <ClInclude Include="..\include\cglm\call.h" />
-    <ClInclude Include="..\include\cglm\call\affine.h" />
-    <ClInclude Include="..\include\cglm\call\bezier.h" />
-    <ClInclude Include="..\include\cglm\call\box.h" />
-    <ClInclude Include="..\include\cglm\call\cam.h" />
-    <ClInclude Include="..\include\cglm\call\curve.h" />
-    <ClInclude Include="..\include\cglm\call\ease.h" />
-    <ClInclude Include="..\include\cglm\call\euler.h" />
-    <ClInclude Include="..\include\cglm\call\frustum.h" />
-    <ClInclude Include="..\include\cglm\call\io.h" />
-    <ClInclude Include="..\include\cglm\call\mat2.h" />
-    <ClInclude Include="..\include\cglm\call\mat3.h" />
-    <ClInclude Include="..\include\cglm\call\mat4.h" />
-    <ClInclude Include="..\include\cglm\call\plane.h" />
-    <ClInclude Include="..\include\cglm\call\project.h" />
-    <ClInclude Include="..\include\cglm\call\quat.h" />
-    <ClInclude Include="..\include\cglm\call\ray.h" />
-    <ClInclude Include="..\include\cglm\call\sphere.h" />
-    <ClInclude Include="..\include\cglm\call\vec2.h" />
-    <ClInclude Include="..\include\cglm\call\vec3.h" />
-    <ClInclude Include="..\include\cglm\call\vec4.h" />
     <ClInclude Include="..\include\cglm\cam.h" />
     <ClInclude Include="..\include\cglm\cglm.h" />
     <ClInclude Include="..\include\cglm\color.h" />
@@ -127,7 +84,9 @@
     <ClInclude Include="..\include\cglm\vec4-ext.h" />
     <ClInclude Include="..\include\cglm\vec4.h" />
     <ClInclude Include="..\include\cglm\version.h" />
-    <ClInclude Include="..\src\config.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\cglm.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
