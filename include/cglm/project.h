@@ -39,9 +39,11 @@
  * @param[in]  vp       viewport as [x, y, width, height]
  * @param[out] dest     unprojected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 v;
 
   v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
@@ -53,6 +55,7 @@ glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
   glm_vec4_scale(v, 1.0f / v[3], v);
   glm_vec3(v, dest);
 }
+#endif
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
@@ -78,13 +81,16 @@ glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  * @param[in]  vp       viewport as [x, y, width, height]
  * @param[out] dest     unprojected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4 inv;
   glm_mat4_inv(m, inv);
   glm_unprojecti(pos, inv, vp, dest);
 }
+#endif
 
 /*!
  * @brief map object coordinates to window coordinates
@@ -98,9 +104,11 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  * @param[in]  vp       viewport as [x, y, width, height]
  * @param[out] dest     projected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN(16) vec4 pos4, vone = GLM_VEC4_ONE_INIT;
 
   glm_vec4(pos, 1.0f, pos4);
@@ -114,5 +122,6 @@ glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   dest[1] = pos4[1] * vp[3] + vp[1];
   dest[2] = pos4[2];
 }
+#endif
 
 #endif /* cglm_project_h */

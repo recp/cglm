@@ -92,7 +92,7 @@ TEST_IMPL(MACRO_glm_vec4_flipsign) {
        v3 = {-13.0f, 12.0f, -11.0f, -56.0f};
   
   glm_vec4_flipsign(v1);
-  glmc_vec4_flipsign(v2);
+  glm_vec4_flipsign(v2);
 
   ASSERTIFY(test_assert_vec4_eq(v1, v3))
   ASSERTIFY(test_assert_vec4_eq(v2, v3))
@@ -106,7 +106,7 @@ TEST_IMPL(MACRO_glm_vec4_flipsign_to) {
        v3, v4;
   
   glm_vec4_flipsign_to(v1, v3);
-  glmc_vec4_flipsign_to(v1, v4);
+  glm_vec4_flipsign_to(v1, v4);
 
   ASSERTIFY(test_assert_vec4_eq(v2, v3))
   ASSERTIFY(test_assert_vec4_eq(v2, v4))
@@ -120,7 +120,7 @@ TEST_IMPL(MACRO_glm_vec4_inv) {
        v3 = {-13.0f, 12.0f, -11.0f, -56.0f};
   
   glm_vec4_inv(v1);
-  glmc_vec4_inv(v2);
+  glm_vec4_inv(v2);
 
   ASSERTIFY(test_assert_vec4_eq(v1, v3))
   ASSERTIFY(test_assert_vec4_eq(v2, v3))
@@ -134,7 +134,7 @@ TEST_IMPL(MACRO_glm_vec4_inv_to) {
        v3, v4;
 
   glm_vec4_inv_to(v1, v3);
-  glmc_vec4_inv_to(v1, v4);
+  glm_vec4_inv_to(v1, v4);
 
   ASSERTIFY(test_assert_vec4_eq(v3, v4))
   ASSERTIFY(test_assert_vec4_eq(v2, v3))
@@ -148,7 +148,7 @@ TEST_IMPL(MACRO_glm_vec4_mulv) {
        v3, v4;
 
   glm_vec4_mulv(v1, v2, v3);
-  glmc_vec4_mulv(v1, v2, v4);
+  glm_vec4_mulv(v1, v2, v4);
 
   ASSERTIFY(test_assert_vec4_eq(v3, v4))
 

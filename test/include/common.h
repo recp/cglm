@@ -14,7 +14,6 @@
 
 #include <cglm/cglm.h>
 #include <cglm/struct.h>
-#include <cglm/call.h>
 
 typedef struct test_status_t {
   const char *msg;

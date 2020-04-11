@@ -18,16 +18,16 @@
    enum glm_euler_seq
 
  Functions:
-   CGLM_INLINE glm_euler_seq glm_euler_order(int newOrder[3]);
-   CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
-   CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xyz(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zyx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zxy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xzy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yzx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yxz(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_by_order(vec3         angles,
+   CGLM_DECL glm_euler_seq glm_euler_order(int newOrder[3]);
+   CGLM_DECL void glm_euler_angles(mat4 m, vec3 dest);
+   CGLM_DECL void glm_euler(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_xyz(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_zyx(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_zxy(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_xzy(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_yzx(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_yxz(vec3 angles, mat4 dest);
+   CGLM_DECL void glm_euler_by_order(vec3         angles,
                                        glm_euler_seq ord,
                                        mat4         dest);
  */
@@ -57,11 +57,14 @@ typedef enum glm_euler_seq {
 
 typedef glm_euler_seq glm_euler_sq;
 
-CGLM_INLINE
+CGLM_DECL
 glm_euler_seq
-glm_euler_order(int ord[3]) {
+glm_euler_order(int ord[3]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (glm_euler_seq)(ord[0] << 0 | ord[1] << 2 | ord[2] << 4);
 }
+#endif
 
 /*!
  * @brief extract euler angles (in radians) using xyz order
@@ -69,9 +72,11 @@ glm_euler_order(int ord[3]) {
  * @param[in]  m    affine transform
  * @param[out] dest angles vector [x, y, z]
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_angles(mat4 m, vec3 dest) {
+glm_euler_angles(mat4 m, vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float m00, m01, m10, m11, m20, m21, m22;
   float thetaX, thetaY, thetaZ;
 
@@ -100,6 +105,7 @@ glm_euler_angles(mat4 m, vec3 dest) {
   dest[1] = thetaY;
   dest[2] = thetaZ;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -107,9 +113,11 @@ glm_euler_angles(mat4 m, vec3 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_xyz(vec3 angles, mat4 dest) {
+glm_euler_xyz(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz, czsx, cxcz, sysz;
 
@@ -138,6 +146,7 @@ glm_euler_xyz(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -145,11 +154,14 @@ glm_euler_xyz(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler(vec3 angles, mat4 dest) {
+glm_euler(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_euler_xyz(angles, dest);
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -157,9 +169,11 @@ glm_euler(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_xzy(vec3 angles, mat4 dest) {
+glm_euler_xzy(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
   sx, sy, sz, sxsy, cysx, cxsy, cxcy;
 
@@ -189,6 +203,7 @@ glm_euler_xzy(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 
 /*!
@@ -197,9 +212,11 @@ glm_euler_xzy(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_yxz(vec3 angles, mat4 dest) {
+glm_euler_yxz(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz, cycz, sysz, czsy, cysz;
 
@@ -229,6 +246,7 @@ glm_euler_yxz(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -236,9 +254,11 @@ glm_euler_yxz(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_yzx(vec3 angles, mat4 dest) {
+glm_euler_yzx(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz, sxsy, cxcy, cysx, cxsy;
 
@@ -268,6 +288,7 @@ glm_euler_yzx(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -275,9 +296,11 @@ glm_euler_yzx(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_zxy(vec3 angles, mat4 dest) {
+glm_euler_zxy(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz, cycz, sxsy, cysz;
 
@@ -306,6 +329,7 @@ glm_euler_zxy(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -313,9 +337,11 @@ glm_euler_zxy(vec3 angles, mat4 dest) {
  * @param[in]  angles angles as vector [Xangle, Yangle, Zangle]
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_zyx(vec3 angles, mat4 dest) {
+glm_euler_zyx(vec3 angles, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz, czsx, cxcz, sysz;
 
@@ -344,6 +370,7 @@ glm_euler_zyx(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
+#endif
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -352,9 +379,11 @@ glm_euler_zyx(vec3 angles, mat4 dest) {
  * @param[in]  ord    euler order
  * @param[out] dest   rotation matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
+glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float cx, cy, cz,
         sx, sy, sz;
 
@@ -449,5 +478,6 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
   dest[3][2] = 0.0f;
   dest[3][3] = 1.0f;
 }
+#endif
 
 #endif /* cglm_euler_h */

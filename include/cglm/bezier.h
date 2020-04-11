@@ -45,9 +45,11 @@
  *
  * @return B(s)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_bezier(float s, float p0, float c0, float c1, float p1) {
+glm_bezier(float s, float p0, float c0, float c1, float p1) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float x, xx, ss, xs3, a;
 
   x   = 1.0f - s;
@@ -58,6 +60,7 @@ glm_bezier(float s, float p0, float c0, float c1, float p1) {
 
   return a + s * (c1 * xs3 + p1 * ss - a);
 }
+#endif
 
 /*!
  * @brief cubic hermite interpolation
@@ -79,9 +82,11 @@ glm_bezier(float s, float p0, float c0, float c1, float p1) {
  *
  * @return H(s)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_hermite(float s, float p0, float t0, float t1, float p1) {
+glm_hermite(float s, float p0, float t0, float t1, float p1) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float ss, d, a, b, c, e, f;
 
   ss = s  * s;
@@ -94,6 +99,7 @@ glm_hermite(float s, float p0, float t0, float t1, float p1) {
 
   return p0 * (e + 1.0f) + t0 * (f - ss + s) + t1 * f - p1 * e;
 }
+#endif
 
 /*!
  * @brief iterative way to solve cubic equation
@@ -106,9 +112,11 @@ glm_hermite(float s, float p0, float t0, float t1, float p1) {
  *
  * @return parameter to use in cubic equation
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
+glm_decasteljau(float prm, float p0, float c0, float c1, float p1) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float u, v, a, b, c, d, e, f;
   int   i;
 
@@ -150,5 +158,6 @@ glm_decasteljau(float prm, float p0, float c0, float c1, float p1) {
 
   return glm_clamp_zo((u  + v) * 0.5f);
 }
+#endif
 
 #endif /* cglm_bezier_h */

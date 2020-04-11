@@ -7,27 +7,27 @@
 
 /*
  Functions:
-   CGLM_INLINE int   glm_sign(int val);
-   CGLM_INLINE float glm_signf(float val);
-   CGLM_INLINE float glm_rad(float deg);
-   CGLM_INLINE float glm_deg(float rad);
-   CGLM_INLINE void  glm_make_rad(float *deg);
-   CGLM_INLINE void  glm_make_deg(float *rad);
-   CGLM_INLINE float glm_pow2(float x);
-   CGLM_INLINE float glm_min(float a, float b);
-   CGLM_INLINE float glm_max(float a, float b);
-   CGLM_INLINE float glm_clamp(float val, float minVal, float maxVal);
-   CGLM_INLINE float glm_clamp_zo(float val, float minVal, float maxVal);
-   CGLM_INLINE float glm_lerp(float from, float to, float t);
-   CGLM_INLINE float glm_lerpc(float from, float to, float t);
-   CGLM_INLINE float glm_step(float edge, float x);
-   CGLM_INLINE float glm_smooth(float t);
-   CGLM_INLINE float glm_smoothstep(float edge0, float edge1, float x);
-   CGLM_INLINE float glm_smoothinterp(float from, float to, float t);
-   CGLM_INLINE float glm_smoothinterpc(float from, float to, float t);
-   CGLM_INLINE bool  glm_eq(float a, float b);
-   CGLM_INLINE float glm_percent(float from, float to, float current);
-   CGLM_INLINE float glm_percentc(float from, float to, float current);
+   CGLM_DECL int   glm_sign(int val);
+   CGLM_DECL float glm_signf(float val);
+   CGLM_DECL float glm_rad(float deg);
+   CGLM_DECL float glm_deg(float rad);
+   CGLM_DECL void  glm_make_rad(float *deg);
+   CGLM_DECL void  glm_make_deg(float *rad);
+   CGLM_DECL float glm_pow2(float x);
+   CGLM_DECL float glm_min(float a, float b);
+   CGLM_DECL float glm_max(float a, float b);
+   CGLM_DECL float glm_clamp(float val, float minVal, float maxVal);
+   CGLM_DECL float glm_clamp_zo(float val, float minVal, float maxVal);
+   CGLM_DECL float glm_lerp(float from, float to, float t);
+   CGLM_DECL float glm_lerpc(float from, float to, float t);
+   CGLM_DECL float glm_step(float edge, float x);
+   CGLM_DECL float glm_smooth(float t);
+   CGLM_DECL float glm_smoothstep(float edge0, float edge1, float x);
+   CGLM_DECL float glm_smoothinterp(float from, float to, float t);
+   CGLM_DECL float glm_smoothinterpc(float from, float to, float t);
+   CGLM_DECL bool  glm_eq(float a, float b);
+   CGLM_DECL float glm_percent(float from, float to, float current);
+   CGLM_DECL float glm_percentc(float from, float to, float current);
  */
 
 #ifndef cglm_util_h
@@ -45,11 +45,14 @@
  *
  * @param val integer value
  */
-CGLM_INLINE
+CGLM_DECL
 int
-glm_sign(int val) {
+glm_sign(int val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return ((val >> 31) - (-val >> 31));
 }
+#endif
 
 /*!
  * @brief get sign of 32 bit float as +1, -1, 0
@@ -58,66 +61,84 @@ glm_sign(int val) {
  *
  * @param val float value
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_signf(float val) {
+glm_signf(float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (float)((val > 0.0f) - (val < 0.0f));
 }
+#endif
 
 /*!
  * @brief convert degree to radians
  *
  * @param[in] deg angle in degrees
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_rad(float deg) {
+glm_rad(float deg) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return deg * GLM_PIf / 180.0f;
 }
+#endif
 
 /*!
  * @brief convert radians to degree
  *
  * @param[in] rad angle in radians
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_deg(float rad) {
+glm_deg(float rad) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return rad * 180.0f / GLM_PIf;
 }
+#endif
 
 /*!
  * @brief convert exsisting degree to radians. this will override degrees value
  *
  * @param[in, out] deg pointer to angle in degrees
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_make_rad(float *deg) {
+glm_make_rad(float *deg) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   *deg = *deg * GLM_PIf / 180.0f;
 }
+#endif
 
 /*!
  * @brief convert exsisting radians to degree. this will override radians value
  *
  * @param[in, out] rad pointer to angle in radians
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_make_deg(float *rad) {
+glm_make_deg(float *rad) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   *rad = *rad * 180.0f / GLM_PIf;
 }
+#endif
 
 /*!
  * @brief multiplies given parameter with itself = x * x or powf(x, 2)
  *
  * @param[in] x x
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_pow2(float x) {
+glm_pow2(float x) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return x * x;
 }
+#endif
 
 /*!
  * @brief find minimum of given two values
@@ -125,13 +146,16 @@ glm_pow2(float x) {
  * @param[in] a number 1
  * @param[in] b number 2
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_min(float a, float b) {
+glm_min(float a, float b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   if (a < b)
     return a;
   return b;
 }
+#endif
 
 /*!
  * @brief find maximum of given two values
@@ -139,13 +163,16 @@ glm_min(float a, float b) {
  * @param[in] a number 1
  * @param[in] b number 2
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_max(float a, float b) {
+glm_max(float a, float b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   if (a > b)
     return a;
   return b;
 }
+#endif
 
 /*!
  * @brief clamp a number between min and max
@@ -154,22 +181,28 @@ glm_max(float a, float b) {
  * @param[in] minVal minimum value
  * @param[in] maxVal maximum value
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_clamp(float val, float minVal, float maxVal) {
+glm_clamp(float val, float minVal, float maxVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_min(glm_max(val, minVal), maxVal);
 }
+#endif
 
 /*!
  * @brief clamp a number to zero and one
  *
  * @param[in] val value to clamp
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_clamp_zo(float val) {
+glm_clamp_zo(float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_clamp(val, 0.0f, 1.0f);
 }
+#endif
 
 /*!
  * @brief linear interpolation between two numbers
@@ -180,11 +213,14 @@ glm_clamp_zo(float val) {
  * @param[in]   to   to value
  * @param[in]   t    interpolant (amount)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_lerp(float from, float to, float t) {
+glm_lerp(float from, float to, float t) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return from + t * (to - from);
 }
+#endif
 
 /*!
  * @brief clamped linear interpolation between two numbers
@@ -195,11 +231,14 @@ glm_lerp(float from, float to, float t) {
  * @param[in]   to      to value
  * @param[in]   t       interpolant (amount) clamped between 0 and 1
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_lerpc(float from, float to, float t) {
+glm_lerpc(float from, float to, float t) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_lerp(from, to, glm_clamp_zo(t));
 }
+#endif
 
 /*!
  * @brief threshold function
@@ -208,9 +247,11 @@ glm_lerpc(float from, float to, float t) {
  * @param[in]   x       value to test against threshold
  * @return      returns 0.0 if x < edge, else 1.0
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_step(float edge, float x) {
+glm_step(float edge, float x) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   /* branching - no type conversion */
   return (x < edge) ? 0.0f : 1.0f;
   /*
@@ -219,6 +260,7 @@ glm_step(float edge, float x) {
    * return !(x < edge);
    */
 }
+#endif
 
 /*!
  * @brief smooth Hermite interpolation
@@ -227,11 +269,14 @@ glm_step(float edge, float x) {
  *
  * @param[in]   t    interpolant (amount)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_smooth(float t) {
+glm_smooth(float t) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return t * t * (3.0f - 2.0f * t);
 }
+#endif
 
 /*!
  * @brief threshold function with a smooth transition (according to OpenCL specs)
@@ -242,13 +287,16 @@ glm_smooth(float t) {
  * @param[in]   edge1 high threshold
  * @param[in]   x     interpolant (amount)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_smoothstep(float edge0, float edge1, float x) {
+glm_smoothstep(float edge0, float edge1, float x) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float t;
   t = glm_clamp_zo((x - edge0) / (edge1 - edge0));
   return glm_smooth(t);
 }
+#endif
 
 /*!
  * @brief smoothstep interpolation between two numbers
@@ -259,11 +307,14 @@ glm_smoothstep(float edge0, float edge1, float x) {
  * @param[in]   to   to value
  * @param[in]   t    interpolant (amount)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_smoothinterp(float from, float to, float t) {
+glm_smoothinterp(float from, float to, float t) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return from + glm_smooth(t) * (to - from);
 }
+#endif
 
 /*!
  * @brief clamped smoothstep interpolation between two numbers
@@ -274,11 +325,14 @@ glm_smoothinterp(float from, float to, float t) {
  * @param[in]   to   to value
  * @param[in]   t    interpolant (amount) clamped between 0 and 1
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_smoothinterpc(float from, float to, float t) {
+glm_smoothinterpc(float from, float to, float t) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_smoothinterp(from, to, glm_clamp_zo(t));
 }
+#endif
 
 /*!
  * @brief check if two float equal with using EPSILON
@@ -286,11 +340,14 @@ glm_smoothinterpc(float from, float to, float t) {
  * @param[in]   a   a
  * @param[in]   b   b
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_eq(float a, float b) {
+glm_eq(float a, float b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return fabsf(a - b) <= FLT_EPSILON;
 }
+#endif
 
 /*!
  * @brief percentage of current value between start and end value
@@ -301,9 +358,11 @@ glm_eq(float a, float b) {
  * @param[in]   to      to value
  * @param[in]   current current value
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_percent(float from, float to, float current) {
+glm_percent(float from, float to, float current) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float t;
 
   if ((t = to - from) == 0.0f)
@@ -311,6 +370,7 @@ glm_percent(float from, float to, float current) {
 
   return (current - from) / t;
 }
+#endif
 
 /*!
  * @brief clamped percentage of current value between start and end value
@@ -319,11 +379,14 @@ glm_percent(float from, float to, float current) {
  * @param[in]   to      to value
  * @param[in]   current current value
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_percentc(float from, float to, float current) {
+glm_percentc(float from, float to, float current) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_clamp_zo(glm_percent(from, to, current));
 }
+#endif
 
 /*!
 * @brief swap two float values
@@ -331,13 +394,16 @@ glm_percentc(float from, float to, float current) {
 * @param[in]   a float value 1 (pointer)
 * @param[in]   b float value 2 (pointer)
 */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_swapf(float * __restrict a, float * __restrict b) {
+glm_swapf(float * __restrict a, float * __restrict b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float t;
   t  = *a;
   *a = *b;
   *b = t;
 }
+#endif
 
 #endif /* cglm_util_h */

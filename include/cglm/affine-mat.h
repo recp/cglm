@@ -7,8 +7,8 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_mul(mat4 m1, mat4 m2, mat4 dest);
-   CGLM_INLINE void glm_inv_tr(mat4 mat);
+   CGLM_DECL void glm_mul(mat4 m1, mat4 m2, mat4 dest);
+   CGLM_DECL void glm_inv_tr(mat4 mat);
  */
 
 #ifndef cglm_affine_mat_h
@@ -42,9 +42,11 @@
  * @param[in]   m2    affine matrix 2
  * @param[out]  dest  result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mul(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul(mat4 m1, mat4 m2, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #ifdef __AVX__
   glm_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -81,6 +83,7 @@ glm_mul(mat4 m1, mat4 m2, mat4 dest) {
   dest[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
 #endif
 }
+#endif
 
 /*!
  * @brief this is similar to glm_mat4_mul but specialized to affine transform
@@ -98,9 +101,11 @@ glm_mul(mat4 m1, mat4 m2, mat4 dest) {
  * @param[in]   m2    affine matrix 2
  * @param[out]  dest  result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mul_rot_sse2(m1, m2, dest);
 #else
@@ -134,6 +139,7 @@ glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
   dest[3][3] = a33;
 #endif
 }
+#endif
 
 /*!
  * @brief inverse orthonormal rotation + translation matrix (ridig-body)
@@ -145,9 +151,11 @@ glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
  *
  * @param[in,out]  mat  matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_inv_tr(mat4 mat) {
+glm_inv_tr(mat4 mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_inv_tr_sse2(mat);
 #else
@@ -164,5 +172,6 @@ glm_inv_tr(mat4 mat) {
   glm_vec3_copy(t, mat[3]);
 #endif
 }
+#endif
 
 #endif /* cglm_affine_mat_h */

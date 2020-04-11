@@ -16,16 +16,36 @@
 #include <float.h>
 #include <stdbool.h>
 
-#if defined(_MSC_VER)
-#  ifdef CGLM_DLL
-#    define CGLM_EXPORT __declspec(dllexport)
-#  else
-#    define CGLM_EXPORT __declspec(dllimport)
-#  endif
-#  define CGLM_INLINE __forceinline
+#if defined(_WIN32) /* Win32/64, incl MSVC, Tiny C, MinGW/Cygwin GCC */
+  #if defined(CGLM_DLL)
+    #define CGLM_EXPORT __declspec(dllexport)
+  #else
+    #define CGLM_EXPORT __declspec(dllimport)
+  #endif
+#elif defined(__GNUC__) && defined(CGLM_DLL)
+  #define CGLM_EXPORT __attribute__((visibility ("default")))
 #else
-#  define CGLM_EXPORT __attribute__((visibility("default")))
-#  define CGLM_INLINE static inline __attribute((always_inline))
+  #define CGLM_EXPORT
+#endif
+
+#if defined(_MSC_VER)
+  #define CGLM_INLINE __forceinline
+#elif defined(__GNUC__)
+  #define CGLM_INLINE static inline __attribute((always_inline))
+#else  
+  #define CGLM_INLINE static inline
+#endif	
+
+#if defined(CGLM_LIB) && !defined(CGLM_DLL)
+  #define CGLM_ENDD ;
+#else
+  #define CGLM_ENDD
+#endif
+
+#if defined(CGLM_LIB) || defined(CGLM_DLL)
+#  define CGLM_DECL CGLM_EXPORT
+#else
+#  define CGLM_DECL CGLM_INLINE
 #endif
 
 #define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))

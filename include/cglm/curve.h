@@ -29,12 +29,15 @@
  *
  * @return B(s)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_smc(float s, mat4 m, vec4 c) {
+glm_smc(float s, mat4 m, vec4 c) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 vs;
   glm_vec4_cubic(s, vs);
   return glm_mat4_rmc(vs, m, c);
 }
+#endif
 
 #endif /* cglm_curve_h */

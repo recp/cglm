@@ -11,19 +11,19 @@
 
 /*
  Functions:
-   CGLM_INLINE vec2s glms_vec2_fill(float val)
-   CGLM_INLINE bool  glms_vec2_eq(vec2s v, float val)
-   CGLM_INLINE bool  glms_vec2_eq_eps(vec2s v, float val)
-   CGLM_INLINE bool  glms_vec2_eq_all(vec2s v)
-   CGLM_INLINE bool  glms_vec2_eqv(vec2s a, vec2s b)
-   CGLM_INLINE bool  glms_vec2_eqv_eps(vec2s a, vec2s b)
-   CGLM_INLINE float glms_vec2_max(vec2s v)
-   CGLM_INLINE float glms_vec2_min(vec2s v)
-   CGLM_INLINE bool  glms_vec2_isnan(vec2s v)
-   CGLM_INLINE bool  glms_vec2_isinf(vec2s v)
-   CGLM_INLINE bool  glms_vec2_isvalid(vec2s v)
-   CGLM_INLINE vec2s glms_vec2_sign(vec2s v)
-   CGLM_INLINE vec2s glms_vec2_sqrt(vec2s v)
+   CGLM_DECL vec2s glms_vec2_fill(float val)
+   CGLM_DECL bool  glms_vec2_eq(vec2s v, float val)
+   CGLM_DECL bool  glms_vec2_eq_eps(vec2s v, float val)
+   CGLM_DECL bool  glms_vec2_eq_all(vec2s v)
+   CGLM_DECL bool  glms_vec2_eqv(vec2s a, vec2s b)
+   CGLM_DECL bool  glms_vec2_eqv_eps(vec2s a, vec2s b)
+   CGLM_DECL float glms_vec2_max(vec2s v)
+   CGLM_DECL float glms_vec2_min(vec2s v)
+   CGLM_DECL bool  glms_vec2_isnan(vec2s v)
+   CGLM_DECL bool  glms_vec2_isinf(vec2s v)
+   CGLM_DECL bool  glms_vec2_isvalid(vec2s v)
+   CGLM_DECL vec2s glms_vec2_sign(vec2s v)
+   CGLM_DECL vec2s glms_vec2_sqrt(vec2s v)
  */
 
 #ifndef cglms_vec2s_ext_h
@@ -40,13 +40,16 @@
  * @param[in]  val  value
  * @returns         dest
  */
-CGLM_INLINE
+CGLM_DECL
 vec2s
-glms_vec2_fill(float val) {
+glms_vec2_fill(float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec2s r;
   glm_vec2_fill(r.raw, val);
   return r;
 }
+#endif
 
 /*!
  * @brief check if vector is equal to value (without epsilon)
@@ -54,11 +57,14 @@ glms_vec2_fill(float val) {
  * @param[in] v   vector
  * @param[in] val value
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_eq(vec2s v, float val) {
+glms_vec2_eq(vec2s v, float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_eq(v.raw, val);
 }
+#endif
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
@@ -66,22 +72,28 @@ glms_vec2_eq(vec2s v, float val) {
  * @param[in] v   vector
  * @param[in] val value
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_eq_eps(vec2s v, float val) {
+glms_vec2_eq_eps(vec2s v, float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_eq_eps(v.raw, val);
 }
+#endif
 
 /*!
  * @brief check if vectors members are equal (without epsilon)
  *
  * @param[in] v   vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_eq_all(vec2s v) {
+glms_vec2_eq_all(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_eq_all(v.raw);
 }
+#endif
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -89,11 +101,14 @@ glms_vec2_eq_all(vec2s v) {
  * @param[in] a vector
  * @param[in] b vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_eqv(vec2s a, vec2s b) {
+glms_vec2_eqv(vec2s a, vec2s b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_eqv(a.raw, b.raw);
 }
+#endif
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
@@ -101,33 +116,42 @@ glms_vec2_eqv(vec2s a, vec2s b) {
  * @param[in] a vector
  * @param[in] b vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_eqv_eps(vec2s a, vec2s b) {
+glms_vec2_eqv_eps(vec2s a, vec2s b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_eqv_eps(a.raw, b.raw);
 }
+#endif
 
 /*!
  * @brief max value of vector
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_vec2_max(vec2s v) {
+glms_vec2_max(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_max(v.raw);
 }
+#endif
 
 /*!
  * @brief min value of vector
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_vec2_min(vec2s v) {
+glms_vec2_min(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_min(v.raw);
 }
+#endif
 
 /*!
  * @brief check if all items are NaN (not a number)
@@ -135,11 +159,14 @@ glms_vec2_min(vec2s v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_isnan(vec2s v) {
+glms_vec2_isnan(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_isnan(v.raw);
 }
+#endif
 
 /*!
  * @brief check if all items are INFINITY
@@ -147,11 +174,14 @@ glms_vec2_isnan(vec2s v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_isinf(vec2s v) {
+glms_vec2_isinf(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_isinf(v.raw);
 }
+#endif
 
 /*!
  * @brief check if all items are valid number
@@ -159,11 +189,14 @@ glms_vec2_isinf(vec2s v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_vec2_isvalid(vec2s v) {
+glms_vec2_isvalid(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec2_isvalid(v.raw);
 }
+#endif
 
 /*!
  * @brief get sign of 32 bit float as +1, -1, 0
@@ -173,13 +206,16 @@ glms_vec2_isvalid(vec2s v) {
  * @param   v   vector
  * @returns     sign vector
  */
-CGLM_INLINE
+CGLM_DECL
 vec2s
-glms_vec2_sign(vec2s v) {
+glms_vec2_sign(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec2s r;
   glm_vec2_sign(v.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief square root of each vector item
@@ -187,12 +223,15 @@ glms_vec2_sign(vec2s v) {
  * @param[in]  v    vector
  * @returns         destination vector
  */
-CGLM_INLINE
+CGLM_DECL
 vec2s
-glms_vec2_sqrt(vec2s v) {
+glms_vec2_sqrt(vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec2s r;
   glm_vec2_sqrt(v.raw, r.raw);
   return r;
 }
+#endif
 
 #endif /* cglms_vec2s_ext_h */

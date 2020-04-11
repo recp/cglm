@@ -394,8 +394,8 @@ TEST_IMPL(GLM_PREFIX, mat4_inv_precise) {
     test_rand_mat4(m4);
     test_rand_mat4(m5);
     
-    glmc_mat4_inv_precise(m4, m5);
-    glmc_mat4_inv_precise(m5, m6);
+    glm_mat4_inv_precise(m4, m5);
+    glm_mat4_inv_precise(m5, m6);
     ASSERTIFY(test_assert_mat4_eq(m4, m6))
   }
 

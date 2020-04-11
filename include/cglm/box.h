@@ -20,9 +20,11 @@
  * @param[in]  m    transform matrix
  * @param[out] dest transformed bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
+glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec3 v[2], xa, xb, ya, yb, za, zb;
 
   glm_vec3_scale(m[0], box[0][0], xa);
@@ -49,6 +51,7 @@ glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
   glm_vec3_copy(v[0], dest[0]);
   glm_vec3_copy(v[1], dest[1]);
 }
+#endif
 
 /*!
  * @brief merges two AABB bounding box and creates new one
@@ -60,9 +63,11 @@ glm_aabb_transform(vec3 box[2], mat4 m, vec3 dest[2]) {
  * @param[in]  box2 bounding box 2
  * @param[out] dest merged bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) {
+glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = glm_min(box1[0][0], box2[0][0]);
   dest[0][1] = glm_min(box1[0][1], box2[0][1]);
   dest[0][2] = glm_min(box1[0][2], box2[0][2]);
@@ -71,6 +76,7 @@ glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) {
   dest[1][1] = glm_max(box1[1][1], box2[1][1]);
   dest[1][2] = glm_max(box1[1][2], box2[1][2]);
 }
+#endif
 
 /*!
  * @brief crops a bounding box with another one.
@@ -83,9 +89,11 @@ glm_aabb_merge(vec3 box1[2], vec3 box2[2], vec3 dest[2]) {
  * @param[in]  cropBox crop box
  * @param[out] dest    cropped bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
+glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = glm_max(box[0][0], cropBox[0][0]);
   dest[0][1] = glm_max(box[0][1], cropBox[0][1]);
   dest[0][2] = glm_max(box[0][2], cropBox[0][2]);
@@ -94,6 +102,7 @@ glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
   dest[1][1] = glm_min(box[1][1], cropBox[1][1]);
   dest[1][2] = glm_min(box[1][2], cropBox[1][2]);
 }
+#endif
 
 /*!
  * @brief crops a bounding box with another one.
@@ -107,15 +116,18 @@ glm_aabb_crop(vec3 box[2], vec3 cropBox[2], vec3 dest[2]) {
  * @param[in]  clampBox miniumum box
  * @param[out] dest     cropped bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glm_aabb_crop_until(vec3 box[2],
                     vec3 cropBox[2],
                     vec3 clampBox[2],
-                    vec3 dest[2]) {
+                    vec3 dest[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_aabb_crop(box, cropBox, dest);
   glm_aabb_merge(clampBox, dest, dest);
 }
+#endif
 
 /*!
  * @brief check if AABB intersects with frustum planes
@@ -131,9 +143,11 @@ glm_aabb_crop_until(vec3 box[2],
  * @param[in]  box     bounding box
  * @param[in]  planes  frustum planes
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
+glm_aabb_frustum(vec3 box[2], vec4 planes[6]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float *p, dp;
   int    i;
 
@@ -149,52 +163,65 @@ glm_aabb_frustum(vec3 box[2], vec4 planes[6]) {
 
   return true;
 }
+#endif
 
 /*!
  * @brief invalidate AABB min and max values
  *
  * @param[in, out]  box bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_aabb_invalidate(vec3 box[2]) {
+glm_aabb_invalidate(vec3 box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_vec3_broadcast(FLT_MAX,  box[0]);
   glm_vec3_broadcast(-FLT_MAX, box[1]);
 }
+#endif
 
 /*!
  * @brief check if AABB is valid or not
  *
  * @param[in]  box bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_isvalid(vec3 box[2]) {
+glm_aabb_isvalid(vec3 box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec3_max(box[0]) != FLT_MAX
          && glm_vec3_min(box[1]) != -FLT_MAX;
 }
+#endif
 
 /*!
  * @brief distance between of min and max
  *
  * @param[in]  box bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_aabb_size(vec3 box[2]) {
+glm_aabb_size(vec3 box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec3_distance(box[0], box[1]);
 }
+#endif
 
 /*!
  * @brief radius of sphere which surrounds AABB
  *
  * @param[in]  box bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_aabb_radius(vec3 box[2]) {
+glm_aabb_radius(vec3 box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_aabb_size(box) * 0.5f;
 }
+#endif
 
 /*!
  * @brief computes center point of AABB
@@ -202,11 +229,14 @@ glm_aabb_radius(vec3 box[2]) {
  * @param[in]   box  bounding box
  * @param[out]  dest center of bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_aabb_center(vec3 box[2], vec3 dest) {
+glm_aabb_center(vec3 box[2], vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_vec3_center(box[0], box[1], dest);
 }
+#endif
 
 /*!
  * @brief check if two AABB intersects
@@ -214,13 +244,16 @@ glm_aabb_center(vec3 box[2], vec3 dest) {
  * @param[in]   box    bounding box
  * @param[in]   other  other bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
+glm_aabb_aabb(vec3 box[2], vec3 other[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (box[0][0] <= other[1][0] && box[1][0] >= other[0][0])
       && (box[0][1] <= other[1][1] && box[1][1] >= other[0][1])
       && (box[0][2] <= other[1][2] && box[1][2] >= other[0][2]);
 }
+#endif
 
 /*!
  * @brief check if AABB intersects with sphere
@@ -231,9 +264,11 @@ glm_aabb_aabb(vec3 box[2], vec3 other[2]) {
  * @param[in]   box    solid bounding box
  * @param[in]   s      solid sphere
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_sphere(vec3 box[2], vec4 s) {
+glm_aabb_sphere(vec3 box[2], vec4 s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float dmin;
   int   a, b, c;
 
@@ -247,6 +282,7 @@ glm_aabb_sphere(vec3 box[2], vec4 s) {
 
   return dmin <= glm_pow2(s[3]);
 }
+#endif
 
 /*!
  * @brief check if point is inside of AABB
@@ -254,13 +290,16 @@ glm_aabb_sphere(vec3 box[2], vec4 s) {
  * @param[in]   box    bounding box
  * @param[in]   point  point
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_point(vec3 box[2], vec3 point) {
+glm_aabb_point(vec3 box[2], vec3 point) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (point[0] >= box[0][0] && point[0] <= box[1][0])
       && (point[1] >= box[0][1] && point[1] <= box[1][1])
       && (point[2] >= box[0][2] && point[2] <= box[1][2]);
 }
+#endif
 
 /*!
  * @brief check if AABB contains other AABB
@@ -268,12 +307,15 @@ glm_aabb_point(vec3 box[2], vec3 point) {
  * @param[in]   box    bounding box
  * @param[in]   other  other bounding box
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_aabb_contains(vec3 box[2], vec3 other[2]) {
+glm_aabb_contains(vec3 box[2], vec3 other[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (box[0][0] <= other[0][0] && box[1][0] >= other[1][0])
       && (box[0][1] <= other[0][1] && box[1][1] >= other[1][1])
       && (box[0][2] <= other[0][2] && box[1][2] >= other[1][2]);
 }
+#endif
 
 #endif /* cglm_box_h */
