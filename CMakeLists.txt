@@ -24,11 +24,12 @@ if(MSVC)
 	add_definitions(-DNDEBUG -D_WINDOWS -D_USRDLL -DCGLM_EXPORTS -DCGLM_DLL)
 	add_compile_options("/W3" "/Ox" "/Gy" "/Oi" "/TC" "/analyze")
 else()
-    add_compile_options("-Wall" "-Werror" "-O3")
+    add_compile_options("-Wall" "-Werror" "-std=gnu11" "-O3")
     if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-		add_compile_options("-stdlib=libc++" "-Weverything")
+		# Currently, nothing special to be seen here.
     else()
-		add_compile_options("-Werror=strict-prototypes" "-fstrict-aliasing")
+		add_compile_options("-Werror=strict-prototypes")
+
     endif()
 endif()
 
