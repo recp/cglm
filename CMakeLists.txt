@@ -29,6 +29,7 @@ else()
 		# Currently, nothing special to be seen here.
     else()
 		add_compile_options("-Werror=strict-prototypes")
+
     endif()
 endif()
 
