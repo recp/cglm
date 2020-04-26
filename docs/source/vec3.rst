@@ -435,8 +435,8 @@ Functions documentation
     squared distance between two vectors
 
     Parameters:
-      | *[in]*  **mat**   vector1
-      | *[in]*  **row1**  vector2
+      | *[in]*  **v1**  vector1
+      | *[in]*  **v2**  vector2
 
     Returns:
       | squared distance (distance * distance)
@@ -446,8 +446,8 @@ Functions documentation
     distance between two vectors
 
     Parameters:
-      | *[in]*  **mat**   vector1
-      | *[in]*  **row1**  vector2
+      | *[in]*  **v1**  vector1
+      | *[in]*  **v2**  vector2
 
     Returns:
       | distance
@@ -475,7 +475,7 @@ Functions documentation
     possible orthogonal/perpendicular vector
 
     Parameters:
-      | *[in]*  **mat**   vector
+      | *[in]*  **v**     vector
       | *[out]* **dest**  orthogonal/perpendicular vector
 
 .. c:function:: void  glm_vec3_clamp(vec3 v, float minVal, float maxVal)
