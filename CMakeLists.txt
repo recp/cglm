@@ -20,14 +20,16 @@ if(CGLM_USE_C99)
   set(C_STANDARD 99)
 endif()
 
-if("${CMAKE_C_COMPILER_ID}" STREQUAL "MSVC")
-  list(APPEND LDFLAGS "/W4")
-elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "GNU")
-  set(C_EXTENSIONS YES)
-  list(APPEND LDFLAGS "-Wall" "-Wpedantic" "-Wstrict-aliasing=2")
-  list(APPEND LDFLAGS "-Werror=strict-prototypes" "-fstrict-aliasing" "-O3")
-elseif("${CMAKE_C_COMPILER_ID}" STREQUAL "CLANG")
-  list(APPEND LDFLAGS "-Wall" "-Weverything" "-Wpedantic")
+if(MSVC)
+	add_definitions(-DNDEBUG -D_WINDOWS -D_USRDLL -DCGLM_EXPORTS -DCGLM_DLL)
+	add_compile_options("/W3" "/Ox" "/Gy" "/Oi" "/TC" "/analyze")
+else()
+    add_compile_options("-Wall" "-Werror" "-O3")
+    if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
+		add_compile_options("-stdlib=libc++" "-Weverything")
+    else()
+		add_compile_options("-Werror=strict-prototypes" "-fstrict-aliasing")
+    endif()
 endif()
 
 set(HEADERS
@@ -159,10 +161,6 @@ add_library(cglm
 target_include_directories(cglm PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
-
-if(LDFLAGS)
-  target_compile_options(cglm PRIVATE ${LDFLAGS})
-endif()
 
 install(
 	TARGETS	cglm
