@@ -89,6 +89,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - curves
 - curve interpolation helpers (S*M*C, deCasteljau...)
 - helpers to convert cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
+- ray intersection helpers
 - and others...
 
 <hr />
@@ -155,6 +156,15 @@ $ cd build
 $ cmake .. # [Optional] -DCGLM_SHARED=ON
 $ make
 $ sudo make install # [Optional]
+```
+
+##### Cmake options with Defaults:
+
+```CMake
+option(CGLM_SHARED "Shared build" ON)
+option(CGLM_STATIC "Static build" OFF)
+option(CGLM_USE_C99 "" OFF) # C11 
+option(CGLM_USE_TEST "Enable Tests" OFF) # for make check - make test
 ```
 
 #### Use with your CMake project
