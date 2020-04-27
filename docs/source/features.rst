@@ -1,10 +1,11 @@
 Features
 ================================================================================
 
+* array api and struct api, you can use arrays or structs.
 * general purpose matrix operations (mat4, mat3)
 * chain matrix multiplication (square only)
 * general purpose vector operations (cross, dot, rotate, proj, angle...)
-* affine transforms
+* affine transformations
 * matrix decomposition (extract rotation, scaling factor)
 * optimized affine transform matrices (mul, rigid-body inverse)
 * camera (lookat)
@@ -20,4 +21,6 @@ Features
 * easing functions
 * curves
 * curve interpolation helpers (SMC, deCasteljau...)
-* and other...
+* helpers to convert cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
+* ray intersection helpers
+* and others...

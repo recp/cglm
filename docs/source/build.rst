@@ -7,6 +7,46 @@ Build cglm
 If you only need to inline versions, you don't need to build **cglm**, you don't need to link it to your program.
 Just import cglm to your project as dependency / external lib by copy-paste then use it as usual
 
+CMake (All platforms):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+  $ mkdir build
+  $ cd build
+  $ cmake .. # [Optional] -DCGLM_SHARED=ON
+  $ make
+  $ sudo make install # [Optional]
+
+**make** will build cglm to **build** folder.
+If you don't want to install **cglm** to your system's folder you can get static and dynamic libs in this folder.
+
+**CMake Options:**
+
+.. code-block:: CMake
+  :linenos:
+
+  option(CGLM_SHARED "Shared build" ON)
+  option(CGLM_STATIC "Static build" OFF)
+  option(CGLM_USE_C99 "" OFF) # C11 
+  option(CGLM_USE_TEST "Enable Tests" OFF) # for make check - make test
+
+**Use with your CMake project example**
+
+.. code-block:: CMake
+  :linenos:
+
+  cmake_minimum_required(VERSION 3.8.2)
+  
+  project(<Your Project Name>)
+  
+  add_executable(${PROJECT_NAME} src/main.c)
+  target_link_libraries(${LIBRARY_NAME} PRIVATE
+    cglm)
+  
+  add_subdirectory(external/cglm/)
+
 Unix (Autotools):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
