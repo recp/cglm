@@ -157,6 +157,15 @@ $ make
 $ sudo make install # [Optional]
 ```
 
+##### Cmake options with Defaults:
+
+```CMake
+option(CGLM_SHARED "Shared build" ON)
+option(CGLM_STATIC "Static build" OFF)
+option(CGLM_USE_C99 "" OFF) # C11 
+option(CGLM_USE_TEST "Enable Tests" OFF) # for make check - make test
+```
+
 #### Use with your CMake project
 * Example:
 ```cmake
