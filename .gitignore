@@ -73,3 +73,5 @@ cglm-test-ios*
 test-driver
 Default-568h@2x.png
 build/
+conftest.dir/*
+confdefs.h
