@@ -17,6 +17,7 @@
 
 #ifndef cglm_io_h
 #define cglm_io_h
+#if defined(DEBUG) || defined(CGLM_DEFINE_PRINTS) || defined(CGLM_LIB_SRC)
 
 #include "common.h"
 
@@ -291,4 +292,22 @@ glm_aabb_print(vec3                    bbox[2],
 #undef m
 }
 
+#elif !defined(CGLM_NO_PRINTS_NOOP)
+
+#include "common.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+/* NOOP: Remove print from DEBUG */
+CGLM_INLINE void glm_mat4_print(mat4 matrix, FILE *o) { }
+CGLM_INLINE void glm_mat3_print(mat3 matrix, FILE *o) { }
+CGLM_INLINE void glm_mat2_print(mat2 matrix, FILE *o) { }
+CGLM_INLINE void glm_vec4_print(vec4 vec, FILE *o) { }
+CGLM_INLINE void glm_vec3_print(vec3 vec, FILE *o) { }
+CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *o) { }
+CGLM_INLINE void glm_vec2_print(vec2 vec, FILE *o) { }
+CGLM_INLINE void glm_versor_print(versor vec, FILE *o) { }
+CGLM_INLINE void glm_aabb_print(vec3 bbox[2], const char *t, FILE *o) { }
+#endif
 #endif /* cglm_io_h */

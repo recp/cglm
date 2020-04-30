@@ -5,6 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
+#define CGLM_LIB_SRC
+
 #include "../include/cglm/cglm.h"
 #include "../include/cglm/call.h"
 
