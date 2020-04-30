@@ -7,7 +7,6 @@
 
 #ifndef cglmc_io_h
 #define cglmc_io_h
-#if (defined(DEBUG) || defined(CGLM_DEFINE_PRINTS)) || defined(CGLM_LIB_SRC)
 
 #ifdef __cplusplus
 extern "C" {
@@ -42,6 +41,5 @@ glmc_versor_print(versor vec,
 
 #ifdef __cplusplus
 }
-#endif
 #endif
 #endif /* cglmc_io_h */
