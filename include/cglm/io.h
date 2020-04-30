@@ -17,7 +17,8 @@
 
 #ifndef cglm_io_h
 #define cglm_io_h
-#if defined(DEBUG) || defined(CGLM_DEFINE_PRINTS) || defined(CGLM_LIB_SRC)
+#if defined(DEBUG) || defined(_DEBUG) \
+   || defined(CGLM_DEFINE_PRINTS) || defined(CGLM_LIB_SRC)
 
 #include "common.h"
 

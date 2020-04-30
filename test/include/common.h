@@ -8,6 +8,9 @@
 #ifndef tests_common_h
 #define tests_common_h
 
+#define _USE_MATH_DEFINES       /* for windows */
+#define _CRT_SECURE_NO_WARNINGS /* for windows */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
