@@ -7,6 +7,7 @@
 
 #ifndef cglmc_io_h
 #define cglmc_io_h
+
 #ifdef __cplusplus
 extern "C" {
 #endif

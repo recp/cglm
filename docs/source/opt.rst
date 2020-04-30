@@ -50,3 +50,24 @@ You have to extra options for dot product: **CGLM_SSE4_DOT** and **CGLM_SSE3_DOT
 - If **SSE3** is enabled then you can define **CGLM_SSE3_DOT** to force cglm to use **_mm_hadd_ps** instructions.
 
 otherwise cglm will use custom cglm's hadd functions which are optimized too.
+
+Print Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. **CGLM_DEFINE_PRINTS**
+2. **CGLM_NO_PRINTS_NOOP**
+
+Inline prints are only enabled in DEBUG mode and if **CGLM_DEFINE_PRINTS** is defined.
+If DEBUG is not enabled then print function bodies will be emptied to eliminate print function calls.
+You can disable this feature too by defining **CGLM_NO_PRINTS_NOOP** macro top of cglm headers.
+
+3. **CGLM_PRINT_PRECISION**    5
+
+precision.
+
+4. **CGLM_PRINT_MAX_TO_SHORT** 1e5
+
+if a number is greater than this value then %g will be used, since this is shorten print you won't be able to see high precision.
+
+5. **CGLM_PRINT_COLOR**        "\033[36m"
+6. **CGLM_PRINT_COLOR_RESET**  "\033[0m"
