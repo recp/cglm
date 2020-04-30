@@ -28,6 +28,23 @@ Example to print mat4 matrix:
 (you probably will in some cases), you can change it temporary.
 cglm may provide precision parameter in the future
 
+Changes since **v0.7.3**:
+* Now mis-alignment of columns are fixed: larger numbers are printed via %g and others are printed via %f. Column withs are calculated before print.
+* Now values are colorful ;)
+* Some print improvements
+* New options with default values:
+
+.. code-block:: c
+
+    #define CGLM_PRINT_PRECISION    5
+    #define CGLM_PRINT_MAX_TO_SHORT 1e5
+    #define CGLM_PRINT_COLOR        "\033[36m"
+    #define CGLM_PRINT_COLOR_RESET  "\033[0m"
+
+* Inline prints are only enabled in DEBUG mode and if **CGLM_DEFINE_PRINTS** is defined.
+
+Check options page.
+
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
