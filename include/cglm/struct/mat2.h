@@ -13,20 +13,20 @@
    GLM_MAT2_ZERO
 
  Functions:
-   CGLM_INLINE void  glms_mat2_identity(mat2 mat)
-   CGLM_INLINE void  glms_mat2_identity_array(mat2 * restrict mat, size_t count)
-   CGLM_INLINE void  glms_mat2_zero(mat2 mat)
-   CGLM_INLINE void  glms_mat2_mul(mat2 m1, mat2 m2, mat2 dest)
-   CGLM_INLINE void  glms_mat2_transpose_to(mat2 m, mat2 dest)
-   CGLM_INLINE void  glms_mat2_transpose(mat2 m)
-   CGLM_INLINE void  glms_mat2_mulv(mat2 m, vec2 v, vec2 dest)
-   CGLM_INLINE float glms_mat2_trace(mat2 m)
-   CGLM_INLINE void  glms_mat2_scale(mat2 m, float s)
-   CGLM_INLINE float glms_mat2_det(mat2 mat)
-   CGLM_INLINE void  glms_mat2_inv(mat2 mat, mat2 dest)
-   CGLM_INLINE void  glms_mat2_swap_col(mat2 mat, int col1, int col2)
-   CGLM_INLINE void  glms_mat2_swap_row(mat2 mat, int row1, int row2)
-   CGLM_INLINE float glms_mat2_rmc(vec2 r, mat2 m, vec2 c)
+   CGLM_DECL void  glms_mat2_identity(mat2 mat)
+   CGLM_DECL void  glms_mat2_identity_array(mat2 * restrict mat, size_t count)
+   CGLM_DECL void  glms_mat2_zero(mat2 mat)
+   CGLM_DECL void  glms_mat2_mul(mat2 m1, mat2 m2, mat2 dest)
+   CGLM_DECL void  glms_mat2_transpose_to(mat2 m, mat2 dest)
+   CGLM_DECL void  glms_mat2_transpose(mat2 m)
+   CGLM_DECL void  glms_mat2_mulv(mat2 m, vec2 v, vec2 dest)
+   CGLM_DECL float glms_mat2_trace(mat2 m)
+   CGLM_DECL void  glms_mat2_scale(mat2 m, float s)
+   CGLM_DECL float glms_mat2_det(mat2 mat)
+   CGLM_DECL void  glms_mat2_inv(mat2 mat, mat2 dest)
+   CGLM_DECL void  glms_mat2_swap_col(mat2 mat, int col1, int col2)
+   CGLM_DECL void  glms_mat2_swap_row(mat2 mat, int row1, int row2)
+   CGLM_DECL float glms_mat2_rmc(vec2 r, mat2 m, vec2 c)
  */
 
 #ifndef cglms_mat2_h
@@ -57,13 +57,16 @@
  *
  * @returns identity matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_identity(void) {
+glms_mat2_identity(void) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat2s r;
   glm_mat2_identity(r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief make given matrix array's each element identity matrix
@@ -73,9 +76,11 @@ glms_mat2_identity(void) {
  *
  * @param[in]       count count of matrices
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_mat2_identity_array(mat2s * __restrict mat, size_t count) {
+glms_mat2_identity_array(mat2s * __restrict mat, size_t count) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN_MAT mat2s t = GLMS_MAT2_IDENTITY_INIT;
   size_t i;
 
@@ -83,19 +88,23 @@ glms_mat2_identity_array(mat2s * __restrict mat, size_t count) {
     glm_mat2_copy(t.raw, mat[i].raw);
   }
 }
+#endif
 
 /*!
  * @brief make given matrix zero.
  *
  * @returns  matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_zero(void) {
+glms_mat2_zero(void) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat2s r;
   glm_mat2_zero(r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief multiply m1 and m2 to dest
@@ -112,13 +121,16 @@ glms_mat2_zero(void) {
  *
  * @returns matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_mul(mat2s m1, mat2s m2) {
+glms_mat2_mul(mat2s m1, mat2s m2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat2s r;
   glm_mat2_mul(m1.raw, m2.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief transpose mat2
@@ -127,12 +139,15 @@ glms_mat2_mul(mat2s m1, mat2s m2) {
  *
  * @returns transposed matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_transpose(mat2s m) {
+glms_mat2_transpose(mat2s m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_mat2_transpose(m.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief multiply mat2 with vec2 (column vector) and store in dest vector
@@ -141,13 +156,16 @@ glms_mat2_transpose(mat2s m) {
  * @param[in]  v    vec2 (right, column vector)
  * @returns         vec2 (result, column vector)
  */
-CGLM_INLINE
+CGLM_DECL
 vec2s
-glms_mat2_mulv(mat2s m, vec2s v) {
+glms_mat2_mulv(mat2s m, vec2s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec2s r;
   glm_mat2_mulv(m.raw, v.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief trace of matrix
@@ -156,11 +174,14 @@ glms_mat2_mulv(mat2s m, vec2s v) {
  *
  * @param[in]  m matrix
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_mat2_trace(mat2s m) {
+glms_mat2_trace(mat2s m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_mat2_trace(m.raw);
 }
+#endif
 
 /*!
  * @brief scale (multiply with scalar) matrix
@@ -171,12 +192,15 @@ glms_mat2_trace(mat2s m) {
  * @param[in]      s scalar
  * @returns matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_scale(mat2s m, float s) {
+glms_mat2_scale(mat2s m, float s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_mat2_scale(m.raw, s);
   return m;
 }
+#endif
 
 /*!
  * @brief mat2 determinant
@@ -185,11 +209,14 @@ glms_mat2_scale(mat2s m, float s) {
  *
  * @return determinant
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_mat2_det(mat2s mat) {
+glms_mat2_det(mat2s mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_mat2_det(mat.raw);
 }
+#endif
 
 /*!
  * @brief inverse mat2 and store in dest
@@ -197,13 +224,16 @@ glms_mat2_det(mat2s mat) {
  * @param[in]  mat  matrix
  * @returns matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_inv(mat2s mat) {
+glms_mat2_inv(mat2s mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat2s r;
   glm_mat2_inv(mat.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief swap two matrix columns
@@ -213,12 +243,15 @@ glms_mat2_inv(mat2s mat) {
  * @param[in] col2 col2
  * @returns matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_swap_col(mat2s mat, int col1, int col2) {
+glms_mat2_swap_col(mat2s mat, int col1, int col2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_mat2_swap_col(mat.raw, col1, col2);
   return mat;
 }
+#endif
 
 /*!
  * @brief swap two matrix rows
@@ -228,12 +261,15 @@ glms_mat2_swap_col(mat2s mat, int col1, int col2) {
  * @param[in] row2 row2
  * @returns matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat2s
-glms_mat2_swap_row(mat2s mat, int row1, int row2) {
+glms_mat2_swap_row(mat2s mat, int row1, int row2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_mat2_swap_row(mat.raw, row1, row2);
   return mat;
 }
+#endif
 
 /*!
  * @brief helper for  R (row vector) * M (matrix) * C (column vector)
@@ -249,10 +285,13 @@ glms_mat2_swap_row(mat2s mat, int row1, int row2) {
  *
  * @return scalar value e.g. Matrix1x1
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_mat2_rmc(vec2s r, mat2s m, vec2s c) {
+glms_mat2_rmc(vec2s r, mat2s m, vec2s c) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_mat2_rmc(r.raw, m.raw, c.raw);
 }
+#endif
 
 #endif /* cglms_mat2_h */

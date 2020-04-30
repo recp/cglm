@@ -52,13 +52,16 @@
  * @param[in]  m    matrix (see brief)
  * @param[out] dest extracted view frustum planes (see brief)
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_frustum_planes(mat4s m, vec4s dest[6]) {
+glms_frustum_planes(mat4s m, vec4s dest[6]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 rawDest[6];
   glm_frustum_planes(m.raw, rawDest);
   glms_vec4_pack(dest, rawDest, 6);
 }
+#endif
 
 /*!
  * @brief extracts view frustum corners using clip-space coordinates
@@ -83,13 +86,16 @@ glms_frustum_planes(mat4s m, vec4s dest[6]) {
  * @param[in]  invMat matrix (see brief)
  * @param[out] dest   exracted view frustum corners (see brief)
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_frustum_corners(mat4s invMat, vec4s dest[8]) {
+glms_frustum_corners(mat4s invMat, vec4s dest[8]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 rawDest[8];
   glm_frustum_corners(invMat.raw, rawDest);
   glms_vec4_pack(dest, rawDest, 8);
 }
+#endif
 
 /*!
  * @brief finds center of view frustum
@@ -97,9 +103,11 @@ glms_frustum_corners(mat4s invMat, vec4s dest[8]) {
  * @param[in]  corners view frustum corners
  * @returns            view frustum center
  */
-CGLM_INLINE
+CGLM_DECL
 vec4s
-glms_frustum_center(vec4s corners[8]) {
+glms_frustum_center(vec4s corners[8]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 rawCorners[8];
   vec4s r;
 
@@ -107,6 +115,7 @@ glms_frustum_center(vec4s corners[8]) {
   glm_frustum_center(rawCorners, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief finds bounding box of frustum relative to given matrix e.g. view mat
@@ -115,9 +124,11 @@ glms_frustum_center(vec4s corners[8]) {
  * @param[in]  m       matrix to convert existing conners
  * @param[out] box     bounding box as array [min, max]
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) {
+glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 rawCorners[8];
   vec3 rawBox[2];
 
@@ -125,6 +136,7 @@ glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) {
   glm_frustum_box(rawCorners, m.raw, rawBox);
   glms_vec3_pack(box, rawBox, 2);
 }
+#endif
 
 /*!
  * @brief finds planes corners which is between near and far planes (parallel)
@@ -138,12 +150,14 @@ glms_frustum_box(vec4s corners[8], mat4s m, vec3s box[2]) {
  * @param[in]  farDist       far distance (zFar)
  * @param[out] planeCorners  plane corners [LB, LT, RT, RB]
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glms_frustum_corners_at(vec4s corners[8],
                         float splitDist,
                         float farDist,
-                        vec4s planeCorners[4]) {
+                        vec4s planeCorners[4]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 rawCorners[8];
   vec4 rawPlaneCorners[4];
 
@@ -151,5 +165,6 @@ glms_frustum_corners_at(vec4s corners[8],
   glm_frustum_corners_at(rawCorners, splitDist, farDist, rawPlaneCorners);
   glms_vec4_pack(planeCorners, rawPlaneCorners, 8);
 }
+#endif
 
 #endif /* cglms_frustums_h */

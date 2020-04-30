@@ -7,40 +7,40 @@
 
 /*
  Functions:
-   CGLM_INLINE mat4s glms_frustum(float left,    float right,
+   CGLM_DECL mat4s glms_frustum(float left,    float right,
                                   float bottom,  float top,
                                   float nearVal, float farVal)
-   CGLM_INLINE mat4s glms_ortho(float left,    float right,
+   CGLM_DECL mat4s glms_ortho(float left,    float right,
                                 float bottom,  float top,
                                 float nearVal, float farVal)
-   CGLM_INLINE mat4s glms_ortho_aabb(vec3s box[2]);
-   CGLM_INLINE mat4s glms_ortho_aabb_p(vec3s box[2],  float padding);
-   CGLM_INLINE mat4s glms_ortho_aabb_pz(vec3s box[2], float padding);
-   CGLM_INLINE mat4s glms_ortho_default(float aspect)
-   CGLM_INLINE mat4s glms_ortho_default_s(float aspect, float size)
-   CGLM_INLINE mat4s glms_perspective(float fovy,
+   CGLM_DECL mat4s glms_ortho_aabb(vec3s box[2]);
+   CGLM_DECL mat4s glms_ortho_aabb_p(vec3s box[2],  float padding);
+   CGLM_DECL mat4s glms_ortho_aabb_pz(vec3s box[2], float padding);
+   CGLM_DECL mat4s glms_ortho_default(float aspect)
+   CGLM_DECL mat4s glms_ortho_default_s(float aspect, float size)
+   CGLM_DECL mat4s glms_perspective(float fovy,
                                       float aspect,
                                       float nearVal,
                                       float farVal)
-   CGLM_INLINE void  glms_persp_move_far(mat4s proj, float deltaFar)
-   CGLM_INLINE mat4s glms_perspective_default(float aspect)
-   CGLM_INLINE void  glms_perspective_resize(mat4s proj, float aspect)
-   CGLM_INLINE mat4s glms_lookat(vec3s eye, vec3s center, vec3s up)
-   CGLM_INLINE mat4s glms_look(vec3s eye, vec3s dir, vec3s up)
-   CGLM_INLINE mat4s glms_look_anyup(vec3s eye, vec3s dir)
-   CGLM_INLINE void  glms_persp_decomp(mat4s  proj,
+   CGLM_DECL void  glms_persp_move_far(mat4s proj, float deltaFar)
+   CGLM_DECL mat4s glms_perspective_default(float aspect)
+   CGLM_DECL void  glms_perspective_resize(mat4s proj, float aspect)
+   CGLM_DECL mat4s glms_lookat(vec3s eye, vec3s center, vec3s up)
+   CGLM_DECL mat4s glms_look(vec3s eye, vec3s dir, vec3s up)
+   CGLM_DECL mat4s glms_look_anyup(vec3s eye, vec3s dir)
+   CGLM_DECL void  glms_persp_decomp(mat4s  proj,
                                        float *nearv, float *farv,
                                        float *top,   float *bottom,
                                        float *left,  float *right)
-   CGLM_INLINE void  glms_persp_decompv(mat4s proj, float dest[6])
-   CGLM_INLINE void  glms_persp_decomp_x(mat4s proj, float *left, float *right)
-   CGLM_INLINE void  glms_persp_decomp_y(mat4s proj, float *top, float *bottom)
-   CGLM_INLINE void  glms_persp_decomp_z(mat4s proj, float *nearv, float *farv)
-   CGLM_INLINE void  glms_persp_decomp_far(mat4s proj, float *farVal)
-   CGLM_INLINE void  glms_persp_decomp_near(mat4s proj, float *nearVal)
-   CGLM_INLINE float glms_persp_fovy(mat4s proj)
-   CGLM_INLINE float glms_persp_aspect(mat4s proj)
-   CGLM_INLINE vec4s glms_persp_sizes(mat4s proj, float fovy)
+   CGLM_DECL void  glms_persp_decompv(mat4s proj, float dest[6])
+   CGLM_DECL void  glms_persp_decomp_x(mat4s proj, float *left, float *right)
+   CGLM_DECL void  glms_persp_decomp_y(mat4s proj, float *top, float *bottom)
+   CGLM_DECL void  glms_persp_decomp_z(mat4s proj, float *nearv, float *farv)
+   CGLM_DECL void  glms_persp_decomp_far(mat4s proj, float *farVal)
+   CGLM_DECL void  glms_persp_decomp_near(mat4s proj, float *nearVal)
+   CGLM_DECL float glms_persp_fovy(mat4s proj)
+   CGLM_DECL float glms_persp_aspect(mat4s proj)
+   CGLM_DECL vec4s glms_persp_sizes(mat4s proj, float fovy)
  */
 
 #ifndef cglms_cam_h
@@ -62,15 +62,18 @@
  * @param[in]  farVal  far clipping plane
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
 glms_frustum(float left,    float right,
              float bottom,  float top,
-             float nearVal, float farVal) {
+             float nearVal, float farVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_frustum(left, right, bottom, top, nearVal, farVal, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up orthographic projection matrix
@@ -83,15 +86,18 @@ glms_frustum(float left,    float right,
  * @param[in]  farVal  far clipping plane
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
 glms_ortho(float left,    float right,
            float bottom,  float top,
-           float nearVal, float farVal) {
+           float nearVal, float farVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_ortho(left, right, bottom, top, nearVal, farVal, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
@@ -101,9 +107,11 @@ glms_ortho(float left,    float right,
  * @param[in]  box   AABB
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_ortho_aabb(vec3s box[2]) {
+glms_ortho_aabb(vec3s box[2]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   vec3  rawBox[2];
 
@@ -112,6 +120,7 @@ glms_ortho_aabb(vec3s box[2]) {
 
   return dest;
 }
+#endif
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
@@ -122,9 +131,11 @@ glms_ortho_aabb(vec3s box[2]) {
  * @param[in]  padding padding
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_ortho_aabb_p(vec3s box[2], float padding) {
+glms_ortho_aabb_p(vec3s box[2], float padding) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   vec3  rawBox[2];
 
@@ -133,6 +144,7 @@ glms_ortho_aabb_p(vec3s box[2], float padding) {
 
   return dest;
 }
+#endif
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
@@ -143,9 +155,11 @@ glms_ortho_aabb_p(vec3s box[2], float padding) {
  * @param[in]  padding padding for near and far
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_ortho_aabb_pz(vec3s box[2], float padding) {
+glms_ortho_aabb_pz(vec3s box[2], float padding) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   vec3  rawBox[2];
 
@@ -154,6 +168,7 @@ glms_ortho_aabb_pz(vec3s box[2], float padding) {
 
   return dest;
 }
+#endif
 
 /*!
  * @brief set up unit orthographic projection matrix
@@ -161,13 +176,16 @@ glms_ortho_aabb_pz(vec3s box[2], float padding) {
  * @param[in]  aspect aspect ration ( width / height )
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_ortho_default(float aspect) {
+glms_ortho_default(float aspect) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_ortho_default(aspect, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up orthographic projection matrix with given CUBE size
@@ -176,13 +194,16 @@ glms_ortho_default(float aspect) {
  * @param[in]  size   cube size
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_ortho_default_s(float aspect, float size) {
+glms_ortho_default_s(float aspect, float size) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_ortho_default_s(aspect, size, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up perspective projection matrix
@@ -193,13 +214,16 @@ glms_ortho_default_s(float aspect, float size) {
  * @param[in]  farVal  far clipping planes
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_perspective(float fovy, float aspect, float nearVal, float farVal) {
+glms_perspective(float fovy, float aspect, float nearVal, float farVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_perspective(fovy, aspect, nearVal, farVal, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief extend perspective projection matrix's far distance
@@ -209,11 +233,14 @@ glms_perspective(float fovy, float aspect, float nearVal, float farVal) {
  * @param[in, out] proj      projection matrix to extend
  * @param[in]      deltaFar  distance from existing far (negative to shink)
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_persp_move_far(mat4s proj, float deltaFar) {
+glms_persp_move_far(mat4s proj, float deltaFar) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_move_far(proj.raw, deltaFar);
 }
+#endif
 
 /*!
  * @brief set up perspective projection matrix with default near/far
@@ -222,13 +249,16 @@ glms_persp_move_far(mat4s proj, float deltaFar) {
  * @param[in]  aspect aspect ratio ( width / height )
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_perspective_default(float aspect) {
+glms_perspective_default(float aspect) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_perspective_default(aspect, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief resize perspective matrix by aspect ratio ( width / height )
@@ -238,11 +268,14 @@ glms_perspective_default(float aspect) {
  * @param[in, out] proj   perspective projection matrix
  * @param[in]      aspect aspect ratio ( width / height )
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_perspective_resize(mat4s proj, float aspect) {
+glms_perspective_resize(mat4s proj, float aspect) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_perspective_resize(aspect, proj.raw);
 }
+#endif
 
 /*!
  * @brief set up view matrix
@@ -255,13 +288,16 @@ glms_perspective_resize(mat4s proj, float aspect) {
  * @param[in]  up     up vector
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_lookat(vec3s eye, vec3s center, vec3s up) {
+glms_lookat(vec3s eye, vec3s center, vec3s up) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_lookat(eye.raw, center.raw, up.raw, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up view matrix
@@ -277,13 +313,16 @@ glms_lookat(vec3s eye, vec3s center, vec3s up) {
  * @param[in]  up     up vector
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_look(vec3s eye, vec3s dir, vec3s up) {
+glms_look(vec3s eye, vec3s dir, vec3s up) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_look(eye.raw, dir.raw, up.raw, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief set up view matrix
@@ -295,13 +334,16 @@ glms_look(vec3s eye, vec3s dir, vec3s up) {
  * @param[in]  dir    direction vector
  * @returns    result matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_look_anyup(vec3s eye, vec3s dir) {
+glms_look_anyup(vec3s eye, vec3s dir) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s dest;
   glm_look_anyup(eye.raw, dir.raw, dest.raw);
   return dest;
 }
+#endif
 
 /*!
  * @brief decomposes frustum values of perspective projection.
@@ -314,14 +356,17 @@ glms_look_anyup(vec3s eye, vec3s dir) {
  * @param[out] left    left
  * @param[out] right   right
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glms_persp_decomp(mat4s proj,
                   float * __restrict nearVal, float * __restrict farVal,
                   float * __restrict top,     float * __restrict bottom,
-                  float * __restrict left,    float * __restrict right) {
+                  float * __restrict left,    float * __restrict right) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp(proj.raw, nearVal, farVal, top, bottom, left, right);
 }
+#endif
 
 /*!
  * @brief decomposes frustum values of perspective projection.
@@ -330,11 +375,14 @@ glms_persp_decomp(mat4s proj,
  * @param[in]  proj   perspective projection matrix
  * @param[out] dest   array
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_persp_decompv(mat4s proj, float dest[6]) {
+glms_persp_decompv(mat4s proj, float dest[6]) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decompv(proj.raw, dest);
 }
+#endif
 
 /*!
  * @brief decomposes left and right values of perspective projection.
@@ -344,13 +392,16 @@ glms_persp_decompv(mat4s proj, float dest[6]) {
  * @param[out] left  left
  * @param[out] right right
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glms_persp_decomp_x(mat4s proj,
                     float * __restrict left,
-                    float * __restrict right) {
+                    float * __restrict right) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp_x(proj.raw, left, right);
 }
+#endif
 
 /*!
  * @brief decomposes top and bottom values of perspective projection.
@@ -360,13 +411,16 @@ glms_persp_decomp_x(mat4s proj,
  * @param[out] top    top
  * @param[out] bottom bottom
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glms_persp_decomp_y(mat4s proj,
                     float * __restrict top,
-                    float * __restrict bottom) {
+                    float * __restrict bottom) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp_y(proj.raw, top, bottom);
 }
+#endif
 
 /*!
  * @brief decomposes near and far values of perspective projection.
@@ -376,13 +430,16 @@ glms_persp_decomp_y(mat4s proj,
  * @param[out] nearVal near
  * @param[out] farVal  far
  */
-CGLM_INLINE
+CGLM_DECL
 void
 glms_persp_decomp_z(mat4s proj,
                     float * __restrict nearVal,
-                    float * __restrict farVal) {
+                    float * __restrict farVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp_z(proj.raw, nearVal, farVal);
 }
+#endif
 
 /*!
  * @brief decomposes far value of perspective projection.
@@ -390,11 +447,14 @@ glms_persp_decomp_z(mat4s proj,
  * @param[in]  proj   perspective projection matrix
  * @param[out] farVal far
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_persp_decomp_far(mat4s proj, float * __restrict farVal) {
+glms_persp_decomp_far(mat4s proj, float * __restrict farVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp_far(proj.raw, farVal);
 }
+#endif
 
 /*!
  * @brief decomposes near value of perspective projection.
@@ -402,11 +462,14 @@ glms_persp_decomp_far(mat4s proj, float * __restrict farVal) {
  * @param[in]  proj    perspective projection matrix
  * @param[out] nearVal near
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_persp_decomp_near(mat4s proj, float * __restrict nearVal) {
+glms_persp_decomp_near(mat4s proj, float * __restrict nearVal) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_persp_decomp_near(proj.raw, nearVal);
 }
+#endif
 
 /*!
  * @brief returns field of view angle along the Y-axis (in radians)
@@ -416,22 +479,28 @@ glms_persp_decomp_near(mat4s proj, float * __restrict nearVal) {
  *
  * @param[in] proj perspective projection matrix
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_persp_fovy(mat4s proj) {
+glms_persp_fovy(mat4s proj) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_persp_fovy(proj.raw);
 }
+#endif
 
 /*!
  * @brief returns aspect ratio of perspective projection
  *
  * @param[in] proj perspective projection matrix
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_persp_aspect(mat4s proj) {
+glms_persp_aspect(mat4s proj) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_persp_aspect(proj.raw);
 }
+#endif
 
 /*!
  * @brief returns sizes of near and far planes of perspective projection
@@ -440,12 +509,15 @@ glms_persp_aspect(mat4s proj) {
  * @param[in]  fovy fovy (see brief)
  * @returns    sizes as vector, sizes order: [Wnear, Hnear, Wfar, Hfar]
  */
-CGLM_INLINE
+CGLM_DECL
 vec4s
-glms_persp_sizes(mat4s proj, float fovy) {
+glms_persp_sizes(mat4s proj, float fovy) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4s dest;
   glm_persp_sizes(proj.raw, fovy, dest.raw);
   return dest;
 }
+#endif
 
 #endif /* cglms_cam_h */

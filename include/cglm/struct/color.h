@@ -18,10 +18,13 @@
  *
  * @param[in]  rgb RGB color
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_luminance(vec3s rgb) {
+glms_luminance(vec3s rgb) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_luminance(rgb.raw);
 }
+#endif
 
 #endif /* cglms_colors_h */

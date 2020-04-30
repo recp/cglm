@@ -18,31 +18,31 @@
    GLM_MAT4_ZERO
 
  Functions:
-   CGLM_INLINE void  glm_mat4_ucopy(mat4 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_copy(mat4 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_identity(mat4 mat);
-   CGLM_INLINE void  glm_mat4_identity_array(mat4 * restrict mat, size_t count);
-   CGLM_INLINE void  glm_mat4_zero(mat4 mat);
-   CGLM_INLINE void  glm_mat4_pick3(mat4 mat, mat3 dest);
-   CGLM_INLINE void  glm_mat4_pick3t(mat4 mat, mat3 dest);
-   CGLM_INLINE void  glm_mat4_ins3(mat3 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
-   CGLM_INLINE void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
-   CGLM_INLINE void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
-   CGLM_INLINE float glm_mat4_trace(mat4 m);
-   CGLM_INLINE float glm_mat4_trace3(mat4 m);
-   CGLM_INLINE void  glm_mat4_quat(mat4 m, versor dest) ;
-   CGLM_INLINE void  glm_mat4_transpose_to(mat4 m, mat4 dest);
-   CGLM_INLINE void  glm_mat4_transpose(mat4 m);
-   CGLM_INLINE void  glm_mat4_scale_p(mat4 m, float s);
-   CGLM_INLINE void  glm_mat4_scale(mat4 m, float s);
-   CGLM_INLINE float glm_mat4_det(mat4 mat);
-   CGLM_INLINE void  glm_mat4_inv(mat4 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_inv_fast(mat4 mat, mat4 dest);
-   CGLM_INLINE void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
-   CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
-   CGLM_INLINE float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
+   CGLM_DECL void  glm_mat4_ucopy(mat4 mat, mat4 dest);
+   CGLM_DECL void  glm_mat4_copy(mat4 mat, mat4 dest);
+   CGLM_DECL void  glm_mat4_identity(mat4 mat);
+   CGLM_DECL void  glm_mat4_identity_array(mat4 * restrict mat, size_t count);
+   CGLM_DECL void  glm_mat4_zero(mat4 mat);
+   CGLM_DECL void  glm_mat4_pick3(mat4 mat, mat3 dest);
+   CGLM_DECL void  glm_mat4_pick3t(mat4 mat, mat3 dest);
+   CGLM_DECL void  glm_mat4_ins3(mat3 mat, mat4 dest);
+   CGLM_DECL void  glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
+   CGLM_DECL void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
+   CGLM_DECL void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
+   CGLM_DECL void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
+   CGLM_DECL float glm_mat4_trace(mat4 m);
+   CGLM_DECL float glm_mat4_trace3(mat4 m);
+   CGLM_DECL void  glm_mat4_quat(mat4 m, versor dest) ;
+   CGLM_DECL void  glm_mat4_transpose_to(mat4 m, mat4 dest);
+   CGLM_DECL void  glm_mat4_transpose(mat4 m);
+   CGLM_DECL void  glm_mat4_scale_p(mat4 m, float s);
+   CGLM_DECL void  glm_mat4_scale(mat4 m, float s);
+   CGLM_DECL float glm_mat4_det(mat4 mat);
+   CGLM_DECL void  glm_mat4_inv(mat4 mat, mat4 dest);
+   CGLM_DECL void  glm_mat4_inv_fast(mat4 mat, mat4 dest);
+   CGLM_DECL void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
+   CGLM_DECL void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
+   CGLM_DECL float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
  */
 
 #ifndef cglm_mat_h
@@ -98,9 +98,11 @@
  * @param[in]  mat  source
  * @param[out] dest destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_ucopy(mat4 mat, mat4 dest) {
+glm_mat4_ucopy(mat4 mat, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = mat[0][0];  dest[1][0] = mat[1][0];
   dest[0][1] = mat[0][1];  dest[1][1] = mat[1][1];
   dest[0][2] = mat[0][2];  dest[1][2] = mat[1][2];
@@ -111,6 +113,7 @@ glm_mat4_ucopy(mat4 mat, mat4 dest) {
   dest[2][2] = mat[2][2];  dest[3][2] = mat[3][2];
   dest[2][3] = mat[2][3];  dest[3][3] = mat[3][3];
 }
+#endif
 
 /*!
  * @brief copy all members of [mat] to [dest]
@@ -118,9 +121,11 @@ glm_mat4_ucopy(mat4 mat, mat4 dest) {
  * @param[in]  mat  source
  * @param[out] dest destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_copy(mat4 mat, mat4 dest) {
+glm_mat4_copy(mat4 mat, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #ifdef __AVX__
   glmm_store256(dest[0], glmm_load256(mat[0]));
   glmm_store256(dest[2], glmm_load256(mat[2]));
@@ -138,6 +143,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
   glm_mat4_ucopy(mat, dest);
 #endif
 }
+#endif
 
 /*!
  * @brief make given matrix identity. It is identical with below, 
@@ -153,12 +159,15 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
  *
  * @param[in, out]  mat  destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_identity(mat4 mat) {
+glm_mat4_identity(mat4 mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   glm_mat4_copy(t, mat);
 }
+#endif
 
 /*!
  * @brief make given matrix array's each element identity matrix
@@ -168,9 +177,11 @@ glm_mat4_identity(mat4 mat) {
  *
  * @param[in]       count count of matrices
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
+glm_mat4_identity_array(mat4 * __restrict mat, size_t count) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   size_t i;
 
@@ -178,18 +189,22 @@ glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
     glm_mat4_copy(t, mat[i]);
   }
 }
+#endif
 
 /*!
  * @brief make given matrix zero.
  *
  * @param[in, out]  mat  matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_zero(mat4 mat) {
+glm_mat4_zero(mat4 mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_ZERO_INIT;
   glm_mat4_copy(t, mat);
 }
+#endif
 
 /*!
  * @brief copy upper-left of mat4 to mat3
@@ -197,9 +212,11 @@ glm_mat4_zero(mat4 mat) {
  * @param[in]  mat  source
  * @param[out] dest destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_pick3(mat4 mat, mat3 dest) {
+glm_mat4_pick3(mat4 mat, mat3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -212,6 +229,7 @@ glm_mat4_pick3(mat4 mat, mat3 dest) {
   dest[2][1] = mat[2][1];
   dest[2][2] = mat[2][2];
 }
+#endif
 
 /*!
  * @brief copy upper-left of mat4 to mat3 (transposed)
@@ -221,9 +239,11 @@ glm_mat4_pick3(mat4 mat, mat3 dest) {
  * @param[in]  mat  source
  * @param[out] dest destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_pick3t(mat4 mat, mat3 dest) {
+glm_mat4_pick3t(mat4 mat, mat3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[1][0];
   dest[0][2] = mat[2][0];
@@ -236,6 +256,7 @@ glm_mat4_pick3t(mat4 mat, mat3 dest) {
   dest[2][1] = mat[1][2];
   dest[2][2] = mat[2][2];
 }
+#endif
 
 /*!
  * @brief copy mat3 to mat4's upper-left
@@ -243,9 +264,11 @@ glm_mat4_pick3t(mat4 mat, mat3 dest) {
  * @param[in]  mat  source
  * @param[out] dest destination
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_ins3(mat3 mat, mat4 dest) {
+glm_mat4_ins3(mat3 mat, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -258,6 +281,7 @@ glm_mat4_ins3(mat3 mat, mat4 dest) {
   dest[2][1] = mat[2][1];
   dest[2][2] = mat[2][2];
 }
+#endif
 
 /*!
  * @brief multiply m1 and m2 to dest
@@ -273,9 +297,11 @@ glm_mat4_ins3(mat3 mat, mat4 dest) {
  * @param[in]  m2   right matrix
  * @param[out] dest destination matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #ifdef __AVX__
   glm_mat4_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -311,6 +337,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   dest[3][3] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
 #endif
 }
+#endif
 
 /*!
  * @brief mupliply N mat4 matrices and store result in dest
@@ -331,9 +358,11 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
  * @param[in]  len      matrices count
  * @param[out] dest     result
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
+glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   uint32_t i;
 
 #ifdef DEBUG
@@ -345,6 +374,7 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
   for (i = 2; i < len; i++)
     glm_mat4_mul(dest, *matrices[i], dest);
 }
+#endif
 
 /*!
  * @brief multiply mat4 with vec4 (column vector) and store in dest vector
@@ -353,9 +383,11 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
  * @param[in]  v    vec4 (right, column vector)
  * @param[out] dest vec4 (result, column vector)
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mulv_sse2(m, v, dest);
 #else
@@ -367,6 +399,7 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
   glm_vec4_copy(res, dest);
 #endif
 }
+#endif
 
 /*!
  * @brief trace of matrix
@@ -375,11 +408,14 @@ glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
  *
  * @param[in]  m matrix
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_mat4_trace(mat4 m) {
+glm_mat4_trace(mat4 m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return m[0][0] + m[1][1] + m[2][2] + m[3][3];
 }
+#endif
 
 /*!
  * @brief trace of matrix (rotation part)
@@ -388,11 +424,14 @@ glm_mat4_trace(mat4 m) {
  *
  * @param[in]  m matrix
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_mat4_trace3(mat4 m) {
+glm_mat4_trace3(mat4 m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return m[0][0] + m[1][1] + m[2][2];
 }
+#endif
 
 /*!
  * @brief convert mat4's rotation part to quaternion
@@ -400,9 +439,11 @@ glm_mat4_trace3(mat4 m) {
  * @param[in]  m    affine matrix
  * @param[out] dest destination quaternion
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_quat(mat4 m, versor dest) {
+glm_mat4_quat(mat4 m, versor dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float trace, r, rinv;
 
   /* it seems using like m12 instead of m[1][2] causes extra instructions */
@@ -442,6 +483,7 @@ glm_mat4_quat(mat4 m, versor dest) {
     dest[3] = rinv * (m[0][1] - m[1][0]);
   }
 }
+#endif
 
 /*!
  * @brief multiply vector with mat4
@@ -454,14 +496,17 @@ glm_mat4_quat(mat4 m, versor dest) {
  * @param[in]  last 4th item to make it vec4
  * @param[out] dest result vector (vec3)
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
+glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 res;
   glm_vec4(v, last, res);
   glm_mat4_mulv(m, res, res);
   glm_vec3(res, dest);
 }
+#endif
 
 /*!
  * @brief transpose mat4 and store in dest
@@ -471,9 +516,11 @@ glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest) {
  * @param[in]  m    matrix
  * @param[out] dest result
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_transpose_to(mat4 m, mat4 dest) {
+glm_mat4_transpose_to(mat4 m, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
 #else
@@ -487,15 +534,18 @@ glm_mat4_transpose_to(mat4 m, mat4 dest) {
   dest[2][3] = m[3][2]; dest[3][3] = m[3][3];
 #endif
 }
+#endif
 
 /*!
  * @brief tranpose mat4 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_transpose(mat4 m) {
+glm_mat4_transpose(mat4 m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
 #else
@@ -504,6 +554,7 @@ glm_mat4_transpose(mat4 m) {
   glm_mat4_ucopy(d, m);
 #endif
 }
+#endif
 
 /*!
  * @brief scale (multiply with scalar) matrix without simd optimization
@@ -513,14 +564,17 @@ glm_mat4_transpose(mat4 m) {
  * @param[in, out] m matrix
  * @param[in]      s scalar
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_scale_p(mat4 m, float s) {
+glm_mat4_scale_p(mat4 m, float s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   m[0][0] *= s; m[0][1] *= s; m[0][2] *= s; m[0][3] *= s;
   m[1][0] *= s; m[1][1] *= s; m[1][2] *= s; m[1][3] *= s;
   m[2][0] *= s; m[2][1] *= s; m[2][2] *= s; m[2][3] *= s;
   m[3][0] *= s; m[3][1] *= s; m[3][2] *= s; m[3][3] *= s;
 }
+#endif
 
 /*!
  * @brief scale (multiply with scalar) matrix
@@ -530,9 +584,11 @@ glm_mat4_scale_p(mat4 m, float s) {
  * @param[in, out] m matrix
  * @param[in]      s scalar
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_scale(mat4 m, float s) {
+glm_mat4_scale(mat4 m, float s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
 #elif defined(CGLM_NEON_FP)
@@ -546,6 +602,7 @@ glm_mat4_scale(mat4 m, float s) {
   glm_mat4_scale_p(m, s);
 #endif
 }
+#endif
 
 /*!
  * @brief mat4 determinant
@@ -554,9 +611,11 @@ glm_mat4_scale(mat4 m, float s) {
  *
  * @return determinant
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_mat4_det(mat4 mat) {
+glm_mat4_det(mat4 mat) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glm_mat4_det_sse2(mat);
 #else
@@ -580,6 +639,7 @@ glm_mat4_det(mat4 mat) {
        - d * (e * t[2] - f * t[4] + g * t[5]);
 #endif
 }
+#endif
 
 /*!
  * @brief inverse mat4 and store in dest
@@ -587,9 +647,11 @@ glm_mat4_det(mat4 mat) {
  * @param[in]  mat  matrix
  * @param[out] dest inverse matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_inv(mat4 mat, mat4 dest) {
+glm_mat4_inv(mat4 mat, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
 #else
@@ -635,6 +697,7 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
   glm_mat4_scale_p(dest, det);
 #endif
 }
+#endif
 
 /*!
  * @brief inverse mat4 and store in dest
@@ -648,15 +711,18 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
  * @param[in]  mat  matrix
  * @param[out] dest inverse matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_inv_fast(mat4 mat, mat4 dest) {
+glm_mat4_inv_fast(mat4 mat, mat4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_fast_sse2(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
 #endif
 }
+#endif
 
 /*!
  * @brief swap two matrix columns
@@ -665,14 +731,17 @@ glm_mat4_inv_fast(mat4 mat, mat4 dest) {
  * @param[in]     col1 col1
  * @param[in]     col2 col2
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_swap_col(mat4 mat, int col1, int col2) {
+glm_mat4_swap_col(mat4 mat, int col1, int col2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN(16) vec4 tmp;
   glm_vec4_copy(mat[col1], tmp);
   glm_vec4_copy(mat[col2], mat[col1]);
   glm_vec4_copy(tmp, mat[col2]);
 }
+#endif
 
 /*!
  * @brief swap two matrix rows
@@ -681,9 +750,11 @@ glm_mat4_swap_col(mat4 mat, int col1, int col2) {
  * @param[in]     row1 row1
  * @param[in]     row2 row2
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_mat4_swap_row(mat4 mat, int row1, int row2) {
+glm_mat4_swap_row(mat4 mat, int row1, int row2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   CGLM_ALIGN(16) vec4 tmp;
   tmp[0] = mat[0][row1];
   tmp[1] = mat[1][row1];
@@ -700,6 +771,7 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
   mat[2][row2] = tmp[2];
   mat[3][row2] = tmp[3];
 }
+#endif
 
 /*!
  * @brief helper for  R (row vector) * M (matrix) * C (column vector)
@@ -715,12 +787,15 @@ glm_mat4_swap_row(mat4 mat, int row1, int row2) {
  *
  * @return scalar value e.g. B(s)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
+glm_mat4_rmc(vec4 r, mat4 m, vec4 c) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec4 tmp;
   glm_mat4_mulv(m, c, tmp);
   return glm_vec4_dot(r, tmp);
 }
+#endif
 
 #endif /* cglm_mat_h */

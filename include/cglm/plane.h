@@ -19,7 +19,7 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_plane_normalize(vec4 plane);
+   CGLM_DECL void  glm_plane_normalize(vec4 plane);
  */
 
 /*!
@@ -27,9 +27,11 @@
  *
  * @param[in, out] plane plane to normalize
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_plane_normalize(vec4 plane) {
+glm_plane_normalize(vec4 plane) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float norm;
   
   if ((norm = glm_vec3_norm(plane)) == 0.0f) {
@@ -39,5 +41,6 @@ glm_plane_normalize(vec4 plane) {
   
   glm_vec4_scale(plane, 1.0f / norm, plane);
 }
+#endif
 
 #endif /* cglm_plane_h */

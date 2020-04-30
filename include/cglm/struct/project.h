@@ -41,13 +41,16 @@
  * @param[in]  vp       viewport as [x, y, width, height]
  * @returns             unprojected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 vec3s
-glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
+glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec3s r;
   glm_unprojecti(pos.raw, invMat.raw, vp.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
@@ -73,13 +76,16 @@ glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
  * @param[in]  vp       viewport as [x, y, width, height]
  * @returns             unprojected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 vec3s
-glms_unproject(vec3s pos, mat4s m, vec4s vp) {
+glms_unproject(vec3s pos, mat4s m, vec4s vp) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec3s r;
   glm_unproject(pos.raw, m.raw, vp.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief map object coordinates to window coordinates
@@ -93,12 +99,15 @@ glms_unproject(vec3s pos, mat4s m, vec4s vp) {
  * @param[in]  vp       viewport as [x, y, width, height]
  * @returns projected coordinates
  */
-CGLM_INLINE
+CGLM_DECL
 vec3s
-glms_project(vec3s pos, mat4s m, vec4s vp) {
+glms_project(vec3s pos, mat4s m, vec4s vp) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec3s r;
   glm_project(pos.raw, m.raw, vp.raw, r.raw);
   return r;
 }
+#endif
 
 #endif /* cglms_projects_h */

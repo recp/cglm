@@ -7,26 +7,26 @@
 
 /*
  Functions:
-   CGLM_INLINE mat4s glms_translate(mat4s m, vec3s v);
-   CGLM_INLINE mat4s glms_translate_x(mat4s m, float x);
-   CGLM_INLINE mat4s glms_translate_y(mat4s m, float y);
-   CGLM_INLINE mat4s glms_translate_z(mat4s m, float z);
-   CGLM_INLINE mat4s glms_translate_make(vec3s v);
-   CGLM_INLINE mat4s glms_scale_to(mat4s m, vec3s v);
-   CGLM_INLINE mat4s glms_scale_make(vec3s v);
-   CGLM_INLINE mat4s glms_scale(mat4s m, vec3s v);
-   CGLM_INLINE mat4s glms_scale_uni(mat4s m, float s);
-   CGLM_INLINE mat4s glms_rotate_x(mat4s m, float angle);
-   CGLM_INLINE mat4s glms_rotate_y(mat4s m, float angle);
-   CGLM_INLINE mat4s glms_rotate_z(mat4s m, float angle);
-   CGLM_INLINE mat4s glms_rotate_make(float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_rotate(mat4s m, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis);
-   CGLM_INLINE vec3s glms_decompose_scalev(mat4s m);
-   CGLM_INLINE bool  glms_uniscaled(mat4s m);
-   CGLM_INLINE void  glms_decompose_rs(mat4s m, mat4s * r, vec3s * s);
-   CGLM_INLINE void  glms_decompose(mat4s m, vec4s t, mat4s * r, vec3s * s);
+   CGLM_DECL mat4s glms_translate(mat4s m, vec3s v);
+   CGLM_DECL mat4s glms_translate_x(mat4s m, float x);
+   CGLM_DECL mat4s glms_translate_y(mat4s m, float y);
+   CGLM_DECL mat4s glms_translate_z(mat4s m, float z);
+   CGLM_DECL mat4s glms_translate_make(vec3s v);
+   CGLM_DECL mat4s glms_scale_to(mat4s m, vec3s v);
+   CGLM_DECL mat4s glms_scale_make(vec3s v);
+   CGLM_DECL mat4s glms_scale(mat4s m, vec3s v);
+   CGLM_DECL mat4s glms_scale_uni(mat4s m, float s);
+   CGLM_DECL mat4s glms_rotate_x(mat4s m, float angle);
+   CGLM_DECL mat4s glms_rotate_y(mat4s m, float angle);
+   CGLM_DECL mat4s glms_rotate_z(mat4s m, float angle);
+   CGLM_DECL mat4s glms_rotate_make(float angle, vec3s axis);
+   CGLM_DECL mat4s glms_rotate(mat4s m, float angle, vec3s axis);
+   CGLM_DECL mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis);
+   CGLM_DECL mat4s glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis);
+   CGLM_DECL vec3s glms_decompose_scalev(mat4s m);
+   CGLM_DECL bool  glms_uniscaled(mat4s m);
+   CGLM_DECL void  glms_decompose_rs(mat4s m, mat4s * r, vec3s * s);
+   CGLM_DECL void  glms_decompose(mat4s m, vec4s t, mat4s * r, vec3s * s);
  */
 
 #ifndef cglms_affines_h
@@ -47,12 +47,15 @@
  * @param[in]       v   translate vector [x, y, z]
  * @returns             affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_translate(mat4s m, vec3s v) {
+glms_translate(mat4s m, vec3s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_translate(m.raw, v.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief translate existing transform matrix by x factor
@@ -61,12 +64,15 @@ glms_translate(mat4s m, vec3s v) {
  * @param[in]       x   x factor
  * @returns             affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_translate_x(mat4s m, float x) {
+glms_translate_x(mat4s m, float x) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_translate_x(m.raw, x);
   return m;
 }
+#endif
 
 /*!
  * @brief translate existing transform matrix by y factor
@@ -75,12 +81,15 @@ glms_translate_x(mat4s m, float x) {
  * @param[in]       y   y factor
  * @returns             affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_translate_y(mat4s m, float y) {
+glms_translate_y(mat4s m, float y) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_translate_y(m.raw, y);
   return m;
 }
+#endif
 
 /*!
  * @brief translate existing transform matrix by z factor
@@ -89,12 +98,15 @@ glms_translate_y(mat4s m, float y) {
  * @param[in]       z   z factor
  * @returns             affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_translate_z(mat4s m, float z) {
+glms_translate_z(mat4s m, float z) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_translate_z(m.raw, z);
   return m;
 }
+#endif
 
 /*!
  * @brief creates NEW translate transform matrix by v vector
@@ -102,13 +114,16 @@ glms_translate_z(mat4s m, float z) {
  * @param[in]   v   translate vector [x, y, z]
  * @returns         affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_translate_make(vec3s v) {
+glms_translate_make(vec3s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s m;
   glm_translate_make(m.raw, v.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief creates NEW scale matrix by v vector
@@ -116,13 +131,16 @@ glms_translate_make(vec3s v) {
  * @param[in]   v  scale vector [x, y, z]
  * @returns affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_scale_make(vec3s v) {
+glms_scale_make(vec3s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s m;
   glm_scale_make(m.raw, v.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief scales existing transform matrix by v vector
@@ -132,13 +150,16 @@ glms_scale_make(vec3s v) {
  * @param[in]    v   scale vector [x, y, z]
  * @returns          affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_scale(mat4s m, vec3s v) {
+glms_scale(mat4s m, vec3s v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s r;
   glm_scale_to(m.raw, v.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief applies uniform scale to existing transform matrix v = [s, s, s]
@@ -148,12 +169,15 @@ glms_scale(mat4s m, vec3s v) {
  * @param[in]    s   scale factor
  * @returns          affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_scale_uni(mat4s m, float s) {
+glms_scale_uni(mat4s m, float s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_scale_uni(m.raw, s);
   return m;
 }
+#endif
 
 /*!
  * @brief rotate existing transform matrix around X axis by angle
@@ -163,13 +187,16 @@ glms_scale_uni(mat4s m, float s) {
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_x(mat4s m, float angle) {
+glms_rotate_x(mat4s m, float angle) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s r;
   glm_rotate_x(m.raw, angle, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief rotate existing transform matrix around Y axis by angle
@@ -179,13 +206,16 @@ glms_rotate_x(mat4s m, float angle) {
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_y(mat4s m, float angle) {
+glms_rotate_y(mat4s m, float angle) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s r;
   glm_rotate_y(m.raw, angle, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief rotate existing transform matrix around Z axis by angle
@@ -195,13 +225,16 @@ glms_rotate_y(mat4s m, float angle) {
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_z(mat4s m, float angle) {
+glms_rotate_z(mat4s m, float angle) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s r;
   glm_rotate_z(m.raw, angle, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief creates NEW rotation matrix by angle and axis
@@ -212,13 +245,16 @@ glms_rotate_z(mat4s m, float angle) {
  * @param[in]  axis   axis
  * @returns           affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_make(float angle, vec3s axis) {
+glms_rotate_make(float angle, vec3s axis) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   mat4s m;
   glm_rotate_make(m.raw, angle, axis.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief rotate existing transform matrix around given axis by angle
@@ -228,12 +264,15 @@ glms_rotate_make(float angle, vec3s axis) {
  * @param[in]       axis    axis
  * @returns                 affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate(mat4s m, float angle, vec3s axis) {
+glms_rotate(mat4s m, float angle, vec3s axis) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_rotate(m.raw, angle, axis.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief rotate existing transform
@@ -245,12 +284,15 @@ glms_rotate(mat4s m, float angle, vec3s axis) {
  * @param[in]       axis    axis
  * @returns                 affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
+glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_rotate_at(m.raw, pivot.raw, angle, axis.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief creates NEW rotation matrix by angle and axis at given point
@@ -266,12 +308,15 @@ glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
  * @param[in]  axis   axis
  * @returns           affine transfrom
  */
-CGLM_INLINE
+CGLM_DECL
 mat4s
-glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) {
+glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_rotate_atm(m.raw, pivot.raw, angle, axis.raw);
   return m;
 }
+#endif
 
 /*!
  * @brief decompose scale vector
@@ -279,13 +324,16 @@ glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) {
  * @param[in]  m  affine transform
  * @returns       scale vector (Sx, Sy, Sz)
  */
-CGLM_INLINE
+CGLM_DECL
 vec3s
-glms_decompose_scalev(mat4s m) {
+glms_decompose_scalev(mat4s m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   vec3s r;
   glm_decompose_scalev(m.raw, r.raw);
   return r;
 }
+#endif
 
 /*!
  * @brief returns true if matrix is uniform scaled. This is helpful for
@@ -295,11 +343,14 @@ glms_decompose_scalev(mat4s m) {
  *
  * @return boolean
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glms_uniscaled(mat4s m) {
+glms_uniscaled(mat4s m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_uniscaled(m.raw);
 }
+#endif
 
 /*!
  * @brief decompose rotation matrix (mat4) and scale vector [Sx, Sy, Sz]
@@ -309,11 +360,14 @@ glms_uniscaled(mat4s m) {
  * @param[out] r rotation matrix
  * @param[out] s scale matrix
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_decompose_rs(mat4s m, mat4s * __restrict r, vec3s * __restrict s) {
+glms_decompose_rs(mat4s m, mat4s * __restrict r, vec3s * __restrict s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_decompose_rs(m.raw, r->raw, s->raw);
 }
+#endif
 
 /*!
  * @brief decompose affine transform, TODO: extract shear factors.
@@ -324,10 +378,13 @@ glms_decompose_rs(mat4s m, mat4s * __restrict r, vec3s * __restrict s) {
  * @param[out] r rotation matrix (mat4)
  * @param[out] s scaling vector [X, Y, Z]
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glms_decompose(mat4s m, vec4s * __restrict t, mat4s * __restrict r, vec3s * __restrict s) {
+glms_decompose(mat4s m, vec4s * __restrict t, mat4s * __restrict r, vec3s * __restrict s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_decompose(m.raw, t->raw, r->raw, s->raw);
 }
+#endif
 
 #endif /* cglms_affines_h */

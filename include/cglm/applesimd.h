@@ -19,9 +19,11 @@
 * @brief converts mat4 to Apple's simd type simd_float4x4
 * @return simd_float4x4
 */
-CGLM_INLINE
+CGLM_DECL
 simd_float4x4
-glm_mat4_applesimd(mat4 m) {
+glm_mat4_applesimd(mat4 m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   simd_float4x4 t;
   
   t.columns[0][0] = m[0][0];
@@ -46,14 +48,17 @@ glm_mat4_applesimd(mat4 m) {
 
   return t;
 }
+#endif
 
 /*!
 * @brief converts mat3 to Apple's simd type simd_float3x3
 * @return simd_float3x3
 */
-CGLM_INLINE
+CGLM_DECL
 simd_float3x3
-glm_mat3_applesimd(mat3 m) {
+glm_mat3_applesimd(mat3 m) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   simd_float3x3 t;
   
   t.columns[0][0] = m[0][0];
@@ -70,26 +75,33 @@ glm_mat3_applesimd(mat3 m) {
 
   return t;
 }
+#endif
 
 /*!
 * @brief converts vec4 to Apple's simd type simd_float4
 * @return simd_float4
 */
-CGLM_INLINE
+CGLM_DECL
 simd_float4
-glm_vec4_applesimd(vec4 v) {
+glm_vec4_applesimd(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (simd_float4){v[0], v[1], v[2], v[3]};
 }
+#endif
 
 /*!
 * @brief converts vec3 to Apple's simd type simd_float3
 * @return v
 */
-CGLM_INLINE
+CGLM_DECL
 simd_float3
-glm_vec3_applesimd(vec3 v) {
+glm_vec3_applesimd(vec3 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return (simd_float3){v[0], v[1], v[2]};
 }
+#endif
 
 #endif
 #endif /* cglm_applesimd_h */

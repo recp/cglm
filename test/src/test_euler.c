@@ -18,13 +18,13 @@ TEST_IMPL(euler) {
   glm_euler_xyz(inAngles, rot1);
 
   /* extract angles */
-  glmc_euler_angles(rot1, outAngles);
+  glm_euler_angles(rot1, outAngles);
 
   /* angles must be equal in that range */
   ASSERTIFY(test_assert_vec3_eq(inAngles, outAngles))
 
   /* matrices must be equal */
-  glmc_euler_xyz(outAngles, rot2);
+  glm_euler_xyz(outAngles, rot2);
   ASSERTIFY(test_assert_mat4_eq(rot1, rot2))
 
   /* change range */
@@ -33,12 +33,12 @@ TEST_IMPL(euler) {
   inAngles[2] = glm_rad(181.0f);   /* Z angle */
 
   glm_euler_xyz(inAngles, rot1);
-  glmc_euler_angles(rot1, outAngles);
+  glm_euler_angles(rot1, outAngles);
 
   /* angles may not be equal but matrices MUST! */
 
   /* matrices must be equal */
-  glmc_euler_xyz(outAngles, rot2);
+  glm_euler_xyz(outAngles, rot2);
   ASSERTIFY(test_assert_mat4_eq(rot1, rot2))
 
   TEST_SUCCESS

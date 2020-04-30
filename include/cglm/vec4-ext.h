@@ -11,23 +11,23 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
-   CGLM_INLINE void  glm_vec4_fill(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
-   CGLM_INLINE bool  glm_vec4_eqv(vec4 a, vec4 b);
-   CGLM_INLINE bool  glm_vec4_eqv_eps(vec4 a, vec4 b);
-   CGLM_INLINE float glm_vec4_max(vec4 v);
-   CGLM_INLINE float glm_vec4_min(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isnan(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isinf(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isvalid(vec4 v);
-   CGLM_INLINE void  glm_vec4_sign(vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_abs(vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_fract(vec4 v, vec4 dest);
-   CGLM_INLINE float glm_vec4_hadd(vec4 v);
-   CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
+   CGLM_DECL void  glm_vec4_broadcast(float val, vec4 d);
+   CGLM_DECL void  glm_vec4_fill(vec4 v, float val);
+   CGLM_DECL bool  glm_vec4_eq(vec4 v, float val);
+   CGLM_DECL bool  glm_vec4_eq_eps(vec4 v, float val);
+   CGLM_DECL bool  glm_vec4_eq_all(vec4 v);
+   CGLM_DECL bool  glm_vec4_eqv(vec4 a, vec4 b);
+   CGLM_DECL bool  glm_vec4_eqv_eps(vec4 a, vec4 b);
+   CGLM_DECL float glm_vec4_max(vec4 v);
+   CGLM_DECL float glm_vec4_min(vec4 v);
+   CGLM_DECL bool  glm_vec4_isnan(vec4 v);
+   CGLM_DECL bool  glm_vec4_isinf(vec4 v);
+   CGLM_DECL bool  glm_vec4_isvalid(vec4 v);
+   CGLM_DECL void  glm_vec4_sign(vec4 v, vec4 dest);
+   CGLM_DECL void  glm_vec4_abs(vec4 v, vec4 dest);
+   CGLM_DECL void  glm_vec4_fract(vec4 v, vec4 dest);
+   CGLM_DECL float glm_vec4_hadd(vec4 v);
+   CGLM_DECL void  glm_vec4_sqrt(vec4 v, vec4 dest);
  */
 
 #ifndef cglm_vec4_ext_h
@@ -42,15 +42,18 @@
  * @param val value
  * @param d   dest
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_broadcast(float val, vec4 d) {
+glm_vec4_broadcast(float val, vec4 d) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(d, _mm_set1_ps(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
 #endif
 }
+#endif
 
 /*!
  * @brief fill a vector with specified value
@@ -58,15 +61,18 @@ glm_vec4_broadcast(float val, vec4 d) {
  * @param v   dest
  * @param val value
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_fill(vec4 v, float val) {
+glm_vec4_fill(vec4 v, float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_set1_ps(val));
 #else
   v[0] = v[1] = v[2] = v[3] = val;
 #endif
 }
+#endif
 
 /*!
  * @brief check if vector is equal to value (without epsilon)
@@ -74,14 +80,17 @@ glm_vec4_fill(vec4 v, float val) {
  * @param v   vector
  * @param val value
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_eq(vec4 v, float val) {
+glm_vec4_eq(vec4 v, float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return v[0] == val
          && v[0] == v[1]
          && v[0] == v[2]
          && v[0] == v[3];
 }
+#endif
 
 /*!
  * @brief check if vector is equal to value (with epsilon)
@@ -89,27 +98,33 @@ glm_vec4_eq(vec4 v, float val) {
  * @param v   vector
  * @param val value
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_eq_eps(vec4 v, float val) {
+glm_vec4_eq_eps(vec4 v, float val) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return fabsf(v[0] - val) <= FLT_EPSILON
          && fabsf(v[1] - val) <= FLT_EPSILON
          && fabsf(v[2] - val) <= FLT_EPSILON
          && fabsf(v[3] - val) <= FLT_EPSILON;
 }
+#endif
 
 /*!
  * @brief check if vectors members are equal (without epsilon)
  *
  * @param v   vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_eq_all(vec4 v) {
+glm_vec4_eq_all(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return v[0] == v[1]
          && v[0] == v[2]
          && v[0] == v[3];
 }
+#endif
 
 /*!
  * @brief check if vector is equal to another (without epsilon)
@@ -117,14 +132,17 @@ glm_vec4_eq_all(vec4 v) {
  * @param a vector
  * @param b vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_eqv(vec4 a, vec4 b) {
+glm_vec4_eqv(vec4 a, vec4 b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return a[0] == b[0]
          && a[1] == b[1]
          && a[2] == b[2]
          && a[3] == b[3];
 }
+#endif
 
 /*!
  * @brief check if vector is equal to another (with epsilon)
@@ -132,23 +150,28 @@ glm_vec4_eqv(vec4 a, vec4 b) {
  * @param a vector
  * @param b vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_eqv_eps(vec4 a, vec4 b) {
+glm_vec4_eqv_eps(vec4 a, vec4 b) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return fabsf(a[0] - b[0]) <= FLT_EPSILON
          && fabsf(a[1] - b[1]) <= FLT_EPSILON
          && fabsf(a[2] - b[2]) <= FLT_EPSILON
          && fabsf(a[3] - b[3]) <= FLT_EPSILON;
 }
+#endif
 
 /*!
  * @brief max value of vector
  *
  * @param v vector
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_vec4_max(vec4 v) {
+glm_vec4_max(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float max;
 
   max = glm_vec3_max(v);
@@ -157,15 +180,18 @@ glm_vec4_max(vec4 v) {
 
   return max;
 }
+#endif
 
 /*!
  * @brief min value of vector
  *
  * @param v vector
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_vec4_min(vec4 v) {
+glm_vec4_min(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float min;
 
   min = glm_vec3_min(v);
@@ -174,6 +200,7 @@ glm_vec4_min(vec4 v) {
 
   return min;
 }
+#endif
 
 /*!
  * @brief check if one of items is NaN (not a number)
@@ -181,11 +208,14 @@ glm_vec4_min(vec4 v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_isnan(vec4 v) {
+glm_vec4_isnan(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]);
 }
+#endif
 
 /*!
  * @brief check if one of items is INFINITY
@@ -193,11 +223,14 @@ glm_vec4_isnan(vec4 v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_isinf(vec4 v) {
+glm_vec4_isinf(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]);
 }
+#endif
 
 /*!
  * @brief check if all items are valid number
@@ -205,11 +238,14 @@ glm_vec4_isinf(vec4 v) {
  *
  * @param[in] v vector
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_vec4_isvalid(vec4 v) {
+glm_vec4_isvalid(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return !glm_vec4_isnan(v) && !glm_vec4_isinf(v);
 }
+#endif
 
 /*!
  * @brief get sign of 32 bit float as +1, -1, 0
@@ -218,9 +254,11 @@ glm_vec4_isvalid(vec4 v) {
  *
  * @param v vector
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_sign(vec4 v, vec4 dest) {
+glm_vec4_sign(vec4 v, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE2__ ) || defined( __SSE2__ )
   __m128 x0, x1, x2, x3, x4;
 
@@ -239,6 +277,7 @@ glm_vec4_sign(vec4 v, vec4 dest) {
   dest[3] = glm_signf(v[3]);
 #endif
 }
+#endif
 
 /*!
  * @brief absolute value of each vector item
@@ -246,9 +285,11 @@ glm_vec4_sign(vec4 v, vec4 dest) {
  * @param[in]  v    vector
  * @param[out] dest destination vector
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_abs(vec4 v, vec4 dest) {
+glm_vec4_abs(vec4 v, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, glmm_abs(glmm_load(v)));
 #elif defined(CGLM_NEON_FP)
@@ -260,6 +301,7 @@ glm_vec4_abs(vec4 v, vec4 dest) {
   dest[3] = fabsf(v[3]);
 #endif
 }
+#endif
 
 /*!
  * @brief fractional part of each vector item
@@ -267,14 +309,17 @@ glm_vec4_abs(vec4 v, vec4 dest) {
  * @param[in]  v    vector
  * @param[out] dest destination vector
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_fract(vec4 v, vec4 dest) {
+glm_vec4_fract(vec4 v, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   dest[0] = fminf(v[0] - floorf(v[0]), 0x1.fffffep-1f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0x1.fffffep-1f);
   dest[2] = fminf(v[2] - floorf(v[2]), 0x1.fffffep-1f);
   dest[3] = fminf(v[3] - floorf(v[3]), 0x1.fffffep-1f);
 }
+#endif
 
 /*!
  * @brief vector reduction by summation
@@ -283,15 +328,18 @@ glm_vec4_fract(vec4 v, vec4 dest) {
  * @param[in]   v    vector
  * @return      sum of all vector's elements
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_vec4_hadd(vec4 v) {
+glm_vec4_hadd(vec4 v) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glmm_hadd(glmm_load(v));
 #else
   return v[0] + v[1] + v[2] + v[3];
 #endif
 }
+#endif
 
 /*!
  * @brief square root of each vector item
@@ -299,9 +347,11 @@ glm_vec4_hadd(vec4 v) {
  * @param[in]  v    vector
  * @param[out] dest destination vector
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_vec4_sqrt(vec4 v, vec4 dest) {
+glm_vec4_sqrt(vec4 v, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_sqrt_ps(glmm_load(v)));
 #else
@@ -311,5 +361,6 @@ glm_vec4_sqrt(vec4 v, vec4 dest) {
   dest[3] = sqrtf(v[3]);
 #endif
 }
+#endif
 
 #endif /* cglm_vec4_ext_h */

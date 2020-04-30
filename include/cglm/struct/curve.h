@@ -31,10 +31,13 @@
  *
  * @return B(s)
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glms_smc(float s, mat4s m, vec4s c) {
+glms_smc(float s, mat4s m, vec4s c) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_smc(s, m.raw, c.raw);
 }
+#endif
 
 #endif /* cglms_curves_h */

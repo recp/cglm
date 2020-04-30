@@ -25,11 +25,14 @@
  *
  * @return returns radii
  */
-CGLM_INLINE
+CGLM_DECL
 float
-glm_sphere_radii(vec4 s) {
+glm_sphere_radii(vec4 s) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return s[3];
 }
+#endif
 
 /*!
  * @brief apply transform to sphere, it is just wrapper for glm_mat4_mulv3
@@ -38,12 +41,15 @@ glm_sphere_radii(vec4 s) {
  * @param[in]  m    transform matrix
  * @param[out] dest transformed sphere
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_sphere_transform(vec4 s, mat4 m, vec4 dest) {
+glm_sphere_transform(vec4 s, mat4 m, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_mat4_mulv3(m, s, 1.0f, dest);
   dest[3] = s[3];
 }
+#endif
 
 /*!
  * @brief merges two spheres and creates a new one
@@ -55,9 +61,11 @@ glm_sphere_transform(vec4 s, mat4 m, vec4 dest) {
  * @param[in]  s2   sphere 2
  * @param[out] dest merged/extended sphere
  */
-CGLM_INLINE
+CGLM_DECL
 void
-glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
+glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float dist, radii;
 
   dist  = glm_vec3_distance(s1, s2);
@@ -69,6 +77,7 @@ glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
   glm_vec3_center(s1, s2, dest);
   dest[3] = radii;
 }
+#endif
 
 /*!
  * @brief check if two sphere intersects
@@ -76,11 +85,14 @@ glm_sphere_merge(vec4 s1, vec4 s2, vec4 dest) {
  * @param[in]   s1  sphere
  * @param[in]   s2  other sphere
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_sphere_sphere(vec4 s1, vec4 s2) {
+glm_sphere_sphere(vec4 s1, vec4 s2) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   return glm_vec3_distance2(s1, s2) <= glm_pow2(s1[3] + s2[3]);
 }
+#endif
 
 /*!
  * @brief check if sphere intersects with point
@@ -88,12 +100,15 @@ glm_sphere_sphere(vec4 s1, vec4 s2) {
  * @param[in]   s      sphere
  * @param[in]   point  point
  */
-CGLM_INLINE
+CGLM_DECL
 bool
-glm_sphere_point(vec4 s, vec3 point) {
+glm_sphere_point(vec4 s, vec3 point) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   float rr;
   rr = s[3] * s[3];
   return glm_vec3_distance2(point, s) <= rr;
 }
+#endif
 
 #endif /* cglm_sphere_h */

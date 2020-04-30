@@ -21,7 +21,7 @@
 
 /*
  Functions:
-   CGLM_INLINE vec4s glms_plane_normalize(vec4s plane);
+   CGLM_DECL vec4s glms_plane_normalize(vec4s plane);
  */
 
 /*!
@@ -30,11 +30,14 @@
  * @param[in] plane plane to normalize
  * @returns         normalized plane
  */
-CGLM_INLINE
+CGLM_DECL
 vec4s
-glms_plane_normalize(vec4s plane) {
+glms_plane_normalize(vec4s plane) CGLM_ENDD
+#ifndef CGLM_LIB
+{
   glm_plane_normalize(plane.raw);
   return plane;
 }
+#endif
 
 #endif /* cglms_planes_h */
