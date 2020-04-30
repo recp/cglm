@@ -29,7 +29,7 @@
  * @param[in] v1             second vertex of triangle
  * @param[in] v2             third vertex of triangle
  * @param[in, out] d         distance to intersection
- * @param[out] intersection  whether there is intersection
+ * @return whether there is intersection
  */
 
 CGLM_INLINE
@@ -46,34 +46,30 @@ glm_ray_triangle(vec3   origin,
 
   glm_vec3_sub(v1, v0, edge1);
   glm_vec3_sub(v2, v0, edge2);
-
   glm_vec3_cross(direction, edge2, p);
 
   det = glm_vec3_dot(edge1, p);
-
   if (det > -epsilon && det < epsilon)
-    return 0;
+    return false;
 
   inv_det = 1.0f / det;
-
+  
   glm_vec3_sub(origin, v0, t);
 
   u = inv_det * glm_vec3_dot(t, p);
-
   if (u < 0.0f || u > 1.0f)
-    return 0;
+    return false;
 
   glm_vec3_cross(t, edge1, q);
 
   v = inv_det * glm_vec3_dot(direction, q);
-
   if (v < 0.0f || u + v > 1.0f)
-    return 0;
+    return false;
 
   dist = inv_det * glm_vec3_dot(edge2, q);
 
   if (d)
-      *d = dist;
+    *d = dist;
 
   return dist > epsilon;
 }
