@@ -1,10 +1,5 @@
 cmake_minimum_required(VERSION 3.8.2)
-project(cglm LANGUAGES C)
-
-set(CGLM_VERSION_MAJOR 0)
-set(CGLM_VERSION_MINOR 7)
-set(CGLM_VERSION_PATCH 4)
-set(CGLM_VERSION ${CGLM_VERSION_MAJOR}.${CGLM_VERSION_MINOR}.${CGLM_VERSION_PATCH})
+project(cglm VERSION 0.7.4  LANGUAGES C)
 
 set(C_STANDARD 11)
 set(C_STANDARD_REQUIRED YES)
@@ -168,8 +163,8 @@ add_library(cglm
   src/ray.c
   )
 
-set_target_properties(cglm PROPERTIES VERSION ${CGLM_VERSION} 
-                                    SOVERSION ${CGLM_VERSION_MAJOR})
+set_target_properties(cglm PROPERTIES VERSION ${PROJECT_VERSION} 
+                                    SOVERSION ${PROJECT_VERSION_MAJOR})
 
 target_include_directories(cglm PUBLIC
   ${CMAKE_CURRENT_SOURCE_DIR}/include
