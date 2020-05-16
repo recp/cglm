@@ -80,6 +80,19 @@ So be carefull, when your IDE (Xcode, Visual Studio ...) tried to autocomplete f
 
 **Also implementation may be wrong please let us know by creating an issue on Github.**
 
+BAD_ACCESS : Thread 1: EXC_BAD_ACCESS (code=EXC_I386_GPFLT) or Similar Errors/Crashes
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This is similar issue with alignment. For instance if you compiled **cglm** with 
+AVX (**-mavx**, intentionally or not) and if you use **cglm** in an environment that doesn't 
+support AVX (or if AVX is disabled intentionally) e.g. environment that max support SSE2/3/4, 
+then you probably get **BAD ACCESS** or similar...
+
+Because if you compile **cglm** with AVX it aligns **mat4** with 32 byte boundary, 
+and your project aligns that as 16 byte boundary...
+
+Check alignment, supported vector extension or simd in **cglm** and linked projects...
+
 Other Issues?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
