@@ -992,6 +992,7 @@ TEST_LIST {
   /* bezier */
   TEST_ENTRY(bezier)
 
+  /* vec2 */
   /* Macros */
 
   TEST_ENTRY(MACRO_GLM_VEC2_ONE_INIT)
@@ -1070,7 +1071,6 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec2_lerp)
 
   /* vec3 */
-
   /* Macros */
 
   TEST_ENTRY(MACRO_GLM_VEC3_ONE_INIT)
@@ -1236,7 +1236,8 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec3_sqrt)
 
   /* vec4 */
-  
+  /* Macros */
+
   TEST_ENTRY(MACRO_GLM_VEC4_ONE_INIT)
   TEST_ENTRY(MACRO_GLM_VEC4_ZERO_INIT)
   TEST_ENTRY(MACRO_GLM_VEC4_ONE)

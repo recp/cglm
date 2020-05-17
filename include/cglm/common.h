@@ -8,8 +8,13 @@
 #ifndef cglm_common_h
 #define cglm_common_h
 
-#define _USE_MATH_DEFINES       /* for windows */
-#define _CRT_SECURE_NO_WARNINGS /* for windows */
+#ifndef _USE_MATH_DEFINES
+#  define _USE_MATH_DEFINES       /* for windows */
+#endif
+
+#ifndef _CRT_SECURE_NO_WARNINGS
+#  define _CRT_SECURE_NO_WARNINGS /* for windows */
+#endif
 
 #include <stdint.h>
 #include <stddef.h>
