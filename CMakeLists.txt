@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8.2)
-project(cglm VERSION 0.7.5 LANGUAGES C)
+project(cglm VERSION 0.7.6 LANGUAGES C)
 
 set(C_STANDARD 11)
 set(C_STANDARD_REQUIRED YES)
