@@ -179,6 +179,8 @@ target_link_libraries(${LIBRARY_NAME} PRIVATE
   cglm)
 
 add_subdirectory(external/cglm/)
+
+# or you can use find_package to configure cglm
 ```
 
 ### Unix (Autotools)
