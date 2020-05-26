@@ -602,7 +602,7 @@ glm_vec4_muladds(vec4 a, float s, vec4 dest) {
                                          _mm_set1_ps(s))));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
-                            vsubq_f32(vld1q_f32(a),
+                            vmulq_f32(vld1q_f32(a),
                                       vdupq_n_f32(s))));
 #else
   dest[0] += a[0] * s;
