@@ -106,9 +106,7 @@ glm_vec4_eq_eps(vec4 v, float val) {
 CGLM_INLINE
 bool
 glm_vec4_eq_all(vec4 v) {
-  return v[0] == v[1]
-         && v[0] == v[2]
-         && v[0] == v[3];
+  return glm_vec4_eq_eps(v, v[0]);
 }
 
 /*!

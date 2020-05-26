@@ -73,7 +73,7 @@ glm_vec2_eq_eps(vec2 v, float val) {
 CGLM_INLINE
 bool
 glm_vec2_eq_all(vec2 v) {
-  return v[0] == v[1];
+  return glm_vec2_eq_eps(v, v[0]);
 }
 
 /*!
