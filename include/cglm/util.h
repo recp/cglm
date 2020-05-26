@@ -289,7 +289,7 @@ glm_smoothinterpc(float from, float to, float t) {
 CGLM_INLINE
 bool
 glm_eq(float a, float b) {
-  return fabsf(a - b) <= FLT_EPSILON;
+  return fabsf(a - b) <= GLM_FLT_EPSILON;
 }
 
 /*!

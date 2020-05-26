@@ -81,9 +81,9 @@ glm_vec3_eq(vec3 v, float val) {
 CGLM_INLINE
 bool
 glm_vec3_eq_eps(vec3 v, float val) {
-  return fabsf(v[0] - val) <= FLT_EPSILON
-         && fabsf(v[1] - val) <= FLT_EPSILON
-         && fabsf(v[2] - val) <= FLT_EPSILON;
+  return fabsf(v[0] - val) <= GLM_FLT_EPSILON
+         && fabsf(v[1] - val) <= GLM_FLT_EPSILON
+         && fabsf(v[2] - val) <= GLM_FLT_EPSILON;
 }
 
 /*!
@@ -120,9 +120,9 @@ glm_vec3_eqv(vec3 a, vec3 b) {
 CGLM_INLINE
 bool
 glm_vec3_eqv_eps(vec3 a, vec3 b) {
-  return fabsf(a[0] - b[0]) <= FLT_EPSILON
-         && fabsf(a[1] - b[1]) <= FLT_EPSILON
-         && fabsf(a[2] - b[2]) <= FLT_EPSILON;
+  return fabsf(a[0] - b[0]) <= GLM_FLT_EPSILON
+         && fabsf(a[1] - b[1]) <= GLM_FLT_EPSILON
+         && fabsf(a[2] - b[2]) <= GLM_FLT_EPSILON;
 }
 
 /*!

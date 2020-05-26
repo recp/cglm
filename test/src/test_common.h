@@ -106,7 +106,7 @@ test_rand_quat(versor q);
 CGLM_INLINE
 bool
 test_eq(float a, float b) {
-  return fabsf(a - b) <= 1e-6;
+  return fabsf(a - b) <= GLM_FLT_EPSILON * 10;
 }
 
 CGLM_INLINE

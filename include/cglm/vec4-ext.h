@@ -92,10 +92,10 @@ glm_vec4_eq(vec4 v, float val) {
 CGLM_INLINE
 bool
 glm_vec4_eq_eps(vec4 v, float val) {
-  return fabsf(v[0] - val) <= FLT_EPSILON
-         && fabsf(v[1] - val) <= FLT_EPSILON
-         && fabsf(v[2] - val) <= FLT_EPSILON
-         && fabsf(v[3] - val) <= FLT_EPSILON;
+  return fabsf(v[0] - val) <= GLM_FLT_EPSILON
+         && fabsf(v[1] - val) <= GLM_FLT_EPSILON
+         && fabsf(v[2] - val) <= GLM_FLT_EPSILON
+         && fabsf(v[3] - val) <= GLM_FLT_EPSILON;
 }
 
 /*!
@@ -135,10 +135,10 @@ glm_vec4_eqv(vec4 a, vec4 b) {
 CGLM_INLINE
 bool
 glm_vec4_eqv_eps(vec4 a, vec4 b) {
-  return fabsf(a[0] - b[0]) <= FLT_EPSILON
-         && fabsf(a[1] - b[1]) <= FLT_EPSILON
-         && fabsf(a[2] - b[2]) <= FLT_EPSILON
-         && fabsf(a[3] - b[3]) <= FLT_EPSILON;
+  return fabsf(a[0] - b[0]) <= GLM_FLT_EPSILON
+         && fabsf(a[1] - b[1]) <= GLM_FLT_EPSILON
+         && fabsf(a[2] - b[2]) <= GLM_FLT_EPSILON
+         && fabsf(a[3] - b[3]) <= GLM_FLT_EPSILON;
 }
 
 /*!
