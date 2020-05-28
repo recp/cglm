@@ -199,6 +199,10 @@ TEST_DECLARE(glmc_mat2_rmc)
 TEST_DECLARE(camera_lookat)
 TEST_DECLARE(camera_decomp)
 
+TEST_DECLARE(glm_frustum)
+
+TEST_DECLARE(glmc_frustum)
+
 /* project */
 TEST_DECLARE(glm_unprojecti)
 TEST_DECLARE(glm_unproject)
@@ -889,6 +893,10 @@ TEST_LIST {
   /* camera */
   TEST_ENTRY(camera_lookat)
   TEST_ENTRY(camera_decomp)
+  
+  TEST_ENTRY(glm_frustum)
+  
+  TEST_ENTRY(glmc_frustum)
   
   /* project */
   TEST_ENTRY(glm_unprojecti)

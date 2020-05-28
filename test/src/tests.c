@@ -24,6 +24,7 @@
 #include "test_affine.h"
 #include "test_affine_mat.h"
 #include "test_ray.h"
+#include "test_camera.h"
 
 #undef GLM
 #undef GLM_PREFIX
@@ -46,6 +47,7 @@
 #include "test_affine.h"
 #include "test_affine_mat.h"
 #include "test_ray.h"
+#include "test_camera.h"
 
 #undef GLM
 #undef GLM_PREFIX
