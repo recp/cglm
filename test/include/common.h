@@ -38,6 +38,8 @@ typedef struct test_entry_t {
   int    show_output;
 } test_entry_t;
 
+#ifndef GLM_TESTS_NO_COLORFUL_OUTPUT
+
 #define RESET       "\033[0m"
 #define BLACK       "\033[30m"             /* Black */
 #define RED         "\033[31m"             /* Red */
@@ -55,6 +57,28 @@ typedef struct test_entry_t {
 #define BOLDMAGENTA "\033[1m\033[35m"      /* Bold Magenta */
 #define BOLDCYAN    "\033[1m\033[36m"      /* Bold Cyan */
 #define BOLDWHITE   "\033[1m\033[37m"      /* Bold White */
+
+#else
+
+#define RESET
+#define BLACK
+#define RED
+#define GREEN
+#define YELLOW
+#define BLUE
+#define MAGENTA
+#define CYAN
+#define WHITE
+#define BOLDBLACK
+#define BOLDRED
+#define BOLDGREEN
+#define BOLDYELLOW
+#define BOLDBLUE
+#define BOLDMAGENTA
+#define BOLDCYAN
+#define BOLDWHITE
+
+#endif
 
 #define TEST_DECLARE(FUN) test_status_t test_ ## FUN(void);
 #define TEST_ENTRY(FUN)   { #FUN, test_ ## FUN, 0, 0 },
