@@ -228,9 +228,11 @@ glm_mat3_transpose(mat3 m) {
 CGLM_INLINE
 void
 glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
-  dest[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
-  dest[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
-  dest[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+  vec3 res;
+  res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
+  res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
+  res[2] = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2];
+  glm_vec3_copy(res, dest);
 }
 
 /*!
