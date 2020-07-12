@@ -162,8 +162,9 @@ Functions documentation
 .. c:function:: void  glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest)
 
     | multiply vec3 with mat4 and get vec3 as result
-    | 
-    | actually the result is vec4, after multiplication the last component
+    |
+    | actually the result is vec4, after multiplication, the last component
+    | is trimmed. if you need it don't use this func and use glm_mat4_mulv
 
     Parameters:
     | *[in]*  **m**     mat4(affine transform)
