@@ -156,16 +156,20 @@ Functions documentation
     Parameters:
       | *[in]*  **m**     mat4 (left)
       | *[in]*  **v**     vec4 (right, column vector)
+      | *[in]*  **last**  4th item to make it vec4
       | *[out]* **dest**  vec4 (result, column vector)
 
-.. c:function:: void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest)
+.. c:function:: void  glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest)
 
-    multiply vector with mat4's mat3 part(rotation)
+    | multiply vec3 with mat4 and get vec3 as result
+    | 
+    | actually the result is vec4, after multiplication the last component
 
     Parameters:
-    | *[in]*  **m**     mat4 (left)
-    | *[in]*  **v**     vec3 (right, column vector)
-    | *[out]* **dest**  vec3 (result, column vector)
+    | *[in]*  **m**     mat4(affine transform)
+    | *[in]*  **v**     vec3
+    | *[in]*  **last**  4th item to make it vec4
+    | *[out]* **dest**  result vector (vec3)
 
 .. c:function:: void  glm_mat4_trace(mat4 m)
 
