@@ -163,8 +163,9 @@ Functions documentation
 
     | multiply **vec3** with **mat4** and get **vec3** as result
     |
-    | actually the result is vec4, after multiplication, the last component
-    | is trimmed, if you need the result's last component then don't use this function and consider to use **glm_mat4_mulv()**
+    | actually the result is vec4, after multiplication, 
+      the last component is trimmed, if you need the result's last component 
+      then don't use this function and consider to use **glm_mat4_mulv()**
 
     Parameters:
       | *[in]*  **m**     mat4(affine transform)
