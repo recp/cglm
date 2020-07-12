@@ -167,10 +167,10 @@ Functions documentation
     | is trimmed. if you need it don't use this func and use glm_mat4_mulv
 
     Parameters:
-    | *[in]*  **m**     mat4(affine transform)
-    | *[in]*  **v**     vec3
-    | *[in]*  **last**  4th item to make it vec4
-    | *[out]* **dest**  result vector (vec3)
+      | *[in]*  **m**     mat4(affine transform)
+      | *[in]*  **v**     vec3
+      | *[in]*  **last**  4th item to make it vec4
+      | *[out]* **dest**  result vector (vec3)
 
 .. c:function:: void  glm_mat4_trace(mat4 m)
 
