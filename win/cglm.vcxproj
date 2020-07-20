@@ -247,6 +247,7 @@
       <PrecompiledHeaderFile />
       <CompileAs>CompileAsC</CompileAs>
       <EnablePREfast>true</EnablePREfast>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -266,6 +267,7 @@
       <PrecompiledHeaderFile />
       <CompileAs>CompileAsC</CompileAs>
       <EnablePREfast>true</EnablePREfast>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
