@@ -56,7 +56,7 @@
 CGLM_INLINE
 void
 glm_mat2_copy(mat2 mat, mat2 dest) {
-  glm_vec4_copy(mat[0], dest[0]);
+  glm_vec4_ucopy(mat[0], dest[0]);
 }
 
 /*!
@@ -216,7 +216,16 @@ glm_mat2_trace(mat2 m) {
 CGLM_INLINE
 void
 glm_mat2_scale(mat2 m, float s) {
-  glm_vec4_scale(m[0], s, m[0]);
+#if defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(m[0], _mm_mul_ps(_mm_loadu_ps(m[0]), _mm_set1_ps(s)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), vdupq_n_f32(s)));
+#else
+  m[0][0] = m[0][0] * s;
+  m[0][1] = m[0][1] * s;
+  m[1][0] = m[1][0] * s;
+  m[1][1] = m[1][1] * s;
+#endif
 }
 
 /*!
