@@ -21,7 +21,9 @@ checkLDFLAGS = -L./.libs \
                -lm \
                -lcglm
 checkCFLAGS = $(AM_CFLAGS) \
-              -I./include
+               -std=gnu11 \
+               -O3 \
+               -I./include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
