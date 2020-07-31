@@ -70,6 +70,17 @@ TEST_DECLARE(glmc_uniscaled)
 TEST_DECLARE(glmc_decompose_rs)
 TEST_DECLARE(glmc_decompose)
 
+/* affine 2d */
+TEST_DECLARE(glm_translate2d)
+TEST_DECLARE(glm_translate2d_to)
+TEST_DECLARE(glm_translate2d_x)
+TEST_DECLARE(glm_translate2d_y)
+
+TEST_DECLARE(glmc_translate2d)
+TEST_DECLARE(glmc_translate2d_to)
+TEST_DECLARE(glmc_translate2d_x)
+TEST_DECLARE(glmc_translate2d_y)
+
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
 TEST_DECLARE(glm_mat4_copy)
@@ -764,6 +775,17 @@ TEST_LIST {
   TEST_ENTRY(glmc_uniscaled)
   TEST_ENTRY(glmc_decompose_rs)
   TEST_ENTRY(glmc_decompose)
+  
+  /* affine 2d */
+  TEST_ENTRY(glm_translate2d)
+  TEST_ENTRY(glm_translate2d_to)
+  TEST_ENTRY(glm_translate2d_x)
+  TEST_ENTRY(glm_translate2d_y)
+
+  TEST_ENTRY(glmc_translate2d)
+  TEST_ENTRY(glmc_translate2d_to)
+  TEST_ENTRY(glmc_translate2d_x)
+  TEST_ENTRY(glmc_translate2d_y)
 
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)
