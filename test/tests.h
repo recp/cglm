@@ -80,6 +80,9 @@ TEST_DECLARE(glm_scale2d_to)
 TEST_DECLARE(glm_scale2d_make)
 TEST_DECLARE(glm_scale2d)
 TEST_DECLARE(glm_scale2d_uni)
+TEST_DECLARE(glm_rotate2d_make)
+TEST_DECLARE(glm_rotate2d)
+TEST_DECLARE(glm_rotate2d_to)
 
 TEST_DECLARE(glmc_translate2d)
 TEST_DECLARE(glmc_translate2d_to)
@@ -90,6 +93,9 @@ TEST_DECLARE(glmc_scale2d_to)
 TEST_DECLARE(glmc_scale2d_make)
 TEST_DECLARE(glmc_scale2d)
 TEST_DECLARE(glmc_scale2d_uni)
+TEST_DECLARE(glmc_rotate2d_make)
+TEST_DECLARE(glmc_rotate2d)
+TEST_DECLARE(glmc_rotate2d_to)
 
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
@@ -796,6 +802,9 @@ TEST_LIST {
   TEST_ENTRY(glm_scale2d_make)
   TEST_ENTRY(glm_scale2d)
   TEST_ENTRY(glm_scale2d_uni)
+  TEST_ENTRY(glm_rotate2d_make)
+  TEST_ENTRY(glm_rotate2d)
+  TEST_ENTRY(glm_rotate2d_to)
 
   TEST_ENTRY(glmc_translate2d)
   TEST_ENTRY(glmc_translate2d_to)
@@ -806,7 +815,10 @@ TEST_LIST {
   TEST_ENTRY(glmc_scale2d_make)
   TEST_ENTRY(glmc_scale2d)
   TEST_ENTRY(glmc_scale2d_uni)
-
+  TEST_ENTRY(glmc_rotate2d_make)
+  TEST_ENTRY(glmc_rotate2d)
+  TEST_ENTRY(glmc_rotate2d_to)
+  
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)
   TEST_ENTRY(glm_mat4_copy)
