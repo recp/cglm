@@ -61,3 +61,21 @@ void
 glmc_scale2d_uni(mat3 m, float s) {
   glm_scale2d_uni(m, s);
 }
+
+CGLM_EXPORT
+void
+glmc_rotate2d_make(mat3 m, float angle) {
+  glm_rotate2d_make(m, angle);
+}
+
+CGLM_EXPORT
+void
+glmc_rotate2d(mat3 m, float angle) {
+  glm_rotate2d(m, angle);
+}
+
+CGLM_EXPORT
+void
+glmc_rotate2d_to(mat3 m, float angle, mat3 dest) {
+  glm_rotate2d_to(m, angle, dest);
+}

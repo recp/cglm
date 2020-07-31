@@ -172,4 +172,85 @@ glm_scale2d_uni(mat3 m, float s) {
   m[1][2] = m[1][2] * s;
 }
 
+/*!
+ * @brief creates NEW rotation matrix by angle and axis
+ *
+ * axis will be normalized so you don't need to normalize it
+ *
+ * @param[out] m     affine transfrom
+ * @param[in]  angle angle (radians)
+ */
+CGLM_INLINE
+void
+glm_rotate2d_make(mat3 m, float angle) {
+  float c, s;
+
+  s = sinf(angle);
+  c = cosf(angle);
+  
+  m[0][0] = m[0][0] * c + m[1][0] * s;
+  m[0][1] = m[0][1] * c + m[1][1] * s;
+  m[0][2] = m[0][2] * c + m[1][2] * s;
+  
+  m[1][0] = m[0][0] * -s + m[1][0] * c;
+  m[1][1] = m[0][1] * -s + m[1][1] * c;
+  m[1][2] = m[0][2] * -s + m[1][2] * c;
+  
+  m[2][0] = 0.0f;
+  m[2][1] = 0.0f;
+  m[2][2] = 1.0f;
+}
+
+/*!
+ * @brief rotate existing 2d transform matrix around given axis by angle
+ *
+ * @param[in, out]  m      affine transfrom
+ * @param[in]       angle  angle (radians)
+ */
+CGLM_INLINE
+void
+glm_rotate2d(mat3 m, float angle) {
+  float c, s;
+
+  s = sinf(angle);
+  c = cosf(angle);
+  
+  m[0][0] = m[0][0] * c + m[1][0] * s;
+  m[0][1] = m[0][1] * c + m[1][1] * s;
+  m[0][2] = m[0][2] * c + m[1][2] * s;
+  
+  m[1][0] = m[0][0] * -s + m[1][0] * c;
+  m[1][1] = m[0][1] * -s + m[1][1] * c;
+  m[1][2] = m[0][2] * -s + m[1][2] * c;
+}
+
+/*!
+ * @brief rotate existing 2d transform matrix around given axis by angle
+ *        and store result in dest
+ *
+ * @param[in]  m      affine transfrom
+ * @param[in]  angle  angle (radians)
+ * @param[out] dest   destination
+ */
+CGLM_INLINE
+void
+glm_rotate2d_to(mat3 m, float angle, mat3 dest) {
+  float c, s;
+
+  s = sinf(angle);
+  c = cosf(angle);
+  
+  dest[0][0] = m[0][0] * c + m[1][0] * s;
+  dest[0][1] = m[0][1] * c + m[1][1] * s;
+  dest[0][2] = m[0][2] * c + m[1][2] * s;
+  
+  dest[1][0] = m[0][0] * -s + m[1][0] * c;
+  dest[1][1] = m[0][1] * -s + m[1][1] * c;
+  dest[1][2] = m[0][2] * -s + m[1][2] * c;
+  
+  dest[2][0] = m[0][0];
+  dest[2][1] = m[0][1];
+  dest[2][2] = m[0][2];
+}
+
 #endif /* cglm_affine2d_h */

@@ -49,6 +49,18 @@ CGLM_EXPORT
 void
 glmc_scale2d_uni(mat3 m, float s);
 
+CGLM_EXPORT
+void
+glmc_rotate2d_make(mat3 m, float angle);
+
+CGLM_EXPORT
+void
+glmc_rotate2d(mat3 m, float angle);
+
+CGLM_EXPORT
+void
+glmc_rotate2d_to(mat3 m, float angle, mat3 dest);
+
 #ifdef __cplusplus
 }
 #endif
