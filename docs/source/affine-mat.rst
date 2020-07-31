@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-affine transform matrix (specialized functions)
+3D Affine Transform Matrix (specialized functions)
 ================================================================================
 
 Header: cglm/affine-mat.h

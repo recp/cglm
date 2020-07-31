@@ -16,6 +16,7 @@ set(TEST_MAIN tests)
 set(TEST_RUNNER_PARAMS "")
 
 add_executable(${TEST_MAIN} ${TESTFILES})
+target_compile_definitions(${TEST_MAIN} PRIVATE CGLM_DEFINE_PRINTS=1)
 
 target_link_libraries(${TEST_MAIN} PRIVATE cglm m)
 target_include_directories(${TEST_MAIN} PRIVATE

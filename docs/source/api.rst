@@ -28,6 +28,7 @@ Follow the :doc:`build` documentation for this
 
    affine
    affine-mat
+   affine2d
    cam
    frustum
    box

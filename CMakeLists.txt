@@ -72,6 +72,7 @@ add_library(${PROJECT_NAME}
   src/curve.c
   src/bezier.c
   src/ray.c
+  src/affine2d.c
   )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

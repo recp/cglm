@@ -31,6 +31,7 @@ extern "C" {
 #include "struct/project.h"
 #include "struct/sphere.h"
 #include "struct/curve.h"
+#include "struct/affine2d.h"
 
 #ifdef __cplusplus
 }
