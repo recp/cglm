@@ -37,3 +37,27 @@ void
 glmc_translate2d_y(mat3 m, float to) {
   glm_translate2d_y(m, to);
 }
+
+CGLM_EXPORT
+void
+glmc_scale2d_to(mat3 m, vec2 v, mat3 dest) {
+  glm_scale2d_to(m, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_scale2d_make(mat3 m, vec2 v) {
+  glm_scale2d_make(m, v);
+}
+
+CGLM_EXPORT
+void
+glmc_scale2d(mat3 m, vec2 v) {
+  glm_scale2d(m, v);
+}
+
+CGLM_EXPORT
+void
+glmc_scale2d_uni(mat3 m, float s) {
+  glm_scale2d_uni(m, s);
+}

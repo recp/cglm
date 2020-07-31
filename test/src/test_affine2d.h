@@ -35,7 +35,7 @@ TEST_IMPL(GLM_PREFIX, translate2d_to) {
   vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
 
   glm_mat3_identity(m1);
-  GLM(translate2d_to)(m1, (vec3){13.0f, 11.0f}, m2);
+  GLM(translate2d_to)(m1, (vec2){13.0f, 11.0f}, m2);
   glm_mat3_mulv(m2, v1, v2);
 
   ASSERT(test_eq(v2[0], 15.0f))
@@ -43,7 +43,7 @@ TEST_IMPL(GLM_PREFIX, translate2d_to) {
   ASSERT(test_eq(v2[2], 1.0f))
 
   glm_mat3_identity(m1);
-  GLM(translate2d_to)(m1, (vec3){1.0f, -1.0f}, m2);
+  GLM(translate2d_to)(m1, (vec2){1.0f, -1.0f}, m2);
   glm_mat3_mulv(m2, v2, v2);
 
   ASSERT(test_eq(v2[0], 16.0f))
@@ -97,5 +97,118 @@ TEST_IMPL(GLM_PREFIX, translate2d_y) {
   ASSERT(test_eq(v2[1], 13.0f))
   ASSERT(test_eq(v2[2], 1.0f))
   
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, translate2d_make) {
+  mat3 m1;
+  vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat3_identity(m1);
+  GLM(translate2d_make)(m1, (vec2){13.0f, 11.0f});
+  glm_mat3_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 15.0f))
+  ASSERT(test_eq(v2[1], 14.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  glm_mat3_identity(m1);
+  GLM(translate2d_make)(m1, (vec2){-1.0f, -5.0f});
+  glm_mat3_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0], 14.0f))
+  ASSERT(test_eq(v2[1], 9.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale2d_to) {
+  mat3 m1, m2;
+  vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat3_identity(m1);
+  GLM(scale2d_to)(m1, (vec2){13.0f, 11.0f}, m2);
+  glm_mat3_mulv(m2, v1, v2);
+
+  ASSERT(test_eq(v2[0], 26.0f))
+  ASSERT(test_eq(v2[1], 33.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  glm_mat3_identity(m1);
+  GLM(scale2d_to)(m1, (vec2){-1.0f, -5.0f}, m2);
+  glm_mat3_mulv(m2, v2, v2);
+
+  ASSERT(test_eq(v2[0], -26.0f))
+  ASSERT(test_eq(v2[1], -165.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale2d_make) {
+  mat3 m1;
+  vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
+
+  GLM(scale2d_make)(m1, (vec2){13.0f, 11.0f});
+  glm_mat3_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 26.0f))
+  ASSERT(test_eq(v2[1], 33.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  GLM(scale2d_make)(m1, (vec3){-1.0f, -5.0f});
+  glm_mat3_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0], -26.0f))
+  ASSERT(test_eq(v2[1], -165.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale2d) {
+  mat3 m1;
+  vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat3_identity(m1);
+  GLM(scale2d)(m1, (vec2){13.0f, 11.0f});
+  glm_mat3_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 26.0f))
+  ASSERT(test_eq(v2[1], 33.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  glm_mat3_identity(m1);
+  GLM(scale2d)(m1, (vec2){-1.0f, -5.0f});
+  glm_mat3_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0], -26.0f))
+  ASSERT(test_eq(v2[1], -165.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, scale2d_uni) {
+  mat3 m1;
+  vec3 v1 = {2.0f, 3.0f, 1.0f}, v2;
+
+  glm_mat3_identity(m1);
+  GLM(scale2d_uni)(m1, 13.0f);
+  glm_mat3_mulv(m1, v1, v2);
+
+  ASSERT(test_eq(v2[0], 26.0f))
+  ASSERT(test_eq(v2[1], 39.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+
+  glm_mat3_identity(m1);
+  GLM(scale2d_uni)(m1, -5.0f);
+  glm_mat3_mulv(m1, v2, v2);
+
+  ASSERT(test_eq(v2[0], -130.0f))
+  ASSERT(test_eq(v2[1], -195.0f))
+  ASSERT(test_eq(v2[2],  1.0f))
+
   TEST_SUCCESS
 }
