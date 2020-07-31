@@ -7,7 +7,18 @@
 
 /*
  Functions:
-
+   CGLM_INLINE void glm_translate2d(mat3 m, vec2 v)
+   CGLM_INLINE void glm_translate2d_to(mat3 m, vec2 v, mat3 dest)
+   CGLM_INLINE void glm_translate2d_x(mat3 m, float x)
+   CGLM_INLINE void glm_translate2d_y(mat3 m, float y)
+   CGLM_INLINE void glm_translate2d_make(mat3 m, vec2 v)
+   CGLM_INLINE void glm_scale2d_to(mat3 m, vec2 v, mat3 dest)
+   CGLM_INLINE void glm_scale2d_make(mat3 m, vec2 v)
+   CGLM_INLINE void glm_scale2d(mat3 m, vec2 v)
+   CGLM_INLINE void glm_scale2d_uni(mat3 m, float s)
+   CGLM_INLINE void glm_rotate2d_make(mat3 m, float angle)
+   CGLM_INLINE void glm_rotate2d(mat3 m, float angle)
+   CGLM_INLINE void glm_rotate2d_to(mat3 m, float angle, mat3 dest)
  */
 
 #ifndef cglm_affine2d_h
@@ -16,11 +27,7 @@
 #include "common.h"
 #include "util.h"
 #include "vec2.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
 #include "mat3.h"
-#include "affine-mat.h"
 
 /*!
  * @brief translate existing 2d transform matrix by v vector
