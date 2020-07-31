@@ -180,9 +180,7 @@ glm_scale2d_uni(mat3 m, float s) {
 }
 
 /*!
- * @brief creates NEW rotation matrix by angle and axis
- *
- * axis will be normalized so you don't need to normalize it
+ * @brief creates NEW rotation matrix by angle around Z axis
  *
  * @param[out] m     affine transfrom
  * @param[in]  angle angle (radians)
@@ -209,7 +207,8 @@ glm_rotate2d_make(mat3 m, float angle) {
 }
 
 /*!
- * @brief rotate existing 2d transform matrix around given axis by angle
+ * @brief rotate existing 2d transform matrix around Z axis by angle
+ *         and store result in same matrix
  *
  * @param[in, out]  m      affine transfrom
  * @param[in]       angle  angle (radians)
@@ -235,7 +234,7 @@ glm_rotate2d(mat3 m, float angle) {
 }
 
 /*!
- * @brief rotate existing 2d transform matrix around given axis by angle
+ * @brief rotate existing 2d transform matrix around Z axis by angle
  *        and store result in dest
  *
  * @param[in]  m      affine transfrom

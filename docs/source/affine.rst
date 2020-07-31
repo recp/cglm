@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-affine transforms
+3D Affine Transforms
 ================================================================================
 
 Header: cglm/affine.h
@@ -44,6 +44,8 @@ The implementation would be:
   glm_translate(m, pivot);
   glm_rotate(m, angle, axis);
   glm_translate(m, pivotInv); /* pivotInv = -pivot */
+
+.. _TransformsOrder:
 
 Transforms Order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
