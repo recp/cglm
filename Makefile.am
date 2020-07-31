@@ -23,6 +23,7 @@ checkLDFLAGS = -L./.libs \
 checkCFLAGS = $(AM_CFLAGS) \
                -std=gnu11 \
                -O3 \
+               -DCGLM_DEFINE_PRINTS \
                -I./include
 
 check_PROGRAMS = test/tests
