@@ -32,6 +32,7 @@ extern "C" {
 #include "call/curve.h"
 #include "call/bezier.h"
 #include "call/ray.h"
+#include "call/affine2d.h"
 
 #ifdef __cplusplus
 }

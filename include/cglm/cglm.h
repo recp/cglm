@@ -31,5 +31,6 @@
 #include "curve.h"
 #include "bezier.h"
 #include "ray.h"
+#include "affine2d.h"
 
 #endif /* cglm_h */
