@@ -82,5 +82,11 @@
     <ClInclude Include="..\test\src\test_ray.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_affine2d.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_camera.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

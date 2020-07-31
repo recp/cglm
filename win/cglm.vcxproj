@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affine.c" />
+    <ClCompile Include="..\src\affine2d.c" />
     <ClCompile Include="..\src\bezier.c" />
     <ClCompile Include="..\src\box.c" />
     <ClCompile Include="..\src\cam.c" />
@@ -43,11 +44,13 @@
   <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
+    <ClInclude Include="..\include\cglm\affine2d.h" />
     <ClInclude Include="..\include\cglm\applesimd.h" />
     <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
     <ClInclude Include="..\include\cglm\call.h" />
     <ClInclude Include="..\include\cglm\call\affine.h" />
+    <ClInclude Include="..\include\cglm\call\affine2d.h" />
     <ClInclude Include="..\include\cglm\call\bezier.h" />
     <ClInclude Include="..\include\cglm\call\box.h" />
     <ClInclude Include="..\include\cglm\call\cam.h" />
@@ -97,6 +100,7 @@
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\struct.h" />
     <ClInclude Include="..\include\cglm\struct\affine.h" />
+    <ClInclude Include="..\include\cglm\struct\affine2d.h" />
     <ClInclude Include="..\include\cglm\struct\box.h" />
     <ClInclude Include="..\include\cglm\struct\cam.h" />
     <ClInclude Include="..\include\cglm\struct\color.h" />

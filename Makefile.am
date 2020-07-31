@@ -132,8 +132,9 @@ cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/project.h \
                       include/cglm/struct/sphere.h \
                       include/cglm/struct/color.h \
-                      include/cglm/struct/curve.h
-
+                      include/cglm/struct/curve.h \
+                      include/cglm/struct/affine2d.h
+                      
 libcglm_la_SOURCES=\
     src/euler.c \
     src/affine.c \

@@ -31,7 +31,9 @@
   <ItemGroup>
     <ClInclude Include="..\test\include\common.h" />
     <ClInclude Include="..\test\src\test_affine.h" />
+    <ClInclude Include="..\test\src\test_affine2d.h" />
     <ClInclude Include="..\test\src\test_affine_mat.h" />
+    <ClInclude Include="..\test\src\test_camera.h" />
     <ClInclude Include="..\test\src\test_common.h" />
     <ClInclude Include="..\test\src\test_mat2.h" />
     <ClInclude Include="..\test\src\test_mat3.h" />

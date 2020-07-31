@@ -95,6 +95,9 @@
     <ClCompile Include="..\src\ray.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\affine2d.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -357,6 +360,15 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\simd\sse2\mat2.h">
       <Filter>include\cglm\simd\sse2</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\affine2d.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\affine2d.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\affine2d.h">
+      <Filter>include\cglm\struct</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
