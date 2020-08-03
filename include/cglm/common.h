@@ -22,11 +22,13 @@
 #include <float.h>
 #include <stdbool.h>
 
-#if defined(_MSC_VER)
+#if defined(_MSC_VER) && defined(CGLM_EXPORTS)
 #  ifdef CGLM_DLL
 #    define CGLM_EXPORT __declspec(dllexport)
-#  else
+#  elif defined(CGLM_DLL)
 #    define CGLM_EXPORT __declspec(dllimport)
+#  else
+#    define CGLM_EXPORT
 #  endif
 #  define CGLM_INLINE __forceinline
 #else
