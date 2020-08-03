@@ -22,7 +22,7 @@ if(CGLM_USE_C99)
 endif()
 
 if(MSVC)
-  add_definitions(-DNDEBUG -D_WINDOWS -D_USRDLL -DCGLM_EXPORTS -DCGLM_DLL)
+  add_definitions(-DNDEBUG -D_WINDOWS -D_USRDLL)
   add_compile_options(/W3 /Ox /Gy /Oi /TC)
   
   # Ref: https://skia.googlesource.com/third_party/sdl/+/refs/heads/master/CMakeLists.txt#225
@@ -74,6 +74,11 @@ add_library(${PROJECT_NAME}
   src/ray.c
   src/affine2d.c
   )
+
+if(CGLM_SHARED)
+  add_definitions(-DCGLM_EXPORTS)
+  target_compile_definitions(${PROJECT_NAME} PUBLIC -DCGLM_DLL)
+endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
                               VERSION ${PROJECT_VERSION} 
