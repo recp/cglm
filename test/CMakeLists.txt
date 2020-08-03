@@ -18,7 +18,11 @@ set(TEST_RUNNER_PARAMS "")
 add_executable(${TEST_MAIN} ${TESTFILES})
 target_compile_definitions(${TEST_MAIN} PRIVATE CGLM_DEFINE_PRINTS=1)
 
-target_link_libraries(${TEST_MAIN} PRIVATE cglm m)
+if(NOT MSVC)
+  target_link_libraries(${TEST_MAIN} PRIVATE m)
+endif()
+
+target_link_libraries(${TEST_MAIN} PRIVATE cglm)
 target_include_directories(${TEST_MAIN} PRIVATE
   ${CMAKE_CURRENT_LIST_DIR}/include
   ${CMAKE_CURRENT_LIST_DIR}/src
