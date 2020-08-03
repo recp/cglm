@@ -23,7 +23,7 @@
 #include <stdbool.h>
 
 #if defined(_MSC_VER)
-#  if defined(CGLM_DLL) && defined(CGLM_EXPORTS)
+#  ifdef CGLM_EXPORTS
 #    define CGLM_EXPORT __declspec(dllexport)
 #  elif defined(CGLM_DLL)
 #    define CGLM_EXPORT __declspec(dllimport)
