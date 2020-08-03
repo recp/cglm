@@ -77,7 +77,8 @@ add_library(${PROJECT_NAME}
 
 if(CGLM_SHARED)
   add_definitions(-DCGLM_EXPORTS)
-  target_compile_definitions(${PROJECT_NAME} PUBLIC -DCGLM_DLL)
+else()
+  target_compile_definitions(${PROJECT_NAME} PUBLIC -DCGLM_STATIC)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

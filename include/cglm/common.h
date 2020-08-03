@@ -23,12 +23,12 @@
 #include <stdbool.h>
 
 #if defined(_MSC_VER)
-#  ifdef CGLM_EXPORTS
-#    define CGLM_EXPORT __declspec(dllexport)
-#  elif defined(CGLM_DLL)
-#    define CGLM_EXPORT __declspec(dllimport)
-#  else
+#  ifdef CGLM_STATIC
 #    define CGLM_EXPORT
+#  elif defined(CGLM_EXPORTS)
+#    define CGLM_EXPORT __declspec(dllexport)
+#  else
+#    define CGLM_EXPORT __declspec(dllimport)
 #  endif
 #  define CGLM_INLINE __forceinline
 #else
