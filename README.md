@@ -183,6 +183,34 @@ add_subdirectory(external/cglm/)
 # or you can use find_package to configure cglm
 ```
 
+### Meson (All platforms)
+
+```bash
+$ meson build # [Optional] --default-library=static
+$ cd build
+$ ninja
+$ sudo ninja install # [Optional]
+```
+
+##### Meson options with Defaults:
+
+```meson
+c_std=c11
+buildtype=release
+default_library=shared
+```
+#### Use with your Meson project
+* Example:
+```meson
+# Clone cglm or create a cglm.wrap under <source_root>/subprojects
+project('name', 'c')
+
+cglm_dep = dependency('cglm', fallback : 'cglm', 'cglm_dep')
+
+executable('exe', 'src/main.c', dependencies : cglm_dep)
+```
+
+
 ### Unix (Autotools)
 
 ```bash
