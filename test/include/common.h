@@ -16,6 +16,10 @@
 #  define _CRT_SECURE_NO_WARNINGS /* for windows */
 #endif
 
+#ifndef _GNU_SOURCE
+#  define _GNU_SOURCE /* for drand48() */
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

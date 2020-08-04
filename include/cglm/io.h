@@ -301,15 +301,15 @@ glm_aabb_print(vec3                    bbox[2],
 #include <stdlib.h>
 
 /* NOOP: Remove print from DEBUG */
-#define glm_mat4_print(...)
-#define glm_mat3_print(...)
-#define glm_mat2_print(...)
-#define glm_vec4_print(...)
-#define glm_vec3_print(...)
-#define glm_ivec3_print(...)
-#define glm_vec2_print(...)
-#define glm_versor_print(...)
-#define glm_aabb_print(...)
+#define glm_mat4_print(v, s) (void)v; (void)s;
+#define glm_mat3_print(v, s) (void)v; (void)s;
+#define glm_mat2_print(v, s) (void)v; (void)s;
+#define glm_vec4_print(v, s) (void)v; (void)s;
+#define glm_vec3_print(v, s) (void)v; (void)s;
+#define glm_ivec3_print(v, s) (void)v; (void)s;
+#define glm_vec2_print(v, s) (void)v; (void)s;
+#define glm_versor_print(v, s) (void)v; (void)s;
+#define glm_aabb_print(v, t, s) (void)v; (void)t; (void)s;
 
 #endif
 #endif /* cglm_io_h */

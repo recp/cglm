@@ -18,6 +18,8 @@ main(int argc, const char * argv[]) {
   test_status_t st;
   int32_t       i, count, passed, failed, maxlen;
   double        start, end, elapsed, total;
+  (void)argc;
+  (void)argv;
 
   passed = failed = maxlen  = 0;
   total  = 0.0;
