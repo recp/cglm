@@ -1,0 +1,1 @@
+option('build_tests', type : 'boolean', value : false, description : 'Build tests')
