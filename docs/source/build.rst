@@ -47,6 +47,41 @@ If you don't want to install **cglm** to your system's folder you can get static
   
   add_subdirectory(external/cglm/)
 
+Meson (All platforms):
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: bash
+  :linenos:
+
+  $ meson build # [Optional] --default-library=static
+  $ cd build
+  $ ninja
+  $ sudo ninja install # [Optional]
+
+**Meson Options:**
+
+.. code-block:: CMake
+  :linenos:
+
+  c_std=c11
+  buildtype=release
+  default_library=shared
+  enable_tests=false # to run tests: ninja test
+
+
+**Use with your CMake project example**
+
+.. code-block:: CMake
+  :linenos:
+
+  # Clone cglm or create a cglm.wrap under <source_root>/subprojects
+  project('name', 'c')
+  
+  cglm_dep = dependency('cglm', fallback : 'cglm', 'cglm_dep')
+  
+  executable('exe', 'src/main.c', dependencies : cglm_dep)
+
+
 Unix (Autotools):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
