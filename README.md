@@ -198,6 +198,7 @@ $ sudo ninja install # [Optional]
 c_std=c11
 buildtype=release
 default_library=shared
+enable_tests=false # to run tests: ninja test
 ```
 #### Use with your Meson project
 * Example:
