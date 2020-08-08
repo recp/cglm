@@ -15,6 +15,21 @@
    CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
  */
 
+/*
+ cglm tried to enable print functions in debug mode and disable them in
+ release/production mode to eliminate printing costs.
+ 
+ if you need to force enable then define CGLM_DEFINE_PRINTS macro not DEBUG one
+ 
+ Print functions are enabled if:
+ 
+ - DEBUG or _DEBUG macro is defined (mostly defined automatically in debugging)
+ - CGLM_DEFINE_PRINTS macro is defined including release/production
+   which makes enabled printing always
+ - glmc_ calls for io are always prints
+
+ */
+
 #ifndef cglm_io_h
 #define cglm_io_h
 #if defined(DEBUG) || defined(_DEBUG) \

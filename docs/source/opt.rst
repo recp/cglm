@@ -18,7 +18,7 @@ versor: 16 byte
 By starting **v0.4.5** cglm provides an option to disable alignment requirement.
 To enable this option define **CGLM_ALL_UNALIGNED** macro before all headers.
 You can define it in Xcode, Visual Studio (or other IDEs) or you can also prefer
-to define it in build system. If you use pre-compiled verisons then you
+to define it in build system. If you use pre-compiled versions then you
 have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
 
 **VERY VERY IMPORTANT:** If you use cglm in multiple projects and
@@ -55,11 +55,20 @@ Print Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. **CGLM_DEFINE_PRINTS**
-2. **CGLM_NO_PRINTS_NOOP**
+2. **CGLM_NO_PRINTS_NOOP** (use CGLM_DEFINE_PRINTS)
 
-Inline prints are only enabled in DEBUG mode and if **CGLM_DEFINE_PRINTS** is defined.
-If DEBUG is not enabled then print function bodies will be emptied to eliminate print function calls.
-You can disable this feature too by defining **CGLM_NO_PRINTS_NOOP** macro top of cglm headers.
+Inline prints are only enabled in **DEBUG** mode or if **CGLM_DEFINE_PRINTS** is defined.
+**glmc_** versions will always print too.
+
+Because **cglm** tried to enable print functions in debug mode and disable them in
+release/production mode to eliminate printing costs when we do not need them.
+
+**cglm** checks **DEBUG** or **_DEBUG** macros to test debug mode, if these are not working for you then you can use 
+**CGLM_DEFINE_PRINTS** to force enable, or create a PR to introduce new macro to test against debugging mode.
+
+If DEBUG mode is not enabled then print functions will be emptied to eliminate print function calls.
+You can disable this feature too by defining **CGLM_DEFINE_PRINTS** macro top of cglm header 
+or in project/build settings...
 
 3. **CGLM_PRINT_PRECISION**    5
 
@@ -71,3 +80,6 @@ if a number is greater than this value then %g will be used, since this is short
 
 5. **CGLM_PRINT_COLOR**        "\033[36m"
 6. **CGLM_PRINT_COLOR_RESET**  "\033[0m"
+
+You can disable colorful print output by defining **CGLM_PRINT_COLOR** and **CGLM_PRINT_COLOR_RESET** as empty macro.
+Because some terminals may not support colors.
