@@ -293,7 +293,7 @@ glm_aabb_print(vec3                    bbox[2],
 #undef m
 }
 
-#elif !defined(CGLM_NO_PRINTS_NOOP)
+#else
 
 #include "common.h"
 
