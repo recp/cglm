@@ -25,10 +25,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define CGLM_PRINT_PRECISION    5
-#define CGLM_PRINT_MAX_TO_SHORT 1e5
-#define CGLM_PRINT_COLOR        "\033[36m"
-#define CGLM_PRINT_COLOR_RESET  "\033[0m"
+#ifndef CGLM_PRINT_PRECISION
+#  define CGLM_PRINT_PRECISION    5
+#endif
+
+#ifndef CGLM_PRINT_MAX_TO_SHORT
+#  define CGLM_PRINT_MAX_TO_SHORT 1e5
+#endif
+
+#ifndef CGLM_PRINT_COLOR
+#  define CGLM_PRINT_COLOR        "\033[36m"
+#endif
+
+#ifndef CGLM_PRINT_COLOR_RESET
+#  define CGLM_PRINT_COLOR_RESET  "\033[0m"
+#endif
 
 CGLM_INLINE
 void
