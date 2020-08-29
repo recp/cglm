@@ -536,12 +536,7 @@ glm_mat4_scale(mat4 m, float s) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
 #elif defined(CGLM_NEON_FP)
-  float32x4_t v0;
-  v0 = vdupq_n_f32(s);
-  vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), v0));
-  vst1q_f32(m[1], vmulq_f32(vld1q_f32(m[1]), v0));
-  vst1q_f32(m[2], vmulq_f32(vld1q_f32(m[2]), v0));
-  vst1q_f32(m[3], vmulq_f32(vld1q_f32(m[3]), v0));
+  glm_mat4_scale_neon(m, s);
 #else
   glm_mat4_scale_p(m, s);
 #endif

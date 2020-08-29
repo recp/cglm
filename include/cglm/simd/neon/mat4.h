@@ -14,6 +14,19 @@
 
 CGLM_INLINE
 void
+glm_mat4_scale_neon(mat4 m, float s) {
+  float32x4_t v0;
+  
+  v0 = vdupq_n_f32(s);
+
+  vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), v0));
+  vst1q_f32(m[1], vmulq_f32(vld1q_f32(m[1]), v0));
+  vst1q_f32(m[2], vmulq_f32(vld1q_f32(m[2]), v0));
+  vst1q_f32(m[3], vmulq_f32(vld1q_f32(m[3]), v0));
+}
+
+CGLM_INLINE
+void
 glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
   float32x4_t l0, l1, l2, l3, r, d0, d1, d2, d3;
