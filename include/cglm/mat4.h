@@ -476,6 +476,8 @@ void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_mat4_transp_neon(m, dest);
 #else
   dest[0][0] = m[0][0]; dest[1][0] = m[0][1];
   dest[0][1] = m[1][0]; dest[1][1] = m[1][1];
@@ -498,6 +500,8 @@ void
 glm_mat4_transpose(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
+#elif defined(CGLM_NEON_FP)
+  glm_mat4_transp_neon(m, m);
 #else
   mat4 d;
   glm_mat4_transpose_to(m, d);
