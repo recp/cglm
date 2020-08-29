@@ -79,5 +79,27 @@ glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
   vst1q_f32(dest[3], d3);
 }
 
+CGLM_INLINE
+void
+glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
+  float32x4_t l0, l1, l2, l3;
+  float32x2_t vlo, vhi;
+  
+  l0  = vld1q_f32(m[0]);
+  l1  = vld1q_f32(m[1]);
+  l2  = vld1q_f32(m[2]);
+  l3  = vld1q_f32(m[3]);
+
+  vlo = vld1_f32(&v[0]);
+  vhi = vld1_f32(&v[2]);
+
+  l0  = vmulq_lane_f32(l0, vlo, 0);
+  l0  = vmlaq_lane_f32(l0, l1, vlo, 1);
+  l0  = vmlaq_lane_f32(l0, l2, vhi, 0);
+  l0  = vmlaq_lane_f32(l0, l3, vhi, 1);
+
+  vst1q_f32(dest, l0);
+}
+
 #endif
 #endif /* cglm_mat4_neon_h */

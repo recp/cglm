@@ -358,6 +358,8 @@ void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mulv_sse2(m, v, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_mat4_mulv_neon(m, v, dest);
 #else
   vec4 res;
   res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2] + m[3][0] * v[3];
