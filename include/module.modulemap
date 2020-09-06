@@ -1,0 +1,14 @@
+module cglm {
+    header "cglm/cglm.h"
+    header "cglm/struct.h"
+    
+    export *
+}
+
+module cglmc {
+    header "cglm/cglm.h"
+    header "cglm/struct.h"
+    header "cglm/call.h"
+    
+    export *
+}
