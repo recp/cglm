@@ -15,7 +15,7 @@ let package = Package(
             path: "./",
             exclude: [
                 "./docs",
-                "./dummySrcForSwift",
+                "./src/swift",
                 "./include",
                 "./test",
                 "./win",
@@ -31,12 +31,11 @@ let package = Package(
             exclude: [
                 "./docs",
                 "./include",
-                "./src",
                 "./test",
                 "./win",
             ],
             sources: [
-                "./dummySrcForSwift",
+                "./src/swift",
             ],
             publicHeadersPath: "./include"
         ),
