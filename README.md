@@ -212,6 +212,38 @@ cglm_dep = dependency('cglm', fallback : 'cglm', 'cglm_dep')
 executable('exe', 'src/main.c', dependencies : cglm_dep)
 ```
 
+### Swift (Swift Package Manager)
+
+Currently only default build options are supported. Add **cglm** dependency to your project:
+
+```swift
+...
+Package( 
+  ...
+  dependencies: [
+    ...
+    .package(url: "https://github.com/recp/cglm", .branch("master")),
+  ]
+  ...
+)
+```
+
+Now add **cgml** as a dependency to your target. Product choices are:
+- **cglm** for inlined version of the library which can be linked only statically
+- **cglmc** for a compiled version of the library with no linking limitation
+
+```swift
+...
+.target(
+  ...
+  dependencies: [
+    ...
+    .product(name: "cglm", package: "cglm"),
+  ]
+  ...
+)
+...
+```
 
 ### Unix (Autotools)
 
