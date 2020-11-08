@@ -11,6 +11,7 @@ project('cglm', 'c',
 
 cc = meson.get_compiler('c')
 
+cglm_install = get_option('install')
 cglm_deps = cc.find_library('m', required : false)
 
 cglm_args = []
@@ -50,11 +51,9 @@ cglm_src = files(
     'src/vec4.c'
 )
 
-install_subdir('include/cglm', install_dir : get_option('includedir'))
-
 cglm_lib = library('cglm',
     cglm_src,
-    install : true,
+    install : cglm_install,
     dependencies : cglm_deps,
     c_args : [ build_args, cglm_args ]
 )
@@ -71,17 +70,19 @@ if meson.version().version_compare('>= 0.54.0')
     meson.override_dependency('cglm', cglm_dep)
 endif
 
+if cglm_install
+    install_subdir('include/cglm', install_dir : get_option('includedir'))
 
-pkg = import('pkgconfig')
-
-pkg.generate(
-    name : 'cglm',
-    libraries : cglm_lib,
-    extra_cflags : cglm_args,
-    version : meson.project_version(),
-    url : 'https://github.com/recp/cglm',
-    description : 'OpenGL Mathematics (glm) for C'
-)
+    pkg = import('pkgconfig')
+    pkg.generate(
+        name : 'cglm',
+        libraries : cglm_lib,
+        extra_cflags : cglm_args,
+        version : meson.project_version(),
+        url : 'https://github.com/recp/cglm',
+        description : 'OpenGL Mathematics (glm) for C'
+    )
+endif
 
 if get_option('build_tests') == true
 
