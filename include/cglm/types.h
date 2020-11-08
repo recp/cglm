@@ -32,6 +32,16 @@
 #  define CGLM_ALIGN_MAT CGLM_ALIGN(16)
 #endif
 
+#ifdef __GNUC__
+#  define CGLM_ASSUME_ALIGNED(expr, alignment) \
+  __builtin_assume_aligned((expr), (alignment))
+#else
+#  define CGLM_ASSUME_ALIGNED(expr, alignment) (expr)
+#endif
+
+#define CGLM_CASTPTR_ASSUME_ALIGNED(expr, type) \
+  ((type*)CGLM_ASSUME_ALIGNED((expr), __alignof__(type)))
+
 typedef float                   vec2[2];
 typedef float                   vec3[3];
 typedef int                    ivec3[3];
