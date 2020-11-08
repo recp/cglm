@@ -71,3 +71,6 @@ Authors:
   Thomas Möller (tompa@clarus.se)
   Ben Trumbore (wbt@graphics.cornell.edu)
 Link to paper: http://webserver2.tecgraf.puc-rio.br/~mgattass/cg/trbRR/Fast%20MinimumStorage%20RayTriangle%20Intersection.pdf
+
+14. ARM NEON: Matrix Vector Multiplication
+https://stackoverflow.com/a/57793352/2676533
