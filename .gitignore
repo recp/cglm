@@ -75,3 +75,4 @@ Default-568h@2x.png
 build/
 conftest.dir/*
 confdefs.h
+*.xcuserdatad
