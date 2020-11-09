@@ -175,7 +175,7 @@ glmm_load3(float v[3]) {
   __m128i xy;
   __m128  z;
 
-  xy = _mm_loadl_epi64((const __m128i *)v);
+  xy = _mm_loadl_epi64(CGLM_CASTPTR_ASSUME_ALIGNED(v, const __m128i));
   z  = _mm_load_ss(&v[2]);
 
   return _mm_movelh_ps(_mm_castsi128_ps(xy), z);
@@ -184,7 +184,7 @@ glmm_load3(float v[3]) {
 static inline
 void
 glmm_store3(float v[3], __m128 vx) {
-  _mm_storel_pi((__m64 *)&v[0], vx);
+  _mm_storel_pi(CGLM_CASTPTR_ASSUME_ALIGNED(v, __m64), vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
 
