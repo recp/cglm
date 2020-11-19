@@ -25,4 +25,13 @@ cglm is math library for graphics programming for C. See the documentation or RE
 
   # Linking
   s.library = "m"
+
+  # Configuration
+  s.pod_target_xcconfig = {
+    'CLANG_ENABLE_MODULES' => 'NO',
+    'CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES' => 'YES',
+    'CLANG_WARN_DOCUMENTATION_COMMENTS' => 'NO',
+    'GCC_C_LANGUAGE_STANDARD' => 'gnu11',
+    'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) GLM_TESTS_NO_COLORFUL_OUTPUT'
+  }
 end
