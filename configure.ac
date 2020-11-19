@@ -7,7 +7,7 @@
 #*****************************************************************************
 
 AC_PREREQ([2.69])
-AC_INIT([cglm], [0.7.9], [info@recp.me])
+AC_INIT([cglm], [0.8.0], [info@recp.me])
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects serial-tests])
 
 # Don't use the default cflags (-O2 -g), we set ours manually in Makefile.am.

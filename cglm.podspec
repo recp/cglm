@@ -2,10 +2,10 @@ Pod::Spec.new do |s|
 
   # Description
   s.name         = "cglm"
-  s.version      = "0.7.2"
-  s.summary      = "📽 Optimized OpenGL/Graphics Math (glm) for C"
+  s.version      = "0.7.9"
+  s.summary      = "📽 Highly Optimized Graphics Math (glm) for C"
   s.description  = <<-DESC
-cglm is math library for graphics programming for C. It is similar to original glm but it is written for C instead of C++ (you can use here too). See the documentation or README for all features.
+cglm is math library for graphics programming for C. See the documentation or README for all features.
                    DESC
 
   s.documentation_url = "http://cglm.readthedocs.io"
