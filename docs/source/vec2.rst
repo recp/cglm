@@ -55,7 +55,7 @@ Functions:
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. c:function:: void glm_vec2(float \*v, vec2 dest)
+.. c:function:: void glm_vec2(float * v, vec2 dest)
 
     init vec2 using vec3 or vec4
 
