@@ -50,7 +50,7 @@ If you don't want to install **cglm** to your system's folder you can get static
 Meson (All platforms):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code-block:: bash
+.. code-block::
   :linenos:
 
   $ meson build # [Optional] --default-library=static
@@ -60,7 +60,7 @@ Meson (All platforms):
 
 **Meson Options:**
 
-.. code-block:: CMake
+.. code-block:: 
   :linenos:
 
   c_std=c11
@@ -69,9 +69,9 @@ Meson (All platforms):
   enable_tests=false # to run tests: ninja test
 
 
-**Use with your CMake project example**
+**Use with your Meson project**
 
-.. code-block:: CMake
+.. code-block::
   :linenos:
 
   # Clone cglm or create a cglm.wrap under <source_root>/subprojects
