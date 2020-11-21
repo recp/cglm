@@ -374,7 +374,7 @@ Functions documentation
       | *[in]*       **q**      quaternion
       | *[in]*       **pivot**  pivot
 
-.. c:function:: void glm_quat_rotate(mat4 m, versor q, mat4 dest)
+.. c:function:: void glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot)
 
     | rotate NEW transform matrix using quaternion at pivot point
     | this creates rotation matrix, it assumes you don't have a matrix
