@@ -425,7 +425,7 @@ bool
 glm_uniscaled(mat4 m) {
   CGLM_ALIGN(8) vec3 s;
   glm_decompose_scalev(m, s);
-  return glm_vec3_eq_all(s);
+  return glm_vec3_eq_eps(s);
 }
 
 /*!
