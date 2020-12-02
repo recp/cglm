@@ -237,9 +237,9 @@ glm_vec3_abs(vec3 v, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec3_fract(vec3 v, vec3 dest) {
-  dest[0] = fminf(v[0] - floorf(v[0]), 0x1.fffffep-1f);
-  dest[1] = fminf(v[1] - floorf(v[1]), 0x1.fffffep-1f);
-  dest[2] = fminf(v[2] - floorf(v[2]), 0x1.fffffep-1f);
+  dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
+  dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
+  dest[2] = fminf(v[2] - floorf(v[2]), 0.999999940395355224609375f);
 }
 
 /*!
