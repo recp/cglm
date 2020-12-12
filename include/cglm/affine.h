@@ -455,7 +455,7 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
   glm_vec4_scale(r[1], 1.0f/s[1], r[1]);
   glm_vec4_scale(r[2], 1.0f/s[2], r[2]);
 
-  /* Note from Apple Open Source (asume that the matrix is orthonormal):
+  /* Note from Apple Open Source (assume that the matrix is orthonormal):
      check for a coordinate system flip.  If the determinant
      is -1, then negate the matrix and the scaling factors. */
   glm_vec3_cross(m[0], m[1], v);
