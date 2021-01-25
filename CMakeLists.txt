@@ -18,7 +18,7 @@ else(CGLM_STATIC)
 endif()
 
 if(CGLM_USE_C99)
-  set(C_STANDARD 99)
+  set(CMAKE_C_STANDARD 99)
 endif()
 
 if(MSVC)
