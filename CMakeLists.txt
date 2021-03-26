@@ -93,6 +93,11 @@ target_include_directories(${PROJECT_NAME}
         ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
+# Target for header-only usage
+add_library(${PROJECT_NAME}_headers INTERFACE)
+target_include_directories(${PROJECT_NAME}_headers INTERFACE
+  ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 # Test Configuration
 if(CGLM_USE_TEST)
   include(CTest)
