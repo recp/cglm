@@ -168,6 +168,24 @@ option(CGLM_USE_C99 "" OFF) # C11
 option(CGLM_USE_TEST "Enable Tests" OFF) # for make check - make test
 ```
 
+#### Use as header-only library with your CMake project
+
+This requires no building or installation of cglm.
+
+* Example:
+
+``` cmake
+cmake_minimum_required(VERSION 3.8.2)
+
+project(<Your Project Name>)
+
+add_executable(${PROJECT_NAME} src/main.c)
+target_link_libraries(${LIBRARY_NAME} PRIVATE
+  cglm_headers)
+
+add_subdirectory(external/cglm/ EXCLUDE_FROM_ALL)
+```
+
 #### Use with your CMake project
 * Example:
 ```cmake
