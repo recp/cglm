@@ -539,7 +539,9 @@ glm_mat4_scale_p(mat4 m, float s) {
 CGLM_INLINE
 void
 glm_mat4_scale(mat4 m, float s) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_scale_avx(m, s);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_scale_neon(m, s);
@@ -591,7 +593,9 @@ glm_mat4_det(mat4 mat) {
 CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_inv_avx(mat, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
 #else
   float t[6];
@@ -652,7 +656,9 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_inv_fast(mat4 mat, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#ifdef __AVX__
+  glm_mat4_inv_fast_avx(mat, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_fast_sse2(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
