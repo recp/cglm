@@ -16,6 +16,16 @@
 
 CGLM_INLINE
 void
+glm_mat4_scale_avx(mat4 m, float s) {
+  __m256 y0;
+  y0 = _mm256_set1_ps(s);
+  
+  glmm_store256(m[0], _mm256_mul_ps(y0, glmm_load256(m[0])));
+  glmm_store256(m[2], _mm256_mul_ps(y0, glmm_load256(m[2])));
+}
+
+CGLM_INLINE
+void
 glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
