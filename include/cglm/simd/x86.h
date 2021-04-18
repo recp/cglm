@@ -201,7 +201,7 @@ static inline
 __m128
 glmm_fmadd(__m128 a, __m128 b, __m128 c) {
 #ifdef __FMA__
-  return  _mm_fmadd_ps(a, b, c);
+  return _mm_fmadd_ps(a, b, c);
 #else
   return _mm_add_ps(c, _mm_mul_ps(a, b));
 #endif
@@ -211,11 +211,74 @@ static inline
 __m128
 glmm_fnmadd(__m128 a, __m128 b, __m128 c) {
 #ifdef __FMA__
-  return  _mm_fnmadd_ps(a, b, c);
+  return _mm_fnmadd_ps(a, b, c);
 #else
   return _mm_sub_ps(c, _mm_mul_ps(a, b));
 #endif
 }
+
+static inline
+__m128
+glmm_fmsub(__m128 a, __m128 b, __m128 c) {
+#ifdef __FMA__
+  return _mm_fmsub_ps(a, b, c);
+#else
+  return _mm_sub_ps(_mm_mul_ps(a, b), c);
+#endif
+}
+
+static inline
+__m128
+glmm_fnmsub(__m128 a, __m128 b, __m128 c) {
+#ifdef __FMA__
+  return _mm_fnmsub_ps(a, b, c);
+#else
+  return _mm_xor_ps(_mm_add_ps(_mm_mul_ps(a, b), c), _mm_set1_ps(-0.0f));
+#endif
+}
+
+#if defined(__AVX__)
+static inline
+__m256
+glmm256_fmadd(__m256 a, __m256 b, __m256 c) {
+#ifdef __FMA__
+  return _mm256_fmadd_ps(a, b, c);
+#else
+  return _mm256_add_ps(c, _mm256_mul_ps(a, b));
+#endif
+}
+
+static inline
+__m256
+glmm256_fnmadd(__m256 a, __m256 b, __m256 c) {
+#ifdef __FMA__
+  return _mm256_fnmadd_ps(a, b, c);
+#else
+  return _mm256_sub_ps(c, _mm256_mul_ps(a, b));
+#endif
+}
+
+static inline
+__m256
+glmm256_fmsub(__m256 a, __m256 b, __m256 c) {
+#ifdef __FMA__
+  return _mm256_fmsub_ps(a, b, c);
+#else
+  return _mm256_sub_ps(_mm256_mul_ps(a, b), c);
+#endif
+}
+
+static inline
+__m256
+glmm256_fnmsub(__m256 a, __m256 b, __m256 c) {
+#ifdef __FMA__
+  return _mm256_fmsub_ps(a, b, c);
+#else
+  return _mm256_xor_ps(_mm256_sub_ps(_mm256_mul_ps(a, b), c),
+                       _mm256_set1_ps(-0.0f));
+#endif
+}
+#endif
 
 #endif
 #endif /* cglm_simd_x86_h */
