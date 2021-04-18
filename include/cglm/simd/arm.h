@@ -99,5 +99,21 @@ glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 #endif
 }
 
+static inline
+float32x4_t
+glmm_fmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
+#if defined(__aarch64__)
+  return vfmsq_f32(c, a, b);
+#else
+  return vmlsq_f32(c, a, b);
+#endif
+}
+
+static inline
+float32x4_t
+glmm_fnmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
+  return vsubq_f32(vdupq_n_f32(0.0f), glmm_fmadd(a, b, c));
+}
+
 #endif
 #endif /* cglm_simd_arm_h */
