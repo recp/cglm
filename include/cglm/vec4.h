@@ -590,8 +590,10 @@ glm_vec4_muladd(vec4 a, vec4 b, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_muladds(vec4 a, float s, vec4 dest) {
-#if defined(CGLM_SIMD)
+#if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, glmm_fmadd(glmm_load(a), _mm_set1_ps(s), glmm_load(dest)));
+#elif defined(CGLM_NEON_FP)
+  glmm_store(dest, glmm_fmadd(glmm_load(a), vdupq_n_f32(s), glmm_load(dest)));
 #else
   dest[0] += a[0] * s;
   dest[1] += a[1] * s;
