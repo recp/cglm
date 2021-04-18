@@ -197,5 +197,25 @@ glmm_store3(float v[3], __m128 vx) {
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
 
+static inline
+__m128
+glmm_fmadd(__m128 a, __m128 b, __m128 c) {
+#ifdef __FMA__
+  return  _mm_fmadd_ps(a, b, c);
+#else
+  return _mm_add_ps(c, _mm_mul_ps(a, b));
+#endif
+}
+
+static inline
+__m128
+glmm_fnmadd(__m128 a, __m128 b, __m128 c) {
+#ifdef __FMA__
+  return  _mm_fnmadd_ps(a, b, c);
+#else
+  return _mm_sub_ps(c, _mm_mul_ps(a, b));
+#endif
+}
+
 #endif
 #endif /* cglm_simd_x86_h */

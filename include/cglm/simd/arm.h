@@ -79,5 +79,25 @@ glmm_norm_inf(float32x4_t a) {
   return glmm_hmax(glmm_abs(a));
 }
 
+static inline
+float32x4_t
+glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
+#if defined(__aarch64__)
+  return vfmaq_f32(a, b, c);
+#else
+  return vmlaq_f32(a, b, c);
+#endif
+}
+
+static inline
+float32x4_t
+glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
+#if defined(__aarch64__)
+  return vfmsq_f32(a, b, c);
+#else
+  return vmlsq_f32(a, b, c);
+#endif
+}
+
 #endif
 #endif /* cglm_simd_arm_h */
