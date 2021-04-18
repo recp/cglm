@@ -26,11 +26,11 @@ glm_mat2_mul_sse2(mat2 m1, mat2 m2, mat2 dest) {
    dest[1][0] = a * g + c * h;
    dest[1][1] = b * g + d * h;
    */
-  x0 = _mm_mul_ps(_mm_movelh_ps(x1, x1), glmm_shuff1(x2, 2, 2, 0, 0));
-  x1 = _mm_mul_ps(_mm_movehl_ps(x1, x1), glmm_shuff1(x2, 3, 3, 1, 1));
-  x1 = _mm_add_ps(x0, x1);
+  x0 = glmm_fmadd(_mm_movelh_ps(x1, x1), glmm_shuff1(x2, 2, 2, 0, 0),
+                  _mm_mul_ps(_mm_movehl_ps(x1, x1),
+                             glmm_shuff1(x2, 3, 3, 1, 1)));
 
-  glmm_store(dest[0], x1);
+  glmm_store(dest[0], x0);
 }
 
 CGLM_INLINE
