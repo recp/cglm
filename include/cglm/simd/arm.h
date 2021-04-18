@@ -83,9 +83,9 @@ static inline
 float32x4_t
 glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 #if defined(__aarch64__)
-  return vfmaq_f32(a, b, c);
+  return vfmaq_f32(c, a, b);
 #else
-  return vmlaq_f32(a, b, c);
+  return vmlaq_f32(c, a, b);
 #endif
 }
 
@@ -93,9 +93,9 @@ static inline
 float32x4_t
 glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 #if defined(__aarch64__)
-  return vfmsq_f32(a, b, c);
+  return vfmsq_f32(c, a, b);
 #else
-  return vmlsq_f32(a, b, c);
+  return vmlsq_f32(c, a, b);
 #endif
 }
 
