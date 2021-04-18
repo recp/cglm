@@ -50,6 +50,15 @@ glmm_abs(__m128 x) {
 
 static inline
 __m128
+glmm_vhadd(__m128 v) {
+  __m128 x0;
+  x0 = _mm_add_ps(v,  glmm_shuff1(v, 0, 1, 2, 3));
+  x0 = _mm_add_ps(x0, glmm_shuff1(x0, 1, 0, 0, 1));
+  return x0;
+}
+
+static inline
+__m128
 glmm_vhadds(__m128 v) {
 #if defined(__SSE3__)
   __m128 shuf, sums;
