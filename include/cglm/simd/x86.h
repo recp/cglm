@@ -198,7 +198,7 @@ glmm_store3(float v[3], __m128 vx) {
 }
 
 /* enable FMA macro for MSVC? */
-#if !defined(__FMA__) && defined(__AVX2__)
+#if defined(_MSC_VER) && !defined(__FMA__) && defined(__AVX2__)
 #  define __FMA__ 1
 #endif
 
