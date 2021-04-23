@@ -10,6 +10,10 @@
 #include "intrin.h"
 #ifdef CGLM_SIMD_ARM
 
+#if defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || defined(__aarch64__)
+# define CGLM_ARM64 1
+#endif
+
 #define glmm_load(p)      vld1q_f32(p)
 #define glmm_store(p, a)  vst1q_f32(p, a)
 
@@ -70,7 +74,7 @@ glmm_abs(float32x4_t v) {
 static inline
 float
 glmm_hadd(float32x4_t v) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vaddvq_f32(v);
 #else
   v = vaddq_f32(v, vrev64q_f32(v));
@@ -130,7 +134,7 @@ glmm_norm_inf(float32x4_t a) {
 static inline
 float32x4_t
 glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vfmaq_f32(c, a, b);
 #else
   return vmlaq_f32(c, a, b);
@@ -140,7 +144,7 @@ glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 static inline
 float32x4_t
 glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vfmsq_f32(c, a, b);
 #else
   return vmlsq_f32(c, a, b);
@@ -150,7 +154,7 @@ glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 static inline
 float32x4_t
 glmm_fmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vfmsq_f32(c, a, b);
 #else
   return vmlsq_f32(c, a, b);
