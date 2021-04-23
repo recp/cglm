@@ -126,3 +126,12 @@ install(EXPORT      ${PROJECT_NAME}
         NAMESPACE   ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
+set(PACKAGE_NAME ${PROJECT_NAME})
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(exec_prefix ${CMAKE_INSTALL_PREFIX})
+set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+set(libdir "\${prefix}/${CMAKE_INSTALL_LIBDIR}")
+configure_file(${CMAKE_CURRENT_LIST_DIR}/cglm.pc.in ${CMAKE_BINARY_DIR}/cglm.pc @ONLY)
+
+install(FILES ${CMAKE_BINARY_DIR}/cglm.pc
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
