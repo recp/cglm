@@ -13,6 +13,14 @@
 #define glmm_load(p)      vld1q_f32(p)
 #define glmm_store(p, a)  vst1q_f32(p, a)
 
+#define glmm_set1(x) vdupq_n_f32(x)
+#define glmm_128     float32x4_t
+
+#define glmm_splat_x(x) vdupq_lane_f32(vget_low_f32(x),  0)
+#define glmm_splat_y(x) vdupq_lane_f32(vget_low_f32(x),  1)
+#define glmm_splat_z(x) vdupq_lane_f32(vget_high_f32(x), 0)
+#define glmm_splat_w(x) vdupq_lane_f32(vget_high_f32(x), 1)
+
 static inline
 float32x4_t
 glmm_abs(float32x4_t v) {

@@ -18,6 +18,9 @@
 #  define glmm_store(p, a)  _mm_store_ps(p, a)
 #endif
 
+#define glmm_set1(x) _mm_set1_ps(x)
+#define glmm_128     __m128
+
 #ifdef CGLM_USE_INT_DOMAIN
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
      _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                \
@@ -28,6 +31,11 @@
 #endif
 
 #define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
+
+#define glmm_splat_x(x) glmm_splat(x, 0)
+#define glmm_splat_y(x) glmm_splat(x, 1)
+#define glmm_splat_z(x) glmm_splat(x, 2)
+#define glmm_splat_w(x) glmm_splat(x, 3)
 
 /* glmm_shuff1x() is DEPRECATED!, use glmm_splat() */
 #define glmm_shuff1x(xmm, x) glmm_shuff1(xmm, x, x, x, x)
