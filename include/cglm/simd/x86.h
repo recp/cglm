@@ -27,7 +27,11 @@
        _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
 #endif
 
+#define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
+
+/* glmm_shuff1x() is DEPRECATED!, use glmm_splat() */
 #define glmm_shuff1x(xmm, x) glmm_shuff1(xmm, x, x, x, x)
+
 #define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
      glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
                  z1, y1, x1, w1)
@@ -89,7 +93,7 @@ glmm_vhmin(__m128 v) {
   __m128 x0, x1, x2;
   x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
   x1 = _mm_min_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
   return _mm_min_ss(x1, x2);
 }
 
@@ -105,7 +109,7 @@ glmm_vhmax(__m128 v) {
   __m128 x0, x1, x2;
   x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
   x1 = _mm_max_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
   return _mm_max_ss(x1, x2);
 }
 

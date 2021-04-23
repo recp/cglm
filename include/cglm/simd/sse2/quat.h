@@ -27,15 +27,15 @@ glm_quat_mul_sse2(versor p, versor q, versor dest) {
   xp = glmm_load(p); /* 3 2 1 0 */
   xq = glmm_load(q);
 
-  r  = _mm_mul_ps(glmm_shuff1x(xp, 3), xq);
+  r  = _mm_mul_ps(glmm_splat(xp, 3), xq);
 
-  x0 = _mm_xor_ps(glmm_shuff1x(xp, 0), _mm_set_ps(-0.f, 0.f, -0.f, 0.f));
+  x0 = _mm_xor_ps(glmm_splat(xp, 0), _mm_set_ps(-0.f, 0.f, -0.f, 0.f));
   r  = _mm_add_ps(r, _mm_mul_ps(x0, glmm_shuff1(xq, 0, 1, 2, 3)));
 
-  x0 = _mm_xor_ps(glmm_shuff1x(xp, 1), _mm_set_ps(-0.f, -0.f, 0.f, 0.f));
+  x0 = _mm_xor_ps(glmm_splat(xp, 1), _mm_set_ps(-0.f, -0.f, 0.f, 0.f));
   r  = _mm_add_ps(r, _mm_mul_ps(x0, glmm_shuff1(xq, 1, 0, 3, 2)));
 
-  x0 = _mm_xor_ps(glmm_shuff1x(xp, 2), _mm_set_ps(-0.f, 0.f, 0.f, -0.f));
+  x0 = _mm_xor_ps(glmm_splat(xp, 2), _mm_set_ps(-0.f, 0.f, 0.f, -0.f));
   r  = _mm_add_ps(r, _mm_mul_ps(x0, glmm_shuff1(xq, 2, 3, 0, 1)));
 
   glmm_store(dest, r);

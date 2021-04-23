@@ -60,11 +60,10 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
                                                                               \
   r = glmm_load(m2[C]);                                                       \
   glmm_store(dest[C],                                                         \
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,                               \
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,                    \
-                                   glmm_fmadd(glmm_shuff1x(r, 2), l2,         \
-                                              _mm_mul_ps(glmm_shuff1x(r, 3),  \
-                                                         l3)))));
+       glmm_fmadd(glmm_splat(r, 0), l0,                                       \
+                   glmm_fmadd(glmm_splat(r, 1), l1,                           \
+                             glmm_fmadd(glmm_splat(r, 2), l2,                 \
+                                         _mm_mul_ps(glmm_splat(r, 3), l3)))));
 
   XX(0);
   XX(1);
@@ -80,11 +79,11 @@ glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
   __m128 x0, x1;
   
   x0 = glmm_load(v);
-  x1 = glmm_fmadd(glmm_load(m[0]), glmm_shuff1x(x0, 0),
-                  glmm_fmadd(glmm_load(m[1]), glmm_shuff1x(x0, 1),
-                             glmm_fmadd(glmm_load(m[2]), glmm_shuff1x(x0, 2),
+  x1 = glmm_fmadd(glmm_load(m[0]), glmm_splat(x0, 0),
+                  glmm_fmadd(glmm_load(m[1]), glmm_splat(x0, 1),
+                             glmm_fmadd(glmm_load(m[2]), glmm_splat(x0, 2),
                                         _mm_mul_ps(glmm_load(m[3]),
-                                                   glmm_shuff1x(x0, 3)))));
+                                                   glmm_splat(x0, 3)))));
   
   glmm_store(dest, x1);
 }
