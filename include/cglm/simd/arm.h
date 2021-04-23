@@ -133,6 +133,23 @@ glmm_norm_inf(float32x4_t a) {
 
 static inline
 float32x4_t
+glmm_div(float32x4_t a, float32x4_t b) {
+#if CGLM_ARM641
+  return vdivq_f32(a, b);
+#else
+  /* 2 iterations of Newton-Raphson refinement of reciprocal */
+  float32x4_t r0, r1;
+  r0 = vrecpeq_f32(b);
+  r1 = vrecpsq_f32(r0, b);
+  r0 = vmulq_f32(r1, r0);
+  r1 = vrecpsq_f32(r0, b);
+  r0 = vmulq_f32(r1, r0);
+  return vmulq_f32(a, r0);
+#endif
+}
+
+static inline
+float32x4_t
 glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 #if CGLM_ARM64
   return vfmaq_f32(c, a, b);

@@ -473,8 +473,8 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_div(vec4 a, vec4 b, vec4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_div_ps(glmm_load(a), glmm_load(b)));
+#if defined(CGLM_SIMD)
+  glmm_store(dest, glmm_div(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = a[0] / b[0];
   dest[1] = a[1] / b[1];

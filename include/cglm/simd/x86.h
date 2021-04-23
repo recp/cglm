@@ -209,6 +209,12 @@ glmm_store3(float v[3], __m128 vx) {
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
 
+static inline
+__m128
+glmm_div(__m128 a, __m128 b) {
+  return _mm_div_ps(a, b);
+}
+
 /* enable FMA macro for MSVC? */
 #if defined(_MSC_VER) && !defined(__FMA__) && defined(__AVX2__)
 #  define __FMA__ 1
