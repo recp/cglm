@@ -562,6 +562,8 @@ float
 glm_mat4_det(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glm_mat4_det_sse2(mat);
+#elif defined(CGLM_NEON_FP)
+  return glm_mat4_det_neon(mat);
 #else
   /* [square] det(A) = det(At) */
   float t[6];

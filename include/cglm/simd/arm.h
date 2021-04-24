@@ -69,10 +69,21 @@ SWIZZLE(glmm_2103) { return vextq_f32(v, v, 3);     }
 
 #undef SWIZZLE
 
+#define glmm_xor(a, b)                                                        \
+  vreinterpretq_f32_s32(veorq_s32(vreinterpretq_s32_f32(a),                   \
+                                  vreinterpretq_s32_f32(b)))
+
 static inline
 float32x4_t
 glmm_abs(float32x4_t v) {
   return vabsq_f32(v);
+}
+
+static inline
+float32x4_t
+glmm_vhadd(float32x4_t v) {
+  v = vaddq_f32(v, vrev64q_f32(v));
+  return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
 }
 
 static inline
@@ -138,7 +149,7 @@ glmm_norm_inf(float32x4_t a) {
 static inline
 float32x4_t
 glmm_div(float32x4_t a, float32x4_t b) {
-#if CGLM_ARM641
+#if CGLM_ARM64
   return vdivq_f32(a, b);
 #else
   /* 2 iterations of Newton-Raphson refinement of reciprocal */
