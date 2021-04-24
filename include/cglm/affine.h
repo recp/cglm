@@ -51,18 +51,17 @@ CGLM_INLINE
 void
 glm_translate(mat4 m, vec3 v) {
 #if defined(CGLM_SIMD)
-  glmm_128 v0, m0, m1, m2, m3;
+  glmm_128 m0, m1, m2, m3;
 
   m0 = glmm_load(m[0]);
   m1 = glmm_load(m[1]);
   m2 = glmm_load(m[2]);
   m3 = glmm_load(m[3]);
-  v0 = glmm_load(v);
 
   glmm_store(m[3],
-             glmm_fmadd(m0, glmm_splat_x(v0),
-                        glmm_fmadd(m1, glmm_splat_y(v0),
-                                   glmm_fmadd(m2, glmm_splat_z(v0), m3))));
+             glmm_fmadd(m0, glmm_set1(v[0]),
+                        glmm_fmadd(m1, glmm_set1(v[1]),
+                                   glmm_fmadd(m2, glmm_set1(v[2]), m3))));
 #else
   glm_vec4_muladds(m[0], v[0], m[3]);
   glm_vec4_muladds(m[1], v[1], m[3]);
