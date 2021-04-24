@@ -597,6 +597,8 @@ void
 glm_mat4_inv(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_mat4_inv_neon(mat, dest);
 #else
   float t[6];
   float det;
