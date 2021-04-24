@@ -75,11 +75,6 @@ Link to paper: http://webserver2.tecgraf.puc-rio.br/~mgattass/cg/trbRR/Fast%20Mi
 14. ARM NEON: Matrix Vector Multiplication
 https://stackoverflow.com/a/57793352/2676533
 
-15. ARM NEON Vector Swizzling and Permute
-
-https://stackoverflow.com/questions/32536265/how-to-convert-mm-shuffle-ps-sse-intrinsic-to-neon-intrinsic
-http://github.com/microsoft/DirectXMath
-
 16. ARM NEON Div
 
 http://github.com/microsoft/DirectXMath
