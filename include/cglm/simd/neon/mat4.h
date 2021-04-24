@@ -295,12 +295,21 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   x0 = vcombine_f32(vget_low_f32(vzipq_f32(v0, v1).val[0]),
                     vget_low_f32(vzipq_f32(v2, v3).val[0]));
 
+  /*
   x0 = glmm_div(glmm_set1(1.0f), glmm_vhadd(vmulq_f32(x0, r0)));
 
   glmm_store(dest[0], vmulq_f32(v0, x0));
   glmm_store(dest[1], vmulq_f32(v1, x0));
   glmm_store(dest[2], vmulq_f32(v2, x0));
   glmm_store(dest[3], vmulq_f32(v3, x0));
+  */
+
+  x0 = glmm_vhadd(vmulq_f32(x0, r0));
+
+  glmm_store(dest[0], glmm_div(v0, x0));
+  glmm_store(dest[1], glmm_div(v1, x0));
+  glmm_store(dest[2], glmm_div(v2, x0));
+  glmm_store(dest[3], glmm_div(v3, x0));
 }
 
 #endif
