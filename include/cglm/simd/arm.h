@@ -123,7 +123,7 @@ static inline
 float32x4_t
 glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 #if CGLM_ARM64
-  return vfmaq_f32(c, a, b);
+  return vfmaq_f32(c, a, b); /* why vfmaq_f32 is slower than vmlaq_f32 ??? */
 #else
   return vmlaq_f32(c, a, b);
 #endif
