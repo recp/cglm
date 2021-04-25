@@ -26,6 +26,10 @@
 #  include "simd/avx/affine.h"
 #endif
 
+#ifdef CGLM_NEON_FP
+#  include "simd/neon/affine.h"
+#endif
+
 /*!
  * @brief this is similar to glm_mat4_mul but specialized to affine transform
  *
@@ -49,6 +53,8 @@ glm_mul(mat4 m1, mat4 m2, mat4 dest) {
   glm_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mul_sse2(m1, m2, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_mul_neon(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],

@@ -41,7 +41,7 @@ glm_mat4_transp_neon(mat4 m, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
-   /* D = R * L (Column-Major) */
+  /* D = R * L (Column-Major) */
 
   glmm_128 l0, l1, l2, l3, r0, r1, r2, r3, v0, v1, v2, v3;
 
