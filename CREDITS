@@ -74,3 +74,7 @@ Link to paper: http://webserver2.tecgraf.puc-rio.br/~mgattass/cg/trbRR/Fast%20Mi
 
 14. ARM NEON: Matrix Vector Multiplication
 https://stackoverflow.com/a/57793352/2676533
+
+16. ARM NEON Div
+
+http://github.com/microsoft/DirectXMath

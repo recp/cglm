@@ -10,8 +10,24 @@
 #include "intrin.h"
 #ifdef CGLM_SIMD_ARM
 
+#if defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || defined(__aarch64__)
+# define CGLM_ARM64 1
+#endif
+
 #define glmm_load(p)      vld1q_f32(p)
 #define glmm_store(p, a)  vst1q_f32(p, a)
+
+#define glmm_set1(x) vdupq_n_f32(x)
+#define glmm_128     float32x4_t
+
+#define glmm_splat_x(x) vdupq_lane_f32(vget_low_f32(x),  0)
+#define glmm_splat_y(x) vdupq_lane_f32(vget_low_f32(x),  1)
+#define glmm_splat_z(x) vdupq_lane_f32(vget_high_f32(x), 0)
+#define glmm_splat_w(x) vdupq_lane_f32(vget_high_f32(x), 1)
+
+#define glmm_xor(a, b)                                                        \
+  vreinterpretq_f32_s32(veorq_s32(vreinterpretq_s32_f32(a),                   \
+                                  vreinterpretq_s32_f32(b)))
 
 static inline
 float32x4_t
@@ -20,9 +36,16 @@ glmm_abs(float32x4_t v) {
 }
 
 static inline
+float32x4_t
+glmm_vhadd(float32x4_t v) {
+  v = vaddq_f32(v, vrev64q_f32(v));
+  return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
+}
+
+static inline
 float
 glmm_hadd(float32x4_t v) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vaddvq_f32(v);
 #else
   v = vaddq_f32(v, vrev64q_f32(v));
@@ -81,9 +104,26 @@ glmm_norm_inf(float32x4_t a) {
 
 static inline
 float32x4_t
+glmm_div(float32x4_t a, float32x4_t b) {
+#if CGLM_ARM64
+  return vdivq_f32(a, b);
+#else
+  /* 2 iterations of Newton-Raphson refinement of reciprocal */
+  float32x4_t r0, r1;
+  r0 = vrecpeq_f32(b);
+  r1 = vrecpsq_f32(r0, b);
+  r0 = vmulq_f32(r1, r0);
+  r1 = vrecpsq_f32(r0, b);
+  r0 = vmulq_f32(r1, r0);
+  return vmulq_f32(a, r0);
+#endif
+}
+
+static inline
+float32x4_t
 glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
-  return vfmaq_f32(c, a, b);
+#if CGLM_ARM64
+  return vfmaq_f32(c, a, b); /* why vfmaq_f32 is slower than vmlaq_f32 ??? */
 #else
   return vmlaq_f32(c, a, b);
 #endif
@@ -92,7 +132,7 @@ glmm_fmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 static inline
 float32x4_t
 glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vfmsq_f32(c, a, b);
 #else
   return vmlsq_f32(c, a, b);
@@ -102,7 +142,7 @@ glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 static inline
 float32x4_t
 glmm_fmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if defined(__aarch64__)
+#if CGLM_ARM64
   return vfmsq_f32(c, a, b);
 #else
   return vmlsq_f32(c, a, b);

@@ -25,29 +25,28 @@ glm_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
   
   r = glmm_load(m2[0]);
   glmm_store(dest[0],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
   
   r = glmm_load(m2[1]);
   glmm_store(dest[1],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
 
   r = glmm_load(m2[2]);
   glmm_store(dest[2],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
 
   r = glmm_load(m2[3]);
   glmm_store(dest[3],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   glmm_fmadd(glmm_shuff1x(r, 2), l2,
-                                              _mm_mul_ps(glmm_shuff1x(r, 3),
-                                                         l3)))));
+       glmm_fmadd(glmm_splat(r, 0), l0,
+                  glmm_fmadd(glmm_splat(r, 1), l1,
+                             glmm_fmadd(glmm_splat(r, 2), l2,
+                                        _mm_mul_ps(glmm_splat(r, 3), l3)))));
 }
 
 CGLM_INLINE
@@ -63,22 +62,22 @@ glm_mul_rot_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
   r = glmm_load(m2[0]);
   glmm_store(dest[0],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
   
   r = glmm_load(m2[1]);
   glmm_store(dest[1],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
   
   
   r = glmm_load(m2[2]);
   glmm_store(dest[2],
-             glmm_fmadd(glmm_shuff1x(r, 0), l0,
-                        glmm_fmadd(glmm_shuff1x(r, 1), l1,
-                                   _mm_mul_ps(glmm_shuff1x(r, 2), l2))));
+             glmm_fmadd(glmm_splat(r, 0), l0,
+                        glmm_fmadd(glmm_splat(r, 1), l1,
+                                   _mm_mul_ps(glmm_splat(r, 2), l2))));
 
   glmm_store(dest[3], l3);
 }

@@ -18,6 +18,9 @@
 #  define glmm_store(p, a)  _mm_store_ps(p, a)
 #endif
 
+#define glmm_set1(x) _mm_set1_ps(x)
+#define glmm_128     __m128
+
 #ifdef CGLM_USE_INT_DOMAIN
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
      _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                \
@@ -27,7 +30,16 @@
        _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
 #endif
 
+#define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
+
+#define glmm_splat_x(x) glmm_splat(x, 0)
+#define glmm_splat_y(x) glmm_splat(x, 1)
+#define glmm_splat_z(x) glmm_splat(x, 2)
+#define glmm_splat_w(x) glmm_splat(x, 3)
+
+/* glmm_shuff1x() is DEPRECATED!, use glmm_splat() */
 #define glmm_shuff1x(xmm, x) glmm_shuff1(xmm, x, x, x, x)
+
 #define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
      glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
                  z1, y1, x1, w1)
@@ -89,7 +101,7 @@ glmm_vhmin(__m128 v) {
   __m128 x0, x1, x2;
   x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
   x1 = _mm_min_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
   return _mm_min_ss(x1, x2);
 }
 
@@ -105,7 +117,7 @@ glmm_vhmax(__m128 v) {
   __m128 x0, x1, x2;
   x0 = _mm_movehl_ps(v, v);     /* [2, 3, 2, 3] */
   x1 = _mm_max_ps(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_shuff1x(x1, 1);     /* [1|3, 1|3, 1|3, 1|3] */
+  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
   return _mm_max_ss(x1, x2);
 }
 
@@ -195,6 +207,12 @@ void
 glmm_store3(float v[3], __m128 vx) {
   _mm_storel_pi(CGLM_CASTPTR_ASSUME_ALIGNED(v, __m64), vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
+}
+
+static inline
+__m128
+glmm_div(__m128 a, __m128 b) {
+  return _mm_div_ps(a, b);
 }
 
 /* enable FMA macro for MSVC? */
