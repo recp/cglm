@@ -109,6 +109,8 @@ void
 glm_mul_rot(mat4 m1, mat4 m2, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mul_rot_sse2(m1, m2, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_mul_rot_neon(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
