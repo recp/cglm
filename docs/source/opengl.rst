@@ -2,7 +2,7 @@ How to send vector or matrix to OpenGL like API
 ==================================================
 
 *cglm*'s vector and matrix types are arrays. So you can send them directly to a
-function which accecpts pointer. But you may got warnings for matrix because it is
+function which accepts pointer. But you may got warnings for matrix because it is
 two dimensional array.
 
 Passing / Uniforming Matrix to OpenGL:
