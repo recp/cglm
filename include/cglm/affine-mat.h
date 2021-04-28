@@ -158,6 +158,8 @@ void
 glm_inv_tr(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_inv_tr_sse2(mat);
+#elif defined(CGLM_NEON_FP)
+  glm_inv_tr_neon(mat);
 #else
   CGLM_ALIGN_MAT mat3 r;
   CGLM_ALIGN(8)  vec3 t;

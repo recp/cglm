@@ -76,5 +76,41 @@ glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
   glmm_store(dest[3], glmm_load(m1[3]));
 }
 
+CGLM_INLINE
+void
+glm_inv_tr_neon(mat4 mat) {
+  float32x4x4_t vmat;
+  glmm_128      r0, r1, r2, r3, x0;
+
+  vmat = vld4q_f32(mat[0]);
+  r0   = vmat.val[0];
+  r1   = vmat.val[1];
+  r2   = vmat.val[2];
+  r3   = vmat.val[3];
+
+  x0 = glmm_fmadd(r0, glmm_splat_w(r0),
+                  glmm_fmadd(r1, glmm_splat_w(r1),
+                             vmulq_f32(r2, glmm_splat_w(r2))));
+  x0 = glmm_xor(x0, glmm_set1(-0.f));
+
+  glmm_store(mat[0], r0);
+  glmm_store(mat[1], r1);
+  glmm_store(mat[2], r2);
+  glmm_store(mat[3], x0);
+  
+  mat[0][3] = 0.0f;
+  mat[1][3] = 0.0f;
+  mat[2][3] = 0.0f;
+  mat[3][3] = 1.0f;
+
+  /* TODO: ?
+  zo   = vget_high_f32(r3);
+  vst1_lane_f32(&mat[0][3], zo, 0);
+  vst1_lane_f32(&mat[1][3], zo, 0);
+  vst1_lane_f32(&mat[2][3], zo, 0);
+  vst1_lane_f32(&mat[3][3], zo, 1);
+  */
+}
+
 #endif
 #endif /* cglm_affine_neon_h */
