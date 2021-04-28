@@ -223,6 +223,7 @@ TEST_DECLARE(glmc_mat2_swap_row)
 TEST_DECLARE(glmc_mat2_rmc)
 
 /* camera */
+TEST_DECLARE(perspective_lh_zo)
 TEST_DECLARE(camera_lookat)
 TEST_DECLARE(camera_decomp)
 
@@ -947,6 +948,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat2_rmc)
 
   /* camera */
+  TEST_ENTRY(perspective_lh_zo)
   TEST_ENTRY(camera_lookat)
   TEST_ENTRY(camera_decomp)
   

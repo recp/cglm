@@ -394,6 +394,10 @@ You can pass matrices the same way to other APIs e.g. Vulkan, DX...
 - This library uses float types only, does not support Integers, Double... yet
 - If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
 
+## Comparing cglm with glm results
+
+Contributors who wish to generate test results using the GLM library are pointed at the simple application in `test/glm_cmp`. A single file `test/glm_cmp/src/main.cpp` exists to which further functions can be added to print additional reference values. This is deliberately not part of the standard build.
+
 **TODO:**
 - [ ] Unit tests (In Progress)
 - [ ] Unit tests for comparing cglm with glm results
