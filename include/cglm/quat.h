@@ -63,6 +63,10 @@
 #  include "simd/sse2/quat.h"
 #endif
 
+#ifdef CGLM_NEON_FP
+#  include "simd/neon/quat.h"
+#endif
+
 CGLM_INLINE
 void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
@@ -412,6 +416,8 @@ glm_quat_mul(versor p, versor q, versor dest) {
    */
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_quat_mul_sse2(p, q, dest);
+#elif defined(CGLM_NEON_FP)
+  glm_quat_mul_neon(p, q, dest);
 #else
   dest[0] = p[3] * q[0] + p[0] * q[3] + p[1] * q[2] - p[2] * q[1];
   dest[1] = p[3] * q[1] - p[0] * q[2] + p[1] * q[3] + p[2] * q[0];

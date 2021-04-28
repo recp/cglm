@@ -111,7 +111,8 @@ cglm_simd_avx_HEADERS = include/cglm/simd/avx/mat4.h \
 cglm_simd_neondir=$(includedir)/cglm/simd/neon
 cglm_simd_neon_HEADERS = include/cglm/simd/neon/mat4.h \
                          include/cglm/simd/neon/mat2.h \
-                         include/cglm/simd/neon/affine.h
+                         include/cglm/simd/neon/affine.h \
+                         include/cglm/simd/neon/quat.h
 
 cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \

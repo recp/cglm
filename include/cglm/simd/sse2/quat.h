@@ -41,6 +41,5 @@ glm_quat_mul_sse2(versor p, versor q, versor dest) {
   glmm_store(dest, r);
 }
 
-
 #endif
 #endif /* cglm_quat_simd_h */

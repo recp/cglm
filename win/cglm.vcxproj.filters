@@ -376,5 +376,8 @@
     <ClInclude Include="..\include\cglm\simd\neon\mat2.h">
       <Filter>include\cglm\simd\neon</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\neon\quat.h">
+      <Filter>include\cglm\simd\neon</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
