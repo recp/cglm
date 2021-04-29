@@ -41,6 +41,8 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/call.h \
                include/cglm/struct.h \
                include/cglm/cam.h \
+               include/cglm/cam_lh_zo.h \
+               include/cglm/cam_rh_zo.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
@@ -144,6 +146,8 @@ libcglm_la_SOURCES=\
     src/io.c \
     src/quat.c \
     src/cam.c \
+    src/cam_lh_zo.c \
+    src/cam_rh_zo.c \
     src/vec2.c \
     src/vec3.c \
     src/vec4.c \
@@ -166,6 +170,8 @@ test_tests_SOURCES=\
     test/src/test_common.c \
     test/src/tests.c \
     test/src/test_cam.c \
+    test/src/test_cam_lh_zo.c \
+    test/src/test_cam_rh_zo.c \
     test/src/test_clamp.c \
     test/src/test_euler.c \
     test/src/test_bezier.c \

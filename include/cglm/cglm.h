@@ -17,6 +17,8 @@
 #include "mat2.h"
 #include "affine.h"
 #include "cam.h"
+#include "cam_lh_zo.h"
+#include "cam_rh_zo.h"
 #include "frustum.h"
 #include "quat.h"
 #include "euler.h"

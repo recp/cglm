@@ -249,39 +249,6 @@ glm_perspective(float fovy, float aspect, float nearZ, float farZ, mat4 dest) {
 }
 
 /*!
- * @brief set up perspective projection matrix with a left-hand coordinate
- * system (suitable for DirectX, Metal and Vulkan) and a clip-space with
- * depth values from zero to one.
- *
- * @param[in]  fovy    field of view angle
- * @param[in]  aspect  aspect ratio ( width / height )
- * @param[in]  nearVal near clipping plane
- * @param[in]  farVal  far clipping planes
- * @param[out] dest    result matrix
- */
-CGLM_INLINE
-void
-glm_perspective_lh_zo(float fovy,
-                      float aspect,
-                      float nearVal,
-                      float farVal,
-                      mat4  dest) {
-  /* Impl follows glm::perspectiveLH_ZO in glm/ext/matrix_clip_space.inl */
-  float f, fn;
-
-  glm_mat4_zero(dest);
-
-  f  = 1.0f / tanf(fovy * 0.5f);
-  fn = 1.0f / (farVal - nearVal);
-
-  dest[0][0] = f / aspect;
-  dest[1][1] = f;
-  dest[2][2] = farVal * fn;
-  dest[2][3] = 1.0f;
-  dest[3][2] = -(farVal * nearVal * fn);
-}
-
-/*!
  * @brief extend perspective projection matrix's far distance
  *
  * this function does not guarantee far >= near, be aware of that!
