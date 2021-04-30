@@ -187,8 +187,29 @@ glm_mat4_identity_array(mat4 * __restrict mat, size_t count) {
 CGLM_INLINE
 void
 glm_mat4_zero(mat4 mat) {
+#ifdef __AVX__
+  __m256 y0;
+  y0 = _mm256_setzero_ps();
+  glmm_store256(mat[0], y0);
+  glmm_store256(mat[2], y0);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_128 x0;
+  x0 = _mm_setzero_ps();
+  glmm_store(mat[0], x0);
+  glmm_store(mat[1], x0);
+  glmm_store(mat[2], x0);
+  glmm_store(mat[3], x0);
+#elif defined(CGLM_NEON_FP)
+  glmm_128 x0;
+  x0 = vdupq_n_f32(0.0f);
+  vst1q_f32(mat[0], x0);
+  vst1q_f32(mat[1], x0);
+  vst1q_f32(mat[2], x0);
+  vst1q_f32(mat[3], x0);
+#else
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_ZERO_INIT;
   glm_mat4_copy(t, mat);
+#endif
 }
 
 /*!
