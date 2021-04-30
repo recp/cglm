@@ -89,15 +89,24 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
-  __m128 x0, x1;
-  
+  __m128 x0, x1, m0, m1, m2, m3, v0, v1, v2, v3;
+
+  m0 = glmm_load(m[0]);
+  m1 = glmm_load(m[1]);
+  m2 = glmm_load(m[2]);
+  m3 = glmm_load(m[3]);
+
   x0 = glmm_load(v);
-  x1 = glmm_fmadd(glmm_load(m[0]), glmm_splat(x0, 0),
-                  glmm_fmadd(glmm_load(m[1]), glmm_splat(x0, 1),
-                             glmm_fmadd(glmm_load(m[2]), glmm_splat(x0, 2),
-                                        _mm_mul_ps(glmm_load(m[3]),
-                                                   glmm_splat(x0, 3)))));
-  
+  v0 = glmm_splat_x(x0);
+  v1 = glmm_splat_y(x0);
+  v2 = glmm_splat_z(x0);
+  v3 = glmm_splat_w(x0);
+
+  x1 = _mm_mul_ps(m3, v3);
+  x1 = glmm_fmadd(m2, v2, x1);
+  x1 = glmm_fmadd(m1, v1, x1);
+  x1 = glmm_fmadd(m0, v0, x1);
+
   glmm_store(dest, x1);
 }
 
