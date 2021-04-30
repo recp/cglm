@@ -49,28 +49,41 @@ void
 glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
-  __m128 l0, l1, l2, l3, r;
+  glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
 
-  l0 = glmm_load(m1[0]);
-  l1 = glmm_load(m1[1]);
-  l2 = glmm_load(m1[2]);
-  l3 = glmm_load(m1[3]);
-  
-#define XX(C)                                                                 \
-                                                                              \
-  r = glmm_load(m2[C]);                                                       \
-  glmm_store(dest[C],                                                         \
-       glmm_fmadd(glmm_splat(r, 0), l0,                                       \
-                   glmm_fmadd(glmm_splat(r, 1), l1,                           \
-                             glmm_fmadd(glmm_splat(r, 2), l2,                 \
-                                         _mm_mul_ps(glmm_splat(r, 3), l3)))));
+  l  = glmm_load(m1[0]);
+  r0 = glmm_load(m2[0]);
+  r1 = glmm_load(m2[1]);
+  r2 = glmm_load(m2[2]);
+  r3 = glmm_load(m2[3]);
 
-  XX(0);
-  XX(1);
-  XX(2);
-  XX(3);
+  v0 = _mm_mul_ps(glmm_splat_x(r0), l);
+  v1 = _mm_mul_ps(glmm_splat_x(r1), l);
+  v2 = _mm_mul_ps(glmm_splat_x(r2), l);
+  v3 = _mm_mul_ps(glmm_splat_x(r3), l);
 
-#undef XX
+  l  = glmm_load(m1[1]);
+  v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
+  v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
+  v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
+  v3 = glmm_fmadd(glmm_splat_y(r3), l, v3);
+
+  l  = glmm_load(m1[2]);
+  v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
+  v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
+  v2 = glmm_fmadd(glmm_splat_z(r2), l, v2);
+  v3 = glmm_fmadd(glmm_splat_z(r3), l, v3);
+
+  l  = glmm_load(m1[3]);
+  v0 = glmm_fmadd(glmm_splat_w(r0), l, v0);
+  v1 = glmm_fmadd(glmm_splat_w(r1), l, v1);
+  v2 = glmm_fmadd(glmm_splat_w(r2), l, v2);
+  v3 = glmm_fmadd(glmm_splat_w(r3), l, v3);
+
+  glmm_store(dest[0], v0);
+  glmm_store(dest[1], v1);
+  glmm_store(dest[2], v2);
+  glmm_store(dest[3], v3);
 }
 
 CGLM_INLINE
