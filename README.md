@@ -95,9 +95,9 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 
 <hr />
 
-You have two option to call a function/operation: inline or library call (link)
+You have two options to call a function/operation: inline or library call (link)
 Almost all functions are marked inline (always_inline) so compiler will probably inline.
-To call pre-compiled version, just use `glmc_` (c stands for 'call') instead of `glm_`.
+To call pre-compiled versions, just use `glmc_` (c stands for 'call') instead of `glm_`.
 
 ```C
   #include <cglm/cglm.h>   /* for inline */
