@@ -7,23 +7,22 @@
 
 /*
  Functions:
-   CGLM_INLINE void  glm_perspective_rh_zo(float fovy,
+   CGLM_INLINE void  glm_perspective_lh_no(float fovy,
                                            float aspect,
                                            float nearVal,
                                            float farVal,
                                            mat4  dest)
  */
 
-#ifndef cglm_cam_rh_zo_h
-#define cglm_cam_rh_zo_h
+#ifndef cglm_cam_lh_no_h
+#define cglm_cam_lh_no_h
 
 #include "common.h"
 #include "plane.h"
 
 /*!
- * @brief set up perspective projection matrix with a right-hand coordinate
- * system (suitable for Vulkan) and a clip-space with depth values from zero
- * to one.
+ * @brief set up perspective projection matrix with a left-hand coordinate
+ * system and a clip-space of [-1, 1]
  *
  * @param[in]  fovy    field of view angle
  * @param[in]  aspect  aspect ratio ( width / height )
@@ -33,12 +32,12 @@
  */
 CGLM_INLINE
 void
-glm_perspective_rh_zo(float fovy,
+glm_perspective_lh_no(float fovy,
                       float aspect,
                       float nearVal,
                       float farVal,
                       mat4  dest) {
-  /* Impl follows glm::perspectiveRH_ZO in glm/ext/matrix_clip_space.inl */
+  /* Impl follows glm::perspectiveLH_NO in glm/ext/matrix_clip_space.inl */
   float fl, fn;
 
   glm_mat4_zero(dest);
@@ -48,9 +47,9 @@ glm_perspective_rh_zo(float fovy,
 
   dest[0][0] =  fl / aspect;
   dest[1][1] =  fl;
-  dest[2][2] = -farVal * fn;
-  dest[2][3] = -1.0f;
-  dest[3][2] = -farVal * nearVal * fn;
+  dest[2][2] =  (farVal + nearVal) * fn;
+  dest[2][3] =  1.0f;
+  dest[3][2] = -2.0f * farVal * nearVal * fn;
 }
 
-#endif /*cglm_cam_rh_zo_h*/
+#endif /*cglm_cam_lh_no_h*/

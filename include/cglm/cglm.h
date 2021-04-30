@@ -19,6 +19,8 @@
 #include "cam.h"
 #include "cam_lh_zo.h"
 #include "cam_rh_zo.h"
+#include "cam_lh_no.h"
+#include "cam_rh_no.h"
 #include "frustum.h"
 #include "quat.h"
 #include "euler.h"

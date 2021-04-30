@@ -20,7 +20,6 @@
 #include "common.h"
 #include "plane.h"
 
-
 /*!
  * @brief set up perspective projection matrix with a left-hand coordinate
  * system (suitable, apparently, for DirectX and Metal) and a clip-space with
@@ -47,11 +46,11 @@ glm_perspective_lh_zo(float fovy,
   fl = 1.0f / tanf(fovy * 0.5f);
   fn = 1.0f / (farVal - nearVal);
 
-  dest[0][0] = fl / aspect;
-  dest[1][1] = fl;
-  dest[2][2] = farVal * fn;
-  dest[2][3] = 1.0f;
-  dest[3][2] = -(farVal * nearVal * fn);
+  dest[0][0] =  fl / aspect;
+  dest[1][1] =  fl;
+  dest[2][2] =  farVal * fn;
+  dest[2][3] =  1.0f;
+  dest[3][2] = -farVal * nearVal * fn;
 }
 
 #endif /*cglm_cam_lh_zo_h*/

@@ -8,6 +8,8 @@ set(TESTFILES
   src/test_cam.c
   src/test_cam_lh_zo.c
   src/test_cam_rh_zo.c
+  src/test_cam_lh_no.c
+  src/test_cam_rh_no.c
   src/test_struct.c
   src/test_clamp.c
   src/test_common.c

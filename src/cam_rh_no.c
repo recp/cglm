@@ -9,12 +9,12 @@
 
 CGLM_EXPORT
 void
-glmc_perspective_rh_zo(float fovy,
+glmc_perspective_rh_no(float fovy,
                        float aspect,
                        float nearVal,
                        float farVal,
                        mat4 dest) {
-  glm_perspective_rh_zo(fovy,
+  glm_perspective_rh_no(fovy,
                         aspect,
                         nearVal,
                         farVal,

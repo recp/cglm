@@ -59,6 +59,8 @@ add_library(${PROJECT_NAME}
   src/cam.c
   src/cam_lh_zo.c
   src/cam_rh_zo.c
+  src/cam_lh_no.c
+  src/cam_rh_no.c
   src/vec2.c
   src/vec3.c
   src/vec4.c

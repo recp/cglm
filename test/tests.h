@@ -225,6 +225,8 @@ TEST_DECLARE(glmc_mat2_rmc)
 /* camera (incl [LR]H cross [NZ]O) */
 TEST_DECLARE(perspective_lh_zo)
 TEST_DECLARE(perspective_rh_zo)
+TEST_DECLARE(perspective_lh_no)
+TEST_DECLARE(perspective_rh_no)
 TEST_DECLARE(camera_lookat)
 TEST_DECLARE(camera_decomp)
 
@@ -951,6 +953,8 @@ TEST_LIST {
   /* camera (incl [LR]H cross [NZ]O) */
   TEST_ENTRY(perspective_lh_zo)
   TEST_ENTRY(perspective_rh_zo)
+  TEST_ENTRY(perspective_lh_no)
+  TEST_ENTRY(perspective_rh_no)
   TEST_ENTRY(camera_lookat)
   TEST_ENTRY(camera_decomp)
   

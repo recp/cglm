@@ -6,7 +6,6 @@
  */
 
 #include "../include/cglm/cglm.h"
-#include "../include/cglm/cam_lh_zo.h"
 
 CGLM_EXPORT
 void
