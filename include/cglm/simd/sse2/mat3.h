@@ -67,9 +67,9 @@ glm_mat3_mul_sse2(mat3 m1, mat3 m2, mat3 dest) {
   x3 = _mm_movelh_ps(x9, r2);                           /* 0.f b22 b21 b20 */
   x2 = glmm_vdots(x2, x3);
 
-  _mm_storeu_ps(dest[0], x0);
+  _mm_storeu_ps(&dest[0][0], x0);
   _mm_storeu_ps(&dest[1][1], x1);
-  _mm_store_ss(&dest[2][2], x2);
+  _mm_store_ss (&dest[2][2], x2);
 }
 
 #endif
