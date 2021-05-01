@@ -26,7 +26,7 @@ glm_quat_mul_sse2(versor p, versor q, versor dest) {
 
   xp = glmm_load(p); /* 3 2 1 0 */
   xq = glmm_load(q);
-  x1 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f);
+  x1 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f); /* TODO: _mm_set1_ss() + shuff ? */
   r  = _mm_mul_ps(glmm_splat_w(xp), xq);
   
   x2 = _mm_unpackhi_ps(x1, x1);
