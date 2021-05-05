@@ -41,10 +41,6 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/call.h \
                include/cglm/struct.h \
                include/cglm/cam.h \
-               include/cglm/cam_lh_zo.h \
-               include/cglm/cam_rh_zo.h \
-               include/cglm/cam_lh_no.h \
-               include/cglm/cam_rh_no.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
@@ -72,6 +68,23 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/applesimd.h \
                include/cglm/ray.h \
                include/cglm/affine2d.h
+
+cglm_clipspacedir=$(includedir)/cglm/clipspace
+cglm_clipspace_HEADERS = include/cglm/clipspace/persp.h \
+                         include/cglm/clipspace/persp_lh_zo.h \
+                         include/cglm/clipspace/persp_rh_zo.h \
+                         include/cglm/clipspace/persp_lh_no.h \
+                         include/cglm/clipspace/persp_rh_no.h \
+                         include/cglm/clipspace/ortho_lh_zo.h \
+                         include/cglm/clipspace/ortho_rh_zo.h \
+                         include/cglm/clipspace/ortho_lh_no.h \
+                         include/cglm/clipspace/ortho_rh_no.h \
+                         include/cglm/clipspace/view_lh.h \
+                         include/cglm/clipspace/view_rh.h \
+                         include/cglm/clipspace/view_lh_zo.h \
+                         include/cglm/clipspace/view_rh_zo.h \
+                         include/cglm/clipspace/view_lh_no.h \
+                         include/cglm/clipspace/view_rh_no.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \

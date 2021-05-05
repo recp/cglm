@@ -57,10 +57,7 @@ add_library(${PROJECT_NAME}
   src/io.c
   src/quat.c
   src/cam.c
-  src/cam_lh_zo.c
-  src/cam_rh_zo.c
-  src/cam_lh_no.c
-  src/cam_rh_no.c
+  src/vec2.c
   src/vec2.c
   src/vec3.c
   src/vec4.c
@@ -77,6 +74,18 @@ add_library(${PROJECT_NAME}
   src/bezier.c
   src/ray.c
   src/affine2d.c
+  src/clipspace/persp_lh_zo.c
+  src/clipspace/persp_rh_zo.c
+  src/clipspace/persp_lh_no.c
+  src/clipspace/persp_rh_no.c
+  src/clipspace/ortho_lh_zo.c
+  src/clipspace/ortho_rh_zo.c
+  src/clipspace/ortho_lh_no.c
+  src/clipspace/ortho_rh_no.c
+  src/clipspace/view_lh_zo.c
+  src/clipspace/view_rh_zo.c
+  src/clipspace/view_lh_no.c
+  src/clipspace/view_rh_no.c
   )
 
 if(CGLM_SHARED)

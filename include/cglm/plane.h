@@ -9,6 +9,7 @@
 #define cglm_plane_h
 
 #include "common.h"
+#include "vec3.h"
 #include "vec4.h"
 
 /*

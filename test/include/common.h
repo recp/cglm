@@ -20,6 +20,10 @@
 #  define _GNU_SOURCE /* for drand48() */
 #endif
 
+#ifndef CGLM_CLIPSPACE_INCLUDE_ALL
+#  define CGLM_CLIPSPACE_INCLUDE_ALL
+#endif
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
