@@ -97,7 +97,7 @@ glm_inv_tr_neon(mat4 mat) {
   x0 = glmm_fmadd(r0, glmm_splat_w(r0),
                   glmm_fmadd(r1, glmm_splat_w(r1),
                              vmulq_f32(r2, glmm_splat_w(r2))));
-  x0 = glmm_xor(x0, glmm_set1(-0.f));
+  x0 = vnegq_f32(x0);
 
   glmm_store(mat[0], r0);
   glmm_store(mat[1], r1);
