@@ -644,10 +644,7 @@ void
 glm_quat_nlerp(versor from, versor to, float t, versor dest) {
   float dot = glm_vec4_dot(from, to);
   versor target;
-  if (dot >= 0)
-    glm_quat_copy(to, target);
-  else
-    glm_vec4_negate_to(to, target);
+  glm_vec4_scale(to, (dot >= 0) ? 1 : -1, target);
   glm_quat_lerp(from, target, t, dest);
   glm_quat_normalize(dest);
 }
