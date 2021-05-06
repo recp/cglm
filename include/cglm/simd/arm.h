@@ -47,8 +47,13 @@ glmm_abs(float32x4_t v) {
 static inline
 float32x4_t
 glmm_vhadd(float32x4_t v) {
-  v = vaddq_f32(v, vrev64q_f32(v));
-  return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
+  return vaddq_f32(vaddq_f32(glmm_splat_x(v), glmm_splat_y(v)),
+                   vaddq_f32(glmm_splat_z(v), glmm_splat_w(v)));
+  /*
+   this seems slower:
+   v = vaddq_f32(v, vrev64q_f32(v));
+   return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
+   */
 }
 
 static inline
