@@ -172,6 +172,12 @@ glmc_quat_lerpc(versor from, versor to, float t, versor dest) {
 
 CGLM_EXPORT
 void
+glmc_quat_nlerp(versor from, versor to, float t, versor dest) {
+  glm_quat_nlerp(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_quat_slerp(versor from, versor to, float t, versor dest) {
   glm_quat_slerp(from, to, t, dest);
 }

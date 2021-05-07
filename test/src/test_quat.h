@@ -708,6 +708,38 @@ TEST_IMPL(GLM_PREFIX, quat_lerpc) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, quat_nlerp) {
+  versor q1, q2, q3, q4;
+  vec3 v1 = {10.0f, 0.0f, 0.0f}, v2;
+
+  glm_quatv(q1, glm_rad(30.0f), v1);
+  glm_quatv(q2, glm_rad(90.0f), v1);
+
+  GLM(quat_nlerp)(q1, q2, 1.0f, q3);
+  glm_quat_normalize(q2);
+  ASSERTIFY(test_assert_quat_eq(q2, q3));
+
+  glm_quatv(q1, glm_rad(30.001f), v1);
+  glm_quatv(q2, glm_rad(30.002f), v1);
+  GLM(quat_nlerp)(q1, q2, 0.7f, q3);
+  glm_quat_lerp(q1, q2, 0.7f, q4);
+  ASSERTIFY(test_assert_quat_eq(q3, q4));
+
+  glm_quatv(q1, glm_rad(30.0f), v1);
+  glm_quatv(q2, glm_rad(90.0f), v1);
+  GLM(quat_nlerp)(q1, q2, 0.5f, q3);
+
+  glm_quat_axis(q3, v2);
+  glm_vec3_normalize(v1);
+  glm_vec3_normalize(v2);
+
+  ASSERT(glm_quat_angle(q3) > glm_rad(30.0f));
+  ASSERT(glm_quat_angle(q3) < glm_rad(90.0f));
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, quat_slerp) {
   versor q1, q2, q3, q4;
   vec3 v1 = {10.0f, 0.0f, 0.0f}, v2;
