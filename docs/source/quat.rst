@@ -52,6 +52,7 @@ Functions:
 #. :c:func:`glm_quat_mat3`
 #. :c:func:`glm_quat_mat3t`
 #. :c:func:`glm_quat_lerp`
+#. :c:func:`glm_quat_nlerp`
 #. :c:func:`glm_quat_slerp`
 #. :c:func:`glm_quat_look`
 #. :c:func:`glm_quat_for`
@@ -297,6 +298,25 @@ Functions documentation
 
     | interpolates between two quaternions
     | using spherical linear interpolation (LERP)
+
+    Parameters:
+      | *[in]*  **from**  from
+      | *[in]*  **to**    to
+      | *[in]*  **t**     interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**  result quaternion
+
+.. c:function:: void glm_quat_nlerp(versor q, versor r, float  t, versor dest)
+
+    | interpolates between two quaternions
+    | taking the shortest rotation path using
+    | normalized linear interpolation (NLERP)
+
+    | This is a cheaper alternative to slerp; most games use nlerp
+    | for animations as it visually makes little difference.
+
+    References:
+      * `Understanding Slerp, Then Not Using it <http://number-none.com/product/Understanding%20Slerp,%20Then%20Not%20Using%20It>`_
+      * `Lerp, Slerp and Nlerp <https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/>`_
 
     Parameters:
       | *[in]*  **from**  from
