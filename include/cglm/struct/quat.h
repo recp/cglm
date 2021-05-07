@@ -34,6 +34,7 @@
    CGLM_INLINE mat3s   glms_quat_mat3t(versors q)
    CGLM_INLINE versors glms_quat_lerp(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_lerpc(versors from, versors to, float t)
+   CGLM_INLINE versors glms_quat_nlerp(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_slerp(versors from, versors to, float t)
    CGLM_INLINE mat4s.  glms_quat_look(vec3s eye, versors ori)
    CGLM_INLINE versors glms_quat_for(vec3s dir, vec3s fwd, vec3s up)
@@ -398,6 +399,24 @@ versors
 glms_quat_lerpc(versors from, versors to, float t) {
   versors dest;
   glm_quat_lerpc(from.raw, to.raw, t, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        taking the shortest rotation path using
+ *        normalized linear interpolation (NLERP)
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     interpolant (amount)
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+versors
+glms_quat_nlerp(versors from, versors to, float t) {
+  versors dest;
+  glm_quat_nlerp(from.raw, to.raw, t, dest.raw);
   return dest;
 }
 

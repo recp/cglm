@@ -38,6 +38,7 @@
    CGLM_INLINE void glm_quat_lerp(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_lerpc(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_nlerp(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
    CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
    CGLM_INLINE void glm_quat_forp(vec3 from,
@@ -626,6 +627,26 @@ CGLM_INLINE
 void
 glm_quat_lerpc(versor from, versor to, float t, versor dest) {
   glm_vec4_lerpc(from, to, t, dest);
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        taking the shortest rotation path using
+ *        normalized linear interpolation (NLERP)
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     interpolant (amount)
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_nlerp(versor from, versor to, float t, versor dest) {
+  float dot = glm_vec4_dot(from, to);
+  versor target;
+  glm_vec4_scale(to, (dot >= 0) ? 1 : -1, target);
+  glm_quat_lerp(from, target, t, dest);
+  glm_quat_normalize(dest);
 }
 
 /*!

@@ -99,7 +99,7 @@ glmc_vec4_scale(vec4 v, float s, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_scale_as(vec3 v, float s, vec3 dest);
+glmc_vec4_scale_as(vec4 v, float s, vec4 dest);
 
 CGLM_EXPORT
 void
