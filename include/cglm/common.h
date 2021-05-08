@@ -42,12 +42,18 @@
 #include "types.h"
 #include "simd/intrin.h"
 
-#ifndef CGLM_USE_DEFAULT_EPSILON
-#  ifndef GLM_FLT_EPSILON
-#    define GLM_FLT_EPSILON 1e-6
+/** CGLM_USE_DEFAULT_EPSILON is removed, to override float epsilon,
+ *  just define GLM_FLT_EPSILON with epsilon value like below
+ *
+ *  #define GLM_FLT_EPSILON 1e-6f
+ */
+
+#ifndef GLM_FLT_EPSILON
+#  ifndef FLT_EPSILON
+#    define GLM_FLT_EPSILON 1e-6f
+#  else
+#    define GLM_FLT_EPSILON FLT_EPSILON
 #  endif
-#else
-#  define GLM_FLT_EPSILON FLT_EPSILON
 #endif
 
 #endif /* cglm_common_h */

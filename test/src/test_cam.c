@@ -35,9 +35,9 @@ TEST_IMPL(camera_decomp) {
   farVal  = 100.0f;
 
   glm_perspective(fovy, aspect, nearVal, farVal, proj);
-  ASSERT(fabsf(aspect  - glm_persp_aspect(proj)) < GLM_FLT_EPSILON)
-  ASSERT(fabsf(fovy    - glm_persp_fovy(proj))   < GLM_FLT_EPSILON)
-  ASSERT(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < GLM_FLT_EPSILON)
+  ASSERT(fabsf(aspect  - glm_persp_aspect(proj)) < 1e-5f)
+  ASSERT(fabsf(fovy    - glm_persp_fovy(proj))   < 1e-5f)
+  ASSERT(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < 1e-5f)
 
   glm_persp_sizes(proj, fovy, sizes);
 
