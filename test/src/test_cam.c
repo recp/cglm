@@ -27,14 +27,14 @@ TEST_IMPL(camera_lookat) {
 TEST_IMPL(camera_decomp) {
   mat4  proj, proj2;
   vec4  sizes;
-  float aspect, fovy, nearVal, farVal;
+  float aspect, fovy, nearZ, farZ;
 
   aspect  = 0.782f;
   fovy    = glm_rad(49.984f);
-  nearVal = 0.1f;
-  farVal  = 100.0f;
+  nearZ   = 0.1f;
+  farZ    = 100.0f;
 
-  glm_perspective(fovy, aspect, nearVal, farVal, proj);
+  glm_perspective(fovy, aspect, nearZ, farZ, proj);
   ASSERT(fabsf(aspect  - glm_persp_aspect(proj)) < GLM_FLT_EPSILON)
   ASSERT(fabsf(fovy    - glm_persp_fovy(proj))   < GLM_FLT_EPSILON)
   ASSERT(fabsf(49.984f - glm_deg(glm_persp_fovy(proj))) < GLM_FLT_EPSILON)
@@ -45,8 +45,8 @@ TEST_IMPL(camera_decomp) {
                sizes[0] * 0.5f,
               -sizes[1] * 0.5f,
                sizes[1] * 0.5f,
-               nearVal,
-               farVal,
+               nearZ,
+               farZ,
                proj2);
 
   ASSERTIFY(test_assert_mat4_eq(proj, proj2))
