@@ -55,7 +55,9 @@ cglm_lib = library('cglm',
     cglm_src,
     install : cglm_install,
     dependencies : cglm_deps,
-    c_args : [ build_args, cglm_args ]
+    c_args : [ build_args, cglm_args ],
+    version : meson.project_version(),
+    soversion : '0'
 )
 
 cglm_dep = declare_dependency(
