@@ -68,8 +68,7 @@ glm_ortho_lh_zo(float left,    float right,
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
- * with a left-hand coordinate system and a clip-space with depth
- * values from zero to one.
+ *        with a left-hand coordinate system and a clip-space of [0, 1].
  *
  * bounding box (AABB) must be in view space
  *
@@ -87,8 +86,7 @@ glm_ortho_aabb_lh_zo(vec3 box[2], mat4 dest) {
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
- * with a left-hand coordinate system and a clip-space with depth
- * values from zero to one.
+ *        with a left-hand coordinate system and a clip-space of [0, 1].
  *
  * bounding box (AABB) must be in view space
  *
@@ -107,8 +105,7 @@ glm_ortho_aabb_p_lh_zo(vec3 box[2], float padding, mat4 dest) {
 
 /*!
  * @brief set up orthographic projection matrix using bounding box
- * with a left-hand coordinate system and a clip-space with depth
- * values from zero to one.
+ *        with a left-hand coordinate system and a clip-space of [0, 1].
  *
  * bounding box (AABB) must be in view space
  *
@@ -126,8 +123,8 @@ glm_ortho_aabb_pz_lh_zo(vec3 box[2], float padding, mat4 dest) {
 }
 
 /*!
- * @brief set up unit orthographic projection matrix with a left-hand
- * coordinate system and a clip-space of [0, 1].
+ * @brief set up unit orthographic projection matrix
+ *        with a left-hand coordinate system and a clip-space of [0, 1].
  *
  * @param[in]  aspect aspect ration ( width / height )
  * @param[out] dest   result matrix
@@ -147,8 +144,7 @@ glm_ortho_default_lh_zo(float aspect, mat4 dest) {
 
 /*!
  * @brief set up orthographic projection matrix with given CUBE size
- * with a left-hand coordinate system and a clip-space with depth
- * values from zero to one.
+ *        with a left-hand coordinate system and a clip-space of [0, 1].
  *
  * @param[in]  aspect aspect ratio ( width / height )
  * @param[in]  size   cube size
