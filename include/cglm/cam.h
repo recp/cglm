@@ -348,9 +348,9 @@ glm_perspective_resize(float aspect, mat4 proj) {
 CGLM_INLINE
 void
 glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest) {
-#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_lookat_lh(eye, center, up, dest);
-#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
   glm_lookat_rh(eye, center, up, dest);
 #endif
 }
@@ -372,9 +372,9 @@ glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest) {
 CGLM_INLINE
 void
 glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
-#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_look_lh(eye, dir, up, dest);
-#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
   glm_look_rh(eye, dir, up, dest);
 #endif
 }
@@ -392,9 +392,9 @@ glm_look(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
 CGLM_INLINE
 void
 glm_look_anyup(vec3 eye, vec3 dir, mat4 dest) {
-#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_look_anyup_lh(eye, dir, dest);
-#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
   glm_look_anyup_rh(eye, dir, dest);
 #endif
 }
