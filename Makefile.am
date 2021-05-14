@@ -161,10 +161,6 @@ libcglm_la_SOURCES=\
     src/io.c \
     src/quat.c \
     src/cam.c \
-    src/cam_lh_zo.c \
-    src/cam_rh_zo.c \
-    src/cam_lh_no.c \
-    src/cam_rh_no.c \
     src/vec2.c \
     src/vec3.c \
     src/vec4.c \
@@ -180,7 +176,19 @@ libcglm_la_SOURCES=\
     src/curve.c \
     src/bezier.c \
     src/ray.c \
-    src/affine2d.c
+    src/affine2d.c \
+    src/clipspace/ortho_lh_no.c \
+    src/clipspace/ortho_lh_zo.c \
+    src/clipspace/ortho_rh_no.c \
+    src/clipspace/ortho_rh_zo.c \
+    src/clipspace/persp_lh_no.c \
+    src/clipspace/persp_lh_zo.c \
+    src/clipspace/persp_rh_no.c \
+    src/clipspace/persp_rh_zo.c \
+    src/clipspace/view_lh_no.c \
+    src/clipspace/view_lh_zo.c \
+    src/clipspace/view_rh_no.c \
+    src/clipspace/view_rh_zo.c
 
 test_tests_SOURCES=\
     test/runner.c \
