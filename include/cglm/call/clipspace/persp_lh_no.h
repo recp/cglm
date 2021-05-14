@@ -17,7 +17,7 @@ CGLM_EXPORT
 void
 glmc_frustum_lh_no(float left,    float right,
                    float bottom,  float top,
-                   float nearZ, float farZ,
+                   float nearZ,   float farZ,
                    mat4  dest);
 
 CGLM_EXPORT
