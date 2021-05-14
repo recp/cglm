@@ -5,7 +5,7 @@
  * Full license can be found in the LICENSE file
  */
 
-#include "../include/cglm/clipspace/persp_rh_no.h"
+#include "../../include/cglm/clipspace/persp_rh_no.h"
 
 CGLM_EXPORT
 void

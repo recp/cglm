@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#include "../include/cglm/cglm.h"
-#include "../include/cglm/clipspace/view_lh_zo.h"
+#include "../../include/cglm/cglm.h"
+#include "../../include/cglm/clipspace/view_lh_zo.h"
 
 CGLM_EXPORT
 void
