@@ -73,6 +73,18 @@ add_library(${PROJECT_NAME}
   src/bezier.c
   src/ray.c
   src/affine2d.c
+  src/clipspace/persp_lh_zo.c
+  src/clipspace/persp_rh_zo.c
+  src/clipspace/persp_lh_no.c
+  src/clipspace/persp_rh_no.c
+  src/clipspace/ortho_lh_zo.c
+  src/clipspace/ortho_rh_zo.c
+  src/clipspace/ortho_lh_no.c
+  src/clipspace/ortho_rh_no.c
+  src/clipspace/view_lh_zo.c
+  src/clipspace/view_rh_zo.c
+  src/clipspace/view_lh_no.c
+  src/clipspace/view_rh_no.c
   )
 
 if(CGLM_SHARED)

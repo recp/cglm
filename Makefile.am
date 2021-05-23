@@ -69,6 +69,23 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/ray.h \
                include/cglm/affine2d.h
 
+cglm_clipspacedir=$(includedir)/cglm/clipspace
+cglm_clipspace_HEADERS = include/cglm/clipspace/persp.h \
+                         include/cglm/clipspace/persp_lh_zo.h \
+                         include/cglm/clipspace/persp_rh_zo.h \
+                         include/cglm/clipspace/persp_lh_no.h \
+                         include/cglm/clipspace/persp_rh_no.h \
+                         include/cglm/clipspace/ortho_lh_zo.h \
+                         include/cglm/clipspace/ortho_rh_zo.h \
+                         include/cglm/clipspace/ortho_lh_no.h \
+                         include/cglm/clipspace/ortho_rh_no.h \
+                         include/cglm/clipspace/view_lh.h \
+                         include/cglm/clipspace/view_rh.h \
+                         include/cglm/clipspace/view_lh_zo.h \
+                         include/cglm/clipspace/view_rh_zo.h \
+                         include/cglm/clipspace/view_lh_no.h \
+                         include/cglm/clipspace/view_rh_no.h
+
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
@@ -159,13 +176,29 @@ libcglm_la_SOURCES=\
     src/curve.c \
     src/bezier.c \
     src/ray.c \
-    src/affine2d.c
+    src/affine2d.c \
+    src/clipspace/ortho_lh_no.c \
+    src/clipspace/ortho_lh_zo.c \
+    src/clipspace/ortho_rh_no.c \
+    src/clipspace/ortho_rh_zo.c \
+    src/clipspace/persp_lh_no.c \
+    src/clipspace/persp_lh_zo.c \
+    src/clipspace/persp_rh_no.c \
+    src/clipspace/persp_rh_zo.c \
+    src/clipspace/view_lh_no.c \
+    src/clipspace/view_lh_zo.c \
+    src/clipspace/view_rh_no.c \
+    src/clipspace/view_rh_zo.c
 
 test_tests_SOURCES=\
     test/runner.c \
     test/src/test_common.c \
     test/src/tests.c \
     test/src/test_cam.c \
+    test/src/test_cam_lh_zo.c \
+    test/src/test_cam_rh_zo.c \
+    test/src/test_cam_lh_no.c \
+    test/src/test_cam_rh_no.c \
     test/src/test_clamp.c \
     test/src/test_euler.c \
     test/src/test_bezier.c \
