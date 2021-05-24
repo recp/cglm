@@ -154,7 +154,21 @@ cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/color.h \
                       include/cglm/struct/curve.h \
                       include/cglm/struct/affine2d.h
-                      
+
+cglm_struct_clipspacedir=$(includedir)/cglm/struct/clipspace
+cglm_struct_clipspace_HEADERS = include/cglm/struct/clipspace/persp_lh_zo.h \
+                                include/cglm/struct/clipspace/persp_rh_zo.h \
+                                include/cglm/struct/clipspace/persp_lh_no.h \
+                                include/cglm/struct/clipspace/persp_rh_no.h \
+                                include/cglm/struct/clipspace/ortho_lh_zo.h \
+                                include/cglm/struct/clipspace/ortho_rh_zo.h \
+                                include/cglm/struct/clipspace/ortho_lh_no.h \
+                                include/cglm/struct/clipspace/ortho_rh_no.h \
+                                include/cglm/struct/clipspace/view_lh_zo.h \
+                                include/cglm/struct/clipspace/view_rh_zo.h \
+                                include/cglm/struct/clipspace/view_lh_no.h \
+                                include/cglm/struct/clipspace/view_rh_no.h
+
 libcglm_la_SOURCES=\
     src/euler.c \
     src/affine.c \
