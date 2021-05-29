@@ -1,5 +1,5 @@
 project('cglm', 'c',
-    version : '0.8.3', 
+    version : '0.8.3',
     license : 'mit',
     default_options : [
         'c_std=c11',
@@ -111,8 +111,8 @@ test_src = files(
     'test/src/tests.c'
 )
 
-test_exe = executable('tests', 
-    test_src, 
+test_exe = executable('tests',
+    test_src,
     dependencies : cglm_dep,
     c_args : '-DGLM_TESTS_NO_COLORFUL_OUTPUT'
 )
