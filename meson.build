@@ -56,11 +56,11 @@ cglm_src = files(
     'src/clipspace/persp_lh_no.c',
     'src/clipspace/persp_lh_zo.c',
     'src/clipspace/persp_rh_no.c',
-    'src/clipspace/persp_rh_zo.c'
+    'src/clipspace/persp_rh_zo.c',
     'src/clipspace/view_lh_no.c',
     'src/clipspace/view_lh_zo.c',
-    'src/clipspace/view_rh_no.c'
-    'src/clipspace/view_rh_zo.c'
+    'src/clipspace/view_rh_no.c',
+    'src/clipspace/view_rh_zo.c',
 )
 
 cglm_lib = library('cglm',
@@ -108,7 +108,7 @@ test_src = files(
     'test/src/test_struct.c',
     'test/src/test_clamp.c',
     'test/src/test_common.c',
-    'test/src/tests.c'
+    'test/src/tests.c',
 )
 
 test_exe = executable('tests',
