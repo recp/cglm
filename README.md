@@ -1,12 +1,52 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
-[![Build Status](https://travis-ci.com/recp/cglm.svg?branch=master)](https://travis-ci.com/recp/cglm)
-[![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
-[![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
-[![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
-[![codecov](https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg)](https://codecov.io/gh/recp/cglm)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
-[![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
+
+<p align="center">
+   <img alt="" src="cglm.png" width="550" />
+</p>
+<br>
+<p align="center">
+    <a href="https://travis-ci.com/recp/cglm">
+        <img src="https://travis-ci.com/recp/cglm.svg?branch=master"
+             alt="Build Status">
+    </a>
+    <a href="https://ci.appveyor.com/project/recp/cglm/branch/master">
+        <img src="https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true"
+             alt="Windows Build Status">
+    </a>
+    <a href="http://cglm.readthedocs.io/en/latest/?badge=latest">
+        <img src="https://readthedocs.org/projects/cglm/badge/?version=latest"
+             alt="Documentation Status">
+    </a>
+    <a href="https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade">
+        <img src="https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1"
+             alt="Codacy Badge"/>
+    </a>
+    <a href="https://coveralls.io/github/recp/cglm?branch=master">
+        <img src="https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master"
+             alt="Coverage Status"/>
+    </a>
+    <a href="https://codecov.io/gh/recp/cglm">
+        <img src="https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg"
+             alt="Coverage Status"/>
+    </a>
+    <br /><br />
+    <a href="#sponsors">
+        <img src="https://opencollective.com/cglm/sponsors/badge.svg"
+             alt="Sponsors on Open Collective"/>
+    </a>
+    <a href="#backers">
+        <img src="https://opencollective.com/cglm/backers/badge.svg"
+             alt="Backers on Open Collective"/>
+    </a>
+</p>
+
+<br>
+
+<p align="center">
+Highly optimized 2D|3D math library, also known as <b>OpenGL Mathematics (glm) for `C`</b>. <b>cglm</b> provides lot of utils to help math operations to be fast and quick to write. It is community friendly, feel free to bring any issues, bugs you faced. 
+</p>
+
+---
 
 #### Documentation
 
@@ -403,7 +443,7 @@ You can pass matrices the same way to other APIs e.g. Vulkan, DX...
 - [x] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
 - [x] Extra documentation
-- [ ] ARM Neon Arch (In Progress)
+- [x] ARM Neon Arch
 
 
 ## Contributors
