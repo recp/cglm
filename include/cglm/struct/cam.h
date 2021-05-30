@@ -499,13 +499,13 @@ glms_persp_decomp_y(mat4s proj,
                     float * __restrict top,
                     float * __restrict bottom) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
-  return glms_persp_decomp_y_lh_zo(proj, top, bottom);
+  glms_persp_decomp_y_lh_zo(proj, top, bottom);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
-  return glms_persp_decomp_y_lh_no(proj, top, bottom);
+  glms_persp_decomp_y_lh_no(proj, top, bottom);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_ZO
-  return glms_persp_decomp_y_rh_zo(proj, top, bottom);
+  glms_persp_decomp_y_rh_zo(proj, top, bottom);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
-  return glms_persp_decomp_y_rh_no(proj, top, bottom);
+  glms_persp_decomp_y_rh_no(proj, top, bottom);
 #endif
 }
 
