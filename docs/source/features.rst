@@ -1,6 +1,7 @@
 Features
 ================================================================================
 
+* option to use diffeent clipspaces e.g. Left Handed, Zero-to-One... (currrently right handed negative-one is default)
 * array api and struct api, you can use arrays or structs.
 * general purpose matrix operations (mat4, mat3)
 * chain matrix multiplication (square only)
