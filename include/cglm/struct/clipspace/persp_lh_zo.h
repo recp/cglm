@@ -127,13 +127,20 @@ glms_perspective_default_lh_zo(float aspect) {
  *        reized with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *
+ * NOTE: if you dodn't want to create new matrix then use array api on struct.raw
+ *       like glms_perspective_resize_lh_zo(proj.raw, aspect) to avoid create new mat4
+ *       each time
+ *       
  * @param[in, out] proj   perspective projection matrix
  * @param[in]      aspect aspect ratio ( width / height )
  */
 CGLM_INLINE
-void
+mat4s
 glms_perspective_resize_lh_zo(mat4s proj, float aspect) {
-  glm_perspective_resize_lh_zo(aspect, proj.raw);
+  mat4s dest;
+  dest = proj;
+  glm_perspective_resize_lh_zo(aspect, dest.raw);
+  return dest;
 }
 
 /*!

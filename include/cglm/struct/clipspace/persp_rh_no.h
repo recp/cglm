@@ -127,13 +127,20 @@ glms_perspective_default_rh_no(float aspect) {
  *        reized with a right-hand coordinate system and a
  *        clip-space of [-1, 1].
  *
+ * NOTE: if you dodn't want to create new matrix then use array api on struct.raw
+ *       like glm_perspective_resize_rh_no(proj.raw, aspect) to avoid create new mat4
+ *       each time
+ *       
  * @param[in, out] proj   perspective projection matrix
  * @param[in]      aspect aspect ratio ( width / height )
  */
 CGLM_INLINE
-void
+mat4s
 glms_perspective_resize_rh_no(mat4s proj, float aspect) {
-  glm_perspective_resize_rh_no(aspect, proj.raw);
+  mat4s dest;
+  dest = proj;
+  glm_perspective_resize_rh_no(aspect, dest.raw);
+  return dest;
 }
 
 /*!

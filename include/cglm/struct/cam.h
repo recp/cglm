@@ -322,20 +322,24 @@ glms_perspective_default(float aspect) {
  *        this makes very easy to resize proj matrix when window /viewport
  *        reized
  *
+ * NOTE: if you dodn't want to create new matrix then use array api on struct.raw
+ *       like glms_perspective_resize(proj.raw, aspect) to avoid create new mat4
+ *       each time
+ *
  * @param[in, out] proj   perspective projection matrix
  * @param[in]      aspect aspect ratio ( width / height )
  */
 CGLM_INLINE
-void
+mat4s
 glms_perspective_resize(mat4s proj, float aspect) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
-  glms_perspective_resize_lh_zo(proj, aspect);
+  return glms_perspective_resize_lh_zo(proj, aspect);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
-  glms_perspective_resize_lh_no(proj, aspect);
+  return glms_perspective_resize_lh_no(proj, aspect);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_ZO
-  glms_perspective_resize_rh_zo(proj, aspect);
+  return glms_perspective_resize_rh_zo(proj, aspect);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
-  glms_perspective_resize_rh_no(proj, aspect);
+  return glms_perspective_resize_rh_no(proj, aspect);
 #endif
 }
 
