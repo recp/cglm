@@ -35,6 +35,45 @@ have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
 
  For instance if you set CGLM_ALL_UNALIGNED in a project then set it in other projects too
 
+ Clipspace Option[s]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+By starting **v0.8.3** cglm provides options to switch between clipspace configurations.
+
+Clipspace related files are located at `include/cglm/[struct]/clipspace.h` but 
+these are included in related files like `cam.h`. If you don't want to change your existing 
+clipspace configuration and want to use different clipspace function like `glm_lookat_zo` or `glm_lookat_lh_zo`...
+then you can include individual headers or just define `CGLM_CLIPSPACE_INCLUDE_ALL` which will iclude all headers for you.
+
+1. **CGLM_CLIPSPACE_INCLUDE_ALL**
+2. **CGLM_FORCE_DEPTH_ZERO_TO_ONE**
+3. **CGLM_FORCE_LEFT_HANDED**
+
+
+1. **CGLM_CLIPSPACE_INCLUDE_ALL**:
+
+By defining this macro, **cglm** will include all clipspace functions for you by just using
+`#include cglm/cglm.h` or `#include cglm/struct.h` or `#include cglm/call.h`
+
+Otherwise you need to include header you want manually e.g. `#include cglm/clipspace/view_rh_zo.h`
+
+2. **CGLM_FORCE_DEPTH_ZERO_TO_ONE**
+
+This is similar to **GLM**'s **GLM_FORCE_DEPTH_ZERO_TO_ONE** option. 
+This will set clip space between 0 to 1 which makes **cglm** Vulkan, Metal friendly. 
+
+You can use functions like `glm_lookat_lh_zo()` individually. By setting **CGLM_FORCE_DEPTH_ZERO_TO_ONE**
+functions in cam.h for instance will use `_zo` versions.
+
+3. **CGLM_FORCE_LEFT_HANDED**
+
+Force **cglm** to use the left handed coordinate system by default, currently **cglm** uses right handed coordinate system as default,
+you can change this behavior with this option.
+
+**VERY VERY IMPORTANT:**
+
+Be careful if you include **cglm** in multiple projects.
+
 SSE and SSE2 Shuffle Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **_mm_shuffle_ps** generates **shufps** instruction even if registers are same.
