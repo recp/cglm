@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="src">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -32,6 +28,18 @@
     </Filter>
     <Filter Include="include\cglm\struct">
       <UniqueIdentifier>{0b5febe7-a88d-4330-94ae-305897a5e957}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\cglm\clipspace">
+      <UniqueIdentifier>{8044a657-123d-4a0e-8de1-f348fad7dadb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\cglm\call\clipspace">
+      <UniqueIdentifier>{842a48fc-5c7e-4951-9623-64af96dfb95a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\cglm\struct\clipspace">
+      <UniqueIdentifier>{86101de1-0722-4c88-92a0-e6d71158354e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\clipspace">
+      <UniqueIdentifier>{98a166bb-ba2d-4649-a20f-ba6bf4ce6383}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +105,42 @@
     </ClCompile>
     <ClCompile Include="..\src\affine2d.c">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\ortho_lh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\ortho_lh_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\ortho_rh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\ortho_rh_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\persp_lh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\persp_lh_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\persp_rh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\persp_rh_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\view_lh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\view_lh_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\view_rh_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\view_rh_zo.c">
+      <Filter>src\clipspace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -378,6 +422,123 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\simd\neon\quat.h">
       <Filter>include\cglm\simd\neon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\ortho_lh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\ortho_lh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\ortho_rh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\ortho_rh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\persp.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\persp_lh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\persp_lh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\persp_rh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\persp_rh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_lh.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_lh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_lh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_rh.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_rh_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\view_rh_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\ortho_lh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\ortho_lh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\ortho_rh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\ortho_rh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\persp_lh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\persp_lh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\persp_rh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\persp_rh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\view_lh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\view_lh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\view_rh_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\view_rh_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\ortho_lh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\ortho_lh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\ortho_rh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\ortho_rh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\persp_lh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\persp_lh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\persp_rh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\persp_rh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\view_lh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\view_lh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\view_rh_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\view_rh_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

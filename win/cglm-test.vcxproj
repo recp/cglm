@@ -23,6 +23,10 @@
     <ClCompile Include="..\test\src\tests.c" />
     <ClCompile Include="..\test\src\test_bezier.c" />
     <ClCompile Include="..\test\src\test_cam.c" />
+    <ClCompile Include="..\test\src\test_cam_lh_no.c" />
+    <ClCompile Include="..\test\src\test_cam_lh_zo.c" />
+    <ClCompile Include="..\test\src\test_cam_rh_no.c" />
+    <ClCompile Include="..\test\src\test_cam_rh_zo.c" />
     <ClCompile Include="..\test\src\test_clamp.c" />
     <ClCompile Include="..\test\src\test_common.c" />
     <ClCompile Include="..\test\src\test_euler.c" />
