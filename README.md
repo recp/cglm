@@ -26,6 +26,7 @@ you have the latest version
 - **[major change]** by starting v0.5.0, vec3 functions use **glm_vec3_** namespace, it was **glm_vec_** until v0.5.0
 - **[major change]** by starting v0.5.1, built-in alignment is removed from **vec3** and **mat3** types
 - **[major change]** by starting v0.7.3, inline print functions are disabled in release/production mode to eliminate print costs (see options in documentation). Print output also improved. You can disable colors if you need  (see documentation)
+- **[major change]** by starting v0.8.3, **cglm** supports alternative clipspace configuations e.g. Left Handed, Zero-to-One (_zo)... `CGLM_FORCE_DEPTH_ZERO_TO_ONE` and `CGLM_FORCE_LEFT_HANDED` is provided to control clipspace. You should be able to use **cglm** with Vulkan, DirectX and Metal now... see https://cglm.readthedocs.io/en/latest/opt.html#clipspace-option-s
 
 #### Note for C++ developers:
 If you are not aware of the original GLM library yet, you may also want to look at:
@@ -69,6 +70,8 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 </table>
 
 ## Features
+- **scalar** and **simd** (sse, avx, neon...) optimizations
+- option to use different clipspaces e.g. Left Handed, Zero-to-One... (currrently right handed negative-one is default)
 - array api and struct api, you can use arrays or structs.
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
@@ -83,7 +86,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - extract euler angles
 - inline or pre-compiled function call
 - frustum (extract view frustum planes, corners...)
-- bounding box  (AABB in Frustum (culling), crop, merge...)
+- bounding box (AABB in Frustum (culling), crop, merge...)
 - bounding sphere
 - project, unproject
 - easing functions
