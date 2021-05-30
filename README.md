@@ -31,7 +31,7 @@
     </a>
     <br /><br />
     <a href="#sponsors">
-        <img sr📚c="https://opencollective.com/cglm/sponsors/badge.svg"
+        <img src="https://opencollective.com/cglm/sponsors/badge.svg"
              alt="Sponsors on Open Collective"/>
     </a>
     <a href="#backers">
