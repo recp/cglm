@@ -1,6 +1,6 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
-[![Build Status](https://travis-ci.org/recp/cglm.svg?branch=master)](https://travis-ci.org/recp/cglm)
- [![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
+[![Build Status](https://travis-ci.com/recp/cglm.svg?branch=master)](https://travis-ci.com/recp/cglm)
+[![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
 [![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
 [![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
 [![codecov](https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg)](https://codecov.io/gh/recp/cglm)
