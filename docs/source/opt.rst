@@ -35,7 +35,7 @@ have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
 
  For instance if you set CGLM_ALL_UNALIGNED in a project then set it in other projects too
 
- Clipspace Option[s]
+Clipspace Option[s]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 By starting **v0.8.3** cglm provides options to switch between clipspace configurations.
