@@ -273,22 +273,26 @@ glms_perspective(float fovy, float aspect, float nearZ, float farZ) {
 /*!
  * @brief extend perspective projection matrix's far distance
  *
+ * NOTE: if you dodn't want to create new matrix then use array api on struct.raw
+ *       like glm_persp_move_far(prooj.raw, deltaFar) to avoid create new mat4
+ *       each time
+ *
  * this function does not guarantee far >= near, be aware of that!
  *
  * @param[in, out] proj      projection matrix to extend
  * @param[in]      deltaFar  distance from existing far (negative to shink)
  */
 CGLM_INLINE
-void
+mat4s
 glms_persp_move_far(mat4s proj, float deltaFar) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
-  glms_persp_move_far_lh_zo(proj, deltaFar);
+  return glms_persp_move_far_lh_zo(proj, deltaFar);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
-  glms_persp_move_far_lh_no(proj, deltaFar);
+  return glms_persp_move_far_lh_no(proj, deltaFar);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_ZO
-  glms_persp_move_far_rh_zo(proj, deltaFar);
+  return glms_persp_move_far_rh_zo(proj, deltaFar);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
-  glms_persp_move_far_rh_no(proj, deltaFar);
+  return glms_persp_move_far_rh_no(proj, deltaFar);
 #endif
 }
 

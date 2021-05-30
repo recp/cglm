@@ -87,15 +87,22 @@ glms_perspective_rh_no(float fovy, float aspect, float nearZ, float farZ) {
  *        with a right-hand coordinate system and a
  *        clip-space of [-1, 1].
  *
+ * NOTE: if you dodn't want to create new matrix then use array api on struct.raw
+ *       like glms_persp_move_far_rh_no(prooj.raw, deltaFar) to avoid create new mat4
+ *       each time
+ *       s
  * this function does not guarantee far >= near, be aware of that!
  *
  * @param[in, out] proj      projection matrix to extend
  * @param[in]      deltaFar  distance from existing far (negative to shink)
  */
 CGLM_INLINE
-void
+mat4s
 glms_persp_move_far_rh_no(mat4s proj, float deltaFar) {
-  glm_persp_move_far_rh_no(proj.raw, deltaFar);
+  mat4s dest;
+  dest = proj;
+  glm_persp_move_far_rh_no(dest.raw, deltaFar);
+  return dest;
 }
 
 /*!
