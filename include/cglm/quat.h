@@ -59,6 +59,7 @@
 #include "mat4.h"
 #include "mat3.h"
 #include "affine-mat.h"
+#include "affine.h"
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/quat.h"
@@ -67,18 +68,6 @@
 #ifdef CGLM_NEON_FP
 #  include "simd/neon/quat.h"
 #endif
-
-CGLM_INLINE
-void
-glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
-
-CGLM_INLINE
-void
-glm_mul_rot(mat4 m1, mat4 m2, mat4 dest);
-
-CGLM_INLINE
-void
-glm_translate(mat4 m, vec3 v);
 
 /*
  * IMPORTANT:
