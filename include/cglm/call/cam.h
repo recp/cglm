@@ -15,23 +15,17 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_frustum(float left,
-             float right,
-             float bottom,
-             float top,
-             float nearVal,
-             float farVal,
-             mat4 dest);
+glmc_frustum(float left,   float right,
+             float bottom, float top,
+             float nearZ,  float farZ,
+             mat4  dest);
 
 CGLM_EXPORT
 void
-glmc_ortho(float left,
-           float right,
-           float bottom,
-           float top,
-           float nearVal,
-           float farVal,
-           mat4 dest);
+glmc_ortho(float left,   float right,
+           float bottom, float top,
+           float nearZ,  float farZ,
+           mat4  dest);
 
 CGLM_EXPORT
 void
@@ -55,11 +49,7 @@ glmc_ortho_default_s(float aspect, float size, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_perspective(float fovy,
-                 float aspect,
-                 float nearVal,
-                 float farVal,
-                 mat4 dest);
+glmc_perspective(float fovy, float aspect, float nearZ, float farZ, mat4 dest);
 
 CGLM_EXPORT
 void
@@ -88,8 +78,8 @@ glmc_look_anyup(vec3 eye, vec3 dir, mat4 dest);
 CGLM_EXPORT
 void
 glmc_persp_decomp(mat4 proj,
-                  float * __restrict nearVal,
-                  float * __restrict farVal,
+                  float * __restrict nearZ,
+                  float * __restrict farZ,
                   float * __restrict top,
                   float * __restrict bottom,
                   float * __restrict left,
@@ -114,16 +104,16 @@ glmc_persp_decomp_y(mat4 proj,
 CGLM_EXPORT
 void
 glmc_persp_decomp_z(mat4 proj,
-                    float * __restrict nearVal,
-                    float * __restrict farVal);
+                    float * __restrict nearZ,
+                    float * __restrict farZ);
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_far(mat4 proj, float * __restrict farVal);
+glmc_persp_decomp_far(mat4 proj, float * __restrict farZ);
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_near(mat4 proj, float * __restrict nearVal);
+glmc_persp_decomp_near(mat4 proj, float * __restrict nearZ);
 
 CGLM_EXPORT
 float

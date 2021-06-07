@@ -1,19 +1,59 @@
 # 🎥 OpenGL Mathematics (glm) for `C`
-[![Build Status](https://travis-ci.org/recp/cglm.svg?branch=master)](https://travis-ci.org/recp/cglm)
- [![Build status](https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true)](https://ci.appveyor.com/project/recp/cglm/branch/master)
-[![Documentation Status](https://readthedocs.org/projects/cglm/badge/?version=latest)](http://cglm.readthedocs.io/en/latest/?badge=latest)
-[![Coverage Status](https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master)](https://coveralls.io/github/recp/cglm?branch=master)
-[![codecov](https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg)](https://codecov.io/gh/recp/cglm)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1)](https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade)
-[![Backers on Open Collective](https://opencollective.com/cglm/backers/badge.svg)](#backers)
-[![Sponsors on Open Collective](https://opencollective.com/cglm/sponsors/badge.svg)](#sponsors)
 
-#### Documentation
+<p align="center">
+   <img alt="" src="cglm.png" width="550" />
+</p>
+<br>
+<p align="center">
+    <a href="https://travis-ci.com/recp/cglm">
+        <img src="https://travis-ci.com/recp/cglm.svg?branch=master"
+             alt="Build Status">
+    </a>
+    <a href="https://ci.appveyor.com/project/recp/cglm/branch/master">
+        <img src="https://ci.appveyor.com/api/projects/status/av7l3gc0yhfex8y4/branch/master?svg=true"
+             alt="Windows Build Status">
+    </a>
+    <a href="http://cglm.readthedocs.io/en/latest/?badge=latest">
+        <img src="https://readthedocs.org/projects/cglm/badge/?version=latest"
+             alt="Documentation Status">
+    </a>
+    <a href="https://www.codacy.com/app/recp/cglm?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=recp/cglm&amp;utm_campaign=Badge_Grade">
+        <img src="https://api.codacy.com/project/badge/Grade/6a62b37d5f214f178ebef269dc4a6bf1"
+             alt="Codacy Badge"/>
+    </a>
+    <a href="https://coveralls.io/github/recp/cglm?branch=master">
+        <img src="https://coveralls.io/repos/github/recp/cglm/badge.svg?branch=master"
+             alt="Coverage Status"/>
+    </a>
+    <a href="https://codecov.io/gh/recp/cglm">
+        <img src="https://codecov.io/gh/recp/cglm/branch/master/graph/badge.svg"
+             alt="Coverage Status"/>
+    </a>
+    <br /><br />
+    <a href="#sponsors">
+        <img src="https://opencollective.com/cglm/sponsors/badge.svg"
+             alt="Sponsors on Open Collective"/>
+    </a>
+    <a href="#backers">
+        <img src="https://opencollective.com/cglm/backers/badge.svg"
+             alt="Backers on Open Collective"/>
+    </a>
+</p>
+
+<br>
+
+<p align="center">
+Highly optimized 2D|3D math library, also known as <b>OpenGL Mathematics (glm) for `C`</b>. <b>cglm</b> provides lot of utils to help math operations to be fast and quick to write. It is community friendly, feel free to bring any issues, bugs you faced. 
+</p>
+
+---
+
+#### 📚 Documentation
 
 Almost all functions (inline versions) and parameters are documented inside the corresponding headers. <br />
 Complete documentation: http://cglm.readthedocs.io
 
-#### Note for previous versions:
+#### 📌 Note for previous versions:
 
 - _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec3_copy`
 - OpenGL related functions are dropped to make this lib platform/third-party independent
@@ -26,30 +66,28 @@ you have the latest version
 - **[major change]** by starting v0.5.0, vec3 functions use **glm_vec3_** namespace, it was **glm_vec_** until v0.5.0
 - **[major change]** by starting v0.5.1, built-in alignment is removed from **vec3** and **mat3** types
 - **[major change]** by starting v0.7.3, inline print functions are disabled in release/production mode to eliminate print costs (see options in documentation). Print output also improved. You can disable colors if you need  (see documentation)
+- **[major change]** by starting v0.8.3, **cglm** supports alternative clipspace configuations e.g. Left Handed, Zero-to-One (_zo)... `CGLM_FORCE_DEPTH_ZERO_TO_ONE` and `CGLM_FORCE_LEFT_HANDED` is provided to control clipspace. You should be able to use **cglm** with Vulkan, DirectX and Metal now... see https://cglm.readthedocs.io/en/latest/opt.html#clipspace-option-s
 
-#### Note for C++ developers:
+#### 📌 Note for C++ developers:
 If you are not aware of the original GLM library yet, you may also want to look at:
 https://github.com/g-truc/glm
 
-#### Note for new comers (Important):
+#### 📌 Note for new comers (Important):
 - `vec4` and `mat4` variables must be aligned. (There will be unaligned versions later)
 - **in** and **[in, out]** parameters must be initialized (please). But **[out]** parameters not, initializing out param is  also redundant
 - All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just include headers.
 - if your debugger takes you to cglm headers then make sure you are not trying to copy vec4 to vec3 or alig issues...
 - Welcome!
 
-#### Note for experienced developers:
+#### 📌 Note for experienced developers:
 - Since I'm testing this library in my projects, sometimes bugs occurs; finding that bug[s] and making improvements would be more easy with multiple developer/contributor and their projects or knowledge. Consider to make some tests if you suspect something is wrong and any feedbacks, contributions and bug reports are always welcome.
 
-#### Allocations?
+#### 📌 Allocations?
 `cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available.
 
-#### Returning vector or matrix... ?
+#### 📌 Returning vector or matrix... ?
 
 **cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you utilize struct api (`glms_`).
-
-#### Other APIs like Vulkan, Metal, Dx?
-Currently *cglm* uses default clip space configuration (-1, 1) for camera functions (perspective, extract corners...), in the future other clip space configurations will be supported
 
 <hr/>
 
@@ -68,7 +106,9 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
   </tbody>
 </table>
 
-## Features
+## 🚀 Features
+- **scalar** and **simd** (sse, avx, neon...) optimizations
+- option to use different clipspaces e.g. Left Handed, Zero-to-One... (currrently right handed negative-one is default)
 - array api and struct api, you can use arrays or structs.
 - general purpose matrix operations (mat4, mat3)
 - chain matrix multiplication (square only)
@@ -83,7 +123,7 @@ Currently *cglm* uses default clip space configuration (-1, 1) for camera functi
 - extract euler angles
 - inline or pre-compiled function call
 - frustum (extract view frustum planes, corners...)
-- bounding box  (AABB in Frustum (culling), crop, merge...)
+- bounding box (AABB in Frustum (culling), crop, merge...)
 - bounding sphere
 - project, unproject
 - easing functions
@@ -148,7 +188,7 @@ Struct functions generally take their parameters as *values* and *return* their 
 
 The types used are actually unions that allow access to the same data multiple ways. One of those ways involves anonymous structures, available since C11. MSVC also supports it for earlier C versions out of the box and GCC/Clang do if you enable `-fms-extensions`. To explicitly enable these anonymous structures, `#define CGLM_USE_ANONYMOUS_STRUCT` to `1`, to disable them, to `0`. For backward compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` (value is irrelevant) to disable them. If you don't specify explicitly, cglm will do a best guess based on your compiler and the C version you're using.
 
-## Build
+## 🔨 Build
 
 ### CMake (All platforms)
 ```bash
@@ -400,7 +440,7 @@ You can pass matrices the same way to other APIs e.g. Vulkan, DX...
 - [x] Add version info
 - [ ] Unaligned operations (e.g. `glm_umat4_mul`)
 - [x] Extra documentation
-- [ ] ARM Neon Arch (In Progress)
+- [x] ARM Neon Arch
 
 
 ## Contributors

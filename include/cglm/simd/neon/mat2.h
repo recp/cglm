@@ -22,8 +22,8 @@ glm_mat2_mul_neon(mat2 m1, mat2 m2, mat2 dest) {
   x1 = glmm_load(m1[0]); /* d c b a */
   x2 = glmm_load(m2[0]); /* h g f e */
   
-  dc  = vget_high_f32(x1);
-  ba  = vget_low_f32(x1);
+  dc = vget_high_f32(x1);
+  ba = vget_low_f32(x1);
 
   /* g g e e, h h f f */
   a1 = vtrnq_f32(x2, x2);

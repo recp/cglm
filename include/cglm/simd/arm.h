@@ -29,6 +29,15 @@
   vreinterpretq_f32_s32(veorq_s32(vreinterpretq_s32_f32(a),                   \
                                   vreinterpretq_s32_f32(b)))
 
+#define glmm_swplane(v) vextq_f32(v, v, 2)
+#define glmm_low(x)     vget_low_f32(x)
+#define glmm_high(x)    vget_high_f32(x)
+
+#define glmm_combine_ll(x, y) vcombine_f32(vget_low_f32(x),  vget_low_f32(y))
+#define glmm_combine_hl(x, y) vcombine_f32(vget_high_f32(x), vget_low_f32(y))
+#define glmm_combine_lh(x, y) vcombine_f32(vget_low_f32(x),  vget_high_f32(y))
+#define glmm_combine_hh(x, y) vcombine_f32(vget_high_f32(x), vget_high_f32(y))
+
 static inline
 float32x4_t
 glmm_abs(float32x4_t v) {
@@ -38,8 +47,13 @@ glmm_abs(float32x4_t v) {
 static inline
 float32x4_t
 glmm_vhadd(float32x4_t v) {
-  v = vaddq_f32(v, vrev64q_f32(v));
-  return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
+  return vaddq_f32(vaddq_f32(glmm_splat_x(v), glmm_splat_y(v)),
+                   vaddq_f32(glmm_splat_z(v), glmm_splat_w(v)));
+  /*
+   this seems slower:
+   v = vaddq_f32(v, vrev64q_f32(v));
+   return vaddq_f32(v, vcombine_f32(vget_high_f32(v), vget_low_f32(v)));
+   */
 }
 
 static inline

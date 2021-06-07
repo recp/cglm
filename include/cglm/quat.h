@@ -631,9 +631,12 @@ glm_quat_lerpc(versor from, versor to, float t, versor dest) {
 CGLM_INLINE
 void
 glm_quat_nlerp(versor from, versor to, float t, versor dest) {
-  float dot = glm_vec4_dot(from, to);
   versor target;
-  glm_vec4_scale(to, (dot >= 0) ? 1 : -1, target);
+  float  dot;
+  
+  dot = glm_vec4_dot(from, to);
+  
+  glm_vec4_scale(to, (dot >= 0) ? 1.0f : -1.0f, target);
   glm_quat_lerp(from, target, t, dest);
   glm_quat_normalize(dest);
 }

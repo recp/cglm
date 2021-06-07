@@ -35,6 +35,18 @@
     <ClCompile Include="..\test\src\tests.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\test\src\test_cam_lh_no.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_cam_lh_zo.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_cam_rh_no.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\test\src\test_cam_rh_zo.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\tests.h">
