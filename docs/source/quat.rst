@@ -57,6 +57,7 @@ Functions:
 #. :c:func:`glm_quat_look`
 #. :c:func:`glm_quat_for`
 #. :c:func:`glm_quat_forp`
+#. :c:func:`glm_quat_unit_rotatev`
 #. :c:func:`glm_quat_rotatev`
 #. :c:func:`glm_quat_rotate`
 #. :c:func:`glm_quat_rotate_at`
@@ -365,9 +366,21 @@ Functions documentation
       | *[in]*  **up**    up vector
       | *[out]* **dest**  result matrix
 
+.. c:function:: void  glm_quat_unit_rotatev(versor q, vec3 v, vec3 dest)
+
+    | rotate vector using unit quaternion
+
+    References:
+      * `Rotating a Single Vector using a Quaternion <https://fgiesen.wordpress.com/2019/02/09/rotating-a-single-vector-using-a-quaternion/>`_
+
+    Parameters:
+      | *[in]*  **q**     unit quaternion
+      | *[in]*  **v**     vector to rotate
+      | *[out]* **dest**  rotated vector
+
 .. c:function:: void  glm_quat_rotatev(versor q, vec3 v, vec3 dest)
 
-    | crotate vector using using quaternion
+    | rotate vector using quaternion
 
     Parameters:
       | *[in]*  **q**     quaternion
