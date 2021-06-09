@@ -488,7 +488,7 @@ glms_quat_forp(vec3s from, vec3s to, vec3s up) {
 /*!
  * @brief rotate vector using unit quaternion
  *
- * @param[in]   q     unit quaternion
+ * @param[in]   q     quaternion (must be of unit length)
  * @param[in]   v     vector to rotate
  * @returns  rotated vector
  */

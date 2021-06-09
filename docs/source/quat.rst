@@ -370,11 +370,13 @@ Functions documentation
 
     | rotate vector using unit quaternion
 
+    | faster than glm_quat_rotatev as it avoids a normalize operation and works only with unit quaternions
+
     References:
       * `Rotating a Single Vector using a Quaternion <https://fgiesen.wordpress.com/2019/02/09/rotating-a-single-vector-using-a-quaternion/>`_
 
     Parameters:
-      | *[in]*  **q**     unit quaternion
+      | *[in]*  **q**     quaternion (must be of unit length)
       | *[in]*  **v**     vector to rotate
       | *[out]* **dest**  rotated vector
 

@@ -747,7 +747,7 @@ glm_quat_forp(vec3 from, vec3 to, vec3 up, versor dest) {
 /*!
  * @brief rotate vector using unit quaternion
  *
- * @param[in]   q     unit quaternion
+ * @param[in]   q     quaternion (must be of unit length)
  * @param[in]   v     vector to rotate
  * @param[out]  dest  rotated vector
  */
@@ -769,7 +769,7 @@ glm_quat_unit_rotatev(versor q, vec3 v, vec3 dest) {
 }
 
 /*!
- * @brief rotate vector using using quaternion
+ * @brief rotate vector using quaternion
  *
  * @param[in]   q     quaternion
  * @param[in]   v     vector to rotate

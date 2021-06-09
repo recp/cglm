@@ -443,7 +443,7 @@ glms_vec3_muladd(vec3s a, vec3s b, vec3s dest) {
  *
  * @param[in]  a    vector
  * @param[in]  s    scalar
- * @returns         dest += (a * b)
+ * @returns         dest += (a * s)
  */
 CGLM_INLINE
 vec3s
