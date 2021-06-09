@@ -39,6 +39,7 @@
    CGLM_INLINE mat4s.  glms_quat_look(vec3s eye, versors ori)
    CGLM_INLINE versors glms_quat_for(vec3s dir, vec3s fwd, vec3s up)
    CGLM_INLINE versors glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up)
+   CGLM_INLINE vec3s   glms_quat_unit_rotatev(versors q, vec3s v)
    CGLM_INLINE vec3s   glms_quat_rotatev(versors q, vec3s v)
    CGLM_INLINE mat4s   glms_quat_rotate(mat4s m, versors q)
    CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q, vec3s pivot)
@@ -485,7 +486,22 @@ glms_quat_forp(vec3s from, vec3s to, vec3s up) {
 }
 
 /*!
- * @brief rotate vector using using quaternion
+ * @brief rotate vector using unit quaternion
+ *
+ * @param[in]   q     unit quaternion
+ * @param[in]   v     vector to rotate
+ * @returns  rotated vector
+ */
+CGLM_INLINE
+vec3s
+glms_quat_unit_rotatev(versors q, vec3s v) {
+  vec3s dest;
+  glm_quat_unit_rotatev(q.raw, v.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief rotate vector using quaternion
  *
  * @param[in]   q     quaternion
  * @param[in]   v     vector to rotate
