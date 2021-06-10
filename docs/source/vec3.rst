@@ -474,6 +474,9 @@ Functions documentation
 
     possible orthogonal/perpendicular vector
 
+    References:
+      * `On picking an orthogonal vector (and combing coconuts) <http://lolengine.net/blog/2013/09/21/picking-orthogonal-vector-combing-coconuts>`_
+
     Parameters:
       | *[in]*  **v**     vector
       | *[out]* **dest**  orthogonal/perpendicular vector

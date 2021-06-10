@@ -1123,8 +1123,8 @@ TEST_IMPL(GLM_PREFIX, vec3_minv) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_ortho) {
-  vec3  v1, v2, v3;
-  vec3  v5, v6, v7;
+  vec3  v1, v2, v3, v4 = {1.f, 1.f, 1.f};
+  vec3  v5, v6, v7, v8;
   float a;
 
   test_rand_vec3(v1);
@@ -1134,6 +1134,7 @@ TEST_IMPL(GLM_PREFIX, vec3_ortho) {
   GLM(vec3_ortho)(v1, v5);
   GLM(vec3_ortho)(v2, v6);
   GLM(vec3_ortho)(v3, v7);
+  GLM(vec3_ortho)(v4, v8);
   
   a = glm_vec3_angle(v1, v5);
   ASSERT(!isinf(a))
@@ -1146,6 +1147,11 @@ TEST_IMPL(GLM_PREFIX, vec3_ortho) {
   ASSERT(test_eq(a, GLM_PI_2f))
   
   a = glm_vec3_angle(v3, v7);
+  ASSERT(!isinf(a))
+  ASSERT(!isnan(a))
+  ASSERT(test_eq(a, GLM_PI_2f))
+
+  a = glm_vec3_angle(v4, v8);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
   ASSERT(test_eq(a, GLM_PI_2f))

@@ -79,22 +79,20 @@ main(int argc, const char * argv[]) {
 
   if (failed == 0) {
     fprintf(stderr,
-            BOLDGREEN "\n  All tests are passed " FINAL_TEXT "\n" RESET);
+            BOLDGREEN "\n  All tests passed " FINAL_TEXT "\n" RESET);
   }
 
   fprintf(stderr,
           CYAN "\ncglm test results (%0.2fs):\n" RESET
           "--------------------------\n"
 
-          MAGENTA "%d" RESET " tests are runned, "
-          GREEN   "%d" RESET " %s passed, "
-          RED     "%d" RESET " %s failed\n\n" RESET,
+          MAGENTA "%d" RESET " tests ran, "
+          GREEN   "%d" RESET " passed, "
+          RED     "%d" RESET " failed\n\n" RESET,
           total,
           count,
           passed,
-          passed > 1 ? "are" : "is",
-          failed,
-          failed > 1 ? "are" : "is");
+          failed);
 
   return failed;
 }
