@@ -844,7 +844,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate X around Y = -Z */
   glm_quatv(q, GLM_PI_2f, GLM_YUP);
-  GLM(quat_rotatev)(q, v1, v1);
+  GLM(quat_unit_rotatev)(q, v1, v1);
 
   ASSERT(test_eq(v1[0],  0.0f))
   ASSERT(test_eq(v1[1],  0.0f))
@@ -852,7 +852,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate -Z around X = Y */
   glm_quatv(q, GLM_PI_2f, GLM_XUP);
-  GLM(quat_rotatev)(q, v1, v1);
+  GLM(quat_unit_rotatev)(q, v1, v1);
 
   ASSERT(test_eq(v1[0],  0.0f))
   ASSERT(test_eq(v1[1],  1.0f))
@@ -860,7 +860,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate Y around Z = -X */
   glm_quatv(q, GLM_PI_2f, GLM_ZUP);
-  GLM(quat_rotatev)(q, v1, v1);
+  GLM(quat_unit_rotatev)(q, v1, v1);
 
   ASSERT(test_eq(v1[0], -1.0f))
   ASSERT(test_eq(v1[1],  0.0f))
@@ -868,7 +868,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate v2 around Y by 90deg */
   glm_quatv(q, GLM_PI_2f, GLM_YUP);
-  GLM(quat_rotatev)(q, v2, v2);
+  GLM(quat_unit_rotatev)(q, v2, v2);
 
   ASSERT(test_eq(v2[0],  1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
@@ -876,7 +876,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate v2 around Y by 90deg */
   glm_quatv(q, GLM_PI_2f, GLM_YUP);
-  GLM(quat_rotatev)(q, v2, v2);
+  GLM(quat_unit_rotatev)(q, v2, v2);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
@@ -884,7 +884,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate v2 around Y by 90deg */
   glm_quatv(q, GLM_PI_2f, GLM_YUP);
-  GLM(quat_rotatev)(q, v2, v2);
+  GLM(quat_unit_rotatev)(q, v2, v2);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1],  1.0f))
@@ -892,7 +892,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate v2 around X by 90deg */
   glm_quatv(q, GLM_PI_2f, GLM_XUP);
-  GLM(quat_rotatev)(q, v2, v2);
+  GLM(quat_unit_rotatev)(q, v2, v2);
 
   ASSERT(test_eq(v2[0], -1.0f))
   ASSERT(test_eq(v2[1], -1.0f))
@@ -900,7 +900,7 @@ TEST_IMPL(GLM_PREFIX, quat_unit_rotatev) {
 
   /* rotate v2 around Z by 90deg */
   glm_quatv(q, GLM_PI_2f, GLM_ZUP);
-  GLM(quat_rotatev)(q, v2, v2);
+  GLM(quat_unit_rotatev)(q, v2, v2);
 
   ASSERT(test_eq(v2[0],  1.0f))
   ASSERT(test_eq(v2[1], -1.0f))

@@ -202,6 +202,12 @@ glmc_quat_forp(vec3 from, vec3 to, vec3 up, versor dest) {
 
 CGLM_EXPORT
 void
+glmc_quat_unit_rotatev(versor q, vec3 v, vec3 dest) {
+  glm_quat_unit_rotatev(q, v, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_quat_rotatev(versor q, vec3 v, vec3 dest) {
   glm_quat_rotatev(q, v, dest);
 }
