@@ -757,16 +757,16 @@ glm_quat_forp(vec3 from, vec3 to, vec3 up, versor dest) {
 CGLM_INLINE
 void
 glm_quat_unit_rotatev(versor q, vec3 v, vec3 dest) {
-  CGLM_ALIGN(8)  vec3   q_v, q_vvxv, t1, t2;
+  CGLM_ALIGN(8)  vec3   q_v, q_vxv, t1, t2;
   float q_w;
 
   glm_quat_imag(q, q_v);
   q_w = glm_quat_real(q);
 
-  glm_vec3_scale(q_v, 2.0f, q_vvxv);
-  glm_vec3_cross(q_vvxv, v, q_vvxv);
-  glm_vec3_scale(q_vvxv, q_w, t1);
-  glm_vec3_cross(q_v, q_vvxv, t2);
+  glm_vec3_scale(q_v, 2.0f, t1);
+  glm_vec3_cross(t1, v, q_vxv);
+  glm_vec3_scale(q_vxv, q_w, t1);
+  glm_vec3_cross(q_v, q_vxv, t2);
   glm_vec3_copy(v, dest);
   glm_vec3_addadd(t1, t2, dest);
 }
