@@ -32,6 +32,7 @@ Functions:
 #. :c:func:`glm_quat`
 #. :c:func:`glm_quatv`
 #. :c:func:`glm_quat_copy`
+#. :c:func:`glm_quat_from_vecs`
 #. :c:func:`glm_quat_norm`
 #. :c:func:`glm_quat_normalize`
 #. :c:func:`glm_quat_normalize_to`
@@ -122,6 +123,20 @@ Functions documentation
     Parameters:
       | *[in]*  **q**     source quaternion
       | *[out]* **dest**  destination quaternion
+
+.. c:function:: void  glm_quat_from_vecs(vec3 a, vec3 b, versor dest)
+
+    | compute unit quaternion needed to rotate a into b
+
+    References:
+      * `Finding quaternion representing the rotation from one vector to another <https://stackoverflow.com/a/11741520/183120>`_
+      * `Quaternion from two vectors <http://lolengine.net/blog/2014/02/24/quaternion-from-two-vectors-final>`_
+      * `Angle between vectors <http://www.euclideanspace.com/maths/algebra/vectors/angleBetween/minorlogic.htm>`_
+
+    Parameters:
+      | *[in]*  **a**     unit vector
+      | *[in]*  **b**     unit vector
+      | *[in]*  **dest**  unit quaternion
 
 .. c:function:: float  glm_quat_norm(versor q)
 
