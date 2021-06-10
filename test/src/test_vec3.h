@@ -1152,8 +1152,6 @@ TEST_IMPL(GLM_PREFIX, vec3_ortho) {
   ASSERT(test_eq(a, GLM_PI_2f))
 
   a = glm_vec3_angle(v4, v8);
-  printf("(%f, %f, %f)\n", v4[0], v4[1], v4[2]);
-  printf("(%f, %f, %f)\n", v8[0], v8[1], v8[2]);
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
   ASSERT(test_eq(a, GLM_PI_2f))
