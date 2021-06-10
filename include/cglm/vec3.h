@@ -808,8 +808,8 @@ CGLM_INLINE
 void
 glm_vec3_ortho(vec3 v, vec3 dest) {
   float ignore;
-  float f = modff(fabsf(v[0]) + 0.5f, &ignore);
-  vec3 result = {-v[1], v[0] - f * v[2], f * v[1]};
+  float f      = modff(fabsf(v[0]) + 0.5f, &ignore);
+  vec3  result = {-v[1], v[0] - f * v[2], f * v[1]};
   glm_vec3_copy(result, dest);
 }
 
