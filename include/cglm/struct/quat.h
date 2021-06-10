@@ -16,6 +16,7 @@
    CGLM_INLINE versors glms_quat_init(float x, float y, float z, float w)
    CGLM_INLINE versors glms_quatv(float angle, vec3s axis)
    CGLM_INLINE versors glms_quat(float angle, float x, float y, float z)
+   CGLM_INLINE versors glms_quat_from_vecs(vec3s a, vec3s b)
    CGLM_INLINE float   glms_quat_norm(versors q)
    CGLM_INLINE versors glms_quat_normalize(versors q)
    CGLM_INLINE float   glms_quat_dot(versors p, versors q)
@@ -148,9 +149,24 @@ glms_quat(float angle, float x, float y, float z) {
 }
 
 /*!
+ * @brief compute quaternion rotating vector A to vector B
+ *
+ * @param[in]   a     vec3 (must have unit length)
+ * @param[in]   b     vec3 (must have unit length)
+ * @returns     quaternion (of unit length)
+ */
+CGLM_INLINE
+versors
+glms_quat_from_vecs(vec3s a, vec3s b) {
+  versors dest;
+  glm_quat_from_vecs(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
  * @brief returns norm (magnitude) of quaternion
  *
- * @param[out]  q  quaternion
+ * @param[in]  q  quaternion
  */
 CGLM_INLINE
 float
