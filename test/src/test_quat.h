@@ -151,6 +151,59 @@ TEST_IMPL(GLM_PREFIX, quat_copy) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, quat_from_vecs) {
+  versor q1, q2, q3, q4, q5, q6, q7;
+  vec3   v1 = {1.f, 0.f, 0.f}, v2 = {1.f, 0.f, 0.f};      // parallel
+  vec3   v3 = {0.f, 1.f, 0.f}, v4 = {1.f, 0.f, 0.f};      // perpendicular
+  vec3   v5 = {0.f, 0.f, 1.f}, v6 = {0.f, 0.f, -1.f};     // straight
+  vec3   v7, v8;                                          // random
+  vec3   v9 = {0.57735026f, 0.57735026f, 0.57735026f},    // acute
+         v10 = {0.70710678f, 0.70710678f, 0.f};
+  vec3   v11 = {0.87287156f, 0.21821789f, 0.43643578f},   // obtuse
+         v12 = {-0.87287156f, 0.21821789f, 0.43643578f};
+  vec3   v13 = {};                                        // zero
+
+  GLM(quat_from_vecs)(v1, v2, q1);
+  ASSERTIFY(test_assert_quat_eq_identity(q1))
+
+  GLM(quat_from_vecs)(v3, v4, q2);
+  GLM(quat_rotatev)(q2, v3, v3);
+  ASSERT(test_eq(GLM(vec3_dot)(v3, v4), 1.f))
+  ASSERT(test_eq(q2[0], 0.f))
+  ASSERT(test_eq(q2[1], 0.f))
+  ASSERT(test_eq(q2[2], -0.707106781187f))
+  ASSERT(test_eq(q2[3], 0.707106781187f))
+
+  GLM(quat_from_vecs)(v5, v6, q3);
+  GLM(quat_rotatev)(q3, v5, v5);
+  ASSERT(test_eq(GLM(vec3_dot)(v5, v6), 1.f))
+  ASSERT(test_eq(q3[0], 0.f))
+  ASSERT(test_eq(q3[1], -1.f))
+  ASSERT(test_eq(q3[2], 0.f))
+  ASSERT(test_eq(q3[3], 0.f))
+
+  test_rand_vec3(v7);
+  test_rand_vec3(v8);
+  GLM(vec3_normalize(v7));
+  GLM(vec3_normalize(v8));
+  GLM(quat_from_vecs)(v7, v8, q4);
+  GLM(quat_rotatev)(q4, v7, v7);
+  ASSERT(test_eq(GLM(vec3_dot)(v7, v8), 1.f))
+
+  GLM(quat_from_vecs)(v9, v10, q5);
+  GLM(quat_rotatev)(q5, v9, v9);
+  ASSERT(test_eq(GLM(vec3_dot)(v9, v10), 1.f))
+
+  GLM(quat_from_vecs)(v11, v12, q6);
+  GLM(quat_rotatev)(q6, v11, v11);
+  ASSERT(test_eq(GLM(vec3_dot)(v11, v12), 1.f))
+
+  GLM(quat_from_vecs)(v13, v1, q7);
+  ASSERTIFY(test_assert_quat_eq_identity(q7))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, quat_norm) {
   versor a = {10.0f, 9.0f, 8.0f, 78.0f};
   float  n1, n2;

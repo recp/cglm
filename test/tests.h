@@ -297,6 +297,7 @@ TEST_DECLARE(glm_quat_rotatev)
 TEST_DECLARE(glm_quat_rotate)
 TEST_DECLARE(glm_quat_rotate_at)
 TEST_DECLARE(glm_quat_rotate_atm)
+TEST_DECLARE(glm_quat_from_vecs)
 
 TEST_DECLARE(glmc_quat_identity)
 TEST_DECLARE(glmc_quat_identity_array)
@@ -334,6 +335,7 @@ TEST_DECLARE(glmc_quat_rotatev)
 TEST_DECLARE(glmc_quat_rotate)
 TEST_DECLARE(glmc_quat_rotate_at)
 TEST_DECLARE(glmc_quat_rotate_atm)
+TEST_DECLARE(glmc_quat_from_vecs)
 
 /* bezier */
 TEST_DECLARE(bezier)
@@ -1025,6 +1027,7 @@ TEST_LIST {
   TEST_ENTRY(glm_quat_rotate)
   TEST_ENTRY(glm_quat_rotate_at)
   TEST_ENTRY(glm_quat_rotate_atm)
+  TEST_ENTRY(glm_quat_from_vecs)
 
   TEST_ENTRY(glmc_quat_identity)
   TEST_ENTRY(glmc_quat_identity_array)
@@ -1062,6 +1065,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_quat_rotate)
   TEST_ENTRY(glmc_quat_rotate_at)
   TEST_ENTRY(glmc_quat_rotate_atm)
+  TEST_ENTRY(glmc_quat_from_vecs)
 
   /* bezier */
   TEST_ENTRY(bezier)

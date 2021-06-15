@@ -38,6 +38,10 @@ void
 glmc_quat_copy(versor q, versor dest);
 
 CGLM_EXPORT
+void
+glmc_quat_from_vecs(vec3 a, vec3 b, versor dest);
+
+CGLM_EXPORT
 float
 glmc_quat_norm(versor q);
 
