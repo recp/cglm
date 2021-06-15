@@ -197,22 +197,23 @@ glm_quat_copy(versor q, versor dest) {
 CGLM_INLINE
 void
 glm_quat_from_vecs(vec3 a, vec3 b, versor dest) {
-  float cos_theta = glm_vec3_dot(a, b);
-  if (cos_theta >= 1.f - GLM_FLT_EPSILON) {  // a ∥ b
+  CGLM_ALIGN(8) vec3 axis;
+  float cos_theta;
+  float cos_half_theta;
+
+  cos_theta = glm_vec3_dot(a, b);
+  if (cos_theta >= 1.f - GLM_FLT_EPSILON) {  /*  a ∥ b  */
     glm_quat_identity(dest);
     return;
   }
-  CGLM_ALIGN(8) vec3 axis;
-  float cos_half_theta;
-  if (cos_theta < -1.f + GLM_FLT_EPSILON) {  // angle(a, b) = 180°
+  if (cos_theta < -1.f + GLM_FLT_EPSILON) {  /*  angle(a, b) = π  */
     glm_vec3_ortho(a, axis);
-    cos_half_theta = 0.f;
-  }
-  else {
+    cos_half_theta = 0.f;                    /*  cos π/2 */
+  } else {
     glm_vec3_cross(a, b, axis);
-    const float cos_zero = 1.0f;
-    cos_half_theta = cos_zero + cos_theta;
+    cos_half_theta = 1.0f + cos_theta;       /*  cos 0 + cos θ  */
   }
+
   glm_quat_init(dest, axis[0], axis[1], axis[2], cos_half_theta);
   glm_quat_normalize(dest);
 }
