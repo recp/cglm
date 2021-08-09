@@ -140,7 +140,7 @@ Functions documentation
     | set up perspective projection matrix
 
     Parameters:
-      | *[in]*  **fovy**    field of view angle
+      | *[in]*  **fovy**    field of view angle (in radians)
       | *[in]*  **aspect**  aspect ratio ( width / height )
       | *[in]*  **nearVal** near clipping plane
       | *[in]*  **farVal**  far clipping planes
