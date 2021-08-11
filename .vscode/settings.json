@@ -1,4 +1,5 @@
 {
   "C_Cpp.default.configurationProvider": "vector-of-bool.cmake-tools",
-  "restructuredtext.confPath": "${workspaceFolder}/docs/source"
+  "restructuredtext.confPath": "${workspaceFolder}/docs/source",
+  "files.autoSave": "onWindowChange"
 }

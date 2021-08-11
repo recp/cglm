@@ -1,5 +1,5 @@
-# -*- coding: utf-8 -*-
-#
+## -*- coding: utf-8 -*-
+
 # cglm documentation build configuration file, created by
 # sphinx-quickstart on Tue Jun  6 20:31:05 2017.
 #
