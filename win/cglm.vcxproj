@@ -105,6 +105,8 @@
     <ClInclude Include="..\include\cglm\clipspace\persp_lh_zo.h" />
     <ClInclude Include="..\include\cglm\clipspace\persp_rh_no.h" />
     <ClInclude Include="..\include\cglm\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="..\include\cglm\clipspace\project_no.h" />
+    <ClInclude Include="..\include\cglm\clipspace\project_zo.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh_no.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh_zo.h" />
