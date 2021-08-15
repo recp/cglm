@@ -13,6 +13,17 @@
 #include "vec4.h"
 #include "mat4.h"
 
+#ifndef CGLM_CLIPSPACE_INCLUDE_ALL
+#  if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+#    include "clipspace/project_zo.h"
+#  elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+#    include "clipspace/project_no.h"
+#  endif
+#else
+#  include "clipspace/project_zo.h"
+#  include "clipspace/project_no.h"
+#endif
+
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
  *        the matrix should contain projection matrix.
@@ -42,16 +53,11 @@
 CGLM_INLINE
 void
 glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
-  vec4 v;
-
-  v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
-  v[1] = 2.0f * (pos[1] - vp[1]) / vp[3] - 1.0f;
-  v[2] = 2.0f *  pos[2]                  - 1.0f;
-  v[3] = 1.0f;
-
-  glm_mat4_mulv(invMat, v, v);
-  glm_vec4_scale(v, 1.0f / v[3], v);
-  glm_vec3(v, dest);
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+  glm_unprojecti_zo(pos, invMat, vp, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+  glm_unprojecti_no(pos, invMat, vp, dest);
+#endif
 }
 
 /*!
