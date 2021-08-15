@@ -153,15 +153,15 @@ TEST_IMPL(GLM_PREFIX, quat_copy) {
 
 TEST_IMPL(GLM_PREFIX, quat_from_vecs) {
   versor q1, q2, q3, q4, q5, q6, q7;
-  vec3   v1 = {1.f, 0.f, 0.f}, v2 = {1.f, 0.f, 0.f};      // parallel
-  vec3   v3 = {0.f, 1.f, 0.f}, v4 = {1.f, 0.f, 0.f};      // perpendicular
-  vec3   v5 = {0.f, 0.f, 1.f}, v6 = {0.f, 0.f, -1.f};     // straight
-  vec3   v7, v8;                                          // random
-  vec3   v9 = {0.57735026f, 0.57735026f, 0.57735026f},    // acute
+  vec3   v1 = {1.f, 0.f, 0.f}, v2 = {1.f, 0.f, 0.f};      /* parallel       */
+  vec3   v3 = {0.f, 1.f, 0.f}, v4 = {1.f, 0.f, 0.f};      /* perpendicular  */
+  vec3   v5 = {0.f, 0.f, 1.f}, v6 = {0.f, 0.f, -1.f};     /* straight       */
+  vec3   v7, v8;                                          /* random         */
+  vec3   v9 = {0.57735026f, 0.57735026f, 0.57735026f},    /* acute          */
          v10 = {0.70710678f, 0.70710678f, 0.f};
-  vec3   v11 = {0.87287156f, 0.21821789f, 0.43643578f},   // obtuse
+  vec3   v11 = {0.87287156f, 0.21821789f, 0.43643578f},   /* obtuse         */
          v12 = {-0.87287156f, 0.21821789f, 0.43643578f};
-  vec3   v13 = {};                                        // zero
+  vec3   v13 = GLM_VEC3_ZERO_INIT;                        /* zero           */
 
   GLM(quat_from_vecs)(v1, v2, q1);
   ASSERTIFY(test_assert_quat_eq_identity(q1))
