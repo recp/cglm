@@ -101,4 +101,20 @@ glms_project(vec3s pos, mat4s m, vec4s vp) {
   return r;
 }
 
+/*!
+ * @brief define a picking region
+ *
+ * @param[in]  center   center [x, y] of a picking region in window coordinates
+ * @param[in]  size     size [width, height] of the picking region in window coordinates
+ * @param[in]  vp       viewport as [x, y, width, height]
+ * @returns projected coordinates
+ */
+CGLM_INLINE
+mat4s
+glms_pickmatrix(vec3s center, vec2s size, vec4s vp) {
+  mat4s res;
+  glm_pickmatrix(center.raw, size.raw, vp.raw, res.raw);
+  return res;
+}
+
 #endif /* cglms_projects_h */

@@ -114,4 +114,37 @@ glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
 #endif
 }
 
+/*!
+ * @brief define a picking region
+ *
+ * @param[in]  center   center [x, y] of a picking region in window coordinates
+ * @param[in]  size     size [width, height] of the picking region in window coordinates
+ * @param[in]  vp       viewport as [x, y, width, height]
+ * @param[out] dest     projected coordinates
+ */
+CGLM_INLINE
+void
+glm_pickmatrix(vec3 center, vec2 size, vec4 vp, mat4 dest) {
+  mat4 res;
+  vec3 v;
+
+  if (size[0] <= 0.0f || size[1] <= 0.0f)
+    return;
+  
+  /* Translate and scale the picked region to the entire window */
+  v[0] = (vp[2] - 2.0f * (center[0] - vp[0])) / size[0];
+  v[1] = (vp[3] - 2.0f * (center[1] - vp[1])) / size[1];
+  v[2] = 0.0f;
+
+  glm_translate_make(res, v);
+  
+  v[0] = vp[2] / size[0];
+  v[1] = vp[3] / size[1];
+  v[2] = 1.0f;
+
+  glm_scale(res, v);
+
+  glm_mat4_copy(res, dest);
+}
+
 #endif /* cglm_project_h */

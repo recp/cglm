@@ -25,3 +25,9 @@ void
 glmc_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   glm_project(pos, m, vp, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest) {
+  glm_pickmatrix(center, size, vp, dest);
+}
