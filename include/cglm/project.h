@@ -107,18 +107,11 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
 CGLM_INLINE
 void
 glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
-  CGLM_ALIGN(16) vec4 pos4, vone = GLM_VEC4_ONE_INIT;
-
-  glm_vec4(pos, 1.0f, pos4);
-
-  glm_mat4_mulv(m, pos4, pos4);
-  glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
-  glm_vec4_add(pos4, vone, pos4);
-  glm_vec4_scale(pos4, 0.5f, pos4);
-
-  dest[0] = pos4[0] * vp[2] + vp[0];
-  dest[1] = pos4[1] * vp[3] + vp[1];
-  dest[2] = pos4[2];
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+  glm_project_zo(pos, m, vp, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+  glm_project_no(pos, m, vp, dest);
+#endif
 }
 
 #endif /* cglm_project_h */
