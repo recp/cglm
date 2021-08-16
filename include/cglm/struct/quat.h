@@ -426,7 +426,7 @@ glms_quat_lerpc(versors from, versors to, float t) {
  * @param[in]   from  from
  * @param[in]   to    to
  * @param[in]   t     interpolant (amount)
- * @param[out]  dest  result quaternion
+ * @returns result quaternion
  */
 CGLM_INLINE
 versors

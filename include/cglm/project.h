@@ -107,18 +107,44 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
 CGLM_INLINE
 void
 glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
-  CGLM_ALIGN(16) vec4 pos4, vone = GLM_VEC4_ONE_INIT;
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+  glm_project_zo(pos, m, vp, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+  glm_project_no(pos, m, vp, dest);
+#endif
+}
 
-  glm_vec4(pos, 1.0f, pos4);
+/*!
+ * @brief define a picking region
+ *
+ * @param[in]  center   center [x, y] of a picking region in window coordinates
+ * @param[in]  size     size [width, height] of the picking region in window coordinates
+ * @param[in]  vp       viewport as [x, y, width, height]
+ * @param[out] dest     projected coordinates
+ */
+CGLM_INLINE
+void
+glm_pickmatrix(vec3 center, vec2 size, vec4 vp, mat4 dest) {
+  mat4 res;
+  vec3 v;
 
-  glm_mat4_mulv(m, pos4, pos4);
-  glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
-  glm_vec4_add(pos4, vone, pos4);
-  glm_vec4_scale(pos4, 0.5f, pos4);
+  if (size[0] <= 0.0f || size[1] <= 0.0f)
+    return;
+  
+  /* Translate and scale the picked region to the entire window */
+  v[0] = (vp[2] - 2.0f * (center[0] - vp[0])) / size[0];
+  v[1] = (vp[3] - 2.0f * (center[1] - vp[1])) / size[1];
+  v[2] = 0.0f;
 
-  dest[0] = pos4[0] * vp[2] + vp[0];
-  dest[1] = pos4[1] * vp[3] + vp[1];
-  dest[2] = pos4[2];
+  glm_translate_make(res, v);
+  
+  v[0] = vp[2] / size[0];
+  v[1] = vp[3] / size[1];
+  v[2] = 1.0f;
+
+  glm_scale(res, v);
+
+  glm_mat4_copy(res, dest);
 }
 
 #endif /* cglm_project_h */

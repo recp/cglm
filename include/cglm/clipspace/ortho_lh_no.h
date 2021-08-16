@@ -30,6 +30,7 @@
 
 #include "../common.h"
 #include "../plane.h"
+#include "../mat4.h"
 
 /*!
  * @brief set up orthographic projection matrix
