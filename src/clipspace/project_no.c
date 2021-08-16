@@ -6,6 +6,7 @@
  */
 
 #include "../../include/cglm/clipspace/project_no.h"
+#include "../../include/cglm/call/clipspace/project_no.h"
 
 CGLM_EXPORT
 void
