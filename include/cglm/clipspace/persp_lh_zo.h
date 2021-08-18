@@ -47,7 +47,6 @@
 #define cglm_persp_lh_zo_h
 
 #include "../common.h"
-#include "../plane.h"
 #include "persp.h"
 
 /*!

@@ -84,7 +84,9 @@ cglm_clipspace_HEADERS = include/cglm/clipspace/persp.h \
                          include/cglm/clipspace/view_lh_zo.h \
                          include/cglm/clipspace/view_rh_zo.h \
                          include/cglm/clipspace/view_lh_no.h \
-                         include/cglm/clipspace/view_rh_no.h
+                         include/cglm/clipspace/view_rh_no.h \
+                         include/cglm/clipspace/project_zo.h \
+                         include/cglm/clipspace/project_no.h
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
@@ -108,6 +110,22 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/bezier.h \
                     include/cglm/call/ray.h \
                     include/cglm/call/affine2d.h
+
+cglm_call_clipspacedir=$(includedir)/cglm/call/clipspace
+cglm_call_clipspace_HEADERS = include/cglm/call/clipspace/persp_lh_zo.h \
+                              include/cglm/call/clipspace/persp_rh_zo.h \
+                              include/cglm/call/clipspace/persp_lh_no.h \
+                              include/cglm/call/clipspace/persp_rh_no.h \
+                              include/cglm/call/clipspace/ortho_lh_zo.h \
+                              include/cglm/call/clipspace/ortho_rh_zo.h \
+                              include/cglm/call/clipspace/ortho_lh_no.h \
+                              include/cglm/call/clipspace/ortho_rh_no.h \
+                              include/cglm/call/clipspace/view_lh_zo.h \
+                              include/cglm/call/clipspace/view_rh_zo.h \
+                              include/cglm/call/clipspace/view_lh_no.h \
+                              include/cglm/call/clipspace/view_rh_no.h \
+                              include/cglm/call/clipspace/project_no.h \
+                              include/cglm/call/clipspace/project_zo.h
 
 cglm_simddir=$(includedir)/cglm/simd
 cglm_simd_HEADERS = include/cglm/simd/intrin.h \
@@ -202,8 +220,10 @@ libcglm_la_SOURCES=\
     src/clipspace/view_lh_no.c \
     src/clipspace/view_lh_zo.c \
     src/clipspace/view_rh_no.c \
-    src/clipspace/view_rh_zo.c
-
+    src/clipspace/view_rh_zo.c \
+    src/clipspace/project_no.c \
+    src/clipspace/project_zo.c
+    
 test_tests_SOURCES=\
     test/runner.c \
     test/src/test_common.c \

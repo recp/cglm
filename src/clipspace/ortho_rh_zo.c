@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#include "../../include/cglm/cglm.h"
 #include "../../include/cglm/clipspace/ortho_rh_zo.h"
+#include "../../include/cglm/call/clipspace/ortho_rh_zo.h"
 
 CGLM_EXPORT
 void

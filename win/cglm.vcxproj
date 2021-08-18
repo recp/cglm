@@ -32,6 +32,8 @@
     <ClCompile Include="..\src\clipspace\persp_lh_zo.c" />
     <ClCompile Include="..\src\clipspace\persp_rh_no.c" />
     <ClCompile Include="..\src\clipspace\persp_rh_zo.c" />
+    <ClCompile Include="..\src\clipspace\project_no.c" />
+    <ClCompile Include="..\src\clipspace\project_zo.c" />
     <ClCompile Include="..\src\clipspace\view_lh_no.c" />
     <ClCompile Include="..\src\clipspace\view_lh_zo.c" />
     <ClCompile Include="..\src\clipspace\view_rh_no.c" />
@@ -74,6 +76,8 @@
     <ClInclude Include="..\include\cglm\call\clipspace\persp_lh_zo.h" />
     <ClInclude Include="..\include\cglm\call\clipspace\persp_rh_no.h" />
     <ClInclude Include="..\include\cglm\call\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="..\include\cglm\call\clipspace\project_no.h" />
+    <ClInclude Include="..\include\cglm\call\clipspace\project_zo.h" />
     <ClInclude Include="..\include\cglm\call\clipspace\view_lh_no.h" />
     <ClInclude Include="..\include\cglm\call\clipspace\view_lh_zo.h" />
     <ClInclude Include="..\include\cglm\call\clipspace\view_rh_no.h" />
@@ -105,6 +109,8 @@
     <ClInclude Include="..\include\cglm\clipspace\persp_lh_zo.h" />
     <ClInclude Include="..\include\cglm\clipspace\persp_rh_no.h" />
     <ClInclude Include="..\include\cglm\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="..\include\cglm\clipspace\project_no.h" />
+    <ClInclude Include="..\include\cglm\clipspace\project_zo.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh_no.h" />
     <ClInclude Include="..\include\cglm\clipspace\view_lh_zo.h" />

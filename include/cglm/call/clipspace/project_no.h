@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglmc_view_rh_zo_h
-#define cglmc_view_rh_zo_h
+#ifndef cglmc_project_no_h
+#define cglmc_project_no_h
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -15,17 +15,13 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_lookat_rh_zo(vec3 eye, vec3 center, vec3 up, mat4 dest);
+glmc_unprojecti_no(vec3 pos, mat4 invMat, vec4 vp, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_look_rh_zo(vec3 eye, vec3 dir, vec3 up, mat4 dest);
-
-CGLM_EXPORT
-void
-glmc_look_anyup_rh_zo(vec3 eye, vec3 dir, mat4 dest);
+glmc_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest);
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* cglmc_view_rh_zo_h */
+#endif /* cglmc_project_no_h */

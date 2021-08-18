@@ -15,6 +15,7 @@
 #ifndef cglm_view_lh_no_h
 #define cglm_view_lh_no_h
 
+#include "../common.h"
 #include "view_lh.h"
 
 /*!

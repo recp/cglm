@@ -142,6 +142,12 @@
     <ClCompile Include="..\src\clipspace\view_rh_zo.c">
       <Filter>src\clipspace</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\clipspace\project_no.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\clipspace\project_zo.c">
+      <Filter>src\clipspace</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -539,6 +545,18 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\clipspace\view_rh_zo.h">
       <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\project_no.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\clipspace\project_zo.h">
+      <Filter>include\cglm\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\project_no.h">
+      <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\clipspace\project_zo.h">
+      <Filter>include\cglm\call\clipspace</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

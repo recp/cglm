@@ -6,6 +6,7 @@
  */
 
 #include "../../include/cglm/clipspace/persp_lh_no.h"
+#include "../../include/cglm/call/clipspace/persp_lh_no.h"
 
 CGLM_EXPORT
 void
