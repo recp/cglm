@@ -44,7 +44,7 @@
 
 #ifndef CGLM_USE_DEFAULT_EPSILON
 #  ifndef GLM_FLT_EPSILON
-#    define GLM_FLT_EPSILON 1e-6
+#    define GLM_FLT_EPSILON 1e-5
 #  endif
 #else
 #  define GLM_FLT_EPSILON FLT_EPSILON
