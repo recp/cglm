@@ -97,6 +97,12 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
                               VERSION ${PROJECT_VERSION} 
                             SOVERSION ${PROJECT_VERSION_MAJOR})
 
+if(WIN32)
+  # Because SOVERSION has no effect to file naming on Windows
+  set_target_properties(${PROJECT_NAME} PROPERTIES
+    RUNTIME_OUTPUT_NAME ${PROJECT_NAME}-${PROJECT_VERSION_MAJOR})
+endif()
+
 target_include_directories(${PROJECT_NAME}
     PUBLIC 
         $<INSTALL_INTERFACE:include>    
@@ -122,7 +128,7 @@ install(TARGETS ${PROJECT_NAME}
         EXPORT  ${PROJECT_NAME}
         LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
+        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY include/${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
         PATTERN ".*" EXCLUDE)
