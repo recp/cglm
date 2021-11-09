@@ -218,8 +218,8 @@ void
 glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest) {
   float tr, ti;
   float const ibnorm2 = 1.0f / (b[0] * b[0] + b[1] * b[1]);
-  tr = ibnorm * (a[0] * b[0] + a[1] * b[1])
-  ti = ibnorm * (a[1] * b[0] - a[0] * b[1])
+  tr = ibnorm2 * (a[0] * b[0] + a[1] * b[1]);
+  ti = ibnorm2 * (a[1] * b[0] - a[0] * b[1]);
   dest[0] = tr;
   dest[1] = ti;
 }
@@ -233,7 +233,7 @@ glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest) {
 CGLM_INLINE
 void
 glm_vec2_complex_conjugate(vec2 a, vec2 dest) {
-  dest[0] =  a[0]
+  dest[0] =  a[0];
   dest[1] = -a[1];
 }
 
