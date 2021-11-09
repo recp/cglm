@@ -195,4 +195,45 @@ glms_vec2_sqrt(vec2s v) {
   return r;
 }
 
+/*!
+ * @brief treat vectors as complex numbers and multiply them as such.
+ *
+ * @param[in]  a    left number
+ * @param[in]  b    right number
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_complex_mul(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_complex_mul(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief treat vectors as complex numbers and divide them as such.
+ *
+ * @param[in]  a    left number (numerator)
+ * @param[in]  b    right number (denominator)
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_complex_div(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_complex_div(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief treat the vector as a complex number and conjugate it as such.
+ *
+ * @param[in]  a    the number
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_complex_conjugate(vec2s a, vec2s dest) {
+  glm_vec2_complex_conjugate(a.raw, dest.raw);
+  return dest;
+}
+
 #endif /* cglms_vec2s_ext_h */
