@@ -382,6 +382,8 @@ TEST_DECLARE(glm_vec2_maxv)
 TEST_DECLARE(glm_vec2_minv)
 TEST_DECLARE(glm_vec2_clamp)
 TEST_DECLARE(glm_vec2_lerp)
+TEST_DECLARE(glm_vec2_complex_mul)
+TEST_DECLARE(glm_vec2_complex_div)
 
 
 TEST_DECLARE(glmc_vec2)
@@ -418,6 +420,8 @@ TEST_DECLARE(glmc_vec2_maxv)
 TEST_DECLARE(glmc_vec2_minv)
 TEST_DECLARE(glmc_vec2_clamp)
 TEST_DECLARE(glmc_vec2_lerp)
+TEST_DECLARE(glmc_vec2_complex_mul)
+TEST_DECLARE(glmc_vec2_complex_div)
 
 /* vec3 */
 TEST_DECLARE(MACRO_GLM_VEC3_ONE_INIT)
@@ -1112,6 +1116,8 @@ TEST_LIST {
   TEST_ENTRY(glm_vec2_minv)
   TEST_ENTRY(glm_vec2_clamp)
   TEST_ENTRY(glm_vec2_lerp)
+  TEST_ENTRY(glm_vec2_complex_mul)
+  TEST_ENTRY(glm_vec2_complex_div)
 
   TEST_ENTRY(glmc_vec2)
   TEST_ENTRY(glmc_vec2_copy)
@@ -1147,6 +1153,8 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec2_minv)
   TEST_ENTRY(glmc_vec2_clamp)
   TEST_ENTRY(glmc_vec2_lerp)
+  TEST_ENTRY(glmc_vec2_complex_mul)
+  TEST_ENTRY(glmc_vec2_complex_div)
 
   /* vec3 */
   /* Macros */
