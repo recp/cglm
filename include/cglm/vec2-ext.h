@@ -20,6 +20,9 @@
    CGLM_INLINE bool  glm_vec2_isvalid(vec2 v);
    CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_complex_conjugate(vec2 a, vec2 dest)
  */
 
 #ifndef cglm_vec2_ext_h
@@ -185,5 +188,54 @@ glm_vec2_sqrt(vec2 v, vec2 dest) {
   dest[0] = sqrtf(v[0]);
   dest[1] = sqrtf(v[1]);
 }
+
+/*!
+ * @brief treat vectors as complex numbers and multiply them as such.
+ *
+ * @param[in]  a    left number
+ * @param[in]  b    right number
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+void
+glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest) {
+  float tr, ti;
+  tr = a[0] * b[0] - a[1] * b[1];
+  ti = a[0] * b[1] + a[1] * b[0];
+  dest[0] = tr;
+  dest[1] = ti;
+}
+
+/*!
+ * @brief treat vectors as complex numbers and divide them as such.
+ *
+ * @param[in]  a    left number (numerator)
+ * @param[in]  b    right number (denominator)
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+void
+glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest) {
+  float tr, ti;
+  float const ibnorm2 = 1.0f / (b[0] * b[0] + b[1] * b[1]);
+  tr = ibnorm2 * (a[0] * b[0] + a[1] * b[1]);
+  ti = ibnorm2 * (a[1] * b[0] - a[0] * b[1]);
+  dest[0] = tr;
+  dest[1] = ti;
+}
+
+/*!
+ * @brief treat the vector as a complex number and conjugate it as such.
+ *
+ * @param[in]  a    the number
+ * @param[out] dest destination number
+ */
+CGLM_INLINE
+void
+glm_vec2_complex_conjugate(vec2 a, vec2 dest) {
+  dest[0] =  a[0];
+  dest[1] = -a[1];
+}
+
 
 #endif /* cglm_vec2_ext_h */
