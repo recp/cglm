@@ -47,6 +47,21 @@ typedef union vec2s {
     float x;
     float y;
   };
+  
+  struct {
+    float r;
+    float i;
+  };
+  
+  struct {
+    float u;
+    float v;
+  };
+  
+  struct {
+    float s;
+    float t;
+  };
 #endif
 } vec2s;
 
@@ -58,6 +73,12 @@ typedef union vec3s {
     float y;
     float z;
   };
+  
+  struct {
+    float r;
+    float g;
+    float b;
+  };
 #endif
 } vec3s;
 
@@ -67,6 +88,21 @@ typedef union ivec2s {
   struct {
     int x;
     int y;
+  };
+  
+  struct {
+    int r;
+    int i;
+  };
+  
+  struct {
+    int u;
+    int v;
+  };
+  
+  struct {
+    int s;
+    int t;
   };
 #endif
 } ivec2s;
@@ -78,6 +114,12 @@ typedef union ivec3s {
     int x;
     int y;
     int z;
+  };
+  
+  struct {
+    int r;
+    int g;
+    int b;
   };
 #endif
 } ivec3s;
@@ -91,6 +133,13 @@ typedef union ivec4s {
     int z;
     int w;
   };
+  
+  struct {
+    int r;
+    int g;
+    int b;
+    int a;
+  };
 #endif
 } ivec4s;
 
@@ -102,6 +151,13 @@ typedef union CGLM_ALIGN_IF(16) vec4s {
     float y;
     float z;
     float w;
+  };
+  
+  struct {
+    float r;
+    float g;
+    float b;
+    float a;
   };
 #endif
 } vec4s;
