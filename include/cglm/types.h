@@ -42,9 +42,12 @@
 #define CGLM_CASTPTR_ASSUME_ALIGNED(expr, type) \
   ((type*)CGLM_ASSUME_ALIGNED((expr), __alignof__(type)))
 
+typedef int                    ivec2[2];
+typedef int                    ivec3[3];
+typedef int                    ivec4[4];
+
 typedef float                   vec2[2];
 typedef float                   vec3[3];
-typedef int                    ivec3[3];
 typedef CGLM_ALIGN_IF(16) float vec4[4];
 typedef vec4                    versor;     /* |x, y, z, w| -> w is the last */
 typedef vec3                    mat3[3];
