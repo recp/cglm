@@ -61,6 +61,16 @@ typedef union vec3s {
 #endif
 } vec3s;
 
+typedef union ivec2s {
+  ivec2 raw;
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    int x;
+    int y;
+  };
+#endif
+} ivec2s;
+
 typedef union ivec3s {
   ivec3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
@@ -71,6 +81,18 @@ typedef union ivec3s {
   };
 #endif
 } ivec3s;
+
+typedef union ivec4s {
+  ivec4 raw;
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    int x;
+    int y;
+    int z;
+    int w;
+  };
+#endif
+} ivec4s;
 
 typedef union CGLM_ALIGN_IF(16) vec4s {
   vec4 raw;
