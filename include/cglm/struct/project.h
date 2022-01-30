@@ -111,7 +111,7 @@ glms_project(vec3s pos, mat4s m, vec4s vp) {
  */
 CGLM_INLINE
 mat4s
-glms_pickmatrix(vec3s center, vec2s size, vec4s vp) {
+glms_pickmatrix(vec2s center, vec2s size, vec4s vp) {
   mat4s res;
   glm_pickmatrix(center.raw, size.raw, vp.raw, res.raw);
   return res;
