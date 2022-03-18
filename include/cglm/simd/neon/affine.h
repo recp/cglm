@@ -86,13 +86,12 @@ CGLM_INLINE
 void
 glm_inv_tr_neon(mat4 mat) {
   float32x4x4_t vmat;
-  glmm_128      r0, r1, r2, r3, x0;
+  glmm_128      r0, r1, r2, x0;
 
   vmat = vld4q_f32(mat[0]);
   r0   = vmat.val[0];
   r1   = vmat.val[1];
   r2   = vmat.val[2];
-  r3   = vmat.val[3];
 
   x0 = glmm_fmadd(r0, glmm_splat_w(r0),
                   glmm_fmadd(r1, glmm_splat_w(r1),
