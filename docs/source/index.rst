@@ -6,13 +6,14 @@
 cglm Documentation
 ================================
 
-**cglm** is optimized 3D math library written in C99 (compatible with C89).
-It is similar to original **glm** library except this is mainly for **C**
+**cglm** is an optimized 3D math library written in C99 (compatible with C89).
+It is similar to the original **glm** library, except **cglm** is mainly for
+**C**.
 
-This library stores matrices as column-major order but in the future row-major
-is considered to be supported as optional.
+**cglm** stores matrices as column-major order but in the future row-major is
+considered to be supported as optional.
 
-Also currently only **float** type is supported for most operations.
+Currently only **float** type is supported for most operations.
 
 .. toctree::
    :maxdepth: 2
@@ -46,8 +47,8 @@ Also currently only **float** type is supported for most operations.
 
    troubleshooting
 
-Indices and tables
-==================
+Indices and Tables:
+===================
 
 * :ref:`genindex`
 * :ref:`modindex`
