@@ -34,15 +34,15 @@ Follow the :doc:`build` documentation for this
    box
    quat
    euler
-   mat4
-   mat3
    mat2
+   mat3
+   mat4
+   vec2
+   vec2-ext
    vec3
    vec3-ext
    vec4
    vec4-ext
-   vec2
-   vec2-ext
    color
    plane
    project
