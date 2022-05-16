@@ -340,9 +340,7 @@ TEST_DECLARE(glmc_quat_from_vecs)
 /* bezier */
 TEST_DECLARE(bezier)
 
-
-/* Macros */
-
+/* vec2 */
 TEST_DECLARE(MACRO_GLM_VEC2_ONE_INIT)
 TEST_DECLARE(MACRO_GLM_VEC2_ZERO_INIT)
 TEST_DECLARE(MACRO_GLM_VEC2_ONE)
@@ -384,7 +382,6 @@ TEST_DECLARE(glm_vec2_clamp)
 TEST_DECLARE(glm_vec2_lerp)
 TEST_DECLARE(glm_vec2_complex_mul)
 TEST_DECLARE(glm_vec2_complex_div)
-
 
 TEST_DECLARE(glmc_vec2)
 TEST_DECLARE(glmc_vec2_copy)
@@ -588,7 +585,6 @@ TEST_DECLARE(glmc_vec3_hadd)
 TEST_DECLARE(glmc_vec3_sqrt)
 
 /* vec4 */
-
 TEST_DECLARE(MACRO_GLM_VEC4_ONE_INIT)
 TEST_DECLARE(MACRO_GLM_VEC4_ZERO_INIT)
 TEST_DECLARE(MACRO_GLM_VEC4_ONE)
@@ -735,7 +731,6 @@ TEST_DECLARE(glmc_vec4_hadd)
 TEST_DECLARE(glmc_vec4_sqrt)
 
 /* structs */
-
 TEST_DECLARE(mat3s_identity_init)
 TEST_DECLARE(mat3s_zero_init)
 TEST_DECLARE(mat4s_identity_init)
@@ -1075,8 +1070,6 @@ TEST_LIST {
   TEST_ENTRY(bezier)
 
   /* vec2 */
-  /* Macros */
-
   TEST_ENTRY(MACRO_GLM_VEC2_ONE_INIT)
   TEST_ENTRY(MACRO_GLM_VEC2_ZERO_INIT)
   TEST_ENTRY(MACRO_GLM_VEC2_ONE)
@@ -1157,8 +1150,6 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec2_complex_div)
 
   /* vec3 */
-  /* Macros */
-
   TEST_ENTRY(MACRO_GLM_VEC3_ONE_INIT)
   TEST_ENTRY(MACRO_GLM_VEC3_ZERO_INIT)
   TEST_ENTRY(MACRO_GLM_VEC3_ONE)
@@ -1322,8 +1313,6 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec3_sqrt)
 
   /* vec4 */
-  /* Macros */
-
   TEST_ENTRY(MACRO_GLM_VEC4_ONE_INIT)
   TEST_ENTRY(MACRO_GLM_VEC4_ZERO_INIT)
   TEST_ENTRY(MACRO_GLM_VEC4_ONE)
