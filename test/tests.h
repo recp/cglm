@@ -730,6 +730,11 @@ TEST_DECLARE(glmc_vec4_fract)
 TEST_DECLARE(glmc_vec4_hadd)
 TEST_DECLARE(glmc_vec4_sqrt)
 
+/* ivec2 */
+TEST_DECLARE(glm_ivec2)
+
+TEST_DECLARE(glmc_ivec2)
+
 /* structs */
 TEST_DECLARE(mat3s_identity_init)
 TEST_DECLARE(mat3s_zero_init)
@@ -1457,6 +1462,11 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec4_fract)
   TEST_ENTRY(glmc_vec4_hadd)
   TEST_ENTRY(glmc_vec4_sqrt)
+
+  /* ivec2 */
+  TEST_ENTRY(glm_ivec2)
+
+  TEST_ENTRY(glmc_ivec2)
 
   /* structs */
   TEST_ENTRY(mat3s_identity_init)

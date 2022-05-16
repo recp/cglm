@@ -15,6 +15,7 @@ extern "C" {
 #include "call/vec2.h"
 #include "call/vec3.h"
 #include "call/vec4.h"
+#include "call/ivec2.h"
 #include "call/mat2.h"
 #include "call/mat3.h"
 #include "call/mat4.h"
