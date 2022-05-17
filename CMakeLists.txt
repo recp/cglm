@@ -64,6 +64,8 @@ add_library(${PROJECT_NAME}
   src/vec3.c
   src/vec4.c
   src/ivec2.c
+  src/ivec3.c
+  src/ivec4.c
   src/mat2.c
   src/mat3.c
   src/mat4.c

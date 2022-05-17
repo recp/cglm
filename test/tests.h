@@ -735,6 +735,16 @@ TEST_DECLARE(glm_ivec2)
 
 TEST_DECLARE(glmc_ivec2)
 
+/* ivec3 */
+TEST_DECLARE(glm_ivec3)
+
+TEST_DECLARE(glmc_ivec3)
+
+/* ivec4 */
+TEST_DECLARE(glm_ivec4)
+
+TEST_DECLARE(glmc_ivec4)
+
 /* structs */
 TEST_DECLARE(mat3s_identity_init)
 TEST_DECLARE(mat3s_zero_init)
@@ -1467,6 +1477,16 @@ TEST_LIST {
   TEST_ENTRY(glm_ivec2)
 
   TEST_ENTRY(glmc_ivec2)
+
+  /* ivec3 */
+  TEST_ENTRY(glm_ivec3)
+
+  TEST_ENTRY(glmc_ivec3)
+
+  /* ivec4 */
+  TEST_ENTRY(glm_ivec4)
+
+  TEST_ENTRY(glmc_ivec4)
 
   /* structs */
   TEST_ENTRY(mat3s_identity_init)
