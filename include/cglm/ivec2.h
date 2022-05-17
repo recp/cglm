@@ -80,8 +80,8 @@ glm_ivec2_one(ivec2 v) {
 /*!
  * @brief add vector [a] to vector [b] and store result in [dest]
  *
- * @param[in] a first vector
- * @param[in] b second vector
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
  * @param[out] dest destination vector
  */
 CGLM_INLINE
