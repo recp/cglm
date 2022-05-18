@@ -9,7 +9,7 @@
 FUNCTIONS:
   CGLM_INLINE void glm_ivec2(int * __restrict v, ivec2 dest)
   CGLM_INLINE void glm_ivec2_copy(ivec2 a, ivec2 dest)
-  CGLM_INLINE voidglm_ivec2_zero(ivec2 v)
+  CGLM_INLINE void glm_ivec2_zero(ivec2 v)
   CGLM_INLINE void glm_ivec2_one(ivec2 v)
   CGLM_INLINE void glm_ivec2_add(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE void glm_ivec2_adds(ivec2 v, int s, ivec2 dest)
