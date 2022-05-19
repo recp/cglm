@@ -15,63 +15,63 @@ extern "C" {
 
 CGLM_EXPORT
 void
-cglmc_ivec3(ivec4 v, ivec3 dest);
+glmc_ivec3(ivec4 v, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_copy(ivec3 a, ivec3 dest);
+glmc_ivec3_copy(ivec3 a, ivec3 dest);
 
 CGLM_EXPORT
 void 
-cglm_ivec3_zero(ivec3 v);
+glmc_ivec3_zero(ivec3 v);
 
 CGLM_EXPORT
 void
-cglm_ivec3_one(ivec3 v);
+glmc_ivec3_one(ivec3 v);
 
 CGLM_EXPORT
 void
-cglm_ivec3_add(ivec3 a, ivec3 b, ivec3 dest);
+glmc_ivec3_add(ivec3 a, ivec3 b, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_adds(ivec3 v, int s, ivec3 dest);
+glmc_ivec3_adds(ivec3 v, int s, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_sub(ivec3 a, ivec3 b, ivec3 dest);
+glmc_ivec3_sub(ivec3 a, ivec3 b, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_subs(ivec3 v, int s, ivec3 dest);
+glmc_ivec3_subs(ivec3 v, int s, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_mul(ivec3 a, ivec3 b, ivec3 dest);
+glmc_ivec3_mul(ivec3 a, ivec3 b, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_scale(ivec3 v, int s, ivec3 dest);
+glmc_ivec3_scale(ivec3 v, int s, ivec3 dest);
 
 CGLM_EXPORT
 int
-cglm_ivec3_distance2(ivec3 a, ivec3 b);
+glmc_ivec3_distance2(ivec3 a, ivec3 b);
 
 CGLM_EXPORT
 float
-cglm_ivec3_distance(ivec3 a, ivec3 b);
+glmc_ivec3_distance(ivec3 a, ivec3 b);
 
 CGLM_EXPORT
 void
-cglm_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest);
+glmc_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_minv(ivec3 a, ivec3 b, ivec3 dest);
+glmc_ivec3_minv(ivec3 a, ivec3 b, ivec3 dest);
 
 CGLM_EXPORT
 void
-cglm_ivec3_clamp(ivec3 v, int minVal, int maxVal);
+glmc_ivec3_clamp(ivec3 v, int minVal, int maxVal);
 
 #ifdef __cplusplus
 }
