@@ -13,12 +13,12 @@ TEST_IMPL(GLM_PREFIX, ivec2) {
   ivec2 v2;
 
   GLM(ivec2)(v4, v2);
-  ASSERT(v2[0] == v4[0])
-  ASSERT(v2[1] == v4[1])
+  ASSERT(v2[0] == 2)
+  ASSERT(v2[1] == 3)
 
   GLM(ivec2)(v3, v2);
-  ASSERT(v2[0] == v3[0])
-  ASSERT(v2[1] == v3[1])
+  ASSERT(v2[0] == 11)
+  ASSERT(v2[1] == 13)
 
   TEST_SUCCESS
 }
