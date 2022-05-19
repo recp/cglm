@@ -25,7 +25,7 @@ TEST_IMPL(GLM_PREFIX, ivec2) {
 
 TEST_IMPL(GLM_PREFIX, ivec2_copy) {
   ivec2 src = {7, 5};
-  ivec2 dst = {10, 11};
+  ivec2 dst = {99, 99};
 
   GLM(ivec2_copy)(src, dst);
   ASSERT(dst[0] == 7)
