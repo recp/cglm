@@ -232,8 +232,8 @@ glm_ivec3_minv(ivec3 a, ivec3 b, ivec3 dest) {
  * @brief clamp each member of [v] between minVal and maxVal (inclusive)
  *
  * @param[in, out] v      vector
- * @param[in] minVal minimum value
- * @param[in] minVal minimum value
+ * @param[in]      minVal minimum value
+ * @param[in]      minVal minimum value
  */
 CGLM_INLINE
 void
