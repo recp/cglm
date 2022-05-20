@@ -29,7 +29,6 @@ Functions:
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-
 .. c:function:: void glm_ivec2(int * v, ivec2 dest)
     
     init ivec2 using vec3 or vec4
