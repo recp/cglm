@@ -183,7 +183,7 @@ glm_ivec4_scale(ivec4 v, int s, ivec4 dest) {
  *
  * @param[in] a first vector
  * @param[in] b second vector
- * @return returns squared distance
+ * @return returns squared distance (distance * distance)
  */
 CGLM_INLINE
 int

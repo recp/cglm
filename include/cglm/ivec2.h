@@ -166,7 +166,7 @@ glm_ivec2_scale(ivec2 v, int s, ivec2 dest) {
  *
  * @param[in] a first vector
  * @param[in] b second vector
- * @return returns squared distance
+ * @return returns squared distance (distance * distance)
  */
 CGLM_INLINE
 int
