@@ -49,7 +49,7 @@ glm_ivec4(ivec3 v3, int last, ivec4 dest) {
  * @brief copy all members of [a] to [dest]
  *
  * @param[in]  a    source vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -87,7 +87,7 @@ glm_ivec4_one(ivec4 v) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -103,7 +103,7 @@ glm_ivec4_add(ivec4 a, ivec4 b, ivec4 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -119,7 +119,7 @@ glm_ivec4_adds(ivec4 v, int s, ivec4 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -135,7 +135,7 @@ glm_ivec4_sub(ivec4 a, ivec4 b, ivec4 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -151,7 +151,7 @@ glm_ivec4_subs(ivec4 v, int s, ivec4 dest) {
  *
  * @param[in]  a    frist vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -167,7 +167,7 @@ glm_ivec4_mul(ivec4 a, ivec4 b, ivec4 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -213,7 +213,7 @@ glm_ivec4_distance(ivec4 a, ivec4 b) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -229,7 +229,7 @@ glm_ivec4_maxv(ivec4 a, ivec4 b, ivec4 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -243,9 +243,9 @@ glm_ivec4_minv(ivec4 a, ivec4 b, ivec4 dest) {
 /*!
  * @brief clamp each member of [v] between minVal and maxVal (inclusive)
  *
- * @param[in, out] v vector
- * @param[in] minVal minimum value
- * @param[in] minVal minimum value
+ * @param[in, out] v      vector
+ * @param[in]      minVal minimum value
+ * @param[in]      minVal minimum value
  */
 CGLM_INLINE
 void

@@ -15,7 +15,7 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_ivec3(ivec4 v, ivec3 dest);
+glmc_ivec3(ivec4 v4, ivec3 dest);
 
 CGLM_EXPORT
 void

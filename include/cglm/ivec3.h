@@ -7,7 +7,7 @@
 
 /*
 FUNCTIONS:
-  CGLM_INLINE void glm_ivec3(ivec4 v, ivec3 dest)
+  CGLM_INLINE void glm_ivec3(ivec4 v4, ivec3 dest)
   CGLM_INLINE void glm_ivec3_copy(ivec3 a, ivec3 dest)
   CGLM_INLINE void glm_ivec3_zero(ivec3 v)
   CGLM_INLINE void glm_ivec3_one(ivec3 v)
@@ -30,24 +30,24 @@ FUNCTIONS:
 #include "common.h"
 
 /*!
- * @brief init ivec3 using an ivec4
+ * @brief init ivec3 using ivec4
  *
- * @param[in]  v    a vector
+ * @param[in]  v4   vector4
  * @param[out] dest destination
  */
 CGLM_INLINE
 void
-glm_ivec3(ivec4 v, ivec3 dest) {
-  dest[0] = v[0];
-  dest[1] = v[1];
-  dest[2] = v[2];
+glm_ivec3(ivec4 v4, ivec3 dest) {
+  dest[0] = v4[0];
+  dest[1] = v4[1];
+  dest[2] = v4[2];
 }
 
 /*!
  * @brief copy all members of [a] to [dest]
  *
  * @param[in]  a    source vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -84,7 +84,7 @@ glm_ivec3_one(ivec3 v) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -99,7 +99,7 @@ glm_ivec3_add(ivec3 a, ivec3 b, ivec3 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -114,7 +114,7 @@ glm_ivec3_adds(ivec3 v, int s, ivec3 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -129,7 +129,7 @@ glm_ivec3_sub(ivec3 a, ivec3 b, ivec3 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -144,7 +144,7 @@ glm_ivec3_subs(ivec3 v, int s, ivec3 dest) {
  *
  * @param[in]  a    frist vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -159,7 +159,7 @@ glm_ivec3_mul(ivec3 a, ivec3 b, ivec3 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -203,7 +203,7 @@ glm_ivec3_distance(ivec3 a, ivec3 b) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -218,7 +218,7 @@ glm_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void

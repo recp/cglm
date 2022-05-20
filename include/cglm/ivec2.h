@@ -30,9 +30,9 @@ FUNCTIONS:
 #include "common.h"
 
 /*!
- * @brief init ivec2 using another vector
+ * @brief init ivec2 using vec3 or vec4
  *
- * @param[in]  v    a vector
+ * @param[in]  v    vector
  * @param[out] dest destination
  */
 CGLM_INLINE
@@ -46,7 +46,7 @@ glm_ivec2(int * __restrict v, ivec2 dest) {
  * @brief copy all members of [a] to [dest]
  *
  * @param[in]  a    source vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -82,7 +82,7 @@ glm_ivec2_one(ivec2 v) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -96,7 +96,7 @@ glm_ivec2_add(ivec2 a, ivec2 b, ivec2 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -110,7 +110,7 @@ glm_ivec2_adds(ivec2 v, int s, ivec2 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -124,7 +124,7 @@ glm_ivec2_sub(ivec2 a, ivec2 b, ivec2 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -138,7 +138,7 @@ glm_ivec2_subs(ivec2 v, int s, ivec2 dest) {
  *
  * @param[in]  a    frist vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -152,7 +152,7 @@ glm_ivec2_mul(ivec2 a, ivec2 b, ivec2 dest) {
  *
  * @param[in]  v    vector
  * @param[in]  s    scalar
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -194,7 +194,7 @@ glm_ivec2_distance(ivec2 a, ivec2 b) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
@@ -208,7 +208,7 @@ glm_ivec2_maxv(ivec2 a, ivec2 b, ivec2 dest) {
  *
  * @param[in]  a    first vector
  * @param[in]  b    second vector
- * @param[out] dest destination vector
+ * @param[out] dest destination
  */
 CGLM_INLINE
 void
