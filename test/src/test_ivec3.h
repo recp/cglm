@@ -56,7 +56,7 @@ TEST_IMPL(GLM_PREFIX, ivec3_one) {
 TEST_IMPL(GLM_PREFIX, ivec3_add) {
   ivec3 a = {14, 3, 2};
   ivec3 b = {-3, 2, 1};
-  ivec3 v = {99, 99};
+  ivec3 v = {99, 99, 99};
   GLM(ivec3_add)(a, b, v);
   ASSERT(v[0] == 11)
   ASSERT(v[1] == 5)
