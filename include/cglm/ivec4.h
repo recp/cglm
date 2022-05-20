@@ -188,10 +188,11 @@ glm_ivec4_scale(ivec4 v, int s, ivec4 dest) {
 CGLM_INLINE
 int
 glm_ivec4_distance2(ivec4 a, ivec4 b) {
-  int xd = a[0] - b[0];
-  int yd = a[1] - b[1];
-  int zd = a[2] - b[2];
-  int wd = a[3] - b[3];
+  int xd, yd, zd, wd;
+  xd = a[0] - b[0];
+  yd = a[1] - b[1];
+  zd = a[2] - b[2];
+  wd = a[3] - b[3];
   return xd * xd + yd * yd + zd * zd + wd * wd;
 }
 

@@ -171,8 +171,9 @@ glm_ivec2_scale(ivec2 v, int s, ivec2 dest) {
 CGLM_INLINE
 int
 glm_ivec2_distance2(ivec2 a, ivec2 b) {
-  int xd = a[0] - b[0];
-  int yd = a[1] - b[1];
+  int xd, yd;
+  xd = a[0] - b[0];
+  yd = a[1] - b[1];
   return xd * xd + yd * yd;
 }
 

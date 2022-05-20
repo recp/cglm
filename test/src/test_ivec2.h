@@ -58,6 +58,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_add) {
   ivec2 a = {14, 3};
   ivec2 b = {-3, 2};
   ivec2 v = {99, 99};
+
   GLM(ivec2_add)(a, b, v);
   ASSERT(v[0] == 11)
   ASSERT(v[1] == 5)
@@ -128,8 +129,9 @@ TEST_IMPL(GLM_PREFIX, ivec2_scale) {
 TEST_IMPL(GLM_PREFIX, ivec2_distance2) {
   ivec2 a = {-1, 3};
   ivec2 b = {5, 4};
+  int v;
 
-  int v = GLM(ivec2_distance2)(a, b);
+  v = GLM(ivec2_distance2)(a, b);
   ASSERT(v == 37)
 
   TEST_SUCCESS
@@ -138,8 +140,9 @@ TEST_IMPL(GLM_PREFIX, ivec2_distance2) {
 TEST_IMPL(GLM_PREFIX, ivec2_distance) {
   ivec2 a = {3, 2};
   ivec2 b = {-2, 5};
+  float v;
 
-  float v = GLM(ivec2_distance)(a, b);
+  v = GLM(ivec2_distance)(a, b);
   ASSERT(test_eq(v, 5.8309518948))
 
   TEST_SUCCESS

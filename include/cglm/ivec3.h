@@ -179,9 +179,10 @@ glm_ivec3_scale(ivec3 v, int s, ivec3 dest) {
 CGLM_INLINE
 int
 glm_ivec3_distance2(ivec3 a, ivec3 b) {
-  int xd = a[0] - b[0];
-  int yd = a[1] - b[1];
-  int zd = a[2] - b[2];
+  int xd, yd, zd;
+  xd = a[0] - b[0];
+  yd = a[1] - b[1];
+  zd = a[2] - b[2];
   return xd * xd + yd * yd + zd * zd;
 }
 
