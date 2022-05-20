@@ -43,6 +43,9 @@ Follow the :doc:`build` documentation for this
    vec3-ext
    vec4
    vec4-ext
+   ivec2
+   ivec3
+   ivec4
    color
    plane
    project
