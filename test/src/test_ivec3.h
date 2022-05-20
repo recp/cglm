@@ -12,9 +12,9 @@ TEST_IMPL(GLM_PREFIX, ivec3) {
   ivec3 v3 = {99, 99, 99};
 
   GLM(ivec3)(v4, v3);
-  ASSERT(test_eq(v3[0], v4[0]))
-  ASSERT(test_eq(v3[1], v4[1]))
-  ASSERT(test_eq(v3[2], v4[2]))
+  ASSERT(v3[0] == 2))
+  ASSERT(v3[1] == 3))
+  ASSERT(v3[2] == 5))
 
   TEST_SUCCESS
 }
