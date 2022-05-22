@@ -13,8 +13,6 @@ It is similar to the original **glm** library, except **cglm** is mainly for
 **cglm** stores matrices as column-major order but in the future row-major is
 considered to be supported as optional.
 
-Currently only **float** type is supported for most operations.
-
 .. toctree::
    :maxdepth: 2
    :caption: Getting Started:
