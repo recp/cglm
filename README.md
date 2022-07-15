@@ -431,7 +431,7 @@ You can pass matrices the same way to other APIs e.g. Vulkan, DX...
 
 ## Notes
 
-- This library uses float types only, does not support Integers, Double... yet
+- This library does not support double type... yet
 - If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
 
 **TODO:**
