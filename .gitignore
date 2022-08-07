@@ -79,3 +79,4 @@ confdefs.h
 .idea
 cmake-build-debug
 *.o.tmp
+xcode/*
