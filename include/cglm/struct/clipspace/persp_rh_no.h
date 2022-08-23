@@ -1,7 +1,7 @@
 /*
  * Copyright (c), Recep Aslantas.
  *
- * MIT License (MIT), htt../opensource.org/licenses/MIT
+ * MIT License (MIT), http://opensource.org/licenses/MIT
  * Full license can be found in the LICENSE file
  */
 
