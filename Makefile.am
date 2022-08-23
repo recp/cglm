@@ -191,7 +191,9 @@ cglm_struct_clipspace_HEADERS = include/cglm/struct/clipspace/persp_lh_no.h \
                                 include/cglm/struct/clipspace/view_lh_no.h \
                                 include/cglm/struct/clipspace/view_lh_zo.h \
                                 include/cglm/struct/clipspace/view_rh_no.h \
-                                include/cglm/struct/clipspace/view_rh_zo.h
+                                include/cglm/struct/clipspace/view_rh_zo.h \
+                                include/cglm/struct/clipspace/project_no.h \
+                                include/cglm/struct/clipspace/project_zo.h
 
 libcglm_la_SOURCES=\
     src/euler.c \
