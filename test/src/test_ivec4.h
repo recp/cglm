@@ -12,10 +12,10 @@ TEST_IMPL(GLM_PREFIX, ivec4) {
   ivec4 v4;
 
   GLM(ivec4)(v3, 7, v4);
-  ASSERT(test_eq(v4[0], 2))
-  ASSERT(test_eq(v4[1], 3))
-  ASSERT(test_eq(v4[2], 5))
-  ASSERT(test_eq(v4[3], 7))
+  ASSERT(v4[0] == 2)
+  ASSERT(v4[1] == 3)
+  ASSERT(v4[2] == 5)
+  ASSERT(v4[3] == 7)
 
   TEST_SUCCESS
 }
@@ -158,7 +158,7 @@ TEST_IMPL(GLM_PREFIX, ivec4_distance) {
   float v;
 
   v = GLM(ivec4_distance)(a, b);
-  ASSERT(test_eq(v, 7.9372539331))
+  ASSERT(test_eq(v, 7.9372539331f))
 
   TEST_SUCCESS
 }

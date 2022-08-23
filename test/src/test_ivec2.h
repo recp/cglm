@@ -143,7 +143,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_distance) {
   float v;
 
   v = GLM(ivec2_distance)(a, b);
-  ASSERT(test_eq(v, 5.8309518948))
+  ASSERT(test_eq(v, 5.8309518948f))
 
   TEST_SUCCESS
 }
