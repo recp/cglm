@@ -43,6 +43,9 @@
     <ClCompile Include="..\src\euler.c" />
     <ClCompile Include="..\src\frustum.c" />
     <ClCompile Include="..\src\io.c" />
+    <ClCompile Include="..\src\ivec2.c" />
+    <ClCompile Include="..\src\ivec3.c" />
+    <ClCompile Include="..\src\ivec4.c" />
     <ClCompile Include="..\src\mat2.c" />
     <ClCompile Include="..\src\mat3.c" />
     <ClCompile Include="..\src\mat4.c" />
@@ -87,6 +90,9 @@
     <ClInclude Include="..\include\cglm\call\euler.h" />
     <ClInclude Include="..\include\cglm\call\frustum.h" />
     <ClInclude Include="..\include\cglm\call\io.h" />
+    <ClInclude Include="..\include\cglm\call\ivec2.h" />
+    <ClInclude Include="..\include\cglm\call\ivec3.h" />
+    <ClInclude Include="..\include\cglm\call\ivec4.h" />
     <ClInclude Include="..\include\cglm\call\mat2.h" />
     <ClInclude Include="..\include\cglm\call\mat3.h" />
     <ClInclude Include="..\include\cglm\call\mat4.h" />
@@ -124,6 +130,9 @@
     <ClInclude Include="..\include\cglm\euler.h" />
     <ClInclude Include="..\include\cglm\frustum.h" />
     <ClInclude Include="..\include\cglm\io.h" />
+    <ClInclude Include="..\include\cglm\ivec2.h" />
+    <ClInclude Include="..\include\cglm\ivec3.h" />
+    <ClInclude Include="..\include\cglm\ivec4.h" />
     <ClInclude Include="..\include\cglm\mat2.h" />
     <ClInclude Include="..\include\cglm\mat3.h" />
     <ClInclude Include="..\include\cglm\mat4.h" />
@@ -159,6 +168,8 @@
     <ClInclude Include="..\include\cglm\struct\clipspace\persp_lh_zo.h" />
     <ClInclude Include="..\include\cglm\struct\clipspace\persp_rh_no.h" />
     <ClInclude Include="..\include\cglm\struct\clipspace\persp_rh_zo.h" />
+    <ClInclude Include="..\include\cglm\struct\clipspace\project_no.h" />
+    <ClInclude Include="..\include\cglm\struct\clipspace\project_zo.h" />
     <ClInclude Include="..\include\cglm\struct\clipspace\view_lh_no.h" />
     <ClInclude Include="..\include\cglm\struct\clipspace\view_lh_zo.h" />
     <ClInclude Include="..\include\cglm\struct\clipspace\view_rh_no.h" />

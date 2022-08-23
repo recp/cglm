@@ -100,5 +100,14 @@
     <ClInclude Include="..\test\src\test_camera.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_ivec2.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_ivec3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_ivec4.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

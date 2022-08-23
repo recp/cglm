@@ -148,6 +148,15 @@
     <ClCompile Include="..\src\clipspace\project_zo.c">
       <Filter>src\clipspace</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\ivec4.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ivec3.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\ivec2.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -557,6 +566,30 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\call\clipspace\project_zo.h">
       <Filter>include\cglm\call\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\ivec2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\ivec3.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\ivec4.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\project_no.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\clipspace\project_zo.h">
+      <Filter>include\cglm\struct\clipspace</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\ivec2.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\ivec3.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\ivec4.h">
+      <Filter>include\cglm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
