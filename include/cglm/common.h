@@ -51,9 +51,9 @@
 #endif
 
 /*
- * Clip control: define GLM_FORCE_DEPTH_ZERO_TO_ONE before including
+ * Clip control: define CGLM_FORCE_DEPTH_ZERO_TO_ONE before including
  * CGLM to use a clip space between 0 to 1.
- * Coordinate system: define GLM_FORCE_LEFT_HANDED before including
+ * Coordinate system: define CGLM_FORCE_LEFT_HANDED before including
  * CGLM to use the left handed coordinate system by default.
  */
 
