@@ -39,6 +39,7 @@
    || defined(CGLM_NO_PRINTS_NOOP)
 
 #include "common.h"
+#include "util.h"
 
 #include <stdio.h>
 #include <stdlib.h>
