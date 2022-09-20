@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.8.2)
-project(cglm VERSION 0.8.6 LANGUAGES C)
+project(cglm
+  VERSION 0.8.6
+  HOMEPAGE_URL https://github.com/recp/cglm
+  DESCRIPTION "OpenGL Mathematics (glm) for C"
+  LANGUAGES C
+)
 
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED YES)
@@ -152,21 +157,7 @@ install(EXPORT      ${PROJECT_NAME}
         NAMESPACE   ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
-set(PACKAGE_NAME ${PROJECT_NAME})
-set(prefix ${CMAKE_INSTALL_PREFIX})
-set(exec_prefix ${CMAKE_INSTALL_PREFIX})
-if (IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
-  set(includedir "${CMAKE_INSTALL_INCLUDEDIR}")
-else()
-  set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
-endif()
-if (IS_ABSOLUTE "${CMAKE_INSTALL_LIBDIR}")
-  set(libdir "${CMAKE_INSTALL_LIBDIR}")
-else()
-  set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
-endif()
-set(PACKAGE_VERSION "${PROJECT_VERSION}")
-configure_file(${CMAKE_CURRENT_LIST_DIR}/cglm.pc.in ${CMAKE_BINARY_DIR}/cglm.pc @ONLY)
+configure_file(cglm.pc.in cglm.pc @ONLY)
 
 install(FILES ${CMAKE_BINARY_DIR}/cglm.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)

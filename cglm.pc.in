@@ -1,11 +1,11 @@
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
+prefix=@CMAKE_INSTALL_PREFIX@
+exec_prefix="${prefix}"
+libdir="${exec_prefix}/lib"
+includedir="${prefix}/include"
 
-Name: @PACKAGE_NAME@
-Description: OpenGL Mathematics (glm) for C
-URL: https://github.com/recp/cglm
-Version: @PACKAGE_VERSION@
+Name: @PROJECT_NAME@
+Description: @CMAKE_PROJECT_DESCRIPTION@
+URL: @CMAKE_PROJECT_HOMEPAGE_URL@
+Version: @PROJECT_VERSION@
 Cflags: -I${includedir}
 Libs: -L${libdir} -lcglm @LIBS@
