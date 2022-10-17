@@ -383,6 +383,21 @@ glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
 }
 
 /*!
+ * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
+ *
+ * @param[in, out]  m      affine transfrom
+ * @param[in]       angle  angle (radians)
+ * @param[in]       axis   axis
+ */
+CGLM_INLINE
+void
+glm_spin(mat4 m, float angle, vec3 axis) {
+  CGLM_ALIGN_MAT mat4 rot;
+  glm_rotate_atm(rot, m[3], angle, axis);
+  glm_mat4_mul(m, rot, m);
+}
+
+/*!
  * @brief decompose scale vector
  *
  * @param[in]  m  affine transform
