@@ -112,6 +112,12 @@ glmc_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
 
 CGLM_EXPORT
 void
+glmc_spin(mat4 m, float angle, vec3 axis) {
+  glm_spin(m, angle, axis);
+}
+
+CGLM_EXPORT
+void
 glmc_decompose_scalev(mat4 m, vec3 s) {
   glm_decompose_scalev(m, s);
 }
