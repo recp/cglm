@@ -115,6 +115,28 @@ glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
 }
 
 /*!
+ * @brief map object's z coordinate to window coordinates
+ *
+ * Computing MVP:
+ *   glm_mat4_mul(proj, view, viewProj);
+ *   glm_mat4_mul(viewProj, model, MVP);
+ *
+ * @param[in]  v  object coordinates
+ * @param[in]  m  MVP matrix
+ *
+ * @returns projected z coordinate
+ */
+CGLM_INLINE
+float
+glm_project_z(vec3 v, mat4 m) {
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+  return glm_project_z_zo(v, m);
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+  return glm_project_z_no(v, m);
+#endif
+}
+
+/*!
  * @brief define a picking region
  *
  * @param[in]  center   center [x, y] of a picking region in window coordinates

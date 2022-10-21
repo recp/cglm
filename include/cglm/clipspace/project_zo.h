@@ -85,4 +85,27 @@ glm_project_zo(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   dest[1] = pos4[1] * vp[3] + vp[1];
 }
 
+/*!
+ * @brief map object's z coordinate to window coordinates
+ *
+ * Computing MVP:
+ *   glm_mat4_mul(proj, view, viewProj);
+ *   glm_mat4_mul(viewProj, model, MVP);
+ *
+ * @param[in]  v  object coordinates
+ * @param[in]  m  MVP matrix
+ *
+ * @returns projected z coordinate
+ */
+CGLM_INLINE
+float
+glm_project_z_zo(vec3 v, mat4 m) {
+  float z, w;
+
+  z = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2];
+  w = m[0][3] * v[0] + m[1][3] * v[1] + m[2][3] * v[2] + m[3][3];
+
+  return z / w;
+}
+
 #endif /* cglm_project_zo_h */
