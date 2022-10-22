@@ -21,6 +21,10 @@ CGLM_EXPORT
 void
 glmc_project_zo(vec3 pos, mat4 m, vec4 vp, vec3 dest);
 
+CGLM_EXPORT
+float
+glmc_project_z_zo(vec3 pos, mat4 m);
+
 #ifdef __cplusplus
 }
 #endif

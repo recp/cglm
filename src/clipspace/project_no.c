@@ -19,3 +19,9 @@ void
 glmc_project_no(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   glm_project_no(pos, m, vp, dest);
 }
+
+CGLM_EXPORT
+float
+glmc_project_z_no(vec3 pos, mat4 m) {
+  return glm_project_z_no(pos, m);
+}
