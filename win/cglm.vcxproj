@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\cglm\affine-mat.h" />
+    <ClInclude Include="..\include\cglm\affine-post.h" />
+    <ClInclude Include="..\include\cglm\affine-pre.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
     <ClInclude Include="..\include\cglm\affine2d.h" />
     <ClInclude Include="..\include\cglm\applesimd.h" />
