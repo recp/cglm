@@ -101,6 +101,52 @@ CGLM_EXPORT
 void
 glmc_decompose(mat4 m, vec4 t, mat4 r, vec3 s);
 
+/* affine-post */
+
+CGLM_EXPORT
+void
+glmc_translated(mat4 m, vec3 v);
+
+CGLM_EXPORT
+void
+glmc_translated_to(mat4 m, vec3 v, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_translated_x(mat4 m, float x);
+
+CGLM_EXPORT
+void
+glmc_translated_y(mat4 m, float y);
+
+CGLM_EXPORT
+void
+glmc_translated_z(mat4 m, float z);
+
+CGLM_EXPORT
+void
+glmc_rotated_x(mat4 m, float angle, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_rotated_y(mat4 m, float angle, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_rotated_z(mat4 m, float angle, mat4 dest);
+
+CGLM_EXPORT
+void
+glmc_rotated(mat4 m, float angle, vec3 axis);
+
+CGLM_EXPORT
+void
+glmc_rotated_at(mat4 m, vec3 pivot, float angle, vec3 axis);
+
+CGLM_EXPORT
+void
+glmc_spinned(mat4 m, float angle, vec3 axis);
+
 /* affine-mat */
 
 CGLM_EXPORT

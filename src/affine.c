@@ -136,6 +136,72 @@ glmc_decompose_rs(mat4 m, mat4 r, vec3 s) {
 
 CGLM_EXPORT
 void
+glmc_translated(mat4 m, vec3 v) {
+  glm_translated(m, v);
+}
+
+CGLM_EXPORT
+void
+glmc_translated_to(mat4 m, vec3 v, mat4 dest) {
+  glm_translated_to(m, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_translated_x(mat4 m, float x) {
+  glm_translated_x(m, x);
+}
+
+CGLM_EXPORT
+void
+glmc_translated_y(mat4 m, float y) {
+  glm_translated_y(m, y);
+}
+
+CGLM_EXPORT
+void
+glmc_translated_z(mat4 m, float z) {
+  glm_translated_z(m, z);
+}
+
+CGLM_EXPORT
+void
+glmc_rotated_x(mat4 m, float angle, mat4 dest) {
+  glm_rotated_x(m, angle, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_rotated_y(mat4 m, float angle, mat4 dest) {
+  glm_rotated_y(m, angle, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_rotated_z(mat4 m, float angle, mat4 dest) {
+  glm_rotated_z(m, angle, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_rotated(mat4 m, float angle, vec3 axis) {
+  glm_rotated(m, angle, axis);
+}
+
+CGLM_EXPORT
+void
+glmc_rotated_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
+  glm_rotated_at(m, pivot, angle, axis);
+}
+
+CGLM_EXPORT
+void
+glmc_spinned(mat4 m, float angle, vec3 axis) {
+  glm_spinned(m, angle, axis);
+}
+
+CGLM_EXPORT
+void
 glmc_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
   glm_decompose(m, t, r, s);
 }
