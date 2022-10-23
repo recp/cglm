@@ -5,12 +5,6 @@
  * Full license can be found in the LICENSE file
  */
 
-/*
- Functions:
-   CGLM_INLINE void glm_mul(mat4 m1, mat4 m2, mat4 dest);
-   CGLM_INLINE void glm_inv_tr(mat4 mat);
- */
-
 #ifndef cglm_affine_post_h
 #define cglm_affine_post_h
 
