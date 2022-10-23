@@ -34,6 +34,8 @@
  * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in, out]  m  affine transfrom
  * @param[in]       v  translate vector [x, y, z]
  */
@@ -49,6 +51,8 @@ glm_translated(mat4 m, vec3 v) {
  *
  * source matrix will remain same
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in]  m    affine transfrom
  * @param[in]  v    translate vector [x, y, z]
  * @param[out] dest translated matrix
@@ -63,6 +67,8 @@ glm_translated_to(mat4 m, vec3 v, mat4 dest) {
 /*!
  * @brief translate existing transform matrix by x factor
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in, out]  m  affine transfrom
  * @param[in]       x  x factor
  */
@@ -74,6 +80,8 @@ glm_translated_x(mat4 m, float x) {
 
 /*!
  * @brief translate existing transform matrix by y factor
+ *
+ *  this is POST transform, applies to existing transform as last transfrom
  *
  * @param[in, out]  m  affine transfrom
  * @param[in]       y  y factor
@@ -87,6 +95,8 @@ glm_translated_y(mat4 m, float y) {
 /*!
  * @brief translate existing transform matrix by z factor
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in, out]  m  affine transfrom
  * @param[in]       z  z factor
  */
@@ -99,6 +109,8 @@ glm_translated_z(mat4 m, float z) {
 /*!
  * @brief rotate existing transform matrix around X axis by angle
  *        and store result in dest
+ *
+ *  this is POST transform, applies to existing transform as last transfrom
  *
  * @param[in]   m      affine transfrom
  * @param[in]   angle  angle (radians)
@@ -125,6 +137,8 @@ glm_rotated_x(mat4 m, float angle, mat4 dest) {
  * @brief rotate existing transform matrix around Y axis by angle
  *        and store result in dest
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in]   m      affine transfrom
  * @param[in]   angle  angle (radians)
  * @param[out]  dest   rotated matrix
@@ -150,6 +164,8 @@ glm_rotated_y(mat4 m, float angle, mat4 dest) {
  * @brief rotate existing transform matrix around Z axis by angle
  *        and store result in dest
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in]   m      affine transfrom
  * @param[in]   angle  angle (radians)
  * @param[out]  dest   rotated matrix
@@ -174,6 +190,8 @@ glm_rotated_z(mat4 m, float angle, mat4 dest) {
 /*!
  * @brief rotate existing transform matrix around given axis by angle
  *
+ *  this is POST transform, applies to existing transform as last transfrom
+ *
  * @param[in, out]  m      affine transfrom
  * @param[in]       angle  angle (radians)
  * @param[in]       axis   axis
@@ -189,6 +207,8 @@ glm_rotated(mat4 m, float angle, vec3 axis) {
 /*!
  * @brief rotate existing transform
  *        around given axis by angle at given pivot point (rotation center)
+ *
+ *  this is POST transform, applies to existing transform as last transfrom
  *
  * @param[in, out]  m      affine transfrom
  * @param[in]       pivot  rotation center
@@ -209,6 +229,8 @@ glm_rotated_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
 
 /*!
  * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
+ *
+ *  this is POST transform, applies to existing transform as last transfrom
  *
  * @param[in, out]  m      affine transfrom
  * @param[in]       angle  angle (radians)
