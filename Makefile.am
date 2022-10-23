@@ -159,6 +159,8 @@ cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/mat3.h \
                       include/cglm/struct/mat2.h \
+                      include/cglm/struct/affine-pre.h \
+                      include/cglm/struct/affine-post.h \
                       include/cglm/struct/affine.h \
                       include/cglm/struct/affine2d.h \
                       include/cglm/struct/vec2.h \

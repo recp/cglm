@@ -591,5 +591,11 @@
     <ClInclude Include="..\include\cglm\ivec4.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\affine-post.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\affine-pre.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

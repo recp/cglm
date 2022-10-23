@@ -21,14 +21,14 @@ Functions:
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-.. c:function:: void  glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest)
+.. c:function:: void glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest)
 
     | maps the specified viewport coordinates into specified space [1]
       the matrix should contain projection matrix.
 
     if you don't have ( and don't want to have ) an inverse matrix then use
-    glm_unproject version. You may use existing inverse of matrix in somewhere
-    else, this is why glm_unprojecti exists to save save inversion cost
+    :c:func:`glm_unproject` version. You may use existing inverse of matrix in somewhere
+    else, this is why **glm_unprojecti** exists to save inversion cost
 
     [1] space:
       - if m = invProj:     View Space
@@ -57,7 +57,7 @@ Functions documentation
     | maps the specified viewport coordinates into specified space [1]
       the matrix should contain projection matrix.
 
-    this is same as glm_unprojecti except this function get inverse matrix for
+    this is same as :c:func:`glm_unprojecti` except this function get inverse matrix for
     you.
 
     [1] space:
@@ -80,7 +80,7 @@ Functions documentation
       | *[in]*  **vp**   viewport as [x, y, width, height]
       | *[out]* **dest** unprojected coordinates
 
-.. c:function:: void  glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest)
+.. c:function:: void glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest)
 
     | map object coordinates to window coordinates
 
@@ -91,12 +91,29 @@ Functions documentation
        glm_mat4_mul(proj, view, viewProj);
        glm_mat4_mul(viewProj, model, MVP);
 
-    this could be useful for gettng a bbox which fits with view frustum and
-    object bounding boxes. In this case you crop view frustum box with objects
-    box
-
     Parameters:
       | *[in]*  **pos**      object coordinates
       | *[in]*  **m**        MVP matrix
       | *[in]*  **vp**       viewport as [x, y, width, height]
       | *[out]* **dest**     projected coordinates
+
+.. c:function:: float glm_project_z(vec3 pos, mat4 m)
+
+    | map object's z coordinate to window coordinates
+
+    this is same as :c:func:`glm_project` except this function projects only Z coordinate
+    which reduces a few calculations and parameters.
+
+    Computing MVP:
+
+    .. code-block:: c
+
+       glm_mat4_mul(proj, view, viewProj);
+       glm_mat4_mul(viewProj, model, MVP);
+
+    Parameters:
+      | *[in]*  **pos**      object coordinates
+      | *[in]*  **m**        MVP matrix
+
+    Returns:
+        projected z coordinate

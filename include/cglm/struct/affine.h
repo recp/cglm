@@ -23,6 +23,7 @@
    CGLM_INLINE mat4s glms_rotate(mat4s m, float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis);
+   CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
    CGLM_INLINE vec3s glms_decompose_scalev(mat4s m);
    CGLM_INLINE bool  glms_uniscaled(mat4s m);
    CGLM_INLINE void  glms_decompose_rs(mat4s m, mat4s * r, vec3s * s);
@@ -226,7 +227,7 @@ glms_rotate_make(float angle, vec3s axis) {
  * @param[in]       m       affine transfrom
  * @param[in]       angle   angle (radians)
  * @param[in]       axis    axis
- * @returns                 affine transfrom
+ * @returns                affine transfrom
  */
 CGLM_INLINE
 mat4s
@@ -270,6 +271,21 @@ CGLM_INLINE
 mat4s
 glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) {
   glm_rotate_atm(m.raw, pivot.raw, angle, axis.raw);
+  return m;
+}
+
+/*!
+ * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
+ *
+ * @param[in]       m       affine transfrom
+ * @param[in]       angle   angle (radians)
+ * @param[in]       axis    axis
+ * @returns                affine transfrom
+ */
+CGLM_INLINE
+mat4s
+glms_spin(mat4s m, float angle, vec3s axis) {
+  glm_spin(m.raw, angle, axis.raw);
   return m;
 }
 
