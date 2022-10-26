@@ -158,6 +158,8 @@
     <ClInclude Include="..\include\cglm\simd\x86.h" />
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\struct.h" />
+    <ClInclude Include="..\include\cglm\struct\affine-post.h" />
+    <ClInclude Include="..\include\cglm\struct\affine-pre.h" />
     <ClInclude Include="..\include\cglm\struct\affine.h" />
     <ClInclude Include="..\include\cglm\struct\affine2d.h" />
     <ClInclude Include="..\include\cglm\struct\box.h" />

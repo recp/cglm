@@ -45,6 +45,8 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/mat4.h \
                include/cglm/mat3.h \
                include/cglm/mat2.h \
+               include/cglm/affine-pre.h \
+               include/cglm/affine-post.h \
                include/cglm/affine.h \
                include/cglm/affine-mat.h \
                include/cglm/vec2.h \
