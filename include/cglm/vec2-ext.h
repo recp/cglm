@@ -19,6 +19,7 @@
    CGLM_INLINE bool  glm_vec2_isinf(vec2 v);
    CGLM_INLINE bool  glm_vec2_isvalid(vec2 v);
    CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_abs(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
@@ -177,6 +178,19 @@ glm_vec2_sign(vec2 v, vec2 dest) {
 }
 
 /*!
+ * @brief absolute value of v
+ *
+ * @param[in]	v	vector
+ * @param[out]	dest	destination
+ */
+CGLM_INLINE
+void
+glm_vec2_abs(vec2 v, vec2 dest) {
+  dest[0] = fabsf(v[0]);
+  dest[1] = fabsf(v[1]);
+}
+
+/*!
  * @brief square root of each vector item
  *
  * @param[in]  v    vector
@@ -236,6 +250,5 @@ glm_vec2_complex_conjugate(vec2 a, vec2 dest) {
   dest[0] =  a[0];
   dest[1] = -a[1];
 }
-
 
 #endif /* cglm_vec2_ext_h */
