@@ -26,6 +26,7 @@ Functions:
 #. :c:func:`glm_vec2_isinf`
 #. :c:func:`glm_vec2_isvalid`
 #. :c:func:`glm_vec2_sign`
+#. :c:func:`glm_vec2_abs`
 #. :c:func:`glm_vec2_sqrt`
 
 Functions documentation

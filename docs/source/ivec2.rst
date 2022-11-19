@@ -25,6 +25,7 @@ Functions:
 #. :c:func:`glm_ivec2_maxv`
 #. :c:func:`glm_ivec2_minv`
 #. :c:func:`glm_ivec2_clamp`
+#. :c:func:`glm_ivec2_abs`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
