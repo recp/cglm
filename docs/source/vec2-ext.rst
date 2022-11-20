@@ -26,6 +26,7 @@ Functions:
 #. :c:func:`glm_vec2_isinf`
 #. :c:func:`glm_vec2_isvalid`
 #. :c:func:`glm_vec2_sign`
+#. :c:func:`glm_vec2_abs`
 #. :c:func:`glm_vec2_sqrt`
 
 Functions documentation
@@ -124,6 +125,14 @@ Functions documentation
     Parameters:
       | *[in]*   **v**     vector
       | *[out]*  **dest**  sign vector (only keeps signs as -1, 0, -1)
+
+.. c:function:: void glm_vec2_abs(vec2 v, vec2 dest)
+
+    absolute value of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector
 
 .. c:function:: void glm_vec2_sqrt(vec2 v, vec2 dest)
 

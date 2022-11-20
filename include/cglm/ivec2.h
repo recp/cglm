@@ -22,6 +22,7 @@ FUNCTIONS:
   CGLM_INLINE void glm_ivec2_maxv(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE void glm_ivec2_minv(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE void glm_ivec2_clamp(ivec2 v, int minVal, int maxVal)
+  CGLM_INLINE void glm_ivec2_abs(ivec2 v, ivec2 dest)
  */
 
 #ifndef cglm_ivec2_h
@@ -237,6 +238,19 @@ glm_ivec2_clamp(ivec2 v, int minVal, int maxVal) {
     v[1] = minVal;
   else if(v[1] > maxVal)
     v[1] = maxVal;
+}
+
+/*!
+ * @brief absolute value of v
+ *
+ * @param[in]	v	vector
+ * @param[out]	dest	destination
+ */
+CGLM_INLINE
+void
+glm_ivec2_abs(ivec2 v, ivec2 dest) {
+  dest[0] = abs(v[0]);
+  dest[1] = abs(v[1]);
 }
 
 #endif /* cglm_ivec2_h */

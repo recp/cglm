@@ -97,3 +97,10 @@ void
 glmc_ivec4_clamp(ivec4 v, int minVal, int maxVal) {
   glm_ivec4_clamp(v, minVal, maxVal);
 }
+
+CGLM_EXPORT
+void
+glmc_ivec4_abs(ivec4 v, ivec4 dest) {
+  glm_ivec4_abs(v, dest);
+}
+

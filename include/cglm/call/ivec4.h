@@ -73,6 +73,10 @@ CGLM_EXPORT
 void
 glmc_ivec4_clamp(ivec4 v, int minVal, int maxVal);
 
+CGLM_EXPORT
+void
+glmc_ivec4_abs(ivec4 v, ivec4 dest);
+
 #ifdef __cplusplus
 }
 #endif

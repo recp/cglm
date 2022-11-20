@@ -25,6 +25,7 @@ Functions:
 #. :c:func:`glm_ivec2_maxv`
 #. :c:func:`glm_ivec2_minv`
 #. :c:func:`glm_ivec2_clamp`
+#. :c:func:`glm_ivec2_abs`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -161,3 +162,11 @@ Functions documentation
       | *[in, out]* **v**      vector
       | *[in]*      **minVal** minimum value
       | *[in]*      **maxVal** maximum value
+
+.. c:function:: void glm_ivec2_abs(ivec2 v, ivec2 dest)
+
+    absolute value of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector

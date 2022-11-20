@@ -73,6 +73,10 @@ CGLM_EXPORT
 void
 glmc_ivec3_clamp(ivec3 v, int minVal, int maxVal);
 
+CGLM_EXPORT
+void
+glmc_ivec3_abs(ivec3 v, ivec3 dest);
+
 #ifdef __cplusplus
 }
 #endif
