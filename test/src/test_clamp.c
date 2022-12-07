@@ -18,14 +18,14 @@ TEST_IMPL(clamp) {
   glm_vec3_clamp(v3, 0.0, 1.0);
   glm_vec4_clamp(v4, 1.5, 3.0);
 
-  ASSERT(v3[0] == 1.0f)
-  ASSERT(v3[1] == 0.4f)
-  ASSERT(v3[2] == 1.0f)
+  ASSERT(glm_eq(v3[0], 1.0f))
+  ASSERT(glm_eq(v3[1], 0.4f))
+  ASSERT(glm_eq(v3[2], 1.0f))
 
-  ASSERT(v4[0] == 3.0f)
-  ASSERT(v4[1] == 2.3f)
-  ASSERT(v4[2] == 1.5f)
-  ASSERT(v4[3] == 1.5f)
+  ASSERT(glm_eq(v4[0], 3.0f))
+  ASSERT(glm_eq(v4[1], 2.3f))
+  ASSERT(glm_eq(v4[2], 1.5f))
+  ASSERT(glm_eq(v4[3], 1.5f))
   
   TEST_SUCCESS
 }
