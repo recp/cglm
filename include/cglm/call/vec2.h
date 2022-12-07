@@ -147,6 +147,10 @@ glmc_vec2_clamp(vec2 v, float minval, float maxval);
 
 CGLM_EXPORT
 void
+glmc_vec2_abs(vec2 v, vec2 dest);
+
+CGLM_EXPORT
+void
 glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest);
 
 CGLM_EXPORT
