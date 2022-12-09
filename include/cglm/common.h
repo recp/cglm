@@ -18,6 +18,9 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#ifdef __EMSCRIPTEN__
+#include <stdlib.h>
+#endif
 #include <math.h>
 #include <float.h>
 #include <stdbool.h>
