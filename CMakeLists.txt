@@ -157,7 +157,7 @@ install(EXPORT      ${PROJECT_NAME}
         NAMESPACE   ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
-configure_file(cglm.pc.in cglm.pc @ONLY)
+configure_file(cglm.cmake.pc.in cglm.pc @ONLY)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cglm.pc
   DESTINATION ${CMAKE_INSTALL_LIBDIR}/pkgconfig)
