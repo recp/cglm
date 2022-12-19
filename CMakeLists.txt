@@ -157,6 +157,20 @@ install(EXPORT      ${PROJECT_NAME}
         NAMESPACE   ${PROJECT_NAME}::
         DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
+set(PACKAGE_NAME ${PROJECT_NAME})
+set(prefix ${CMAKE_INSTALL_PREFIX})
+set(exec_prefix ${CMAKE_INSTALL_PREFIX})
+if (IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
+  set(includedir "${CMAKE_INSTALL_INCLUDEDIR}")
+else()
+  set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
+endif()
+if (IS_ABSOLUTE "${CMAKE_INSTALL_LIBDIR}")
+  set(libdir "${CMAKE_INSTALL_LIBDIR}")
+else()
+  set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
+endif()
+set(PACKAGE_VERSION "${PROJECT_VERSION}")
 configure_file(cglm.pc.in cglm.pc @ONLY)
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/cglm.pc
