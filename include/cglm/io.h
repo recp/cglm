@@ -49,7 +49,7 @@
 #endif
 
 #ifndef CGLM_PRINT_MAX_TO_SHORT
-#  define CGLM_PRINT_MAX_TO_SHORT 1e5
+#  define CGLM_PRINT_MAX_TO_SHORT 1e5f
 #endif
 
 #ifndef CGLM_PRINT_COLOR
@@ -77,9 +77,9 @@ glm_mat4_print(mat4              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, matrix[i][j]);
+        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", matrix[i][j]);
+        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }
@@ -89,9 +89,9 @@ glm_mat4_print(mat4              matrix,
 
     for (j = 0; j < n; j++)
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, matrix[j][i]);
+        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, (double)matrix[j][i]);
       else
-        fprintf(ostream, " % *g", cw[j], matrix[j][i]);
+        fprintf(ostream, " % *g", cw[j], (double)matrix[j][i]);
 
     fprintf(ostream, "  |\n");
   }
@@ -120,22 +120,22 @@ glm_mat3_print(mat3              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, matrix[i][j]);
+        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", matrix[i][j]);
+        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }
 
   for (i = 0; i < m; i++) {
     fprintf(ostream, "  |");
-    
+
     for (j = 0; j < n; j++)
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, matrix[j][i]);
+        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, (double)matrix[j][i]);
       else
-        fprintf(ostream, " % *g", cw[j], matrix[j][i]);
-    
+        fprintf(ostream, " % *g", cw[j], (double)matrix[j][i]);
+
     fprintf(ostream, "  |\n");
   }
 
@@ -162,22 +162,22 @@ glm_mat2_print(mat2              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, matrix[i][j]);
+        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", matrix[i][j]);
+        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }
 
   for (i = 0; i < m; i++) {
     fprintf(ostream, "  |");
-    
+
     for (j = 0; j < n; j++)
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, matrix[j][i]);
+        fprintf(ostream, " % *.*f", cw[j], CGLM_PRINT_PRECISION, (double)matrix[j][i]);
       else
-        fprintf(ostream, " % *g", cw[j], matrix[j][i]);
-    
+        fprintf(ostream, " % *g", cw[j], (double)matrix[j][i]);
+
     fprintf(ostream, "  |\n");
   }
 
@@ -199,9 +199,9 @@ glm_vec4_print(vec4              vec,
 
   for (i = 0; i < m; i++) {
     if (vec[i] < CGLM_PRINT_MAX_TO_SHORT)
-      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, vec[i]);
+      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, (double)vec[i]);
     else
-      fprintf(ostream, " % g", vec[i]);
+      fprintf(ostream, " % g", (double)vec[i]);
   }
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
@@ -221,9 +221,9 @@ glm_vec3_print(vec3              vec,
 
   for (i = 0; i < m; i++) {
     if (vec[i] < CGLM_PRINT_MAX_TO_SHORT)
-      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, vec[i]);
+      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, (double)vec[i]);
     else
-      fprintf(ostream, " % g", vec[i]);
+      fprintf(ostream, " % g", (double)vec[i]);
   }
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
@@ -245,7 +245,7 @@ glm_ivec3_print(ivec3             vec,
     fprintf(ostream, " % d", vec[i]);
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
-  
+
 #undef m
 }
 
@@ -261,9 +261,9 @@ glm_vec2_print(vec2              vec,
 
   for (i = 0; i < m; i++) {
     if (vec[i] < CGLM_PRINT_MAX_TO_SHORT)
-      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, vec[i]);
+      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, (double)vec[i]);
     else
-      fprintf(ostream, " % g", vec[i]);
+      fprintf(ostream, " % g", (double)vec[i]);
   }
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
@@ -283,9 +283,9 @@ glm_versor_print(versor            vec,
 
   for (i = 0; i < m; i++) {
     if (vec[i] < CGLM_PRINT_MAX_TO_SHORT)
-      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, vec[i]);
+      fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, (double)vec[i]);
     else
-      fprintf(ostream, " % g", vec[i]);
+      fprintf(ostream, " % g", (double)vec[i]);
   }
 
 
@@ -307,12 +307,12 @@ glm_aabb_print(vec3                    bbox[2],
 
   for (i = 0; i < 2; i++) {
     fprintf(ostream, "  (");
-    
+
     for (j = 0; j < m; j++) {
       if (bbox[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, bbox[i][j]);
+        fprintf(ostream, " % .*f", CGLM_PRINT_PRECISION, (double)bbox[i][j]);
       else
-        fprintf(ostream, " % g", bbox[i][j]);
+        fprintf(ostream, " % g", (double)bbox[i][j]);
     }
 
     fprintf(ostream, "  )\n");
