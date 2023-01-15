@@ -10,10 +10,10 @@ Table of contents (click to go):
 
 Macros:
 
-1. GLM_vec2_ONE_INIT
-#. GLM_vec2_ZERO_INIT
-#. GLM_vec2_ONE
-#. GLM_vec2_ZERO
+1. GLM_VEC2_ONE_INIT
+#. GLM_VEC2_ZERO_INIT
+#. GLM_VEC2_ONE
+#. GLM_VEC2_ZERO
 
 Functions:
 

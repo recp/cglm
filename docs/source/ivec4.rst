@@ -8,6 +8,13 @@ Header: cglm/ivec4.h
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Macros:
+
+1. GLM_IVEC4_ONE_INIT
+#. GLM_IVEC4_ZERO_INIT
+#. GLM_IVEC4_ONE
+#. GLM_IVEC4_ZERO
+
 Functions:
 
 1. :c:func:`glm_ivec4`

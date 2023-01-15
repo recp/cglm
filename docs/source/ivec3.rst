@@ -8,6 +8,13 @@ Header: cglm/ivec3.h
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Macros:
+
+1. GLM_IVEC3_ONE_INIT
+#. GLM_IVEC3_ZERO_INIT
+#. GLM_IVEC3_ONE
+#. GLM_IVEC3_ZERO
+
 Functions:
 
 1. :c:func:`glm_ivec3`
