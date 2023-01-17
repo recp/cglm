@@ -6,7 +6,13 @@
  */
 
 /*
-FUNCTIONS:
+ Macros:
+   GLM_IVEC2_ONE_INIT
+   GLM_IVEC2_ZERO_INIT
+   GLM_IVEC2_ONE
+   GLM_IVEC2_ZERO
+
+ Functions:
   CGLM_INLINE void glm_ivec2(int * __restrict v, ivec2 dest)
   CGLM_INLINE void glm_ivec2_copy(ivec2 a, ivec2 dest)
   CGLM_INLINE void glm_ivec2_zero(ivec2 v)
@@ -29,6 +35,12 @@ FUNCTIONS:
 #define cglm_ivec2_h
 
 #include "common.h"
+
+#define GLM_IVEC2_ONE_INIT   {1, 1}
+#define GLM_IVEC2_ZERO_INIT  {0, 0}
+
+#define GLM_IVEC2_ONE  ((ivec2)GLM_IVEC2_ONE_INIT)
+#define GLM_IVEC2_ZERO ((ivec2)GLM_IVEC2_ZERO_INIT)
 
 /*!
  * @brief init ivec2 using vec3 or vec4

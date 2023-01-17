@@ -6,7 +6,13 @@
  */
 
 /*
-FUNCTIONS:
+ Macros:
+   GLM_IVEC4_ONE_INIT
+   GLM_IVEC4_ZERO_INIT
+   GLM_IVEC4_ONE
+   GLM_IVEC4_ZERO
+
+ Functions:
   CGLM_INLINE void glm_ivec4(ivec3 v3, int last, ivec4 dest)
   CGLM_INLINE void glm_ivec4_copy(ivec4 a, ivec4 dest)
   CGLM_INLINE void glm_ivec4_zero(ivec4 v)
@@ -29,6 +35,12 @@ FUNCTIONS:
 #define cglm_ivec4_h
 
 #include "common.h"
+
+#define GLM_IVEC4_ONE_INIT   {1, 1, 1, 1}
+#define GLM_IVEC4_ZERO_INIT  {0, 0, 0, 0}
+
+#define GLM_IVEC4_ONE  ((ivec4)GLM_IVEC4_ONE_INIT)
+#define GLM_IVEC4_ZERO ((ivec4)GLM_IVEC4_ZERO_INIT)
 
 /*!
  * @brief init ivec4 using ivec3
