@@ -29,7 +29,7 @@
    CGLM_INLINE void  glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
    CGLM_INLINE void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
    CGLM_INLINE void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest);
    CGLM_INLINE float glm_mat4_trace(mat4 m);
    CGLM_INLINE float glm_mat4_trace3(mat4 m);
    CGLM_INLINE void  glm_mat4_quat(mat4 m, versor dest) ;
