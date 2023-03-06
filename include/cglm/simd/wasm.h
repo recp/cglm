@@ -102,7 +102,7 @@ _mm_set_ps(float __z, float __y, float __x, float __w)
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
-  return wasm_v128_andnot(wasm_f32x4_splat(-0.0f), x);
+  return wasm_v128_andnot(x, wasm_f32x4_splat(-0.0f));
 }
 
 static inline
