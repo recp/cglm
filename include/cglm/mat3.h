@@ -42,6 +42,10 @@
 #  include "simd/sse2/mat3.h"
 #endif
 
+#ifdef CGLM_SIMD_WASM
+#  include "simd/wasm/mat3.h"
+#endif
+
 #define GLM_MAT3_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f},                          \
                                  {0.0f, 1.0f, 0.0f},                          \
                                  {0.0f, 0.0f, 1.0f}}
@@ -150,6 +154,8 @@ void
 glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat3_mul_sse2(m1, m2, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat3_mul_wasm(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],

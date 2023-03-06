@@ -92,7 +92,22 @@ _mm_sqrt_ss(glmm_128 __a)
 static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
 _mm_rcp_ps(glmm_128 __a)
 {
-    return (glmm_128)wasm_f32x4_div((v128_t)wasm_f32x4_splat(1.0f), (v128_t)__a);
+    return (glmm_128)wasm_f32x4_div((glmm_128)wasm_f32x4_splat(1.0f), (glmm_128)__a);
+}
+
+static __inline__ void __attribute__((__always_inline__, __nodebug__))
+_mm_storeu_ps(float *__p, glmm_128 __a)
+{
+  struct __unaligned {
+    glmm_128 __v;
+  } __attribute__((__packed__, __may_alias__));
+  ((struct __unaligned *)__p)->__v = __a;
+}
+
+static __inline__ void __attribute__((__always_inline__, __nodebug__))
+_mm_store_ss(float *__p, glmm_128 __a)
+{
+  wasm_v128_store32_lane((void*)__p, (glmm_128)__a, 0);
 }
 
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
