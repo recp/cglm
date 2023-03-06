@@ -168,6 +168,8 @@ void
 glm_mat2_transpose_to(mat2 m, mat2 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat2_transp_sse2(m, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat2_transp_wasm(m, dest);
 #else
   dest[0][0] = m[0][0];
   dest[0][1] = m[1][0];
@@ -230,6 +232,8 @@ void
 glm_mat2_scale(mat2 m, float s) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(m[0], _mm_mul_ps(_mm_loadu_ps(m[0]), _mm_set1_ps(s)));
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(m[0], wasm_f32x4_mul(wasm_v128_load(m[0]), wasm_f32x4_splat(s)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), vdupq_n_f32(s)));
 #else
