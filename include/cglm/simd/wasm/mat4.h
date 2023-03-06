@@ -12,11 +12,11 @@
 #include "../../common.h"
 #include "../intrin.h"
 
-#define glm_mat4_inv_precise_sse2(mat, dest) glm_mat4_inv_sse2(mat, dest)
+#define glm_mat4_inv_precise_wasm(mat, dest) glm_mat4_inv_wasm(mat, dest)
 
 CGLM_INLINE
 void
-glm_mat4_scale_sse2(mat4 m, float s) {
+glm_mat4_scale_wasm(mat4 m, float s) {
   glmm_128 x0;
   x0 = wasm_f32x4_splat(s);
 
@@ -28,7 +28,7 @@ glm_mat4_scale_sse2(mat4 m, float s) {
 
 CGLM_INLINE
 void
-glm_mat4_transp_sse2(mat4 m, mat4 dest) {
+glm_mat4_transp_wasm(mat4 m, mat4 dest) {
   glmm_128 r0, r1, r2, r3;
 
   r0 = glmm_load(m[0]);
@@ -46,7 +46,7 @@ glm_mat4_transp_sse2(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -88,7 +88,7 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv_wasm(mat4 m, vec4 v, vec4 dest) {
   glmm_128 x0, x1, m0, m1, m2, m3, v0, v1, v2, v3;
 
   m0 = glmm_load(m[0]);
@@ -112,7 +112,7 @@ glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_INLINE
 float
-glm_mat4_det_sse2(mat4 mat) {
+glm_mat4_det_wasm(mat4 mat) {
   glmm_128 r0, r1, r2, r3, x0, x1, x2;
 
   /* 127 <- 0, [square] det(A) = det(At) */
@@ -153,14 +153,14 @@ glm_mat4_det_sse2(mat4 mat) {
                   _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 3, 1)),
                   x2);
   
-  x2 = _mm_xor_ps(x2, _mm_set_ps(-0.f, 0.f, -0.f, 0.f));
+  x2 = wasm_v128_xor(x2, _mm_set_ps(-0.f, 0.f, -0.f, 0.f));
   
   return glmm_hadd(wasm_f32x4_mul(x2, r0));
 }
 
 CGLM_INLINE
 void
-glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
+glm_mat4_inv_fast_wasm(mat4 mat, mat4 dest) {
   glmm_128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
@@ -296,7 +296,7 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
+glm_mat4_inv_wasm(mat4 mat, mat4 dest) {
   glmm_128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
@@ -323,12 +323,12 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x3 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(2, 2, 2, 2));  /* g g k k */
   x0 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(3, 3, 3, 3));  /* h h l l */
   
-  t0 = _mm_mul_ps(x3, x1);
-  t1 = _mm_mul_ps(x5, x1);
-  t2 = _mm_mul_ps(x5, x2);
-  t3 = _mm_mul_ps(x6, x1);
-  t4 = _mm_mul_ps(x6, x2);
-  t5 = _mm_mul_ps(x6, x4);
+  t0 = wasm_f32x4_mul(x3, x1);
+  t1 = wasm_f32x4_mul(x5, x1);
+  t2 = wasm_f32x4_mul(x5, x2);
+  t3 = wasm_f32x4_mul(x6, x1);
+  t4 = wasm_f32x4_mul(x6, x2);
+  t5 = wasm_f32x4_mul(x6, x4);
   
   /* t1[0] = k * p - o * l;
      t1[0] = k * p - o * l;
@@ -374,10 +374,10 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x2 = glmm_shuff1(x5, 0, 0, 0, 2);  /* c c c g */
   x3 = glmm_shuff1(x5, 1, 1, 1, 3);  /* d d d h */
   
-  v2 = _mm_mul_ps(x0, t1);
-  v1 = _mm_mul_ps(x0, t0);
-  v3 = _mm_mul_ps(x0, t2);
-  v0 = _mm_mul_ps(x1, t0);
+  v2 = wasm_f32x4_mul(x0, t1);
+  v1 = wasm_f32x4_mul(x0, t0);
+  v3 = wasm_f32x4_mul(x0, t2);
+  v0 = wasm_f32x4_mul(x1, t0);
   
   v2 = glmm_fnmadd(x1, t3, v2);
   v3 = glmm_fnmadd(x1, t4, v3);
@@ -394,40 +394,40 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
    dest[0][1] =-(b * t1[0] - c * t1[1] + d * t1[2]);
    dest[0][2] =  b * t2[0] - c * t2[1] + d * t2[2];
    dest[0][3] =-(b * t3[0] - c * t3[1] + d * t3[2]); */
-  v0 = _mm_xor_ps(v0, x8);
+  v0 = wasm_v128_xor(v0, x8);
   
   /*
    dest[2][0] =  e * t1[1] - f * t1[3] + h * t1[5];
    dest[2][1] =-(a * t1[1] - b * t1[3] + d * t1[5]);
    dest[2][2] =  a * t2[1] - b * t2[3] + d * t2[5];
    dest[2][3] =-(a * t3[1] - b * t3[3] + d * t3[5]);*/
-  v2 = _mm_xor_ps(v2, x8);
+  v2 = wasm_v128_xor(v2, x8);
 
   /*
    dest[1][0] =-(e * t1[0] - g * t1[3] + h * t1[4]);
    dest[1][1] =  a * t1[0] - c * t1[3] + d * t1[4];
    dest[1][2] =-(a * t2[0] - c * t2[3] + d * t2[4]);
    dest[1][3] =  a * t3[0] - c * t3[3] + d * t3[4]; */
-  v1 = _mm_xor_ps(v1, x9);
+  v1 = wasm_v128_xor(v1, x9);
 
   /*
    dest[3][0] =-(e * t1[2] - f * t1[4] + g * t1[5]);
    dest[3][1] =  a * t1[2] - b * t1[4] + c * t1[5];
    dest[3][2] =-(a * t2[2] - b * t2[4] + c * t2[5]);
    dest[3][3] =  a * t3[2] - b * t3[4] + c * t3[5]; */
-  v3 = _mm_xor_ps(v3, x9);
+  v3 = wasm_v128_xor(v3, x9);
 
   /* determinant */
   x0 = _mm_shuffle_ps(v0, v1, _MM_SHUFFLE(0, 0, 0, 0));
   x1 = _mm_shuffle_ps(v2, v3, _MM_SHUFFLE(0, 0, 0, 0));
   x0 = _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 0, 2, 0));
 
-  x0 = _mm_div_ps(_mm_set1_ps(1.0f), glmm_vhadd(_mm_mul_ps(x0, r0)));
+  x0 = wasm_f32x4_div(wasm_f32x4_splat(1.0f), glmm_vhadd(wasm_f32x4_mul(x0, r0)));
 
-  glmm_store(dest[0], _mm_mul_ps(v0, x0));
-  glmm_store(dest[1], _mm_mul_ps(v1, x0));
-  glmm_store(dest[2], _mm_mul_ps(v2, x0));
-  glmm_store(dest[3], _mm_mul_ps(v3, x0));
+  glmm_store(dest[0], wasm_f32x4_mul(v0, x0));
+  glmm_store(dest[1], wasm_f32x4_mul(v1, x0));
+  glmm_store(dest[2], wasm_f32x4_mul(v2, x0));
+  glmm_store(dest[3], wasm_f32x4_mul(v3, x0));
 }
 
 #endif

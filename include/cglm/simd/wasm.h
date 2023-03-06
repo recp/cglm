@@ -83,6 +83,18 @@ _mm_set_ps(float __z, float __y, float __x, float __w)
   return (glmm_128)wasm_f32x4_make(__w, __x, __y, __z);
 }
 
+static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_sqrt_ss(glmm_128 __a)
+{
+  return wasm_i32x4_shuffle(__a, wasm_f32x4_sqrt(__a), 4, 1, 2, 3);
+}
+
+static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_rcp_ps(glmm_128 __a)
+{
+    return (glmm_128)wasm_f32x4_div((v128_t)wasm_f32x4_splat(1.0f), (v128_t)__a);
+}
+
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
   do { \
     glmm_128 __row0 = (row0); \
@@ -184,12 +196,6 @@ glmm_dot(glmm_128 a, glmm_128 b) {
   return _mm_cvtss_f32(glmm_vdots(a, b));
 }
 
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_sqrt_ss(glmm_128 __a)
-{
-  return wasm_i32x4_shuffle(__a, wasm_f32x4_sqrt(__a), 4, 1, 2, 3);
-}
-
 static inline
 float
 glmm_norm(glmm_128 a) {
@@ -233,11 +239,6 @@ glmm_128
 glmm_div(glmm_128 a, glmm_128 b) {
   return wasm_f32x4_div(a, b);
 }
-
-/* enable FMA macro for MSVC? */
-#if defined(_MSC_VER) && !defined(__FMA__) && defined(__AVX2__)
-#  define __FMA__ 1
-#endif
 
 static inline
 glmm_128

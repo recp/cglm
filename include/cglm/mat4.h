@@ -64,6 +64,10 @@
 #  include "simd/neon/mat4.h"
 #endif
 
+#ifdef CGLM_SIMD_WASM
+#  include "simd/wasm/mat4.h"
+#endif
+
 #ifdef DEBUG
 # include <assert.h>
 #endif
@@ -125,6 +129,11 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
   glmm_store256(dest[0], glmm_load256(mat[0]));
   glmm_store256(dest[2], glmm_load256(mat[2]));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
+  glmm_store(dest[0], glmm_load(mat[0]));
+  glmm_store(dest[1], glmm_load(mat[1]));
+  glmm_store(dest[2], glmm_load(mat[2]));
+  glmm_store(dest[3], glmm_load(mat[3]));
+#elif defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest[0], glmm_load(mat[0]));
   glmm_store(dest[1], glmm_load(mat[1]));
   glmm_store(dest[2], glmm_load(mat[2]));
@@ -195,6 +204,13 @@ glm_mat4_zero(mat4 mat) {
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_128 x0;
   x0 = _mm_setzero_ps();
+  glmm_store(mat[0], x0);
+  glmm_store(mat[1], x0);
+  glmm_store(mat[2], x0);
+  glmm_store(mat[3], x0);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_128 x0;
+  x0 = wasm_f32x4_const(0.f, 0.f, 0.f, 0.f);
   glmm_store(mat[0], x0);
   glmm_store(mat[1], x0);
   glmm_store(mat[2], x0);
@@ -301,6 +317,8 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   glm_mat4_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mul_sse2(m1, m2, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_mul_wasm(m1, m2, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_mul_neon(m1, m2, dest);
 #else
@@ -379,6 +397,8 @@ void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mulv_sse2(m, v, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_mulv_wasm(m, v, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_mulv_neon(m, v, dest);
 #else
@@ -499,6 +519,8 @@ void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_transp_wasm(m, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, dest);
 #else
@@ -523,6 +545,8 @@ void
 glm_mat4_transpose(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_transp_wasm(m, m);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, m);
 #else
@@ -564,6 +588,8 @@ glm_mat4_scale(mat4 m, float s) {
   glm_mat4_scale_avx(m, s);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_scale_wasm(m, s);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_scale_neon(m, s);
 #else
@@ -583,6 +609,8 @@ float
 glm_mat4_det(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glm_mat4_det_sse2(mat);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  return glm_mat4_det_wasm(mat);
 #elif defined(CGLM_NEON_FP)
   return glm_mat4_det_neon(mat);
 #else
@@ -681,6 +709,8 @@ void
 glm_mat4_inv_fast(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_fast_sse2(mat, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_inv_fast_wasm(mat, dest);
 #else
   glm_mat4_inv(mat, dest);
 #endif
