@@ -10,8 +10,17 @@
 
 #define glmm_set1(x) wasm_f32x4_splat(x)
 #define glmm_128     v128_t
-#define glmm_shuffle(a, b, z, y, x, w) wasm_i32x4_shuffle(a, b, z, y, x, w)
-#define glmm_shuff1(xmm, z, y, x, w) wasm_i32x4_shuffle(xmm, xmm, z, y, x, w)
+
+#define _MM_SHUFFLE(w, z, y, x) (((w) << 6) | ((z) << 4) | ((y) << 2) | (x))
+
+#define _mm_shuffle_ps(__a, __b, __mask)  \
+  ((glmm_128)wasm_i32x4_shuffle(__a, __b, \
+            (((__mask) >> 0) & 0x3) + 0,  \
+            (((__mask) >> 2) & 0x3) + 0,  \
+            (((__mask) >> 4) & 0x3) + 4,  \
+            (((__mask) >> 6) & 0x3) + 4))
+
+#define glmm_shuff1(xmm, z, y, x, w) _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
 
 #define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
 
@@ -21,7 +30,8 @@
 #define glmm_splat_w(x) glmm_splat(x, 3)
 
 #define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
-     glmm_shuff1(wasm_i32x4_shuffle(a, b, z0, y0, x0, w0), z1, y1, x1, w1)
+     glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
+                 z1, y1, x1, w1)
 
 #define _mm_cvtss_f32(v) wasm_f32x4_extract_lane(v, 0)
 
@@ -86,7 +96,7 @@ glmm_vhadds(glmm_128 v) {
   glmm_128 shuf, sums;
   shuf = glmm_shuff1(v, 2, 3, 0, 1);
   sums = wasm_f32x4_add(v, shuf);
-  shuf = wasm_i32x4_shuffle(shuf, sums, 6, 7, 2, 3);
+  shuf = _mm_movehl_ps(shuf, sums);
   sums = wasm_f32x4_add(sums, shuf);
   return sums;
 }
