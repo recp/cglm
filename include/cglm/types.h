@@ -32,9 +32,13 @@
 #  define CGLM_ALIGN_MAT CGLM_ALIGN(16)
 #endif
 
-#ifdef __GNUC__
-#  define CGLM_ASSUME_ALIGNED(expr, alignment) \
-  __builtin_assume_aligned((expr), (alignment))
+#if defined(__has_builtin)
+#  if __has_builtin(__builtin_assume_aligned)
+#    define CGLM_ASSUME_ALIGNED(expr, alignment) \
+    __builtin_assume_aligned((expr), (alignment))
+#  else
+#    define CGLM_ASSUME_ALIGNED(expr, alignment) (expr)
+#  endif
 #else
 #  define CGLM_ASSUME_ALIGNED(expr, alignment) (expr)
 #endif
