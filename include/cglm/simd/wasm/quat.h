@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_quat_mul_sse2(versor p, versor q, versor dest) {
+glm_quat_mul_wasm(versor p, versor q, versor dest) {
   /*
    + (a1 b2 + b1 a2 + c1 d2 − d1 c2)i
    + (a1 c2 − b1 d2 + c1 a2 + d1 b2)j
@@ -26,7 +26,7 @@ glm_quat_mul_sse2(versor p, versor q, versor dest) {
 
   xp = glmm_load(p); /* 3 2 1 0 */
   xq = glmm_load(q);
-  x1 = wasm_f32x4_make(-0.f, 0.f, -0.f, 0.f); /* TODO: _mm_set1_ss() + shuff ? */
+  x1 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f); /* TODO: _mm_set1_ss() + shuff ? */
   r  = wasm_f32x4_mul(glmm_splat_w(xp), xq);
   
   x2 = _mm_unpackhi_ps(x1, x1);
