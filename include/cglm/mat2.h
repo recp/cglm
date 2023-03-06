@@ -44,6 +44,10 @@
 #  include "simd/neon/mat2.h"
 #endif
 
+#ifdef CGLM_SIMD_WASM
+#  include "simd/wasm/mat2.h"
+#endif
+
 #define GLM_MAT2_IDENTITY_INIT  {{1.0f, 0.0f}, {0.0f, 1.0f}}
 #define GLM_MAT2_ZERO_INIT      {{0.0f, 0.0f}, {0.0f, 0.0f}}
 
@@ -134,6 +138,8 @@ void
 glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat2_mul_sse2(m1, m2, dest);
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat2_mul_wasm(m1, m2, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat2_mul_neon(m1, m2, dest);
 #else
