@@ -59,6 +59,30 @@ _mm_movelh_ps(glmm_128 __a, glmm_128 __b)
   return wasm_i32x4_shuffle(__a, __b, 0, 1, 4, 5);
 }
 
+static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_move_ss(glmm_128 __a, glmm_128 __b)
+{
+  return (glmm_128)wasm_i32x4_shuffle(__a, __b, 4, 1, 2, 3);
+}
+
+static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_add_ps(glmm_128 __a, glmm_128 __b)
+{
+  return (glmm_128)wasm_f32x4_add((glmm_128)__a, (glmm_128)__b);
+}
+
+static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_add_ss(glmm_128 __a, glmm_128 __b)
+{
+  return _mm_move_ss(__a, _mm_add_ps(__a, __b));
+}
+
+static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
+_mm_set_ps(float __z, float __y, float __x, float __w)
+{
+  return (glmm_128)wasm_f32x4_make(__w, __x, __y, __z);
+}
+
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
   do { \
     glmm_128 __row0 = (row0); \
@@ -97,7 +121,7 @@ glmm_vhadds(glmm_128 v) {
   shuf = glmm_shuff1(v, 2, 3, 0, 1);
   sums = wasm_f32x4_add(v, shuf);
   shuf = _mm_movehl_ps(shuf, sums);
-  sums = wasm_f32x4_add(sums, shuf);
+  sums = _mm_add_ss(sums, shuf);
   return sums;
 }
 
@@ -130,7 +154,7 @@ glmm_vhmax(glmm_128 v) {
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
   x1 = wasm_f32x4_pmax(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
   x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
-  return wasm_f32x4_pmax(x1, x2);
+  return _mm_move_ss(x1, wasm_f32x4_pmax(x1, x2));
 }
 
 static inline
