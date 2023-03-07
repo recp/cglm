@@ -17,7 +17,13 @@
 #    ifndef __SSE__
 #      define __SSE__
 #    endif
+#  elif defined(_M_ARM64)
+#  ifndef __ARM_NEON
+/* TODO: is this valid */
+#    define __ARM_NEON
+#    define __ARM_NEON_FP
 #  endif
+#endif
 /* do not use alignment for older visual studio versions */
 #  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
 #    define CGLM_ALL_UNALIGNED
@@ -63,7 +69,7 @@
 #endif
 
 /* ARM Neon */
-#if defined(__ARM_NEON)
+#if defined(__ARM_NEON) || defined(__ARM_NEON__)
 #  include <arm_neon.h>
 #  if defined(__ARM_NEON_FP)
 #    define CGLM_NEON_FP 1

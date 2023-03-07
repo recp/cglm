@@ -38,6 +38,12 @@
 #define glmm_combine_lh(x, y) vcombine_f32(vget_low_f32(x),  vget_high_f32(y))
 #define glmm_combine_hh(x, y) vcombine_f32(vget_high_f32(x), vget_high_f32(y))
 
+#if defined(_WIN32) && defined(_MSC_VER)
+#  define glmm_float32x4_init(x, y, z, w) { .n128_f32 = { x, y, z, w } }
+#else
+#  define glmm_float32x4_init(x, y, z, w) { x, y, z, w }
+#endif
+
 static inline
 float32x4_t
 glmm_abs(float32x4_t v) {
