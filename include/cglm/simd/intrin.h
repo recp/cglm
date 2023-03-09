@@ -69,13 +69,21 @@
 #endif
 
 /* ARM Neon */
-#if defined(__ARM_NEON) || defined(__ARM_NEON__)
+/* TODO: check _M_ARM and compiling should work if there is no ARM64 and NEON */
+#if defined(__ARM_NEON) || defined(__ARM_NEON__) \
+    || defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || defined(__aarch64__)
 #  include <arm_neon.h>
-#  if defined(__ARM_NEON_FP)
-#    define CGLM_NEON_FP 1
-#    ifndef CGLM_SIMD_ARM
-#      define CGLM_SIMD_ARM
-#    endif
+#  ifndef __ARM_NEON
+#    define __ARM_NEON
+#  endif
+#  ifndef __ARM_NEON_FP
+#    define __ARM_NEON_FP 1
+#  endif
+#  ifndef CGLM_ARM64
+#    define CGLM_ARM64 1
+#  endif
+#  ifndef CGLM_SIMD_ARM
+#    define CGLM_SIMD_ARM
 #  endif
 #endif
 
