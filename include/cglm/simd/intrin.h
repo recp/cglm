@@ -72,6 +72,7 @@
 #  endif
 #  ifndef __ARM_NEON_FP
 #    define __ARM_NEON_FP 1
+#    define CGLM_NEON_FP 1
 #  endif
 #  ifndef CGLM_ARM64
 #    define CGLM_ARM64 1
@@ -79,9 +80,12 @@
 #  ifndef CGLM_SIMD_ARM
 #    define CGLM_SIMD_ARM
 #  endif
+#  ifndef CGLM_SIMD_NEON
+#    define CGLM_SIMD_NEON 1
+#  endif
 #endif
 
-#if defined(CGLM_SIMD_x86) || defined(CGLM_NEON_FP)
+#if defined(CGLM_SIMD_x86) || defined(CGLM_SIMD_NEON)
 #  ifndef CGLM_SIMD
 #    define CGLM_SIMD
 #  endif
