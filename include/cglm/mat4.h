@@ -60,7 +60,7 @@
 #  include "simd/avx/mat4.h"
 #endif
 
-#ifdef CGLM_SIMD_NEON
+#ifdef CGLM_NEON_FP
 #  include "simd/neon/mat4.h"
 #endif
 
@@ -129,7 +129,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
   glmm_store(dest[1], glmm_load(mat[1]));
   glmm_store(dest[2], glmm_load(mat[2]));
   glmm_store(dest[3], glmm_load(mat[3]));
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   vst1q_f32(dest[0], vld1q_f32(mat[0]));
   vst1q_f32(dest[1], vld1q_f32(mat[1]));
   vst1q_f32(dest[2], vld1q_f32(mat[2]));
@@ -199,7 +199,7 @@ glm_mat4_zero(mat4 mat) {
   glmm_store(mat[1], x0);
   glmm_store(mat[2], x0);
   glmm_store(mat[3], x0);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glmm_128 x0;
   x0 = vdupq_n_f32(0.0f);
   vst1q_f32(mat[0], x0);
@@ -301,7 +301,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
   glm_mat4_mul_avx(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mul_sse2(m1, m2, dest);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_mul_neon(m1, m2, dest);
 #else
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
@@ -379,7 +379,7 @@ void
 glm_mat4_mulv(mat4 m, vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_mulv_sse2(m, v, dest);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_mulv_neon(m, v, dest);
 #else
   vec4 res;
@@ -499,7 +499,7 @@ void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, dest);
 #else
   dest[0][0] = m[0][0]; dest[1][0] = m[0][1];
@@ -523,7 +523,7 @@ void
 glm_mat4_transpose(mat4 m) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_transp_neon(m, m);
 #else
   mat4 d;
@@ -564,7 +564,7 @@ glm_mat4_scale(mat4 m, float s) {
   glm_mat4_scale_avx(m, s);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_scale_sse2(m, s);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_scale_neon(m, s);
 #else
   glm_mat4_scale_p(m, s);
@@ -583,7 +583,7 @@ float
 glm_mat4_det(mat4 mat) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   return glm_mat4_det_sse2(mat);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   return glm_mat4_det_neon(mat);
 #else
   /* [square] det(A) = det(At) */
@@ -618,7 +618,7 @@ void
 glm_mat4_inv(mat4 mat, mat4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   glm_mat4_inv_neon(mat, dest);
 #else
   float t[6];

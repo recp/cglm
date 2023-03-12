@@ -7,7 +7,7 @@
 
 #ifndef cglm_affine_neon_h
 #define cglm_affine_neon_h
-#if defined(CGLM_SIMD_NEON)
+#if defined(CGLM_NEON_FP)
 
 #include "../../common.h"
 #include "../intrin.h"

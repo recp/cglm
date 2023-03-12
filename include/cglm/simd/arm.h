@@ -10,6 +10,12 @@
 #include "intrin.h"
 #ifdef CGLM_SIMD_ARM
 
+#if defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || defined(__aarch64__)
+# define CGLM_ARM64 1
+#else
+# define CGLM_ARM64 0
+#endif
+
 #define glmm_load(p)      vld1q_f32(p)
 #define glmm_store(p, a)  vst1q_f32(p, a)
 

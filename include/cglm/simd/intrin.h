@@ -63,29 +63,43 @@
 #endif
 
 /* ARM Neon */
-/* TODO: check _M_ARM and compiling should work if there is no ARM64 and NEON */
-#if defined(__ARM_NEON) || defined(__ARM_NEON__) \
-    || defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || defined(__aarch64__)
-#  include <arm_neon.h>
-#  ifndef __ARM_NEON
-#    define __ARM_NEON
+#if defined(_WIN32)
+/* TODO: non-ARM stuff already inported, will this be better option */
+/* #  include <intrin.h> */
+
+#  if defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC)
+#    include <arm64intr.h>
+#    include <arm64_neon.h>
+#    ifndef CGLM_NEON_FP
+#      define CGLM_NEON_FP  1
+#    endif
+#    ifndef CGLM_SIMD_ARM
+#      define CGLM_SIMD_ARM
+#    endif
+#  elif defined(_M_ARM)
+#    include <armintr.h>
+#    include <arm_neon.h>
+#    if defined(CGLM_NEON_FP) && (defined(__ARM_NEON_FP) || defined(vaddq_f32)) /* vaddq_f32 is defined as macro, we pick it */
+#      define CGLM_NEON_FP 1
+#    endif
+#    ifndef CGLM_SIMD_ARM
+#      define CGLM_SIMD_ARM
+#    endif
 #  endif
-#  ifndef __ARM_NEON_FP
-#    define __ARM_NEON_FP 1
-#    define CGLM_NEON_FP 1
-#  endif
-#  ifndef CGLM_ARM64
-#    define CGLM_ARM64 1
-#  endif
-#  ifndef CGLM_SIMD_ARM
-#    define CGLM_SIMD_ARM
-#  endif
-#  ifndef CGLM_SIMD_NEON
-#    define CGLM_SIMD_NEON 1
+
+#else /* non-windows */
+#  if defined(__ARM_NEON) || defined(__ARM_NEON__)
+#    include <arm_neon.h>
+#    if defined(__ARM_NEON_FP)
+#      define CGLM_NEON_FP 1
+#    endif
+#    ifndef CGLM_SIMD_ARM
+#      define CGLM_SIMD_ARM
+#    endif
 #  endif
 #endif
 
-#if defined(CGLM_SIMD_x86) || defined(CGLM_SIMD_NEON)
+#if defined(CGLM_SIMD_x86) || defined(CGLM_NEON_FP)
 #  ifndef CGLM_SIMD
 #    define CGLM_SIMD
 #  endif

@@ -249,7 +249,7 @@ void
 glm_vec4_abs(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, glmm_abs(glmm_load(v)));
-#elif defined(CGLM_SIMD_NEON)
+#elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vabsq_f32(vld1q_f32(v)));
 #else
   dest[0] = fabsf(v[0]);
