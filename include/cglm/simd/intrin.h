@@ -79,7 +79,7 @@
 #  elif defined(_M_ARM)
 #    include <armintr.h>
 #    include <arm_neon.h>
-#    if defined(CGLM_NEON_FP) && (defined(__ARM_NEON_FP) || defined(vaddq_f32)) /* vaddq_f32 is defined as macro, we pick it */
+#    ifndef CGLM_NEON_FP
 #      define CGLM_NEON_FP 1
 #    endif
 #    ifndef CGLM_SIMD_ARM
@@ -99,7 +99,7 @@
 #  endif
 #endif
 
-#if defined(CGLM_SIMD_x86) || defined(CGLM_NEON_FP)
+#if defined(CGLM_SIMD_x86) || defined(CGLM_SIMD_ARM)
 #  ifndef CGLM_SIMD
 #    define CGLM_SIMD
 #  endif
