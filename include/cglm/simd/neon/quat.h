@@ -7,7 +7,7 @@
 
 #ifndef cglm_quat_neon_h
 #define cglm_quat_neon_h
-#if defined(__ARM_NEON_FP)
+#if defined(CGLM_NEON_FP)
 
 #include "../../common.h"
 #include "../intrin.h"
@@ -23,7 +23,7 @@ glm_quat_mul_neon(versor p, versor q, versor dest) {
    */
 
   glmm_128 xp, xq, xqr, r, x, y, z, s2, s3;
-  glmm_128 s1 = {-0.f, 0.f, 0.f, -0.f};
+  glmm_128 s1 = glmm_float32x4_init(-0.f, 0.f, 0.f, -0.f);
   float32x2_t   qh, ql;
   
   xp  = glmm_load(p); /* 3 2 1 0 */
