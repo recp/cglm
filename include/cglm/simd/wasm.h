@@ -55,12 +55,6 @@ _mm_movelh_ps(glmm_128 __a, glmm_128 __b)
   return wasm_i32x4_shuffle(__a, __b, 0, 1, 4, 5);
 }
 
-static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_set_ps(float __z, float __y, float __x, float __w)
-{
-  return (glmm_128)wasm_f32x4_make(__w, __x, __y, __z);
-}
-
 static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
 _mm_sqrt_ss(glmm_128 __a)
 {

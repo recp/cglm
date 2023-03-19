@@ -91,8 +91,7 @@ glm_inv_tr_wasm(mat4 mat) {
   r1 = glmm_load(mat[1]);
   r2 = glmm_load(mat[2]);
   r3 = glmm_load(mat[3]);
-  x1 = _mm_set_ps(1.0f, 0.0f, 0.0f, 0.0f);
-
+  x1 = wasm_f32x4_const(0.0f, 0.0f, 0.0f, 1.0f);
   _MM_TRANSPOSE4_PS(r0, r1, r2, x1);
 
   x2 = glmm_shuff1(r3, 0, 0, 0, 0);
