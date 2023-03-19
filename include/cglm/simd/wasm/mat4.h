@@ -166,7 +166,7 @@ glm_mat4_inv_fast_wasm(mat4 mat, mat4 dest) {
          t0, t1, t2, t3, t4, t5,
          x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
 
-  x8 = wasm_f32x4_const(-0.f, 0.f, -0.f, 0.f);
+  x8 = wasm_f32x4_const(0.f, -0.f, 0.f, -0.f);
   x9 = glmm_shuff1(x8, 2, 1, 2, 1);
 
   /* 127 <- 0 */
