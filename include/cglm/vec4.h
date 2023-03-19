@@ -329,7 +329,7 @@ glm_vec4_add(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_add_ps(glmm_load(a), glmm_load(b)));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, _mm_add_ps(glmm_load(a), glmm_load(b)));
+  glmm_store(dest, wasm_f32x4_add(glmm_load(a), glmm_load(b)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(a), vld1q_f32(b)));
 #else

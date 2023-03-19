@@ -29,10 +29,6 @@
 #define glmm_splat_z(x) glmm_splat(x, 2)
 #define glmm_splat_w(x) glmm_splat(x, 3)
 
-#define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
-     glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
-                 z1, y1, x1, w1)
-
 #define _mm_cvtss_f32(v) wasm_f32x4_extract_lane(v, 0)
 
 static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
@@ -60,24 +56,6 @@ _mm_movelh_ps(glmm_128 __a, glmm_128 __b)
 }
 
 static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_move_ss(glmm_128 __a, glmm_128 __b)
-{
-  return (glmm_128)wasm_i32x4_shuffle(__a, __b, 4, 1, 2, 3);
-}
-
-static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_add_ps(glmm_128 __a, glmm_128 __b)
-{
-  return (glmm_128)wasm_f32x4_add((glmm_128)__a, (glmm_128)__b);
-}
-
-static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_add_ss(glmm_128 __a, glmm_128 __b)
-{
-  return _mm_move_ss(__a, _mm_add_ps(__a, __b));
-}
-
-static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
 _mm_set_ps(float __z, float __y, float __x, float __w)
 {
   return (glmm_128)wasm_f32x4_make(__w, __x, __y, __z);
@@ -92,7 +70,7 @@ _mm_sqrt_ss(glmm_128 __a)
 static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
 _mm_rcp_ps(glmm_128 __a)
 {
-    return (glmm_128)wasm_f32x4_div((glmm_128)wasm_f32x4_splat(1.0f), (glmm_128)__a);
+  return (glmm_128)wasm_f32x4_div((glmm_128)wasm_f32x4_splat(1.0f), (glmm_128)__a);
 }
 
 static __inline__ void __attribute__((__always_inline__, __nodebug__))
@@ -148,7 +126,7 @@ glmm_vhadds(glmm_128 v) {
   shuf = glmm_shuff1(v, 2, 3, 0, 1);
   sums = wasm_f32x4_add(v, shuf);
   shuf = _mm_movehl_ps(shuf, sums);
-  sums = _mm_add_ss(sums, shuf);
+  sums = wasm_i32x4_shuffle(sums, wasm_f32x4_add(sums, shuf), 4, 1, 2, 3);
   return sums;
 }
 
@@ -181,7 +159,7 @@ glmm_vhmax(glmm_128 v) {
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
   x1 = wasm_f32x4_pmax(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
   x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
-  return _mm_move_ss(x1, wasm_f32x4_pmax(x1, x2));
+  return (glmm_128) wasm_i32x4_shuffle(x1, wasm_f32x4_pmax(x1, x2), 4, 1, 2, 3);
 }
 
 static inline
