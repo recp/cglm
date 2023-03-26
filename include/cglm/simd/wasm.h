@@ -11,15 +11,6 @@
 #define glmm_set1(x) wasm_f32x4_splat(x)
 #define glmm_128     v128_t
 
-#define _MM_SHUFFLE(w, z, y, x) (((w) << 6) | ((z) << 4) | ((y) << 2) | (x))
-
-#define _mm_shuffle_ps(__a, __b, __mask)  \
-  ((glmm_128)wasm_i32x4_shuffle(__a, __b, \
-            (((__mask) >> 0) & 0x3) + 0,  \
-            (((__mask) >> 2) & 0x3) + 0,  \
-            (((__mask) >> 4) & 0x3) + 4,  \
-            (((__mask) >> 6) & 0x3) + 4))
-
 #define glmm_shuff1(xmm, z, y, x, w) wasm_i32x4_shuffle(xmm, xmm, w, x, y, z)
 
 #define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
