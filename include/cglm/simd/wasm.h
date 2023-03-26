@@ -20,7 +20,7 @@
             (((__mask) >> 4) & 0x3) + 4,  \
             (((__mask) >> 6) & 0x3) + 4))
 
-#define glmm_shuff1(xmm, z, y, x, w) _mm_shuffle_ps(xmm, xmm, _MM_SHUFFLE(z, y, x, w))
+#define glmm_shuff1(xmm, z, y, x, w) wasm_i32x4_shuffle(xmm, xmm, w, x, y, z)
 
 #define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
 
