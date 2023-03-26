@@ -23,18 +23,6 @@
 #define _mm_cvtss_f32(v) wasm_f32x4_extract_lane(v, 0)
 
 static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_unpackhi_ps(glmm_128 __a, glmm_128 __b)
-{
-  return wasm_i32x4_shuffle(__a, __b, 2, 6, 3, 7);
-}
-
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_unpacklo_ps(glmm_128 __a, glmm_128 __b)
-{
-  return wasm_i32x4_shuffle(__a, __b, 0, 4, 1, 5);
-}
-
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
 _mm_movehl_ps(glmm_128 __a, glmm_128 __b)
 {
   return wasm_i32x4_shuffle(__a, __b, 6, 7, 2, 3);
@@ -79,10 +67,10 @@ _mm_store_ss(float *__p, glmm_128 __a)
     glmm_128 __row1 = (row1); \
     glmm_128 __row2 = (row2); \
     glmm_128 __row3 = (row3); \
-    glmm_128 __tmp0 = _mm_unpacklo_ps(__row0, __row1); \
-    glmm_128 __tmp1 = _mm_unpackhi_ps(__row0, __row1); \
-    glmm_128 __tmp2 = _mm_unpacklo_ps(__row2, __row3); \
-    glmm_128 __tmp3 = _mm_unpackhi_ps(__row2, __row3); \
+    glmm_128 __tmp0 = wasm_i32x4_shuffle(__row0, __row1, 0, 4, 1, 5); \
+    glmm_128 __tmp1 = wasm_i32x4_shuffle(__row0, __row1, 2, 6, 3, 7); \
+    glmm_128 __tmp2 = wasm_i32x4_shuffle(__row2, __row3, 0, 4, 1, 5); \
+    glmm_128 __tmp3 = wasm_i32x4_shuffle(__row2, __row3, 2, 6, 3, 7); \
     (row0) = _mm_movelh_ps(__tmp0, __tmp2); \
     (row1) = _mm_movehl_ps(__tmp2, __tmp0); \
     (row2) = _mm_movelh_ps(__tmp1, __tmp3); \

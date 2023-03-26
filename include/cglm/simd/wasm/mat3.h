@@ -42,8 +42,10 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
   x6 = glmm_shuff1(x3, 2, 0, 0, 0);                     /* b11 b01 b01 b01 */
   x2 = glmm_shuff1(r1, 3, 3, 0, 0);                     /* b21 b21 b11 b11 */
 
-  x8 = _mm_unpackhi_ps(x8, x4);                         /* a10 a00 a12 a02 */
-  x9 = _mm_unpackhi_ps(x7, x2);                         /* b21 b20 b21 b20 */
+  // x8 = _mm_unpackhi_ps(x8, x4);
+  // x9 = _mm_unpackhi_ps(x7, x2);
+  x8 = wasm_i32x4_shuffle(x8, x4, 2, 6, 3, 7);          /* a10 a00 a12 a02 */
+  x9 = wasm_i32x4_shuffle(x7, x2, 2, 6, 3, 7);          /* b21 b20 b21 b20 */
 
   x0 = glmm_fmadd(x4, x6, x0);
   x1 = glmm_fmadd(x5, x2, x1);
