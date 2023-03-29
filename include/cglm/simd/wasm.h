@@ -34,12 +34,6 @@ _mm_movelh_ps(glmm_128 __a, glmm_128 __b)
   return wasm_i32x4_shuffle(__a, __b, 0, 1, 4, 5);
 }
 
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_sqrt_ss(glmm_128 __a)
-{
-  return wasm_i32x4_shuffle(__a, wasm_f32x4_sqrt(__a), 4, 1, 2, 3);
-}
-
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
   do { \
     glmm_128 __row0 = (row0); \
@@ -145,7 +139,9 @@ glmm_dot(glmm_128 a, glmm_128 b) {
 static inline
 float
 glmm_norm(glmm_128 a) {
-  return _mm_cvtss_f32(_mm_sqrt_ss(glmm_vhadds(wasm_f32x4_mul(a, a))));
+  glmm_128 x0;
+  x0 = glmm_vhadds(wasm_f32x4_mul(a, a));
+  return _mm_cvtss_f32(wasm_i32x4_shuffle(x0, wasm_f32x4_sqrt(x0),4, 1, 2, 3));
 }
 
 static inline
