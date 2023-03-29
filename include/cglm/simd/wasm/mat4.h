@@ -286,7 +286,9 @@ glm_mat4_inv_fast_wasm(mat4 mat, mat4 dest) {
   x1 = wasm_i32x4_shuffle(v2, v3, 0, 0, 4, 4);
   x0 = wasm_i32x4_shuffle(x0, x1, 0, 2, 4, 6);
 
-  x0 = _mm_rcp_ps(glmm_vhadd(wasm_f32x4_mul(x0, r0)));
+  // x0 = _mm_rcp_ps(glmm_vhadd(wasm_f32x4_mul(x0, r0)));
+  x0 = wasm_f32x4_div(wasm_f32x4_const_splat(1.0f),
+                      glmm_vhadd(wasm_f32x4_mul(x0, r0)));
 
   glmm_store(dest[0], wasm_f32x4_mul(v0, x0));
   glmm_store(dest[1], wasm_f32x4_mul(v1, x0));

@@ -40,12 +40,6 @@ _mm_sqrt_ss(glmm_128 __a)
   return wasm_i32x4_shuffle(__a, wasm_f32x4_sqrt(__a), 4, 1, 2, 3);
 }
 
-static __inline__ glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_rcp_ps(glmm_128 __a)
-{
-  return (glmm_128)wasm_f32x4_div((glmm_128)wasm_f32x4_splat(1.0f), (glmm_128)__a);
-}
-
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
   do { \
     glmm_128 __row0 = (row0); \
