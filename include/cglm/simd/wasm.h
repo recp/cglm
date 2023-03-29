@@ -46,21 +46,6 @@ _mm_rcp_ps(glmm_128 __a)
   return (glmm_128)wasm_f32x4_div((glmm_128)wasm_f32x4_splat(1.0f), (glmm_128)__a);
 }
 
-static __inline__ void __attribute__((__always_inline__, __nodebug__))
-_mm_storeu_ps(float *__p, glmm_128 __a)
-{
-  struct __unaligned {
-    glmm_128 __v;
-  } __attribute__((__packed__, __may_alias__));
-  ((struct __unaligned *)__p)->__v = __a;
-}
-
-static __inline__ void __attribute__((__always_inline__, __nodebug__))
-_mm_store_ss(float *__p, glmm_128 __a)
-{
-  wasm_v128_store32_lane((void*)__p, (glmm_128)__a, 0);
-}
-
 #define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
   do { \
     glmm_128 __row0 = (row0); \
@@ -80,7 +65,7 @@ _mm_store_ss(float *__p, glmm_128 __a)
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
-  return wasm_v128_andnot(x, wasm_f32x4_splat(-0.0f));
+  return wasm_v128_andnot(x, wasm_f32x4_const_splat(-0.0f));
 }
 
 static inline
@@ -114,8 +99,8 @@ glmm_128
 glmm_vhmin(glmm_128 v) {
   glmm_128 x0, x1, x2;
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
-  x1 = wasm_f32x4_pmin(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
+  x1 = wasm_f32x4_pmin(x0, v);   /* [0|2, 1|3, 2|2, 3|3] */
+  x2 = glmm_splat(x1, 1);              /* [1|3, 1|3, 1|3, 1|3] */
   return wasm_f32x4_pmin(x1, x2);
 }
 
@@ -130,9 +115,10 @@ glmm_128
 glmm_vhmax(glmm_128 v) {
   glmm_128 x0, x1, x2;
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
-  x1 = wasm_f32x4_pmax(x0, v);       /* [0|2, 1|3, 2|2, 3|3] */
-  x2 = glmm_splat(x1, 1);       /* [1|3, 1|3, 1|3, 1|3] */
-  return (glmm_128) wasm_i32x4_shuffle(x1, wasm_f32x4_pmax(x1, x2), 4, 1, 2, 3);
+  x1 = wasm_f32x4_pmax(x0, v);   /* [0|2, 1|3, 2|2, 3|3] */
+  x2 = glmm_splat(x1, 1);              /* [1|3, 1|3, 1|3, 1|3] */
+  // _mm_max_ss
+  return wasm_i32x4_shuffle(x1, wasm_f32x4_pmax(x1, x2), 4, 1, 2, 3);
 }
 
 static inline
@@ -227,7 +213,8 @@ glmm_fmsub(glmm_128 a, glmm_128 b, glmm_128 c) {
 static inline
 glmm_128
 glmm_fnmsub(glmm_128 a, glmm_128 b, glmm_128 c) {
-  return wasm_v128_xor(wasm_f32x4_add(wasm_f32x4_mul(a, b), c), wasm_f32x4_splat(-0.0f));
+  return wasm_v128_xor(wasm_f32x4_add(wasm_f32x4_mul(a, b), c),
+                       wasm_f32x4_const_splat(-0.0f));
 }
 
 #endif
