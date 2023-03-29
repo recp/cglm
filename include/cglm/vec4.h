@@ -162,10 +162,15 @@ glm_vec4_copy(vec4 v, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_ucopy(vec4 v, vec4 dest) {
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  // note here wasm v128.load/v128.store support unaligned loads and stores
+  wasm_v128_store(dest, wasm_v128_load(v));
+#else
   dest[0] = v[0];
   dest[1] = v[1];
   dest[2] = v[2];
   dest[3] = v[3];
+#endif
 }
 
 /*!
@@ -179,7 +184,7 @@ glm_vec4_zero(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_setzero_ps());
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(v, wasm_f32x4_const(0.f, 0.f, 0.f, 0.f));
+  glmm_store(v, wasm_f32x4_const_splat(0.f));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(v, vdupq_n_f32(0.0f));
 #else
@@ -201,7 +206,7 @@ glm_vec4_one(vec4 v) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_set1_ps(1.0f));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(v, wasm_f32x4_splat(1.0f));
+  glmm_store(v, wasm_f32x4_const_splat(1.0f));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(v, vdupq_n_f32(1.0f));
 #else
@@ -424,6 +429,8 @@ void
 glm_vec4_mul(vec4 a, vec4 b, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_mul_ps(glmm_load(a), glmm_load(b)));
+#elif defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(dest, wasm_f32x4_mul(glmm_load(a), glmm_load(b)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vmulq_f32(vld1q_f32(a), vld1q_f32(b)));
 #else
@@ -702,7 +709,7 @@ glm_vec4_negate_to(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_v128_xor(glmm_load(v), wasm_f32x4_splat(-0.0f)));
+  glmm_store(dest, wasm_v128_xor(glmm_load(v), wasm_f32x4_const_splat(-0.0f)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vnegq_f32(vld1q_f32(v)));
 #else
@@ -756,7 +763,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
   dot  = _mm_cvtss_f32(xdot);
 
   if (dot == 0.0f) {
-    glmm_store(dest, wasm_f32x4_const(0.f, 0.f, 0.f, 0.f));
+    glmm_store(dest, wasm_f32x4_const_splat(0.f));
     return;
   }
 
