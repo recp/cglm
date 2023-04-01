@@ -542,9 +542,9 @@ glm_vec4_addadd(vec4 a, vec4 b, vec4 dest) {
                               _mm_add_ps(glmm_load(a),
                                          glmm_load(b))));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
-                              wasm_f32x4_add(glmm_load(a),
-                                         glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(
+          glmm_load(dest),
+          wasm_f32x4_add(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
                             vaddq_f32(vld1q_f32(a),
@@ -574,9 +574,9 @@ glm_vec4_subadd(vec4 a, vec4 b, vec4 dest) {
                               _mm_sub_ps(glmm_load(a),
                                          glmm_load(b))));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
-                              wasm_f32x4_sub(glmm_load(a),
-                                         glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(
+          glmm_load(dest),
+          wasm_f32x4_sub(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
                             vsubq_f32(vld1q_f32(a),
@@ -650,9 +650,9 @@ glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
                               _mm_max_ps(glmm_load(a),
                                          glmm_load(b))));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
-                              wasm_f32x4_max(glmm_load(a),
-                                         glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(
+          glmm_load(dest),
+          wasm_f32x4_max(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
                             vmaxq_f32(vld1q_f32(a),
@@ -682,9 +682,9 @@ glm_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
                               _mm_min_ps(glmm_load(a),
                                          glmm_load(b))));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
-                              wasm_f32x4_min(glmm_load(a),
-                                         glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(
+          glmm_load(dest),
+          wasm_f32x4_min(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
                             vminq_f32(vld1q_f32(a),
@@ -709,7 +709,8 @@ glm_vec4_negate_to(vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_v128_xor(glmm_load(v), wasm_f32x4_const_splat(-0.0f)));
+  glmm_store(dest, wasm_v128_xor(glmm_load(v),
+                                 wasm_f32x4_const_splat(-0.0f)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vnegq_f32(vld1q_f32(v)));
 #else
@@ -760,7 +761,8 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
 
   x0   = glmm_load(v);
   xdot = glmm_vdot(x0, x0);
-  dot  = _mm_cvtss_f32(xdot);
+  // dot  = _mm_cvtss_f32(xdot);
+  dot  = wasm_f32x4_extract_lane(xdot, 0);
 
   if (dot == 0.0f) {
     glmm_store(dest, wasm_f32x4_const_splat(0.f));
@@ -903,8 +905,9 @@ glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
   glmm_store(v, _mm_min_ps(_mm_max_ps(glmm_load(v), _mm_set1_ps(minVal)),
                            _mm_set1_ps(maxVal)));
 #elif defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(v, wasm_f32x4_min(wasm_f32x4_max(glmm_load(v), wasm_f32x4_splat(minVal)),
-                           wasm_f32x4_splat(maxVal)));
+  glmm_store(v, wasm_f32x4_min(
+          wasm_f32x4_max(glmm_load(v), wasm_f32x4_splat(minVal)),
+          wasm_f32x4_splat(maxVal)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(v, vminq_f32(vmaxq_f32(vld1q_f32(v), vdupq_n_f32(minVal)),
                          vdupq_n_f32(maxVal)));

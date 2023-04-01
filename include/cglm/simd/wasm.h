@@ -20,8 +20,6 @@
 #define glmm_splat_z(x) glmm_splat(x, 2)
 #define glmm_splat_w(x) glmm_splat(x, 3)
 
-#define _mm_cvtss_f32(v) wasm_f32x4_extract_lane(v, 0)
-
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
@@ -52,7 +50,7 @@ glmm_vhadds(glmm_128 v) {
 static inline
 float
 glmm_hadd(glmm_128 v) {
-  return _mm_cvtss_f32(glmm_vhadds(v));
+  return wasm_f32x4_extract_lane(glmm_vhadds(v), 0);
 }
 
 static inline
@@ -68,7 +66,7 @@ glmm_vhmin(glmm_128 v) {
 static inline
 float
 glmm_hmin(glmm_128 v) {
-  return _mm_cvtss_f32(glmm_vhmin(v));
+  return wasm_f32x4_extract_lane(glmm_vhmin(v), 0);
 }
 
 static inline
@@ -106,7 +104,7 @@ glmm_vdot(glmm_128 a, glmm_128 b) {
 static inline
 float
 glmm_dot(glmm_128 a, glmm_128 b) {
-  return _mm_cvtss_f32(glmm_vdots(a, b));
+  return wasm_f32x4_extract_lane(glmm_vdots(a, b), 0);
 }
 
 static inline
@@ -114,25 +112,26 @@ float
 glmm_norm(glmm_128 a) {
   glmm_128 x0;
   x0 = glmm_vhadds(wasm_f32x4_mul(a, a));
-  return _mm_cvtss_f32(wasm_i32x4_shuffle(x0, wasm_f32x4_sqrt(x0),4, 1, 2, 3));
+  return wasm_f32x4_extract_lane(
+          wasm_i32x4_shuffle(x0, wasm_f32x4_sqrt(x0),4, 1, 2, 3), 0);
 }
 
 static inline
 float
 glmm_norm2(glmm_128 a) {
-  return _mm_cvtss_f32(glmm_vhadds(wasm_f32x4_mul(a, a)));
+  return wasm_f32x4_extract_lane(glmm_vhadds(wasm_f32x4_mul(a, a)), 0);
 }
 
 static inline
 float
 glmm_norm_one(glmm_128 a) {
-  return _mm_cvtss_f32(glmm_vhadds(glmm_abs(a)));
+  return wasm_f32x4_extract_lane(glmm_vhadds(glmm_abs(a)), 0);
 }
 
 static inline
 float
 glmm_norm_inf(glmm_128 a) {
-  return _mm_cvtss_f32(glmm_vhmax(glmm_abs(a)));
+  return wasm_f32x4_extract_lane(glmm_vhmax(glmm_abs(a)), 0);
 }
 
 static inline

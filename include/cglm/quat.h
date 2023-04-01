@@ -262,7 +262,8 @@ glm_quat_normalize_to(versor q, versor dest) {
 
   x0   = glmm_load(q);
   xdot = glmm_vdot(x0, x0);
-  dot  = _mm_cvtss_f32(xdot);
+  // dot  = _mm_cvtss_f32(xdot);
+  dot  = wasm_f32x4_extract_lane(xdot, 0);
 
   if (dot <= 0.0f) {
     glm_quat_identity(dest);
