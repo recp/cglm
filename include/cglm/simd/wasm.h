@@ -28,12 +28,6 @@ _mm_movehl_ps(glmm_128 __a, glmm_128 __b)
   return wasm_i32x4_shuffle(__a, __b, 6, 7, 2, 3);
 }
 
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_movelh_ps(glmm_128 __a, glmm_128 __b)
-{
-  return wasm_i32x4_shuffle(__a, __b, 0, 1, 4, 5);
-}
-
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {

@@ -25,8 +25,8 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
 
   x8 = glmm_shuff1(l0, 0, 2, 1, 0);                     /* a00 a02 a01 a00 */
   x1 = glmm_shuff1(r0, 3, 0, 0, 0);                     /* b10 b00 b00 b00 */
-  x2 = wasm_i32x4_shuffle(l0, l1, 3, 3, 4, 5); /* a12 a11 a10 a10 */
-  x3 = wasm_i32x4_shuffle(r0, r1, 1, 3, 4, 6); /* b20 b11 b10 b01 */
+  x2 = wasm_i32x4_shuffle(l0, l1, 3, 3, 4, 5);          /* a12 a11 a10 a10 */
+  x3 = wasm_i32x4_shuffle(r0, r1, 1, 3, 4, 6);          /* b20 b11 b10 b01 */
   x0 = wasm_f32x4_mul(x8, x1);
 
   x6 = glmm_shuff1(l0, 1, 0, 2, 1);                     /* a01 a00 a02 a01 */
@@ -65,8 +65,10 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
                                a12 * b21 +
                                a22 * b22 +
                                0   * 00                                    */
-  x2 = _mm_movelh_ps(x8, l2);                           /* 0.f a22 a12 a02 */
-  x3 = _mm_movelh_ps(x9, r2);                           /* 0.f b22 b21 b20 */
+  // x2 = _mm_movelh_ps(x8, l2);
+  // x3 = _mm_movelh_ps(x9, r2);
+  x2 = wasm_i32x4_shuffle(x8, l2, 0, 1, 4, 5);           /* 0.f a22 a12 a02 */
+  x3 = wasm_i32x4_shuffle(x9, r2, 0, 1, 4, 5);           /* 0.f b22 b21 b20 */
   x2 = glmm_vdots(x2, x3);
 
   // _mm_storeu_ps(&dest[0][0], x0);
