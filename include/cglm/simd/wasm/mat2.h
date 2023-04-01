@@ -24,7 +24,8 @@ glm_mat2_mul_wasm(mat2 m1, mat2 m2, mat2 dest) {
   x4 = glmm_shuff1(x2, 3, 3, 1, 1);
   // x0 = _mm_movelh_ps(x1, x1);
   x0 = wasm_i32x4_shuffle(x1, x1, 0, 1, 4, 5);
-  x2 = _mm_movehl_ps(x1, x1);
+  // x2 = _mm_movehl_ps(x1, x1);
+  x2 = wasm_i32x4_shuffle(x1, x1, 6, 7, 2, 3);
 
   /*
    dest[0][0] = a * e + c * f;

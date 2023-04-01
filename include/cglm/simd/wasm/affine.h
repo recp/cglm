@@ -100,17 +100,20 @@ glm_inv_tr_wasm(mat4 mat) {
   x5 = wasm_i32x4_shuffle(r2, x1, 2, 6, 3, 7);
   // r0 = _mm_movelh_ps(x2, x4);
   r0 = wasm_i32x4_shuffle(x2, x4, 0, 1, 4, 5);
-  r1 = _mm_movehl_ps(x4, x2);
+  // r1 = _mm_movehl_ps(x4, x2);
+  r1 = wasm_i32x4_shuffle(x4, x2, 6, 7, 2, 3);
   // r2 = _mm_movelh_ps(x3, x5);
   r2 = wasm_i32x4_shuffle(x3, x5, 0, 1, 4, 5);
-  x1 = _mm_movehl_ps(x5, x3);
+  // x1 = _mm_movehl_ps(x5, x3);
+  x1 = wasm_i32x4_shuffle(x5, x3, 6, 7, 2, 3);
 
   x2 = glmm_shuff1(r3, 0, 0, 0, 0);
   x3 = glmm_shuff1(r3, 1, 1, 1, 1);
   x4 = glmm_shuff1(r3, 2, 2, 2, 2);
   x5 = wasm_f32x4_const_splat(-0.f);
 
-  x0 = glmm_fmadd(r0, x2, glmm_fmadd(r1, x3, wasm_f32x4_mul(r2, x4)));
+  x0 = glmm_fmadd(r0, x2,
+                  glmm_fmadd(r1, x3, wasm_f32x4_mul(r2, x4)));
   x0 = wasm_v128_xor(x0, x5);
 
   x0 = wasm_f32x4_add(x0, x1);

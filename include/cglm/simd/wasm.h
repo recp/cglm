@@ -22,12 +22,6 @@
 
 #define _mm_cvtss_f32(v) wasm_f32x4_extract_lane(v, 0)
 
-static inline glmm_128 __attribute__((__always_inline__, __nodebug__))
-_mm_movehl_ps(glmm_128 __a, glmm_128 __b)
-{
-  return wasm_i32x4_shuffle(__a, __b, 6, 7, 2, 3);
-}
-
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
@@ -49,7 +43,8 @@ glmm_vhadds(glmm_128 v) {
   glmm_128 shuf, sums;
   shuf = glmm_shuff1(v, 2, 3, 0, 1);
   sums = wasm_f32x4_add(v, shuf);
-  shuf = _mm_movehl_ps(shuf, sums);
+  // shuf = _mm_movehl_ps(shuf, sums);
+  shuf = wasm_i32x4_shuffle(shuf, sums, 6, 7, 2, 3);
   sums = wasm_i32x4_shuffle(sums, wasm_f32x4_add(sums, shuf), 4, 1, 2, 3);
   return sums;
 }

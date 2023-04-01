@@ -50,13 +50,15 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
   x0 = glmm_fmadd(x4, x6, x0);
   x1 = glmm_fmadd(x5, x2, x1);
 
-  x2 = _mm_movehl_ps(l2, l1);                           /* a22 a22 a21 a20 */
+  // x2 = _mm_movehl_ps(l2, l1);
+  x2 = wasm_i32x4_shuffle(l2, l1, 6, 7, 2, 3);          /* a22 a22 a21 a20 */
   x3 = glmm_shuff1(x2, 0, 2, 1, 0);                     /* a20 a22 a21 a20 */
   x2 = glmm_shuff1(x2, 1, 0, 2, 1);                     /* a21 a20 a22 a21 */
-  x4 = wasm_i32x4_shuffle(r0, r1, 2, 2, 5, 5); /* b12 b12 b02 b02 */
+  x4 = wasm_i32x4_shuffle(r0, r1, 2, 2, 5, 5);          /* b12 b12 b02 b02 */
   
   x5 = glmm_shuff1(x4, 3, 0, 0, 0);                     /* b12 b02 b02 b02 */
-  x4 = _mm_movehl_ps(r2, x4);                           /* b22 b22 b12 b12 */
+  // x4 = _mm_movehl_ps(r2, x4);
+  x4 = wasm_i32x4_shuffle(r2, x4, 6, 7, 2, 3);          /* b22 b22 b12 b12 */
   x0 = glmm_fmadd(x3, x5, x0);
   x1 = glmm_fmadd(x2, x4, x1);
 
