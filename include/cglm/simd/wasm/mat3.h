@@ -42,22 +42,22 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
   x6 = glmm_shuff1(x3, 2, 0, 0, 0);                     /* b11 b01 b01 b01 */
   x2 = glmm_shuff1(r1, 3, 3, 0, 0);                     /* b21 b21 b11 b11 */
 
-  // x8 = _mm_unpackhi_ps(x8, x4);
-  // x9 = _mm_unpackhi_ps(x7, x2);
+  /* x8 = _mm_unpackhi_ps(x8, x4); */
+  /* x9 = _mm_unpackhi_ps(x7, x2); */
   x8 = wasm_i32x4_shuffle(x8, x4, 2, 6, 3, 7);          /* a10 a00 a12 a02 */
   x9 = wasm_i32x4_shuffle(x7, x2, 2, 6, 3, 7);          /* b21 b20 b21 b20 */
 
   x0 = glmm_fmadd(x4, x6, x0);
   x1 = glmm_fmadd(x5, x2, x1);
 
-  // x2 = _mm_movehl_ps(l2, l1);
+  /* x2 = _mm_movehl_ps(l2, l1); */
   x2 = wasm_i32x4_shuffle(l2, l1, 6, 7, 2, 3);          /* a22 a22 a21 a20 */
   x3 = glmm_shuff1(x2, 0, 2, 1, 0);                     /* a20 a22 a21 a20 */
   x2 = glmm_shuff1(x2, 1, 0, 2, 1);                     /* a21 a20 a22 a21 */
   x4 = wasm_i32x4_shuffle(r0, r1, 2, 2, 5, 5);          /* b12 b12 b02 b02 */
   
   x5 = glmm_shuff1(x4, 3, 0, 0, 0);                     /* b12 b02 b02 b02 */
-  // x4 = _mm_movehl_ps(r2, x4);
+  /* x4 = _mm_movehl_ps(r2, x4); */
   x4 = wasm_i32x4_shuffle(r2, x4, 6, 7, 2, 3);          /* b22 b22 b12 b12 */
   x0 = glmm_fmadd(x3, x5, x0);
   x1 = glmm_fmadd(x2, x4, x1);
@@ -67,17 +67,17 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
                                a12 * b21 +
                                a22 * b22 +
                                0   * 00                                    */
-  // x2 = _mm_movelh_ps(x8, l2);
-  // x3 = _mm_movelh_ps(x9, r2);
+  /* x2 = _mm_movelh_ps(x8, l2); */
+  /* x3 = _mm_movelh_ps(x9, r2); */
   x2 = wasm_i32x4_shuffle(x8, l2, 0, 1, 4, 5);           /* 0.f a22 a12 a02 */
   x3 = wasm_i32x4_shuffle(x9, r2, 0, 1, 4, 5);           /* 0.f b22 b21 b20 */
   x2 = glmm_vdots(x2, x3);
 
-  // _mm_storeu_ps(&dest[0][0], x0);
+  /* _mm_storeu_ps(&dest[0][0], x0); */
   wasm_v128_store(&dest[0][0], x0);
-  // _mm_storeu_ps(&dest[1][1], x1);
+  /* _mm_storeu_ps(&dest[1][1], x1); */
   wasm_v128_store(&dest[1][1], x1);
-  // _mm_store_ss (&dest[2][2], x2);
+  /* _mm_store_ss (&dest[2][2], x2); */
   wasm_v128_store32_lane(&dest[2][2], x2, 0);
 }
 

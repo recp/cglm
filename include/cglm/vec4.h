@@ -163,7 +163,7 @@ CGLM_INLINE
 void
 glm_vec4_ucopy(vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  // note here wasm v128.load/v128.store support unaligned loads and stores
+  /* note here wasm v128.load/v128.store support unaligned loads and stores */
   wasm_v128_store(dest, wasm_v128_load(v));
 #else
   dest[0] = v[0];
@@ -761,7 +761,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
 
   x0   = glmm_load(v);
   xdot = glmm_vdot(x0, x0);
-  // dot  = _mm_cvtss_f32(xdot);
+  /* dot  = _mm_cvtss_f32(xdot); */
   dot  = wasm_f32x4_extract_lane(xdot, 0);
 
   if (dot == 0.0f) {

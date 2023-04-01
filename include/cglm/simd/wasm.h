@@ -41,7 +41,7 @@ glmm_vhadds(glmm_128 v) {
   glmm_128 shuf, sums;
   shuf = glmm_shuff1(v, 2, 3, 0, 1);
   sums = wasm_f32x4_add(v, shuf);
-  // shuf = _mm_movehl_ps(shuf, sums);
+  /* shuf = _mm_movehl_ps(shuf, sums); */
   shuf = wasm_i32x4_shuffle(shuf, sums, 6, 7, 2, 3);
   sums = wasm_i32x4_shuffle(sums, wasm_f32x4_add(sums, shuf), 4, 1, 2, 3);
   return sums;
@@ -76,7 +76,7 @@ glmm_vhmax(glmm_128 v) {
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
   x1 = wasm_f32x4_pmax(x0, v);   /* [0|2, 1|3, 2|2, 3|3] */
   x2 = glmm_splat(x1, 1);              /* [1|3, 1|3, 1|3, 1|3] */
-  // _mm_max_ss
+  /* _mm_max_ss */
   return wasm_i32x4_shuffle(x1, wasm_f32x4_pmax(x1, x2), 4, 1, 2, 3);
 }
 

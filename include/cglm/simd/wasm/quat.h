@@ -28,7 +28,7 @@ glm_quat_mul_wasm(versor p, versor q, versor dest) {
   xq = glmm_load(q);
   x1 = wasm_f32x4_const(0.f, -0.f, 0.f, -0.f); /* TODO: _mm_set1_ss() + shuff ? */
   r  = wasm_f32x4_mul(glmm_splat_w(xp), xq);
-  // x2 = _mm_unpackhi_ps(x1, x1);
+  /* x2 = _mm_unpackhi_ps(x1, x1); */
   x2 = wasm_i32x4_shuffle(x1, x1, 2, 6, 3, 7);
   x3 = glmm_shuff1(x1, 3, 2, 0, 1);
   x  = glmm_splat_x(xp);
