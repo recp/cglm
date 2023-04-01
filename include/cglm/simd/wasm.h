@@ -34,22 +34,6 @@ _mm_movelh_ps(glmm_128 __a, glmm_128 __b)
   return wasm_i32x4_shuffle(__a, __b, 0, 1, 4, 5);
 }
 
-#define _MM_TRANSPOSE4_PS(row0, row1, row2, row3) \
-  do { \
-    glmm_128 __row0 = (row0); \
-    glmm_128 __row1 = (row1); \
-    glmm_128 __row2 = (row2); \
-    glmm_128 __row3 = (row3); \
-    glmm_128 __tmp0 = wasm_i32x4_shuffle(__row0, __row1, 0, 4, 1, 5); \
-    glmm_128 __tmp1 = wasm_i32x4_shuffle(__row0, __row1, 2, 6, 3, 7); \
-    glmm_128 __tmp2 = wasm_i32x4_shuffle(__row2, __row3, 0, 4, 1, 5); \
-    glmm_128 __tmp3 = wasm_i32x4_shuffle(__row2, __row3, 2, 6, 3, 7); \
-    (row0) = _mm_movelh_ps(__tmp0, __tmp2); \
-    (row1) = _mm_movehl_ps(__tmp2, __tmp0); \
-    (row2) = _mm_movelh_ps(__tmp1, __tmp3); \
-    (row3) = _mm_movehl_ps(__tmp3, __tmp1); \
-  } while (0)
-
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {

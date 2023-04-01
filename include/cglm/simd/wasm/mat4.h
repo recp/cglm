@@ -29,14 +29,22 @@ glm_mat4_scale_wasm(mat4 m, float s) {
 CGLM_INLINE
 void
 glm_mat4_transp_wasm(mat4 m, mat4 dest) {
-  glmm_128 r0, r1, r2, r3;
+  glmm_128 r0, r1, r2, r3, tmp0, tmp1, tmp2, tmp3;
 
   r0 = glmm_load(m[0]);
   r1 = glmm_load(m[1]);
   r2 = glmm_load(m[2]);
   r3 = glmm_load(m[3]);
 
-  _MM_TRANSPOSE4_PS(r0, r1, r2, r3);
+  // _MM_TRANSPOSE4_PS(r0, r1, r2, r3);
+  tmp0 = wasm_i32x4_shuffle(r0, r1, 0, 4, 1, 5);
+  tmp1 = wasm_i32x4_shuffle(r0, r1, 2, 6, 3, 7);
+  tmp2 = wasm_i32x4_shuffle(r2, r3, 0, 4, 1, 5);
+  tmp3 = wasm_i32x4_shuffle(r2, r3, 2, 6, 3, 7);
+  r0 = _mm_movelh_ps(tmp0, tmp2);
+  r1 = _mm_movehl_ps(tmp2, tmp0);
+  r2 = _mm_movelh_ps(tmp1, tmp3);
+  r3 = _mm_movehl_ps(tmp3, tmp1);
 
   glmm_store(dest[0], r0);
   glmm_store(dest[1], r1);
