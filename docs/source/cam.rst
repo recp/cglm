@@ -101,7 +101,7 @@ Functions documentation
     Parameters:
       | *[in]*  **box**      AABB
       | *[in]*  **padding**  padding
-      | *[out]* **d**        result matrix
+      | *[out]* **dest**        result matrix
 
 .. c:function:: void  glm_ortho_aabb_pz(vec3 box[2], float padding, mat4 dest)
 
@@ -113,7 +113,7 @@ Functions documentation
     Parameters:
       | *[in]*  **box**      AABB
       | *[in]*  **padding**  padding for near and far
-      | *[out]* **d**        result matrix
+      | *[out]* **dest**        result matrix
 
     Returns:
       square of norm / magnitude
