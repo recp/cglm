@@ -113,7 +113,7 @@
 #  endif
 #endif
 
-#if defined(CGLM_SIMD_x86)
+#if defined(CGLM_SIMD_x86) && !defined(CGLM_SIMD_WASM)
 #  include "x86.h"
 #endif
 
