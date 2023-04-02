@@ -16,6 +16,11 @@ option(CGLM_STATIC "Static build" OFF)
 option(CGLM_USE_C99 "" OFF)
 option(CGLM_USE_TEST "Enable Tests" OFF)
 
+if(CMAKE_SYSTEM_NAME STREQUAL WASI)
+  set(CGLM_STATIC ON CACHE BOOL "Static option" FORCE)
+  set(CGLM_SHARED OFF CACHE BOOL "Shared option" FORCE)
+endif()
+
 if(NOT CGLM_STATIC AND CGLM_SHARED)
   set(CGLM_BUILD SHARED)
 else(CGLM_STATIC)

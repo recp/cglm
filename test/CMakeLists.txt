@@ -22,6 +22,11 @@ set(TEST_RUNNER_PARAMS "")
 add_executable(${TEST_MAIN} ${TESTFILES})
 target_compile_definitions(${TEST_MAIN} PRIVATE CGLM_DEFINE_PRINTS=1)
 
+if(CMAKE_SYSTEM_NAME STREQUAL WASI)
+  target_compile_definitions(${TEST_MAIN} PRIVATE _WASI_EMULATED_PROCESS_CLOCKS=1)
+  target_link_options(${TEST_MAIN} PRIVATE "-lwasi-emulated-process-clocks")
+endif()
+
 if(NOT MSVC)
   target_link_libraries(${TEST_MAIN} PRIVATE m)
 endif()
