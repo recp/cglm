@@ -62,6 +62,27 @@
 
 CGLM_INLINE
 void
+glm_arch_print_name(FILE* __restrict ostream) {
+#ifdef CGLM_SIMD_x86
+  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: x86 SSE*" 
+#ifdef __AVX__
+    " AVX"
+#endif
+    "\n\n" CGLM_PRINT_COLOR_RESET);
+#elif defined(CGLM_SIMD_ARM) 
+  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: arm"
+#ifndef __ARM_NEON_FP
+    " NEON_FP"
+#endif
+#ifdef CGLM_ARM64
+    " ARM64"
+#endif
+    "\n\n" CGLM_PRINT_COLOR_RESET);
+#endif
+}
+
+CGLM_INLINE
+void
 glm_mat4_print(mat4              matrix,
                FILE * __restrict ostream) {
   char buff[16];
