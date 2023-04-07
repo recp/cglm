@@ -60,6 +60,11 @@
 #  define CGLM_PRINT_COLOR_RESET  "\033[0m"
 #endif
 
+/*!
+ * @brief prints current SIMD path in general
+ *
+ * @param[in] ostream    stream to print e.g. stdout, stderr, FILE ...
+ */
 CGLM_INLINE
 void
 glm_arch_print_name(FILE* __restrict ostream) {
