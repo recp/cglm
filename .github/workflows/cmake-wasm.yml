@@ -43,6 +43,7 @@ jobs:
     - name: Test with wasmtime
       run: |
         cd ${{github.workspace}}
+        ls -lh ${{github.workspace}}/build/
         wget --no-verbose https://github.com/bytecodealliance/wasmtime/releases/download/${{env.wasmtime_version}}/wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
         tar xf wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
         ./wasmtime-${{env.wasmtime_version}}-x86_64-linux/wasmtime run --wasm-features simd ${{github.workspace}}/build/tests
@@ -55,3 +56,42 @@ jobs:
         wget --no-verbose https://github.com/wasmerio/wasmer/releases/download/${{env.wasmer_version}}/wasmer-linux-amd64.tar.gz
         tar xf wasmer-linux-amd64.tar.gz
         ./bin/wasmer run --enable-simd ${{github.workspace}}/build/tests
+
+  build_emsdk:
+    strategy:
+      matrix:
+        BUILD_TYPE: [Release, Debug, RelWithDebInfo, MinSizeRel]
+        C_FLAGS: ['', '-msimd128', '-msse -msse2 -msimd128', '-msse -msse2 -msse3 -msse4 -msimd128']
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup emsdk
+      uses: mymindstorm/setup-emsdk@v11
+
+    - name: Verify emsdk
+      run: emcc -v
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: emcmake cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}}" -DCMAKE_EXE_LINKER_FLAGS="-s STANDALONE_WASM" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
+
+    - name: Test with wasmtime
+      run: |
+        cd ${{github.workspace}}
+        ls -lh ${{github.workspace}}/build/
+        wget --no-verbose https://github.com/bytecodealliance/wasmtime/releases/download/${{env.wasmtime_version}}/wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        tar xf wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        ./wasmtime-${{env.wasmtime_version}}-x86_64-linux/wasmtime run --wasm-features simd ${{github.workspace}}/build/tests.wasm
+    - name: Test with wasmer
+      run: |
+        cd ${{github.workspace}}
+        mkdir wasmer
+        cd wasmer
+        wget --no-verbose https://github.com/wasmerio/wasmer/releases/download/${{env.wasmer_version}}/wasmer-linux-amd64.tar.gz
+        tar xf wasmer-linux-amd64.tar.gz
+        ./bin/wasmer run --enable-simd ${{github.workspace}}/build/tests.wasm
