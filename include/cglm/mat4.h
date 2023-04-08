@@ -198,7 +198,7 @@ void
 glm_mat4_zero(mat4 mat) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_128 x0;
-  x0 = wasm_f32x4_const(0.f, 0.f, 0.f, 0.f);
+  x0 = wasm_f32x4_const_splat(0.f);
   glmm_store(mat[0], x0);
   glmm_store(mat[1], x0);
   glmm_store(mat[2], x0);

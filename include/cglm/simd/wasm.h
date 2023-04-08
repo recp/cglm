@@ -29,7 +29,7 @@
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
-  return wasm_v128_andnot(x, wasm_f32x4_const_splat(-0.0f));
+  return wasm_f32x4_abs(x);
 }
 
 static inline
