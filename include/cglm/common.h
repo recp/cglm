@@ -82,4 +82,34 @@
 #  endif
 #endif
 
+/* struct API configurator */
+/* TODO: move struct/common.h? */
+/* WARN: dont use concant helpers outside cglm headers, because they may be changed */
+
+#define CGLM_MACRO_CONCAT_HELPER(A, B, C, D, E, ...) A ## B ## C ## D ## E ## __VA_ARGS__
+#define CGLM_MACRO_CONCAT(A, B, C, D, E, ...) CGLM_MACRO_CONCAT_HELPER(A, B, C, D, E,__VA_ARGS__)
+
+#ifndef CGLM_OMIT_NS_FROM_STRUCT_API
+#  ifndef CGLM_STRUCT_API_NS
+#    define CGLM_STRUCT_API_NS glms
+#  endif
+#  ifndef CGLM_STRUCT_API_NS_SEPERATOR
+#    define CGLM_STRUCT_API_NS_SEPERATOR _
+#  endif
+#else
+#  define CGLM_STRUCT_API_NS
+#  define CGLM_STRUCT_API_NS_SEPERATOR
+#endif
+
+#ifndef CGLM_STRUCT_API_NAME_SUFFIX
+#  define CGLM_STRUCT_API_NAME_SUFFIX
+#endif
+
+#define CGLM_STRUCTAPI(A, ...) CGLM_MACRO_CONCAT(CGLM_STRUCT_API_NS,             \
+                                                 CGLM_STRUCT_API_NS_SEPERATOR,   \
+                                                 A,                              \
+                                                 CGLM_STRUCT_API_NAME_SUFFIX,    \
+                                                 _,                              \
+                                                 __VA_ARGS__)
+
 #endif /* cglm_common_h */

@@ -34,6 +34,9 @@
 #include "../util.h"
 #include "../vec2-ext.h"
 
+/* api definition */
+#define glms_vec2_(NAME) CGLM_STRUCTAPI(vec2, NAME)
+
 /*!
  * @brief fill a vector with specified value
  *
@@ -42,7 +45,7 @@
  */
 CGLM_INLINE
 vec2s
-glms_vec2_fill(float val) {
+glms_vec2_(fill)(float val) {
   vec2s r;
   glm_vec2_fill(r.raw, val);
   return r;
@@ -56,7 +59,7 @@ glms_vec2_fill(float val) {
  */
 CGLM_INLINE
 bool
-glms_vec2_eq(vec2s v, float val) {
+glms_vec2_(eq)(vec2s v, float val) {
   return glm_vec2_eq(v.raw, val);
 }
 
@@ -68,7 +71,7 @@ glms_vec2_eq(vec2s v, float val) {
  */
 CGLM_INLINE
 bool
-glms_vec2_eq_eps(vec2s v, float val) {
+glms_vec2_(eq_eps)(vec2s v, float val) {
   return glm_vec2_eq_eps(v.raw, val);
 }
 
@@ -79,7 +82,7 @@ glms_vec2_eq_eps(vec2s v, float val) {
  */
 CGLM_INLINE
 bool
-glms_vec2_eq_all(vec2s v) {
+glms_vec2_(eq_all)(vec2s v) {
   return glm_vec2_eq_all(v.raw);
 }
 
@@ -91,7 +94,7 @@ glms_vec2_eq_all(vec2s v) {
  */
 CGLM_INLINE
 bool
-glms_vec2_eqv(vec2s a, vec2s b) {
+glms_vec2_(eqv)(vec2s a, vec2s b) {
   return glm_vec2_eqv(a.raw, b.raw);
 }
 
@@ -103,7 +106,7 @@ glms_vec2_eqv(vec2s a, vec2s b) {
  */
 CGLM_INLINE
 bool
-glms_vec2_eqv_eps(vec2s a, vec2s b) {
+glms_vec2_(eqv_eps)(vec2s a, vec2s b) {
   return glm_vec2_eqv_eps(a.raw, b.raw);
 }
 
@@ -114,7 +117,7 @@ glms_vec2_eqv_eps(vec2s a, vec2s b) {
  */
 CGLM_INLINE
 float
-glms_vec2_max(vec2s v) {
+glms_vec2_(max)(vec2s v) {
   return glm_vec2_max(v.raw);
 }
 
@@ -137,7 +140,7 @@ glms_vec2_min(vec2s v) {
  */
 CGLM_INLINE
 bool
-glms_vec2_isnan(vec2s v) {
+glms_vec2_(isnan)(vec2s v) {
   return glm_vec2_isnan(v.raw);
 }
 
@@ -149,7 +152,7 @@ glms_vec2_isnan(vec2s v) {
  */
 CGLM_INLINE
 bool
-glms_vec2_isinf(vec2s v) {
+glms_vec2_(isinf)(vec2s v) {
   return glm_vec2_isinf(v.raw);
 }
 
@@ -175,7 +178,7 @@ glms_vec2_isvalid(vec2s v) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_sign(vec2s v) {
+glms_vec2_(sign)(vec2s v) {
   vec2s r;
   glm_vec2_sign(v.raw, r.raw);
   return r;
@@ -189,7 +192,7 @@ glms_vec2_sign(vec2s v) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_sqrt(vec2s v) {
+glms_vec2_(sqrt)(vec2s v) {
   vec2s r;
   glm_vec2_sqrt(v.raw, r.raw);
   return r;
@@ -204,7 +207,7 @@ glms_vec2_sqrt(vec2s v) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_complex_mul(vec2s a, vec2s b, vec2s dest) {
+glms_vec2_(complex_mul)(vec2s a, vec2s b, vec2s dest) {
   glm_vec2_complex_mul(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -218,7 +221,7 @@ glms_vec2_complex_mul(vec2s a, vec2s b, vec2s dest) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_complex_div(vec2s a, vec2s b, vec2s dest) {
+glms_vec2_(complex_div)(vec2s a, vec2s b, vec2s dest) {
   glm_vec2_complex_div(a.raw, b.raw, dest.raw);
   return dest;
 }
@@ -231,7 +234,7 @@ glms_vec2_complex_div(vec2s a, vec2s b, vec2s dest) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_complex_conjugate(vec2s a, vec2s dest) {
+glms_vec2_(complex_conjugate)(vec2s a, vec2s dest) {
   glm_vec2_complex_conjugate(a.raw, dest.raw);
   return dest;
 }
