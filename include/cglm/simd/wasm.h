@@ -181,8 +181,7 @@ glmm_fmsub(glmm_128 a, glmm_128 b, glmm_128 c) {
 static inline
 glmm_128
 glmm_fnmsub(glmm_128 a, glmm_128 b, glmm_128 c) {
-  return wasm_v128_xor(wasm_f32x4_add(wasm_f32x4_mul(a, b), c),
-                       wasm_f32x4_const_splat(-0.0f));
+  return wasm_f32x4_neg(wasm_f32x4_add(wasm_f32x4_mul(a, b), c));
 }
 
 #endif

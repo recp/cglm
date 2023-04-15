@@ -110,11 +110,10 @@ glm_inv_tr_wasm(mat4 mat) {
   x2 = glmm_shuff1(r3, 0, 0, 0, 0);
   x3 = glmm_shuff1(r3, 1, 1, 1, 1);
   x4 = glmm_shuff1(r3, 2, 2, 2, 2);
-  x5 = wasm_f32x4_const_splat(-0.f);
 
   x0 = glmm_fmadd(r0, x2,
                   glmm_fmadd(r1, x3, wasm_f32x4_mul(r2, x4)));
-  x0 = wasm_v128_xor(x0, x5);
+  x0 = wasm_f32x4_neg(x0);
 
   x0 = wasm_f32x4_add(x0, x1);
 
