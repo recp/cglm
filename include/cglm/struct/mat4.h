@@ -240,7 +240,7 @@ glms_mat4_(mulN)(mat4s * __restrict matrices[], uint32_t len) {
   size_t i;
 
   for (i = 0; i < len; i++) {
-    r = glms_mat4_mul(r, *matrices[i]);
+    r = glms_mat4_(mul)(r, *matrices[i]);
   }
   
   return r;
