@@ -10,6 +10,10 @@
 
 #include "../include/common.h"
 
+#if !defined(_WIN32) && !defined(_MSC_VER)
+#  pragma GCC diagnostic ignored "-Wstrict-prototypes"
+#endif
+
 void
 test_rand_mat4(mat4 dest);
 

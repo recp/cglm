@@ -17,9 +17,6 @@
     <ClCompile Include="..\test\src\test_bezier.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\src\test_cam.c">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="..\test\src\test_clamp.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -35,18 +32,6 @@
     <ClCompile Include="..\test\src\tests.c">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\test\src\test_cam_lh_no.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_cam_lh_zo.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_cam_rh_no.c">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\test\src\test_cam_rh_zo.c">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\tests.h">
@@ -58,46 +43,28 @@
     <ClInclude Include="..\test\include\common.h">
       <Filter>include</Filter>
     </ClInclude>
-    <ClInclude Include="..\test\src\test_mat3.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_mat4.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_project.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_quat.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_vec3.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_vec4.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\test\src\test_affine.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\test\src\test_affine_mat.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\test\src\test_mat2.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_plane.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_vec2.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\test\src\test_ray.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\test\src\test_affine2d.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="..\test\src\test_camera.h">
+    <ClInclude Include="..\test\src\test_cam.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_cam_lh_no.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_cam_lh_zo.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_cam_rh_no.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_cam_rh_zo.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\test\src\test_ivec2.h">
@@ -107,6 +74,36 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="..\test\src\test_ivec4.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat2.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_mat4.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_plane.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_project.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_quat.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_ray.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec2.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec3.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_vec4.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

@@ -223,12 +223,19 @@ TEST_DECLARE(glmc_mat2_swap_row)
 TEST_DECLARE(glmc_mat2_rmc)
 
 /* camera (incl [LR]H cross [NZ]O) */
-TEST_DECLARE(perspective_lh_zo)
-TEST_DECLARE(perspective_rh_zo)
-TEST_DECLARE(perspective_lh_no)
-TEST_DECLARE(perspective_rh_no)
-TEST_DECLARE(camera_lookat)
-TEST_DECLARE(camera_decomp)
+TEST_DECLARE(glm_perspective_lh_zo)
+TEST_DECLARE(glm_perspective_rh_zo)
+TEST_DECLARE(glm_perspective_lh_no)
+TEST_DECLARE(glm_perspective_rh_no)
+TEST_DECLARE(glm_camera_lookat)
+TEST_DECLARE(glm_camera_decomp)
+
+TEST_DECLARE(glmc_perspective_lh_zo)
+TEST_DECLARE(glmc_perspective_rh_zo)
+TEST_DECLARE(glmc_perspective_lh_no)
+TEST_DECLARE(glmc_perspective_rh_no)
+TEST_DECLARE(glmc_camera_lookat)
+TEST_DECLARE(glmc_camera_decomp)
 
 TEST_DECLARE(glm_frustum)
 
@@ -1057,12 +1064,19 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat2_rmc)
 
   /* camera (incl [LR]H cross [NZ]O) */
-  TEST_ENTRY(perspective_lh_zo)
-  TEST_ENTRY(perspective_rh_zo)
-  TEST_ENTRY(perspective_lh_no)
-  TEST_ENTRY(perspective_rh_no)
-  TEST_ENTRY(camera_lookat)
-  TEST_ENTRY(camera_decomp)
+  TEST_ENTRY(glm_perspective_lh_zo)
+  TEST_ENTRY(glm_perspective_rh_zo)
+  TEST_ENTRY(glm_perspective_lh_no)
+  TEST_ENTRY(glm_perspective_rh_no)
+  TEST_ENTRY(glm_camera_lookat)
+  TEST_ENTRY(glm_camera_decomp)
+
+  TEST_ENTRY(glmc_perspective_lh_zo)
+  TEST_ENTRY(glmc_perspective_rh_zo)
+  TEST_ENTRY(glmc_perspective_lh_no)
+  TEST_ENTRY(glmc_perspective_rh_no)
+  TEST_ENTRY(glmc_camera_lookat)
+  TEST_ENTRY(glmc_camera_decomp)
   
   TEST_ENTRY(glm_frustum)
   

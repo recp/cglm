@@ -6,15 +6,17 @@
  */
 
 #include "test_common.h"
+#include "../../include/cglm/clipspace/persp_rh_no.h"
+#include "../../include/cglm/call/clipspace/persp_rh_no.h"
 
-TEST_IMPL(perspective_rh_no) {
+TEST_IMPL(GLM_PREFIX, perspective_rh_no) {
   mat4 dst;
   const float fovy     = glm_rad(45.0f);
   const float aspect   = 640/480.0f;
   const float zNearVal = 0.1f;
   const float zFarVal  = 100.0f;
 
-  glm_perspective_rh_no(fovy, aspect, zNearVal, zFarVal, dst);
+  GLM(perspective_rh_no)(fovy, aspect, zNearVal, zFarVal, dst);
 
   /* Sanity mk. I: longhand version */
   ASSERT(test_eq(dst[0][0],  1.0f / (tanf(fovy / 2) * aspect)))
