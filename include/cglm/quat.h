@@ -70,6 +70,10 @@
 #  include "simd/neon/quat.h"
 #endif
 
+#ifdef CGLM_SIMD_WASM
+#  include "simd/wasm/quat.h"
+#endif
+
 CGLM_INLINE void glm_quat_normalize(versor q);
 
 /*
@@ -238,7 +242,22 @@ glm_quat_norm(versor q) {
 CGLM_INLINE
 void
 glm_quat_normalize_to(versor q, versor dest) {
-#if defined( __SSE2__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_128 xdot, x0;
+  float  dot;
+
+  x0   = glmm_load(q);
+  xdot = glmm_vdot(x0, x0);
+  /* dot  = _mm_cvtss_f32(xdot); */
+  dot  = wasm_f32x4_extract_lane(xdot, 0);
+
+  if (dot <= 0.0f) {
+    glm_quat_identity(dest);
+    return;
+  }
+
+  glmm_store(dest, wasm_f32x4_div(x0, wasm_f32x4_sqrt(xdot)));
+#elif defined( __SSE2__ ) || defined( __SSE2__ )
   __m128 xdot, x0;
   float  dot;
 
@@ -438,7 +457,9 @@ glm_quat_mul(versor p, versor q, versor dest) {
     + (a1 d2 + b1 c2 − c1 b2 + d1 a2)k
        a1 a2 − b1 b2 − c1 c2 − d1 d2
    */
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glm_quat_mul_wasm(p, q, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_quat_mul_sse2(p, q, dest);
 #elif defined(CGLM_NEON_FP)
   glm_quat_mul_neon(p, q, dest);

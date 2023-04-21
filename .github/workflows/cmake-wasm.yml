@@ -1,0 +1,97 @@
+name: CMake WebAssembly
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  wasmtime_version: v7.0.0
+  wasmer_version: v3.1.1
+
+jobs:
+  build_wasi_sdk:
+    strategy:
+      matrix:
+        BUILD_TYPE: [Release, Debug, RelWithDebInfo, MinSizeRel]
+        C_FLAGS: ['', '-msimd128']
+        wasi_sdk_version: [19, 20]
+    # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
+    # You can convert this to a matrix build if you need cross-platform coverage.
+    # See: https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Downloading wasi-sdk
+      run: |
+        cd ${{github.workspace}}
+        wget --no-verbose https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${{matrix.wasi_sdk_version}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0-linux.tar.gz
+        tar xf wasi-sdk-${{matrix.wasi_sdk_version}}.0-linux.tar.gz
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}}" -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0/share/cmake/wasi-sdk.cmake -DWASI_SDK_PREFIX=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0 -DCGLM_USE_TEST=ON
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
+
+    - name: Test with wasmtime
+      run: |
+        cd ${{github.workspace}}
+        ls -lh ${{github.workspace}}/build/
+        wget --no-verbose https://github.com/bytecodealliance/wasmtime/releases/download/${{env.wasmtime_version}}/wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        tar xf wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        ./wasmtime-${{env.wasmtime_version}}-x86_64-linux/wasmtime run --wasm-features simd ${{github.workspace}}/build/tests
+
+    - name: Test with wasmer
+      run: |
+        cd ${{github.workspace}}
+        mkdir wasmer
+        cd wasmer
+        wget --no-verbose https://github.com/wasmerio/wasmer/releases/download/${{env.wasmer_version}}/wasmer-linux-amd64.tar.gz
+        tar xf wasmer-linux-amd64.tar.gz
+        ./bin/wasmer run --enable-simd ${{github.workspace}}/build/tests
+
+  build_emsdk:
+    strategy:
+      matrix:
+        BUILD_TYPE: [Release, Debug, RelWithDebInfo, MinSizeRel]
+        C_FLAGS: ['', '-msimd128', '-msse -msse2 -msimd128', '-msse -msse2 -msse3 -msse4 -msimd128']
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup emsdk
+      uses: mymindstorm/setup-emsdk@v11
+
+    - name: Verify emsdk
+      run: emcc -v
+
+    - name: Configure CMake
+      # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
+      # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      run: emcmake cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}}" -DCMAKE_EXE_LINKER_FLAGS="-s STANDALONE_WASM" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+
+    - name: Build
+      # Build your program with the given configuration
+      run: cmake --build ${{github.workspace}}/build --config ${{matrix.BUILD_TYPE}}
+
+    - name: Test with wasmtime
+      run: |
+        cd ${{github.workspace}}
+        ls -lh ${{github.workspace}}/build/
+        wget --no-verbose https://github.com/bytecodealliance/wasmtime/releases/download/${{env.wasmtime_version}}/wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        tar xf wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        ./wasmtime-${{env.wasmtime_version}}-x86_64-linux/wasmtime run --wasm-features simd ${{github.workspace}}/build/tests.wasm
+    - name: Test with wasmer
+      run: |
+        cd ${{github.workspace}}
+        mkdir wasmer
+        cd wasmer
+        wget --no-verbose https://github.com/wasmerio/wasmer/releases/download/${{env.wasmer_version}}/wasmer-linux-amd64.tar.gz
+        tar xf wasmer-linux-amd64.tar.gz
+        ./bin/wasmer run --enable-simd ${{github.workspace}}/build/tests.wasm

@@ -99,18 +99,30 @@
 #  endif
 #endif
 
-#if defined(CGLM_SIMD_x86) || defined(CGLM_SIMD_ARM)
+
+/* WebAssembly */
+#if defined(__wasm__) && defined(__wasm_simd128__)
+#  ifndef CGLM_SIMD_WASM
+#    define CGLM_SIMD_WASM
+#  endif
+#endif
+
+#if defined(CGLM_SIMD_x86) || defined(CGLM_SIMD_ARM) || defined(CGLM_SIMD_WASM)
 #  ifndef CGLM_SIMD
 #    define CGLM_SIMD
 #  endif
 #endif
 
-#if defined(CGLM_SIMD_x86)
+#if defined(CGLM_SIMD_x86) && !defined(CGLM_SIMD_WASM)
 #  include "x86.h"
 #endif
 
 #if defined(CGLM_SIMD_ARM)
 #  include "arm.h"
+#endif
+
+#if defined(CGLM_SIMD_WASM)
+#  include "wasm.h"
 #endif
 
 #endif /* cglm_intrin_h */

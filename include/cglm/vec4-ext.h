@@ -45,7 +45,9 @@
 CGLM_INLINE
 void
 glm_vec4_broadcast(float val, vec4 d) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(d, wasm_f32x4_splat(val));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(d, _mm_set1_ps(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
@@ -61,7 +63,9 @@ glm_vec4_broadcast(float val, vec4 d) {
 CGLM_INLINE
 void
 glm_vec4_fill(vec4 v, float val) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(v, wasm_f32x4_splat(val));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_set1_ps(val));
 #else
   v[0] = v[1] = v[2] = v[3] = val;
@@ -247,7 +251,9 @@ glm_vec4_sign(vec4 v, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_abs(vec4 v, vec4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(dest, glmm_abs(glmm_load(v)));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, glmm_abs(glmm_load(v)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vabsq_f32(vld1q_f32(v)));
@@ -284,7 +290,9 @@ glm_vec4_fract(vec4 v, vec4 dest) {
 CGLM_INLINE
 float
 glm_vec4_hadd(vec4 v) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  return glmm_hadd(glmm_load(v));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   return glmm_hadd(glmm_load(v));
 #else
   return v[0] + v[1] + v[2] + v[3];
@@ -300,7 +308,9 @@ glm_vec4_hadd(vec4 v) {
 CGLM_INLINE
 void
 glm_vec4_sqrt(vec4 v, vec4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glmm_store(dest, wasm_f32x4_sqrt(glmm_load(v)));
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_sqrt_ps(glmm_load(v)));
 #else
   dest[0] = sqrtf(v[0]);

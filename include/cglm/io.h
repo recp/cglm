@@ -68,7 +68,10 @@
 CGLM_INLINE
 void
 glm_arch_print_name(FILE* __restrict ostream) {
-#ifdef CGLM_SIMD_x86
+#if defined(CGLM_SIMD_WASM)
+  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: wasm SIMD128"
+    "\n\n" CGLM_PRINT_COLOR_RESET);
+#elif defined(CGLM_SIMD_x86)
   fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: x86 SSE*" 
 #ifdef __AVX__
     " AVX"
