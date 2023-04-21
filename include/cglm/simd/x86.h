@@ -65,11 +65,12 @@
 #define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, 0, GLMM_NEGZEROf)
 
 #define glmm_float32x4_SIGNMASK_NEG _mm_set1_ps(GLMM_NEGZEROf)
+#define glmm_float32x8_SIGNMASK_NEG _mm256_castsi256_ps(_mm256_set1_epi32(GLMM_NEGZEROf));
 
 static inline
 __m128
 glmm_abs(__m128 x) {
-  return _mm_andnot_ps(_mm_set1_ps(0x80000000/*-0.0f*/), x);
+  return _mm_andnot_ps(glmm_float32x4_SIGNMASK_NEG, x);
 }
 
 static inline
@@ -269,7 +270,7 @@ glmm_fnmsub(__m128 a, __m128 b, __m128 c) {
   return _mm_fnmsub_ps(a, b, c);
 #else
   return _mm_xor_ps(_mm_add_ps(_mm_mul_ps(a, b), c),
-                    _mm_set1_ps(0x80000000/*-0.0f*/));
+                    glmm_float32x4_SIGNMASK_NEG);
 #endif
 }
 
@@ -311,7 +312,7 @@ glmm256_fnmsub(__m256 a, __m256 b, __m256 c) {
   return _mm256_fmsub_ps(a, b, c);
 #else
   return _mm256_xor_ps(_mm256_sub_ps(_mm256_mul_ps(a, b), c),
-                       _mm256_set1_ps(0x80000000/*-0.0f*/));
+                       glmm_float32x8_SIGNMASK_NEG);
 #endif
 }
 #endif
