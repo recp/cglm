@@ -99,7 +99,6 @@
 #  endif
 #endif
 
-
 /* WebAssembly */
 #if defined(__wasm__) && defined(__wasm_simd128__)
 #  ifndef CGLM_SIMD_WASM

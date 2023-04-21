@@ -153,7 +153,7 @@ glm_mat4_det_sse2(mat4 mat) {
                   _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 3, 1)),
                   x2);
   
-  x2 = _mm_xor_ps(x2, _mm_set_ps(-0.f, 0.f, -0.f, 0.f));
+  x2 = _mm_xor_ps(x2, glmm_float32x4_SIGNMASK_PNPN);
   
   return glmm_hadd(_mm_mul_ps(x2, r0));
 }
@@ -166,7 +166,8 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
          t0, t1, t2, t3, t4, t5,
          x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
 
-  x8 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f);
+  /* x8 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f); */
+  x8 = glmm_float32x4_SIGNMASK_NPNP;
   x9 = glmm_shuff1(x8, 2, 1, 2, 1);
 
   /* 127 <- 0 */
@@ -302,7 +303,8 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
          t0, t1, t2, t3, t4, t5,
          x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
 
-  x8 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f);
+  /* x8 = _mm_set_ps(-0.f, 0.f, -0.f, 0.f); */
+  x8 = glmm_float32x4_SIGNMASK_NPNP;
   x9 = glmm_shuff1(x8, 2, 1, 2, 1);
 
   /* 127 <- 0 */

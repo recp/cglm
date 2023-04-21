@@ -98,7 +98,7 @@ glm_inv_tr_sse2(mat4 mat) {
   x2 = glmm_shuff1(r3, 0, 0, 0, 0);
   x3 = glmm_shuff1(r3, 1, 1, 1, 1);
   x4 = glmm_shuff1(r3, 2, 2, 2, 2);
-  x5 = _mm_set1_ps(-0.f);
+  x5 = glmm_float32x4_SIGNMASK_NEG;
 
   x0 = glmm_fmadd(r0, x2, glmm_fmadd(r1, x3, _mm_mul_ps(r2, x4)));
   x0 = _mm_xor_ps(x0, x5);
