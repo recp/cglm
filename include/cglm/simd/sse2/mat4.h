@@ -153,7 +153,7 @@ glm_mat4_det_sse2(mat4 mat) {
                   _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 3, 1)),
                   x2);
   
-  x2 = _mm_xor_ps(x2, glmm_float32x4_SIGNMASK_PNPN);
+  x2 = _mm_xor_ps(x2, glmm_float32x4_SIGNMASK_NPNP);
   
   return glmm_hadd(_mm_mul_ps(x2, r0));
 }
