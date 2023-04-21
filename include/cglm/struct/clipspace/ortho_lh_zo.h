@@ -64,7 +64,7 @@ glms_ortho_aabb_lh_zo(vec3s box[2]) {
   mat4s dest;
   vec3  rawBox[2];
 
-  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_lh_zo(rawBox, dest.raw);
 
   return dest;
@@ -87,7 +87,7 @@ glms_ortho_aabb_p_lh_zo(vec3s box[2], float padding) {
   mat4s dest;
   vec3  rawBox[2];
 
-  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_p_lh_zo(rawBox, padding, dest.raw);
 
   return dest;
@@ -110,7 +110,7 @@ glms_ortho_aabb_pz_lh_zo(vec3s box[2], float padding) {
   mat4s dest;
   vec3  rawBox[2];
 
-  glms_vec3_unpack(rawBox, box, 2);
+  glms_vec3_(unpack)(rawBox, box, 2);
   glm_ortho_aabb_pz_lh_zo(rawBox, padding, dest.raw);
 
   return dest;

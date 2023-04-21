@@ -75,7 +75,7 @@ glms_aabb_print(vec3s                   bbox[2],
                 FILE       * __restrict ostream) {
   vec3 rawBbox[2];
 
-  glms_vec3_unpack(rawBbox, bbox, 2);
+  glms_vec3_(unpack)(rawBbox, bbox, 2);
   glm_aabb_print(rawBbox, tag, ostream);
 }
 

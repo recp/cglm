@@ -28,7 +28,11 @@
 #include "test_affine2d.h"
 #include "test_affine_mat.h"
 #include "test_ray.h"
-#include "test_camera.h"
+#include "test_cam.h"
+#include "test_cam_lh_no.h"
+#include "test_cam_lh_zo.h"
+#include "test_cam_rh_no.h"
+#include "test_cam_rh_zo.h"
 
 #undef GLM
 #undef GLM_PREFIX
@@ -55,7 +59,11 @@
 #include "test_affine2d.h"
 #include "test_affine_mat.h"
 #include "test_ray.h"
-#include "test_camera.h"
+#include "test_cam.h"
+#include "test_cam_lh_no.h"
+#include "test_cam_lh_zo.h"
+#include "test_cam_rh_no.h"
+#include "test_cam_rh_zo.h"
 
 #undef GLM
 #undef GLM_PREFIX

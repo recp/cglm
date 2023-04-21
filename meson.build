@@ -108,11 +108,6 @@ if get_option('build_tests') == true
 test_src = files(
     'test/runner.c',
     'test/src/test_bezier.c',
-    'test/src/test_cam.c',
-    'test/src/test_cam_lh_no.c',
-    'test/src/test_cam_lh_zo.c',
-    'test/src/test_cam_rh_no.c',
-    'test/src/test_cam_rh_zo.c',
     'test/src/test_clamp.c',
     'test/src/test_common.c',
     'test/src/test_euler.c',
