@@ -26,6 +26,16 @@
 #define glmm_splat_z(x) glmm_splat(x, 2)
 #define glmm_splat_w(x) glmm_splat(x, 3)
 
+#define GLMM_NEGZEROf 0x80000000 /*  0x80000000 ---> -0.0f  */
+
+/* _mm_set_ps(X, Y, Z, W); */
+#define GLMM__SIGNMASKf(X, Y, Z, W) wasm_i32x4_const(X, Y, Z, W)
+
+#define glmm_float32x4_SIGNMASK_PNPN GLMM__SIGNMASKf(0, GLMM_NEGZEROf, 0, GLMM_NEGZEROf)
+#define glmm_float32x4_SIGNMASK_NPNP GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, GLMM_NEGZEROf, 0)
+#define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, 0, GLMM_NEGZEROf)
+#define glmm_float32x4_SIGNMASK_NEG wasm_i32x4_const_splat(GLMM_NEGZEROf)
+
 static inline
 glmm_128
 glmm_abs(glmm_128 x) {
