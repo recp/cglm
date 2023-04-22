@@ -108,7 +108,7 @@ glm_mat4_det_neon(mat4 mat) {
   float32x4_t   r0, r1, r2, r3, x0, x1, x2;
   float32x2_t   ij, op, mn, kl, nn, mm, jj, ii, gh, ef, t12, t34;
   float32x4x2_t a1;
-  float32x4_t   x3 = glmm_float32x4_init(0.f, -0.f, 0.f, -0.f);
+  float32x4_t   x3 = glmm_float32x4_SIGNMASK_PNPN;
 
   /* 127 <- 0, [square] det(A) = det(At) */
   r0 = glmm_load(mat[0]);              /* d c b a */
@@ -181,7 +181,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
                 x0, x1, x2, x3, x4, x5, x6, x7, x8;
   float32x4x2_t a1;
   float32x2_t   lp, ko, hg, jn, im, fe, ae, bf, cg, dh;
-  float32x4_t   x9 = glmm_float32x4_init(-0.f, 0.f, -0.f, 0.f);
+  float32x4_t   x9 = glmm_float32x4_SIGNMASK_NPNP;
 
   x8 = vrev64q_f32(x9);
 

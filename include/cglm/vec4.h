@@ -709,7 +709,7 @@ glm_vec4_negate_to(vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest, wasm_f32x4_neg(glmm_load(v)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_xor_ps(glmm_load(v), _mm_set1_ps(-0.0f)));
+  glmm_store(dest, _mm_xor_ps(glmm_load(v), glmm_float32x4_SIGNMASK_NEG));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(dest, vnegq_f32(vld1q_f32(v)));
 #else

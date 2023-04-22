@@ -52,6 +52,10 @@ glmm_float32x4_init(float x, float y, float z, float w) {
 #  define glmm_float32x4_init(x, y, z, w) { x, y, z, w }
 #endif
 
+#define glmm_float32x4_SIGNMASK_PNPN glmm_float32x4_init( 0.f, -0.f,  0.f, -0.f)
+#define glmm_float32x4_SIGNMASK_NPNP glmm_float32x4_init(-0.f,  0.f, -0.f,  0.f)
+#define glmm_float32x4_SIGNMASK_NPPN glmm_float32x4_init(-0.f,  0.f,  0.f, -0.f)
+
 static inline
 float32x4_t
 glmm_abs(float32x4_t v) {
