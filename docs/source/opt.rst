@@ -1,6 +1,6 @@
 .. default-domain:: C
 
-Options
+🛠️ Options
 ===============================================================================
 
 A few options are provided via macros.
@@ -89,6 +89,16 @@ You have to extra options for dot product: **CGLM_SSE4_DOT** and **CGLM_SSE3_DOT
 - If **SSE3** is enabled then you can define **CGLM_SSE3_DOT** to force cglm to use **_mm_hadd_ps** instructions.
 
 otherwise cglm will use custom cglm's hadd functions which are optimized too.
+
+Struct API Options
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To configure the Struct API namespace, you can define the following macros before including the cglm/struct.h header:
+
+- **CGLM_OMIT_NS_FROM_STRUCT_API**: omits CGLM_STRUCT_API_NS (`glms_`) namespace completely if there is sub namespace e.g `mat4_`, `vec4_` ... DEFAULT is not defined
+- **CGLM_STRUCT_API_NS**:           define name space for struct api, DEFAULT is **glms**
+- **CGLM_STRUCT_API_NAME_SUFFIX**:  define name suffix, DEFAULT is **empty** e.g defining it as #define CGLM_STRUCT_API_NAME_SUFFIX  s will add s suffix to mat4_mul -> mat4s_mul
+
 
 Print Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

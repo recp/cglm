@@ -1,59 +1,28 @@
-API documentation
+📚 API documentation
 ================================
 
-Some functions may exist twice,
-once for their namespace and once for global namespace
-to make easier to write very common functions
+**cglm** provides a few APIs for similar functions.
 
-For instance, in general we use :code:`glm_vec3_dot` to get dot product
-of two **vec3**. Now we can also do this with :code:`glm_dot`,
-same for *_cross* and so on...
+* 📦 **Inline API**: All functions are inline. You can include **cglm/cglm.h** header
+  to use this API. This is the default API. `glm_` is namespace/prefix for this API. 
+* 📦 **Call API**: All functions are not inline. You need to build *cglm* and link it
+  to your project. You can include **cglm/call.h** header to use this API. `glmc_` is namespace/prefix for this API. 
 
-The original function stays where it is, the function in global namespace
-of same name is just an alias, so there is no call version of those functions.
-e.g there is no func like :code:`glmc_dot` because *glm_dot* is just alias for
-:code:`glm_vec3_dot`
+And also there are also sub categories:
 
-By including **cglm/cglm.h** header you will include all inline version
-of functions. Since functions in this header[s] are inline you don't need to
-build or link *cglm* against your project.
+* 📦 **Array API**: Types are raw arrays and functions takes array as argument. You can include **cglm/cglm.h** header
+  to use this API. This is the default API. `glm_` is namespace/prefix for this API. 
+* 📦 **Struct API**: Types are union/struct and functions takes struct as argument and return structs if needed. You can include **cglm/struct.h** header
+  to use this API. This also includes **cglm/cglm.h** header.`glms_` is namespace/prefix for this API but your can omit or change it, see struct api docs.
+* 📦 **SIMD API**: SIMD functions and helpers. `glmm_` is namespace/prefix for this API. 
 
-But by including **cglm/call.h** header you will include all *non-inline*
-version of functions. You need to build *cglm* and link it.
-Follow the :doc:`build` documentation for this
+📌 Since struct api and call api are built top of inline array api, follow inline array api docs for individual functions. 
 
 .. toctree::
    :maxdepth: 1
-   :caption: API categories:
+   :caption: API documentations:
 
-   affine
-   affine-mat
-   affine2d
-   cam
-   frustum
-   box
-   quat
-   euler
-   mat2
-   mat3
-   mat4
-   vec2
-   vec2-ext
-   vec3
-   vec3-ext
-   vec4
-   vec4-ext
-   ivec2
-   ivec3
-   ivec4
-   color
-   plane
-   project
-   util
-   io
-   call
-   sphere
-   curve
-   bezier
-   version
-   ray
+   api_inline_array
+   api_struct
+   api_call
+   api_simd

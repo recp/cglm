@@ -28,7 +28,7 @@ considered to be supported as optional.
    opengl
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: API:
 
    api
