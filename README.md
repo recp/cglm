@@ -242,6 +242,38 @@ add_subdirectory(external/cglm/)
 # or you can use find_package to configure cglm
 ```
 
+#### Use CMake to build for WebAssembly
+
+Since math functions like `sinf` is used, this can not be targeted at `wasm32-unknown-unknown`, one of [wasi-sdk](https://github.com/WebAssembly/wasi-sdk) or [emscripten](https://github.com/emscripten-core/emsdk) should be used.
+
+Should note that shared build is not yet supported for WebAssembly.
+
+For [simd128](https://github.com/WebAssembly/simd) support, add `-msimd128` to `CMAKE_C_FLAGS`, in command line `-DCMAKE_C_FLAGS="-msimd128"`.
+
+For tests, the cmake option `CGLM_USE_TEST` would still work, you'll need a wasi runtime for running tests, see our [ci config file](.github/workflows/cmake-wasm.yml) for a detailed example.
+
+##### Use CMake and WASI SDK to build for WebAssembly
+
+```bash
+$ cmake .. \
+  -DCMAKE_TOOLCHAIN_FILE=/path/to/wasi-sdk-19.0/share/cmake/wasi-sdk.cmake \
+  -DWASI_SDK_PREFIX=/path/to/wasi-sdk-19.0
+```
+
+Where `/path/to/wasi-sdk-19.0/` is the path to extracted [wasi sdk](https://github.com/WebAssembly/wasi-sdk).
+
+In this case it would by default make a static build.
+
+##### Use CMake and Emscripten SDK to build for WebAssembly
+
+```bash
+$ emcmake cmake .. \
+  -DCMAKE_EXE_LINKER_FLAGS="-s STANDALONE_WASM" \
+  -DCGLM_STATIC=ON
+```
+
+The `emcmake` here is the cmake wrapper for Emscripten from installed [emsdk](https://github.com/emscripten-core/emsdk).
+
 ### Meson (All platforms)
 
 ```bash
