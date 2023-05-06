@@ -68,25 +68,26 @@
 CGLM_INLINE
 void
 glm_arch_print_name(FILE* __restrict ostream) {
+  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: "
 #if defined(CGLM_SIMD_WASM)
-  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: wasm SIMD128"
-    "\n\n" CGLM_PRINT_COLOR_RESET);
+  "wasm SIMD128"
 #elif defined(CGLM_SIMD_x86)
-  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: x86 SSE*" 
-#ifdef __AVX__
-    " AVX"
-#endif
-    "\n\n" CGLM_PRINT_COLOR_RESET);
+  "x86 SSE* "
+#  ifdef __AVX__
+  " AVX"
+#  endif
 #elif defined(CGLM_SIMD_ARM) 
-  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: arm"
-#ifndef __ARM_NEON_FP
+  "arm"
+#  ifndef __ARM_NEON_FP
     " NEON_FP"
-#endif
-#ifdef CGLM_ARM64
+#  endif
+#  ifdef CGLM_ARM64
     " ARM64"
+#  endif
+#else
+  "uncommon"
 #endif
-    "\n\n" CGLM_PRINT_COLOR_RESET);
-#endif
+  "\n\n" CGLM_PRINT_COLOR_RESET);
 }
 
 CGLM_INLINE
