@@ -13,6 +13,7 @@
    CGLM_INLINE void glm_vec3_print(vec3 vec, FILE *ostream);
    CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
    CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
+   CGLM_INLINE void glm_arch_print(FILE *ostream);
  */
 
 /*
@@ -75,8 +76,8 @@
  */
 CGLM_INLINE
 void
-glm_arch_print_name(FILE* __restrict ostream) {
-  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm arch: "
+glm_arch_print(FILE* __restrict ostream) {
+  fprintf(ostream, CGLM_PRINT_COLOR "arch: "
 #if defined(CGLM_SIMD_WASM)
   "wasm SIMD128"
 #elif defined(CGLM_SIMD_x86)
@@ -84,7 +85,7 @@ glm_arch_print_name(FILE* __restrict ostream) {
 #  ifdef __AVX__
   " AVX"
 #  endif
-#elif defined(CGLM_SIMD_ARM) 
+#elif defined(CGLM_SIMD_ARM)
   "arm"
 #  ifndef __ARM_NEON_FP
     " NEON_FP"
@@ -95,7 +96,20 @@ glm_arch_print_name(FILE* __restrict ostream) {
 #else
   "uncommon"
 #endif
-  "\n\n" CGLM_PRINT_COLOR_RESET);
+  CGLM_PRINT_COLOR_RESET);
+}
+
+/*!
+ * @brief prints current SIMD path in general
+ *
+ * @param[in] ostream    stream to print e.g. stdout, stderr, FILE ...
+ */
+CGLM_INLINE
+void
+glm_arch_print_name(FILE* __restrict ostream) {
+  fprintf(ostream, CGLM_PRINT_COLOR "\ncglm ");
+  glm_arch_print(ostream);
+  fprintf(ostream, "\n\n" CGLM_PRINT_COLOR_RESET);
 }
 
 CGLM_INLINE

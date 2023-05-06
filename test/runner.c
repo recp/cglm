@@ -21,13 +21,13 @@ main(int argc, const char * argv[]) {
   (void)argc;
   (void)argv;
 
-  glm_arch_print_name(stderr);
-
   passed = failed = maxlen  = 0;
   total  = 0.0;
   count  = sizeof(tests) / sizeof(tests[0]);
 
-  fprintf(stderr, CYAN "Welcome to cglm tests\n\n" RESET);
+  fprintf(stderr, CYAN "\nWelcome to cglm tests ( " RESET);
+  glm_arch_print(stderr);
+  fprintf(stderr, CYAN " )\n\n" RESET);
 
   srand((unsigned int)time(NULL));
 
