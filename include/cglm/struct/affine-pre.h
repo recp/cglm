@@ -45,6 +45,23 @@ glms_translate(mat4s m, vec3s v) {
 }
 
 /*!
+ * @brief translate existing transform matrix by v vector
+ *        and store result in dest
+ *
+ * source matrix will remain same
+ *
+ * @param[in]  m    affine transfrom
+ * @param[in]  v    translate vector [x, y, z]
+ * @returns    dest translated matrix
+ */
+CGLM_INLINE
+mat4s
+glms_translate_to(mat4s m, vec3s v, mat4s dest) {
+  glm_translate_to(m.raw, v.raw, dest.raw);
+  return dest;
+}
+
+/*!
  * @brief translate existing transform matrix by x factor
  *
  * @param[in]       m   affine transfrom
