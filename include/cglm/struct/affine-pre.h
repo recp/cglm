@@ -7,6 +7,7 @@
 
 /*
  Functions:
+   CGLM_INLINE mat4s glms_translate_to(mat4s m, vec3s v, mat4s dest);
    CGLM_INLINE mat4s glms_translate(mat4s m, vec3s v);
    CGLM_INLINE mat4s glms_translate_x(mat4s m, float x);
    CGLM_INLINE mat4s glms_translate_y(mat4s m, float y);
