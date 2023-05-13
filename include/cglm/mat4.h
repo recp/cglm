@@ -43,6 +43,7 @@
    CGLM_INLINE void  glm_mat4_swap_col(mat4 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
    CGLM_INLINE float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
+   CGLM_INLINE void  glm_mat4_make(float * restrict src, mat4 dest);
  */
 
 #ifndef cglm_mat_h
@@ -779,6 +780,26 @@ glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
   vec4 tmp;
   glm_mat4_mulv(m, c, tmp);
   return glm_vec4_dot(r, tmp);
+}
+
+/*!
+ * @brief Create mat4 matrix from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest matrix
+ */
+CGLM_INLINE
+void
+glm_mat4_make(float * __restrict src, mat4 dest) {
+  dest[0][0] = src[0];   dest[1][0] = src[4];
+  dest[0][1] = src[1];   dest[1][1] = src[5];
+  dest[0][2] = src[2];   dest[1][2] = src[6];
+  dest[0][3] = src[3];   dest[1][3] = src[7];
+
+  dest[2][0] = src[8];   dest[3][0] = src[12];
+  dest[2][1] = src[9];   dest[3][1] = src[13];
+  dest[2][2] = src[10];  dest[3][2] = src[14];
+  dest[2][3] = src[11];  dest[3][3] = src[15];
 }
 
 #endif /* cglm_mat_h */

@@ -9,6 +9,7 @@
 
 #define A_MATRIX  {{1,2,3,4},{5,6,7,8},{9,10,11,12},{13,14,15,16}}
 #define A_MATRIX3 {{1,2,3},{5,6,7},{9,10,11}}
+#define MAT4_ARRAY {1, 5, 2, 7, 12, 1, 4, 6, 0, 8, 1, 0, 6, 5, 0, 1}
 
 TEST_IMPL(GLM_PREFIX, mat4_ucopy) {
   mat4 m1 = A_MATRIX;
@@ -480,6 +481,23 @@ TEST_IMPL(GLM_PREFIX, mat4_rmc) {
   r2 = v[0] * v1[0] + v[1] * v1[1] + v[2] * v1[2] + v[3] * v1[3];
 
   ASSERT(test_eq(r1, r2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4_make) {
+  mat4 dest;
+  unsigned int i, j;
+  float src[16] = MAT4_ARRAY;
+
+  GLM(mat4_make)(src, dest);
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=4, j++) {
+    ASSERT(test_eq(dest[j][0], src[i]))
+    ASSERT(test_eq(dest[j][1], src[i+1]))
+    ASSERT(test_eq(dest[j][2], src[i+2]))
+    ASSERT(test_eq(dest[j][3], src[i+3]))
+  }
 
   TEST_SUCCESS
 }
