@@ -459,4 +459,17 @@ glms_mat4_(rmc)(vec4s r, mat4s m, vec4s c) {
   return glm_mat4_rmc(r.raw, m.raw, c.raw);
 }
 
+/*!
+ * @brief Create mat4 matrix from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest matrix
+ */
+CGLM_INLINE
+mat4s
+glms_mat4_(make)(float * __restrict src, mat4s dest) {
+  glm_mat4_make(src, dest.raw);
+  return dest;
+}
+
 #endif /* cglms_mat4s_h */
