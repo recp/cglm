@@ -8,6 +8,7 @@
 #include "test_common.h"
 
 #define A_MATRIX {{1,2,3},{5,6,7},{9,10,11}}
+#define MAT3_ARRAY {1, 5, 2, 7, 12, 1, 4, 6, 0}
 
 TEST_IMPL(GLM_PREFIX, mat3_copy) {
   mat3 m1 = A_MATRIX;
@@ -304,6 +305,23 @@ TEST_IMPL(GLM_PREFIX, mat3_rmc) {
   r2 = v[0] * v1[0] + v[1] * v1[1] + v[2] * v1[2];
 
   ASSERT(test_eq(r1, r2))
+
+  TEST_SUCCESS
+}
+
+
+TEST_IMPL(GLM_PREFIX, mat3_make) {
+  mat3 dest;
+  unsigned int i, j;
+  float src[9] = MAT3_ARRAY;
+
+  GLM(mat3_make)(src, dest);
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=3, j++) {
+    ASSERT(test_eq(dest[j][0], src[i]))
+    ASSERT(test_eq(dest[j][1], src[i+1]))
+    ASSERT(test_eq(dest[j][2], src[i+2]))
+  }
 
   TEST_SUCCESS
 }
