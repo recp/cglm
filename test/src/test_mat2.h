@@ -8,6 +8,7 @@
 #include "test_common.h"
 
 #define A_MATRIX2x2 {{1,2},{5,6}}
+#define MAT2_ARRAY {1, 5, 2, 7}
 
 #ifndef CGLM_TEST_MAT2_ONCE
 #define CGLM_TEST_MAT2_ONCE
@@ -279,6 +280,21 @@ TEST_IMPL(GLM_PREFIX, mat2_rmc) {
   r2 = v[0] * v1[0] + v[1] * v1[1];
 
   ASSERT(test_eq(r1, r2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat2_make) {
+  mat2 dest;
+  unsigned int i, j;
+  float src[4] = MAT2_ARRAY;
+
+  GLM(mat2_make)(src, dest);
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=2, j++) {
+    ASSERT(test_eq(dest[j][0], src[i]))
+    ASSERT(test_eq(dest[j][1], src[i+1]))
+  }
 
   TEST_SUCCESS
 }
