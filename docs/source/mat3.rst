@@ -34,6 +34,7 @@ Functions:
 #. :c:func:`glm_mat3_swap_col`
 #. :c:func:`glm_mat3_swap_row`
 #. :c:func:`glm_mat3_rmc`
+#. :c:func:`glm_mat3_make`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -187,3 +188,13 @@ Functions documentation
 
     Returns:
         scalar value e.g. Matrix1x1
+
+.. c:function:: void glm_mat3_make(float * __restrict src, mat3 dest)
+
+    Create mat3 matrix from pointer
+
+    | NOTE: **@src** must contain 9 elements.
+
+    Parameters:
+      | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination matrix3x3

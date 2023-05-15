@@ -30,6 +30,7 @@
    CGLM_INLINE void  glm_mat3_swap_col(mat3 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
    CGLM_INLINE float glm_mat3_rmc(vec3 r, mat3 m, vec3 c);
+   CGLM_INLINE void  glm_mat3_make(float * restrict src, mat3 dest);
  */
 
 #ifndef cglm_mat3_h
@@ -425,6 +426,28 @@ glm_mat3_rmc(vec3 r, mat3 m, vec3 c) {
   vec3 tmp;
   glm_mat3_mulv(m, c, tmp);
   return glm_vec3_dot(r, tmp);
+}
+
+/*!
+ * @brief Create mat3 matrix from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest matrix
+ */
+CGLM_INLINE
+void
+glm_mat3_make(float * __restrict src, mat3 dest) {
+  dest[0][0] = src[0];
+  dest[0][1] = src[1];
+  dest[0][2] = src[2];
+
+  dest[1][0] = src[3];
+  dest[1][1] = src[4];
+  dest[1][2] = src[5];
+
+  dest[2][0] = src[6];
+  dest[2][1] = src[7];
+  dest[2][2] = src[8];
 }
 
 #endif /* cglm_mat3_h */
