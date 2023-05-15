@@ -207,6 +207,7 @@ TEST_DECLARE(glm_mat2_inv)
 TEST_DECLARE(glm_mat2_swap_col)
 TEST_DECLARE(glm_mat2_swap_row)
 TEST_DECLARE(glm_mat2_rmc)
+TEST_DECLARE(glm_mat2_make)
 
 TEST_DECLARE(glmc_mat2_copy)
 TEST_DECLARE(glmc_mat2_identity)
@@ -223,6 +224,7 @@ TEST_DECLARE(glmc_mat2_inv)
 TEST_DECLARE(glmc_mat2_swap_col)
 TEST_DECLARE(glmc_mat2_swap_row)
 TEST_DECLARE(glmc_mat2_rmc)
+TEST_DECLARE(glmc_mat2_make)
 
 /* camera (incl [LR]H cross [NZ]O) */
 TEST_DECLARE(glm_perspective_lh_zo)
@@ -1050,6 +1052,7 @@ TEST_LIST {
   TEST_ENTRY(glm_mat2_swap_col)
   TEST_ENTRY(glm_mat2_swap_row)
   TEST_ENTRY(glm_mat2_rmc)
+  TEST_ENTRY(glm_mat2_make)
 
   TEST_ENTRY(glmc_mat2_copy)
   TEST_ENTRY(glmc_mat2_identity)
@@ -1066,6 +1069,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat2_swap_col)
   TEST_ENTRY(glmc_mat2_swap_row)
   TEST_ENTRY(glmc_mat2_rmc)
+  TEST_ENTRY(glmc_mat2_make)
 
   /* camera (incl [LR]H cross [NZ]O) */
   TEST_ENTRY(glm_perspective_lh_zo)

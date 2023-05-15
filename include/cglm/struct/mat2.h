@@ -258,4 +258,17 @@ glms_mat2_(rmc)(vec2s r, mat2s m, vec2s c) {
   return glm_mat2_rmc(r.raw, m.raw, c.raw);
 }
 
+/*!
+ * @brief Create mat2 matrix from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest matrix
+ */
+CGLM_INLINE
+mat2s
+glms_mat2_(make)(float * __restrict src, mat2s dest) {
+  glm_mat2_make(src, dest.raw);
+  return dest;
+}
+
 #endif /* cglms_mat2_h */
