@@ -392,6 +392,8 @@ glm_aabb_print(vec3                    bbox[2],
 #define glm_vec2_print(v, s) (void)v; (void)s;
 #define glm_versor_print(v, s) (void)v; (void)s;
 #define glm_aabb_print(v, t, s) (void)v; (void)t; (void)s;
+#define glm_arch_print(s) (void)s;
+#define glm_arch_print_name(s) (void)s;
 
 #endif
 #endif /* cglm_io_h */
