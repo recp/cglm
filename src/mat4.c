@@ -163,3 +163,9 @@ float
 glmc_mat4_rmc(vec4 r, mat4 m, vec4 c) {
   return glm_mat4_rmc(r, m, c);
 }
+
+CGLM_EXPORT
+void
+glmc_mat4_make(float * __restrict src, mat4 dest) {
+  glm_mat4_make(src, dest);
+}

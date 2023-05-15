@@ -285,4 +285,17 @@ glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
   return glm_mat3_rmc(r.raw, m.raw, c.raw);
 }
 
+/*!
+ * @brief Create mat3 matrix from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest matrix
+ */
+CGLM_INLINE
+mat3s
+glms_mat3_(make)(float * __restrict src, mat3s dest) {
+  glm_mat3_make(src, dest.raw);
+  return dest;
+}
+
 #endif /* cglms_mat3s_h */

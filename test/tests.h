@@ -124,6 +124,7 @@ TEST_DECLARE(glm_mat4_inv_precise)
 TEST_DECLARE(glm_mat4_swap_col)
 TEST_DECLARE(glm_mat4_swap_row)
 TEST_DECLARE(glm_mat4_rmc)
+TEST_DECLARE(glm_mat4_make)
 
 TEST_DECLARE(glmc_mat4_ucopy)
 TEST_DECLARE(glmc_mat4_copy)
@@ -150,6 +151,7 @@ TEST_DECLARE(glmc_mat4_inv_fast)
 TEST_DECLARE(glmc_mat4_swap_col)
 TEST_DECLARE(glmc_mat4_swap_row)
 TEST_DECLARE(glmc_mat4_rmc)
+TEST_DECLARE(glmc_mat4_make)
 
 /* mat3 */
 TEST_DECLARE(glm_mat3_copy)
@@ -168,6 +170,7 @@ TEST_DECLARE(glm_mat3_inv)
 TEST_DECLARE(glm_mat3_swap_col)
 TEST_DECLARE(glm_mat3_swap_row)
 TEST_DECLARE(glm_mat3_rmc)
+TEST_DECLARE(glm_mat3_make)
 
 TEST_DECLARE(glmc_mat3_copy)
 TEST_DECLARE(glmc_mat3_identity)
@@ -185,6 +188,7 @@ TEST_DECLARE(glmc_mat3_inv)
 TEST_DECLARE(glmc_mat3_swap_col)
 TEST_DECLARE(glmc_mat3_swap_row)
 TEST_DECLARE(glmc_mat3_rmc)
+TEST_DECLARE(glmc_mat3_make)
 
 TEST_DECLARE(MACRO_GLM_MAT2_IDENTITY_INIT)
 TEST_DECLARE(MACRO_GLM_MAT2_ZERO_INIT)
@@ -205,6 +209,7 @@ TEST_DECLARE(glm_mat2_inv)
 TEST_DECLARE(glm_mat2_swap_col)
 TEST_DECLARE(glm_mat2_swap_row)
 TEST_DECLARE(glm_mat2_rmc)
+TEST_DECLARE(glm_mat2_make)
 
 TEST_DECLARE(glmc_mat2_copy)
 TEST_DECLARE(glmc_mat2_identity)
@@ -221,6 +226,7 @@ TEST_DECLARE(glmc_mat2_inv)
 TEST_DECLARE(glmc_mat2_swap_col)
 TEST_DECLARE(glmc_mat2_swap_row)
 TEST_DECLARE(glmc_mat2_rmc)
+TEST_DECLARE(glmc_mat2_make)
 
 /* camera (incl [LR]H cross [NZ]O) */
 TEST_DECLARE(glm_perspective_lh_zo)
@@ -965,6 +971,7 @@ TEST_LIST {
   TEST_ENTRY(glm_mat4_swap_col)
   TEST_ENTRY(glm_mat4_swap_row)
   TEST_ENTRY(glm_mat4_rmc)
+  TEST_ENTRY(glm_mat4_make)
   
   TEST_ENTRY(glmc_mat4_ucopy)
   TEST_ENTRY(glmc_mat4_copy)
@@ -991,6 +998,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat4_swap_col)
   TEST_ENTRY(glmc_mat4_swap_row)
   TEST_ENTRY(glmc_mat4_rmc)
+  TEST_ENTRY(glmc_mat4_make)
   
   /* mat3 */
   TEST_ENTRY(glm_mat3_copy)
@@ -1009,6 +1017,7 @@ TEST_LIST {
   TEST_ENTRY(glm_mat3_swap_col)
   TEST_ENTRY(glm_mat3_swap_row)
   TEST_ENTRY(glm_mat3_rmc)
+  TEST_ENTRY(glm_mat3_make)
 
   TEST_ENTRY(glmc_mat3_copy)
   TEST_ENTRY(glmc_mat3_identity)
@@ -1026,6 +1035,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat3_swap_col)
   TEST_ENTRY(glmc_mat3_swap_row)
   TEST_ENTRY(glmc_mat3_rmc)
+  TEST_ENTRY(glmc_mat3_make)
   
   TEST_ENTRY(MACRO_GLM_MAT2_IDENTITY_INIT)
   TEST_ENTRY(MACRO_GLM_MAT2_ZERO_INIT)
@@ -1046,6 +1056,7 @@ TEST_LIST {
   TEST_ENTRY(glm_mat2_swap_col)
   TEST_ENTRY(glm_mat2_swap_row)
   TEST_ENTRY(glm_mat2_rmc)
+  TEST_ENTRY(glm_mat2_make)
 
   TEST_ENTRY(glmc_mat2_copy)
   TEST_ENTRY(glmc_mat2_identity)
@@ -1062,6 +1073,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat2_swap_col)
   TEST_ENTRY(glmc_mat2_swap_row)
   TEST_ENTRY(glmc_mat2_rmc)
+  TEST_ENTRY(glmc_mat2_make)
 
   /* camera (incl [LR]H cross [NZ]O) */
   TEST_ENTRY(glm_perspective_lh_zo)
