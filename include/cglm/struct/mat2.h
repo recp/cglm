@@ -27,6 +27,7 @@
    CGLM_INLINE void  glms_mat2_swap_col(mat2 mat, int col1, int col2)
    CGLM_INLINE void  glms_mat2_swap_row(mat2 mat, int row1, int row2)
    CGLM_INLINE float glms_mat2_rmc(vec2 r, mat2 m, vec2 c)
+   CGLM_INLINE float glms_mat42_make(float * __restrict src);
  */
 
 #ifndef cglms_mat2_h
@@ -262,13 +263,14 @@ glms_mat2_(rmc)(vec2s r, mat2s m, vec2s c) {
  * @brief Create mat2 matrix from pointer
  *
  * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
+ * @return constructed matrix from raw pointer
  */
 CGLM_INLINE
 mat2s
-glms_mat2_(make)(float * __restrict src, mat2s dest) {
-  glm_mat2_make(src, dest.raw);
-  return dest;
+glms_mat2_(make)(float * __restrict src) {
+  mat2s r;
+  glm_mat2_make(src, r.raw);
+  return r;
 }
 
 #endif /* cglms_mat2_h */

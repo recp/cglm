@@ -28,6 +28,7 @@
    CGLM_INLINE mat3s  glms_mat3_swap_col(mat3s mat, int col1, int col2);
    CGLM_INLINE mat3s  glms_mat3_swap_row(mat3s mat, int row1, int row2);
    CGLM_INLINE float  glms_mat3_rmc(vec3s r, mat3s m, vec3s c);
+   CGLM_INLINE float  glms_mat3_make(float * __restrict src);
  */
 
 #ifndef cglms_mat3s_h
@@ -289,13 +290,14 @@ glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
  * @brief Create mat3 matrix from pointer
  *
  * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
+ * @return constructed matrix from raw pointer
  */
 CGLM_INLINE
 mat3s
-glms_mat3_(make)(float * __restrict src, mat3s dest) {
-  glm_mat3_make(src, dest.raw);
-  return dest;
+glms_mat3_(make)(float * __restrict src) {
+  mat3s r;
+  glm_mat3_make(src, r.raw);
+  return r;
 }
 
 #endif /* cglms_mat3s_h */

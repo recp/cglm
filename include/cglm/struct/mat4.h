@@ -42,6 +42,7 @@
    CGLM_INLINE mat4s   glms_mat4_swap_col(mat4s mat, int col1, int col2);
    CGLM_INLINE mat4s   glms_mat4_swap_row(mat4s mat, int row1, int row2);
    CGLM_INLINE float   glms_mat4_rmc(vec4s r, mat4s m, vec4s c);
+   CGLM_INLINE float   glms_mat4_make(float * __restrict src);
  */
 
 #ifndef cglms_mat4s_h
@@ -463,13 +464,14 @@ glms_mat4_(rmc)(vec4s r, mat4s m, vec4s c) {
  * @brief Create mat4 matrix from pointer
  *
  * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
+ * @return constructed matrix from raw pointer
  */
 CGLM_INLINE
 mat4s
-glms_mat4_(make)(float * __restrict src, mat4s dest) {
-  glm_mat4_make(src, dest.raw);
-  return dest;
+glms_mat4_(make)(float * __restrict src) {
+  mat4s r;
+  glm_mat4_make(src, r.raw);
+  return r;
 }
 
 #endif /* cglms_mat4s_h */
