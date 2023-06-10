@@ -25,9 +25,16 @@
       * only #define governing the use of anonymous structs, so for backward
       * compatibility, we still honor that choice and disable them. */
 #    define CGLM_USE_ANONYMOUS_STRUCT 0
-#  elif __STDC_VERSION__ >= 20112L || defined(_MSVC_VER)
+#  elif (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L) || \
+        (defined(__cplusplus)      && __cplusplus >= 201103L)
      /* We're compiling for C11 or this is the MSVC compiler. In either
       * case, anonymous structs are available, so use them. */
+#    define CGLM_USE_ANONYMOUS_STRUCT 1
+#  elif defined(__GNUC__) && (__GNUC__ > 4 || (__GNUC__ == 4 && __GNUC_MINOR__ >= 6))
+     /* GCC 4.6 and onwards support anonymous structs as an extension */
+#    define CGLM_USE_ANONYMOUS_STRUCT 1
+#  elif defined(__clang__) && __clang_major__ >= 3
+     /* Clang 3.0 and onwards support anonymous structs as an extension */
 #    define CGLM_USE_ANONYMOUS_STRUCT 1
 #  elif defined(_MSC_VER) && (_MSC_VER >= 1900) /*  Visual Studio 2015 */
      /* We can support anonymous structs
