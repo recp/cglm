@@ -54,7 +54,8 @@
 #  endif
 #endif
 
-#define GLMM_NEGZEROf 0x80000000 /*  0x80000000 ---> -0.0f  */
+/* Note that `0x80000000` corresponds to `INT_MIN` for a 32-bit int. */
+#define GLMM_NEGZEROf ((int)0x80000000) /*  0x80000000 ---> -0.0f  */
 
 #define GLMM__SIGNMASKf(X, Y, Z, W)                                           \
    _mm_castsi128_ps(_mm_set_epi32(X, Y, Z, W))
@@ -64,7 +65,7 @@
 #define glmm_float32x4_SIGNMASK_NPNP GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, GLMM_NEGZEROf, 0)
 #define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, 0, GLMM_NEGZEROf)
 
-#define glmm_float32x4_SIGNMASK_NEG _mm_castsi128_ps(_mm_set1_epi32(0x80000000)) /* _mm_set1_ps(-0.0f) */
+#define glmm_float32x4_SIGNMASK_NEG _mm_castsi128_ps(_mm_set1_epi32(GLMM_NEGZEROf)) /* _mm_set1_ps(-0.0f) */
 #define glmm_float32x8_SIGNMASK_NEG _mm256_castsi256_ps(_mm256_set1_epi32(GLMM_NEGZEROf))
 
 static inline
