@@ -36,7 +36,7 @@ TEST_IMPL(GLM_PREFIX, mat3_identity) {
 }
 
 TEST_IMPL(GLM_PREFIX, mat3_identity_array) {
-  int i, count;
+  size_t i, count;
   mat3 matrices[4] = {
     A_MATRIX,
     A_MATRIX,

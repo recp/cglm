@@ -56,7 +56,7 @@ TEST_IMPL(GLM_PREFIX, quat_identity) {
 }
 
 TEST_IMPL(GLM_PREFIX, quat_identity_array) {
-  int i, count;
+  size_t i, count;
   versor quats[4] = {
     {1.0f, 2.0f, 3.0f, 4.0f},
     {1.0f, 2.0f, 3.0f, 4.0f},
