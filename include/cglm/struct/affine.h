@@ -39,6 +39,7 @@
 #include "vec3.h"
 #include "vec4.h"
 #include "mat4.h"
+#include "affine-mat.h"
 
 /*!
  * @brief creates NEW translate transform matrix by v vector
