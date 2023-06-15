@@ -603,5 +603,8 @@
     <ClInclude Include="..\include\cglm\struct\affine-pre.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\affine-mat.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
