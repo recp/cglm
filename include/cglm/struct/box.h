@@ -33,7 +33,7 @@ glms_aabb_(transform)(vec3s box[2], mat4s m, vec3s dest[2]) {
 
   glms_vec3_(unpack)(rawBox, box, 2);
   glm_aabb_transform(rawBox, m.raw, rawDest);
-  glms_vec3_pack(dest, rawDest, 2);
+  glms_vec3_(pack)(dest, rawDest, 2);
 }
 
 /*!
