@@ -343,7 +343,7 @@ glms_vec4_(subs)(vec4s v, float s) {
 }
 
 /*!
- * @brief multiply two vector (component-wise multiplication)
+ * @brief multiply two vectors (component-wise multiplication)
  *
  * @param a    vector1
  * @param b    vector2
@@ -482,7 +482,7 @@ glms_vec4_(muladds)(vec4s a, float s, vec4s dest) {
 }
 
 /*!
- * @brief add max of two vector to result/dest
+ * @brief add max of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *
@@ -498,7 +498,7 @@ glms_vec4_(maxadd)(vec4s a, vec4s b, vec4s dest) {
 }
 
 /*!
- * @brief add min of two vector to result/dest
+ * @brief add min of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *

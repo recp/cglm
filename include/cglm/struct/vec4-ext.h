@@ -94,7 +94,7 @@ glms_vec4_(eq_eps)(vec4s v, float val) {
 }
 
 /*!
- * @brief check if vectors members are equal (without epsilon)
+ * @brief check if vector members are equal (without epsilon)
  *
  * @param v   vector
  */

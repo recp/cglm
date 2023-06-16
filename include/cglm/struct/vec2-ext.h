@@ -76,7 +76,7 @@ glms_vec2_(eq_eps)(vec2s v, float val) {
 }
 
 /*!
- * @brief check if vectors members are equal (without epsilon)
+ * @brief check if vector members are equal (without epsilon)
  *
  * @param[in] v   vector
  */

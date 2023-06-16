@@ -229,7 +229,7 @@ glm_vec2_subs(vec2 v, float s, vec2 dest) {
 }
 
 /*!
- * @brief multiply two vector (component-wise multiplication)
+ * @brief multiply two vectors (component-wise multiplication)
  *
  * @param a    v1
  * @param b    v2
@@ -370,7 +370,7 @@ glm_vec2_muladds(vec2 a, float s, vec2 dest) {
 }
 
 /*!
- * @brief add max of two vector to result/dest
+ * @brief add max of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *
@@ -386,7 +386,7 @@ glm_vec2_maxadd(vec2 a, vec2 b, vec2 dest) {
 }
 
 /*!
- * @brief add min of two vector to result/dest
+ * @brief add min of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *
