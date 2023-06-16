@@ -258,11 +258,11 @@ glms_vec2_(subs)(vec2s a, float s) {
 }
 
 /*!
- * @brief multiply two vector (component-wise multiplication)
+ * @brief multiply two vectors (component-wise multiplication)
  *
  * @param     a     vector1
  * @param     b     vector2
- * @returns         v3 = (a[0] * b[0], a[1] * b[1], a[2] * b[2])
+ * @returns         result = (a[0] * b[0], a[1] * b[1])
  */
 CGLM_INLINE
 vec2s
@@ -307,7 +307,7 @@ glms_vec2_(scale_as)(vec2s v, float s) {
  *
  * @param[in]  a    vector 1
  * @param[in]  b    vector 2
- * @returns         result = (a[0]/b[0], a[1]/b[1], a[2]/b[2])
+ * @returns         result = (a[0]/b[0], a[1]/b[1])
  */
 CGLM_INLINE
 vec2s
@@ -322,7 +322,7 @@ glms_vec2_(div)(vec2s a, vec2s b) {
  *
  * @param[in]  a    vector
  * @param[in]  s    scalar
- * @returns         result = (a[0]/s, a[1]/s, a[2]/s)
+ * @returns         result = (a[0]/s, a[1]/s)
  */
 CGLM_INLINE
 vec2s
@@ -397,7 +397,7 @@ glms_vec2_(muladds)(vec2s a, float s, vec2s dest) {
 }
 
 /*!
- * @brief add max of two vector to result/dest
+ * @brief add max of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *
@@ -413,7 +413,7 @@ glms_vec2_(maxadd)(vec2s a, vec2s b, vec2s dest) {
 }
 
 /*!
- * @brief add min of two vector to result/dest
+ * @brief add min of two vectors to result/dest
  *
  * it applies += operator so dest must be initialized
  *
