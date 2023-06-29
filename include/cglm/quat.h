@@ -49,6 +49,7 @@
                                   versor dest);
    CGLM_INLINE void glm_quat_rotatev(versor q, vec3 v, vec3 dest);
    CGLM_INLINE void glm_quat_rotate(mat4 m, versor q, mat4 dest);
+   CGLM_INLINE void glm_quat_make(float * restrict src, versor dest);
  */
 
 #ifndef cglm_quat_h
@@ -883,6 +884,19 @@ glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
   glm_translate_make(m, pivot);
   glm_quat_rotate(m, q, m);
   glm_translate(m, pivotInv);
+}
+
+/*!
+ * @brief Create quaternion from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_make(float * __restrict src, versor dest) {
+  dest[0] = src[0]; dest[1] = src[1];
+  dest[2] = src[2]; dest[3] = src[3];
 }
 
 #endif /* cglm_quat_h */

@@ -62,6 +62,7 @@ Functions:
 #. :c:func:`glm_quat_rotate`
 #. :c:func:`glm_quat_rotate_at`
 #. :c:func:`glm_quat_rotate_atm`
+#. :c:func:`glm_quat_make`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -420,3 +421,13 @@ Functions documentation
       | *[in, out]*  **m**      existing transform matrix to rotate
       | *[in]*       **q**      quaternion
       | *[in]*       **pivot**  pivot
+
+.. c:function:: void glm_quat_make(float * __restrict src, versor dest)
+
+    Create quaternion from pointer
+
+    | NOTE: **@src** must contain 4 elements. cglm store quaternions as [x, y, z, w].
+
+    Parameters:
+      | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination quaternion
