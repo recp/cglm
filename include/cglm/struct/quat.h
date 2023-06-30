@@ -44,6 +44,7 @@
    CGLM_INLINE mat4s   glms_quat_rotate(mat4s m, versors q)
    CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q, vec3s pivot)
    CGLM_INLINE mat4s   glms_quat_rotate_atm(versors q, vec3s pivot)
+   CGLM_INLINE void    glms_quat_make(float * restrict src)
  */
 
 #ifndef cglms_quat_h
@@ -562,6 +563,20 @@ mat4s
 glms_quat_(rotate_atm)(versors q, vec3s pivot) {
   mat4s dest;
   glm_quat_rotate_atm(dest.raw, q.raw, pivot.raw);
+  return dest;
+}
+
+/*!
+ * @brief Create CGLM quaternion from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @returns constructed quaternion from raw pointer
+ */
+CGLM_INLINE
+versors
+glms_quat_(make)(float * __restrict src) {
+  versors dest;
+  glm_quat_make(src, dest.raw);
   return dest;
 }
 
