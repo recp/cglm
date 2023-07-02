@@ -1418,3 +1418,25 @@ TEST_IMPL(GLM_PREFIX, vec4_sqrt) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, vec4_make) {
+  float src[12] = {
+    7.2f, 1.0f, 5.8f, 0.0f,
+    2.5f, 6.1f, 9.9f, 1.0f,
+    17.7f, 4.3f, 3.2f, 1.0f
+  };
+  vec4 dest[3];
+
+  float *srcp = src;
+  unsigned int i, j;
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=4,j++) {
+    GLM(vec4_make)(srcp + i, dest[j]);
+    ASSERT(test_eq(src[ i ], dest[j][0]));
+    ASSERT(test_eq(src[i+1], dest[j][1]));
+    ASSERT(test_eq(src[i+2], dest[j][2]));
+    ASSERT(test_eq(src[i+3], dest[j][3]));
+  }
+
+  TEST_SUCCESS
+}
