@@ -46,6 +46,7 @@
    CGLM_INLINE vec2s glms_vec2_minv(vec2s a, vec2s b)
    CGLM_INLINE vec2s glms_vec2_clamp(vec2s v, float minVal, float maxVal)
    CGLM_INLINE vec2s glms_vec2_lerp(vec2s from, vec2s to, float t)
+   CGLM_INLINE vec2s glms_vec2_make(float * restrict src)
  */
 
 #ifndef cglms_vec2s_h
@@ -556,6 +557,20 @@ glms_vec2_(lerp)(vec2s from, vec2s to, float t) {
   vec2s r;
   glm_vec2_lerp(from.raw, to.raw, t, r.raw);
   return r;
+}
+
+/*!
+ * @brief Create two dimensional vector from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @returns constructed 2D vector from raw pointer
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(make)(float * __restrict src) {
+  vec2s dest;
+  glm_vec2_make(src, dest.raw);
+  return dest;
 }
 
 #endif /* cglms_vec2s_h */

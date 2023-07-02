@@ -637,3 +637,23 @@ TEST_IMPL(GLM_PREFIX, vec2_complex_div) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, vec2_make) {
+  float src[6] = {
+    7.2f, 1.0f,
+    2.5f, 6.1f,
+    17.7f, 4.3f
+  };
+  vec2 dest[3];
+
+  float *srcp = src;
+  unsigned int i, j;
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=2,j++) {
+    GLM(vec2_make)(srcp + i, dest[j]);
+    ASSERT(test_eq(src[ i ], dest[j][0]));
+    ASSERT(test_eq(src[i+1], dest[j][1]));
+  }
+
+  TEST_SUCCESS
+}

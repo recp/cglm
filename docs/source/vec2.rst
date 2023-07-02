@@ -51,6 +51,7 @@ Functions:
 #. :c:func:`glm_vec2_minv`
 #. :c:func:`glm_vec2_clamp`
 #. :c:func:`glm_vec2_lerp`
+#. :c:func:`glm_vec2_make`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -373,3 +374,12 @@ Functions documentation
       | *[in]*  **to**     to value
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
       | *[out]* **dest**   destination
+
+.. c:function:: void glm_vec2_make(float * __restrict src, vec2 dest)
+
+    Create two dimensional vector from pointer
+
+    | NOTE: **@src** must contain at least 2 elements.
+    Parameters:
+      | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination vector
