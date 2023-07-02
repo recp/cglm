@@ -59,6 +59,7 @@ Functions:
 #. :c:func:`glm_vec4_clamp`
 #. :c:func:`glm_vec4_lerp`
 #. :c:func:`glm_vec4_cubic`
+#. :c:func:`glm_vec4_make`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -406,3 +407,12 @@ Functions documentation
     Parameters:
       | *[in]*  **s**      parameter
       | *[out]* **dest**   destination
+
+.. c:function:: void glm_vec4_make(float * __restrict src, vec4 dest)
+
+    Create four dimensional vector from pointer
+
+    | NOTE: **@src** must contain at least 4 elements.
+    Parameters:
+      | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination vector

@@ -533,6 +533,7 @@ TEST_DECLARE(glm_vec3_abs)
 TEST_DECLARE(glm_vec3_fract)
 TEST_DECLARE(glm_vec3_hadd)
 TEST_DECLARE(glm_vec3_sqrt)
+TEST_DECLARE(glm_vec3_make)
 
 TEST_DECLARE(glmc_vec3)
 TEST_DECLARE(glmc_vec3_copy)
@@ -602,6 +603,7 @@ TEST_DECLARE(glmc_vec3_abs)
 TEST_DECLARE(glmc_vec3_fract)
 TEST_DECLARE(glmc_vec3_hadd)
 TEST_DECLARE(glmc_vec3_sqrt)
+TEST_DECLARE(glmc_vec3_make)
 
 /* vec4 */
 TEST_DECLARE(MACRO_GLM_VEC4_ONE_INIT)
@@ -683,6 +685,7 @@ TEST_DECLARE(glm_vec4_abs)
 TEST_DECLARE(glm_vec4_fract)
 TEST_DECLARE(glm_vec4_hadd)
 TEST_DECLARE(glm_vec4_sqrt)
+TEST_DECLARE(glm_vec4_make)
 
 TEST_DECLARE(glmc_vec4)
 TEST_DECLARE(glmc_vec4_copy3)
@@ -748,6 +751,7 @@ TEST_DECLARE(glmc_vec4_abs)
 TEST_DECLARE(glmc_vec4_fract)
 TEST_DECLARE(glmc_vec4_hadd)
 TEST_DECLARE(glmc_vec4_sqrt)
+TEST_DECLARE(glmc_vec4_make)
 
 /* ivec2 */
 TEST_DECLARE(glm_ivec2)
@@ -1382,6 +1386,7 @@ TEST_LIST {
   TEST_ENTRY(glm_vec3_fract)
   TEST_ENTRY(glm_vec3_hadd)
   TEST_ENTRY(glm_vec3_sqrt)
+  TEST_ENTRY(glm_vec3_make)
 
   TEST_ENTRY(glmc_vec3)
   TEST_ENTRY(glmc_vec3_copy)
@@ -1451,6 +1456,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec3_fract)
   TEST_ENTRY(glmc_vec3_hadd)
   TEST_ENTRY(glmc_vec3_sqrt)
+  TEST_ENTRY(glmc_vec3_make)
 
   /* vec4 */
   TEST_ENTRY(MACRO_GLM_VEC4_ONE_INIT)
@@ -1532,6 +1538,7 @@ TEST_LIST {
   TEST_ENTRY(glm_vec4_fract)
   TEST_ENTRY(glm_vec4_hadd)
   TEST_ENTRY(glm_vec4_sqrt)
+  TEST_ENTRY(glm_vec4_make)
 
   TEST_ENTRY(glmc_vec4)
   TEST_ENTRY(glmc_vec4_copy3)
@@ -1597,6 +1604,7 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec4_fract)
   TEST_ENTRY(glmc_vec4_hadd)
   TEST_ENTRY(glmc_vec4_sqrt)
+  TEST_ENTRY(glmc_vec4_make)
 
   /* ivec2 */
   TEST_ENTRY(glm_ivec2)

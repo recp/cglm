@@ -70,6 +70,7 @@
    CGLM_INLINE vec3s glms_vec3_smoothinterp(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_smoothinterpc(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
+   CGLM_INLINE vec3s glms_vec3_make(float * restrict src);
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -964,6 +965,20 @@ vec3s
 glms_vec3_(swizzle)(vec3s v, int mask) {
   vec3s dest;
   glm_vec3_swizzle(v.raw, mask, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief Create three dimensional vector from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @returns constructed 3D vector from raw pointer
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(make)(float * __restrict src) {
+  vec3s dest;
+  glm_vec3_make(src, dest.raw);
   return dest;
 }
 

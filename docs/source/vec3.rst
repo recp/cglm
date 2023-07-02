@@ -79,6 +79,7 @@ Functions:
 #. :c:func:`glm_vec3_ortho`
 #. :c:func:`glm_vec3_clamp`
 #. :c:func:`glm_vec3_lerp`
+#. :c:func:`glm_vec3_make`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -501,3 +502,13 @@ Functions documentation
       | *[in]*  **to**     to value
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
       | *[out]* **dest**   destination
+
+.. c:function:: void glm_vec3_make(float * __restrict src, vec3 dest)
+
+    Create three dimensional vector from pointer
+
+    | NOTE: **@src** must contain at least 3 elements.
+
+    Parameters:
+      | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination vector

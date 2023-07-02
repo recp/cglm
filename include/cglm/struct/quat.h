@@ -44,7 +44,7 @@
    CGLM_INLINE mat4s   glms_quat_rotate(mat4s m, versors q)
    CGLM_INLINE mat4s   glms_quat_rotate_at(mat4s m, versors q, vec3s pivot)
    CGLM_INLINE mat4s   glms_quat_rotate_atm(versors q, vec3s pivot)
-   CGLM_INLINE void    glms_quat_make(float * restrict src)
+   CGLM_INLINE versors glms_quat_make(float * restrict src)
  */
 
 #ifndef cglms_quat_h

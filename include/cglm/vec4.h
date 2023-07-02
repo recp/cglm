@@ -58,6 +58,7 @@
    CGLM_INLINE void  glm_vec4_smoothinterp(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
+   CGLM_INLINE void  glm_vec4_make(float * restrict src, vec4 dest);
 
  DEPRECATED:
    glm_vec4_dup
@@ -1131,6 +1132,19 @@ glm_vec4_swizzle(vec4 v, int mask, vec4 dest) {
   t[3] = v[(mask & (3 << 6)) >> 6];
 
   glm_vec4_copy(t, dest);
+}
+
+/*!
+ * @brief Create four dimensional vector from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_make(float * __restrict src, vec4 dest) {
+  dest[0] = src[0]; dest[1] = src[1];
+  dest[2] = src[2]; dest[3] = src[3];
 }
 
 #endif /* cglm_vec4_h */
