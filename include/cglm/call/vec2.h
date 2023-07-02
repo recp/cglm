@@ -165,6 +165,10 @@ CGLM_EXPORT
 void
 glmc_vec2_complex_conjugate(vec2 a, vec2 dest);
 
+CGLM_EXPORT
+void
+glmc_vec2_make(float * __restrict src, vec2 dest);
+
 #ifdef __cplusplus
 }
 #endif
