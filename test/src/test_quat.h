@@ -1086,12 +1086,22 @@ TEST_IMPL(GLM_PREFIX, quat_rotate_atm) {
 }
 
 TEST_IMPL(GLM_PREFIX, quat_make) {
-  versor dest;
-  float src[4] = {7.2f, 1.0f, 2.5f, 6.1f};
+  versor dest[3];
+  float src[12] = {
+    7.2f, 1.0f, 2.5f, 6.1f,
+    0.2f, 2.8f, 17.3f, 5.1f,
+    4.2f, 7.3f, 6.6f, 8.8f
+  };
 
-  GLM(quat_make)(src, dest);
-  for (unsigned int i = 0; i < sizeof(src) / sizeof(float); i++) {
-    ASSERT(test_eq(src[i], dest[i]));
+  float *srcp = src;
+  unsigned int i, j;
+
+  for (i = 0, j = 0; i < sizeof(src) / sizeof(float); i+=4,j++) {
+    GLM(quat_make)(srcp + i, dest[j]);
+    ASSERT(test_eq(src[ i ], dest[j][0]));
+    ASSERT(test_eq(src[i+1], dest[j][1]));
+    ASSERT(test_eq(src[i+2], dest[j][2]));
+    ASSERT(test_eq(src[i+3], dest[j][3]));
   }
 
   TEST_SUCCESS

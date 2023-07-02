@@ -73,6 +73,7 @@
    CGLM_INLINE void  glm_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
+   CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -1077,6 +1078,20 @@ CGLM_INLINE
 void
 glm_normalize_to(vec3 v, vec3 dest) {
   glm_vec3_normalize_to(v, dest);
+}
+
+/*!
+ * @brief Create three dimensional vector from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_make(float * __restrict src, vec3 dest) {
+  dest[0] = src[0];
+  dest[1] = src[1];
+  dest[2] = src[2];
 }
 
 #endif /* cglm_vec3_h */
