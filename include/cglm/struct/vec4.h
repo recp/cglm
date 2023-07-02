@@ -61,6 +61,7 @@
    CGLM_INLINE vec4s glms_vec4_smoothinterpc(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
+   CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
  */
 
 #ifndef cglms_vec4s_h
@@ -808,6 +809,20 @@ vec4s
 glms_vec4_(swizzle)(vec4s v, int mask) {
   vec4s dest;
   glm_vec4_swizzle(v.raw, mask, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief Create four dimensional vector from pointer
+ *
+ * @param[in]  src  pointer to an array of floats
+ * @returns constructed 4D vector from raw pointer
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(make)(float * __restrict src) {
+  vec4s dest;
+  glm_vec4_make(src, dest.raw);
   return dest;
 }
 
