@@ -78,8 +78,8 @@ glms_mul_rot(mat4s m1, mat4s m2){
  *     | 0  1 |        | 0     1 |
  * @endcode
  *
- * @param[in]  mat  matrix
- * @returns         destination matrix
+ * @param[in]  m  matrix
+ * @returns      destination matrix
  */
 CGLM_INLINE
 mat4s
