@@ -11,8 +11,7 @@ AM_CFLAGS = -Wall \
             -std=gnu11 \
             -O3 \
             -Wstrict-aliasing=2 \
-            -fstrict-aliasing \
-            -Werror=strict-prototypes
+            -fstrict-aliasing
 
 lib_LTLIBRARIES = libcglm.la
 libcglm_la_LDFLAGS = -no-undefined -version-info 0:1:0

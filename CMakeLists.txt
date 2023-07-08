@@ -43,7 +43,7 @@ if(MSVC)
     string(REGEX REPLACE "/RTC(su|[1su])" "" ${flag_var} "${${flag_var}}")
   endforeach(flag_var)
 else()
-  add_compile_options(-Wall -Werror -O3)
+  add_compile_options(-Wall -O3)
 endif()
 
 get_directory_property(hasParent PARENT_DIRECTORY)
