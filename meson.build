@@ -3,7 +3,6 @@ project('cglm', 'c',
     license : 'mit',
     default_options : [
         'c_std=c11',
-        'werror=true',
         'warning_level=2',
         'buildtype=release'
     ]
