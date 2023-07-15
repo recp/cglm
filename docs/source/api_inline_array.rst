@@ -46,6 +46,7 @@ Follow the :doc:`build` documentation for this
    quat
    euler
    mat2
+   mat2x3
    mat3
    mat4
    vec2

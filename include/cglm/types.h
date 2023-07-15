@@ -56,6 +56,7 @@ typedef CGLM_ALIGN_IF(16) float vec4[4];
 typedef vec4                    versor;     /* |x, y, z, w| -> w is the last */
 typedef vec3                    mat3[3];
 typedef CGLM_ALIGN_IF(16) vec2  mat2[2];
+typedef vec3                    mat2x3[2];  /* [row (2), col (3)] */
 typedef CGLM_ALIGN_MAT    vec4  mat4[4];
 
 /*

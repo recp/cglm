@@ -71,6 +71,7 @@
     <ClCompile Include="..\src\ivec3.c" />
     <ClCompile Include="..\src\ivec4.c" />
     <ClCompile Include="..\src\mat2.c" />
+    <ClCompile Include="..\src\mat2x3.c" />
     <ClCompile Include="..\src\mat3.c" />
     <ClCompile Include="..\src\mat4.c" />
     <ClCompile Include="..\src\plane.c" />
@@ -120,6 +121,7 @@
     <ClInclude Include="..\include\cglm\call\ivec3.h" />
     <ClInclude Include="..\include\cglm\call\ivec4.h" />
     <ClInclude Include="..\include\cglm\call\mat2.h" />
+    <ClInclude Include="..\include\cglm\call\mat2x3.h" />
     <ClInclude Include="..\include\cglm\call\mat3.h" />
     <ClInclude Include="..\include\cglm\call\mat4.h" />
     <ClInclude Include="..\include\cglm\call\plane.h" />
@@ -160,6 +162,7 @@
     <ClInclude Include="..\include\cglm\ivec3.h" />
     <ClInclude Include="..\include\cglm\ivec4.h" />
     <ClInclude Include="..\include\cglm\mat2.h" />
+    <ClInclude Include="..\include\cglm\mat2x3.h" />
     <ClInclude Include="..\include\cglm\mat3.h" />
     <ClInclude Include="..\include\cglm\mat4.h" />
     <ClInclude Include="..\include\cglm\plane.h" />
@@ -209,6 +212,7 @@
     <ClInclude Include="..\include\cglm\struct\frustum.h" />
     <ClInclude Include="..\include\cglm\struct\io.h" />
     <ClInclude Include="..\include\cglm\struct\mat2.h" />
+    <ClInclude Include="..\include\cglm\struct\mat2x3.h" />
     <ClInclude Include="..\include\cglm\struct\mat3.h" />
     <ClInclude Include="..\include\cglm\struct\mat4.h" />
     <ClInclude Include="..\include\cglm\struct\plane.h" />

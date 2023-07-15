@@ -97,6 +97,9 @@
     <ClCompile Include="..\src\mat2.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\mat2x3.c">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\vec2.c">
       <Filter>src</Filter>
     </ClCompile>
