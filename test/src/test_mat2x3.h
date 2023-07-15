@@ -10,16 +10,15 @@
 #ifndef CGLM_TEST_MAT2X3_ONCE
 #define CGLM_TEST_MAT2X3_ONCE
 
-TEST_IMPL(MACRO_GLM_MAT2X3_ZERO_INIT) {  
-  mat2x3 m = GLM_MAT2X3_ZERO_INIT;
-  
-  ASSERT(test_eq(m[0][0], 0.0f))
-  ASSERT(test_eq(m[0][1], 0.0f))
-  ASSERT(test_eq(m[0][2], 0.0f))
-  ASSERT(test_eq(m[1][0], 0.0f))
-  ASSERT(test_eq(m[1][1], 0.0f))
-  ASSERT(test_eq(m[1][2], 0.0f))
+TEST_IMPL(MACRO_GLM_MAT2X3_ZERO_INIT) {
+  mat2x3 mat2x3_zero   = GLM_MAT2X3_ZERO_INIT;
+  test_assert_mat2x3_eq_zero(mat2x3_zero);
+  TEST_SUCCESS
+}
 
+TEST_IMPL(MACRO_GLM_MAT2X3_ZERO) {
+  mat2x3 mat2x3_zero   = GLM_MAT2X3_ZERO;
+  test_assert_mat2x3_eq_zero(mat2x3_zero);
   TEST_SUCCESS
 }
 

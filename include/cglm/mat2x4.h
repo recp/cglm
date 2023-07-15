@@ -22,7 +22,7 @@
 #define GLM_MAT2X4_ZERO_INIT {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}
 
 /* for C only */
-#define GLM_MAT2X4_ZERO       GLM_MAT2X4_ZERO_INIT
+#define GLM_MAT2X4_ZERO GLM_MAT2X4_ZERO_INIT
 
 /*!
  * @brief Create mat2x4 matrix from pointer
