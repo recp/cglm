@@ -24,10 +24,10 @@
 /* api definition */
 #define glms_mat2x4_(NAME) CGLM_STRUCTAPI(mat2x4, NAME)
 
-#define GLMS_MAT2X4_ZERO_INIT     {GLM_MAT2X4_ZERO_INIT}
+#define GLMS_MAT2X4_ZERO_INIT {GLM_MAT2X4_ZERO_INIT}
 
 /* for C only */
-#define GLMS_MAT2X4_ZERO     ((mat2x4s)GLMS_MAT2X4_ZERO_INIT)
+#define GLMS_MAT2X4_ZERO ((mat2x4s)GLMS_MAT2X4_ZERO_INIT)
 
 /*!
  * @brief Create mat2x4 matrix from pointer

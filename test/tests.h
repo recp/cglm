@@ -228,6 +228,8 @@ TEST_DECLARE(glmc_mat2_swap_row)
 TEST_DECLARE(glmc_mat2_rmc)
 TEST_DECLARE(glmc_mat2_make)
 
+TEST_DECLARE(MACRO_GLM_MAT2X3_ZERO_INIT)
+TEST_DECLARE(MACRO_GLM_MAT2X3_ZERO)
 TEST_DECLARE(glm_mat2x3_make)
 
 TEST_DECLARE(glmc_mat2x3_make)
@@ -867,6 +869,10 @@ TEST_DECLARE(glmc_ivec4_clamp)
 TEST_DECLARE(glmc_ivec4_abs)
 
 /* structs */
+TEST_DECLARE(mat2x3s_zero_init)
+TEST_DECLARE(mat2x3s_zero)
+TEST_DECLARE(mat2x4s_zero_init)
+TEST_DECLARE(mat2x4s_zero)
 TEST_DECLARE(mat3s_identity_init)
 TEST_DECLARE(mat3s_zero_init)
 TEST_DECLARE(mat4s_identity_init)
@@ -1093,6 +1099,8 @@ TEST_LIST {
   TEST_ENTRY(glmc_mat2_rmc)
   TEST_ENTRY(glmc_mat2_make)
 
+  TEST_ENTRY(MACRO_GLM_MAT2X3_ZERO_INIT)
+  TEST_ENTRY(MACRO_GLM_MAT2X3_ZERO)
   TEST_ENTRY(glm_mat2x3_make)
 
   TEST_ENTRY(glmc_mat2x3_make)
@@ -1729,6 +1737,10 @@ TEST_LIST {
   TEST_ENTRY(glmc_ivec4_abs)
 
   /* structs */
+  TEST_ENTRY(mat2x3s_zero_init)
+  TEST_ENTRY(mat2x3s_zero)
+  TEST_ENTRY(mat2x4s_zero_init)
+  TEST_ENTRY(mat2x4s_zero)
   TEST_ENTRY(mat3s_identity_init)
   TEST_ENTRY(mat3s_zero_init)
   TEST_ENTRY(mat4s_identity_init)

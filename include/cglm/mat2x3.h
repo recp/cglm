@@ -19,10 +19,10 @@
 
 #include "common.h"
 
-#define GLM_MAT2X3_ZERO_INIT      {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
+#define GLM_MAT2X3_ZERO_INIT {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
 
 /* for C only */
-#define GLM_MAT2X3_ZERO     ((mat2x3)GLM_MAT2X3_ZERO_INIT)
+#define GLM_MAT2X3_ZERO GLM_MAT2X3_ZERO_INIT
 
 /*!
  * @brief Create mat2x3 matrix from pointer
