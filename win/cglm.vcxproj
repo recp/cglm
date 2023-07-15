@@ -74,6 +74,7 @@
     <ClCompile Include="..\src\mat2x3.c" />
     <ClCompile Include="..\src\mat2x4.c" />
     <ClCompile Include="..\src\mat3.c" />
+    <ClCompile Include="..\src\mat3x2.c" />
     <ClCompile Include="..\src\mat4.c" />
     <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\project.c" />
@@ -125,6 +126,7 @@
     <ClInclude Include="..\include\cglm\call\mat2x3.h" />
     <ClInclude Include="..\include\cglm\call\mat2x4.h" />
     <ClInclude Include="..\include\cglm\call\mat3.h" />
+    <ClInclude Include="..\include\cglm\call\mat3x2.h" />
     <ClInclude Include="..\include\cglm\call\mat4.h" />
     <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\project.h" />
@@ -167,6 +169,7 @@
     <ClInclude Include="..\include\cglm\mat2x3.h" />
     <ClInclude Include="..\include\cglm\mat2x4.h" />
     <ClInclude Include="..\include\cglm\mat3.h" />
+    <ClInclude Include="..\include\cglm\mat3x2.h" />
     <ClInclude Include="..\include\cglm\mat4.h" />
     <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\project.h" />
@@ -218,6 +221,7 @@
     <ClInclude Include="..\include\cglm\struct\mat2x3.h" />
     <ClInclude Include="..\include\cglm\struct\mat2x4.h" />
     <ClInclude Include="..\include\cglm\struct\mat3.h" />
+    <ClInclude Include="..\include\cglm\struct\mat3x2.h" />
     <ClInclude Include="..\include\cglm\struct\mat4.h" />
     <ClInclude Include="..\include\cglm\struct\plane.h" />
     <ClInclude Include="..\include\cglm\struct\project.h" />
