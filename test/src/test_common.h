@@ -57,6 +57,9 @@ test_status_t
 test_assert_mat2x3_eq_zero(mat2x3 m2x3);
 
 test_status_t
+test_assert_mat2x4_eq_zero(mat2x4 m2x4);
+
+test_status_t
 test_assert_mat3_eq(mat3 m1, mat3 m2);
 
 test_status_t

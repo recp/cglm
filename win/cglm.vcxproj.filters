@@ -100,6 +100,9 @@
     <ClCompile Include="..\src\mat2x3.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\mat2x4.c">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\vec2.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -399,16 +402,25 @@
     <ClInclude Include="..\include\cglm\call\mat2.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\call\mat2x4.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\cglm\call\vec2.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\mat2.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\mat2x4.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\cglm\applesimd.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\mat2.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\mat2x4.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\vec2-ext.h">

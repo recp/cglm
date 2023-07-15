@@ -15,6 +15,12 @@ TEST_IMPL(mat2x3s_zero_init) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(mat2x4s_zero_init) {
+  mat2x4s mat2x4_zero   = GLMS_MAT2X4_ZERO_INIT;
+  test_assert_mat2x4_eq_zero(mat2x4_zero.raw);
+  TEST_SUCCESS
+}
+
 TEST_IMPL(mat3s_identity_init) {
   mat3s mat3_identity   = GLMS_MAT3_IDENTITY_INIT;
   mat3  mat3_identity_a =  GLM_MAT3_IDENTITY_INIT;

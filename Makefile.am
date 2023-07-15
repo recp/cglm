@@ -45,6 +45,7 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/mat3.h \
                include/cglm/mat2.h \
                include/cglm/mat2x3.h \
+               include/cglm/mat2x4.h \
                include/cglm/affine-pre.h \
                include/cglm/affine-post.h \
                include/cglm/affine.h \
@@ -98,6 +99,7 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/mat3.h \
                     include/cglm/call/mat2.h \
                     include/cglm/call/mat2x3.h \
+                    include/cglm/call/mat2x4.h \
                     include/cglm/call/vec2.h \
                     include/cglm/call/vec3.h \
                     include/cglm/call/vec4.h \
@@ -163,6 +165,7 @@ cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/mat3.h \
                       include/cglm/struct/mat2.h \
                       include/cglm/struct/mat2x3.h \
+                      include/cglm/struct/mat2x4.h \
                       include/cglm/struct/affine-pre.h \
                       include/cglm/struct/affine-post.h \
                       include/cglm/struct/affine-mat.h \
@@ -216,6 +219,7 @@ libcglm_la_SOURCES=\
     src/ivec4.c \
     src/mat2.c \
     src/mat2x3.c \
+    src/mat2x4.c \
     src/mat3.c \
     src/mat4.c \
     src/plane.c \

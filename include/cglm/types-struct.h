@@ -208,6 +208,17 @@ typedef union mat2x3s {
 #endif
 } mat2x3s;
 
+typedef union mat2x4s {
+  mat2x4 raw;
+  vec4s  col[2]; /* col -> row | [row (2), col (4)] */
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    float m00, m01, m02, m03;
+    float m10, m11, m12, m13;
+  };
+#endif
+} mat2x4s;
+
 typedef union mat3s {
   mat3  raw;
   vec3s col[3];
