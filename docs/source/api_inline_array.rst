@@ -47,6 +47,7 @@ Follow the :doc:`build` documentation for this
    euler
    mat2
    mat2x3
+   mat2x4
    mat3
    mat4
    vec2

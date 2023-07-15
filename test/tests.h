@@ -232,6 +232,12 @@ TEST_DECLARE(glm_mat2x3_make)
 
 TEST_DECLARE(glmc_mat2x3_make)
 
+TEST_DECLARE(MACRO_GLM_MAT2X4_ZERO_INIT)
+TEST_DECLARE(MACRO_GLM_MAT2X4_ZERO)
+TEST_DECLARE(glm_mat2x4_make)
+
+TEST_DECLARE(glmc_mat2x4_make)
+
 /* camera (incl [LR]H cross [NZ]O) */
 TEST_DECLARE(glm_perspective_lh_zo)
 TEST_DECLARE(glm_perspective_rh_zo)
@@ -1090,6 +1096,12 @@ TEST_LIST {
   TEST_ENTRY(glm_mat2x3_make)
 
   TEST_ENTRY(glmc_mat2x3_make)
+
+  TEST_ENTRY(MACRO_GLM_MAT2X4_ZERO_INIT)
+  TEST_ENTRY(MACRO_GLM_MAT2X4_ZERO)
+  TEST_ENTRY(glm_mat2x4_make)
+
+  TEST_ENTRY(glmc_mat2x4_make)
 
   /* camera (incl [LR]H cross [NZ]O) */
   TEST_ENTRY(glm_perspective_lh_zo)

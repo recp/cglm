@@ -20,6 +20,7 @@ extern "C" {
 #include "call/ivec4.h"
 #include "call/mat2.h"
 #include "call/mat2x3.h"
+#include "call/mat2x4.h"
 #include "call/mat3.h"
 #include "call/mat4.h"
 #include "call/affine.h"
