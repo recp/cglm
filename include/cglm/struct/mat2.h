@@ -27,7 +27,7 @@
    CGLM_INLINE void  glms_mat2_swap_col(mat2 mat, int col1, int col2)
    CGLM_INLINE void  glms_mat2_swap_row(mat2 mat, int row1, int row2)
    CGLM_INLINE float glms_mat2_rmc(vec2 r, mat2 m, vec2 c)
-   CGLM_INLINE float glms_mat42_make(float * __restrict src);
+   CGLM_INLINE mat2s glms_mat2_make(float * __restrict src);
  */
 
 #ifndef cglms_mat2_h
@@ -44,8 +44,8 @@
 #define GLMS_MAT2_ZERO_INIT     {GLM_MAT2_ZERO_INIT}
 
 /* for C only */
-#define GLMS_MAT2_IDENTITY ((mat3s)GLMS_MAT2_IDENTITY_INIT)
-#define GLMS_MAT2_ZERO     ((mat3s)GLMS_MAT2_ZERO_INIT)
+#define GLMS_MAT2_IDENTITY ((mat2s)GLMS_MAT2_IDENTITY_INIT)
+#define GLMS_MAT2_ZERO     ((mat2s)GLMS_MAT2_ZERO_INIT)
 
 /*!
  * @brief make given matrix identity. It is identical with below,

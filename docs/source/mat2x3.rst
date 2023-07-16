@@ -11,7 +11,7 @@ Table of contents (click to go):
 Macros:
 
 1. GLM_MAT2X3_ZERO_INIT
-#. GLM_MAT2x3_ZERO
+#. GLM_MAT2X3_ZERO
 
 Functions:
 

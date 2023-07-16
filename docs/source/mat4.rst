@@ -308,7 +308,7 @@ Functions documentation
 
     Create mat4 matrix from pointer
 
-    | NOTE: **@src** must contain 16 elements.
+    | NOTE: **@src** must contain at least 16 elements.
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
