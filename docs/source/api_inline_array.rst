@@ -50,6 +50,7 @@ Follow the :doc:`build` documentation for this
    mat2x4
    mat3
    mat3x2
+   mat3x4
    mat4
    vec2
    vec2-ext

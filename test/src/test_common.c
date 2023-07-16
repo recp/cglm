@@ -270,6 +270,19 @@ test_assert_mat3x2_eq_zero(mat3x2 m3x2) {
 }
 
 test_status_t
+test_assert_mat3x4_eq_zero(mat3x4 m3x4) {
+  int i, j;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 4; j++) {
+      ASSERT(test_eq(m3x4[i][j], 0.0f))
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_mat4_eq_identity(mat4 m4) {
   int i, j;
 

@@ -21,6 +21,7 @@ extern "C" {
 #include "struct/mat2x4.h"
 #include "struct/mat3.h"
 #include "struct/mat3x2.h"
+#include "struct/mat3x4.h"
 #include "struct/mat4.h"
 #include "struct/affine.h"
 #include "struct/frustum.h"
