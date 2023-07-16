@@ -11,7 +11,7 @@
    GLMS_MAT2X3_ZERO
 
  Functions:
-   CGLM_INLINE float glms_mat2x3_make(float * __restrict src);
+   CGLM_INLINE mat2x3s glms_mat2x3_make(float * __restrict src);
  */
 
 #ifndef cglms_mat2x3_h
