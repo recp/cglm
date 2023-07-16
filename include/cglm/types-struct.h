@@ -199,7 +199,7 @@ typedef union mat2s {
 
 typedef union mat2x3s {
   mat2x3 raw;
-  vec3s  col[2]; /* col -> row | [row (2), col (3)] */
+  vec3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
@@ -210,7 +210,7 @@ typedef union mat2x3s {
 
 typedef union mat2x4s {
   mat2x4 raw;
-  vec4s  col[2]; /* col -> row | [row (2), col (4)] */
+  vec4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
@@ -233,7 +233,7 @@ typedef union mat3s {
 
 typedef union mat3x2s {
   mat3x2 raw;
-  vec2s  col[3]; /* col -> row | [row (3), col (2)] */
+  vec2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01;
