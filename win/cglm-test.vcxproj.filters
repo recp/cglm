@@ -91,6 +91,9 @@
     <ClInclude Include="..\test\src\test_mat3x2.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_mat3x4.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\test\src\test_mat4.h">
       <Filter>src</Filter>
     </ClInclude>
