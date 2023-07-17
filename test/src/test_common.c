@@ -313,6 +313,19 @@ test_assert_mat4_eq_zero(mat4 m4) {
 }
 
 test_status_t
+test_assert_mat4x2_eq_zero(mat4x2 m4x2) {
+  int i, j;
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 2; j++) {
+      ASSERT(test_eq(m4x2[i][j], 0.0f))
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_eqf(float a, float b) {
   ASSERT(fabsf(a - b) <= 0.000009); /* rounding errors */
 

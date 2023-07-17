@@ -42,6 +42,7 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/cam.h \
                include/cglm/io.h \
                include/cglm/mat4.h \
+               include/cglm/mat4x2.h \
                include/cglm/mat3.h \
                include/cglm/mat3x2.h \
                include/cglm/mat3x4.h \
@@ -98,6 +99,7 @@ cglm_clipspace_HEADERS = include/cglm/clipspace/persp.h \
 
 cglm_calldir=$(includedir)/cglm/call
 cglm_call_HEADERS = include/cglm/call/mat4.h \
+                    include/cglm/call/mat4x2.h \
                     include/cglm/call/mat3.h \
                     include/cglm/call/mat3x2.h \
                     include/cglm/call/mat3x4.h \
@@ -166,6 +168,7 @@ cglm_simd_neon_HEADERS = include/cglm/simd/neon/affine.h \
 
 cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \
+                      include/cglm/struct/mat4x2.h \
                       include/cglm/struct/mat3.h \
                       include/cglm/struct/mat3x2.h \
                       include/cglm/struct/mat3x4.h \
@@ -230,6 +233,7 @@ libcglm_la_SOURCES=\
     src/mat3x2.c \
     src/mat3x4.c \
     src/mat4.c \
+    src/mat4x2.c \
     src/plane.c \
     src/frustum.c \
     src/box.c \

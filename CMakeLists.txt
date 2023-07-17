@@ -85,6 +85,7 @@ add_library(${PROJECT_NAME}
   src/mat3x2.c
   src/mat3x4.c
   src/mat4.c
+  src/mat4x2.c
   src/plane.c
   src/frustum.c
   src/box.c
