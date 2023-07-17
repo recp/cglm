@@ -268,4 +268,17 @@ typedef union CGLM_ALIGN_MAT mat4s {
 #endif
 } mat4s;
 
+typedef union mat4x2s {
+  mat4x2 raw;
+  vec2s  col[4]; /* [col (4), row (2)] */
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    float m00, m01;
+    float m10, m11;
+    float m21, m22;
+    float m31, m32;
+  };
+#endif
+} mat4x2s;
+
 #endif /* cglm_types_struct_h */

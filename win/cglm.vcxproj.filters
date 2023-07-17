@@ -67,6 +67,9 @@
     <ClCompile Include="..\src\mat4.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\mat4x2.c">
+      <Filter>src</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\quat.c">
       <Filter>src</Filter>
     </ClCompile>
@@ -198,6 +201,9 @@
     <ClInclude Include="..\include\cglm\call\mat4.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\call\mat4x2.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
     <ClInclude Include="..\include\cglm\call\quat.h">
       <Filter>include\cglm\call</Filter>
     </ClInclude>
@@ -268,6 +274,9 @@
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\mat4.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\mat4x2.h">
       <Filter>include\cglm</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\quat.h">
@@ -391,6 +400,9 @@
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\mat4.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\mat4x2.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\plane.h">

@@ -16,6 +16,7 @@
 #include "ivec3.h"
 #include "ivec4.h"
 #include "mat4.h"
+#include "mat4x2.h"
 #include "mat3.h"
 #include "mat3x2.h"
 #include "mat3x4.h"
