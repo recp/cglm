@@ -26,6 +26,7 @@ extern "C" {
 #include "call/mat3x4.h"
 #include "call/mat4.h"
 #include "call/mat4x2.h"
+#include "call/mat4x3.h"
 #include "call/affine.h"
 #include "call/cam.h"
 #include "call/quat.h"

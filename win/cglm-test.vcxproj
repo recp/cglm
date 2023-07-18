@@ -73,6 +73,7 @@
     <ClInclude Include="..\test\src\test_mat3x4.h" />
     <ClInclude Include="..\test\src\test_mat4.h" />
     <ClInclude Include="..\test\src\test_mat4x2.h" />
+    <ClInclude Include="..\test\src\test_mat4x3.h" />
     <ClInclude Include="..\test\src\test_plane.h" />
     <ClInclude Include="..\test\src\test_project.h" />
     <ClInclude Include="..\test\src\test_quat.h" />

@@ -62,6 +62,7 @@ typedef vec3                    mat2x3[2];  /* [col (2), row (3)] */
 typedef vec4                    mat2x4[2];  /* [col (2), row (4)] */
 typedef CGLM_ALIGN_MAT    vec4  mat4[4];
 typedef vec2                    mat4x2[4];  /* [col (4), row (2)] */
+typedef vec3                    mat4x3[4];  /* [col (4), row (3)] */
 
 /*
   Important: cglm stores quaternion as [x, y, z, w] in memory since v0.4.0 

@@ -95,6 +95,18 @@ TEST_IMPL(mat4x2s_zero) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(mat4x3s_zero_init) {
+  mat4x3s mat4x3_zero   = GLMS_MAT4X3_ZERO_INIT;
+  test_assert_mat4x3_eq_zero(mat4x3_zero.raw);
+  TEST_SUCCESS
+}
+
+TEST_IMPL(mat4x3s_zero) {
+  mat4x3s mat4x3_zero   = GLMS_MAT4X3_ZERO;
+  test_assert_mat4x3_eq_zero(mat4x3_zero.raw);
+  TEST_SUCCESS
+}
+
 TEST_IMPL(quats_zero_init) {
   versors quat_zero   = GLMS_QUAT_IDENTITY_INIT;
   versor  quat_zero_a =  GLM_QUAT_IDENTITY_INIT;
