@@ -281,4 +281,17 @@ typedef union mat4x2s {
 #endif
 } mat4x2s;
 
+typedef union mat4x3s {
+  mat4x3 raw;
+  vec3s  col[4]; /* [col (4), row (3)] */
+#if CGLM_USE_ANONYMOUS_STRUCT
+  struct {
+    float m00, m01, m02;
+    float m10, m11, m12;
+    float m20, m21, m22;
+    float m30, m31, m32;
+  };
+#endif
+} mat4x3s;
+
 #endif /* cglm_types_struct_h */
