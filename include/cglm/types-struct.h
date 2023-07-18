@@ -275,8 +275,8 @@ typedef union mat4x2s {
   struct {
     float m00, m01;
     float m10, m11;
-    float m21, m22;
-    float m31, m32;
+    float m20, m21;
+    float m30, m31;
   };
 #endif
 } mat4x2s;
