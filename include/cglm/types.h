@@ -46,9 +46,9 @@
 #define CGLM_CASTPTR_ASSUME_ALIGNED(expr, type) \
   ((type*)CGLM_ASSUME_ALIGNED((expr), __alignof__(type)))
 
-typedef int                    ivec2[2];
-typedef int                    ivec3[3];
-typedef int                    ivec4[4];
+typedef int                     ivec2[2];
+typedef int                     ivec3[3];
+typedef int                     ivec4[4];
 
 typedef float                   vec2[2];
 typedef float                   vec3[3];

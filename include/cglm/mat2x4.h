@@ -18,11 +18,37 @@
 #define cglm_mat2x4_h
 
 #include "common.h"
+#include "vec4.h"
 
 #define GLM_MAT2X4_ZERO_INIT {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}
 
 /* for C only */
 #define GLM_MAT2X4_ZERO GLM_MAT2X4_ZERO_INIT
+
+/*!
+ * @brief copy all members of [mat] to [dest]
+ *
+ * @param[in]  mat  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_mat2x4_copy(mat2x4 mat, mat2x4 dest) {
+  glm_vec4_ucopy(mat[0], dest[0]);
+  glm_vec4_ucopy(mat[1], dest[1]);
+}
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_mat2x4_zero(mat2x4 mat) {
+  CGLM_ALIGN_MAT mat2x4 t = GLM_MAT2X4_ZERO_INIT;
+  glm_mat2x4_copy(t, mat);
+}
 
 /*!
  * @brief Create mat2x4 matrix from pointer

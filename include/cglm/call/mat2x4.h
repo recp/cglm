@@ -15,6 +15,14 @@ extern "C" {
 
 CGLM_EXPORT
 void
+glmc_mat2x4_copy(mat2x4 mat, mat2x4 dest);
+
+CGLM_EXPORT
+void
+glmc_mat2x4_zero(mat2x4 mat);
+
+CGLM_EXPORT
+void
 glmc_mat2x4_make(float * __restrict src, mat2x4 dest);
 
 #ifdef __cplusplus

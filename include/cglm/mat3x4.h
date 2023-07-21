@@ -27,6 +27,32 @@
 #define GLM_MAT3X4_ZERO GLM_MAT3X4_ZERO_INIT
 
 /*!
+ * @brief copy all members of [mat] to [dest]
+ *
+ * @param[in]  mat  source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_mat3x4_copy(mat3x4 mat, mat3x4 dest) {
+  glm_vec4_ucopy(mat[0], dest[0]);
+  glm_vec4_ucopy(mat[1], dest[1]);
+  glm_vec4_ucopy(mat[2], dest[2]);
+}
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+void
+glm_mat3x4_zero(mat3x4 mat) {
+  CGLM_ALIGN_MAT mat3x4 t = GLM_MAT3X4_ZERO_INIT;
+  glm_mat3x4_copy(t, mat);
+}
+
+/*!
  * @brief Create mat3x4 matrix from pointer
  *
  * @param[in]  src  pointer to an array of floats
