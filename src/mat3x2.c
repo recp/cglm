@@ -31,3 +31,21 @@ void
 glmc_mat3x2_mul(mat3x2 m1, mat2x3 m2, mat3 dest) {
   glm_mat3x2_mul(m1, m2, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_mat3x2_mulv(mat3x2 m, vec2 v, vec3 dest) {
+  glm_mat3x2_mulv(m, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_mat3x2_transpose(mat3x2 m, mat2x3 dest) {
+  glm_mat3x2_transpose(m, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_mat3x2_scale(mat3x2 m, float s) {
+  glm_mat3x2_scale(m, s);
+}

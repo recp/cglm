@@ -29,6 +29,18 @@ CGLM_EXPORT
 void
 glmc_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest);
 
+CGLM_EXPORT
+void
+glmc_mat3x4_mulv(mat3x4 m, vec4 v, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3x4_transpose(mat3x4 m, mat4x3 dest);
+
+CGLM_EXPORT
+void
+glmc_mat3x4_scale(mat3x4 m, float s);
+
 #ifdef __cplusplus
 }
 #endif

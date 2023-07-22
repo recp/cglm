@@ -11,7 +11,13 @@
    GLM_MAT2X4_ZERO
 
  Functions:
-   CGLM_INLINE void  glm_mat2x4_make(float * restrict src, mat2x4 dest)
+   CGLM_INLINE void glm_mat2x4_copy(mat2x4 mat, mat2x4 dest);
+   CGLM_INLINE void glm_mat2x4_zero(mat2x4 mat);
+   CGLM_INLINE void glm_mat2x4_make(float * __restrict src, mat2x4 dest);
+   CGLM_INLINE void glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest);
+   CGLM_INLINE void glm_mat2x4_mulv(mat2x4 m, vec4 v, vec2 dest);
+   CGLM_INLINE void glm_mat2x4_transpose(mat2x4 m, mat4x2 dest);
+   CGLM_INLINE void glm_mat2x4_scale(mat2x4 m, float s);
  */
 
 #ifndef cglm_mat2x4_h
@@ -100,6 +106,52 @@ glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest) {
   dest[0][1] = a00 * b10 + a10 * b11 + a20 * b21 + a30 * b31;
   dest[1][0] = a01 * b00 + a11 * b01 + a21 * b20 + a31 * b30;
   dest[1][1] = a01 * b10 + a11 * b11 + a21 * b21 + a31 * b31;
+}
+
+/*!
+ * @brief multiply matrix with column vector and store in dest vector
+ *
+ * @param[in]  m    matrix (left)
+ * @param[in]  v    vector (right, column vector)
+ * @param[out] dest result vector
+ */
+CGLM_INLINE
+void
+glm_mat2x4_mulv(mat2x4 m, vec4 v, vec2 dest) {
+  float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
+
+  dest[0] = m[0][0] * v0 + m[0][1] * v1 + m[0][2] * v2 + m[0][3] * v3;
+  dest[1] = m[1][0] * v0 + m[1][1] * v1 + m[1][2] * v2 + m[1][3] * v3;
+}
+
+/*!
+ * @brief transpose matrix and store in dest
+ *
+ * @param[in]  m     matrix
+ * @param[out] dest  result
+ */
+CGLM_INLINE
+void
+glm_mat2x4_transpose(mat2x4 m, mat4x2 dest) {
+  dest[0][0] = m[0][0];  dest[0][1] = m[1][0];
+  dest[1][0] = m[0][1];  dest[1][1] = m[1][1];
+  dest[2][0] = m[0][2];  dest[2][1] = m[1][2];
+  dest[3][0] = m[0][3];  dest[3][1] = m[1][3];
+}
+
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]    s scalar
+ */
+CGLM_INLINE
+void
+glm_mat2x4_scale(mat2x4 m, float s) {
+  m[0][0] *= s;  m[0][1] *= s;  m[0][2] *= s;  m[0][3] *= s;
+  m[1][0] *= s;  m[1][1] *= s;  m[2][2] *= s;  m[3][3] *= s;
 }
 
 #endif

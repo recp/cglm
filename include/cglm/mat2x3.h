@@ -11,7 +11,13 @@
    GLM_MAT2X3_ZERO
 
  Functions:
-   CGLM_INLINE void  glm_mat2x3_make(float * restrict src, mat2x3 dest)
+   CGLM_INLINE void glm_mat2x3_copy(mat2x3 mat, mat2x3 dest);
+   CGLM_INLINE void glm_mat2x3_zero(mat2x3 mat);
+   CGLM_INLINE void glm_mat2x3_make(float * __restrict src, mat2x3 dest);
+   CGLM_INLINE void glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat2 dest);
+   CGLM_INLINE void glm_mat2x3_mulv(mat2x3 m, vec3 v, vec2 dest);
+   CGLM_INLINE void glm_mat2x3_transpose(mat2x3 m, mat3x2 dest);
+   CGLM_INLINE void glm_mat2x3_scale(mat2x3 m, float s);
  */
 
 #ifndef cglm_mat2x3_h
@@ -100,6 +106,51 @@ glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat2 dest) {
   dest[0][1] = a00 * b10 + a10 * b11 + a20 * b21;
   dest[1][0] = a01 * b00 + a11 * b01 + a21 * b20;
   dest[1][1] = a01 * b10 + a11 * b11 + a21 * b21;
+}
+
+/*!
+ * @brief multiply matrix with column vector and store in dest vector
+ *
+ * @param[in]  m    matrix (left)
+ * @param[in]  v    vector (right, column vector)
+ * @param[out] dest result vector
+ */
+CGLM_INLINE
+void
+glm_mat2x3_mulv(mat2x3 m, vec3 v, vec2 dest) {
+  float v0 = v[0], v1 = v[1], v2 = v[2];
+
+  dest[0] = m[0][0] * v0 + m[0][1] * v1 + m[0][2] * v2;
+  dest[1] = m[1][0] * v0 + m[1][1] * v1 + m[1][2] * v2;
+}
+
+/*!
+ * @brief transpose matrix and store in dest
+ *
+ * @param[in]  m     matrix
+ * @param[out] dest  result
+ */
+CGLM_INLINE
+void
+glm_mat2x3_transpose(mat2x3 m, mat3x2 dest) {
+  dest[0][0] = m[0][0];  dest[0][1] = m[1][0];
+  dest[1][0] = m[0][1];  dest[1][1] = m[1][1];
+  dest[2][0] = m[0][2];  dest[2][1] = m[1][2];
+}
+
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]    s scalar
+ */
+CGLM_INLINE
+void
+glm_mat2x3_scale(mat2x3 m, float s) {
+  m[0][0] *= s;  m[0][1] *= s;  m[0][2] *= s;
+  m[1][0] *= s;  m[1][1] *= s;  m[1][2] *= s;
 }
 
 #endif

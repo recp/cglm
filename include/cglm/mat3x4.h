@@ -11,7 +11,13 @@
    GLM_MAT3X4_ZERO
 
  Functions:
-   CGLM_INLINE void  glm_mat3x4_make(float * restrict src, mat3x4 dest)
+   CGLM_INLINE void glm_mat3x4_copy(mat3x4 mat, mat3x4 dest);
+   CGLM_INLINE void glm_mat3x4_zero(mat3x4 mat);
+   CGLM_INLINE void glm_mat3x4_make(float * __restrict src, mat3x4 dest);
+   CGLM_INLINE void glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest);
+   CGLM_INLINE void glm_mat3x4_mulv(mat3x4 m, vec4 v, vec3 dest);
+   CGLM_INLINE void glm_mat3x4_transpose(mat3x4 m, mat4x3 dest);
+   CGLM_INLINE void glm_mat3x4_scale(mat3x4 m, float s);
  */
 
 #ifndef cglm_mat3x4_h
@@ -113,6 +119,55 @@ glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest) {
   dest[2][0] = a20 * b00 + a21 * b10 + a22 * b20 + a23 * b30;
   dest[2][1] = a20 * b01 + a21 * b11 + a22 * b21 + a23 * b31;
   dest[2][2] = a20 * b02 + a21 * b12 + a22 * b22 + a23 * b32;
+}
+
+/*!
+ * @brief multiply matrix with column vector and store in dest vector
+ *
+ * @param[in]  m    matrix (left)
+ * @param[in]  v    vector (right, column vector)
+ * @param[out] dest result vector
+ */
+CGLM_INLINE
+void
+glm_mat3x4_mulv(mat3x4 m, vec4 v, vec3 dest) {
+  float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
+
+  dest[0] = m[0][0] * v0 + m[0][1] * v1 + m[0][2] * v2 + m[0][3] * v3;
+  dest[1] = m[1][0] * v0 + m[1][1] * v1 + m[1][2] * v2 + m[1][3] * v3;
+  dest[2] = m[2][0] * v0 + m[2][1] * v1 + m[2][2] * v2 + m[2][3] * v3;
+}
+
+/*!
+ * @brief transpose matrix and store in dest
+ *
+ * @param[in]  m     matrix
+ * @param[out] dest  result
+ */
+CGLM_INLINE
+void
+glm_mat3x4_transpose(mat3x4 m, mat4x3 dest) {
+  dest[0][0] = m[0][0];  dest[0][1] = m[1][0];  dest[0][2] = m[2][0];
+  dest[1][0] = m[0][1];  dest[1][1] = m[1][1];  dest[1][2] = m[2][1];
+  dest[2][0] = m[0][2];  dest[2][1] = m[1][2];  dest[2][2] = m[2][2];
+  dest[3][0] = m[0][3];  dest[3][1] = m[1][3];  dest[3][2] = m[2][3];
+}
+
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]    s scalar
+ */
+CGLM_INLINE
+void
+glm_mat3x4_scale(mat3x4 m, float s) {
+  m[0][0] *= s;  m[1][0] *= s;   m[2][0] *= s;
+  m[0][1] *= s;  m[1][1] *= s;   m[2][1] *= s;
+  m[0][2] *= s;  m[1][2] *= s;   m[2][2] *= s;
+  m[0][3] *= s;  m[1][3] *= s;   m[2][3] *= s;
 }
 
 #endif
