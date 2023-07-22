@@ -11,7 +11,12 @@
    GLMS_MAT4X2_ZERO
 
  Functions:
+   CGLM_INLINE mat4x2s glms_mat4x2_zero(void);
    CGLM_INLINE mat4x2s glms_mat4x2_make(float * __restrict src);
+   CGLM_INLINE mat4s   glms_mat4x2_mul(mat4x2s m1, mat2x4s m2);
+   CGLM_INLINE vec4s   glms_mat4x2_mulv(mat4x2s m, vec2s v);
+   CGLM_INLINE mat2x4s glms_mat4x2_transpose(mat4x2s m);
+   CGLM_INLINE mat4x2s glms_mat4x2_scale(mat4x2s m, float s);
  */
 
 #ifndef cglms_mat4x2_h
@@ -29,6 +34,20 @@
 /* for C only */
 #define GLMS_MAT4X2_ZERO ((mat4x2s)GLMS_MAT4X2_ZERO_INIT)
 
+
+/*!
+ * @brief make given matrix zero.
+ *
+ * @param[in, out]  mat  matrix
+ */
+CGLM_INLINE
+mat4x2s
+glms_mat4x2_(zero)(void) {
+  mat4x2s r;
+  glm_mat4x2_zero(r.raw);
+  return r;
+}
+
 /*!
  * @brief Create mat4x2 matrix from pointer
  *
@@ -41,6 +60,71 @@ glms_mat4x2_(make)(float * __restrict src) {
   mat4x2s r;
   glm_mat4x2_make(src, r.raw);
   return r;
+}
+
+/*!
+ * @brief multiply m1 and m2 to dest
+ *
+ * m1, m2 and dest matrices can be same matrix, it is possible to write this:
+ *
+ * @code
+ * glm_mat4x2_mul(m, m, m);
+ * @endcode
+ *
+ * @param[in]  m1   left matrix
+ * @param[in]  m2   right matrix
+ * @param[out] dest destination matrix
+ */
+CGLM_INLINE
+mat4s
+glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
+  mat4s r;
+  glm_mat4x2_mul(m1.raw, m2.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief multiply matrix with column vector and store in dest vector
+ *
+ * @param[in]  m    matrix (left)
+ * @param[in]  v    vector (right, column vector)
+ * @param[out] dest result vector
+ */
+CGLM_INLINE
+vec4s
+glms_mat4x2_(mulv)(mat4x2s m, vec2s v) {
+  vec4s r;
+  glm_mat4x2_mulv(m.raw, v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief transpose matrix and store in dest
+ *
+ * @param[in]  m     matrix
+ * @param[out] dest  result
+ */
+CGLM_INLINE
+mat2x4s
+glms_mat4x2_(transpose)(mat4x2s m) {
+  mat2x4s r;
+  glm_mat4x2_transpose(m.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief scale (multiply with scalar) matrix
+ *
+ * multiply matrix with scalar
+ *
+ * @param[in, out] m matrix
+ * @param[in]    s scalar
+ */
+CGLM_INLINE
+mat4x2s
+glms_mat4x2_(scale)(mat4x2s m, float s) {
+  glm_mat4x2_scale(m.raw, s);
+  return m;
 }
 
 #endif /* cglms_mat4x2_h */
