@@ -25,3 +25,9 @@ void
 glmc_mat4x2_make(float * __restrict src, mat4x2 dest) {
   glm_mat4x2_make(src, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_mat4x2_mul(mat4x2 m1, mat2x4 m2, mat4 dest) {
+  glm_mat4x2_mul(m1, m2, dest);
+}

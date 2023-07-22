@@ -74,4 +74,40 @@ glm_mat3x2_make(float * __restrict src, mat3x2 dest) {
   dest[2][1] = src[5];
 }
 
+/*!
+ * @brief multiply m1 and m2 to dest
+ *
+ * m1, m2 and dest matrices can be same matrix, it is possible to write this:
+ *
+ * @code
+ * glm_mat3x2_mul(m, m, m);
+ * @endcode
+ *
+ * @param[in]  m1   left matrix
+ * @param[in]  m2   right matrix
+ * @param[out] dest destination matrix
+ */
+CGLM_INLINE
+void
+glm_mat3x2_mul(mat3x2 m1, mat2x3 m2, mat3 dest) {
+  float a00 = m1[0][0], a01 = m1[0][1],
+        a10 = m1[1][0], a11 = m1[1][1],
+        a20 = m1[2][0], a21 = m1[2][1],
+
+        b00 = m2[0][0], b01 = m2[0][1], b02 = m2[0][2],
+        b10 = m2[1][0], b11 = m2[1][1], b12 = m2[1][2];
+
+  dest[0][0] = a00 * b00 + a10 * b10;
+  dest[0][1] = a00 * b01 + a10 * b11;
+  dest[0][2] = a00 * b02 + a10 * b12;
+
+  dest[1][0] = a01 * b00 + a11 * b10;
+  dest[1][1] = a01 * b01 + a11 * b11;
+  dest[1][2] = a01 * b02 + a11 * b12;
+
+  dest[2][0] = a20 * b00 + a21 * b10;
+  dest[2][1] = a20 * b01 + a21 * b11;
+  dest[2][2] = a20 * b02 + a21 * b12;
+}
+
 #endif

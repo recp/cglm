@@ -25,6 +25,10 @@ CGLM_EXPORT
 void
 glmc_mat3x4_make(float * __restrict src, mat3x4 dest);
 
+CGLM_EXPORT
+void
+glmc_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest);
+
 #ifdef __cplusplus
 }
 #endif
