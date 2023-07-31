@@ -17,11 +17,19 @@ cglm_args = []
 build_args = []
 
 if get_option('default_library') == 'static'
-    cglm_args = '-DCGLM_STATIC'
+    cglm_args += '-DCGLM_STATIC'
+endif
+
+if cc.compiles(
+    'int *test(char *p) { return (int*)__builtin_assume_aligned(p, 4); }',
+    name : '__builtin_assume_aligned test')
+    cglm_args += '-DCGLM_HAVE_BUILTIN_ASSUME_ALIGNED=1'
+else
+    cglm_args += '-DCGLM_HAVE_BUILTIN_ASSUME_ALIGNED=0'
 endif
 
 if host_machine.system() == 'windows'
-    build_args = '-DCGLM_EXPORTS'
+    build_args += '-DCGLM_EXPORTS'
 endif
 
 cglm_inc = include_directories('include')
