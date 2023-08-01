@@ -32,13 +32,27 @@
 #  define CGLM_ALIGN_MAT CGLM_ALIGN(16)
 #endif
 
-#if defined(__has_builtin)
-#  if __has_builtin(__builtin_assume_aligned)
-#    define CGLM_ASSUME_ALIGNED(expr, alignment) \
-    __builtin_assume_aligned((expr), (alignment))
-#  else
-#    define CGLM_ASSUME_ALIGNED(expr, alignment) (expr)
+#ifndef CGLM_HAVE_BUILTIN_ASSUME_ALIGNED
+
+#  if defined(__has_builtin)
+#    if __has_builtin(__builtin_assume_aligned)
+#      define CGLM_HAVE_BUILTIN_ASSUME_ALIGNED 1
+#    endif
+#  elif defined(__GNUC__) && defined(__GNUC_MINOR__)
+#    if __GNUC__ >= 4 && __GNUC_MINOR__ >= 7
+#      define CGLM_HAVE_BUILTIN_ASSUME_ALIGNED 1
+#    endif
 #  endif
+
+#  ifndef CGLM_HAVE_BUILTIN_ASSUME_ALIGNED
+#    define CGLM_HAVE_BUILTIN_ASSUME_ALIGNED 0
+#  endif
+
+#endif
+
+#if CGLM_HAVE_BUILTIN_ASSUME_ALIGNED
+#  define CGLM_ASSUME_ALIGNED(expr, alignment) \
+     __builtin_assume_aligned((expr), (alignment))
 #else
 #  define CGLM_ASSUME_ALIGNED(expr, alignment) (expr)
 #endif
