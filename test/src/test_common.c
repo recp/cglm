@@ -32,11 +32,31 @@ test_rand_mat3(mat3 dest) {
 }
 
 void
+test_rand_mat3x2(mat3x2 dest) {
+  dest[0][0] = drand48();
+  dest[0][1] = drand48();
+  dest[1][0] = drand48();
+  dest[1][1] = drand48();
+  dest[2][0] = drand48();
+  dest[2][1] = drand48();
+}
+
+void
 test_rand_mat2(mat2 dest) {
   dest[0][0] = drand48();
   dest[0][1] = drand48();
   dest[1][0] = drand48();
   dest[1][1] = drand48();
+}
+
+void
+test_rand_mat2x3(mat2x3 dest) {
+  dest[0][0] = drand48();
+  dest[0][1] = drand48();
+  dest[0][2] = drand48();
+  dest[1][0] = drand48();
+  dest[1][1] = drand48();
+  dest[1][2] = drand48();
 }
 
 void
@@ -188,6 +208,19 @@ test_assert_mat2x3_eq_zero(mat2x3 m2x3) {
 }
 
 test_status_t
+test_assert_mat2x3_eq(mat2x3 m1, mat2x3 m2) {
+  int i, j;
+
+  for (i = 0; i < 2; i++) {
+    for (j = 0; j < 3; j++) {
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
 test_assert_mat2x4_eq_zero(mat2x4 m2x4) {
   int i, j;
 
@@ -263,6 +296,19 @@ test_assert_mat3x2_eq_zero(mat3x2 m3x2) {
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 2; j++) {
       ASSERT(test_eq(m3x2[i][j], 0.0f))
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+test_status_t
+test_assert_mat3x2_eq(mat3x2 m1, mat3x2 m2) {
+  int i, j;
+
+  for (i = 0; i < 3; i++) {
+    for (j = 0; j < 2; j++) {
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
     }
   }
 
