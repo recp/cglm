@@ -42,15 +42,19 @@ void
 glm_mat4x3_copy(mat4x3 mat, mat4x3 dest) {
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
+  dest[0][2] = mat[0][2];
 
   dest[1][0] = mat[1][0];
   dest[1][1] = mat[1][1];
+  dest[1][2] = mat[1][2];
 
   dest[2][0] = mat[2][0];
   dest[2][1] = mat[2][1];
+  dest[2][2] = mat[2][2];
 
   dest[3][0] = mat[3][0];
   dest[3][1] = mat[3][1];
+  dest[3][2] = mat[3][2];
 }
 
 /*!
