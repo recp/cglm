@@ -7,6 +7,9 @@
 
 #include "test_common.h"
 
+#define A_MATRIX4X3 {{1,2,3},{4,5,6},{7,8,9},{10,11,12}}
+#define A_MATRIX4X3_TRANSPOSE {{1,4,7,10},{2,5,8,11},{3,6,9,12}}
+
 #ifndef CGLM_TEST_MAT4X3_ONCE
 #define CGLM_TEST_MAT4X3_ONCE
 
@@ -23,6 +26,31 @@ TEST_IMPL(MACRO_GLM_MAT4X3_ZERO) {
 }
 
 #endif /* CGLM_TEST_MAT4X3_ONCE */
+
+TEST_IMPL(GLM_PREFIX, mat4x3_copy) {
+  mat4x3 m1 = A_MATRIX4X3;
+  mat4x3 m2 = GLM_MAT4X3_ZERO_INIT;
+
+  GLM(mat4x3_copy)(m1, m2);
+
+  test_assert_mat4x3_eq(m1, m2);
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4x3_zero) {
+  mat4x3 m1 = GLM_MAT4X3_ZERO_INIT;
+  mat4x3 m2 = GLM_MAT4X3_ZERO_INIT;
+  mat4x3 m3;
+
+  GLM(mat4x3_zero)(m3);
+
+  ASSERTIFY(test_assert_mat4x3_eq_zero(m1))
+  ASSERTIFY(test_assert_mat4x3_eq_zero(m2))
+  ASSERTIFY(test_assert_mat4x3_eq_zero(m3))
+
+  TEST_SUCCESS
+}
 
 TEST_IMPL(GLM_PREFIX, mat4x3_make) {
   float src[36] = {
@@ -54,6 +82,80 @@ TEST_IMPL(GLM_PREFIX, mat4x3_make) {
     ASSERT(test_eq(src[i+9], dest[j][k+3][0]));
     ASSERT(test_eq(src[i+10], dest[j][k+3][1]));
     ASSERT(test_eq(src[i+11], dest[j][k+3][2]));
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4x3_mul) {
+  mat4x3 m1 = GLM_MAT4X3_ZERO_INIT;
+  mat3x4 m2 = GLM_MAT3X4_ZERO_INIT;
+
+  mat4 m3 = GLM_MAT4_ZERO_INIT;
+  mat4 m4 = GLM_MAT4_ZERO_INIT;
+
+  int i, j, k;
+
+  test_rand_mat4x3(m1);
+  test_rand_mat3x4(m2);
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 4; j++) {
+      for (k = 0; k < 3; k++) {
+        m4[i][j] += m1[i][k] * m2[k][j];
+      }
+    }
+  }
+
+  GLM(mat4x3_mul)(m1, m2, m3);
+  ASSERTIFY(test_assert_mat4_eq(m3, m4))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4x3_mulv) {
+  mat4x3 mat = A_MATRIX4X3;
+  vec3 v = {11.0f, 21.0f, 31.0f};
+
+  int  i;
+  vec4 dest;
+  float res = 0.0;
+
+  GLM(mat4x3_mulv)(mat, v, dest);
+
+  for (i = 0; i < 4; i++) {
+    res = mat[i][0] * v[0] + mat[i][1] * v[1] + mat[i][2] * v[2];
+    ASSERT(test_eq(dest[i], res))
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4x3_transpose) {
+  mat4x3 m1 = A_MATRIX4X3;
+
+  mat3x4 m2;
+  mat3x4 m3 = A_MATRIX4X3_TRANSPOSE;
+  GLM(mat4x3_transpose)(m1, m2);
+
+  ASSERTIFY(test_assert_mat3x4_eq(m2, m3))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, mat4x3_scale) {
+  mat4x3 m1 = A_MATRIX4X3;
+  mat4x3 m2 = A_MATRIX4X3;
+  int i, j, scale;
+
+  scale = rand() % 100;
+
+  GLM(mat4x3_scale)(m1, (float) scale);
+
+  for (i = 0; i < 4; i++) {
+    for (j = 0; j < 3; j++) {
+      ASSERT(test_eq(m1[i][j], m2[i][j] * scale))
+    }
   }
 
   TEST_SUCCESS

@@ -65,11 +65,12 @@ Functions documentation
     make given matrix zero
 
     Parameters:
-      | *[in,out]* **mat**  matrix to
+      | *[in,out]* **mat**  matrix
 
 .. c:function:: void glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest)
 
     multiply m1 and m2 to dest
+
     m1, m2 and dest matrices can be same matrix, it is possible to write this:
 
     .. code-block:: c
@@ -101,7 +102,7 @@ Functions documentation
 
 .. c:function:: void glm_mat2_mulv(mat2 m, vec2 v, vec2 dest)
 
-    multiply mat4 with vec4 (column vector) and store in dest vector
+    multiply mat2 with vec2 (column vector) and store in dest vector
 
     Parameters:
       | *[in]*  **mat**   mat2 (left)
@@ -113,8 +114,8 @@ Functions documentation
     multiply matrix with scalar
 
     Parameters:
-      | *[in, out]* **mat**   matrix
-      | *[in]*      **dest**  scalar
+      | *[in, out]* **m**  matrix
+      | *[in]*      **s**  scalar
 
 .. c:function:: float  glm_mat2_det(mat2 mat)
 

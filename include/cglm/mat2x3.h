@@ -94,18 +94,18 @@ glm_mat2x3_make(float * __restrict src, mat2x3 dest) {
 CGLM_INLINE
 void
 glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat2 dest) {
-  float a00 = m1[0][0], a01 = m1[0][1],
-        a10 = m1[1][0], a11 = m1[1][1],
-        a20 = m1[2][0], a21 = m1[2][1],
+  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
+        a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
 
         b00 = m2[0][0], b01 = m2[0][1],
         b10 = m2[1][0], b11 = m2[1][1],
         b20 = m2[2][0], b21 = m2[2][1];
 
-  dest[0][0] = a00 * b00 + a10 * b01 + a20 * b20;
-  dest[0][1] = a00 * b10 + a10 * b11 + a20 * b21;
-  dest[1][0] = a01 * b00 + a11 * b01 + a21 * b20;
-  dest[1][1] = a01 * b10 + a11 * b11 + a21 * b21;
+  dest[0][0] = a00 * b00 + a01 * b10 + a02 * b20;
+  dest[0][1] = a00 * b01 + a01 * b11 + a02 * b21;
+
+  dest[1][0] = a10 * b00 + a11 * b10 + a12 * b20;
+  dest[1][1] = a10 * b01 + a11 * b11 + a12 * b21;
 }
 
 /*!
