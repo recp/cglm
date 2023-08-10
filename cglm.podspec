@@ -2,7 +2,7 @@ Pod::Spec.new do |s|
 
   # Description
   s.name         = "cglm"
-  s.version      = "0.9.0"
+  s.version      = "0.9.1"
   s.summary      = "📽 Highly Optimized Graphics Math (glm) for C"
   s.description  = <<-DESC
 cglm is math library for graphics programming for C. See the documentation or README for all features.
