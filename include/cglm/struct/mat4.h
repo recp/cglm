@@ -25,7 +25,7 @@
    CGLM_INLINE mat4s   glms_mat4_zero(void);
    CGLM_INLINE mat3s   glms_mat4_pick3(mat4s mat);
    CGLM_INLINE mat3s   glms_mat4_pick3t(mat4s mat);
-   CGLM_INLINE mat4s   glms_mat4_ins3(mat3s mat);
+   CGLM_INLINE mat4s   glms_mat4_ins3(mat3s mat, mat4s dest);
    CGLM_INLINE mat4s   glms_mat4_mul(mat4s m1, mat4s m2);
    CGLM_INLINE mat4s   glms_mat4_mulN(mat4s * __restrict matrices[], uint32_t len);
    CGLM_INLINE vec4s   glms_mat4_mulv(mat4s m, vec4s v);
@@ -183,14 +183,14 @@ glms_mat4_(pick3t)(mat4s mat) {
  * @brief copy mat3 to mat4's upper-left
  *
  * @param[in]  mat  source
+ * @param[in]  dest destination
  * @returns         destination
  */
 CGLM_INLINE
 mat4s
-glms_mat4_(ins3)(mat3s mat) {
-  mat4s r;
-  glm_mat4_ins3(mat.raw, r.raw);
-  return r;
+glms_mat4_(ins3)(mat3s mat, mat4s dest) {
+  glm_mat4_ins3(mat.raw, dest.raw);
+  return dest;
 }
 
 /*!
