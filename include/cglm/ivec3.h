@@ -25,6 +25,9 @@
   CGLM_INLINE void glm_ivec3_scale(ivec3 v, int s, ivec3 dest)
   CGLM_INLINE int glm_ivec3_distance2(ivec3 a, ivec3 b)
   CGLM_INLINE float glm_ivec3_distance(ivec3 a, ivec3 b)
+  CGLM_INLINE void glm_ivec3_fill(ivec3 v, float val);
+  CGLM_INLINE bool glm_ivec3_eq(ivec3 v, float val);
+  CGLM_INLINE bool glm_ivec3_eqv(ivec3 a, ivec3 b);
   CGLM_INLINE void glm_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_minv(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_clamp(ivec3 v, int minVal, int maxVal)
@@ -210,6 +213,44 @@ CGLM_INLINE
 float
 glm_ivec3_distance(ivec3 a, ivec3 b) {
   return sqrtf((float)glm_ivec3_distance2(a, b));
+}
+
+/*!
+ * @brief fill a vector with specified value
+ *
+ * @param[out] v   dest
+ * @param[in]  val value
+ */
+CGLM_INLINE
+void
+glm_ivec3_fill(ivec3 v, float val) {
+  v[0] = v[1] = v[2] = val;
+}
+
+/*!
+ * @brief check if vector is equal to value
+ *
+ * @param[in] v   vector
+ * @param[in] val value
+ */
+CGLM_INLINE
+bool
+glm_ivec3_eq(ivec3 v, float val) {
+  return v[0] == val && v[0] == v[1] && v[0] == v[2];
+}
+
+/*!
+ * @brief check if vector is equal to another
+ *
+ * @param[in] a vector
+ * @param[in] b vector
+ */
+CGLM_INLINE
+bool
+glm_ivec3_eqv(ivec3 a, ivec3 b) {
+  return a[0] == b[0]
+         && a[1] == b[1]
+         && a[2] == b[2];
 }
 
 /*!

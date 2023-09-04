@@ -12,6 +12,8 @@
    CGLM_INLINE void glm_vec4_print(vec4 vec, FILE *ostream);
    CGLM_INLINE void glm_vec3_print(vec3 vec, FILE *ostream);
    CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
+   CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
+
    CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
  */
 

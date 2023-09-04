@@ -16,6 +16,12 @@ glmc_vec2(float * __restrict v, vec2 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec2_fill(vec2 v, float val) {
+  glm_vec2_fill(v, val);
+}
+
+CGLM_EXPORT
+void
 glmc_vec2_copy(vec2 a, vec2 dest) {
   glm_vec2_copy(a, dest);
 }

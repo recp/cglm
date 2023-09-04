@@ -143,6 +143,31 @@ Functions documentation
     Returns:
         distance
 
+.. c:function:: void  glm_ivec2_fill(ivec2 v, float val)
+
+    fill a vector with specified value
+
+    Parameters:
+      | *[out]*  **v**    vector
+      | *[in]*   **val**  value
+
+.. c:function:: bool  glm_ivec2_eq(ivec2 v, float val)
+
+    check if vector is equal to value
+
+    Parameters:
+      | *[in]*  **v**    vector
+      | *[in]*  **val**  value
+
+.. c:function:: bool  glm_ivec2_eqv(ivec2 v1, ivec2 v2)
+
+    check if vector is equal to another vector
+
+    Parameters:
+      | *[in]*  **vec**   vector 1
+      | *[in]*  **vec**   vector 2
+
+
 .. c:function:: void glm_ivec2_maxv(ivec2 a, ivec2 b, ivec2 dest)
 
     set each member of dest to greater of vector a and b

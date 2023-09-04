@@ -82,6 +82,24 @@ glmc_ivec3_distance(ivec3 a, ivec3 b) {
 
 CGLM_EXPORT
 void
+glmc_ivec3_fill(ivec3 v, float val) {
+  glm_ivec3_fill(v, val);
+}
+
+CGLM_EXPORT
+bool
+glmc_ivec3_eq(ivec3 v, float val) {
+  return glm_ivec3_eq(v, val);
+}
+
+CGLM_EXPORT
+bool
+glmc_ivec3_eqv(ivec3 a, ivec3 b) {
+  return glm_ivec3_eqv(a, b);
+}
+
+CGLM_EXPORT
+void
 glmc_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest) {
   glm_ivec3_maxv(a, b, dest);
 }
