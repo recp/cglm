@@ -10,8 +10,11 @@
    CGLM_INLINE void glm_mat4_print(mat4 matrix, FILE *ostream);
    CGLM_INLINE void glm_mat3_print(mat3 matrix, FILE *ostream);
    CGLM_INLINE void glm_vec4_print(vec4 vec, FILE *ostream);
+   CGLM_INLINE void glm_ivec4_print(ivec4 vec, FILE *ostream);
    CGLM_INLINE void glm_vec3_print(vec3 vec, FILE *ostream);
    CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
+   CGLM_INLINE void glm_vec2_print(vec2 vec, FILE *ostream);
+   CGLM_INLINE void glm_ivec2_print(ivec2 vec, FILE *ostream);
    CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
    CGLM_INLINE void glm_arch_print(FILE *ostream);
  */
@@ -263,6 +266,24 @@ glm_vec4_print(vec4              vec,
 
 CGLM_INLINE
 void
+glm_ivec4_print(ivec4             vec,
+                FILE * __restrict ostream) {
+  int i;
+
+#define m 4
+
+  fprintf(ostream, "Vector (int%d): " CGLM_PRINT_COLOR "\n  (", m);
+
+  for (i = 0; i < m; i++)
+    fprintf(ostream, " % d", vec[i]);
+
+  fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
+
+#undef m
+}
+
+CGLM_INLINE
+void
 glm_vec3_print(vec3              vec,
                FILE * __restrict ostream) {
   int i;
@@ -317,6 +338,24 @@ glm_vec2_print(vec2              vec,
     else
       fprintf(ostream, " % g", (double)vec[i]);
   }
+
+  fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
+
+#undef m
+}
+
+CGLM_INLINE
+void
+glm_ivec2_print(ivec2             vec,
+                FILE * __restrict ostream) {
+  int i;
+
+#define m 2
+
+  fprintf(ostream, "Vector (int%d): " CGLM_PRINT_COLOR "\n  (", m);
+
+  for (i = 0; i < m; i++)
+    fprintf(ostream, " % d", vec[i]);
 
   fprintf(ostream, "  )" CGLM_PRINT_COLOR_RESET "\n\n");
 
@@ -387,9 +426,11 @@ glm_aabb_print(vec3                    bbox[2],
 #define glm_mat3_print(v, s) (void)v; (void)s;
 #define glm_mat2_print(v, s) (void)v; (void)s;
 #define glm_vec4_print(v, s) (void)v; (void)s;
+#define glm_ivec4_print(v, s) (void)v; (void)s;
 #define glm_vec3_print(v, s) (void)v; (void)s;
 #define glm_ivec3_print(v, s) (void)v; (void)s;
 #define glm_vec2_print(v, s) (void)v; (void)s;
+#define glm_ivec2_print(v, s) (void)v; (void)s;
 #define glm_versor_print(v, s) (void)v; (void)s;
 #define glm_aabb_print(v, t, s) (void)v; (void)t; (void)s;
 #define glm_arch_print(s) (void)s;

@@ -153,6 +153,42 @@ TEST_IMPL(GLM_PREFIX, ivec3_distance) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, ivec3_fill) {
+  ivec3 v1;
+  ivec3 v2 = {-1, 3, 4};
+
+  GLM(ivec3_fill)(v1, 1);
+  GLM(ivec3_fill)(v2, 2);
+
+  ASSERT(GLM(ivec3_eq)(v1, 1))
+  ASSERT(GLM(ivec3_eq)(v2, 2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec3_eq) {
+  ivec3 v1 = { -1, 2, 4 };
+
+  GLM(ivec3_fill)(v1, 2);
+
+  ASSERT(GLM(ivec3_eq)(v1, 2))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec3_eqv) {
+  ivec3 v1, v2, v3;
+
+  GLM(ivec3_fill)(v1, 1);
+  GLM(ivec3_fill)(v2, 2);
+  GLM(ivec3_fill)(v3, 1);
+
+  ASSERT(GLM(ivec3_eqv)(v1, v3))
+  ASSERT(!GLM(ivec3_eqv)(v1, v2))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, ivec3_maxv) {
   ivec3 a = {9, -20, 5};
   ivec3 b = {8, -1, 2};

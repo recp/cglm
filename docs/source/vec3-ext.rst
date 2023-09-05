@@ -50,6 +50,14 @@ Functions documentation
       | *[in]*  **val**   value
       | *[out]* **dest**  destination
 
+.. c:function:: void  glm_vec3_fill(vec3 v, float val)
+
+    fill a vector with specified value
+
+    Parameters:
+      | *[out]*  **v**    vector
+      | *[in]*   **val**  value
+
 .. c:function:: bool  glm_vec3_eq(vec3 v, float val)
 
     check if vector is equal to value (without epsilon)

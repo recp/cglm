@@ -29,6 +29,9 @@ Functions:
 #. :c:func:`glm_ivec3_scale`
 #. :c:func:`glm_ivec3_distance2`
 #. :c:func:`glm_ivec3_distance`
+#. :c:func:`glm_ivec3_fill`
+#. :c:func:`glm_ivec3_eq`
+#. :c:func:`glm_ivec3_eqv`
 #. :c:func:`glm_ivec3_maxv`
 #. :c:func:`glm_ivec3_minv`
 #. :c:func:`glm_ivec3_clamp`
@@ -142,6 +145,30 @@ Functions documentation
     
     Returns:
         distance
+
+.. c:function:: void  glm_ivec3_fill(ivec3 v, float val)
+
+    fill a vector with specified value
+
+    Parameters:
+      | *[out]*  **v**    vector
+      | *[in]*   **val**  value
+
+.. c:function:: bool  glm_ivec3_eq(ivec3 v, float val)
+
+    check if vector is equal to value
+
+    Parameters:
+      | *[in]*  **v**    vector
+      | *[in]*  **val**  value
+
+.. c:function:: bool  glm_ivec3_eqv(ivec3 v1, ivec3 v2)
+
+    check if vector is equal to another vector
+
+    Parameters:
+      | *[in]*  **vec**   vector 1
+      | *[in]*  **vec**   vector 2
 
 .. c:function:: void glm_ivec3_maxv(ivec3 a, ivec3 b, ivec3 dest)
 
