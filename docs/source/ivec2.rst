@@ -143,7 +143,7 @@ Functions documentation
     Returns:
         distance
 
-.. c:function:: void  glm_ivec2_fill(ivec2 v, float val)
+.. c:function:: void  glm_ivec2_fill(ivec2 v, int val)
 
     fill a vector with specified value
 
@@ -151,7 +151,7 @@ Functions documentation
       | *[out]*  **v**    vector
       | *[in]*   **val**  value
 
-.. c:function:: bool  glm_ivec2_eq(ivec2 v, float val)
+.. c:function:: bool  glm_ivec2_eq(ivec2 v, int val)
 
     check if vector is equal to value
 

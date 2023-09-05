@@ -25,8 +25,8 @@
   CGLM_INLINE void glm_ivec2_scale(ivec2 v, int s, ivec2 dest)
   CGLM_INLINE int glm_ivec2_distance2(ivec2 a, ivec2 b)
   CGLM_INLINE float glm_ivec2_distance(ivec2 a, ivec2 b)
-  CGLM_INLINE void glm_ivec2_fill(ivec2 v, float val);
-  CGLM_INLINE bool glm_ivec2_eq(ivec2 v, float val);
+  CGLM_INLINE void glm_ivec2_fill(ivec2 v, int val);
+  CGLM_INLINE bool glm_ivec2_eq(ivec2 v, int val);
   CGLM_INLINE bool glm_ivec2_eqv(ivec2 a, ivec2 b);
   CGLM_INLINE void glm_ivec2_maxv(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE void glm_ivec2_minv(ivec2 a, ivec2 b, ivec2 dest)
@@ -215,7 +215,7 @@ glm_ivec2_distance(ivec2 a, ivec2 b) {
  */
 CGLM_INLINE
 void
-glm_ivec2_fill(ivec2 v, float val) {
+glm_ivec2_fill(ivec2 v, int val) {
   v[0] = v[1] = val;
 }
 
@@ -227,7 +227,7 @@ glm_ivec2_fill(ivec2 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_ivec2_eq(ivec2 v, float val) {
+glm_ivec2_eq(ivec2 v, int val) {
   return v[0] == val && v[0] == v[1];
 }
 
