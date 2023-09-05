@@ -63,11 +63,11 @@ glmc_ivec3_distance(ivec3 a, ivec3 b);
 
 CGLM_EXPORT
 void
-glmc_ivec3_fill(ivec3 v, float val);
+glmc_ivec3_fill(ivec3 v, int val);
 
 CGLM_EXPORT
 bool
-glmc_ivec3_eq(ivec3 v, float val);
+glmc_ivec3_eq(ivec3 v, int val);
 
 CGLM_EXPORT
 bool
