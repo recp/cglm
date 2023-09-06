@@ -37,7 +37,7 @@
 #ifndef cglm_ivec2_h
 #define cglm_ivec2_h
 
-#include "common.h"
+#include <cglm/common.h>
 
 #define GLM_IVEC2_ONE_INIT   {1, 1}
 #define GLM_IVEC2_ZERO_INIT  {0, 0}

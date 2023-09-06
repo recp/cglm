@@ -8,20 +8,20 @@
 #ifndef cglm_project_h
 #define cglm_project_h
 
-#include "common.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
 
 #ifndef CGLM_CLIPSPACE_INCLUDE_ALL
 #  if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
-#    include "clipspace/project_zo.h"
+#include <cglm/clipspace/project_zo.h>
 #  elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
-#    include "clipspace/project_no.h"
+#include <cglm/clipspace/project_no.h>
 #  endif
 #else
-#  include "clipspace/project_zo.h"
-#  include "clipspace/project_no.h"
+#include <cglm/clipspace/project_zo.h>
+#include <cglm/clipspace/project_no.h>
 #endif
 
 /*!

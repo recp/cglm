@@ -23,8 +23,8 @@
 #ifndef cglm_mat2x4_h
 #define cglm_mat2x4_h
 
-#include "common.h"
-#include "vec4.h"
+#include <cglm/common.h>
+#include <cglm/vec4.h>
 
 #define GLM_MAT2X4_ZERO_INIT {{0.0f, 0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f, 0.0f}}
 

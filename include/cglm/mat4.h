@@ -49,24 +49,24 @@
 #ifndef cglm_mat_h
 #define cglm_mat_h
 
-#include "common.h"
-#include "vec4.h"
-#include "vec3.h"
+#include <cglm/common.h>
+#include <cglm/vec4.h>
+#include <cglm/vec3.h>
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/mat4.h"
+#include <cglm/simd/sse2/mat4.h>
 #endif
 
 #ifdef CGLM_AVX_FP
-#  include "simd/avx/mat4.h"
+#include <cglm/simd/avx/mat4.h>
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/mat4.h"
+#include <cglm/simd/neon/mat4.h>
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/mat4.h"
+#include <cglm/simd/wasm/mat4.h>
 #endif
 
 #ifdef DEBUG

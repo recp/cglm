@@ -8,9 +8,9 @@
 #ifndef cglm_curve_h
 #define cglm_curve_h
 
-#include "common.h"
-#include "vec4.h"
-#include "mat4.h"
+#include <cglm/common.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
 
 /*!
  * @brief helper function to calculate S*M*C multiplication for curves

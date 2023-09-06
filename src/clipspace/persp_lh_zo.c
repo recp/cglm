@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#include "../../include/cglm/clipspace/persp_lh_zo.h"
-#include "../../include/cglm/call/clipspace/persp_lh_zo.h"
+#include <cglm/clipspace/persp_lh_zo.h>
+#include <cglm/call/clipspace/persp_lh_zo.h>
 
 CGLM_EXPORT
 void

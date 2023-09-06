@@ -13,7 +13,7 @@
     && defined(SIMD_TYPES)                                                    \
     && defined(SIMD_VECTOR_TYPES)
 
-#include "common.h"
+#include <cglm/common.h>
 
 /*!
 * @brief converts mat4 to Apple's simd type simd_float4x4

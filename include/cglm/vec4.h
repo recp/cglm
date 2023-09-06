@@ -72,9 +72,9 @@
 #ifndef cglm_vec4_h
 #define cglm_vec4_h
 
-#include "common.h"
-#include "vec4-ext.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/vec4-ext.h>
+#include <cglm/util.h>
 
 /* DEPRECATED! functions */
 #define glm_vec4_dup3(v, dest)         glm_vec4_copy3(v, dest)

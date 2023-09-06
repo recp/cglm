@@ -8,8 +8,8 @@
 #ifndef cglm_sphere_h
 #define cglm_sphere_h
 
-#include "common.h"
-#include "mat4.h"
+#include <cglm/common.h>
+#include <cglm/mat4.h>
 
 /*
   Sphere Representation in cglm: [center.x, center.y, center.z, radii]

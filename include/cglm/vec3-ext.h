@@ -33,8 +33,8 @@
 #ifndef cglm_vec3_ext_h
 #define cglm_vec3_ext_h
 
-#include "common.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
 
 /*!
  * @brief fill a vector with specified value

@@ -8,8 +8,8 @@
 #ifndef cglm_color_h
 #define cglm_color_h
 
-#include "common.h"
-#include "vec3.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
 
 /*!
  * @brief averages the color channels into one value

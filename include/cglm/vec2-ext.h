@@ -29,8 +29,8 @@
 #ifndef cglm_vec2_ext_h
 #define cglm_vec2_ext_h
 
-#include "common.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
 
 /*!
  * @brief fill a vector with specified value

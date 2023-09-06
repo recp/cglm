@@ -54,9 +54,9 @@
 #ifndef cglm_vec2_h
 #define cglm_vec2_h
 
-#include "common.h"
-#include "util.h"
-#include "vec2-ext.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
+#include <cglm/vec2-ext.h>
 
 #define GLM_VEC2_ONE_INIT   {1.0f, 1.0f}
 #define GLM_VEC2_ZERO_INIT  {0.0f, 0.0f}

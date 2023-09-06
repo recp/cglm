@@ -24,10 +24,10 @@
 #ifndef cglm_affine2d_h
 #define cglm_affine2d_h
 
-#include "common.h"
-#include "util.h"
-#include "vec2.h"
-#include "mat3.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
+#include <cglm/vec2.h>
+#include <cglm/mat3.h>
 
 /*!
  * @brief translate existing 2d transform matrix by v vector

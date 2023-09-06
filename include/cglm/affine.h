@@ -34,12 +34,12 @@
 #ifndef cglm_affine_h
 #define cglm_affine_h
 
-#include "common.h"
-#include "util.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
-#include "affine-mat.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
+#include <cglm/affine-mat.h>
 
 /*!
  * @brief creates NEW translate transform matrix by v vector
@@ -232,7 +232,7 @@ glm_decompose(mat4 m, vec4 t, mat4 r, vec3 s) {
   glm_decompose_rs(m, r, s);
 }
 
-#include "affine-pre.h"
-#include "affine-post.h"
+#include <cglm/affine-pre.h>
+#include <cglm/affine-post.h>
 
 #endif /* cglm_affine_h */

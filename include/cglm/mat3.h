@@ -36,15 +36,15 @@
 #ifndef cglm_mat3_h
 #define cglm_mat3_h
 
-#include "common.h"
-#include "vec3.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/mat3.h"
+#include <cglm/simd/sse2/mat3.h>
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/mat3.h"
+#include <cglm/simd/wasm/mat3.h>
 #endif
 
 #define GLM_MAT3_IDENTITY_INIT  {{1.0f, 0.0f, 0.0f},                          \

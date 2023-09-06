@@ -8,7 +8,7 @@
 #ifndef cglm_ease_h
 #define cglm_ease_h
 
-#include "common.h"
+#include <cglm/common.h>
 
 CGLM_INLINE
 float

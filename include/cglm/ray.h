@@ -18,7 +18,7 @@
 #ifndef cglm_ray_h
 #define cglm_ray_h
 
-#include "vec3.h"
+#include <cglm/vec3.h>
 
 /*!
  * @brief Möller–Trumbore ray-triangle intersection algorithm

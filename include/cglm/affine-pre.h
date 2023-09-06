@@ -24,12 +24,12 @@
    CGLM_INLINE void glm_spin(mat4 m, float angle, vec3 axis);
  */
 
-#include "common.h"
-#include "util.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
-#include "affine-mat.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
+#include <cglm/affine-mat.h>
 
 /*!
  * @brief translate existing transform matrix by v vector

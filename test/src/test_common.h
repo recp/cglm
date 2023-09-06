@@ -8,7 +8,7 @@
 #ifndef test_common_h
 #define test_common_h
 
-#include "../include/common.h"
+#include <common.h>
 
 #if !defined(_WIN32) && !defined(_MSC_VER)
 #  pragma GCC diagnostic ignored "-Wstrict-prototypes"

@@ -93,10 +93,10 @@
 #ifndef cglm_vec3_h
 #define cglm_vec3_h
 
-#include "common.h"
-#include "vec4.h"
-#include "vec3-ext.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/vec4.h>
+#include <cglm/vec3-ext.h>
+#include <cglm/util.h>
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glm_vec3_dup(v, dest)         glm_vec3_copy(v, dest)

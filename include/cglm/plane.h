@@ -8,9 +8,9 @@
 #ifndef cglm_plane_h
 #define cglm_plane_h
 
-#include "common.h"
-#include "vec3.h"
-#include "vec4.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
 
 /*
  Plane equation:  Ax + By + Cz + D = 0;

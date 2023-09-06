@@ -34,7 +34,7 @@
 #ifndef cglm_ivec4_h
 #define cglm_ivec4_h
 
-#include "common.h"
+#include <cglm/common.h>
 
 #define GLM_IVEC4_ONE_INIT   {1, 1, 1, 1}
 #define GLM_IVEC4_ZERO_INIT  {0, 0, 0, 0}

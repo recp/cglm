@@ -34,19 +34,19 @@
 #ifndef cglm_mat2_h
 #define cglm_mat2_h
 
-#include "common.h"
-#include "vec2.h"
+#include <cglm/common.h>
+#include <cglm/vec2.h>
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/mat2.h"
+#include <cglm/simd/sse2/mat2.h>
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/mat2.h"
+#include <cglm/simd/neon/mat2.h>
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/mat2.h"
+#include <cglm/simd/wasm/mat2.h>
 #endif
 
 #define GLM_MAT2_IDENTITY_INIT  {{1.0f, 0.0f}, {0.0f, 1.0f}}

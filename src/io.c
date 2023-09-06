@@ -7,8 +7,8 @@
 
 #define CGLM_LIB_SRC
 
-#include "../include/cglm/cglm.h"
-#include "../include/cglm/call.h"
+#include <cglm/cglm.h>
+#include <cglm/call.h>
 
 CGLM_EXPORT
 void

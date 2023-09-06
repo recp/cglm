@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#include "../include/cglm/cglm.h"
-#include "../include/cglm/call.h"
+#include <cglm/cglm.h>
+#include <cglm/call.h>
 
 CGLM_EXPORT
 float

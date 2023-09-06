@@ -42,8 +42,8 @@
    || defined(CGLM_DEFINE_PRINTS) || defined(CGLM_LIB_SRC) \
    || defined(CGLM_NO_PRINTS_NOOP)
 
-#include "common.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/util.h>
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -416,7 +416,7 @@ glm_aabb_print(vec3                    bbox[2],
 
 #else
 
-#include "common.h"
+#include <cglm/common.h>
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -8,7 +8,7 @@
 #ifndef cglm_types_struct_h
 #define cglm_types_struct_h
 
-#include "types.h"
+#include <cglm/types.h>
 
 /*
  * Anonymous structs are available since C11, but we'd like to be compatible

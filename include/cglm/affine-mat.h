@@ -15,9 +15,9 @@
 #ifndef cglm_affine_mat_h
 #define cglm_affine_mat_h
 
-#include "common.h"
-#include "mat4.h"
-#include "mat3.h"
+#include <cglm/common.h>
+#include <cglm/mat4.h>
+#include <cglm/mat3.h>
 
 #ifdef CGLM_SSE_FP
 #  include "simd/sse2/affine.h"

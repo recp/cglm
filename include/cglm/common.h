@@ -40,8 +40,8 @@
 #define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
 #define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
 
-#include "types.h"
-#include "simd/intrin.h"
+#include <cglm/types.h>
+#include <cglm/simd/intrin.h>
 
 #ifndef CGLM_USE_DEFAULT_EPSILON
 #  ifndef GLM_FLT_EPSILON

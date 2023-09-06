@@ -35,7 +35,7 @@
 #ifndef cglm_euler_h
 #define cglm_euler_h
 
-#include "common.h"
+#include <cglm/common.h>
 
 /*!
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...

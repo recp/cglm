@@ -8,11 +8,11 @@
 #ifndef cglm_frustum_h
 #define cglm_frustum_h
 
-#include "common.h"
-#include "plane.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
+#include <cglm/common.h>
+#include <cglm/plane.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
 
 #define GLM_LBN 0 /* left  bottom near */
 #define GLM_LTN 1 /* left  top    near */

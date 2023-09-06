@@ -55,24 +55,24 @@
 #ifndef cglm_quat_h
 #define cglm_quat_h
 
-#include "common.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "mat4.h"
-#include "mat3.h"
-#include "affine-mat.h"
-#include "affine.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/mat4.h>
+#include <cglm/mat3.h>
+#include <cglm/affine-mat.h>
+#include <cglm/affine.h>
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/quat.h"
+#include <cglm/simd/sse2/quat.h>
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/quat.h"
+#include <cglm/simd/neon/quat.h>
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/quat.h"
+#include <cglm/simd/wasm/quat.h>
 #endif
 
 CGLM_INLINE void glm_quat_normalize(versor q);

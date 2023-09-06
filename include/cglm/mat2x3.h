@@ -23,7 +23,7 @@
 #ifndef cglm_mat2x3_h
 #define cglm_mat2x3_h
 
-#include "common.h"
+#include <cglm/common.h>
 
 #define GLM_MAT2X3_ZERO_INIT {{0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f}}
 

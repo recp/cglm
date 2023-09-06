@@ -8,10 +8,10 @@
 #ifndef cglm_box_h
 #define cglm_box_h
 
-#include "common.h"
-#include "vec3.h"
-#include "vec4.h"
-#include "util.h"
+#include <cglm/common.h>
+#include <cglm/vec3.h>
+#include <cglm/vec4.h>
+#include <cglm/util.h>
 
 /*!
  * @brief apply transform to Axis-Aligned Bounding Box
