@@ -20,19 +20,19 @@
 #include <cglm/mat3.h>
 
 #ifdef CGLM_SSE_FP
-#  include "simd/sse2/affine.h"
+#include <cglm/simd/sse2/affine.h>
 #endif
 
 #ifdef CGLM_AVX_FP
-#  include "simd/avx/affine.h"
+#include <cglm/simd/avx/affine.h>
 #endif
 
 #ifdef CGLM_NEON_FP
-#  include "simd/neon/affine.h"
+#include <cglm/simd/neon/affine.h>
 #endif
 
 #ifdef CGLM_SIMD_WASM
-#  include "simd/wasm/affine.h"
+#include <cglm/simd/wasm/affine.h>
 #endif
 
 /*!
