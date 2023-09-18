@@ -63,6 +63,21 @@ Follow the :doc:`build` documentation for this
    ivec2
    ivec3
    ivec4
+   uvec2
+   uvec3
+   uvec4
+   hvec2
+   hvec3
+   hvec4
+   uhvec2
+   uhvec3
+   uhvec4
+   bvec2
+   bvec3
+   bvec4
+   ubvec2
+   ubvec3
+   ubvec4
    color
    plane
    project

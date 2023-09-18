@@ -57,12 +57,27 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/vec2.h \
                include/cglm/vec2-ext.h \
                include/cglm/ivec2.h \
+               include/cglm/uvec2.h \
+               include/cglm/hvec2.h \
+               include/cglm/uhvec2.h \
+               include/cglm/bvec2.h \
+               include/cglm/ubvec2.h \
                include/cglm/vec3.h \
                include/cglm/vec3-ext.h \
                include/cglm/ivec3.h \
+               include/cglm/uvec3.h \
+               include/cglm/hvec3.h \
+               include/cglm/uhvec3.h \
+               include/cglm/bvec3.h \
+               include/cglm/ubvec3.h \
                include/cglm/vec4.h \
                include/cglm/vec4-ext.h \
                include/cglm/ivec4.h \
+               include/cglm/uvec4.h \
+               include/cglm/hvec4.h \
+               include/cglm/uhvec4.h \
+               include/cglm/bvec4.h \
+               include/cglm/ubvec4.h \
                include/cglm/euler.h \
                include/cglm/util.h \
                include/cglm/quat.h \
@@ -114,6 +129,21 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/ivec2.h \
                     include/cglm/call/ivec3.h \
                     include/cglm/call/ivec4.h \
+                    include/cglm/call/uvec2.h \
+                    include/cglm/call/uvec3.h \
+                    include/cglm/call/uvec4.h \
+                    include/cglm/call/hvec2.h \
+                    include/cglm/call/hvec3.h \
+                    include/cglm/call/hvec4.h \
+                    include/cglm/call/uhvec2.h \
+                    include/cglm/call/uhvec3.h \
+                    include/cglm/call/uhvec4.h \
+                    include/cglm/call/bvec2.h \
+                    include/cglm/call/bvec3.h \
+                    include/cglm/call/bvec4.h \
+                    include/cglm/call/ubvec2.h \
+                    include/cglm/call/ubvec3.h \
+                    include/cglm/call/ubvec4.h \
                     include/cglm/call/io.h \
                     include/cglm/call/cam.h \
                     include/cglm/call/quat.h \
@@ -225,10 +255,25 @@ libcglm_la_SOURCES=\
     src/cam.c \
     src/vec2.c \
     src/ivec2.c \
+    src/uvec2.c \
+    src/hvec2.c \
+    src/uhvec2.c \
+    src/bvec2.c \
+    src/ubvec2.c \
     src/vec3.c \
     src/ivec3.c \
+    src/uvec3.c \
+    src/hvec3.c \
+    src/uhvec3.c \
+    src/bvec3.c \
+    src/ubvec3.c \
     src/vec4.c \
     src/ivec4.c \
+    src/uvec4.c \
+    src/hvec4.c \
+    src/uhvec4.c \
+    src/bvec4.c \
+    src/ubvec4.c \
     src/mat2.c \
     src/mat2x3.c \
     src/mat2x4.c \
@@ -261,7 +306,8 @@ libcglm_la_SOURCES=\
     src/clipspace/view_rh_no.c \
     src/clipspace/view_rh_zo.c \
     src/clipspace/project_no.c \
-    src/clipspace/project_zo.c
+    src/clipspace/project_zo.c \
+    src/color.c
     
 test_tests_SOURCES=\
     test/runner.c \

@@ -54,10 +54,25 @@ Functions:
 #. :c:func:`glm_mat3_print`
 #. :c:func:`glm_vec4_print`
 #. :c:func:`glm_ivec4_print`
+#. :c:func:`glm_uvec4_print`
+#. :c:func:`glm_hvec4_print`
+#. :c:func:`glm_uhvec4_print`
+#. :c:func:`glm_bvec4_print`
+#. :c:func:`glm_ubvec4_print`
 #. :c:func:`glm_vec3_print`
 #. :c:func:`glm_ivec3_print`
+#. :c:func:`glm_uvec3_print`
+#. :c:func:`glm_hvec3_print`
+#. :c:func:`glm_uhvec3_print`
+#. :c:func:`glm_bvec3_print`
+#. :c:func:`glm_ubvec3_print`
 #. :c:func:`glm_vec2_print`
 #. :c:func:`glm_ivec2_print`
+#. :c:func:`glm_uvec2_print`
+#. :c:func:`glm_hvec2_print`
+#. :c:func:`glm_uhvec2_print`
+#. :c:func:`glm_bvec2_print`
+#. :c:func:`glm_ubvec2_print`
 #. :c:func:`glm_versor_print`
 #. :c:func:`glm_aabb_print`
 
@@ -96,6 +111,46 @@ Functions documentation
       | *[in]*  **vec**      vector
       | *[in]*  **ostream**  FILE to write
 
+.. c:function:: void  glm_uvec4_print(uvec4 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_hvec4_print(hvec4 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_uhvec4_print(uhvec4 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_bvec4_print(bvec4 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_ubvec4_print(ubvec4 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
 .. c:function:: void  glm_vec3_print(vec3 vec, FILE * __restrict ostream)
 
     | print vector to given stream
@@ -105,6 +160,46 @@ Functions documentation
       | *[in]*  **ostream**  FILE to write
 
 .. c:function:: void  glm_ivec3_print(ivec3 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_uvec3_print(uvec3 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_hvec3_print(hvec3 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_uhvec3_print(uhvec3 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_bvec3_print(bvec3 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_ubvec3_print(ubvec3 vec, FILE * __restrict ostream)
 
     | print vector to given stream
 
@@ -128,6 +223,45 @@ Functions documentation
       | *[in]*  **vec**      vector
       | *[in]*  **ostream**  FILE to write
 
+.. c:function:: void  glm_uvec2_print(uvec2 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_hvec2_print(hvec2 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_uhvec2_print(uhvec2 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_bvec2_print(bvec2 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
+
+.. c:function:: void  glm_ubvec2_print(ubvec2 vec, FILE * __restrict ostream)
+
+    | print vector to given stream
+
+    Parameters:
+      | *[in]*  **vec**      vector
+      | *[in]*  **ostream**  FILE to write
 
 .. c:function:: void  glm_versor_print(versor vec, FILE * __restrict ostream)
 
