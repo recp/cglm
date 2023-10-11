@@ -480,6 +480,17 @@ TEST_IMPL(GLM_PREFIX, vec2_rotate) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_center) {
+  vec2 v1 = {1.0f, 1.0f},
+       v2 = {0.0f, 0.0f};
+  vec2 dest;
+  GLM(vec2_center)(v1, v2, dest);
+
+  ASSERTIFY(test_assert_vec2_eq(dest, (vec2){ 0.5f, 0.5f }))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec2_distance2) {
   vec2 v1 = {30.0f, 0.0f},
        v2 = {0.0f, 0.0f},
