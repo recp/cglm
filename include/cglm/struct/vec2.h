@@ -40,6 +40,7 @@
    CGLM_INLINE vec2s glms_vec2_negate(vec2s v)
    CGLM_INLINE vec2s glms_vec2_normalize(vec2s v)
    CGLM_INLINE vec2s glms_vec2_rotate(vec2s v, float angle, vec2s axis)
+   CGLM_INLINE vec2s glms_vec2_center(vec2s a, vec2s b)
    CGLM_INLINE float glms_vec2_distance(vec2s a, vec2s b)
    CGLM_INLINE float glms_vec2_distance2(vec2s a, vec2s b)
    CGLM_INLINE vec2s glms_vec2_maxv(vec2s a, vec2s b)
@@ -467,6 +468,21 @@ vec2s
 glms_vec2_(rotate)(vec2s v, float angle) {
   vec2s r;
   glm_vec2_rotate(v.raw, angle, r.raw);
+  return r;
+}
+
+/**
+ * @brief find center point of two vector
+ *
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
+ * @returns         center point
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(center)(vec2s a, vec2s b) {
+  vec2s r;
+  glm_vec2_center(a.raw, b.raw, r.raw);
   return r;
 }
 
