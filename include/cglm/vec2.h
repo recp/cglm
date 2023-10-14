@@ -41,6 +41,7 @@
    CGLM_INLINE void  glm_vec2_normalize(vec2 v)
    CGLM_INLINE void  glm_vec2_normalize_to(vec2 vec, vec2 dest)
    CGLM_INLINE void  glm_vec2_rotate(vec2 v, float angle, vec2 dest)
+   CGLM_INLINE void  glm_vec2_center(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE float glm_vec2_distance2(vec2 a, vec2 b)
    CGLM_INLINE float glm_vec2_distance(vec2 a, vec2 b)
    CGLM_INLINE void  glm_vec2_maxv(vec2 v1, vec2 v2, vec2 dest)
@@ -491,6 +492,20 @@ glm_vec2_rotate(vec2 v, float angle, vec2 dest) {
 
   dest[0] = c * x1 - s * y1;
   dest[1] = s * x1 + c * y1;
+}
+
+/**
+ * @brief find center point of two vector
+ *
+ * @param[in]  a    vector1
+ * @param[in]  b    vector2
+ * @param[out] dest center point
+ */
+CGLM_INLINE
+void
+glm_vec2_center(vec2 a, vec2 b, vec2 dest) {
+  glm_vec2_add(a, b, dest);
+  glm_vec2_scale(dest, 0.5f, dest);
 }
 
 /**

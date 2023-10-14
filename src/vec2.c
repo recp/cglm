@@ -195,6 +195,12 @@ glmc_vec2_rotate(vec2 v, float angle, vec2 dest) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec2_center(vec2 a, vec2 b, vec2 dest) {
+  glm_vec2_center(a, b, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec2_distance2(vec2 a, vec2 b) {
   return glm_vec2_distance2(a, b);

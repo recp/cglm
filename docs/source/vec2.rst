@@ -45,6 +45,7 @@ Functions:
 #. :c:func:`glm_vec2_normalize`
 #. :c:func:`glm_vec2_normalize_to`
 #. :c:func:`glm_vec2_rotate`
+#. :c:func:`glm_vec2_center`
 #. :c:func:`glm_vec2_distance2`
 #. :c:func:`glm_vec2_distance`
 #. :c:func:`glm_vec2_maxv`
@@ -313,6 +314,15 @@ Functions documentation
       | *[in]*  **v**      vector
       | *[in]*  **axis**   axis vector
       | *[out]* **dest**   destination
+
+.. c:function:: void  glm_vec2_center(vec2 v1, vec2 v2, vec2 dest)
+
+    find center point of two vector
+
+    Parameters:
+      | *[in]*  **v1**    vector1
+      | *[in]*  **v2**    vector2
+      | *[out]* **dest**  center point
 
 .. c:function:: float glm_vec2_distance2(vec2 v1, vec2 v2)
 
