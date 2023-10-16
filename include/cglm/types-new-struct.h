@@ -50,8 +50,8 @@
 /*----------------------------------------------*
  *     single-precision floating-point types    *
  *----------------------------------------------*/
-typedef union vec2s {
-  vec2 raw;
+typedef union f32v2s {
+  f32v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -73,10 +73,10 @@ typedef union vec2s {
     float t;
   };
 #endif
-} vec2s;
+} f32v2s;
 
-typedef union vec3s {
-  vec3 raw;
+typedef union f32v3s {
+  f32v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -90,10 +90,10 @@ typedef union vec3s {
     float b;
   };
 #endif
-} vec3s;
+} f32v3s;
 
-typedef union CGLM_ALIGN_IF(16) vec4s {
-  vec4 raw;
+typedef union CGLM_ALIGN_IF(16) f32v4s {
+  f32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -109,10 +109,10 @@ typedef union CGLM_ALIGN_IF(16) vec4s {
     float a;
   };
 #endif
-} vec4s;
+} f32v4s;
 
-typedef union CGLM_ALIGN_IF(16) versors {
-  vec4 raw;
+typedef union CGLM_ALIGN_IF(16) f32versors {
+  f32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float x;
@@ -122,48 +122,48 @@ typedef union CGLM_ALIGN_IF(16) versors {
   };
 
   struct {
-    vec3s imag;
+    f32v3s imag;
     float real;
   };
 #endif
-} versors;
+} f32versors;
 
-typedef union mat2s {
-  mat2  raw;
-  vec2s col[2];
+typedef union f32m2s {
+  f32m2  raw;
+  f32v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01;
     float m10, m11;
   };
 #endif
-} mat2s;
+} f32m2s;
 
-typedef union mat2x3s {
-  mat2x3 raw;
-  vec3s  col[2]; /* [col (2), row (3)] */
+typedef union f32m2x3s {
+  f32m2x3 raw;
+  f32v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
     float m10, m11, m12;
   };
 #endif
-} mat2x3s;
+} f32m2x3s;
 
-typedef union mat2x4s {
-  mat2x4 raw;
-  vec4s  col[2]; /* [col (2), row (4)] */
+typedef union f32m2x4s {
+  f32m2x4 raw;
+  f32v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
     float m10, m11, m12, m13;
   };
 #endif
-} mat2x4s;
+} f32m2x4s;
 
-typedef union mat3s {
-  mat3  raw;
-  vec3s col[3];
+typedef union f32m3s {
+  f32m3  raw;
+  f32v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
@@ -171,11 +171,11 @@ typedef union mat3s {
     float m20, m21, m22;
   };
 #endif
-} mat3s;
+} f32m3s;
 
-typedef union mat3x2s {
-  mat3x2 raw;
-  vec2s  col[3]; /* [col (3), row (2)] */
+typedef union f32m3x2s {
+  f32m3x2 raw;
+  f32v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01;
@@ -183,11 +183,11 @@ typedef union mat3x2s {
     float m20, m21;
   };
 #endif
-} mat3x2s;
+} f32m3x2s;
 
-typedef union mat3x4s {
-  mat3x4 raw;
-  vec4s  col[3]; /* [col (3), row (4)] */
+typedef union f32m3x4s {
+  f32v3x4 raw;
+  f32v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
@@ -195,11 +195,11 @@ typedef union mat3x4s {
     float m20, m21, m22, m23;
   };
 #endif
-} mat3x4s;
+} f32m3x4s;
 
-typedef union CGLM_ALIGN_MAT mat4s {
-  mat4  raw;
-  vec4s col[4];
+typedef union CGLM_ALIGN_MAT f32m4s {
+  f32m4  raw;
+  f32v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02, m03;
@@ -208,11 +208,11 @@ typedef union CGLM_ALIGN_MAT mat4s {
     float m30, m31, m32, m33;
   };
 #endif
-} mat4s;
+} f32m4s;
 
-typedef union mat4x2s {
-  mat4x2 raw;
-  vec2s  col[4]; /* [col (4), row (2)] */
+typedef union f32m4x2s {
+  f32m4x2 raw;
+  f32v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01;
@@ -221,11 +221,11 @@ typedef union mat4x2s {
     float m30, m31;
   };
 #endif
-} mat4x2s;
+} f32m4x2s;
 
-typedef union mat4x3s {
-  mat4x3 raw;
-  vec3s  col[4]; /* [col (4), row (3)] */
+typedef union f32m4x3s {
+  f32m4x3 raw;
+  f32v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     float m00, m01, m02;
@@ -234,14 +234,14 @@ typedef union mat4x3s {
     float m30, m31, m32;
   };
 #endif
-} mat4x3s;
+} f32m4x3s;
 
 
 /*----------------------------------------------*
  *             8-bit integer types              *
  *----------------------------------------------*/
-typedef union ubvec2s {
-  ubvec2 raw;
+typedef union u8v2s {
+  u8v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t x;
@@ -263,10 +263,10 @@ typedef union ubvec2s {
     uint8_t t;
   };
 #endif
-} ubvec2s;
+} u8v2s;
 
-typedef union ubvec3s {
-  ubvec3 raw;
+typedef union u8v3s {
+  u8v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t x;
@@ -280,10 +280,10 @@ typedef union ubvec3s {
     uint8_t b;
   };
 #endif
-} ubvec3s;
+} u8v3s;
 
-typedef union ubvec4s {
-  ubvec4 raw;
+typedef union u8v4s {
+  u8v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t x;
@@ -299,10 +299,10 @@ typedef union ubvec4s {
     uint8_t a;
   };
 #endif
-} ubvec4s;
+} u8v4s;
 
-typedef union CGLM_ALIGN_IF(16) ubversors {
-  ubvec4 raw;
+typedef union CGLM_ALIGN_IF(16) u8versors {
+  u8v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t x;
@@ -312,48 +312,48 @@ typedef union CGLM_ALIGN_IF(16) ubversors {
   };
 
   struct {
-    ubvec3s imag;
+    u8v3s imag;
     uint8_t real;
   };
 #endif
-} ubversors;
+} u8versors;
 
-typedef union ubmat2s {
-  ubmat2  raw;
-  ubvec2s col[2];
+typedef union u8m2s {
+  u8v2  raw;
+  u8v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01;
     uint8_t m10, m11;
   };
 #endif
-} ubmat2s;
+} u8m2s;
 
-typedef union ubmat2x3s {
-  ubmat2x3 raw;
-  ubvec3s  col[2]; /* [col (2), row (3)] */
+typedef union u8m2x3s {
+  u8m2x3 raw;
+  u8v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02;
     uint8_t m10, m11, m12;
   };
 #endif
-} ubmat2x3s;
+} u8m2x3s;
 
-typedef union ubmat2x4s {
-  ubmat2x4 raw;
-  ubvec4s  col[2]; /* [col (2), row (4)] */
+typedef union u8m2x4s {
+  u8m2x4 raw;
+  u8v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02, m03;
     uint8_t m10, m11, m12, m13;
   };
 #endif
-} ubmat2x4s;
+} u8m2x4s;
 
-typedef union ubmat3s {
-  ubmat3  raw;
-  ubvec3s col[3];
+typedef union u8m3s {
+  u8m3  raw;
+  u8v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02;
@@ -361,11 +361,11 @@ typedef union ubmat3s {
     uint8_t m20, m21, m22;
   };
 #endif
-} ubmat3s;
+} u8m3s;
 
-typedef union ubmat3x2s {
-  ubmat3x2 raw;
-  ubvec2s  col[3]; /* [col (3), row (2)] */
+typedef union u8m3x2s {
+  u8m3x2 raw;
+  u8v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01;
@@ -373,11 +373,11 @@ typedef union ubmat3x2s {
     uint8_t m20, m21;
   };
 #endif
-} ubmat3x2s;
+} u8m3x2s;
 
-typedef union ubmat3x4s {
-  ubmat3x4 raw;
-  ubvec4s  col[3]; /* [col (3), row (4)] */
+typedef union u8m3x4s {
+  u8m3x4 raw;
+  u8v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02, m03;
@@ -385,11 +385,11 @@ typedef union ubmat3x4s {
     uint8_t m20, m21, m22, m23;
   };
 #endif
-} ubmat3x4s;
+} u8m3x4s;
 
-typedef union CGLM_ALIGN_MAT ubmat4s {
-  ubmat4  raw;
-  ubvec4s col[4];
+typedef union CGLM_ALIGN_MAT u8m4s {
+  u8m4  raw;
+  u8v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02, m03;
@@ -398,11 +398,11 @@ typedef union CGLM_ALIGN_MAT ubmat4s {
     uint8_t m30, m31, m32, m33;
   };
 #endif
-} ubmat4s;
+} u8m4s;
 
-typedef union ubmat4x2s {
-  ubmat4x2 raw;
-  ubvec2s  col[4]; /* [col (4), row (2)] */
+typedef union u8m4x2s {
+  u8m4x2 raw;
+  u8m2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01;
@@ -411,11 +411,11 @@ typedef union ubmat4x2s {
     uint8_t m30, m31;
   };
 #endif
-} ubmat4x2s;
+} u8m4x2s;
 
-typedef union ubmat4x3s {
-  ubmat4x3 raw;
-  ubvec3s  col[4]; /* [col (4), row (3)] */
+typedef union u8m4x3s {
+  u8m4x3 raw;
+  u8v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint8_t m00, m01, m02;
@@ -424,10 +424,10 @@ typedef union ubmat4x3s {
     uint8_t m30, m31, m32;
   };
 #endif
-} ubmat4x3s;
+} u8m4x3s;
 
-typedef union bvec2s {
-  bvec2 raw;
+typedef union i8v2s {
+  i8v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t x;
@@ -449,10 +449,10 @@ typedef union bvec2s {
     int8_t t;
   };
 #endif
-} bvec2s;
+} i8v2s;
 
-typedef union bvec3s {
-  bvec3 raw;
+typedef union i8v3s {
+  i8v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t x;
@@ -466,10 +466,10 @@ typedef union bvec3s {
     int8_t b;
   };
 #endif
-} bvec3s;
+} i8v3s;
 
-typedef union bvec4s {
-  bvec4 raw;
+typedef union i8v4s {
+  i8v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t x;
@@ -485,10 +485,10 @@ typedef union bvec4s {
     int8_t a;
   };
 #endif
-} bvec4s;
+} i8v4s;
 
-typedef union CGLM_ALIGN_IF(16) bversors {
-  bvec4 raw;
+typedef union CGLM_ALIGN_IF(16) i8versors {
+  i8v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t x;
@@ -498,48 +498,48 @@ typedef union CGLM_ALIGN_IF(16) bversors {
   };
 
   struct {
-    bvec3s imag;
+    i8v3s imag;
     int8_t real;
   };
 #endif
-} bversors;
+} i8versors;
 
-typedef union bmat2s {
-  bmat2  raw;
-  bvec2s col[2];
+typedef union i8m2s {
+  i8m2  raw;
+  i8v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01;
     int8_t m10, m11;
   };
 #endif
-} bmat2s;
+} i8m2s;
 
-typedef union bmat2x3s {
-  bmat2x3 raw;
-  bvec3s  col[2]; /* [col (2), row (3)] */
+typedef union i8m2x3s {
+  i8m2x3 raw;
+  i8v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02;
     int8_t m10, m11, m12;
   };
 #endif
-} bmat2x3s;
+} i8m2x3s;
 
-typedef union bmat2x4s {
-  bmat2x4 raw;
-  bvec4s  col[2]; /* [col (2), row (4)] */
+typedef union i8m2x4s {
+  i8m2x4 raw;
+  i8v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02, m03;
     int8_t m10, m11, m12, m13;
   };
 #endif
-} bmat2x4s;
+} i8m2x4s;
 
-typedef union bmat3s {
-  bmat3  raw;
-  bvec3s col[3];
+typedef union i8m3s {
+  i8m3  raw;
+  i8v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02;
@@ -547,11 +547,11 @@ typedef union bmat3s {
     int8_t m20, m21, m22;
   };
 #endif
-} bmat3s;
+} i8m3s;
 
-typedef union bmat3x2s {
-  bmat3x2 raw;
-  bvec2s  col[3]; /* [col (3), row (2)] */
+typedef union i8m3x2s {
+  i8m3x2 raw;
+  i8v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01;
@@ -559,11 +559,11 @@ typedef union bmat3x2s {
     int8_t m20, m21;
   };
 #endif
-} bmat3x2s;
+} i8m3x2s;
 
-typedef union bmat3x4s {
-  bmat3x4 raw;
-  bvec4s  col[3]; /* [col (3), row (4)] */
+typedef union i8m3x4s {
+  i8m3x4 raw;
+  i8v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02, m03;
@@ -571,11 +571,11 @@ typedef union bmat3x4s {
     int8_t m20, m21, m22, m23;
   };
 #endif
-} bmat3x4s;
+} i8m3x4s;
 
-typedef union CGLM_ALIGN_MAT bmat4s {
-  bmat4  raw;
-  bvec4s col[4];
+typedef union CGLM_ALIGN_MAT i8m4s {
+  i8m4  raw;
+  i8v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02, m03;
@@ -584,11 +584,11 @@ typedef union CGLM_ALIGN_MAT bmat4s {
     int8_t m30, m31, m32, m33;
   };
 #endif
-} bmat4s;
+} i8m4s;
 
-typedef union bmat4x2s {
-  bmat4x2 raw;
-  bvec2s  col[4]; /* [col (4), row (2)] */
+typedef union i8m4x2s {
+  i8m4x2 raw;
+  i8v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01;
@@ -597,11 +597,11 @@ typedef union bmat4x2s {
     int8_t m30, m31;
   };
 #endif
-} bmat4x2s;
+} i8m4x2s;
 
-typedef union bmat4x3s {
-  bmat4x3 raw;
-  bvec3s  col[4]; /* [col (4), row (3)] */
+typedef union i8m4x3s {
+  i8m4x3 raw;
+  i8v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int8_t m00, m01, m02;
@@ -610,13 +610,13 @@ typedef union bmat4x3s {
     int8_t m30, m31, m32;
   };
 #endif
-} bmat4x3s;
+} i8m4x3s;
 
 /*----------------------------------------------*
  *           16-bit integer types               *
  *----------------------------------------------*/
-typedef union uhvec2s {
-  uhvec2 raw;
+typedef union u16v2s {
+  u16v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t x;
@@ -638,10 +638,10 @@ typedef union uhvec2s {
     uint16_t t;
   };
 #endif
-} uhvec2s;
+} u16v2s;
 
-typedef union uhvec3s {
-  uhvec3 raw;
+typedef union u16v3s {
+  u16v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t x;
@@ -655,10 +655,10 @@ typedef union uhvec3s {
     uint16_t b;
   };
 #endif
-} uhvec3s;
+} u16v3s;
 
-typedef union uhvec4s {
-  uhvec4 raw;
+typedef union u16v4s {
+  u16v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t x;
@@ -674,10 +674,10 @@ typedef union uhvec4s {
     uint16_t a;
   };
 #endif
-} uhvec4s;
+} u16v4s;
 
-typedef union CGLM_ALIGN_IF(16) uhversors {
-  uhvec4 raw;
+typedef union CGLM_ALIGN_IF(16) u16versors {
+  u16v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t x;
@@ -687,48 +687,48 @@ typedef union CGLM_ALIGN_IF(16) uhversors {
   };
 
   struct {
-    uhvec3s imag;
+    u16v3s imag;
     uint16_t real;
   };
 #endif
-} uhversors;
+} u16versors;
 
-typedef union uhmat2s {
-  uhmat2  raw;
-  uhvec2s col[2];
+typedef union u16m2s {
+  u16m2  raw;
+  u16v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01;
     uint16_t m10, m11;
   };
 #endif
-} uhmat2s;
+} u16m2s;
 
-typedef union uhmat2x3s {
-  uhmat2x3 raw;
-  uhvec3s  col[2]; /* [col (2), row (3)] */
+typedef union u16m2x3s {
+  u16m2x3 raw;
+  u16v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02;
     uint16_t m10, m11, m12;
   };
 #endif
-} uhmat2x3s;
+} u16m2x3s;
 
-typedef union uhmat2x4s {
-  uhmat2x4 raw;
-  uhvec4s  col[2]; /* [col (2), row (4)] */
+typedef union u16m2x4s {
+  u16m2x4 raw;
+  u16v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02, m03;
     uint16_t m10, m11, m12, m13;
   };
 #endif
-} uhmat2x4s;
+} u16m2x4s;
 
-typedef union uhmat3s {
-  uhmat3  raw;
-  uhvec3s col[3];
+typedef union u16m3s {
+  u16m3  raw;
+  u16v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02;
@@ -736,11 +736,11 @@ typedef union uhmat3s {
     uint16_t m20, m21, m22;
   };
 #endif
-} uhmat3s;
+} u16m3s;
 
-typedef union uhmat3x2s {
-  uhmat3x2 raw;
-  uhvec2s  col[3]; /* [col (3), row (2)] */
+typedef union u16m3x2s {
+  u16m3x2 raw;
+  u16v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01;
@@ -748,11 +748,11 @@ typedef union uhmat3x2s {
     uint16_t m20, m21;
   };
 #endif
-} uhmat3x2s;
+} u16m3x2s;
 
-typedef union uhmat3x4s {
-  uhmat3x4 raw;
-  uhvec4s  col[3]; /* [col (3), row (4)] */
+typedef union u16m3x4s {
+  u16m3x4 raw;
+  u16v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02, m03;
@@ -760,11 +760,11 @@ typedef union uhmat3x4s {
     uint16_t m20, m21, m22, m23;
   };
 #endif
-} uhmat3x4s;
+} u16m3x4s;
 
-typedef union CGLM_ALIGN_MAT uhmat4s {
-  uhmat4  raw;
-  uhvec4s col[4];
+typedef union CGLM_ALIGN_MAT u16m4s {
+  u16m4  raw;
+  u16v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02, m03;
@@ -773,11 +773,11 @@ typedef union CGLM_ALIGN_MAT uhmat4s {
     uint16_t m30, m31, m32, m33;
   };
 #endif
-} uhmat4s;
+} u16m4s;
 
-typedef union uhmat4x2s {
-  uhmat4x2 raw;
-  uhvec2s  col[4]; /* [col (4), row (2)] */
+typedef union u16m4x2s {
+  u16m4x2 raw;
+  u16v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01;
@@ -786,11 +786,11 @@ typedef union uhmat4x2s {
     uint16_t m30, m31;
   };
 #endif
-} uhmat4x2s;
+} u16m4x2s;
 
-typedef union uhmat4x3s {
-  uhmat4x3 raw;
-  uhvec3s  col[4]; /* [col (4), row (3)] */
+typedef union u16m4x3s {
+  u16m4x3 raw;
+  u16v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint16_t m00, m01, m02;
@@ -799,10 +799,10 @@ typedef union uhmat4x3s {
     uint16_t m30, m31, m32;
   };
 #endif
-} uhmat4x3s;
+} u16m4x3s;
 
-typedef union hvec2s {
-  hvec2 raw;
+typedef union i16v2s {
+  i16v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t x;
@@ -824,10 +824,10 @@ typedef union hvec2s {
     int16_t t;
   };
 #endif
-} hvec2s;
+} i16v2s;
 
-typedef union hvec3s {
-  hvec3 raw;
+typedef union i16v3s {
+  i16v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t x;
@@ -841,10 +841,10 @@ typedef union hvec3s {
     int16_t b;
   };
 #endif
-} hvec3s;
+} i16v3s;
 
-typedef union hvec4s {
-  hvec4 raw;
+typedef union i16v4s {
+  i16v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t x;
@@ -860,10 +860,10 @@ typedef union hvec4s {
     int16_t a;
   };
 #endif
-} hvec4s;
+} i16v4s;
 
-typedef union CGLM_ALIGN_IF(16) hversors {
-  hvec4 raw;
+typedef union CGLM_ALIGN_IF(16) i16versors {
+  i16v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t x;
@@ -873,48 +873,48 @@ typedef union CGLM_ALIGN_IF(16) hversors {
   };
 
   struct {
-    hvec3s imag;
+    i16v3s imag;
     int16_t real;
   };
 #endif
-} hversors;
+} i16versors;
 
-typedef union hmat2s {
-  hmat2  raw;
-  hvec2s col[2];
+typedef union i16m2s {
+  i16m2  raw;
+  i16v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01;
     int16_t m10, m11;
   };
 #endif
-} hmat2s;
+} i16m2s;
 
-typedef union hmat2x3s {
-  hmat2x3 raw;
-  hvec3s  col[2]; /* [col (2), row (3)] */
+typedef union i16m2x3s {
+  i16m2x3 raw;
+  i16v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02;
     int16_t m10, m11, m12;
   };
 #endif
-} hmat2x3s;
+} i16m2x3s;
 
-typedef union hmat2x4s {
-  hmat2x4 raw;
-  hvec4s  col[2]; /* [col (2), row (4)] */
+typedef union i16m2x4s {
+  i16m2x4 raw;
+  i16v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02, m03;
     int16_t m10, m11, m12, m13;
   };
 #endif
-} hmat2x4s;
+} i16m2x4s;
 
-typedef union hmat3s {
-  hmat3  raw;
-  hvec3s col[3];
+typedef union i16m3s {
+  i16m3  raw;
+  i16v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02;
@@ -922,11 +922,11 @@ typedef union hmat3s {
     int16_t m20, m21, m22;
   };
 #endif
-} hmat3s;
+} i16m3s;
 
-typedef union hmat3x2s {
-  hmat3x2 raw;
-  hvec2s  col[3]; /* [col (3), row (2)] */
+typedef union i16m3x2s {
+  i16m3x2 raw;
+  i16v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01;
@@ -934,11 +934,11 @@ typedef union hmat3x2s {
     int16_t m20, m21;
   };
 #endif
-} hmat3x2s;
+} i16m3x2s;
 
-typedef union hmat3x4s {
-  hmat3x4 raw;
-  hvec4s  col[3]; /* [col (3), row (4)] */
+typedef union i16m3x4s {
+  i16m3x4 raw;
+  i16v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02, m03;
@@ -946,11 +946,11 @@ typedef union hmat3x4s {
     int16_t m20, m21, m22, m23;
   };
 #endif
-} hmat3x4s;
+} i16m3x4s;
 
-typedef union CGLM_ALIGN_MAT hmat4s {
-  hmat4  raw;
-  hvec4s col[4];
+typedef union CGLM_ALIGN_MAT i16m4s {
+  i16m4  raw;
+  i16v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02, m03;
@@ -959,11 +959,11 @@ typedef union CGLM_ALIGN_MAT hmat4s {
     int16_t m30, m31, m32, m33;
   };
 #endif
-} hmat4s;
+} i16m4s;
 
-typedef union hmat4x2s {
-  hmat4x2 raw;
-  hvec2s  col[4]; /* [col (4), row (2)] */
+typedef union i16m4x2s {
+  i16m4x2 raw;
+  i16v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01;
@@ -972,11 +972,11 @@ typedef union hmat4x2s {
     int16_t m30, m31;
   };
 #endif
-} hmat4x2s;
+} i16m4x2s;
 
-typedef union hmat4x3s {
-  hmat4x3 raw;
-  hvec3s  col[4]; /* [col (4), row (3)] */
+typedef union i16m4x3s {
+  i16m4x3 raw;
+  i16v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int16_t m00, m01, m02;
@@ -985,13 +985,13 @@ typedef union hmat4x3s {
     int16_t m30, m31, m32;
   };
 #endif
-} hmat4x3s;
+} i16m4x3s;
 
 /*----------------------------------------------*
  *           32-bit integer types               *
  *----------------------------------------------*/
-typedef union ivec2s {
-  ivec2 raw;
+typedef union i32v2s {
+  i32v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t x;
@@ -1013,10 +1013,10 @@ typedef union ivec2s {
     int32_t t;
   };
 #endif
-} ivec2s;
+} i32v2s;
 
-typedef union ivec3s {
-  ivec3 raw;
+typedef union i32v3s {
+  i32v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t x;
@@ -1030,10 +1030,10 @@ typedef union ivec3s {
     int32_t b;
   };
 #endif
-} ivec3s;
+} i32v3s;
 
-typedef union ivec4s {
-  ivec4 raw;
+typedef union i32v4s {
+  i32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t x;
@@ -1049,10 +1049,10 @@ typedef union ivec4s {
     int32_t a;
   };
 #endif
-} ivec4s;
+} i32v4s;
 
-typedef union CGLM_ALIGN_IF(16) iversors {
-  ivec4 raw;
+typedef union CGLM_ALIGN_IF(16) i32versors {
+  i32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t x;
@@ -1062,48 +1062,48 @@ typedef union CGLM_ALIGN_IF(16) iversors {
   };
 
   struct {
-    ivec3s imag;
+    i32v3s imag;
     int32_t    real;
   };
 #endif
-} iversors;
+} i32versors;
 
-typedef union imat2s {
-  imat2  raw;
-  ivec2s col[2];
+typedef union i32m2s {
+  i32m2  raw;
+  i32v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01;
     int32_t m10, m11;
   };
 #endif
-} imat2s;
+} i32m2s;
 
-typedef union imat2x3s {
-  imat2x3 raw;
-  ivec3s  col[2]; /* [col (2), row (3)] */
+typedef union i32m2x3s {
+  i32m2x3 raw;
+  i32v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02;
     int32_t m10, m11, m12;
   };
 #endif
-} imat2x3s;
+} i32m2x3s;
 
-typedef union imat2x4s {
-  imat2x4 raw;
-  ivec4s  col[2]; /* [col (2), row (4)] */
+typedef union i32m2x4s {
+  i32m2x4 raw;
+  i32v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02, m03;
     int32_t m10, m11, m12, m13;
   };
 #endif
-} imat2x4s;
+} i32m2x4s;
 
-typedef union imat3s {
-  imat3  raw;
-  ivec3s col[3];
+typedef union i32m3s {
+  i32m3  raw;
+  i32v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02;
@@ -1111,11 +1111,11 @@ typedef union imat3s {
     int32_t m20, m21, m22;
   };
 #endif
-} imat3s;
+} i32m3s;
 
-typedef union imat3x2s {
-  imat3x2 raw;
-  ivec2s  col[3]; /* [col (3), row (2)] */
+typedef union i32m3x2s {
+  i32m3x2 raw;
+  i32v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01;
@@ -1123,11 +1123,11 @@ typedef union imat3x2s {
     int32_t m20, m21;
   };
 #endif
-} imat3x2s;
+} i32m3x2s;
 
-typedef union imat3x4s {
-  imat3x4 raw;
-  ivec4s  col[3]; /* [col (3), row (4)] */
+typedef union i32m3x4s {
+  i32m3x4 raw;
+  i32v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02, m03;
@@ -1135,11 +1135,11 @@ typedef union imat3x4s {
     int32_t m20, m21, m22, m23;
   };
 #endif
-} imat3x4s;
+} i32m3x4s;
 
-typedef union CGLM_ALIGN_MAT imat4s {
-  imat4  raw;
-  ivec4s col[4];
+typedef union CGLM_ALIGN_MAT i32m4s {
+  i32m4  raw;
+  i32v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02, m03;
@@ -1148,11 +1148,11 @@ typedef union CGLM_ALIGN_MAT imat4s {
     int32_t m30, m31, m32, m33;
   };
 #endif
-} imat4s;
+} i32m4s;
 
-typedef union imat4x2s {
-  imat4x2 raw;
-  ivec2s  col[4]; /* [col (4), row (2)] */
+typedef union i32m4x2s {
+  i32m4x2 raw;
+  i32v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01;
@@ -1161,11 +1161,11 @@ typedef union imat4x2s {
     int32_t m30, m31;
   };
 #endif
-} imat4x2s;
+} i32m4x2s;
 
-typedef union imat4x3s {
-  imat4x3 raw;
-  ivec3s  col[4]; /* [col (4), row (3)] */
+typedef union i32m4x3s {
+  i32m4x3 raw;
+  i32v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     int32_t m00, m01, m02;
@@ -1174,10 +1174,10 @@ typedef union imat4x3s {
     int32_t m30, m31, m32;
   };
 #endif
-} imat4x3s;
+} i32m4x3s;
 
-typedef union uvec2s {
-  uvec2 raw;
+typedef union u32v2s {
+  u32v2 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t x;
@@ -1199,10 +1199,10 @@ typedef union uvec2s {
     uint32_t t;
   };
 #endif
-} uvec2s;
+} u32v2s;
 
-typedef union uvec3s {
-  uvec3 raw;
+typedef union u32v3s {
+  u32v3 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t x;
@@ -1216,10 +1216,10 @@ typedef union uvec3s {
     uint32_t b;
   };
 #endif
-} uvec3s;
+} u32v3s;
 
-typedef union uvec4s {
-  uvec4 raw;
+typedef union u32v4s {
+  u32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t x;
@@ -1235,10 +1235,10 @@ typedef union uvec4s {
     uint32_t a;
   };
 #endif
-} uvec4s;
+} u32v4s;
 
-typedef union CGLM_ALIGN_IF(16) uversors {
-  uvec4 raw;
+typedef union CGLM_ALIGN_IF(16) u32versors {
+  u32v4 raw;
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t x;
@@ -1248,48 +1248,48 @@ typedef union CGLM_ALIGN_IF(16) uversors {
   };
 
   struct {
-    uvec3s imag;
+    u32v3s imag;
     uint32_t    real;
   };
 #endif
-} uversors;
+} u32versors;
 
-typedef union umat2s {
-  umat2  raw;
-  uvec2s col[2];
+typedef union u32m2s {
+  u32m2  raw;
+  u32v2s col[2];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01;
     uint32_t m10, m11;
   };
 #endif
-} umat2s;
+} u32m2s;
 
-typedef union umat2x3s {
-  umat2x3 raw;
-  uvec3s  col[2]; /* [col (2), row (3)] */
+typedef union u32m2x3s {
+  u32m2x3 raw;
+  u32v3s  col[2]; /* [col (2), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02;
     uint32_t m10, m11, m12;
   };
 #endif
-} umat2x3s;
+} u32m2x3s;
 
-typedef union umat2x4s {
-  umat2x4 raw;
-  uvec4s  col[2]; /* [col (2), row (4)] */
+typedef union u32m2x4s {
+  u32m2x4 raw;
+  u32v4s  col[2]; /* [col (2), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02, m03;
     uint32_t m10, m11, m12, m13;
   };
 #endif
-} umat2x4s;
+} u32m2x4s;
 
-typedef union umat3s {
-  umat3  raw;
-  uvec3s col[3];
+typedef union u32m3s {
+  u32m3  raw;
+  u32v3s col[3];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02;
@@ -1297,11 +1297,11 @@ typedef union umat3s {
     uint32_t m20, m21, m22;
   };
 #endif
-} umat3s;
+} u32m3s;
 
-typedef union umat3x2s {
-  umat3x2 raw;
-  uvec2s  col[3]; /* [col (3), row (2)] */
+typedef union u32m3x2s {
+  u32m3x2 raw;
+  u32v2s  col[3]; /* [col (3), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01;
@@ -1309,11 +1309,11 @@ typedef union umat3x2s {
     uint32_t m20, m21;
   };
 #endif
-} umat3x2s;
+} u32m3x2s;
 
-typedef union umat3x4s {
-  umat3x4 raw;
-  uvec4s  col[3]; /* [col (3), row (4)] */
+typedef union u32m3x4s {
+  u32m3x4 raw;
+  u32v4s  col[3]; /* [col (3), row (4)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02, m03;
@@ -1321,11 +1321,11 @@ typedef union umat3x4s {
     uint32_t m20, m21, m22, m23;
   };
 #endif
-} umat3x4s;
+} u32m3x4s;
 
-typedef union CGLM_ALIGN_MAT umat4s {
-  umat4  raw;
-  uvec4s col[4];
+typedef union CGLM_ALIGN_MAT u32m4s {
+  u32m4  raw;
+  u32v4s col[4];
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02, m03;
@@ -1334,11 +1334,11 @@ typedef union CGLM_ALIGN_MAT umat4s {
     uint32_t m30, m31, m32, m33;
   };
 #endif
-} umat4s;
+} u32m4s;
 
-typedef union umat4x2s {
-  umat4x2 raw;
-  uvec2s  col[4]; /* [col (4), row (2)] */
+typedef union u32m4x2s {
+  u32m4x2 raw;
+  u32v2s  col[4]; /* [col (4), row (2)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01;
@@ -1347,11 +1347,11 @@ typedef union umat4x2s {
     uint32_t m30, m31;
   };
 #endif
-} umat4x2s;
+} u32m4x2s;
 
-typedef union umat4x3s {
-  umat4x3 raw;
-  uvec3s  col[4]; /* [col (4), row (3)] */
+typedef union u32m4x3s {
+  u32m4x3 raw;
+  u32v3s  col[4]; /* [col (4), row (3)] */
 #if CGLM_USE_ANONYMOUS_STRUCT
   struct {
     uint32_t m00, m01, m02;
@@ -1360,6 +1360,6 @@ typedef union umat4x3s {
     uint32_t m30, m31, m32;
   };
 #endif
-} umat4x3s;
+} u32m4x3s;
 
 #endif /* cglm_types_struct_h */
