@@ -18,6 +18,7 @@ Features
 * inline or pre-compiled function call
 * frustum (extract view frustum planes, corners...)
 * bounding box (AABB in Frustum (culling), crop, merge...)
+* 2d bounding box (crop, merge...)
 * bounding sphere
 * project, unproject
 * easing functions
