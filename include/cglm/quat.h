@@ -258,7 +258,7 @@ glm_quat_normalize_to(versor q, versor dest) {
   }
 
   glmm_store(dest, wasm_f32x4_div(x0, wasm_f32x4_sqrt(xdot)));
-#elif defined( __SSE2__ ) || defined( __SSE2__ )
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   __m128 xdot, x0;
   float  dot;
 
