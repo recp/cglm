@@ -42,7 +42,6 @@
    CGLM_INLINE vec4s glms_vec4_maxadd(vec4s a, vec4s b, vec4s dest);
    CGLM_INLINE vec4s glms_vec4_minadd(vec4s a, vec4s b, vec4s dest);
    CGLM_INLINE vec4s glms_vec4_negate(vec4s v);
-   CGLM_INLINE vec4s glms_vec4_inv(vec4s v);
    CGLM_INLINE vec4s glms_vec4_normalize(vec4s v);
    CGLM_INLINE float glms_vec4_distance(vec4s a, vec4s b);
    CGLM_INLINE float glms_vec4_distance2(vec4s a, vec4s b);
