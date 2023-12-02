@@ -95,6 +95,7 @@ cglm_dep = declare_dependency(
     dependencies : cglm_deps,
     compile_args : cglm_args,
     include_directories : cglm_inc,
+    build_by_default: not meson.is_subproject(),
     version : meson.project_version()
 )
 
