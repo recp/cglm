@@ -1,0 +1,79 @@
+name: Meson WebAssembly
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+env:
+  wasmtime_version: v7.0.0
+  wasmer_version: v3.1.1
+
+jobs:
+  build_emsdk:
+    strategy:
+      matrix:
+        BUILD_TYPE: [debug, debugoptimized, release, minsize]
+        C_FLAGS: ['', '-msimd128', '-msse -msse2 -msimd128', '-msse -msse2 -msse3 -msse4 -msimd128']
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup emsdk
+      uses: mymindstorm/setup-emsdk@v13
+
+    - name: Verify emsdk
+      run: emcc -v
+
+    - name: Creating cross file
+      run: |
+        cat << EOF > ${{github.workspace}}/meson_cross_emsdk.txt
+        [binaries]
+        c = '`which emcc`'
+        cpp = '`which em++`'
+        ar = '`which emar`'
+        
+        [built-in options]
+        
+        c_args = ['-Wno-unused-parameter']
+        c_link_args = ['-s', 'STANDALONE_WASM']
+        cpp_args = ['-Wno-unused-parameter']
+        cpp_link_args = ['-s', 'STANDALONE_WASM']
+        
+        [host_machine]
+        
+        system = 'emscripten'
+        cpu_family = 'wasm32'
+        cpu = 'wasm32'
+        endian = 'little'
+
+        EOF
+        cat ${{github.workspace}}/meson_cross_emsdk.txt
+
+    - uses: actions/setup-python@v4
+    
+    - name: Install meson
+      run: |
+        sudo python3 -m pip install meson ninja
+
+    - name: Build with meson
+      run: |
+        meson setup build -Dbuildtype=${{matrix.BUILD_TYPE}} --cross-file ${{github.workspace}}/meson_cross_emsdk.txt --default-library=static -Dbuild_tests=true
+        meson test -C build
+
+    - name: Test with wasmtime
+      run: |
+        cd ${{github.workspace}}
+        ls -lh ${{github.workspace}}/build/
+        wget --no-verbose https://github.com/bytecodealliance/wasmtime/releases/download/${{env.wasmtime_version}}/wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        tar xf wasmtime-${{env.wasmtime_version}}-x86_64-linux.tar.xz
+        ./wasmtime-${{env.wasmtime_version}}-x86_64-linux/wasmtime run --wasm-features simd ${{github.workspace}}/build/tests.wasm
+
+    - name: Test with wasmer
+      run: |
+        cd ${{github.workspace}}
+        mkdir wasmer
+        cd wasmer
+        wget --no-verbose https://github.com/wasmerio/wasmer/releases/download/${{env.wasmer_version}}/wasmer-linux-amd64.tar.gz
+        tar xf wasmer-linux-amd64.tar.gz
+        ./bin/wasmer run --enable-simd ${{github.workspace}}/build/tests.wasm
