@@ -649,7 +649,7 @@ glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest, wasm_f32x4_add(
           glmm_load(dest),
-          wasm_f32x4_max(glmm_load(a), glmm_load(b))));
+          wasm_f32x4_pmax(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_add_ps(glmm_load(dest),
                               _mm_max_ps(glmm_load(a),
@@ -681,7 +681,7 @@ glm_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest, wasm_f32x4_add(
           glmm_load(dest),
-          wasm_f32x4_min(glmm_load(a), glmm_load(b))));
+          wasm_f32x4_pmin(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_add_ps(glmm_load(dest),
                               _mm_min_ps(glmm_load(a),
@@ -854,7 +854,7 @@ CGLM_INLINE
 void
 glm_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_max(glmm_load(a), glmm_load(b)));
+  glmm_store(dest, wasm_f32x4_pmax(glmm_load(a), glmm_load(b)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_max_ps(glmm_load(a), glmm_load(b)));
 #elif defined(CGLM_NEON_FP)
@@ -878,7 +878,7 @@ CGLM_INLINE
 void
 glm_vec4_minv(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_min(glmm_load(a), glmm_load(b)));
+  glmm_store(dest, wasm_f32x4_pmin(glmm_load(a), glmm_load(b)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_min_ps(glmm_load(a), glmm_load(b)));
 #elif defined(CGLM_NEON_FP)
@@ -902,8 +902,8 @@ CGLM_INLINE
 void
 glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(v, wasm_f32x4_min(
-          wasm_f32x4_max(glmm_load(v), wasm_f32x4_splat(minVal)),
+  glmm_store(v, wasm_f32x4_pmin(
+          wasm_f32x4_pmax(glmm_load(v), wasm_f32x4_splat(minVal)),
           wasm_f32x4_splat(maxVal)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(v, _mm_min_ps(_mm_max_ps(glmm_load(v), _mm_set1_ps(minVal)),

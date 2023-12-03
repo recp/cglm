@@ -43,7 +43,6 @@
    CGLM_INLINE vec3s glms_vec3_minadd(vec3s a, vec3s b, vec3s dest);
    CGLM_INLINE vec3s glms_vec3_flipsign(vec3s v);
    CGLM_INLINE vec3s glms_vec3_negate(vec3s v);
-   CGLM_INLINE vec3s glms_vec3_inv(vec3s v);
    CGLM_INLINE vec3s glms_vec3_normalize(vec3s v);
    CGLM_INLINE vec3s glms_vec3_cross(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_vec3_crossn(vec3s a, vec3s b);
