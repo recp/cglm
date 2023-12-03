@@ -207,7 +207,7 @@ glms_aabb2d_(aabb)(vec2s aabb[2], vec2s other[2]) {
 }
 
 /*!
- * @brief check if AABB intersects with sphere
+ * @brief check if AABB intersects with a circle
  *
  * https://github.com/erich666/GraphicsGems/blob/master/gems/BoxSphere.c
  * Solid Box - Solid Sphere test.
@@ -217,11 +217,11 @@ glms_aabb2d_(aabb)(vec2s aabb[2], vec2s other[2]) {
  */
 CGLM_INLINE
 bool
-glms_aabb2d_(sphere)(vec2s aabb[2], vec4s s) {
+glms_aabb2d_(circle)(vec2s aabb[2], vec3s c) {
   vec2 rawAabb[2];
 
   glms_vec2_(unpack)(rawAabb, aabb, 2);
-  return glm_aabb2d_circle(rawAabb, s.raw);
+  return glm_aabb2d_circle(rawAabb, c.raw);
 }
 
 /*!

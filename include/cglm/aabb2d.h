@@ -227,7 +227,7 @@ glm_aabb2d_aabb(vec2 aabb[2], vec2 other[2]) {
 }
 
 /*!
- * @brief check if AABB intersects with sphere
+ * @brief check if AABB intersects with a circle
  *
  * Circle Representation in cglm: [center.x, center.y, radii]
  *
