@@ -15,6 +15,10 @@ extern "C" {
 
 CGLM_EXPORT
 void
+glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]);
+
+CGLM_EXPORT
+void
 glmc_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2]);
 
 CGLM_EXPORT
@@ -70,7 +74,7 @@ glmc_aabb2d_contains(vec2 aabb[2], vec2 other[2]);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_sphere(vec2 aabb[2], vec4 s);
+glmc_aabb2d_circle(vec2 aabb[2], vec3 s);
 
 #ifdef __cplusplus
 }

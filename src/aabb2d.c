@@ -10,6 +10,12 @@
 
 CGLM_EXPORT
 void
+glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
+  glm_aabb2d_copy(aabb, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2]) {
   glm_aabb2d_transform(aabb, m, dest);
 }
@@ -91,6 +97,6 @@ glmc_aabb2d_contains(vec2 aabb[2], vec2 other[2]) {
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_sphere(vec2 aabb[2], vec4 s) {
-  return glm_aabb2d_sphere(aabb, s);
+glmc_aabb2d_circle(vec2 aabb[2], vec3 s) {
+  return glm_aabb2d_circle(aabb, s);
 }

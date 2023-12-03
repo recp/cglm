@@ -7,19 +7,20 @@ Header: cglm/aabb2d.h
 
 Some convenient functions provided for AABB.
 
-**Definition of box:**
+**Definition of aabb:**
 
-cglm defines box as two dimensional array of vec2.
-The first element is **min** point and the second one is **max** point.
+cglm defines an aabb as a two dimensional array of vec2's.
+The first element is the **min** point and the second one is the **max** point.
 If you have another type e.g. struct or even another representation then you must
-convert it before and after call cglm box function.
+convert it before and after calling a cglm aabb2d function.
 
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Functions:
 
-1. :c:func:`glm_aabb2d_transform`
+1. :c:func:`glm_aabb2d_copy`
+#. :c:func:`glm_aabb2d_transform`
 #. :c:func:`glm_aabb2d_merge`
 #. :c:func:`glm_aabb2d_crop`
 #. :c:func:`glm_aabb2d_crop_until`
@@ -30,12 +31,20 @@ Functions:
 #. :c:func:`glm_aabb2d_radius`
 #. :c:func:`glm_aabb2d_center`
 #. :c:func:`glm_aabb2d_aabb`
-#. :c:func:`glm_aabb2d_sphere`
+#. :c:func:`glm_aabb2d_circle`
 #. :c:func:`glm_aabb2d_point`
 #. :c:func:`glm_aabb2d_contains`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
+
+.. c:function:: void  glm_aabb2d_copy(vec2 aabb[2], vec2 dest[2])
+
+    | copy all members of [aabb] to [dest]
+
+    Parameters:
+      | *[in]*  **aabb**  bounding box
+      | *[out]* **dest**  destination
 
 .. c:function:: void  glm_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2])
 
@@ -152,7 +161,7 @@ Functions documentation
       | *[in]*    **aabb**     bounding box
       | *[out]*   **other**   other bounding box
 
-.. c:function:: bool  glm_aabb2d_sphere(vec2 aabb[2], vec4 s)
+.. c:function:: bool  glm_aabb2d_circle(vec2 aabb[2], vec4 s)
 
     | check if AABB intersects with sphere
 

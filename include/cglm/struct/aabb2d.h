@@ -221,7 +221,7 @@ glms_aabb2d_(sphere)(vec2s aabb[2], vec4s s) {
   vec2 rawAabb[2];
 
   glms_vec2_(unpack)(rawAabb, aabb, 2);
-  return glm_aabb2d_sphere(rawAabb, s.raw);
+  return glm_aabb2d_circle(rawAabb, s.raw);
 }
 
 /*!

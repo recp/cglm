@@ -14,6 +14,19 @@
 #include "util.h"
 
 /*!
+ * @brief copy all members of [aabb] to [dest]
+ *
+ * @param[in]  aabb source
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
+  glm_vec2_copy(aabb[0], dest[0]);
+  glm_vec2_copy(aabb[1], dest[1]);
+}
+
+/*!
  * @brief apply transform to Axis-Aligned Bounding aabb
  *
  * @param[in]  aabb  bounding aabb
@@ -216,27 +229,24 @@ glm_aabb2d_aabb(vec2 aabb[2], vec2 other[2]) {
 /*!
  * @brief check if AABB intersects with sphere
  *
- * https://github.com/erich666/GraphicsGems/blob/master/gems/aabbSphere.c
- * Solid aabb - Solid Sphere test.
+ * Circle Representation in cglm: [center.x, center.y, radii]
  *
- * Sphere Representation in cglm: [center.x, center.y, center.z, radii]
- *
- * @param[in]   aabb    solid bounding aabb
- * @param[in]   s      solid sphere
+ * @param[in]   aabb   solid bounding aabb
+ * @param[in]   c      solid circle
  */
 CGLM_INLINE
 bool
-glm_aabb2d_sphere(vec2 aabb[2], vec4 s) {
+glm_aabb2d_circle(vec2 aabb[2], vec3 c) {
   float dmin;
   int   a, b;
 
-  a = (s[0] < aabb[0][0]) + (s[0] > aabb[1][0]);
-  b = (s[1] < aabb[0][1]) + (s[1] > aabb[1][1]);
+  a = (c[0] < aabb[0][0]) + (c[0] > aabb[1][0]);
+  b = (c[1] < aabb[0][1]) + (c[1] > aabb[1][1]);
 
-  dmin  = glm_pow2((s[0] - aabb[!(a - 1)][0]) * (a != 0))
-        + glm_pow2((s[1] - aabb[!(b - 1)][1]) * (b != 0));
+  dmin  = glm_pow2((c[0] - aabb[!(a - 1)][0]) * (a != 0))
+        + glm_pow2((c[1] - aabb[!(b - 1)][1]) * (b != 0));
 
-  return dmin <= glm_pow2(s[3]);
+  return dmin <= glm_pow2(c[2]);
 }
 
 /*!
