@@ -107,6 +107,30 @@ glmc_vec2_minadd(vec2 a, vec2 b, vec2 dest);
 
 CGLM_EXPORT
 void
+glmc_vec2_subsub(vec2 a, vec2 b, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_vec2_addsub(vec2 a, vec2 b, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_vec2_mulsub(vec2 a, vec2 b, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_vec2_mulsubs(vec2 a, float s, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_vec2_maxsub(vec2 a, vec2 b, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_vec2_minsub(vec2 a, vec2 b, vec2 dest);
+
+CGLM_EXPORT
+void
 glmc_vec2_negate_to(vec2 v, vec2 dest);
 
 CGLM_EXPORT

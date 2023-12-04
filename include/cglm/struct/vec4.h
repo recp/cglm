@@ -41,6 +41,12 @@
    CGLM_INLINE vec4s glms_vec4_muladds(vec4s a, float s, vec4s dest);
    CGLM_INLINE vec4s glms_vec4_maxadd(vec4s a, vec4s b, vec4s dest);
    CGLM_INLINE vec4s glms_vec4_minadd(vec4s a, vec4s b, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_subsub(vec4s a, vec4s b, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_addsub(vec4s a, vec4s b, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_mulsub(vec4s a, vec4s b, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_mulsubs(vec4s a, float s, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_maxsub(vec4s a, vec4s b, vec4s dest);
+   CGLM_INLINE vec4s glms_vec4_minsub(vec4s a, vec4s b, vec4s dest);
    CGLM_INLINE vec4s glms_vec4_negate(vec4s v);
    CGLM_INLINE vec4s glms_vec4_normalize(vec4s v);
    CGLM_INLINE float glms_vec4_distance(vec4s a, vec4s b);
@@ -510,6 +516,102 @@ CGLM_INLINE
 vec4s
 glms_vec4_(minadd)(vec4s a, vec4s b, vec4s dest) {
   glm_vec4_minadd(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a + b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(subsub)(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_subsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief add two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a + b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(addsub)(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_addsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief mul two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a * b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(mulsub)(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_mulsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief mul vector with scalar and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @returns         dest -= (a * b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(mulsubs)(vec4s a, float s, vec4s dest) {
+  glm_vec4_mulsubs(a.raw, s, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub max of two vectors to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= max(a, b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(maxsub)(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_maxsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub min of two vectors to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= min(a, b)
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(minsub)(vec4s a, vec4s b, vec4s dest) {
+  glm_vec4_minsub(a.raw, b.raw, dest.raw);
   return dest;
 }
 
