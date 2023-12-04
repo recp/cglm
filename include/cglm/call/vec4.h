@@ -139,7 +139,7 @@ glmc_vec4_subsub(vec4 a, vec4 b, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_subadd(vec4 a, vec4 b, vec4 dest);
+glmc_vec4_addsub(vec4 a, vec4 b, vec4 dest);
 
 CGLM_EXPORT
 void
