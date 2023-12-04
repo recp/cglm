@@ -365,6 +365,90 @@ TEST_IMPL(GLM_PREFIX, vec2_minadd) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_subsub) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {-3.0f, 4.0f},
+       v3 = {1.0f, 2.0f},
+       v4 = {1.0f, 2.0f};
+  
+  GLM(vec2_subsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - v1[0] - v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] - v1[1] - v2[1], v4[1]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_addsub) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {-3.0f, 4.0f},
+       v3 = {1.0f, 2.0f},
+       v4 = {1.0f, 2.0f};
+  
+  GLM(vec2_addsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - v1[0] + v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] - v1[1] + v2[1], v4[1]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_mulsub) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {-3.0f, 4.0f},
+       v3 = {1.0f, 2.0f},
+       v4 = {1.0f, 2.0f};
+  
+  GLM(vec2_mulsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - v1[0] * v2[0], v4[0]))
+  ASSERT(test_eq(v3[1] - v1[1] * v2[1], v4[1]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_mulsubs) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {1.0f, 2.0f},
+       v3 = {1.0f, 2.0f};
+  float s = 9.0f;
+  
+  GLM(vec2_mulsubs)(v1, s, v3);
+
+  ASSERT(test_eq(v2[0] - v1[0] * s, v3[0]))
+  ASSERT(test_eq(v2[1] - v1[1] * s, v3[1]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_maxsub) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {-3.0f, 4.0f},
+       v3 = {1.0f, 2.0f},
+       v4 = {1.0f, 2.0f};
+  
+  GLM(vec2_maxsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - glm_max(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - glm_max(v1[1], v2[1]), v4[1]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_minsub) {
+  vec2 v1 = {2.0f, -3.0f},
+       v2 = {-3.0f, 4.0f},
+       v3 = {1.0f, 2.0f},
+       v4 = {1.0f, 2.0f};
+  
+  GLM(vec2_minsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - glm_min(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - glm_min(v1[1], v2[1]), v4[1]))
+  
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec2_negate_to) {
   vec2 v1 = {2.0f, -3.0f},
        v2 = {-3.0f, 4.0f},
