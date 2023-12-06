@@ -45,12 +45,12 @@ glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]) {
   glm_vec2_scale(m[1], aabb[1][1], yb);
 
   /* translation + min(xa, xb) + min(ya, yb) + min(za, zb) */
-  glm_vec2(m[3], v[0]);
+  glm_vec2(m[2], v[0]);
   glm_vec2_minadd(xa, xb, v[0]);
   glm_vec2_minadd(ya, yb, v[0]);
 
   /* translation + max(xa, xb) + max(ya, yb) + max(za, zb) */
-  glm_vec2(m[3], v[1]);
+  glm_vec2(m[2], v[1]);
   glm_vec2_maxadd(xa, xb, v[1]);
   glm_vec2_maxadd(ya, yb, v[1]);
 
