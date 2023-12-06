@@ -161,7 +161,7 @@ Functions documentation
       | *[in]*    **aabb**     bounding box
       | *[out]*   **other**   other bounding box
 
-.. c:function:: bool  glm_aabb2d_circle(vec2 aabb[2], vec3 s)
+.. c:function:: bool  glm_aabb2d_circle(vec2 aabb[2], vec3 c)
 
     | check if AABB intersects with sphere
 
