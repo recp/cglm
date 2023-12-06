@@ -161,7 +161,7 @@ Functions documentation
       | *[in]*    **aabb**     bounding box
       | *[out]*   **other**   other bounding box
 
-.. c:function:: bool  glm_aabb2d_circle(vec2 aabb[2], vec4 s)
+.. c:function:: bool  glm_aabb2d_circle(vec2 aabb[2], vec3 s)
 
     | check if AABB intersects with sphere
 
@@ -170,7 +170,7 @@ Functions documentation
 
     Parameters:
       | *[in]*    **aabb**     solid bounding box
-      | *[out]*   **s**       solid sphere
+      | *[out]*   **c**        solid circle
 
 .. c:function:: bool  glm_aabb2d_point(vec2 aabb[2], vec2 point)
 
