@@ -16,7 +16,7 @@ glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
 
 CGLM_EXPORT
 void
-glmc_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2]) {
+glmc_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]) {
   glm_aabb2d_transform(aabb, m, dest);
 }
 

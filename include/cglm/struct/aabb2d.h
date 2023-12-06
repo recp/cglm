@@ -27,7 +27,7 @@
  */
 CGLM_INLINE
 void
-glms_aabb2d_(transform)(vec2s aabb[2], mat4s m, vec2s dest[2]) {
+glms_aabb2d_(transform)(vec2s aabb[2], mat3s m, vec2s dest[2]) {
   vec2 rawAabb[2];
   vec2 rawDest[2];
 

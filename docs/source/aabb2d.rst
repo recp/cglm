@@ -46,7 +46,7 @@ Functions documentation
       | *[in]*  **aabb**  bounding box
       | *[out]* **dest**  destination
 
-.. c:function:: void  glm_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2])
+.. c:function:: void  glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2])
 
     | apply transform to Axis-Aligned Bounding Box
 

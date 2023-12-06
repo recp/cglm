@@ -35,8 +35,8 @@ glm_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2]) {
-  vec2 v[2], xa, xb, ya, yb, za, zb;
+glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]) {
+  vec2 v[2], xa, xb, ya, yb;
 
   glm_vec2_scale(m[0], aabb[0][0], xa);
   glm_vec2_scale(m[0], aabb[1][0], xb);
@@ -48,13 +48,11 @@ glm_aabb2d_transform(vec2 aabb[2], mat4 m, vec2 dest[2]) {
   glm_vec2(m[3], v[0]);
   glm_vec2_minadd(xa, xb, v[0]);
   glm_vec2_minadd(ya, yb, v[0]);
-  glm_vec2_minadd(za, zb, v[0]);
 
   /* translation + max(xa, xb) + max(ya, yb) + max(za, zb) */
   glm_vec2(m[3], v[1]);
   glm_vec2_maxadd(xa, xb, v[1]);
   glm_vec2_maxadd(ya, yb, v[1]);
-  glm_vec2_maxadd(za, zb, v[1]);
 
   glm_vec2_copy(v[0], dest[0]);
   glm_vec2_copy(v[1], dest[1]);
