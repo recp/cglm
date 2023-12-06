@@ -24,7 +24,6 @@ Functions:
 #. :c:func:`glm_aabb2d_merge`
 #. :c:func:`glm_aabb2d_crop`
 #. :c:func:`glm_aabb2d_crop_until`
-#. :c:func:`glm_aabb2d_frustum`
 #. :c:func:`glm_aabb2d_invalidate`
 #. :c:func:`glm_aabb2d_isvalid`
 #. :c:func:`glm_aabb2d_size`
@@ -92,22 +91,6 @@ Functions documentation
       | *[in]*  **cropAabb**  crop box
       | *[in]*  **clampAabb** miniumum box
       | *[out]* **dest**     cropped bounding box
-
-.. c:function:: bool  glm_aabb2d_frustum(vec2 aabb[2], vec4 planes[6])
-
-    | check if AABB intersects with frustum planes
-
-    this could be useful for frustum culling using AABB.
-
-    OPTIMIZATION HINT:
-       if planes order is similar to LEFT, RIGHT, BOTTOM, TOP, NEAR, FAR
-       then this method should run even faster because it would only use two
-       planes if object is not inside the two planes
-       fortunately cglm extracts planes as this order! just pass what you got!
-
-    Parameters:
-      | *[in]*   **aabb**     bounding box
-      | *[out]*  **planes**  frustum planes
 
 .. c:function:: void  glm_aabb2d_invalidate(vec2 aabb[2])
 

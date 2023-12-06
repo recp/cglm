@@ -106,31 +106,6 @@ glms_aabb2d_(crop_until)(vec2s aabb[2],
 }
 
 /*!
- * @brief check if AABB intersects with frustum planes
- *
- * this could be useful for frustum culling using AABB.
- *
- * OPTIMIZATION HINT:
- *  if planes order is similar to LEFT, RIGHT, BOTTOM, TOP, NEAR, FAR
- *  then this method should run even faster because it would only use two
- *  planes if object is not inside the two planes
- *  fortunately cglm extracts planes as this order! just pass what you got!
- *
- * @param[in]  aabb     bounding box
- * @param[in]  planes  frustum planes
- */
-CGLM_INLINE
-bool
-glms_aabb2d_(frustum)(vec2s box[2], vec4s planes[6]) {
-  vec2 rawBox[2];
-  vec4 rawPlanes[6];
-
-  glms_vec2_(unpack)(rawBox, box, 2);
-  glms_vec4_(unpack)(rawPlanes, planes, 6);
-  return glm_aabb2d_frustum(rawBox, rawPlanes);
-}
-
-/*!
  * @brief invalidate AABB min and max values
  *
  * @param[in, out]  aabb bounding box

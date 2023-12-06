@@ -37,10 +37,6 @@ glmc_aabb2d_crop_until(vec2 aabb[2],
                      vec2 dest[2]);
 
 CGLM_EXPORT
-bool
-glmc_aabb2d_frustum(vec2 aabb[2], vec4 planes[6]);
-
-CGLM_EXPORT
 void
 glmc_aabb2d_invalidate(vec2 aabb[2]);
 
