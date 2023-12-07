@@ -139,6 +139,33 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
   q[3] = w;
 }
 
+//TODO: telephone001's eulertoquat
+
+/*!
+ * @brief creates a quaternion using rotation angles and does does rotations in x y z order
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_xyz_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0);
+  float xc = cosf(angles[0] / 2.0);
+
+  float ys = sinf(angles[1] / 2.0);
+  float yc = cosf(angles[1] / 2.0);
+  
+  float zs = sinf(angles[2] / 2.0);
+  float zc = cosf(angles[2] / 2.0);
+
+  glm_quat_init(q, 
+    zc * yc * xs - zs * ys * xs, 
+    zc * ys * xc - zs * yc * xs,
+    zs * yc * xc - zs * yc * xs,
+    zc * yc * xc + zs * ys * xs);
+}
+
 /*!
  * @brief creates NEW quaternion with axis vector
  *

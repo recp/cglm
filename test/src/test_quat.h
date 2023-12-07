@@ -121,6 +121,36 @@ TEST_IMPL(GLM_PREFIX, quatv) {
   TEST_SUCCESS
 }
 
+// telephone001 changes (remove comment when done) TODO
+TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
+  vec3 axis_x = {1.0f, 0.0f, 0.0f};
+  vec3 axis_y = {0.0f, 1.0f, 0.0f};
+  vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+  versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+  versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+  versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+  //random angles for testing
+  vec3 angles = {glm_rad(30.0f), glm_rad(60.0f), glm_rad(90.0f)};
+
+  glm_quatv(rot_x, angles[0], axis_x);
+  glm_quatv(rot_y, angles[1], axis_y);
+  glm_quatv(rot_z, angles[2], axis_z);
+
+  versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+  glm_quat_mul(rot_x, expected, expected);
+  glm_quat_mul(rot_y, expected, expected);
+  glm_quat_mul(rot_z, expected, expected);
+
+  versor result;
+  glm_euler_xyz_quat(angles, result);
+  ASSERTIFY(test_assert_vec3_eq(result, expected))
+
+  TEST_SUCCESS
+}
+
+
 TEST_IMPL(GLM_PREFIX, quat) {
   versor q1 = {1.0f, 2.0f, 3.0f, 4.0f};
   vec3   v1, v2;
