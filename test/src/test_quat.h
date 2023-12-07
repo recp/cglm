@@ -123,29 +123,39 @@ TEST_IMPL(GLM_PREFIX, quatv) {
 
 // telephone001 changes (remove comment when done) TODO
 TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
-  vec3 axis_x = {1.0f, 0.0f, 0.0f};
-  vec3 axis_y = {0.0f, 1.0f, 0.0f};
-  vec3 axis_z = {0.0f, 0.0f, 1.0f};
+  /*random angles for testing*/
+  vec3 angles = {glm_rad(30.0f), glm_rad(60.0f), glm_rad(90.0f)};
 
+  /*quaternion representations for rotations*/
   versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
   versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
   versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
 
-  //random angles for testing
-  vec3 angles = {glm_rad(30.0f), glm_rad(60.0f), glm_rad(90.0f)};
+  vec3 axis_x = {1.0f, 0.0f, 0.0f};
+  vec3 axis_y = {0.0f, 1.0f, 0.0f};
+  vec3 axis_z = {0.0f, 0.0f, 1.0f};
 
+  versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+  versor result = {0.0f, 0.0f, 0.0f, 0.0f};
+
+  /*create the rotation quaternions using the angles and axises*/
   glm_quatv(rot_x, angles[0], axis_x);
   glm_quatv(rot_y, angles[1], axis_y);
   glm_quatv(rot_z, angles[2], axis_z);
 
-  versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+  /*apply the rotations to a unit quaternion in xyz order*/
   glm_quat_mul(rot_x, expected, expected);
   glm_quat_mul(rot_y, expected, expected);
   glm_quat_mul(rot_z, expected, expected);
 
-  versor result;
-  glm_euler_xyz_quat(angles, result);
-  ASSERTIFY(test_assert_vec3_eq(result, expected))
+  /*use my function to get the quaternion*/
+  glm_euler_xyz_quat(result, angles);
+
+  fprintf(stderr,"TEST\n");
+  for (int i = 0; i < 4; i++) {
+    fprintf(stderr, "%f vs %f\n", expected[i], result[i]);
+  }
+  ASSERTIFY(test_assert_quat_eq(result, expected))
 
   TEST_SUCCESS
 }
