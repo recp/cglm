@@ -215,12 +215,10 @@ glm_euler_yxz_quat(versor q, vec3 angles) {
   float zc = cosf(angles[2] / 2.0f);
 
   glm_quat_init(q,
-    zc * xc * ys - zs * xs * yc,
+    zc * xs * yc - zs * xc * ys,
+    zc * xc * ys + zs * xs * yc,
     zc * xs * ys + zs * xc * yc,
-    zc * xs * yc + zs * xc * ys,
     zc * xc * yc - zs * xs * ys);
-
-
 }
 
 /*!
@@ -271,9 +269,9 @@ glm_euler_zxy_quat(versor q, vec3 angles) {
 
   glm_quat_init(q,
     yc * xs * zc + ys * xc * zs,
+   -yc * xs * zs + ys * xc * zc,
     yc * xc * zs - ys * xs * zc,
-    yc * xs * zs + ys * xc * zc,
-    yc * xc * zc - ys * xs * zs);
+    yc * xc * zc + ys * xs * zs);
 
 
 }
@@ -299,8 +297,8 @@ glm_euler_zyx_quat(versor q, vec3 angles) {
 
   glm_quat_init(q,
     xc * ys * zs + xs * yc * zc,
+    xc * ys * zc - xs * yc * zs,
     xc * yc * zs + xs * ys * zc,
-   -xc * ys * zc + xs * yc * zs,
     xc * yc * zc - xs * ys * zs);
 
 }

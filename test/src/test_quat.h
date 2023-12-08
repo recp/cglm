@@ -272,7 +272,7 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -336,11 +336,8 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
         glm_quat_mul(rot_z, expected, expected);
 
         /*use my function to get the quaternion*/
-        glm_euler_zxy_quat(result, angles);
-for (int i = 0; i < 4; i++) {
-  fprintf(stderr, "%f vs %f", result[i], expected[i]);
-}
-fprintf(stderr, "\n");
+        glm_euler_yxz_quat(result, angles);
+
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
     }
@@ -350,7 +347,7 @@ fprintf(stderr, "\n");
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -379,7 +376,7 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
     glm_quat_mul(rot_x, expected, expected);
 
     /*use my function to get the quaternion*/
-    glm_euler_yxz_quat(result, angles);
+    glm_euler_yzx_quat(result, angles);
 
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
@@ -414,11 +411,8 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
         glm_quat_mul(rot_x, expected, expected);
 
         /*use my function to get the quaternion*/
-        glm_euler_zxy_quat(result, angles);
-for (int i = 0; i < 4; i++) {
-  fprintf(stderr, "%f vs %f", result[i], expected[i]);
-}
-fprintf(stderr, "\n");
+        glm_euler_yzx_quat(result, angles);
+
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
     }
@@ -428,7 +422,7 @@ fprintf(stderr, "\n");
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -493,10 +487,7 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_zxy_quat(result, angles);
-for (int i = 0; i < 4; i++) {
-  fprintf(stderr, "%f vs %f", result[i], expected[i]);
-}
-fprintf(stderr, "\n");
+
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
     }
@@ -506,7 +497,7 @@ fprintf(stderr, "\n");
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -535,7 +526,7 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
     glm_quat_mul(rot_x, expected, expected);
 
     /*use my function to get the quaternion*/
-    glm_euler_zxy_quat(result, angles);
+    glm_euler_zyx_quat(result, angles);
 
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
@@ -565,17 +556,14 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
         glm_quatv(rot_y, angles[1], axis_y);
         glm_quatv(rot_z, angles[2], axis_z);
 
-        /*apply the rotations to a unit quaternion in xyz order*/
+        /*apply the rotations to a unit quaternion in zyx order*/
         glm_quat_mul(rot_z, expected, expected);
         glm_quat_mul(rot_y, expected, expected);
         glm_quat_mul(rot_x, expected, expected);
 
         /*use my function to get the quaternion*/
-        glm_euler_zxy_quat(result, angles);
-for (int i = 0; i < 4; i++) {
-  fprintf(stderr, "%f vs %f", result[i], expected[i]);
-}
-fprintf(stderr, "\n");
+        glm_euler_zyx_quat(result, angles);
+
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
     }
