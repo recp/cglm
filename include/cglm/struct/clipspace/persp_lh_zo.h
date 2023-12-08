@@ -39,6 +39,7 @@
 #include "../../types-struct.h"
 #include "../../plane.h"
 #include "../../cam.h"
+#include "../../clipspace/persp_lh_zo.h"
 
 /*!
  * @brief set up perspective peprojection matrix
