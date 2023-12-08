@@ -121,7 +121,6 @@ TEST_IMPL(GLM_PREFIX, quatv) {
   TEST_SUCCESS
 }
 
-// telephone001 changes (remove comment when done) TODO
 TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
   for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
@@ -154,8 +153,12 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
     /*use my function to get the quaternion*/
     glm_euler_xyz_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
+  
 
   /*Start gimbal lock tests*/
   for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
@@ -188,6 +191,9 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_xyz_quat(result, angles);
+
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
@@ -228,6 +234,9 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
     /*use my function to get the quaternion*/
     glm_euler_xzy_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
 
@@ -262,6 +271,9 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_xzy_quat(result, angles);
+
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
@@ -303,6 +315,9 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
     /*use my function to get the quaternion*/
     glm_euler_yxz_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
 
@@ -337,6 +352,9 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_yxz_quat(result, angles);
+
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
@@ -378,6 +396,9 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
     /*use my function to get the quaternion*/
     glm_euler_yzx_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
 
@@ -412,6 +433,9 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_yzx_quat(result, angles);
+
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
@@ -453,6 +477,9 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
     /*use my function to get the quaternion*/
     glm_euler_zxy_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
 
@@ -487,6 +514,9 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
 
         /*use my function to get the quaternion*/
         glm_euler_zxy_quat(result, angles);
+
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
@@ -528,6 +558,9 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
     /*use my function to get the quaternion*/
     glm_euler_zyx_quat(result, angles);
 
+    /*verify if the magnitude of the quaternion stays 1*/
+    ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
     ASSERTIFY(test_assert_quat_eq(result, expected))
   }
 
@@ -564,6 +597,9 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
         /*use my function to get the quaternion*/
         glm_euler_zyx_quat(result, angles);
 
+        /*verify if the magnitude of the quaternion stays 1*/
+        ASSERT(test_eq(glm_quat_norm(result), 1.0f))
+
         ASSERTIFY(test_assert_quat_eq(result, expected))
       }
     }
@@ -571,7 +607,6 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
 
   TEST_SUCCESS
 }
-
 
 TEST_IMPL(GLM_PREFIX, quat) {
   versor q1 = {1.0f, 2.0f, 3.0f, 4.0f};

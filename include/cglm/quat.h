@@ -13,6 +13,12 @@
  Functions:
    CGLM_INLINE void glm_quat_identity(versor q);
    CGLM_INLINE void glm_quat_init(versor q, float x, float y, float z, float w);
+   CGLM_INLINE void glm_euler_xyz_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_xzy_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_yxz_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_yzx_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_zxy_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_zyx_quat(versor q, vec3 angles);
    CGLM_INLINE void glm_quat(versor q, float angle, float x, float y, float z);
    CGLM_INLINE void glm_quatv(versor q, float angle, vec3 axis);
    CGLM_INLINE void glm_quat_copy(versor q, versor dest);
@@ -138,8 +144,6 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
   q[2] = z;
   q[3] = w;
 }
-
-//TODO: telephone001's eulertoquat
 
 /*!
  * @brief creates NEW quaternion using rotation angles and does
