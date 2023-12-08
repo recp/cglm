@@ -307,8 +307,6 @@ glm_euler_zyx_quat(versor q, vec3 angles) {
 
 }
 
-
-
 /*!
  * @brief creates NEW quaternion with axis vector
  *

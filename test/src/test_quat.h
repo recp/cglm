@@ -102,25 +102,6 @@ TEST_IMPL(GLM_PREFIX, quat_init) {
   TEST_SUCCESS
 }
 
-TEST_IMPL(GLM_PREFIX, quatv) {
-  versor q1 = {1.0f, 2.0f, 3.0f, 4.0f};
-  vec3   v1, v2;
-  float  a1;
-
-  test_rand_vec3(v1);
-  GLM(quatv)(q1, glm_rad(60.0f), v1);
-
-  glm_quat_axis(q1, v2);
-  a1 = glm_quat_angle(q1);
-
-  ASSERT(test_eq(a1, glm_rad(60.0f)))
-
-  glm_vec3_normalize(v1);
-  ASSERTIFY(test_assert_vec3_eq(v1, v2))
-
-  TEST_SUCCESS
-}
-
 TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
   for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
@@ -284,7 +265,7 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -365,7 +346,7 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -446,7 +427,7 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -527,7 +508,7 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
-  for (int i = 0; i < 1; i++) {
+  for (int i = 0; i < 100; i++) {
     /*random angles for testing*/
     vec3 angles;
 
@@ -604,6 +585,25 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
       }
     }
   }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, quatv) {
+  versor q1 = {1.0f, 2.0f, 3.0f, 4.0f};
+  vec3   v1, v2;
+  float  a1;
+
+  test_rand_vec3(v1);
+  GLM(quatv)(q1, glm_rad(60.0f), v1);
+
+  glm_quat_axis(q1, v2);
+  a1 = glm_quat_angle(q1);
+
+  ASSERT(test_eq(a1, glm_rad(60.0f)))
+
+  glm_vec3_normalize(v1);
+  ASSERTIFY(test_assert_vec3_eq(v1, v2))
 
   TEST_SUCCESS
 }
