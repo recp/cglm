@@ -24,6 +24,8 @@
 #include "../../types-struct.h"
 #include "../../plane.h"
 #include "../../cam.h"
+#include "../vec3.h"
+#include "../../clipspace/ortho_rh_zo.h"
 
 /*!
  * @brief set up orthographic projection matrix

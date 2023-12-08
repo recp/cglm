@@ -19,6 +19,7 @@
 #include "../../types-struct.h"
 #include "../../plane.h"
 #include "../../cam.h"
+#include "../../clipspace/view_lh_no.h"
 
 /*!
  * @brief set up view matrix
