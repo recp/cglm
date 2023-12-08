@@ -123,39 +123,463 @@ TEST_IMPL(GLM_PREFIX, quatv) {
 
 // telephone001 changes (remove comment when done) TODO
 TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
-  /*random angles for testing*/
-  vec3 angles = {glm_rad(30.0f), glm_rad(60.0f), glm_rad(90.0f)};
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
 
-  /*quaternion representations for rotations*/
-  versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
-  versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
-  versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
 
-  vec3 axis_x = {1.0f, 0.0f, 0.0f};
-  vec3 axis_y = {0.0f, 1.0f, 0.0f};
-  vec3 axis_z = {0.0f, 0.0f, 1.0f};
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
 
-  versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
-  versor result = {0.0f, 0.0f, 0.0f, 0.0f};
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
 
-  /*create the rotation quaternions using the angles and axises*/
-  glm_quatv(rot_x, angles[0], axis_x);
-  glm_quatv(rot_y, angles[1], axis_y);
-  glm_quatv(rot_z, angles[2], axis_z);
+    test_rand_vec3(angles);
 
-  /*apply the rotations to a unit quaternion in xyz order*/
-  glm_quat_mul(rot_x, expected, expected);
-  glm_quat_mul(rot_y, expected, expected);
-  glm_quat_mul(rot_z, expected, expected);
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
 
-  /*use my function to get the quaternion*/
-  glm_euler_xyz_quat(result, angles);
+    /*apply the rotations to a unit quaternion in xyz order*/
+    glm_quat_mul(rot_x, expected, expected);
+    glm_quat_mul(rot_y, expected, expected);
+    glm_quat_mul(rot_z, expected, expected);
 
-  fprintf(stderr,"TEST\n");
-  for (int i = 0; i < 4; i++) {
-    fprintf(stderr, "%f vs %f\n", expected[i], result[i]);
+    /*use my function to get the quaternion*/
+    glm_euler_xyz_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
   }
-  ASSERTIFY(test_assert_quat_eq(result, expected))
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in xyz order*/
+        glm_quat_mul(rot_x, expected, expected);
+        glm_quat_mul(rot_y, expected, expected);
+        glm_quat_mul(rot_z, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_xyz_quat(result, angles);
+
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
+
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
+
+    test_rand_vec3(angles);
+
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
+
+    /*apply the rotations to a unit quaternion in xzy order*/
+    glm_quat_mul(rot_x, expected, expected);
+    glm_quat_mul(rot_z, expected, expected);
+    glm_quat_mul(rot_y, expected, expected);
+
+    /*use my function to get the quaternion*/
+    glm_euler_xzy_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
+  }
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in xyz order*/
+        glm_quat_mul(rot_x, expected, expected);
+        glm_quat_mul(rot_z, expected, expected);
+        glm_quat_mul(rot_y, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_xzy_quat(result, angles);
+
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
+
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
+
+    test_rand_vec3(angles);
+
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
+
+    /*apply the rotations to a unit quaternion in yxz order*/
+    glm_quat_mul(rot_y, expected, expected);
+    glm_quat_mul(rot_x, expected, expected);
+    glm_quat_mul(rot_z, expected, expected);
+
+    /*use my function to get the quaternion*/
+    glm_euler_yxz_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
+  }
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in xyz order*/
+        glm_quat_mul(rot_y, expected, expected);
+        glm_quat_mul(rot_x, expected, expected);
+        glm_quat_mul(rot_z, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_zxy_quat(result, angles);
+for (int i = 0; i < 4; i++) {
+  fprintf(stderr, "%f vs %f", result[i], expected[i]);
+}
+fprintf(stderr, "\n");
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
+
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
+
+    test_rand_vec3(angles);
+
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
+
+    /*apply the rotations to a unit quaternion in yzx order*/
+    glm_quat_mul(rot_y, expected, expected);
+    glm_quat_mul(rot_z, expected, expected);
+    glm_quat_mul(rot_x, expected, expected);
+
+    /*use my function to get the quaternion*/
+    glm_euler_yxz_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
+  }
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in yzx order*/
+        glm_quat_mul(rot_y, expected, expected);
+        glm_quat_mul(rot_z, expected, expected);
+        glm_quat_mul(rot_x, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_zxy_quat(result, angles);
+for (int i = 0; i < 4; i++) {
+  fprintf(stderr, "%f vs %f", result[i], expected[i]);
+}
+fprintf(stderr, "\n");
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
+
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
+
+    test_rand_vec3(angles);
+
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
+
+    /*apply the rotations to a unit quaternion in zxy order*/
+    glm_quat_mul(rot_z, expected, expected);
+    glm_quat_mul(rot_x, expected, expected);
+    glm_quat_mul(rot_y, expected, expected);
+
+    /*use my function to get the quaternion*/
+    glm_euler_zxy_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
+  }
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in zxy order*/
+        glm_quat_mul(rot_z, expected, expected);
+        glm_quat_mul(rot_x, expected, expected);
+        glm_quat_mul(rot_y, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_zxy_quat(result, angles);
+for (int i = 0; i < 4; i++) {
+  fprintf(stderr, "%f vs %f", result[i], expected[i]);
+}
+fprintf(stderr, "\n");
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
+  for (int i = 0; i < 100; i++) {
+    /*random angles for testing*/
+    vec3 angles;
+
+    /*quaternion representations for rotations*/
+    versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+    vec3 axis_x = {1.0f, 0.0f, 0.0f};
+    vec3 axis_y = {0.0f, 1.0f, 0.0f};
+    vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+    versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+    versor result;
+
+    test_rand_vec3(angles);
+
+    /*create the rotation quaternions using the angles and axises*/
+    glm_quatv(rot_x, angles[0], axis_x);
+    glm_quatv(rot_y, angles[1], axis_y);
+    glm_quatv(rot_z, angles[2], axis_z);
+
+    /*apply the rotations to a unit quaternion in zyx order*/
+    glm_quat_mul(rot_z, expected, expected);
+    glm_quat_mul(rot_y, expected, expected);
+    glm_quat_mul(rot_x, expected, expected);
+
+    /*use my function to get the quaternion*/
+    glm_euler_zxy_quat(result, angles);
+
+    ASSERTIFY(test_assert_quat_eq(result, expected))
+  }
+
+  /*Start gimbal lock tests*/
+  for (float x = -90.0f; x <= 90.0f; x += 90.0f) {
+    for (float y = -90.0f; y <= 90.0f; y += 90.0f) {
+      for (float z = -90.0f; z <= 90.0f; z += 90.0f) {
+        
+        /* angles that will cause gimbal lock*/
+        vec3 angles = {x, y, z};
+
+        /*quaternion representations for rotations*/
+        versor rot_x = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_y = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor rot_z = {0.0f, 0.0f, 0.0f, 1.0f};
+
+        vec3 axis_x = {1.0f, 0.0f, 0.0f};
+        vec3 axis_y = {0.0f, 1.0f, 0.0f};
+        vec3 axis_z = {0.0f, 0.0f, 1.0f};
+
+        versor expected = {0.0f, 0.0f, 0.0f, 1.0f};
+        versor result;
+
+        /*create the rotation quaternions using the angles and axises*/
+        glm_quatv(rot_x, angles[0], axis_x);
+        glm_quatv(rot_y, angles[1], axis_y);
+        glm_quatv(rot_z, angles[2], axis_z);
+
+        /*apply the rotations to a unit quaternion in xyz order*/
+        glm_quat_mul(rot_z, expected, expected);
+        glm_quat_mul(rot_y, expected, expected);
+        glm_quat_mul(rot_x, expected, expected);
+
+        /*use my function to get the quaternion*/
+        glm_euler_zxy_quat(result, angles);
+for (int i = 0; i < 4; i++) {
+  fprintf(stderr, "%f vs %f", result[i], expected[i]);
+}
+fprintf(stderr, "\n");
+        ASSERTIFY(test_assert_quat_eq(result, expected))
+      }
+    }
+  }
 
   TEST_SUCCESS
 }

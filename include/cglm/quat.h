@@ -142,7 +142,8 @@ glm_quat_init(versor q, float x, float y, float z, float w) {
 //TODO: telephone001's eulertoquat
 
 /*!
- * @brief creates NEW quaternion using rotation angles and does does rotations in x y z order
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in x y z order (roll pitch yaw)
  * 
  * @param[out]  q     quaternion
  * @param[in]   angle angles x y z (radians)
@@ -159,13 +160,152 @@ glm_euler_xyz_quat(versor q, vec3 angles) {
   float zs = sinf(angles[2] / 2.0f);
   float zc = cosf(angles[2] / 2.0f);
 
+
   glm_quat_init(q, 
     zc * yc * xs - zs * ys * xc, 
     zc * ys * xc + zs * yc * xs,
    -zc * ys * xs + zs * yc * xc,
     zc * yc * xc + zs * ys * xs);
-  
 }
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in x z y order (roll yaw pitch)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_xzy_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0f);
+  float xc = cosf(angles[0] / 2.0f);
+
+  float ys = sinf(angles[1] / 2.0f);
+  float yc = cosf(angles[1] / 2.0f);
+  
+  float zs = sinf(angles[2] / 2.0f);
+  float zc = cosf(angles[2] / 2.0f);
+
+  glm_quat_init(q,
+    yc * zc * xs + ys * zs * xc,
+    yc * zs * xs + ys * zc * xc,
+    yc * zs * xc - ys * zc * xs,
+    yc * zc * xc - ys * zs * xs);
+
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in y x z order (pitch roll yaw)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_yxz_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0f);
+  float xc = cosf(angles[0] / 2.0f);
+
+  float ys = sinf(angles[1] / 2.0f);
+  float yc = cosf(angles[1] / 2.0f);
+  
+  float zs = sinf(angles[2] / 2.0f);
+  float zc = cosf(angles[2] / 2.0f);
+
+  glm_quat_init(q,
+    zc * xc * ys - zs * xs * yc,
+    zc * xs * ys + zs * xc * yc,
+    zc * xs * yc + zs * xc * ys,
+    zc * xc * yc - zs * xs * ys);
+
+
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in y z x order (pitch yaw roll)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_yzx_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0f);
+  float xc = cosf(angles[0] / 2.0f);
+
+  float ys = sinf(angles[1] / 2.0f);
+  float yc = cosf(angles[1] / 2.0f);
+  
+  float zs = sinf(angles[2] / 2.0f);
+  float zc = cosf(angles[2] / 2.0f);
+
+  glm_quat_init(q,
+   -xc * zs * ys + xs * zc * yc,
+    xc * zc * ys - xs * zs * yc,
+    xc * zs * yc + xs * zc * ys,
+    xc * zc * yc + xs * zs * ys);
+
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in z x y order (yaw roll pitch)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_zxy_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0f);
+  float xc = cosf(angles[0] / 2.0f);
+
+  float ys = sinf(angles[1] / 2.0f);
+  float yc = cosf(angles[1] / 2.0f);
+  
+  float zs = sinf(angles[2] / 2.0f);
+  float zc = cosf(angles[2] / 2.0f);
+
+  glm_quat_init(q,
+    yc * xs * zc + ys * xc * zs,
+    yc * xc * zs - ys * xs * zc,
+    yc * xs * zs + ys * xc * zc,
+    yc * xc * zc - ys * xs * zs);
+
+
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in z y x order (yaw pitch roll)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_zyx_quat(versor q, vec3 angles) {
+  float xs = sinf(angles[0] / 2.0f);
+  float xc = cosf(angles[0] / 2.0f);
+
+  float ys = sinf(angles[1] / 2.0f);
+  float yc = cosf(angles[1] / 2.0f);
+  
+  float zs = sinf(angles[2] / 2.0f);
+  float zc = cosf(angles[2] / 2.0f);
+
+  glm_quat_init(q,
+    xc * ys * zs + xs * yc * zc,
+    xc * yc * zs + xs * ys * zc,
+   -xc * ys * zc + xs * yc * zs,
+    xc * yc * zc - xs * ys * zs);
+
+}
+
+
 
 /*!
  * @brief creates NEW quaternion with axis vector
