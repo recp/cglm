@@ -54,16 +54,14 @@ Functions documentation
 
     multiply m1 and m2 to dest
 
-    m1, m2 and dest matrices can be same matrix, it is possible to write this:
-
     .. code-block:: c
 
-       glm_mat4x2_mul(m, m, m);
+       glm_mat4x2_mul(mat4x2, mat2x4, mat4);
 
     Parameters:
-      | *[in]*  **m1**    left matrix
-      | *[in]*  **m2**    right matrix
-      | *[out]* **dest**  destination matrix
+      | *[in]*  **m1**    left matrix (mat4x2)
+      | *[in]*  **m2**    right matrix (mat2x4)
+      | *[out]* **dest**  destination matrix (mat4)
 
 .. c:function:: void glm_mat4x2_mulv(mat4x2 m, vec2 v, vec4 dest)
 
