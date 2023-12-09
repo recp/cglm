@@ -361,6 +361,12 @@ TEST_DECLARE(clamp)
 
 /* euler */
 TEST_DECLARE(euler)
+TEST_DECLARE(glm_euler_xyz_quat) 
+TEST_DECLARE(glm_euler_xzy_quat) 
+TEST_DECLARE(glm_euler_yxz_quat)
+TEST_DECLARE(glm_euler_yzx_quat)  
+TEST_DECLARE(glm_euler_zxy_quat)
+TEST_DECLARE(glm_euler_zyx_quat)
 
 /* ray */
 TEST_DECLARE(glm_ray_triangle)
@@ -374,12 +380,6 @@ TEST_DECLARE(glm_quat_identity)
 TEST_DECLARE(glm_quat_identity_array)
 TEST_DECLARE(glm_quat_init)
 TEST_DECLARE(glm_quatv)
-TEST_DECLARE(glm_euler_xyz_quat)
-TEST_DECLARE(glm_euler_xzy_quat)
-TEST_DECLARE(glm_euler_yxz_quat)
-TEST_DECLARE(glm_euler_yzx_quat)
-TEST_DECLARE(glm_euler_zxy_quat)
-TEST_DECLARE(glm_euler_zyx_quat)
 TEST_DECLARE(glm_quat)
 TEST_DECLARE(glm_quat_copy)
 TEST_DECLARE(glm_quat_norm)
@@ -1341,9 +1341,10 @@ TEST_LIST {
   
   /* utils */
   TEST_ENTRY(clamp)
-  
+
   /* euler */
   TEST_ENTRY(euler)
+
   
   /* ray */
   TEST_ENTRY(glm_ray_triangle)
@@ -1357,12 +1358,6 @@ TEST_LIST {
   TEST_ENTRY(glm_quat_identity_array)
   TEST_ENTRY(glm_quat_init)
   TEST_ENTRY(glm_quatv)
-  TEST_ENTRY(glm_euler_xyz_quat) 
-  TEST_ENTRY(glm_euler_xzy_quat) 
-  TEST_ENTRY(glm_euler_yxz_quat)
-  TEST_ENTRY(glm_euler_yzx_quat)  
-  TEST_ENTRY(glm_euler_zxy_quat)
-  TEST_ENTRY(glm_euler_zyx_quat)
   TEST_ENTRY(glm_quat)
   TEST_ENTRY(glm_quat_copy)
   TEST_ENTRY(glm_quat_norm)

@@ -14,12 +14,6 @@
    CGLM_INLINE versors glms_quat_identity(void)
    CGLM_INLINE void    glms_quat_identity_array(versor *q, size_t count)
    CGLM_INLINE versors glms_quat_init(float x, float y, float z, float w)
-   CGLM_INLINE versors glms_euler_xyz_quat(versors q, vec3s angles)
-   CGLM_INLINE versors glms_euler_xzy_quat(versors q, vec3s angles)
-   CGLM_INLINE versors glms_euler_yxz_quat(versors q, vec3s angles)
-   CGLM_INLINE versors glms_euler_yzx_quat(versors q, vec3s angles)
-   CGLM_INLINE versors glms_euler_zxy_quat(versors q, vec3s angles)
-   CGLM_INLINE versors glms_euler_zyx_quat(versors q, vec3s angles)
    CGLM_INLINE versors glms_quatv(float angle, vec3s axis)
    CGLM_INLINE versors glms_quat(float angle, float x, float y, float z)
    CGLM_INLINE versors glms_quat_from_vecs(vec3s a, vec3s b)
@@ -125,97 +119,6 @@ glms_quat_(init)(float x, float y, float z, float w) {
   glm_quat_init(dest.raw, x, y, z, w);
   return dest;
 }
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in x y z order (roll pitch yaw)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_xyz_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_xyz_quat(dest.raw, angles.raw);
-  return dest;
-}
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in x z y order (roll yaw pitch)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_xzy_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_xzy_quat(dest.raw, angles.raw);
-  return dest;
-}
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in y x z order (pitch roll yaw)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_yxz_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_yxz_quat(dest.raw, angles.raw);
-  return dest;
-}
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in y z x order (pitch yaw roll)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_yzx_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_yzx_quat(dest.raw, angles.raw);
-  return dest;
-}
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in z x y order (yaw roll pitch)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_zxy_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_zxy_quat(dest.raw, angles.raw);
-  return dest;
-}
-
-/*!
- * @brief creates NEW quaternion using rotation angles and does
- *        rotations in z y x order (yaw pitch roll)
- * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
- */
-CGLM_INLINE
-versors
-glms_euler_zyx_quat(versors q, vec3s angles) {
-  versors dest;
-  glm_euler_zyx_quat(dest.raw, angles.raw);
-  return dest;
-}
-
 
 /*!
  * @brief creates NEW quaternion with axis vector

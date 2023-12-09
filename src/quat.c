@@ -28,42 +28,6 @@ glmc_quat_init(versor q, float x, float y, float z, float w) {
 
 CGLM_EXPORT
 void
-glmc_euler_xyz_quat(versor q, vec3 angles) {
-  glm_euler_xyz_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
-glmc_euler_xzy_quat(versor q, vec3 angles) {
-  glm_euler_xzy_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
-glmc_euler_yxz_quat(versor q, vec3 angles) {
-  glm_euler_yxz_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
-glmc_euler_yzx_quat(versor q, vec3 angles) {
-  glm_euler_yzx_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
-glmc_euler_zxy_quat(versor q, vec3 angles) {
-  glm_euler_zxy_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
-glmc_euler_zyx_quat(versor q, vec3 angles) {
-  glm_euler_zyx_quat(q, angles);
-}
-
-CGLM_EXPORT
-void
 glmc_quat(versor q, float angle, float x, float y, float z) {
   glm_quat(q, angle, x, y, z);
 }

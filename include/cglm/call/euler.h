@@ -49,6 +49,31 @@ CGLM_EXPORT
 void
 glmc_euler_by_order(vec3 angles, glm_euler_seq axis, mat4 dest);
 
+CGLM_EXPORT
+void
+glmc_euler_xyz_quat(versor q, vec3 angles);
+
+CGLM_EXPORT
+void
+glmc_euler_xzy_quat(versor q, vec3 angles);
+
+CGLM_EXPORT
+void
+glmc_euler_yxz_quat(versor q, vec3 angles);
+
+CGLM_EXPORT
+void
+glmc_euler_yzx_quat(versor q, vec3 angles);
+
+CGLM_EXPORT
+void
+glmc_euler_zxy_quat(versor q, vec3 angles);
+
+CGLM_EXPORT
+void
+glmc_euler_zyx_quat(versor q, vec3 angles);
+
+
 #ifdef __cplusplus
 }
 #endif
