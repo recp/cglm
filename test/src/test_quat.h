@@ -127,9 +127,13 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in xyz order*/
-    glm_quat_mul(rot_x, expected, expected);
-    glm_quat_mul(rot_y, expected, expected);
-    glm_quat_mul(rot_z, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
 
     /*use my function to get the quaternion*/
     glm_euler_xyz_quat(result, angles);
@@ -166,9 +170,13 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
         glm_quatv(rot_z, angles[2], axis_z);
 
         /*apply the rotations to a unit quaternion in xyz order*/
-        glm_quat_mul(rot_x, expected, expected);
-        glm_quat_mul(rot_y, expected, expected);
-        glm_quat_mul(rot_z, expected, expected);
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
 
         /*use my function to get the quaternion*/
         glm_euler_xyz_quat(result, angles);
@@ -208,9 +216,13 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in xzy order*/
-    glm_quat_mul(rot_x, expected, expected);
-    glm_quat_mul(rot_z, expected, expected);
-    glm_quat_mul(rot_y, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
 
     /*use my function to get the quaternion*/
     glm_euler_xzy_quat(result, angles);
@@ -246,9 +258,13 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
         glm_quatv(rot_z, angles[2], axis_z);
 
         /*apply the rotations to a unit quaternion in xyz order*/
-        glm_quat_mul(rot_x, expected, expected);
-        glm_quat_mul(rot_z, expected, expected);
-        glm_quat_mul(rot_y, expected, expected);
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
 
         /*use my function to get the quaternion*/
         glm_euler_xzy_quat(result, angles);
@@ -289,9 +305,13 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in yxz order*/
-    glm_quat_mul(rot_y, expected, expected);
-    glm_quat_mul(rot_x, expected, expected);
-    glm_quat_mul(rot_z, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
 
     /*use my function to get the quaternion*/
     glm_euler_yxz_quat(result, angles);
@@ -326,10 +346,14 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
         glm_quatv(rot_y, angles[1], axis_y);
         glm_quatv(rot_z, angles[2], axis_z);
 
-        /*apply the rotations to a unit quaternion in xyz order*/
-        glm_quat_mul(rot_y, expected, expected);
-        glm_quat_mul(rot_x, expected, expected);
-        glm_quat_mul(rot_z, expected, expected);
+        /*apply the rotations to a unit quaternion in yxz order*/
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
 
         /*use my function to get the quaternion*/
         glm_euler_yxz_quat(result, angles);
@@ -370,9 +394,13 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in yzx order*/
-    glm_quat_mul(rot_y, expected, expected);
-    glm_quat_mul(rot_z, expected, expected);
-    glm_quat_mul(rot_x, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
 
     /*use my function to get the quaternion*/
     glm_euler_yzx_quat(result, angles);
@@ -408,9 +436,13 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
         glm_quatv(rot_z, angles[2], axis_z);
 
         /*apply the rotations to a unit quaternion in yzx order*/
-        glm_quat_mul(rot_y, expected, expected);
-        glm_quat_mul(rot_z, expected, expected);
-        glm_quat_mul(rot_x, expected, expected);
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
 
         /*use my function to get the quaternion*/
         glm_euler_yzx_quat(result, angles);
@@ -451,9 +483,13 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in zxy order*/
-    glm_quat_mul(rot_z, expected, expected);
-    glm_quat_mul(rot_x, expected, expected);
-    glm_quat_mul(rot_y, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
 
     /*use my function to get the quaternion*/
     glm_euler_zxy_quat(result, angles);
@@ -489,9 +525,14 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
         glm_quatv(rot_z, angles[2], axis_z);
 
         /*apply the rotations to a unit quaternion in zxy order*/
-        glm_quat_mul(rot_z, expected, expected);
-        glm_quat_mul(rot_x, expected, expected);
-        glm_quat_mul(rot_y, expected, expected);
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
+
 
         /*use my function to get the quaternion*/
         glm_euler_zxy_quat(result, angles);
@@ -532,9 +573,14 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
     glm_quatv(rot_z, angles[2], axis_z);
 
     /*apply the rotations to a unit quaternion in zyx order*/
-    glm_quat_mul(rot_z, expected, expected);
-    glm_quat_mul(rot_y, expected, expected);
-    glm_quat_mul(rot_x, expected, expected);
+    versor tmp;
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_z, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_y, tmp, expected);
+    glm_quat_copy(expected, tmp);
+    glm_quat_mul(rot_x, tmp, expected);
+
 
     /*use my function to get the quaternion*/
     glm_euler_zyx_quat(result, angles);
@@ -571,9 +617,14 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
         glm_quatv(rot_z, angles[2], axis_z);
 
         /*apply the rotations to a unit quaternion in zyx order*/
-        glm_quat_mul(rot_z, expected, expected);
-        glm_quat_mul(rot_y, expected, expected);
-        glm_quat_mul(rot_x, expected, expected);
+        versor tmp;
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_z, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_y, tmp, expected);
+        glm_quat_copy(expected, tmp);
+        glm_quat_mul(rot_x, tmp, expected);
+
 
         /*use my function to get the quaternion*/
         glm_euler_zyx_quat(result, angles);

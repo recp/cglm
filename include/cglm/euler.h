@@ -448,4 +448,6 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
   dest[3][3] = 1.0f;
 }
 
+
+
 #endif /* cglm_euler_h */
