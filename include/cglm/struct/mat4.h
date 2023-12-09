@@ -200,12 +200,12 @@ glms_mat4_(ins3)(mat3s mat, mat4s dest) {
  *
  * @code
  * mat4 m = GLM_MAT4_IDENTITY_INIT;
- * glm_mat4_mul(m, m, m);
+ * r = glms_mat4_mul(m, m);
  * @endcode
  *
  * @param[in]  m1   left matrix
  * @param[in]  m2   right matrix
- * @returns         destination matrix
+ * @returns destination matrix
  */
 CGLM_INLINE
 mat4s

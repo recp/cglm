@@ -64,15 +64,13 @@ glms_mat4x3_(make)(float * __restrict src) {
 /*!
  * @brief multiply m1 and m2 to dest
  *
- * m1, m2 and dest matrices can be same matrix, it is possible to write this:
- *
  * @code
- * glm_mat4x3_mul(m, m, m);
+ * r = glms_mat4x3_mul(mat4x3s, mat3x4s);
  * @endcode
  *
- * @param[in]  m1   left matrix
- * @param[in]  m2   right matrix
- * @param[out] dest destination matrix
+ * @param[in]  m1   left matrix (mat4x3s)
+ * @param[in]  m2   right matrix (mat3x4s)
+ * @returns destination matrix (mat4s)
  */
 CGLM_INLINE
 mat4s

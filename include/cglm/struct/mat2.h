@@ -108,13 +108,13 @@ glms_mat2_(zero)(void) {
  *
  * @code
  * mat2 m = GLM_MAT2_IDENTITY_INIT;
- * glm_mat2_mul(m, m, m);
+ * r = glms_mat2_mul(m, m);
  * @endcode
  *
  * @param[in]  m1   left matrix
  * @param[in]  m2   right matrix
  *
- * @returns matrix
+ * @returns destination matrix
  */
 CGLM_INLINE
 mat2s
