@@ -178,6 +178,42 @@ glmc_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec4_subsub(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_subsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_addsub(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_addsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_mulsub(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_mulsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_mulsubs(vec4 a, float s, vec4 dest) {
+  glm_vec4_mulsubs(a, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_maxsub(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_maxsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_minsub(vec4 a, vec4 b, vec4 dest) {
+  glm_vec4_minsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec4_negate(vec4 v) {
   glm_vec4_negate(v);
 }
