@@ -175,9 +175,9 @@ static inline
 float32x4_t
 glmm_fmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
 #if CGLM_ARM64
-  return vfmsq_f32(c, a, b);
+  return vfmsq_f32(c, vnegq_f32(a), b);
 #else
-  return vmlsq_f32(vnegq_f32(c), a, b);
+  return vmlsq_f32(c, vnegq_f32(a), b);
 #endif
 }
 
