@@ -578,10 +578,10 @@ TEST_IMPL(GLM_PREFIX, vec4_addsub) {
   
   GLM(vec4_addsub)(v1, v2, v4);
 
-  ASSERT(test_eq(v3[0] - v1[0] + v2[0], v4[0]))
-  ASSERT(test_eq(v3[1] - v1[1] + v2[1], v4[1]))
-  ASSERT(test_eq(v3[2] - v1[2] + v2[2], v4[2]))
-  ASSERT(test_eq(v3[3] - v1[3] + v2[3], v4[3]))
+  ASSERT(test_eq(v3[0] - (v1[0] + v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] + v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - (v1[2] + v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - (v1[3] + v2[3]), v4[3]))
   
   TEST_SUCCESS
 }
@@ -594,11 +594,11 @@ TEST_IMPL(GLM_PREFIX, vec4_mulsub) {
   
   GLM(vec4_mulsub)(v1, v2, v4);
 
-  ASSERT(test_eq(v3[0] - v1[0] * v2[0], v4[0]))
-  ASSERT(test_eq(v3[1] - v1[1] * v2[1], v4[1]))
-  ASSERT(test_eq(v3[2] - v1[2] * v2[2], v4[2]))
-  ASSERT(test_eq(v3[3] - v1[3] * v2[3], v4[3]))
-  
+  ASSERT(test_eq(v3[0] - (v1[0] * v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] * v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - (v1[2] * v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - (v1[3] * v2[3]), v4[3]))
+
   TEST_SUCCESS
 }
 
@@ -610,10 +610,10 @@ TEST_IMPL(GLM_PREFIX, vec4_mulsubs) {
   
   GLM(vec4_mulsubs)(v1, s, v3);
 
-  ASSERT(test_eq(v2[0] - v1[0] * s, v3[0]))
-  ASSERT(test_eq(v2[1] - v1[1] * s, v3[1]))
-  ASSERT(test_eq(v2[2] - v1[2] * s, v3[2]))
-  ASSERT(test_eq(v2[3] - v1[3] * s, v3[3]))
+  ASSERT(test_eq(v2[0] - (v1[0] * s), v3[0]))
+  ASSERT(test_eq(v2[1] - (v1[1] * s), v3[1]))
+  ASSERT(test_eq(v2[2] - (v1[2] * s), v3[2]))
+  ASSERT(test_eq(v2[3] - (v1[3] * s), v3[3]))
   
   TEST_SUCCESS
 }

@@ -781,7 +781,7 @@ CGLM_INLINE
 void
 glm_vec4_mulsub(vec4 a, vec4 b, vec4 dest) {
 #if defined(CGLM_SIMD)
-  glmm_store(dest, glmm_fnmsub(glmm_load(a), glmm_load(b), glmm_load(dest)));
+  glmm_store(dest, glmm_fnmadd(glmm_load(a), glmm_load(b), glmm_load(dest)));
 #else
   dest[0] -= a[0] * b[0];
   dest[1] -= a[1] * b[1];
@@ -803,7 +803,7 @@ CGLM_INLINE
 void
 glm_vec4_mulsubs(vec4 a, float s, vec4 dest) {
 #if defined(CGLM_SIMD)
-  glmm_store(dest, glmm_fnmsub(glmm_load(a), glmm_set1(s), glmm_load(dest)));
+  glmm_store(dest, glmm_fnmadd(glmm_load(a), glmm_set1(s), glmm_load(dest)));
 #else
   dest[0] -= a[0] * s;
   dest[1] -= a[1] * s;

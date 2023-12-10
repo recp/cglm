@@ -373,8 +373,8 @@ TEST_IMPL(GLM_PREFIX, vec2_subsub) {
   
   GLM(vec2_subsub)(v1, v2, v4);
 
-  ASSERT(test_eq(v3[0] - v1[0] - v2[0], v4[0]))
-  ASSERT(test_eq(v3[1] - v1[1] - v2[1], v4[1]))
+  ASSERT(test_eq(v3[0] - (v1[0] - v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] - v2[1]), v4[1]))
   
   TEST_SUCCESS
 }
@@ -387,8 +387,8 @@ TEST_IMPL(GLM_PREFIX, vec2_addsub) {
   
   GLM(vec2_addsub)(v1, v2, v4);
 
-  ASSERT(test_eq(v3[0] - v1[0] + v2[0], v4[0]))
-  ASSERT(test_eq(v3[1] - v1[1] + v2[1], v4[1]))
+  ASSERT(test_eq(v3[0] - (v1[0] + v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] + v2[1]), v4[1]))
   
   TEST_SUCCESS
 }
