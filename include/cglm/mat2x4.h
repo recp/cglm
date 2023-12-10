@@ -79,15 +79,13 @@ glm_mat2x4_make(float * __restrict src, mat2x4 dest) {
 /*!
  * @brief multiply m1 and m2 to dest
  *
- * m1, m2 and dest matrices can be same matrix, it is possible to write this:
- *
  * @code
- * glm_mat2x4_mul(m, m, m);
+ * glm_mat2x4_mul(mat2x4, mat4x2, mat2);
  * @endcode
  *
- * @param[in]  m1   left matrix
- * @param[in]  m2   right matrix
- * @param[out] dest destination matrix
+ * @param[in]  m1   left matrix (mat2x4)
+ * @param[in]  m2   right matrix (mat4x2)
+ * @param[out] dest destination matrix (mat2)
  */
 CGLM_INLINE
 void

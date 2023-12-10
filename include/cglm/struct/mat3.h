@@ -124,12 +124,12 @@ glms_mat3_(zero)(void) {
  *
  * @code
  * mat3 m = GLM_MAT3_IDENTITY_INIT;
- * glm_mat3_mul(m, m, m);
+ * r = glms_mat3_mul(m, m);
  * @endcode
  *
  * @param[in]  m1   left matrix
  * @param[in]  m2   right matrix
- * @returns         destination matrix
+ * @returns destination matrix
  */
 CGLM_INLINE
 mat3s
