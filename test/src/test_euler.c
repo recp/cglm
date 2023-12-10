@@ -87,6 +87,8 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
 
+        fprintf(stderr, "%f %f %f %f\n",
+          expected[0], expected[1], expected[2], expected[3]);
         /* verify that it acts the same as glm_euler_by_order */
         mat4 expected_mat4;
         glm_euler_by_order(angles, GLM_EULER_XYZ, expected_mat4);
@@ -104,7 +106,6 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
-  TEST_SUCCESS //TODO REMOVE
   vec3 axis_x = {1.0f, 0.0f, 0.0f};
   vec3 axis_y = {0.0f, 1.0f, 0.0f};
   vec3 axis_z = {0.0f, 0.0f, 1.0f};
@@ -178,7 +179,7 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
         glm_quat_mul(tmp, rot_y, expected);
 
         /* use my function to get the quaternion */
-        glm_euler_xyz_quat(result, angles);
+        glm_euler_xzy_quat(result, angles);
 
         /* verify if the magnitude of the quaternion stays 1 */
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -198,7 +199,6 @@ TEST_IMPL(GLM_PREFIX, euler_xzy_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
-  TEST_SUCCESS //TODO REMOVE
   vec3 axis_x = {1.0f, 0.0f, 0.0f};
   vec3 axis_y = {0.0f, 1.0f, 0.0f};
   vec3 axis_z = {0.0f, 0.0f, 1.0f};
@@ -231,7 +231,7 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
     glm_quat_copy(expected, tmp);
     glm_quat_mul(tmp, rot_z, expected);
 
-    glm_euler_xyz_quat(result, angles);
+    glm_euler_yxz_quat(result, angles);
 
     /* verify if the magnitude of the quaternion stays 1 */
     ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -272,7 +272,7 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
         glm_quat_mul(tmp, rot_z, expected);
 
         /* use my function to get the quaternion */
-        glm_euler_xyz_quat(result, angles);
+        glm_euler_yxz_quat(result, angles);
 
         /* verify if the magnitude of the quaternion stays 1 */
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -292,7 +292,6 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
-  TEST_SUCCESS //TODO REMOVE
   vec3 axis_x = {1.0f, 0.0f, 0.0f};
   vec3 axis_y = {0.0f, 1.0f, 0.0f};
   vec3 axis_z = {0.0f, 0.0f, 1.0f};
@@ -325,7 +324,7 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
     glm_quat_copy(expected, tmp);
     glm_quat_mul(tmp, rot_x, expected);
 
-    glm_euler_xyz_quat(result, angles);
+    glm_euler_yzx_quat(result, angles);
 
     /* verify if the magnitude of the quaternion stays 1 */
     ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -366,7 +365,7 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
         glm_quat_mul(tmp, rot_x, expected);
 
         /* use my function to get the quaternion */
-        glm_euler_xyz_quat(result, angles);
+        glm_euler_yzx_quat(result, angles);
 
         /* verify if the magnitude of the quaternion stays 1 */
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -386,7 +385,6 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
-  TEST_SUCCESS //TODO REMOVE
   vec3 axis_x = {1.0f, 0.0f, 0.0f};
   vec3 axis_y = {0.0f, 1.0f, 0.0f};
   vec3 axis_z = {0.0f, 0.0f, 1.0f};
@@ -419,7 +417,7 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
     glm_quat_copy(expected, tmp);
     glm_quat_mul(tmp, rot_y, expected);
 
-    glm_euler_xyz_quat(result, angles);
+    glm_euler_zxy_quat(result, angles);
 
     /* verify if the magnitude of the quaternion stays 1 */
     ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -460,7 +458,7 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
         glm_quat_mul(tmp, rot_y, expected);
 
         /* use my function to get the quaternion */
-        glm_euler_xyz_quat(result, angles);
+        glm_euler_zxy_quat(result, angles);
 
         /* verify if the magnitude of the quaternion stays 1 */
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -480,7 +478,6 @@ TEST_IMPL(GLM_PREFIX, euler_zxy_quat) {
 }
 
 TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
-  TEST_SUCCESS //TODO REMOVE
   vec3 axis_x = {1.0f, 0.0f, 0.0f};
   vec3 axis_y = {0.0f, 1.0f, 0.0f};
   vec3 axis_z = {0.0f, 0.0f, 1.0f};
@@ -513,7 +510,7 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
     glm_quat_copy(expected, tmp);
     glm_quat_mul(tmp, rot_x, expected);
 
-    glm_euler_xyz_quat(result, angles);
+    glm_euler_zyx_quat(result, angles);
 
     /* verify if the magnitude of the quaternion stays 1 */
     ASSERT(test_eq(glm_quat_norm(result), 1.0f))
@@ -554,7 +551,7 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat) {
         glm_quat_mul(tmp, rot_x, expected);
 
         /* use my function to get the quaternion */
-        glm_euler_xyz_quat(result, angles);
+        glm_euler_zyx_quat(result, angles);
 
         /* verify if the magnitude of the quaternion stays 1 */
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
