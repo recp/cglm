@@ -174,11 +174,7 @@ glmm_fnmadd(float32x4_t a, float32x4_t b, float32x4_t c) {
 static inline
 float32x4_t
 glmm_fmsub(float32x4_t a, float32x4_t b, float32x4_t c) {
-#if CGLM_ARM64
-  return vfmsq_f32(c, a, b);
-#else
-  return vmlsq_f32(c, a, b);
-#endif
+  return glmm_fmadd(vnegq_f32(c), a, b);
 }
 
 static inline

@@ -554,6 +554,102 @@ TEST_IMPL(GLM_PREFIX, vec4_minadd) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec4_subsub) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {1.0f, 2.0f, 3.0f, 130.0f},
+       v4 = {1.0f, 2.0f, 3.0f, 130.0f};
+  
+  GLM(vec4_subsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - (v1[0] - v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] - v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - (v1[2] - v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - (v1[3] - v2[3]), v4[3]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_addsub) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {1.0f, 2.0f, 3.0f, 130.0f},
+       v4 = {1.0f, 2.0f, 3.0f, 130.0f};
+  
+  GLM(vec4_addsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - (v1[0] + v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] + v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - (v1[2] + v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - (v1[3] + v2[3]), v4[3]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_mulsub) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {1.0f, 2.0f, 3.0f, 130.0f},
+       v4 = {1.0f, 2.0f, 3.0f, 130.0f};
+  
+  GLM(vec4_mulsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - (v1[0] * v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - (v1[1] * v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - (v1[2] * v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - (v1[3] * v2[3]), v4[3]))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_mulsubs) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {-3.0f, 4.0f, -5.0f, 20.0f};
+  float s = 9.0f;
+  
+  GLM(vec4_mulsubs)(v1, s, v3);
+
+  ASSERT(test_eq(v2[0] - (v1[0] * s), v3[0]))
+  ASSERT(test_eq(v2[1] - (v1[1] * s), v3[1]))
+  ASSERT(test_eq(v2[2] - (v1[2] * s), v3[2]))
+  ASSERT(test_eq(v2[3] - (v1[3] * s), v3[3]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_maxsub) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {1.0f, 2.0f, 3.0f, 130.0f},
+       v4 = {1.0f, 2.0f, 3.0f, 130.0f};
+  
+  GLM(vec4_maxsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - glm_max(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - glm_max(v1[1], v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - glm_max(v1[2], v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - glm_max(v1[3], v2[3]), v4[3]))
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_minsub) {
+  vec4 v1 = {2.0f, -3.0f, 4.0f, 4.0f},
+       v2 = {-3.0f, 4.0f, -5.0f, 20.0f},
+       v3 = {1.0f, 2.0f, 3.0f, 130.0f},
+       v4 = {1.0f, 2.0f, 3.0f, 130.0f};
+  
+  GLM(vec4_minsub)(v1, v2, v4);
+
+  ASSERT(test_eq(v3[0] - glm_min(v1[0], v2[0]), v4[0]))
+  ASSERT(test_eq(v3[1] - glm_min(v1[1], v2[1]), v4[1]))
+  ASSERT(test_eq(v3[2] - glm_min(v1[2], v2[2]), v4[2]))
+  ASSERT(test_eq(v3[3] - glm_min(v1[3], v2[3]), v4[3]))
+  
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec4_negate_to) {
   vec4 v1 = {2.0f, -3.0f, 4.0f, 60.0f},
        v2 = {-3.0f, 4.0f, -5.0f, 34.0f},
