@@ -178,6 +178,42 @@ glmc_vec3_minadd(vec3 a, vec3 b, vec3 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec3_subsub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_subsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_addsub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_addsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_mulsub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_mulsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_mulsubs(vec3 a, float s, vec3 dest) {
+  glm_vec3_mulsubs(a, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_maxsub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_maxsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_minsub(vec3 a, vec3 b, vec3 dest) {
+  glm_vec3_minsub(a, b, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec3_negate(vec3 v) {
   glm_vec3_negate(v);
 }

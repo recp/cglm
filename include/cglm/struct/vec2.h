@@ -37,6 +37,12 @@
    CGLM_INLINE vec2s glms_vec2_muladds(vec2s a, float s, vec2s dest)
    CGLM_INLINE vec2s glms_vec2_maxadd(vec2s a, vec2s b, vec2s dest)
    CGLM_INLINE vec2s glms_vec2_minadd(vec2s a, vec2s b, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_subsub(vec2s a, vec2s b, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_addsub(vec2s a, vec2s b, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_mulsub(vec2s a, vec2s b, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_mulsubs(vec2s a, float s, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_maxsub(vec2s a, vec2s b, vec2s dest)
+   CGLM_INLINE vec2s glms_vec2_minsub(vec2s a, vec2s b, vec2s dest)
    CGLM_INLINE vec2s glms_vec2_negate(vec2s v)
    CGLM_INLINE vec2s glms_vec2_normalize(vec2s v)
    CGLM_INLINE vec2s glms_vec2_rotate(vec2s v, float angle, vec2s axis)
@@ -427,6 +433,102 @@ CGLM_INLINE
 vec2s
 glms_vec2_(minadd)(vec2s a, vec2s b, vec2s dest) {
   glm_vec2_minadd(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a - b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(subsub)(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_subsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief add two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a + b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(addsub)(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_addsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief mul two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= (a * b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(mulsub)(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_mulsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief mul vector with scalar and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @returns         dest -= (a * b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(mulsubs)(vec2s a, float s, vec2s dest) {
+  glm_vec2_mulsubs(a.raw, s, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub max of two vectors to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= max(a, b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(maxsub)(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_maxsub(a.raw, b.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief sub min of two vectors to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @returns         dest -= min(a, b)
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(minsub)(vec2s a, vec2s b, vec2s dest) {
+  glm_vec2_minsub(a.raw, b.raw, dest.raw);
   return dest;
 }
 

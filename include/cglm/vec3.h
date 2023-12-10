@@ -40,6 +40,12 @@
    CGLM_INLINE void  glm_vec3_muladds(vec3 a, float s, vec3 dest);
    CGLM_INLINE void  glm_vec3_maxadd(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_minadd(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_subsub(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_addsub(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mulsub(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_mulsubs(vec3 a, float s, vec3 dest);
+   CGLM_INLINE void  glm_vec3_maxsub(vec3 a, vec3 b, vec3 dest);
+   CGLM_INLINE void  glm_vec3_minsub(vec3 a, vec3 b, vec3 dest);
    CGLM_INLINE void  glm_vec3_flipsign(vec3 v);
    CGLM_INLINE void  glm_vec3_flipsign_to(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_negate_to(vec3 v, vec3 dest);
@@ -501,6 +507,108 @@ glm_vec3_minadd(vec3 a, vec3 b, vec3 dest) {
   dest[0] += glm_min(a[0], b[0]);
   dest[1] += glm_min(a[1], b[1]);
   dest[2] += glm_min(a[2], b[2]);
+}
+
+/*!
+ * @brief sub two vectors and sub result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest -= (a - b)
+ */
+CGLM_INLINE
+void
+glm_vec3_subsub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] -= a[0] - b[0];
+  dest[1] -= a[1] - b[1];
+  dest[2] -= a[2] - b[2];
+}
+
+/*!
+ * @brief add two vectors and sub result to dest
+ *
+ * it applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest -= (a + b)
+ */
+CGLM_INLINE
+void
+glm_vec3_addsub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] -= a[0] + b[0];
+  dest[1] -= a[1] + b[1];
+  dest[2] -= a[2] + b[2];
+}
+
+/*!
+ * @brief mul two vectors and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest -= (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec3_mulsub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] -= a[0] * b[0];
+  dest[1] -= a[1] * b[1];
+  dest[2] -= a[2] * b[2];
+}
+
+/*!
+ * @brief mul vector with scalar and sub result to dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a * b)
+ */
+CGLM_INLINE
+void
+glm_vec3_mulsubs(vec3 a, float s, vec3 dest) {
+  dest[0] -= a[0] * s;
+  dest[1] -= a[1] * s;
+  dest[2] -= a[2] * s;
+}
+
+/*!
+ * @brief sub max of two vectors to result/dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest -= max(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec3_maxsub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] -= glm_max(a[0], b[0]);
+  dest[1] -= glm_max(a[1], b[1]);
+  dest[2] -= glm_max(a[2], b[2]);
+}
+
+/*!
+ * @brief sub min of two vectors to result/dest
+ *
+ * it applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest dest -= min(a, b)
+ */
+CGLM_INLINE
+void
+glm_vec3_minsub(vec3 a, vec3 b, vec3 dest) {
+  dest[0] -= glm_min(a[0], b[0]);
+  dest[1] -= glm_min(a[1], b[1]);
+  dest[2] -= glm_min(a[2], b[2]);
 }
 
 /*!
