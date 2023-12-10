@@ -749,16 +749,16 @@ CGLM_INLINE
 void
 glm_vec4_addsub(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(
+  glmm_store(dest, wasm_f32x4_sub(
           glmm_load(dest),
-          wasm_f32x4_sub(glmm_load(a), glmm_load(b))));
+          wasm_f32x4_add(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_add_ps(glmm_load(dest),
-                              _mm_sub_ps(glmm_load(a),
+  glmm_store(dest, _mm_sub_ps(glmm_load(dest),
+                              _mm_add_ps(glmm_load(a),
                                          glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
-                            vsubq_f32(vld1q_f32(a),
+  vst1q_f32(dest, vsubq_f32(vld1q_f32(dest),
+                            vaddq_f32(vld1q_f32(a),
                                       vld1q_f32(b))));
 #else
   dest[0] -= a[0] + b[0];
