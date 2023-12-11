@@ -23,6 +23,22 @@
   CGLM_INLINE void glm_ivec2_subs(ivec2 v, int s, ivec2 dest)
   CGLM_INLINE void glm_ivec2_mul(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE void glm_ivec2_scale(ivec2 v, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_addadd(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_addadds(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_subadd(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_subadds(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_muladd(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_muladds(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_maxadd(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_minadd(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_subsub(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_subsubs(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_addsub(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_addsubs(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_mulsub(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_mulsubs(ivec2 a, int s, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_maxsub(ivec2 a, ivec2 b, ivec2 dest)
+  CGLM_INLINE void glm_ivec2_minsub(ivec2 a, ivec2 b, ivec2 dest)
   CGLM_INLINE int glm_ivec2_distance2(ivec2 a, ivec2 b)
   CGLM_INLINE float glm_ivec2_distance(ivec2 a, ivec2 b)
   CGLM_INLINE void glm_ivec2_fill(ivec2 v, int val);
@@ -175,6 +191,262 @@ void
 glm_ivec2_scale(ivec2 v, int s, ivec2 dest) {
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
+}
+
+/*!
+ * @brief add vector [a] with vector [b] and add result to vector [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest += (a + b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_addadd(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] += a[0] + b[0];
+  dest[1] += a[1] + b[1];
+}
+
+/*!
+ * @brief add scalar [s] onto vector [a] and add result to vector [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a + s)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_addadds(ivec2 a, int s, ivec2 dest) {
+  dest[0] += a[0] + s;
+  dest[1] += a[1] + s;
+}
+
+/*!
+ * @brief subtract vector [a] from vector [b] and add result to [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest += (a - b)  
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_subadd(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] += a[0] - b[0];
+  dest[1] += a[1] - b[1];
+}
+
+/*!
+ * @brief subtract scalar [s] from vector [a] and add result to [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a - s)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_subadds(ivec2 a, int s, ivec2 dest) {
+  dest[0] += a[0] - s;
+  dest[1] += a[1] - s;
+}
+
+/*!
+ * @brief multiply vector [a] with vector [b] and add result to [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest += (a * b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_muladd(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] += a[0] * b[0];
+  dest[1] += a[1] * b[1];
+}
+
+/*!
+ * @brief multiply vector [a] with scalar [s] and add result to [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest += (a * s)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_muladds(ivec2 a, int s, ivec2 dest) {
+  dest[0] += a[0] * s;
+  dest[1] += a[1] * s;
+}
+
+/*!
+ * @brief add maximum of vector [a] and vector [b] to vector [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest += max(a, b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_maxadd(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] += a[0] > b[0] ? a[0] : b[0];
+  dest[1] += a[1] > b[1] ? a[1] : b[1];
+}
+
+/*!
+ * @brief add minimum of vector [a] and vector [b] to vector [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest += min(a, b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_minadd(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] += a[0] < b[0] ? a[0] : b[0];
+  dest[1] += a[1] < b[1] ? a[1] : b[1];
+}
+
+/*!
+ * @brief subtract vector [a] from vector [b] and subtract result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest -= (a - b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_subsub(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] -= a[0] - b[0];
+  dest[1] -= a[1] - b[1];
+}
+
+/*!
+ * @brief subtract scalar [s] from vector [a] and subtract result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a - s)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_subsubs(ivec2 a, int s, ivec2 dest) {
+  dest[0] -= a[0] - s;
+  dest[1] -= a[1] - s;
+}
+
+/*!
+ * @brief add vector [a] to vector [b] and subtract the result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a + b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_addsub(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] -= a[0] + b[0];
+  dest[1] -= a[1] + b[1];
+}
+
+/*!
+ * @brief add scalar [s] to vector [a] and subtract the result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a + b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_addsubs(ivec2 a, int s, ivec2 dest) {
+  dest[0] -= a[0] + s;
+  dest[1] -= a[1] + s;
+}
+
+/*!
+ * @brief multiply vector [a] and vector [b] and subtract the result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a * b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_mulsub(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] -= a[0] * b[0];
+  dest[1] -= a[1] * b[1];
+}
+
+/*!
+ * @brief multiply vector [a] with scalar [s] and subtract the result from [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    vector
+ * @param[in]  s    scalar
+ * @param[out] dest dest -= (a * s)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_mulsubs(ivec2 a, int s, ivec2 dest) {
+  dest[0] -= a[0] * s;
+  dest[1] -= a[1] * s;
+}
+
+/*!
+ * @brief subtract maximum of vector [a] and vector [b] from vector [dest]
+ *
+ * applies += operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest -= max(a, b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_maxsub(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] -= a[0] > b[0] ? a[0] : b[0];
+  dest[1] -= a[1] > b[1] ? a[1] : b[1];
+}
+
+/*!
+ * @brief subtract minimum of vector [a] and vector [b] from vector [dest]
+ *
+ * applies -= operator so dest must be initialized
+ *
+ * @param[in]  a    first vector
+ * @param[in]  b    second vector
+ * @param[out] dest dest -= min(a, b)
+ */
+CGLM_INLINE 
+void 
+glm_ivec2_minsub(ivec2 a, ivec2 b, ivec2 dest) {
+  dest[0] -= a[0] < b[0] ? a[0] : b[0];
+  dest[1] -= a[1] < b[1] ? a[1] : b[1];
 }
 
 /*!
