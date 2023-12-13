@@ -30,12 +30,12 @@
    CGLM_INLINE void glm_euler_by_order(vec3         angles,
                                        glm_euler_seq ord,
                                        mat4         dest);
-   CGLM_INLINE void glm_euler_xyz_quat(versor q, vec3 angles);
-   CGLM_INLINE void glm_euler_xzy_quat(versor q, vec3 angles);
-   CGLM_INLINE void glm_euler_yxz_quat(versor q, vec3 angles);
-   CGLM_INLINE void glm_euler_yzx_quat(versor q, vec3 angles);
-   CGLM_INLINE void glm_euler_zxy_quat(versor q, vec3 angles);
-   CGLM_INLINE void glm_euler_zyx_quat(versor q, vec3 angles);
+   CGLM_INLINE void glm_euler_xyz_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_xzy_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yxz_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yzx_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zxy_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zyx_quat(vec3 angles, versor dest);
  */
 
 #ifndef cglm_euler_h
@@ -464,7 +464,7 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_xyz_quat(versor q, vec3 angles) {
+glm_euler_xyz_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -472,10 +472,10 @@ glm_euler_xyz_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] = xc * ys * zs + xs * yc * zc;
-  q[1] = xc * ys * zc - xs * yc * zs;
-  q[2] = xc * yc * zs + xs * ys * zc;
-  q[3] = xc * yc * zc - xs * ys * zs;
+  dest[0] = xc * ys * zs + xs * yc * zc;
+  dest[1] = xc * ys * zc - xs * yc * zs;
+  dest[2] = xc * yc * zs + xs * ys * zc;
+  dest[3] = xc * yc * zc - xs * ys * zs;
 
 }
 
@@ -488,7 +488,7 @@ glm_euler_xyz_quat(versor q, vec3 angles) {
  */
 CGLM_INLINE
 void
-glm_euler_xzy_quat(versor q, vec3 angles) {
+glm_euler_xzy_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -496,10 +496,10 @@ glm_euler_xzy_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] = -xc * zs * ys + xs * zc * yc;
-  q[1] =  xc * zc * ys - xs * zs * yc;
-  q[2] =  xc * zs * yc + xs * zc * ys;
-  q[3] =  xc * zc * yc + xs * zs * ys;  
+  dest[0] = -xc * zs * ys + xs * zc * yc;
+  dest[1] =  xc * zc * ys - xs * zs * yc;
+  dest[2] =  xc * zs * yc + xs * zc * ys;
+  dest[3] =  xc * zc * yc + xs * zs * ys;  
 
 }
 
@@ -512,7 +512,7 @@ glm_euler_xzy_quat(versor q, vec3 angles) {
  */
 CGLM_INLINE
 void
-glm_euler_yxz_quat(versor q, vec3 angles) {
+glm_euler_yxz_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -520,10 +520,10 @@ glm_euler_yxz_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] =  yc * xs * zc + ys * xc * zs;
-  q[1] = -yc * xs * zs + ys * xc * zc;
-  q[2] =  yc * xc * zs - ys * xs * zc;
-  q[3] =  yc * xc * zc + ys * xs * zs;
+  dest[0] =  yc * xs * zc + ys * xc * zs;
+  dest[1] = -yc * xs * zs + ys * xc * zc;
+  dest[2] =  yc * xc * zs - ys * xs * zc;
+  dest[3] =  yc * xc * zc + ys * xs * zs;
 }
 
 /*!
@@ -535,7 +535,7 @@ glm_euler_yxz_quat(versor q, vec3 angles) {
  */
 CGLM_INLINE
 void
-glm_euler_yzx_quat(versor q, vec3 angles) {
+glm_euler_yzx_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -543,10 +543,10 @@ glm_euler_yzx_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] = yc * zc * xs + ys * zs * xc;
-  q[1] = yc * zs * xs + ys * zc * xc;
-  q[2] = yc * zs * xc - ys * zc * xs;
-  q[3] = yc * zc * xc - ys * zs * xs;
+  dest[0] = yc * zc * xs + ys * zs * xc;
+  dest[1] = yc * zs * xs + ys * zc * xc;
+  dest[2] = yc * zs * xc - ys * zc * xs;
+  dest[3] = yc * zc * xc - ys * zs * xs;
 
 }
 
@@ -559,7 +559,7 @@ glm_euler_yzx_quat(versor q, vec3 angles) {
  */
 CGLM_INLINE
 void
-glm_euler_zxy_quat(versor q, vec3 angles) {
+glm_euler_zxy_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -567,10 +567,10 @@ glm_euler_zxy_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] = zc * xs * yc - zs * xc * ys;
-  q[1] = zc * xc * ys + zs * xs * yc;
-  q[2] = zc * xs * ys + zs * xc * yc;
-  q[3] = zc * xc * yc - zs * xs * ys;
+  dest[0] = zc * xs * yc - zs * xc * ys;
+  dest[1] = zc * xc * ys + zs * xs * yc;
+  dest[2] = zc * xs * ys + zs * xc * yc;
+  dest[3] = zc * xc * yc - zs * xs * ys;
 }
 
 /*!
@@ -582,7 +582,7 @@ glm_euler_zxy_quat(versor q, vec3 angles) {
  */
 CGLM_INLINE
 void
-glm_euler_zyx_quat(versor q, vec3 angles) {
+glm_euler_zyx_quat(vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -590,10 +590,10 @@ glm_euler_zyx_quat(versor q, vec3 angles) {
   ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
   zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
 
-  q[0] =  zc * yc * xs - zs * ys * xc;
-  q[1] =  zc * ys * xc + zs * yc * xs;
-  q[2] = -zc * ys * xs + zs * yc * xc;
-  q[3] =  zc * yc * xc + zs * ys * xs;
+  dest[0] =  zc * yc * xs - zs * ys * xc;
+  dest[1] =  zc * ys * xc + zs * yc * xs;
+  dest[2] = -zc * ys * xs + zs * yc * xc;
+  dest[3] =  zc * yc * xc + zs * ys * xs;
 }
 
 
