@@ -54,6 +54,7 @@
 #define cglm_ivec2_h
 
 #include "common.h"
+#include "util.h"
 
 #define GLM_IVEC2_ONE_INIT   {1, 1}
 #define GLM_IVEC2_ZERO_INIT  {0, 0}
@@ -301,8 +302,8 @@ glm_ivec2_muladds(ivec2 a, int s, ivec2 dest) {
 CGLM_INLINE 
 void 
 glm_ivec2_maxadd(ivec2 a, ivec2 b, ivec2 dest) {
-  dest[0] += a[0] > b[0] ? a[0] : b[0];
-  dest[1] += a[1] > b[1] ? a[1] : b[1];
+  dest[0] += glm_imax(a[0], b[0]);
+  dest[1] += glm_imax(a[1], b[1]);
 }
 
 /*!
@@ -317,8 +318,8 @@ glm_ivec2_maxadd(ivec2 a, ivec2 b, ivec2 dest) {
 CGLM_INLINE 
 void 
 glm_ivec2_minadd(ivec2 a, ivec2 b, ivec2 dest) {
-  dest[0] += a[0] < b[0] ? a[0] : b[0];
-  dest[1] += a[1] < b[1] ? a[1] : b[1];
+  dest[0] += glm_imin(a[0], b[0]);
+  dest[1] += glm_imin(a[1], b[1]);
 }
 
 /*!
@@ -429,8 +430,8 @@ glm_ivec2_mulsubs(ivec2 a, int s, ivec2 dest) {
 CGLM_INLINE 
 void 
 glm_ivec2_maxsub(ivec2 a, ivec2 b, ivec2 dest) {
-  dest[0] -= a[0] > b[0] ? a[0] : b[0];
-  dest[1] -= a[1] > b[1] ? a[1] : b[1];
+  dest[0] -= glm_imax(a[0], b[0]);
+  dest[1] -= glm_imax(a[1], b[1]);
 }
 
 /*!
@@ -445,8 +446,8 @@ glm_ivec2_maxsub(ivec2 a, ivec2 b, ivec2 dest) {
 CGLM_INLINE 
 void 
 glm_ivec2_minsub(ivec2 a, ivec2 b, ivec2 dest) {
-  dest[0] -= a[0] < b[0] ? a[0] : b[0];
-  dest[1] -= a[1] < b[1] ? a[1] : b[1];
+  dest[0] -= glm_imin(a[0], b[0]);
+  dest[1] -= glm_imin(a[1], b[1]);
 }
 
 /*!

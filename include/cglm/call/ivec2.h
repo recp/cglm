@@ -53,6 +53,70 @@ CGLM_EXPORT
 void
 glmc_ivec2_scale(ivec2 v, int s, ivec2 dest);
 
+CGLM_EXPORT 
+void 
+glmc_ivec2_addadd(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_addadds(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_subadd(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_subadds(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_muladd(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_muladds(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_maxadd(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_minadd(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_subsub(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_subsubs(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_addsub(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_addsubs(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_mulsub(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_mulsubs(ivec2 a, int s, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_maxsub(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT 
+void 
+glmc_ivec2_minsub(ivec2 a, ivec2 b, ivec2 dest);
+
 CGLM_EXPORT
 int
 glmc_ivec2_distance2(ivec2 a, ivec2 b);
