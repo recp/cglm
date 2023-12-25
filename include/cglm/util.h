@@ -148,6 +148,38 @@ glm_max(float a, float b) {
 }
 
 /*!
+ * @brief find minimum of given two values
+ * 
+ * @param[in] a number 1
+ * @param[in] b number 2
+ *
+ * @return smallest of the two values
+ */
+CGLM_INLINE
+int
+glm_imin(int a, int b) {
+  if (a < b)
+    return a;
+  return b;
+}
+
+/*!
+ * @brief find maximum of given two values
+ *
+ * @param[in] a number 1
+ * @param[in] b number 2
+ *
+ * @return largest of the two values
+ */
+CGLM_INLINE
+int
+glm_imax(int a, int b) {
+  if (a > b)
+    return a;
+  return b;
+}
+
+/*!
  * @brief clamp a number between min and max
  *
  * @param[in] val    value to clamp
