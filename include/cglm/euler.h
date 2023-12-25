@@ -43,6 +43,8 @@
 
 #include "common.h"
 
+#include "handed/euler_to_quat_rh.h"
+
 /*!
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
  * vector then you can convert it to this enum by doing this:
@@ -193,7 +195,6 @@ glm_euler_xzy(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
-
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -465,18 +466,11 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
 CGLM_INLINE
 void
 glm_euler_xyz_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] = xc * ys * zs + xs * yc * zc;
-  dest[1] = xc * ys * zc - xs * yc * zs;
-  dest[2] = xc * yc * zs + xs * ys * zc;
-  dest[3] = xc * yc * zc - xs * ys * zs;
-
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_xyz_quat_lh(angles, dest);
+#else
+  glm_euler_xyz_quat_rh(angles, dest);
+#endif
 }
 
 /*!
@@ -489,18 +483,11 @@ glm_euler_xyz_quat(vec3 angles, versor dest) {
 CGLM_INLINE
 void
 glm_euler_xzy_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] = -xc * zs * ys + xs * zc * yc;
-  dest[1] =  xc * zc * ys - xs * zs * yc;
-  dest[2] =  xc * zs * yc + xs * zc * ys;
-  dest[3] =  xc * zc * yc + xs * zs * ys;  
-
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_xzy_quat_lh(angles, dest);
+#else
+  glm_euler_xzy_quat_rh(angles, dest);
+#endif
 }
 
 /*!
@@ -513,17 +500,11 @@ glm_euler_xzy_quat(vec3 angles, versor dest) {
 CGLM_INLINE
 void
 glm_euler_yxz_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] =  yc * xs * zc + ys * xc * zs;
-  dest[1] = -yc * xs * zs + ys * xc * zc;
-  dest[2] =  yc * xc * zs - ys * xs * zc;
-  dest[3] =  yc * xc * zc + ys * xs * zs;
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_yxz_quat_lh(angles, dest);
+#else
+  glm_euler_yxz_quat_rh(angles, dest);
+#endif
 }
 
 /*!
@@ -536,18 +517,11 @@ glm_euler_yxz_quat(vec3 angles, versor dest) {
 CGLM_INLINE
 void
 glm_euler_yzx_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] = yc * zc * xs + ys * zs * xc;
-  dest[1] = yc * zs * xs + ys * zc * xc;
-  dest[2] = yc * zs * xc - ys * zc * xs;
-  dest[3] = yc * zc * xc - ys * zs * xs;
-
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_yzx_quat_lh(angles, dest);
+#else
+  glm_euler_yzx_quat_rh(angles, dest);
+#endif
 }
 
 /*!
@@ -560,17 +534,11 @@ glm_euler_yzx_quat(vec3 angles, versor dest) {
 CGLM_INLINE
 void
 glm_euler_zxy_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] = zc * xs * yc - zs * xc * ys;
-  dest[1] = zc * xc * ys + zs * xs * yc;
-  dest[2] = zc * xs * ys + zs * xc * yc;
-  dest[3] = zc * xc * yc - zs * xs * ys;
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_zxy_quat_lh(angles, dest);
+#else
+  glm_euler_zxy_quat_rh(angles, dest);
+#endif
 }
 
 /*!
@@ -583,17 +551,11 @@ glm_euler_zxy_quat(vec3 angles, versor dest) {
 CGLM_INLINE
 void
 glm_euler_zyx_quat(vec3 angles, versor dest) {
-  float xc, yc, zc,
-        xs, ys, zs;
-
-  xs = sinf(angles[0] * 0.5f); xc = cosf(angles[0] * 0.5f);
-  ys = sinf(angles[1] * 0.5f); yc = cosf(angles[1] * 0.5f);
-  zs = sinf(angles[2] * 0.5f); zc = cosf(angles[2] * 0.5f);
-
-  dest[0] =  zc * yc * xs - zs * ys * xc;
-  dest[1] =  zc * ys * xc + zs * yc * xs;
-  dest[2] = -zc * ys * xs + zs * yc * xc;
-  dest[3] =  zc * yc * xc + zs * ys * xs;
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_zyx_quat_lh(angles, dest);
+#else
+  glm_euler_zyx_quat_rh(angles, dest);
+#endif
 }
 
 
