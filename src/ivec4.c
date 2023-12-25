@@ -68,6 +68,102 @@ glmc_ivec4_scale(ivec4 v, int s, ivec4 dest) {
   glm_ivec4_scale(v, s, dest);
 }
 
+CGLM_EXPORT 
+void 
+glmc_ivec4_addadd(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_addadd(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_addadds(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_addadds(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_subadd(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_subadd(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_subadds(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_subadds(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_muladd(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_muladd(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_muladds(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_muladds(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_maxadd(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_maxadd(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_minadd(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_minadd(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_subsub(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_subsub(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_subsubs(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_subsubs(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_addsub(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_addsub(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_addsubs(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_addsubs(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_mulsub(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_mulsub(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_mulsubs(ivec4 a, int s, ivec4 dest) {
+  glm_ivec4_mulsubs(a, s, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_maxsub(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_maxsub(a, b, dest);
+}
+
+CGLM_EXPORT 
+void 
+glmc_ivec4_minsub(ivec4 a, ivec4 b, ivec4 dest) {
+  glm_ivec4_minsub(a, b, dest);
+}
+
 CGLM_EXPORT
 int
 glmc_ivec4_distance2(ivec4 a, ivec4 b) {
