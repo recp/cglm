@@ -30,12 +30,20 @@
    CGLM_INLINE void glm_euler_by_order(vec3         angles,
                                        glm_euler_seq ord,
                                        mat4         dest);
+   CGLM_INLINE void glm_euler_xyz_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_xzy_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yxz_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yzx_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zxy_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zyx_quat(vec3 angles, versor dest);
  */
 
 #ifndef cglm_euler_h
 #define cglm_euler_h
 
 #include "common.h"
+
+#include "handed/euler_to_quat_rh.h"
 
 /*!
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
@@ -187,7 +195,6 @@ glm_euler_xzy(vec3 angles, mat4 dest) {
   dest[3][2] =  0.0f;
   dest[3][3] =  1.0f;
 }
-
 
 /*!
  * @brief build rotation matrix from euler angles
@@ -447,5 +454,109 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
   dest[3][2] = 0.0f;
   dest[3][3] = 1.0f;
 }
+
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in x y z order (roll pitch yaw)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_xyz_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_xyz_quat_lh(angles, dest);
+#else
+  glm_euler_xyz_quat_rh(angles, dest);
+#endif
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in x z y order (roll yaw pitch)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_xzy_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_xzy_quat_lh(angles, dest);
+#else
+  glm_euler_xzy_quat_rh(angles, dest);
+#endif
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in y x z order (pitch roll yaw)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_yxz_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_yxz_quat_lh(angles, dest);
+#else
+  glm_euler_yxz_quat_rh(angles, dest);
+#endif
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in y z x order (pitch yaw roll)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_yzx_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_yzx_quat_lh(angles, dest);
+#else
+  glm_euler_yzx_quat_rh(angles, dest);
+#endif
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in z x y order (yaw roll pitch)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_zxy_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_zxy_quat_lh(angles, dest);
+#else
+  glm_euler_zxy_quat_rh(angles, dest);
+#endif
+}
+
+/*!
+ * @brief creates NEW quaternion using rotation angles and does
+ *        rotations in z y x order (yaw pitch roll)
+ * 
+ * @param[out]  q     quaternion
+ * @param[in]   angle angles x y z (radians)
+ */
+CGLM_INLINE
+void
+glm_euler_zyx_quat(vec3 angles, versor dest) {
+#ifdef CGLM_FORCE_LEFT_HANDED
+  glm_euler_zyx_quat_lh(angles, dest);
+#else
+  glm_euler_zyx_quat_rh(angles, dest);
+#endif
+}
+
 
 #endif /* cglm_euler_h */

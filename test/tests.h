@@ -360,6 +360,12 @@ TEST_DECLARE(glmc_plane_normalize)
 TEST_DECLARE(clamp)
 
 /* euler */
+TEST_DECLARE(glm_euler_xyz_quat_rh) 
+TEST_DECLARE(glm_euler_xzy_quat_rh) 
+TEST_DECLARE(glm_euler_yxz_quat_rh)
+TEST_DECLARE(glm_euler_yzx_quat_rh)  
+TEST_DECLARE(glm_euler_zxy_quat_rh)
+TEST_DECLARE(glm_euler_zyx_quat_rh)
 TEST_DECLARE(euler)
 
 /* ray */
@@ -1467,8 +1473,14 @@ TEST_LIST {
   
   /* utils */
   TEST_ENTRY(clamp)
-  
+
   /* euler */
+  TEST_ENTRY(glm_euler_xyz_quat_rh) 
+  TEST_ENTRY(glm_euler_xzy_quat_rh) 
+  TEST_ENTRY(glm_euler_yxz_quat_rh)
+  TEST_ENTRY(glm_euler_yzx_quat_rh)  
+  TEST_ENTRY(glm_euler_zxy_quat_rh)
+  TEST_ENTRY(glm_euler_zyx_quat_rh)
   TEST_ENTRY(euler)
   
   /* ray */
