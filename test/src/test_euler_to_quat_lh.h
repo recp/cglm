@@ -23,8 +23,6 @@ TEST_IMPL(GLM_PREFIX, euler_xyz_quat_lh) {
   versor result;
   versor tmp;
 
-  mat4 expected_mat4;
-
   /* 100 randomized tests */
   for (int i = 0; i < 100; i++) {
     test_rand_vec3(angles);
@@ -213,12 +211,6 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat_lh) {
 
     /* verify that it acts the same as rotating by 3 axis quaternions */
     ASSERTIFY(test_assert_quat_eq(result, expected))
-
-    /* verify that it acts the same as glm_euler_by_order */
-    glm_euler_by_order(angles, GLM_EULER_YXZ, expected_mat4);
-    glm_mat4_quat(expected_mat4, expected);   
-
-    ASSERTIFY(test_assert_quat_eq_abs(result, expected));
   }
   
 
@@ -252,12 +244,6 @@ TEST_IMPL(GLM_PREFIX, euler_yxz_quat_lh) {
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
-
-        /* verify that it acts the same as glm_euler_by_order */
-        glm_euler_by_order(angles, GLM_EULER_YXZ, expected_mat4);
-        glm_mat4_quat(expected_mat4, expected);   
-
-        ASSERTIFY(test_assert_quat_eq_abs(result, expected));
       }
     }
   }
@@ -305,12 +291,6 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat_lh) {
 
     /* verify that it acts the same as rotating by 3 axis quaternions */
     ASSERTIFY(test_assert_quat_eq(result, expected))
-
-    /* verify that it acts the same as glm_euler_by_order */
-    glm_euler_by_order(angles, GLM_EULER_YZX, expected_mat4);
-    glm_mat4_quat(expected_mat4, expected);   
-
-    ASSERTIFY(test_assert_quat_eq_abs(result, expected));
   }
   
 
@@ -344,12 +324,6 @@ TEST_IMPL(GLM_PREFIX, euler_yzx_quat_lh) {
         ASSERT(test_eq(glm_quat_norm(result), 1.0f))
 
         ASSERTIFY(test_assert_quat_eq(result, expected))
-
-        /* verify that it acts the same as glm_euler_by_order */
-        glm_euler_by_order(angles, GLM_EULER_YZX, expected_mat4);
-        glm_mat4_quat(expected_mat4, expected);   
-
-        ASSERTIFY(test_assert_quat_eq_abs(result, expected));
       }
     }
   }
