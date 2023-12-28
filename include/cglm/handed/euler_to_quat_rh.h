@@ -24,8 +24,8 @@
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in x y z order in right hand (roll pitch yaw)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
@@ -48,8 +48,8 @@ glm_euler_xyz_quat_rh(vec3 angles, versor dest) {
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in x z y order in right hand (roll yaw pitch)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
@@ -72,8 +72,8 @@ glm_euler_xzy_quat_rh(vec3 angles, versor dest) {
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in y x z order in right hand (pitch roll yaw)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
@@ -95,8 +95,8 @@ glm_euler_yxz_quat_rh(vec3 angles, versor dest) {
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in y z x order in right hand (pitch yaw roll)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
@@ -119,8 +119,8 @@ glm_euler_yzx_quat_rh(vec3 angles, versor dest) {
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in z x y order in right hand (yaw roll pitch)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
@@ -142,8 +142,8 @@ glm_euler_zxy_quat_rh(vec3 angles, versor dest) {
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in z y x order in right hand (yaw pitch roll)
  * 
- * @param[out]  q     quaternion
- * @param[in]   angle angles x y z (radians)
+ * @param[in]   angles angles x y z (radians)
+ * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
