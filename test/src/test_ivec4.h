@@ -149,10 +149,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_addadd) {
 
   GLM(ivec4_addadd)(a, b, c);
 
-  ASSERT(test_eq(d[0] + a[0] + b[0], c[0]))
-  ASSERT(test_eq(d[1] + a[1] + b[1], c[1]))
-  ASSERT(test_eq(d[2] + a[2] + b[2], c[2]))
-  ASSERT(test_eq(d[3] + a[3] + b[3], c[3]))
+  ASSERT(d[0] + a[0] + b[0] == c[0])
+  ASSERT(d[1] + a[1] + b[1] == c[1])
+  ASSERT(d[2] + a[2] + b[2] == c[2])
+  ASSERT(d[3] + a[3] + b[3] == c[3])
 
   TEST_SUCCESS
 }
@@ -165,10 +165,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_addadds) {
 
   GLM(ivec4_addadds)(a, s, c);
 
-  ASSERT(test_eq(d[0] + a[0] + s, c[0]))
-  ASSERT(test_eq(d[1] + a[1] + s, c[1]))
-  ASSERT(test_eq(d[2] + a[2] + s, c[2]))
-  ASSERT(test_eq(d[3] + a[3] + s, c[3]))
+  ASSERT(d[0] + a[0] + s == c[0])
+  ASSERT(d[1] + a[1] + s == c[1])
+  ASSERT(d[2] + a[2] + s == c[2])
+  ASSERT(d[3] + a[3] + s == c[3])
 
   TEST_SUCCESS
 }
@@ -181,10 +181,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_subadd) {
 
   GLM(ivec4_subadd)(a, b, c);
 
-  ASSERT(test_eq(d[0] + a[0] - b[0], c[0]))
-  ASSERT(test_eq(d[1] + a[1] - b[1], c[1]))
-  ASSERT(test_eq(d[2] + a[2] - b[2], c[2]))
-  ASSERT(test_eq(d[3] + a[3] - b[3], c[3]))
+  ASSERT(d[0] + a[0] - b[0] == c[0])
+  ASSERT(d[1] + a[1] - b[1] == c[1])
+  ASSERT(d[2] + a[2] - b[2] == c[2])
+  ASSERT(d[3] + a[3] - b[3] == c[3])
 
   TEST_SUCCESS
 }
@@ -197,10 +197,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_subadds) {
 
   GLM(ivec4_subadds)(a, s, c);
 
-  ASSERT(test_eq(d[0] + a[0] - s, c[0]))
-  ASSERT(test_eq(d[1] + a[1] - s, c[1]))
-  ASSERT(test_eq(d[2] + a[2] - s, c[2]))
-  ASSERT(test_eq(d[3] + a[3] - s, c[3]))
+  ASSERT(d[0] + a[0] - s == c[0])
+  ASSERT(d[1] + a[1] - s == c[1])
+  ASSERT(d[2] + a[2] - s == c[2])
+  ASSERT(d[3] + a[3] - s == c[3])
 
   TEST_SUCCESS
 }
@@ -213,10 +213,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_muladd) {
 
   GLM(ivec4_muladd)(a, b, c);
 
-  ASSERT(test_eq(d[0] + a[0] * b[0], c[0]))
-  ASSERT(test_eq(d[1] + a[1] * b[1], c[1]))
-  ASSERT(test_eq(d[2] + a[2] * b[2], c[2]))
-  ASSERT(test_eq(d[3] + a[3] * b[3], c[3]))
+  ASSERT(d[0] + a[0] * b[0] == c[0])
+  ASSERT(d[1] + a[1] * b[1] == c[1])
+  ASSERT(d[2] + a[2] * b[2] == c[2])
+  ASSERT(d[3] + a[3] * b[3] == c[3])
 
   TEST_SUCCESS
 }
@@ -229,10 +229,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_muladds) {
 
   GLM(ivec4_muladds)(a, s, c);
 
-  ASSERT(test_eq(d[0] + a[0] * s, c[0]))
-  ASSERT(test_eq(d[1] + a[1] * s, c[1]))
-  ASSERT(test_eq(d[2] + a[2] * s, c[2]))
-  ASSERT(test_eq(d[3] + a[3] * s, c[3]))
+  ASSERT(d[0] + a[0] * s == c[0])
+  ASSERT(d[1] + a[1] * s == c[1])
+  ASSERT(d[2] + a[2] * s == c[2])
+  ASSERT(d[3] + a[3] * s == c[3])
 
   TEST_SUCCESS
 }
@@ -245,10 +245,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_maxadd) {
 
   GLM(ivec4_maxadd)(a, b, c);
   
-  ASSERT(test_eq(d[0] += glm_imax(a[0], b[0]), c[0]))
-  ASSERT(test_eq(d[1] += glm_imax(a[1], b[1]), c[1]))
-  ASSERT(test_eq(d[2] += glm_imax(a[2], b[2]), c[2]))
-  ASSERT(test_eq(d[3] += glm_imax(a[3], b[3]), c[3]))
+  ASSERT(d[0] += glm_imax(a[0], b[0]) == c[0])
+  ASSERT(d[1] += glm_imax(a[1], b[1]) == c[1])
+  ASSERT(d[2] += glm_imax(a[2], b[2]) == c[2])
+  ASSERT(d[3] += glm_imax(a[3], b[3]) == c[3])
 
   TEST_SUCCESS
 }
@@ -261,10 +261,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_minadd) {
 
   GLM(ivec4_minadd)(a, b, c);
   
-  ASSERT(test_eq(d[0] += glm_imin(a[0], b[0]), c[0]))
-  ASSERT(test_eq(d[1] += glm_imin(a[1], b[1]), c[1]))
-  ASSERT(test_eq(d[2] += glm_imin(a[2], b[2]), c[2]))
-  ASSERT(test_eq(d[3] += glm_imin(a[3], b[3]), c[3]))
+  ASSERT(d[0] += glm_imin(a[0], b[0]) == c[0])
+  ASSERT(d[1] += glm_imin(a[1], b[1]) == c[1])
+  ASSERT(d[2] += glm_imin(a[2], b[2]) == c[2])
+  ASSERT(d[3] += glm_imin(a[3], b[3]) == c[3])
 
   TEST_SUCCESS
 }
@@ -277,10 +277,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_subsub) {
 
   GLM(ivec4_subsub)(a, b, c);
 
-  ASSERT(test_eq(d[0] - (a[0] - b[0]), c[0]))
-  ASSERT(test_eq(d[1] - (a[1] - b[1]), c[1]))
-  ASSERT(test_eq(d[2] - (a[2] - b[2]), c[2]))
-  ASSERT(test_eq(d[3] - (a[3] - b[3]), c[3]))
+  ASSERT(d[0] - (a[0] - b[0]) == c[0])
+  ASSERT(d[1] - (a[1] - b[1]) == c[1])
+  ASSERT(d[2] - (a[2] - b[2]) == c[2])
+  ASSERT(d[3] - (a[3] - b[3]) == c[3])
 
   TEST_SUCCESS
 }
@@ -293,10 +293,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_subsubs) {
 
   GLM(ivec4_subsubs)(a, s, c);
 
-  ASSERT(test_eq(d[0] - (a[0] - s), c[0]))
-  ASSERT(test_eq(d[1] - (a[1] - s), c[1]))
-  ASSERT(test_eq(d[2] - (a[2] - s), c[2]))
-  ASSERT(test_eq(d[3] - (a[3] - s), c[3]))
+  ASSERT(d[0] - (a[0] - s) == c[0])
+  ASSERT(d[1] - (a[1] - s) == c[1])
+  ASSERT(d[2] - (a[2] - s) == c[2])
+  ASSERT(d[3] - (a[3] - s) == c[3])
 
   TEST_SUCCESS
 }
@@ -309,10 +309,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_addsub) {
 
   GLM(ivec4_addsub)(a, b, c);
 
-  ASSERT(test_eq(d[0] - (a[0] + b[0]), c[0]))
-  ASSERT(test_eq(d[1] - (a[1] + b[1]), c[1]))
-  ASSERT(test_eq(d[2] - (a[2] + b[2]), c[2]))
-  ASSERT(test_eq(d[3] - (a[3] + b[3]), c[3]))
+  ASSERT(d[0] - (a[0] + b[0]) == c[0])
+  ASSERT(d[1] - (a[1] + b[1]) == c[1])
+  ASSERT(d[2] - (a[2] + b[2]) == c[2])
+  ASSERT(d[3] - (a[3] + b[3]) == c[3])
 
   TEST_SUCCESS
 }
@@ -325,10 +325,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_addsubs) {
 
   GLM(ivec4_addsubs)(a, s, c);
 
-  ASSERT(test_eq(d[0] - (a[0] + s), c[0]))
-  ASSERT(test_eq(d[1] - (a[1] + s), c[1]))
-  ASSERT(test_eq(d[2] - (a[2] + s), c[2]))
-  ASSERT(test_eq(d[3] - (a[3] + s), c[3]))
+  ASSERT(d[0] - (a[0] + s) == c[0])
+  ASSERT(d[1] - (a[1] + s) == c[1])
+  ASSERT(d[2] - (a[2] + s) == c[2])
+  ASSERT(d[3] - (a[3] + s) == c[3])
 
   TEST_SUCCESS
 }
@@ -341,10 +341,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_mulsub) {
 
   GLM(ivec4_mulsub)(a, b, c);
 
-  ASSERT(test_eq(d[0] - a[0] * b[0], c[0]))
-  ASSERT(test_eq(d[1] - a[1] * b[1], c[1]))
-  ASSERT(test_eq(d[2] - a[2] * b[2], c[2]))
-  ASSERT(test_eq(d[3] - a[3] * b[3], c[3]))
+  ASSERT(d[0] - a[0] * b[0] == c[0])
+  ASSERT(d[1] - a[1] * b[1] == c[1])
+  ASSERT(d[2] - a[2] * b[2] == c[2])
+  ASSERT(d[3] - a[3] * b[3] == c[3])
 
   TEST_SUCCESS
 }
@@ -357,10 +357,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_mulsubs) {
 
   GLM(ivec4_mulsubs)(a, s, c);
 
-  ASSERT(test_eq(d[0] - a[0] * s, c[0]))
-  ASSERT(test_eq(d[1] - a[1] * s, c[1]))
-  ASSERT(test_eq(d[2] - a[2] * s, c[2]))
-  ASSERT(test_eq(d[3] - a[3] * s, c[3]))
+  ASSERT(d[0] - a[0] * s == c[0])
+  ASSERT(d[1] - a[1] * s == c[1])
+  ASSERT(d[2] - a[2] * s == c[2])
+  ASSERT(d[3] - a[3] * s == c[3])
 
   TEST_SUCCESS
 }
@@ -373,10 +373,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_maxsub) {
 
   GLM(ivec4_maxsub)(a, b, c);
 
-  ASSERT(test_eq(d[0] -= glm_imax(a[0], b[0]), c[0]))
-  ASSERT(test_eq(d[1] -= glm_imax(a[1], b[1]), c[1]))
-  ASSERT(test_eq(d[2] -= glm_imax(a[2], b[2]), c[2]))
-  ASSERT(test_eq(d[3] -= glm_imax(a[3], b[3]), c[3]))
+  ASSERT(d[0] -= glm_imax(a[0], b[0]) == c[0])
+  ASSERT(d[1] -= glm_imax(a[1], b[1]) == c[1])
+  ASSERT(d[2] -= glm_imax(a[2], b[2]) == c[2])
+  ASSERT(d[3] -= glm_imax(a[3], b[3]) == c[3])
 
   TEST_SUCCESS
 }
@@ -389,10 +389,10 @@ TEST_IMPL(GLM_PREFIX, ivec4_minsub) {
 
   GLM(ivec4_minsub)(a, b, c);
 
-  ASSERT(test_eq(d[0] -= glm_imin(a[0], b[0]), c[0]))
-  ASSERT(test_eq(d[1] -= glm_imin(a[1], b[1]), c[1]))
-  ASSERT(test_eq(d[2] -= glm_imin(a[2], b[2]), c[2]))
-  ASSERT(test_eq(d[3] -= glm_imin(a[3], b[3]), c[3]))
+  ASSERT(d[0] -= glm_imin(a[0], b[0]) == c[0])
+  ASSERT(d[1] -= glm_imin(a[1], b[1]) == c[1])
+  ASSERT(d[2] -= glm_imin(a[2], b[2]) == c[2])
+  ASSERT(d[3] -= glm_imin(a[3], b[3]) == c[3])
 
   TEST_SUCCESS
 }
