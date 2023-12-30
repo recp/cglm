@@ -69,6 +69,7 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/plane.h \
                include/cglm/frustum.h \
                include/cglm/box.h \
+               include/cglm/aabb2d.h \
                include/cglm/color.h \
                include/cglm/project.h \
                include/cglm/sphere.h \
@@ -149,7 +150,8 @@ cglm_call_clipspace_HEADERS = include/cglm/call/clipspace/persp_lh_no.h \
 cglm_simddir=$(includedir)/cglm/simd
 cglm_simd_HEADERS = include/cglm/simd/intrin.h \
                     include/cglm/simd/x86.h \
-                    include/cglm/simd/arm.h
+                    include/cglm/simd/arm.h \
+                    include/cglm/simd/wasm.h
 
 cglm_simd_sse2dir=$(includedir)/cglm/simd/sse2
 cglm_simd_sse2_HEADERS = include/cglm/simd/sse2/affine.h \
@@ -167,6 +169,17 @@ cglm_simd_neon_HEADERS = include/cglm/simd/neon/affine.h \
                          include/cglm/simd/neon/mat2.h \
                          include/cglm/simd/neon/mat4.h \
                          include/cglm/simd/neon/quat.h
+
+cglm_simd_wasmdir=$(includedir)/cglm/simd/wasm
+cglm_simd_wasm_HEADERS = include/cglm/simd/wasm/affine.h \
+                         include/cglm/simd/wasm/mat2.h \
+                         include/cglm/simd/wasm/mat3.h \
+                         include/cglm/simd/wasm/mat4.h \
+                         include/cglm/simd/wasm/quat.h
+
+cglm_handeddir=$(includedir)/cglm/handed
+cglm_handed_HEADERS = include/cglm/handed/euler_to_quat_lh.h \
+                      include/cglm/handed/euler_to_quat_rh.h
 
 cglm_structdir=$(includedir)/cglm/struct
 cglm_struct_HEADERS = include/cglm/struct/mat4.h \
@@ -196,6 +209,7 @@ cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/plane.h \
                       include/cglm/struct/frustum.h \
                       include/cglm/struct/box.h \
+                      include/cglm/struct/aabb2d.h \
                       include/cglm/struct/project.h \
                       include/cglm/struct/sphere.h \
                       include/cglm/struct/color.h \
@@ -216,6 +230,10 @@ cglm_struct_clipspace_HEADERS = include/cglm/struct/clipspace/persp_lh_no.h \
                                 include/cglm/struct/clipspace/view_rh_zo.h \
                                 include/cglm/struct/clipspace/project_no.h \
                                 include/cglm/struct/clipspace/project_zo.h
+
+cglm_struct_handeddir=$(includedir)/cglm/struct/handed
+cglm_struct_handed_HEADERS = include/cglm/struct/handed/euler_to_quat_lh.h \
+                             include/cglm/struct/handed/euler_to_quat_rh.h
 
 libcglm_la_SOURCES=\
     src/euler.c \

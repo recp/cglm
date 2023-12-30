@@ -62,6 +62,8 @@
     <ClInclude Include="..\test\src\test_cam_rh_no.h" />
     <ClInclude Include="..\test\src\test_cam_rh_zo.h" />
     <ClInclude Include="..\test\src\test_common.h" />
+    <ClInclude Include="..\test\src\test_euler_to_quat_lh.h" />
+    <ClInclude Include="..\test\src\test_euler_to_quat_rh.h" />
     <ClInclude Include="..\test\src\test_ivec2.h" />
     <ClInclude Include="..\test\src\test_ivec3.h" />
     <ClInclude Include="..\test\src\test_ivec4.h" />

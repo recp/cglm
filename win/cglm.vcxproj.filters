@@ -41,6 +41,12 @@
     <Filter Include="src\clipspace">
       <UniqueIdentifier>{98a166bb-ba2d-4649-a20f-ba6bf4ce6383}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\cglm\simd\wasm">
+      <UniqueIdentifier>{24571788-2e78-4969-b66f-065aea5489be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\cglm\struct\handed">
+      <UniqueIdentifier>{e6a410e7-83db-41a5-b9fc-34bbfcf46ae5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affine.c">
@@ -173,6 +179,9 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="..\src\ivec2.c">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\aabb2d.c">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -677,6 +686,39 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\affine-mat.h">
       <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\aabb2d.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\aabb2d.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm\affine.h">
+      <Filter>include\cglm\simd\wasm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm\mat2.h">
+      <Filter>include\cglm\simd\wasm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm\mat3.h">
+      <Filter>include\cglm\simd\wasm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm\mat4.h">
+      <Filter>include\cglm\simd\wasm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm\quat.h">
+      <Filter>include\cglm\simd\wasm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\simd\wasm.h">
+      <Filter>include\cglm\simd</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\aabb2d.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_lh.h">
+      <Filter>include\cglm\struct\handed</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_rh.h">
+      <Filter>include\cglm\struct\handed</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

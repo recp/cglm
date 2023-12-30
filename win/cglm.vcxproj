@@ -43,6 +43,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\aabb2d.c" />
     <ClCompile Include="..\src\affine.c" />
     <ClCompile Include="..\src\affine2d.c" />
     <ClCompile Include="..\src\bezier.c" />
@@ -89,6 +90,7 @@
     <ClCompile Include="..\src\vec4.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\cglm\aabb2d.h" />
     <ClInclude Include="..\include\cglm\affine-mat.h" />
     <ClInclude Include="..\include\cglm\affine-post.h" />
     <ClInclude Include="..\include\cglm\affine-pre.h" />
@@ -98,6 +100,7 @@
     <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
     <ClInclude Include="..\include\cglm\call.h" />
+    <ClInclude Include="..\include\cglm\call\aabb2d.h" />
     <ClInclude Include="..\include\cglm\call\affine.h" />
     <ClInclude Include="..\include\cglm\call\affine2d.h" />
     <ClInclude Include="..\include\cglm\call\bezier.h" />
@@ -197,9 +200,16 @@
     <ClInclude Include="..\include\cglm\simd\sse2\mat3.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\mat4.h" />
     <ClInclude Include="..\include\cglm\simd\sse2\quat.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm\affine.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm\mat2.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm\mat3.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm\mat4.h" />
+    <ClInclude Include="..\include\cglm\simd\wasm\quat.h" />
     <ClInclude Include="..\include\cglm\simd\x86.h" />
     <ClInclude Include="..\include\cglm\sphere.h" />
     <ClInclude Include="..\include\cglm\struct.h" />
+    <ClInclude Include="..\include\cglm\struct\aabb2d.h" />
     <ClInclude Include="..\include\cglm\struct\affine-post.h" />
     <ClInclude Include="..\include\cglm\struct\affine-pre.h" />
     <ClInclude Include="..\include\cglm\struct\affine-mat.h" />
@@ -225,6 +235,8 @@
     <ClInclude Include="..\include\cglm\struct\curve.h" />
     <ClInclude Include="..\include\cglm\struct\euler.h" />
     <ClInclude Include="..\include\cglm\struct\frustum.h" />
+    <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_lh.h" />
+    <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_rh.h" />
     <ClInclude Include="..\include\cglm\struct\io.h" />
     <ClInclude Include="..\include\cglm\struct\mat2.h" />
     <ClInclude Include="..\include\cglm\struct\mat2x3.h" />

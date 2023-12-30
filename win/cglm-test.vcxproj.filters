@@ -124,5 +124,11 @@
     <ClInclude Include="..\test\src\test_vec4.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_euler_to_quat_lh.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_euler_to_quat_rh.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
