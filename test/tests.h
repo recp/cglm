@@ -363,9 +363,31 @@ TEST_DECLARE(clamp)
 TEST_DECLARE(glm_euler_xyz_quat_rh) 
 TEST_DECLARE(glm_euler_xzy_quat_rh) 
 TEST_DECLARE(glm_euler_yxz_quat_rh)
-TEST_DECLARE(glm_euler_yzx_quat_rh)  
+TEST_DECLARE(glm_euler_yzx_quat_rh) 
 TEST_DECLARE(glm_euler_zxy_quat_rh)
 TEST_DECLARE(glm_euler_zyx_quat_rh)
+
+TEST_DECLARE(glm_euler_xyz_quat_lh) 
+TEST_DECLARE(glm_euler_xzy_quat_lh) 
+TEST_DECLARE(glm_euler_yxz_quat_lh)
+TEST_DECLARE(glm_euler_yzx_quat_lh) 
+TEST_DECLARE(glm_euler_zxy_quat_lh)
+TEST_DECLARE(glm_euler_zyx_quat_lh)
+
+TEST_DECLARE(glmc_euler_xyz_quat_rh) 
+TEST_DECLARE(glmc_euler_xzy_quat_rh) 
+TEST_DECLARE(glmc_euler_yxz_quat_rh)
+TEST_DECLARE(glmc_euler_yzx_quat_rh)  
+TEST_DECLARE(glmc_euler_zxy_quat_rh)
+TEST_DECLARE(glmc_euler_zyx_quat_rh)
+
+TEST_DECLARE(glmc_euler_xyz_quat_lh) 
+TEST_DECLARE(glmc_euler_xzy_quat_lh) 
+TEST_DECLARE(glmc_euler_yxz_quat_lh)
+TEST_DECLARE(glmc_euler_yzx_quat_lh)  
+TEST_DECLARE(glmc_euler_zxy_quat_lh)
+TEST_DECLARE(glmc_euler_zyx_quat_lh)
+
 TEST_DECLARE(euler)
 
 /* ray */
@@ -1481,6 +1503,28 @@ TEST_LIST {
   TEST_ENTRY(glm_euler_yzx_quat_rh)  
   TEST_ENTRY(glm_euler_zxy_quat_rh)
   TEST_ENTRY(glm_euler_zyx_quat_rh)
+
+  TEST_ENTRY(glm_euler_xyz_quat_lh)
+  TEST_ENTRY(glm_euler_xzy_quat_lh)
+  TEST_ENTRY(glm_euler_yxz_quat_lh)
+  TEST_ENTRY(glm_euler_yzx_quat_lh)
+  TEST_ENTRY(glm_euler_zxy_quat_lh)
+  TEST_ENTRY(glm_euler_zyx_quat_lh)
+
+  TEST_ENTRY(glmc_euler_xyz_quat_rh) 
+  TEST_ENTRY(glmc_euler_xzy_quat_rh) 
+  TEST_ENTRY(glmc_euler_yxz_quat_rh)
+  TEST_ENTRY(glmc_euler_yzx_quat_rh)  
+  TEST_ENTRY(glmc_euler_zxy_quat_rh)
+  TEST_ENTRY(glmc_euler_zyx_quat_rh)
+
+  TEST_ENTRY(glmc_euler_xyz_quat_lh)
+  TEST_ENTRY(glmc_euler_xzy_quat_lh)
+  TEST_ENTRY(glmc_euler_yxz_quat_lh)
+  TEST_ENTRY(glmc_euler_yzx_quat_lh)
+  TEST_ENTRY(glmc_euler_zxy_quat_lh)
+  TEST_ENTRY(glmc_euler_zyx_quat_lh)
+
   TEST_ENTRY(euler)
   
   /* ray */

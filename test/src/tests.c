@@ -40,6 +40,7 @@
 #include "test_cam_rh_no.h"
 #include "test_cam_rh_zo.h"
 #include "test_euler_to_quat_rh.h"
+#include "test_euler_to_quat_lh.h"
 
 #undef GLM
 #undef GLM_PREFIX
@@ -78,6 +79,7 @@
 #include "test_cam_rh_no.h"
 #include "test_cam_rh_zo.h"
 #include "test_euler_to_quat_rh.h"
+#include "test_euler_to_quat_lh.h"
 
 #undef GLM
 #undef GLM_PREFIX
