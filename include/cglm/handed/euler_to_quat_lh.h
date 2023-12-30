@@ -15,6 +15,11 @@
    CGLM_INLINE void glm_euler_zyx_quat_lh(vec3 angles, versor dest);
  */
 
+/*
+ Things to note:
+ The only difference between euler to quat rh vs lh is that the zsin part is negative
+ */
+
 #ifndef cglm_euler_to_quat_lh_h
 #define cglm_euler_to_quat_lh_h
 

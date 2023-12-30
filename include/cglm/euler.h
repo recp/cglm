@@ -43,7 +43,46 @@
 
 #include "common.h"
 
-#include "handed/euler_to_quat_rh.h"
+#ifdef CGLM_FORCE_LEFT_HANDED
+#  include "handed/euler_to_quat_lh.h"
+#else
+#  include "handed/euler_to_quat_rh.h"
+#endif
+
+
+#ifndef CGLM_CLIPSPACE_INCLUDE_ALL
+#  if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
+#    include "clipspace/ortho_lh_zo.h"
+#    include "clipspace/persp_lh_zo.h"
+#    include "clipspace/view_lh_zo.h"
+#  elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
+#    include "clipspace/ortho_lh_no.h"
+#    include "clipspace/persp_lh_no.h"
+#    include "clipspace/view_lh_no.h"
+#  elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_ZO
+#    include "clipspace/ortho_rh_zo.h"
+#    include "clipspace/persp_rh_zo.h"
+#    include "clipspace/view_rh_zo.h"
+#  elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
+#    include "clipspace/ortho_rh_no.h"
+#    include "clipspace/persp_rh_no.h"
+#    include "clipspace/view_rh_no.h"
+#  endif
+#else
+#  include "clipspace/ortho_lh_zo.h"
+#  include "clipspace/persp_lh_zo.h"
+#  include "clipspace/ortho_lh_no.h"
+#  include "clipspace/persp_lh_no.h"
+#  include "clipspace/ortho_rh_zo.h"
+#  include "clipspace/persp_rh_zo.h"
+#  include "clipspace/ortho_rh_no.h"
+#  include "clipspace/persp_rh_no.h"
+#  include "clipspace/view_lh_zo.h"
+#  include "clipspace/view_lh_no.h"
+#  include "clipspace/view_rh_zo.h"
+#  include "clipspace/view_rh_no.h"
+#endif
+
 
 /*!
  * if you have axis order like vec3 orderVec = [0, 1, 2] or [0, 2, 1]...
