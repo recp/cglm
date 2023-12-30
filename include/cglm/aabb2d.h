@@ -86,8 +86,8 @@ glm_aabb2d_merge(vec2 aabb1[2], vec2 aabb2[2], vec2 dest[2]) {
  * aabb
  *
  * @param[in]  aabb     bounding aabb 1
- * @param[in]  cropaabb crop aabb
- * @param[out] dest    cropped bounding aabb
+ * @param[in]  cropAabb crop aabb
+ * @param[out] dest     cropped bounding aabb
  */
 CGLM_INLINE
 void
@@ -107,16 +107,16 @@ glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
  * aabb
  *
  * @param[in]  aabb      bounding aabb
- * @param[in]  cropaabb  crop aabb
- * @param[in]  clampaabb miniumum aabb
- * @param[out] dest     cropped bounding aabb
+ * @param[in]  cropAabb  crop aabb
+ * @param[in]  clampAabb miniumum aabb
+ * @param[out] dest      cropped bounding aabb
  */
 CGLM_INLINE
 void
 glm_aabb2d_crop_until(vec2 aabb[2],
-                    vec2 cropAabb[2],
-                    vec2 clampAabb[2],
-                    vec2 dest[2]) {
+                      vec2 cropAabb[2],
+                      vec2 clampAabb[2],
+                      vec2 dest[2]) {
   glm_aabb2d_crop(aabb, cropAabb, dest);
   glm_aabb2d_merge(clampAabb, dest, dest);
 }

@@ -160,7 +160,7 @@ glms_euler_by_order(vec3s angles, glm_euler_seq ord) {
  *        rotations in x y z order (roll pitch yaw)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors
@@ -175,7 +175,7 @@ glms_euler_xyz_quat(vec3s angles) {
  *        rotations in x z y order (roll yaw pitch)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors
@@ -190,7 +190,7 @@ glms_euler_xzy_quat(vec3s angles) {
  *        rotations in y x z order (pitch roll yaw)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors
@@ -205,7 +205,7 @@ glms_euler_yxz_quat(vec3s angles) {
  *        rotations in y z x order (pitch yaw roll)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors
@@ -220,7 +220,7 @@ glms_euler_yzx_quat(vec3s angles) {
  *        rotations in z x y order (yaw roll pitch)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors
@@ -235,7 +235,7 @@ glms_euler_zxy_quat(vec3s angles) {
  *        rotations in z y x order (yaw pitch roll)
  * 
  * @param[in]   angles angles x y z (radians)
- * @param[out]  dest   quaternion
+ * @returns quaternion
  */
 CGLM_INLINE
 versors

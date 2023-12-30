@@ -360,7 +360,7 @@ glm_ivec2_subsubs(ivec2 a, int s, ivec2 dest) {
  * applies -= operator so dest must be initialized
  *
  * @param[in]  a    vector
- * @param[in]  s    scalar
+ * @param[in]  b    scalar
  * @param[out] dest dest -= (a + b)
  */
 CGLM_INLINE 
@@ -392,7 +392,7 @@ glm_ivec2_addsubs(ivec2 a, int s, ivec2 dest) {
  * applies -= operator so dest must be initialized
  *
  * @param[in]  a    vector
- * @param[in]  s    scalar
+ * @param[in]  b    scalar
  * @param[out] dest dest -= (a * b)
  */
 CGLM_INLINE 
