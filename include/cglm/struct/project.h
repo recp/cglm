@@ -15,6 +15,17 @@
 #include "vec4.h"
 #include "mat4.h"
 
+#ifndef CGLM_CLIPSPACE_INCLUDE_ALL
+#  if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+#    include "clipspace/project_zo.h"
+#  elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+#    include "clipspace/project_no.h"
+#  endif
+#else
+#  include "clipspace/project_zo.h"
+#  include "clipspace/project_no.h"
+#endif
+
 /*!
  * @brief maps the specified viewport coordinates into specified space [1]
  *        the matrix should contain projection matrix.
@@ -68,6 +79,9 @@ glms_unprojecti(vec3s pos, mat4s invMat, vec4s vp) {
  *   glm_mat4_mul(proj, view, viewProj);
  *   glm_mat4_mul(viewProj, model, MVP);
  *
+ * or in struct api:
+ *   MVP = mat4_mul(mat4_mul(proj, view), model)
+ *
  * @param[in]  pos      point/position in viewport coordinates
  * @param[in]  m        matrix (see brief)
  * @param[in]  vp       viewport as [x, y, width, height]
@@ -88,6 +102,9 @@ glms_unproject(vec3s pos, mat4s m, vec4s vp) {
  *   glm_mat4_mul(proj, view, viewProj);
  *   glm_mat4_mul(viewProj, model, MVP);
  *
+ * or in struct api:
+ *   MVP = mat4_mul(mat4_mul(proj, view), model)
+ *
  * @param[in]  pos      object coordinates
  * @param[in]  m        MVP matrix
  * @param[in]  vp       viewport as [x, y, width, height]
@@ -99,6 +116,32 @@ glms_project(vec3s pos, mat4s m, vec4s vp) {
   vec3s r;
   glm_project(pos.raw, m.raw, vp.raw, r.raw);
   return r;
+}
+
+/*!
+ * @brief map object's z coordinate to window coordinates
+ *
+ * Computing MVP:
+ *   glm_mat4_mul(proj, view, viewProj);
+ *   glm_mat4_mul(viewProj, model, MVP);
+ *
+ * or in struct api:
+ *   MVP = mat4_mul(mat4_mul(proj, view), model)
+ *
+ * @param[in]  v  object coordinates
+ * @param[in]  m  MVP matrix
+ *
+ * @returns projected z coordinate
+ */
+CGLM_INLINE
+float
+glms_project_z(vec3s v, mat4s m) {
+  return glm_project_z(v.raw, m.raw);
+#if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
+  return glms_project_z_zo(v, m);
+#elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
+  return glms_project_z_no(v, m);
+#endif
 }
 
 /*!
