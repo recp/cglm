@@ -22,7 +22,7 @@
    CGLM_INLINE mat4s glms_rotate_make(float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate(mat4s m, float angle, vec3s axis);
    CGLM_INLINE mat4s glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis);
-   CGLM_INLINE mat4s glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis);
+   CGLM_INLINE mat4s glms_rotate_atm(vec3s pivot, float angle, vec3s axis);
    CGLM_INLINE mat4s glms_spin(mat4s m, float angle, vec3s axis);
    CGLM_INLINE vec3s glms_decompose_scalev(mat4s m);
    CGLM_INLINE bool  glms_uniscaled(mat4s m);
@@ -125,7 +125,6 @@ glms_rotate_make(float angle, vec3s axis) {
  * this should work faster than glm_rotate_at because it reduces
  * one glm_translate.
  *
- * @param[in]  m      affine transfrom
  * @param[in]  pivot  rotation center
  * @param[in]  angle  angle (radians)
  * @param[in]  axis   axis
@@ -133,7 +132,8 @@ glms_rotate_make(float angle, vec3s axis) {
  */
 CGLM_INLINE
 mat4s
-glms_rotate_atm(mat4s m, vec3s pivot, float angle, vec3s axis) {
+glms_rotate_atm(vec3s pivot, float angle, vec3s axis) {
+  mat4s m;
   glm_rotate_atm(m.raw, pivot.raw, angle, axis.raw);
   return m;
 }
