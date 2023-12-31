@@ -136,7 +136,6 @@ glms_project(vec3s pos, mat4s m, vec4s vp) {
 CGLM_INLINE
 float
 glms_project_z(vec3s v, mat4s m) {
-  return glm_project_z(v.raw, m.raw);
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
   return glms_project_z_zo(v, m);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
