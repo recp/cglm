@@ -145,7 +145,7 @@ typedef struct test_entry_t {
     } \
   } while(0);
 
-#if defined(_WIN32)
+#if defined(_WIN32) || defined(__MINGW32__) || defined(__MINGW64__) 
 # define drand48()  ((float)(rand() / (RAND_MAX + 1.0)))
 # define OK_TEXT    "ok:"
 # define FAIL_TEXT  "fail:"
