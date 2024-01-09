@@ -34,13 +34,11 @@
 #define glmm_float32x4_SIGNMASK_PNPN GLMM__SIGNMASKf(0, GLMM_NEGZEROf, 0, GLMM_NEGZEROf)
 #define glmm_float32x4_SIGNMASK_NPNP GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, GLMM_NEGZEROf, 0)
 #define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, 0, GLMM_NEGZEROf)
-#define glmm_float32x4_SIGNMASK_NEG wasm_i32x4_const_splat(GLMM_NEGZEROf)
+#define glmm_float32x4_SIGNMASK_NEG  wasm_i32x4_const_splat(GLMM_NEGZEROf)
 
-static inline
-glmm_128
-glmm_abs(glmm_128 x) {
-  return wasm_f32x4_abs(x);
-}
+static inline glmm_128 glmm_abs(glmm_128 x)             { return wasm_f32x4_abs(x);     }
+static inline glmm_128 glmm_min(glmm_128 a, glmm_128 b) { return wasm_f32x4_pmin(b, a); }
+static inline glmm_128 glmm_max(glmm_128 a, glmm_128 b) { return wasm_f32x4_pmax(b, a); }
 
 static inline
 glmm_128
@@ -74,7 +72,7 @@ glmm_128
 glmm_vhmin(glmm_128 v) {
   glmm_128 x0, x1, x2;
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
-  x1 = wasm_f32x4_pmin(x0, v);   /* [0|2, 1|3, 2|2, 3|3] */
+  x1 = wasm_f32x4_pmin(x0, v);         /* [0|2, 1|3, 2|2, 3|3] */
   x2 = glmm_splat(x1, 1);              /* [1|3, 1|3, 1|3, 1|3] */
   return wasm_f32x4_pmin(x1, x2);
 }
@@ -90,7 +88,7 @@ glmm_128
 glmm_vhmax(glmm_128 v) {
   glmm_128 x0, x1, x2;
   x0 = glmm_shuff1(v, 2, 3, 2, 3);     /* [2, 3, 2, 3] */
-  x1 = wasm_f32x4_pmax(x0, v);   /* [0|2, 1|3, 2|2, 3|3] */
+  x1 = wasm_f32x4_pmax(x0, v);         /* [0|2, 1|3, 2|2, 3|3] */
   x2 = glmm_splat(x1, 1);              /* [1|3, 1|3, 1|3, 1|3] */
   /* _mm_max_ss */
   return wasm_i32x4_shuffle(x1, wasm_f32x4_pmax(x1, x2), 4, 1, 2, 3);
