@@ -74,6 +74,9 @@ glmm_abs(__m128 x) {
   return _mm_andnot_ps(glmm_float32x4_SIGNMASK_NEG, x);
 }
 
+static inline __m128 glmm_min(__m128 a, __m128 b) { return _mm_min_ps(a, b); }
+static inline __m128 glmm_max(__m128 a, __m128 b) { return _mm_max_ps(a, b); }
+
 static inline
 __m128
 glmm_vhadd(__m128 v) {

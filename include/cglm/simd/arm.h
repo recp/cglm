@@ -56,11 +56,9 @@ glmm_float32x4_init(float x, float y, float z, float w) {
 #define glmm_float32x4_SIGNMASK_NPNP glmm_float32x4_init(-0.f,  0.f, -0.f,  0.f)
 #define glmm_float32x4_SIGNMASK_NPPN glmm_float32x4_init(-0.f,  0.f,  0.f, -0.f)
 
-static inline
-float32x4_t
-glmm_abs(float32x4_t v) {
-  return vabsq_f32(v);
-}
+static inline float32x4_t glmm_abs(float32x4_t v)                { return vabsq_f32(v);    }
+static inline float32x4_t glmm_min(float32x4_t a, float32x4_t b) { return vminq_f32(a, b); }
+static inline float32x4_t glmm_max(float32x4_t a, float32x4_t b) { return vmaxq_f32(a, b); }
 
 static inline
 float32x4_t
