@@ -653,17 +653,14 @@ CGLM_INLINE
 void
 glm_vec4_maxadd(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(
-          glmm_load(dest),
-          wasm_f32x4_pmax(glmm_load(a), glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
+                                  glmm_max(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_add_ps(glmm_load(dest),
-                              _mm_max_ps(glmm_load(a),
-                                         glmm_load(b))));
+                              glmm_max(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
-                            vmaxq_f32(vld1q_f32(a),
-                                      vld1q_f32(b))));
+  glmm_store(dest, vaddq_f32(glmm_load(dest),
+                             glmm_max(glmm_load(a), glmm_load(b))));
 #else
   dest[0] += glm_max(a[0], b[0]);
   dest[1] += glm_max(a[1], b[1]);
@@ -685,17 +682,14 @@ CGLM_INLINE
 void
 glm_vec4_minadd(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_add(
-          glmm_load(dest),
-          wasm_f32x4_pmin(glmm_load(a), glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_add(glmm_load(dest),
+                                  glmm_min(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_add_ps(glmm_load(dest),
-                              _mm_min_ps(glmm_load(a),
-                                         glmm_load(b))));
+                              glmm_min(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vaddq_f32(vld1q_f32(dest),
-                            vminq_f32(vld1q_f32(a),
-                                      vld1q_f32(b))));
+  glmm_store(dest, vaddq_f32(glmm_load(dest),
+                             glmm_min(glmm_load(a), glmm_load(b))));
 #else
   dest[0] += glm_min(a[0], b[0]);
   dest[1] += glm_min(a[1], b[1]);
@@ -825,17 +819,14 @@ CGLM_INLINE
 void
 glm_vec4_maxsub(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_sub(
-          glmm_load(dest),
-          wasm_f32x4_pmax(glmm_load(a), glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_sub(glmm_load(dest),
+                                  glmm_max(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_sub_ps(glmm_load(dest),
-                              _mm_max_ps(glmm_load(a),
-                                         glmm_load(b))));
+                              glmm_max(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vsubq_f32(vld1q_f32(dest),
-                            vmaxq_f32(vld1q_f32(a),
-                                      vld1q_f32(b))));
+  glmm_store(dest, vsubq_f32(glmm_load(dest),
+                             glmm_max(glmm_load(a), glmm_load(b))));
 #else
   dest[0] -= glm_max(a[0], b[0]);
   dest[1] -= glm_max(a[1], b[1]);
@@ -857,17 +848,14 @@ CGLM_INLINE
 void
 glm_vec4_minsub(vec4 a, vec4 b, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_sub(
-          glmm_load(dest),
-          wasm_f32x4_pmin(glmm_load(a), glmm_load(b))));
+  glmm_store(dest, wasm_f32x4_sub(glmm_load(dest),
+                                  glmm_min(glmm_load(a), glmm_load(b))));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_sub_ps(glmm_load(dest),
-                              _mm_min_ps(glmm_load(a),
-                                         glmm_load(b))));
+                              glmm_min(glmm_load(a), glmm_load(b))));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vsubq_f32(vld1q_f32(dest),
-                            vminq_f32(vld1q_f32(a),
-                                      vld1q_f32(b))));
+  glmm_store(dest, vsubq_f32(vld1q_f32(dest),
+                             glmm_min(glmm_load(a), glmm_load(b))));
 #else
   dest[0] -= glm_min(a[0], b[0]);
   dest[1] -= glm_min(a[1], b[1]);
@@ -1031,12 +1019,8 @@ glm_vec4_distance2(vec4 a, vec4 b) {
 CGLM_INLINE
 void
 glm_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
-#if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_pmax(glmm_load(a), glmm_load(b)));
-#elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_max_ps(glmm_load(a), glmm_load(b)));
-#elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vmaxq_f32(vld1q_f32(a), vld1q_f32(b)));
+#if defined(CGLM_SIMD)
+  glmm_store(dest, glmm_max(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = glm_max(a[0], b[0]);
   dest[1] = glm_max(a[1], b[1]);
@@ -1055,12 +1039,8 @@ glm_vec4_maxv(vec4 a, vec4 b, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_minv(vec4 a, vec4 b, vec4 dest) {
-#if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_pmin(glmm_load(a), glmm_load(b)));
-#elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_min_ps(glmm_load(a), glmm_load(b)));
-#elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vminq_f32(vld1q_f32(a), vld1q_f32(b)));
+#if defined(CGLM_SIMD)
+  glmm_store(dest, glmm_min(glmm_load(a), glmm_load(b)));
 #else
   dest[0] = glm_min(a[0], b[0]);
   dest[1] = glm_min(a[1], b[1]);
@@ -1080,14 +1060,13 @@ CGLM_INLINE
 void
 glm_vec4_clamp(vec4 v, float minVal, float maxVal) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(v, wasm_f32x4_pmin(
-          wasm_f32x4_pmax(glmm_load(v), wasm_f32x4_splat(minVal)),
-          wasm_f32x4_splat(maxVal)));
+  glmm_store(v, glmm_min(glmm_max(glmm_load(v), wasm_f32x4_splat(minVal)),
+                         wasm_f32x4_splat(maxVal)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(v, _mm_min_ps(_mm_max_ps(glmm_load(v), _mm_set1_ps(minVal)),
-                           _mm_set1_ps(maxVal)));
+  glmm_store(v, glmm_min(glmm_max(glmm_load(v), _mm_set1_ps(minVal)),
+                         _mm_set1_ps(maxVal)));
 #elif defined(CGLM_NEON_FP)
-  vst1q_f32(v, vminq_f32(vmaxq_f32(vld1q_f32(v), vdupq_n_f32(minVal)),
+  glmm_store(v, glmm_min(glmm_max(vld1q_f32(v), vdupq_n_f32(minVal)),
                          vdupq_n_f32(maxVal)));
 #else
   v[0] = glm_clamp(v[0], minVal, maxVal);
