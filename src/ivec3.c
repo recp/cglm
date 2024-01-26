@@ -33,6 +33,24 @@ glmc_ivec3_one(ivec3 v) {
 }
 
 CGLM_EXPORT
+int
+glmc_ivec3_dot(ivec3 a, ivec3 b) {
+  return glm_ivec3_dot(a, b);
+}
+
+CGLM_EXPORT
+int
+glmc_ivec3_norm2(ivec3 v) {
+  return glm_ivec3_norm2(v);
+}
+
+CGLM_EXPORT
+int
+glmc_ivec3_norm(ivec3 v) {
+  return glm_ivec3_norm(v);
+}
+
+CGLM_EXPORT
 void
 glmc_ivec3_add(ivec3 a, ivec3 b, ivec3 dest) {
   glm_ivec3_add(a, b, dest);
@@ -66,6 +84,24 @@ CGLM_EXPORT
 void
 glmc_ivec3_scale(ivec3 v, int s, ivec3 dest) {
   glm_ivec3_scale(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec3_div(ivec3 a, ivec3 b, ivec3 dest) {
+  glm_ivec3_div(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec3_divs(ivec3 v, int s, ivec3 dest) {
+  glm_ivec3_divs(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec3_mod(ivec3 a, ivec3 b, ivec3 dest) {
+  glm_ivec3_mod(a, b, dest);
 }
 
 CGLM_EXPORT 

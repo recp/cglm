@@ -54,6 +54,34 @@ TEST_IMPL(GLM_PREFIX, ivec2_one) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, ivec2_dot) {
+  ivec2 a = {2, 3};
+  ivec2 b = {4, 4};
+  int dot1, dot2;
+
+  dot1 = GLM(ivec2_dot)(a, b);
+  dot2 = a[0] * b[0] + a[1] * b[1];
+
+  ASSERT(test_eq(dot1, dot2))
+  ASSERT(dot1 == 20)
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec2_cross) {
+  ivec2 a = {10, 9};
+  ivec2 b = {1, 2};
+  int cross1, cross2;
+
+  cross1 = GLM(ivec2_cross)(a, b);
+  cross2 = a[0] * b[1] - a[1] * b[0];
+
+  ASSERT(test_eq(cross1, cross2))
+  ASSERT(cross1 == 11)
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, ivec2_add) {
   ivec2 a = {14, 3};
   ivec2 b = {-3, 2};
@@ -122,6 +150,50 @@ TEST_IMPL(GLM_PREFIX, ivec2_scale) {
   GLM(ivec2_scale)(a, s, v);
   ASSERT(v[0] == 18)
   ASSERT(v[1] == -4)
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec2_div) {
+  ivec2 v1 = {6, 5},
+        v2 = {-2, 4},
+        v3;
+  
+  GLM(ivec2_div)(v1, v2, v3);
+
+  ASSERT(test_eq(v1[0] / v2[0], v3[0]))
+  ASSERT(test_eq(v1[1] / v2[1], v3[1]))
+  ASSERT(v3[0] == -3)
+  ASSERT(v3[1] == 1)
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec2_divs) {
+  ivec2  v1 = {16, -8}, v2;
+  int s  = 4;
+  
+  GLM(ivec2_divs)(v1, s, v2);
+
+  ASSERT(test_eq(v1[0] / s, v2[0]))
+  ASSERT(test_eq(v1[1] / s, v2[1]))
+  ASSERT(v2[0] == 4)
+  ASSERT(v2[1] == -2)
+  
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, ivec2_mod) {
+  ivec2 a = {16, -8};
+  ivec2 b = {3, 5};
+  ivec2 dest;
+
+  GLM(ivec2_mod)(a, b, dest);
+
+  ASSERT(test_eq(a[0] % b[0], dest[0]))
+  ASSERT(test_eq(a[1] % b[1], dest[1]))
+  ASSERT(dest[0] == 1)
+  ASSERT(dest[1] == -3)
 
   TEST_SUCCESS
 }

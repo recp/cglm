@@ -33,6 +33,18 @@ glmc_ivec2_one(ivec2 v) {
 }
 
 CGLM_EXPORT
+int
+glmc_ivec2_dot(ivec2 a, ivec2 b) {
+  return glm_ivec2_dot(a, b);
+}
+
+CGLM_EXPORT
+int
+glmc_ivec2_cross(ivec2 a, ivec2 b) {
+  return glm_ivec2_cross(a, b);
+}
+
+CGLM_EXPORT
 void
 glmc_ivec2_add(ivec2 a, ivec2 b, ivec2 dest) {
   glm_ivec2_add(a, b, dest);
@@ -66,6 +78,24 @@ CGLM_EXPORT
 void
 glmc_ivec2_scale(ivec2 v, int s, ivec2 dest) {
   glm_ivec2_scale(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec2_div(ivec2 a, ivec2 b, ivec2 dest) {
+  glm_ivec2_div(a, b, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec2_divs(ivec2 v, int s, ivec2 dest) {
+  glm_ivec2_divs(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_ivec2_mod(ivec2 a, ivec2 b, ivec2 dest) {
+  glm_ivec2_mod(a, b, dest);
 }
 
 CGLM_EXPORT

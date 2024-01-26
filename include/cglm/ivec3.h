@@ -17,12 +17,18 @@
   CGLM_INLINE void glm_ivec3_copy(ivec3 a, ivec3 dest)
   CGLM_INLINE void glm_ivec3_zero(ivec3 v)
   CGLM_INLINE void glm_ivec3_one(ivec3 v)
+  CGLM_INLINE int glm_ivec3_dot(ivec3 a, ivec3 b)
+  CGLM_INLINE int glm_ivec3_norm2(ivec3 v)
+  CGLM_INLINE int glm_ivec3_norm(ivec3 v)
   CGLM_INLINE void glm_ivec3_add(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_adds(ivec3 v, int s, ivec3 dest)
   CGLM_INLINE void glm_ivec3_sub(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_subs(ivec3 v, int s, ivec3 dest)
   CGLM_INLINE void glm_ivec3_mul(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_scale(ivec3 v, int s, ivec3 dest)
+  CGLM_INLINE void glm_ivec3_div(ivec3 a, ivec3 b, ivec3 dest)
+  CGLM_INLINE void glm_ivec3_divs(ivec3 v, int s, ivec3 dest)
+  CGLM_INLINE void glm_ivec3_mod(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_addadd(ivec3 a, ivec3 b, ivec3 dest)
   CGLM_INLINE void glm_ivec3_addadds(ivec3 a, int s, ivec3 dest)
   CGLM_INLINE void glm_ivec3_subadd(ivec3 a, ivec3 b, ivec3 dest)
@@ -113,6 +119,51 @@ glm_ivec3_one(ivec3 v) {
 }
 
 /*!
+ * @brief ivec3 dot product
+ *
+ * @param[in] a vector1
+ * @param[in] b vector2
+ *
+ * @return dot product
+ */
+CGLM_INLINE
+int
+glm_ivec3_dot(ivec3 a, ivec3 b) {
+  return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+/*!
+ * @brief norm * norm (magnitude) of vec
+ *
+ * we can use this func instead of calling norm * norm, because it would call
+ * sqrtf fuction twice but with this func we can avoid func call, maybe this is
+ * not good name for this func
+ *
+ * @param[in] v vector
+ *
+ * @return norm * norm
+ */
+CGLM_INLINE
+int
+glm_ivec3_norm2(ivec3 v) {
+  return glm_ivec3_dot(v, v);
+}
+
+/*!
+ * @brief euclidean norm (magnitude), also called L2 norm
+ *        this will give magnitude of vector in euclidean space
+ *
+ * @param[in] v vector
+ *
+ * @return norm
+ */
+CGLM_INLINE
+int
+glm_ivec3_norm(ivec3 v) {
+  return (int)sqrtf(glm_ivec3_norm2(v));
+}
+
+/*!
  * @brief add vector [a] to vector [b] and store result in [dest]
  *
  * @param[in]  a    first vector
@@ -200,6 +251,53 @@ glm_ivec3_scale(ivec3 v, int s, ivec3 dest) {
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
   dest[2] = v[2] * s;
+}
+
+/*!
+ * @brief div vector with another component-wise division: d = a / b
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest result = (a[0]/b[0], a[1]/b[1], a[2]/b[2])
+ */
+CGLM_INLINE
+void
+glm_ivec3_div(ivec3 a, ivec3 b, ivec3 dest) {
+  dest[0] = a[0] / b[0];
+  dest[1] = a[1] / b[1];
+  dest[2] = a[2] / b[2];
+}
+
+/*!
+ * @brief div vector with scalar: d = v / s
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest result = (a[0]/s, a[1]/s, a[2]/s)
+ */
+CGLM_INLINE
+void
+glm_ivec3_divs(ivec3 v, int s, ivec3 dest) {
+  dest[0] = v[0] / s;
+  dest[1] = v[1] / s;
+  dest[2] = v[2] / s;
+}
+
+/*!
+ * @brief Element-wise modulo operation on ivec3 vectors: dest = a % b
+ *
+ * Performs element-wise modulo on each component of vectors `a` and `b`.
+ *
+ * @param[in]  a    vector 1
+ * @param[in]  b    vector 2
+ * @param[out] dest result = (a[0]%b[0], a[1]%b[1], a[2]%b[2])
+ */
+CGLM_INLINE
+void
+glm_ivec3_mod(ivec3 a, ivec3 b, ivec3 dest) {
+  dest[0] = a[0] % b[0];
+  dest[1] = a[1] % b[1];
+  dest[2] = a[2] % b[2];
 }
 
 /*!
