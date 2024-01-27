@@ -30,6 +30,14 @@ void
 glmc_ivec2_one(ivec2 v);
 
 CGLM_EXPORT
+int
+glmc_ivec2_dot(ivec2 a, ivec2 b);
+
+CGLM_EXPORT
+int
+glmc_ivec2_cross(ivec2 a, ivec2 b);
+
+CGLM_EXPORT
 void
 glmc_ivec2_add(ivec2 a, ivec2 b, ivec2 dest);
 
@@ -52,6 +60,18 @@ glmc_ivec2_mul(ivec2 a, ivec2 b, ivec2 dest);
 CGLM_EXPORT
 void
 glmc_ivec2_scale(ivec2 v, int s, ivec2 dest);
+
+CGLM_EXPORT
+void
+glmc_ivec2_div(ivec2 a, ivec2 b, ivec2 dest);
+
+CGLM_EXPORT
+void
+glmc_ivec2_divs(ivec2 v, int s, ivec2 dest);
+
+CGLM_EXPORT
+void
+glmc_ivec2_mod(ivec2 a, ivec2 b, ivec2 dest);
 
 CGLM_EXPORT 
 void 
