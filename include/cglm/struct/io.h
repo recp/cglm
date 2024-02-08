@@ -7,14 +7,16 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_mat4_print(mat4 matrix, FILE *ostream);
-   CGLM_INLINE void glm_mat3_print(mat3 matrix, FILE *ostream);
-   CGLM_INLINE void glm_vec4_print(vec4 vec, FILE *ostream);
-   CGLM_INLINE void glm_vec3_print(vec3 vec, FILE *ostream);
-   CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
-   CGLM_INLINE void glm_ivec3_print(ivec3 vec, FILE *ostream);
-
-   CGLM_INLINE void glm_versor_print(versor vec, FILE *ostream);
+   CGLM_INLINE void glms_mat4_print(mat4s matrix, FILE *ostream);
+   CGLM_INLINE void glms_mat3_print(mat3s matrix, FILE *ostream);
+   CGLM_INLINE void glms_vec4_print(vec4s vec, FILE *ostream);
+   CGLM_INLINE void glms_ivec4_print(ivec3s vec, FILE *ostream);
+   CGLM_INLINE void glms_vec3_print(vec3s vec, FILE *ostream);
+   CGLM_INLINE void glms_ivec3_print(ivec3s vec, FILE *ostream);
+   CGLM_INLINE void glms_vec2_print(vec2s vec, FILE *ostream);
+   CGLM_INLINE void glms_ivec2_print(ivec3s vec, FILE *ostream);
+   CGLM_INLINE void glms_versor_print(versor vec, FILE *ostream);
+   CGLM_INLINE void glms_aabb_print(vec3s bbox[2], const char *tag, FILE *ostream);
  */
 
 #ifndef cglms_ios_h
@@ -51,6 +53,13 @@ glms_vec4_print(vec4s             vec,
 
 CGLM_INLINE
 void
+glms_ivec4_print(ivec4s            vec,
+                 FILE * __restrict ostream) {
+  glm_ivec4_print(vec.raw, ostream);
+}
+
+CGLM_INLINE
+void
 glms_vec3_print(vec3s             vec,
                 FILE * __restrict ostream) {
   glm_vec3_print(vec.raw, ostream);
@@ -61,6 +70,20 @@ void
 glms_ivec3_print(ivec3s            vec,
                  FILE * __restrict ostream) {
   glm_ivec3_print(vec.raw, ostream);
+}
+
+CGLM_INLINE
+void
+glms_vec2_print(vec2s             vec,
+                FILE * __restrict ostream) {
+  glm_vec2_print(vec.raw, ostream);
+}
+
+CGLM_INLINE
+void
+glms_ivec2_print(ivec2s            vec,
+                 FILE * __restrict ostream) {
+  glm_ivec2_print(vec.raw, ostream);
 }
 
 CGLM_INLINE
