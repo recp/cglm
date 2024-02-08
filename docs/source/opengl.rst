@@ -43,14 +43,14 @@ array of matrices:
    /* ... */
    glUniformMatrix4fv(location, count, GL_FALSE, (float *)matrix);
 
-in this way, passing aray of matrices is same
+in this way, passing array of matrices is same
 
 Passing / Uniforming Vectors to OpenGL:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 You don't need to do extra thing when passing cglm vectors to OpengL or other APIs.
 Because a function like **glUniform4fv** accepts vector as pointer. cglm's vectors
-are array of floats. So you can pass it directly ot those functions:
+are array of floats. So you can pass it directly to those functions:
 
 .. code-block:: c
 

@@ -13,7 +13,7 @@ Post functions (`T' = T * Tnew`) are like `glm_translated`, `glm_rotated` which 
 `glm_translate`, `glm_rotate` are pre functions and are similar to C++ **glm** which you are familiar with. 
 
 In new versions of **cglm** we added `glm_translated`, `glm_rotated`... which are post functions, 
-they are useful in some cases, e.g. append transform to existing transform (apply/append transform as last transfrom T' = T * Tnew).
+they are useful in some cases, e.g. append transform to existing transform (apply/append transform as last transform T' = T * Tnew).
 
 Post functions are named after pre functions with `ed` suffix, e.g. `glm_translate` -> `glm_translated`. So don't mix them up.
 
@@ -24,7 +24,7 @@ a matrix for you. You don't need to pass identity matrix.
 
 But other functions expect you have a matrix and you want to transform them. If
 you didn't have any existing matrix you have to initialize matrix to identity
-before sending to transfrom functions.
+before sending to transform functions.
 
 There are also functions to decompose transform matrix. These functions can't
 decompose matrix after projected.
@@ -35,7 +35,7 @@ Rotation Center
 Rotating functions uses origin as rotation center (pivot/anchor point),
 since scale factors are stored in rotation matrix, same may also true for scalling.
 cglm provides some functions for rotating around at given point e.g.
-**glm_rotate_at**, **glm_quat_rotate_at**. Use them or follow next section for algorihm ("Rotate or Scale around specific Point (Pivot Point / Anchor Point)").
+**glm_rotate_at**, **glm_quat_rotate_at**. Use them or follow next section for algorithm ("Rotate or Scale around specific Point (Pivot Point / Anchor Point)").
 
 Also **cglm** provides :c:func:`glm_spin` and :c:func:`glm_spinned` functions to rotate around itself. No need to give pivot.
 These functions are useful for rotating around center of object. 
@@ -43,7 +43,7 @@ These functions are useful for rotating around center of object.
 Rotate or Scale around specific Point (Anchor Point)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to rotate model around arbibtrary point follow these steps:
+If you want to rotate model around arbitrary point follow these steps:
 
 1. Move model from pivot point to origin: **translate(-pivot.x, -pivot.y, -pivot.z)**
 2. Apply rotation (or scaling maybe)
@@ -82,11 +82,11 @@ helpers functions works like this (cglm provides reverse order as `ed` suffix e.
 .. code-block:: c
   :linenos:
 
-  TransformMatrix = TransformMatrix * TraslateMatrix; // glm_translate()
+  TransformMatrix = TransformMatrix * TranslateMatrix; // glm_translate()
   TransformMatrix = TransformMatrix * RotateMatrix;   // glm_rotate(), glm_quat_rotate()
   TransformMatrix = TransformMatrix * ScaleMatrix;    // glm_scale()
 
-As you can see it is multipled as right matrix. For instance what will happen if you call `glm_translate` twice?
+As you can see it is multiplied as right matrix. For instance what will happen if you call `glm_translate` twice?
 
 .. code-block:: c
   :linenos:

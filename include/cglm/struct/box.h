@@ -92,7 +92,7 @@ glms_aabb_(crop)(vec3s box[2], vec3s cropBox[2], vec3s dest[2]) {
  *
  * @param[in]  box      bounding box
  * @param[in]  cropBox  crop box
- * @param[in]  clampBox miniumum box
+ * @param[in]  clampBox minimum box
  * @param[out] dest     cropped bounding box
  */
 CGLM_INLINE

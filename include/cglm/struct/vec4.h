@@ -223,7 +223,7 @@ glms_vec4_(dot)(vec4s a, vec4s b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf fuction twice but with this func we can avoid func call, maybe this is
+ * sqrtf function twice but with this func we can avoid func call, maybe this is
  * not good name for this func
  *
  * @param[in] v vec4
@@ -899,7 +899,7 @@ glms_vec4_(cubic)(float s) {
 /*!
  * @brief swizzle vector components
  *
- * you can use existin masks e.g. GLM_XXXX, GLM_WZYX
+ * you can use existing masks e.g. GLM_XXXX, GLM_WZYX
  *
  * @param[in]  v    source
  * @param[in]  mask mask

@@ -180,7 +180,7 @@ glm_mat2_transpose_to(mat2 m, mat2 dest) {
 }
 
 /*!
- * @brief tranpose mat2 and store result in same matrix
+ * @brief transpose mat2 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */

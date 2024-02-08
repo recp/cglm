@@ -124,7 +124,7 @@ Functions documentation
     norm * norm (magnitude) of vector
 
     we can use this func instead of calling norm * norm, because it would call
-    sqrtf fuction twice but with this func we can avoid func call, maybe this is
+    sqrtf function twice but with this func we can avoid func call, maybe this is
     not good name for this func
 
     Parameters:
@@ -284,7 +284,7 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_flipsign(vec4 v)
 
-    **DEPRACATED!**
+    **DEPRECATED!**
 
     use :c:func:`glm_vec4_negate`
 
@@ -293,7 +293,7 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_flipsign_to(vec4 v, vec4 dest)
 
-    **DEPRACATED!**
+    **DEPRECATED!**
 
     use :c:func:`glm_vec4_negate_to`
 
@@ -303,7 +303,7 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_inv(vec4 v)
 
-    **DEPRACATED!**
+    **DEPRECATED!**
 
     use :c:func:`glm_vec4_negate`
 
@@ -312,7 +312,7 @@ Functions documentation
 
 .. c:function:: void  glm_vec4_inv_to(vec4 v, vec4 dest)
 
-    **DEPRACATED!**
+    **DEPRECATED!**
 
     use :c:func:`glm_vec4_negate_to`
 

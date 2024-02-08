@@ -136,7 +136,7 @@ glm_ivec3_dot(ivec3 a, ivec3 b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf fuction twice but with this func we can avoid func call, maybe this is
+ * sqrtf function twice but with this func we can avoid func call, maybe this is
  * not good name for this func
  *
  * @param[in] v vector
@@ -226,7 +226,7 @@ glm_ivec3_subs(ivec3 v, int s, ivec3 dest) {
 /*!
  * @brief multiply vector [a] with vector [b] and store result in [dest]
  *
- * @param[in]  a    frist vector
+ * @param[in]  a    first vector
  * @param[in]  b    second vector
  * @param[out] dest destination
  */

@@ -108,7 +108,7 @@ glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
  *
  * @param[in]  aabb      bounding aabb
  * @param[in]  cropAabb  crop aabb
- * @param[in]  clampAabb miniumum aabb
+ * @param[in]  clampAabb minimum aabb
  * @param[out] dest      cropped bounding aabb
  */
 CGLM_INLINE

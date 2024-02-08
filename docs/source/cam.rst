@@ -250,7 +250,7 @@ Functions documentation
 .. c:function:: void  glm_persp_decomp_y(mat4 proj, float *top, float *bottom)
 
     | decomposes top and bottom values of perspective projection.
-    | y stands for y axis (top / botom axis)
+    | y stands for y axis (top / bottom axis)
 
     Parameters:
       | *[in]*   **proj**    perspective projection matrix

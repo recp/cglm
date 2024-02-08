@@ -92,7 +92,7 @@ Functions documentation
     norm * norm (magnitude) of vector
 
     we can use this func instead of calling norm * norm, because it would call
-    sqrtf fuction twice but with this func we can avoid func call, maybe this is
+    sqrtf function twice but with this func we can avoid func call, maybe this is
     not good name for this func
 
     Parameters:

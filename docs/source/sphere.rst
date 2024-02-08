@@ -9,7 +9,7 @@ Header: cglm/sphere.h
 
 Sphere Representation in cglm is *vec4*: **[center.x, center.y, center.z, radii]**
 
-You can call any vec3 function by pasing sphere. Because first three elements
+You can call any vec3 function by passing sphere. Because first three elements
 defines center of sphere.
 
 Table of contents (click to go):

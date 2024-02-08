@@ -29,7 +29,7 @@ have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
  if you do not know what you are doing. Because a cglm header included
  via 'project A' may force types to be aligned and another cglm header
  included via 'project B' may not require alignment. In this case
- cglm functions will read from and write to **INVALID MEMORY LOCATIONs**.
+ cglm functions will read from and write to **INVALID MEMORY LOCATIONSNs**.
 
  ALWAYS USE SAME CONFIGURATION / OPTION for **cglm** if you have multiple projects.
 
@@ -43,7 +43,7 @@ By starting **v0.8.3** cglm provides options to switch between clipspace configu
 Clipspace related files are located at `include/cglm/[struct]/clipspace.h` but 
 these are included in related files like `cam.h`. If you don't want to change your existing 
 clipspace configuration and want to use different clipspace function like `glm_lookat_zo` or `glm_lookat_lh_zo`...
-then you can include individual headers or just define `CGLM_CLIPSPACE_INCLUDE_ALL` which will iclude all headers for you.
+then you can include individual headers or just define `CGLM_CLIPSPACE_INCLUDE_ALL` which will include all headers for you.
 
 1. **CGLM_CLIPSPACE_INCLUDE_ALL**
 2. **CGLM_FORCE_DEPTH_ZERO_TO_ONE**

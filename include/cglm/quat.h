@@ -703,7 +703,7 @@ glm_quat_nlerp(versor from, versor to, float t, versor dest) {
  *
  * @param[in]   from  from
  * @param[in]   to    to
- * @param[in]   t     amout
+ * @param[in]   t     amount
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE

@@ -9,7 +9,7 @@
  NOTE:
   angles must be passed as [X-Angle, Y-Angle, Z-angle] order
   For instance you don't pass angles as [Z-Angle, X-Angle, Y-angle] to
-  glm_euler_zxy funciton, All RELATED functions accept angles same order
+  glm_euler_zxy function, All RELATED functions accept angles same order
   which is [X, Y, Z].
  */
 

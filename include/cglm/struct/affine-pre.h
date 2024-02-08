@@ -33,9 +33,9 @@
  * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix
  *
- * @param[in]       m   affine transfrom
+ * @param[in]       m   affine transform
  * @param[in]       v   translate vector [x, y, z]
- * @returns             affine transfrom
+ * @returns             affine transform
  */
 CGLM_INLINE
 mat4s
@@ -47,9 +47,9 @@ glms_translate(mat4s m, vec3s v) {
 /*!
  * @brief translate existing transform matrix by x factor
  *
- * @param[in]       m   affine transfrom
+ * @param[in]       m   affine transform
  * @param[in]       x   x factor
- * @returns             affine transfrom
+ * @returns             affine transform
  */
 CGLM_INLINE
 mat4s
@@ -61,9 +61,9 @@ glms_translate_x(mat4s m, float x) {
 /*!
  * @brief translate existing transform matrix by y factor
  *
- * @param[in]       m   affine transfrom
+ * @param[in]       m   affine transform
  * @param[in]       y   y factor
- * @returns             affine transfrom
+ * @returns             affine transform
  */
 CGLM_INLINE
 mat4s
@@ -75,9 +75,9 @@ glms_translate_y(mat4s m, float y) {
 /*!
  * @brief translate existing transform matrix by z factor
  *
- * @param[in]       m   affine transfrom
+ * @param[in]       m   affine transform
  * @param[in]       z   z factor
- * @returns             affine transfrom
+ * @returns             affine transform
  */
 CGLM_INLINE
 mat4s
@@ -90,7 +90,7 @@ glms_translate_z(mat4s m, float z) {
  * @brief rotate existing transform matrix around X axis by angle
  *        and store result in dest
  *
- * @param[in]   m       affine transfrom
+ * @param[in]   m       affine transform
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
@@ -106,7 +106,7 @@ glms_rotate_x(mat4s m, float angle) {
  * @brief rotate existing transform matrix around Y axis by angle
  *        and store result in dest
  *
- * @param[in]   m       affine transfrom
+ * @param[in]   m       affine transform
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
@@ -122,7 +122,7 @@ glms_rotate_y(mat4s m, float angle) {
  * @brief rotate existing transform matrix around Z axis by angle
  *        and store result in dest
  *
- * @param[in]   m       affine transfrom
+ * @param[in]   m       affine transform
  * @param[in]   angle   angle (radians)
  * @returns             rotated matrix
  */
@@ -137,10 +137,10 @@ glms_rotate_z(mat4s m, float angle) {
 /*!
  * @brief rotate existing transform matrix around given axis by angle
  *
- * @param[in]       m       affine transfrom
+ * @param[in]       m       affine transform
  * @param[in]       angle   angle (radians)
  * @param[in]       axis    axis
- * @returns                affine transfrom
+ * @returns                affine transform
  */
 CGLM_INLINE
 mat4s
@@ -153,11 +153,11 @@ glms_rotate(mat4s m, float angle, vec3s axis) {
  * @brief rotate existing transform
  *        around given axis by angle at given pivot point (rotation center)
  *
- * @param[in]       m       affine transfrom
+ * @param[in]       m       affine transform
  * @param[in]       pivot   rotation center
  * @param[in]       angle   angle (radians)
  * @param[in]       axis    axis
- * @returns                 affine transfrom
+ * @returns                 affine transform
  */
 CGLM_INLINE
 mat4s
@@ -169,10 +169,10 @@ glms_rotate_at(mat4s m, vec3s pivot, float angle, vec3s axis) {
 /*!
  * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
  *
- * @param[in]       m       affine transfrom
+ * @param[in]       m       affine transform
  * @param[in]       angle   angle (radians)
  * @param[in]       axis    axis
- * @returns                affine transfrom
+ * @returns                affine transform
  */
 CGLM_INLINE
 mat4s

@@ -10,7 +10,7 @@ Also struct api `s` suffix to namespace e.g. `glms_vec3_add`, `glms_mat4_mul` et
 
 By starting v0.9.0, struct api namespace is configurable. We can omit **glms_** namespace or 
 even change it with custom name to move existing api integrations to **cglm** more easliy...
-We can also add **s** to functin names if we want e.g. `glms_vec3_add()` -> `vec3_add()` or `vec3s_add()`.
+We can also add **s** to function names if we want e.g. `glms_vec3_add()` -> `vec3_add()` or `vec3s_add()`.
 
 By including **cglm/struct.h** header you will include all struct api. It will also include **cglm/cglm.h** too. 
 Since struct apis are inline you don't need to build or link *cglm* against 

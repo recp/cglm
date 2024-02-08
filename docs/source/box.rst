@@ -82,7 +82,7 @@ Functions documentation
     Parameters:
       | *[in]*  **box**      bounding box
       | *[in]*  **cropBox**  crop box
-      | *[in]*  **clampBox** miniumum box
+      | *[in]*  **clampBox** minimum box
       | *[out]* **dest**     cropped bounding box
 
 .. c:function:: bool  glm_aabb_frustum(vec3 box[2], vec4 planes[6])

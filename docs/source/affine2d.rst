@@ -14,7 +14,7 @@ a matrix for you. You don't need to pass identity matrix.
 
 But other functions expect you have a matrix and you want to transform them. If
 you didn't have any existing matrix you have to initialize matrix to identity
-before sending to transfrom functions.
+before sending to transform functions.
 
 Transforms Order
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ Functions:
     translate existing 2d transform matrix by *v* vector and stores result in same matrix
 
     Parameters:
-      | *[in, out]*  **m**    2d affine transfrom
+      | *[in, out]*  **m**    2d affine transform
       | *[in]*       **v**    translate vector [x, y]
 
 .. c:function:: void glm_translate2d_to(mat3 m, vec2 v, mat3 dest)
@@ -53,7 +53,7 @@ Functions:
     translate existing 2d transform matrix by *v* vector and store result in dest
 
     Parameters:
-      | *[in]*  **m**    2d affine transfrom
+      | *[in]*  **m**    2d affine transform
       | *[in]*  **v**    translate vector [x, y]
       | *[out]* **dest** translated matrix
 
@@ -62,7 +62,7 @@ Functions:
     translate existing 2d transform matrix by x factor
 
     Parameters:
-      | *[in, out]*  **m**    2d affine transfrom
+      | *[in, out]*  **m**    2d affine transform
       | *[in]*       **x**    x factor
 
 .. c:function:: void glm_translate2d_y(mat3 m, float y)
@@ -70,7 +70,7 @@ Functions:
     translate existing 2d transform matrix by y factor
 
     Parameters:
-      | *[in, out]*  **m**    2d affine transfrom
+      | *[in, out]*  **m**    2d affine transform
       | *[in]*       **y**    y factor
 
 .. c:function:: void glm_translate2d_make(mat3 m, vec2 v)
@@ -78,7 +78,7 @@ Functions:
     creates NEW translate 2d transform matrix by *v* vector
 
     Parameters:
-      | *[in, out]*  **m**    affine transfrom
+      | *[in, out]*  **m**    affine transform
       | *[in]*       **v**    translate vector [x, y]
 
 .. c:function:: void glm_scale2d_to(mat3 m, vec2 v, mat3 dest)
@@ -86,7 +86,7 @@ Functions:
     scale existing 2d transform matrix by *v* vector and store result in dest
 
     Parameters:
-      | *[in]*  **m**    affine transfrom
+      | *[in]*  **m**    affine transform
       | *[in]*  **v**    scale vector [x, y]
       | *[out]* **dest** scaled matrix
 
@@ -95,7 +95,7 @@ Functions:
     creates NEW 2d scale matrix by *v* vector
 
     Parameters:
-      | *[in, out]*  **m**    affine transfrom
+      | *[in, out]*  **m**    affine transform
       | *[in]*       **v**    scale vector [x, y]
 
 .. c:function:: void glm_scale2d(mat3 m, vec2 v)
@@ -103,7 +103,7 @@ Functions:
     scales existing 2d transform matrix by *v* vector and stores result in same matrix
 
     Parameters:
-      | *[in, out]*  **m**    affine transfrom
+      | *[in, out]*  **m**    affine transform
       | *[in]*       **v**    translate vector [x, y]
 
 .. c:function:: void glm_scale2d_uni(mat3 m, float s)
@@ -111,7 +111,7 @@ Functions:
     applies uniform scale to existing 2d transform matrix v = [s, s] and stores result in same matrix
 
     Parameters:
-      | *[in, out]*  **m**  affine transfrom
+      | *[in, out]*  **m**  affine transform
       | *[in]*       **s**  scale factor
 
 .. c:function:: void glm_rotate2d_make(mat3 m, float angle)
@@ -119,7 +119,7 @@ Functions:
     creates NEW rotation matrix by angle around *Z* axis
 
     Parameters:
-      | *[in, out]*  **m**      affine transfrom
+      | *[in, out]*  **m**      affine transform
       | *[in]*       **angle**  angle (radians)
 
 .. c:function:: void glm_rotate2d(mat3 m, float angle)
@@ -127,7 +127,7 @@ Functions:
     rotate existing 2d transform matrix around *Z* axis by angle and store result in same matrix
 
     Parameters:
-      | *[in, out]*  **m**      affine transfrom
+      | *[in, out]*  **m**      affine transform
       | *[in]*       **angle**  angle (radians)
 
 .. c:function:: void glm_rotate2d_to(mat3 m, float angle, mat3 dest)
@@ -135,6 +135,6 @@ Functions:
     rotate existing 2d transform matrix around *Z* axis by angle and store result in dest
 
     Parameters:
-      | *[in]*  **m**      affine transfrom
+      | *[in]*  **m**      affine transform
       | *[in]*  **angle**  angle (radians)
       | *[out]* **dest**   rotated matrix

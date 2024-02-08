@@ -11,9 +11,9 @@ not **vec3**. If you want to store them to save space you msut convert them
 yourself.
 
 **vec4** is used to speed up functions need to corners. This is why frustum
-fucntions use *vec4* instead of *vec3*
+functions use *vec4* instead of *vec3*
 
-Currenty related-functions use [-1, 1] clip space configuration to extract
+Currently related-functions use [-1, 1] clip space configuration to extract
 corners but you can override it by prodiving **GLM_CUSTOM_CLIPSPACE** macro.
 If you provide it then you have to all bottom macros as *vec4*
 

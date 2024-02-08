@@ -25,7 +25,7 @@ You cannot use :c:func:`glm_mul` anymore.
 Same is also true for :c:func:`glm_inv_tr` if you only have rotation and
 translation then it will work as expected, otherwise you cannot use that.
 
-In the future it may accept scale factors too but currectly it does not.
+In the future it may accept scale factors too but currently it does not.
 
 Table of contents (click func go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

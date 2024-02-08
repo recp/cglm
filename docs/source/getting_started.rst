@@ -22,7 +22,7 @@ Types:
   typedef CGLM_ALIGN_IF(16) vec4  mat4[4];
   #endif
 
-As you can see types don't store extra informations in favor of space.
+As you can see types don't store extra information in favor of space.
 You can send these values e.g. matrix to OpenGL directly without casting or calling a function like *value_ptr*
 
 Alignment Is Required:
@@ -35,7 +35,7 @@ Alignment Is Required:
 
   | Check :doc:`opt` page for more details
 
-  Also alignment is disabled for older msvc verisons as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
+  Also alignment is disabled for older msvc versions as default. Now alignment is only required in Visual Studio 2017 version 15.6+ if CGLM_ALL_UNALIGNED macro is not defined.
 
 Allocations:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
