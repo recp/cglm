@@ -140,7 +140,7 @@ glms_mat3_(mul)(mat3s m1, mat3s m2) {
 }
 
 /*!
- * @brief tranpose mat3 and store result in same matrix
+ * @brief transpose mat3 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */

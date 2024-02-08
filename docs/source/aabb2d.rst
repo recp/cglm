@@ -89,7 +89,7 @@ Functions documentation
     Parameters:
       | *[in]*  **aabb**      bounding box
       | *[in]*  **cropAabb**  crop box
-      | *[in]*  **clampAabb** miniumum box
+      | *[in]*  **clampAabb** minimum box
       | *[out]* **dest**     cropped bounding box
 
 .. c:function:: void  glm_aabb2d_invalidate(vec2 aabb[2])

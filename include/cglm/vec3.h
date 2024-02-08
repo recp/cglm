@@ -196,7 +196,7 @@ glm_vec3_dot(vec3 a, vec3 b) {
  * @brief norm * norm (magnitude) of vec
  *
  * we can use this func instead of calling norm * norm, because it would call
- * sqrtf fuction twice but with this func we can avoid func call, maybe this is
+ * sqrtf function twice but with this func we can avoid func call, maybe this is
  * not good name for this func
  *
  * @param[in] v vector
@@ -710,7 +710,7 @@ glm_vec3_crossn(vec3 a, vec3 b, vec3 dest) {
 }
 
 /*!
- * @brief angle betwen two vector
+ * @brief angle between two vector
  *
  * @param[in] a  vector1
  * @param[in] b  vector2
@@ -1112,7 +1112,7 @@ glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
 /*!
  * @brief swizzle vector components
  *
- * you can use existin masks e.g. GLM_XXX, GLM_ZYX
+ * you can use existing masks e.g. GLM_XXX, GLM_ZYX
  *
  * @param[in]  v    source
  * @param[in]  mask mask

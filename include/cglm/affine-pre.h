@@ -35,7 +35,7 @@
  * @brief translate existing transform matrix by v vector
  *        and stores result in same matrix
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       v  translate vector [x, y, z]
  */
 CGLM_INLINE
@@ -66,7 +66,7 @@ glm_translate(mat4 m, vec3 v) {
  *
  * source matrix will remain same
  *
- * @param[in]  m    affine transfrom
+ * @param[in]  m    affine transform
  * @param[in]  v    translate vector [x, y, z]
  * @param[out] dest translated matrix
  */
@@ -80,7 +80,7 @@ glm_translate_to(mat4 m, vec3 v, mat4 dest) {
 /*!
  * @brief translate existing transform matrix by x factor
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       x  x factor
  */
 CGLM_INLINE
@@ -98,7 +98,7 @@ glm_translate_x(mat4 m, float x) {
 /*!
  * @brief translate existing transform matrix by y factor
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       y  y factor
  */
 CGLM_INLINE
@@ -116,7 +116,7 @@ glm_translate_y(mat4 m, float y) {
 /*!
  * @brief translate existing transform matrix by z factor
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       z  z factor
  */
 CGLM_INLINE
@@ -135,7 +135,7 @@ glm_translate_z(mat4 m, float z) {
  * @brief rotate existing transform matrix around X axis by angle
  *        and store result in dest
  *
- * @param[in]   m      affine transfrom
+ * @param[in]   m      affine transform
  * @param[in]   angle  angle (radians)
  * @param[out]  dest   rotated matrix
  */
@@ -160,7 +160,7 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
  * @brief rotate existing transform matrix around Y axis by angle
  *        and store result in dest
  *
- * @param[in]   m      affine transfrom
+ * @param[in]   m      affine transform
  * @param[in]   angle  angle (radians)
  * @param[out]  dest   rotated matrix
  */
@@ -185,7 +185,7 @@ glm_rotate_y(mat4 m, float angle, mat4 dest) {
  * @brief rotate existing transform matrix around Z axis by angle
  *        and store result in dest
  *
- * @param[in]   m      affine transfrom
+ * @param[in]   m      affine transform
  * @param[in]   angle  angle (radians)
  * @param[out]  dest   rotated matrix
  */
@@ -209,7 +209,7 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
 /*!
  * @brief rotate existing transform matrix around given axis by angle
  *
- * @param[in, out]  m      affine transfrom
+ * @param[in, out]  m      affine transform
  * @param[in]       angle  angle (radians)
  * @param[in]       axis   axis
  */
@@ -225,7 +225,7 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
  * @brief rotate existing transform
  *        around given axis by angle at given pivot point (rotation center)
  *
- * @param[in, out]  m      affine transfrom
+ * @param[in, out]  m      affine transform
  * @param[in]       pivot  rotation center
  * @param[in]       angle  angle (radians)
  * @param[in]       axis   axis
@@ -250,7 +250,7 @@ glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
  * this should work faster than glm_rotate_at because it reduces
  * one glm_translate.
  *
- * @param[out] m      affine transfrom
+ * @param[out] m      affine transform
  * @param[in]  pivot  rotation center
  * @param[in]  angle  angle (radians)
  * @param[in]  axis   axis
@@ -270,7 +270,7 @@ glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
 /*!
  * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
  *
- * @param[in, out]  m      affine transfrom
+ * @param[in, out]  m      affine transform
  * @param[in]       angle  angle (radians)
  * @param[in]       axis   axis
  */

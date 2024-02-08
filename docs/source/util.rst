@@ -68,14 +68,14 @@ Functions documentation
 
 .. c:function:: void  glm_make_rad(float *degm)
 
-    | convert exsisting degree to radians. this will override degrees value
+    | convert existing degree to radians. this will override degrees value
 
     Parameters:
       | *[in, out]*  **deg**      pointer to angle in degrees
 
 .. c:function:: void  glm_make_deg(float *rad)
 
-    | convert exsisting radians to degree. this will override radians value
+    | convert existing radians to degree. this will override radians value
 
     Parameters:
       | *[in, out]*  **rad**      pointer to angle in radians

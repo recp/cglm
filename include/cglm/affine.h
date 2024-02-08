@@ -44,7 +44,7 @@
 /*!
  * @brief creates NEW translate transform matrix by v vector
  *
- * @param[out]  m  affine transfrom
+ * @param[out]  m  affine transform
  * @param[in]   v  translate vector [x, y, z]
  */
 CGLM_INLINE
@@ -58,7 +58,7 @@ glm_translate_make(mat4 m, vec3 v) {
  * @brief scale existing transform matrix by v vector
  *        and store result in dest
  *
- * @param[in]  m    affine transfrom
+ * @param[in]  m    affine transform
  * @param[in]  v    scale vector [x, y, z]
  * @param[out] dest scaled matrix
  */
@@ -75,7 +75,7 @@ glm_scale_to(mat4 m, vec3 v, mat4 dest) {
 /*!
  * @brief creates NEW scale matrix by v vector
  *
- * @param[out]  m  affine transfrom
+ * @param[out]  m  affine transform
  * @param[in]   v  scale vector [x, y, z]
  */
 CGLM_INLINE
@@ -91,7 +91,7 @@ glm_scale_make(mat4 m, vec3 v) {
  * @brief scales existing transform matrix by v vector
  *        and stores result in same matrix
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       v  scale vector [x, y, z]
  */
 CGLM_INLINE
@@ -104,7 +104,7 @@ glm_scale(mat4 m, vec3 v) {
  * @brief applies uniform scale to existing transform matrix v = [s, s, s]
  *        and stores result in same matrix
  *
- * @param[in, out]  m  affine transfrom
+ * @param[in, out]  m  affine transform
  * @param[in]       s  scale factor
  */
 CGLM_INLINE
@@ -119,7 +119,7 @@ glm_scale_uni(mat4 m, float s) {
  *
  * axis will be normalized so you don't need to normalize it
  *
- * @param[out] m     affine transfrom
+ * @param[out] m     affine transform
  * @param[in]  angle angle (radians)
  * @param[in]  axis  axis
  */
@@ -220,7 +220,7 @@ glm_decompose_rs(mat4 m, mat4 r, vec3 s) {
  * @brief decompose affine transform, TODO: extract shear factors.
  *        DON'T pass projected matrix here
  *
- * @param[in]  m affine transfrom
+ * @param[in]  m affine transform
  * @param[out] t translation vector
  * @param[out] r rotation matrix (mat4)
  * @param[out] s scaling vector [X, Y, Z]

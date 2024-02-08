@@ -49,7 +49,7 @@ Functions documentation
 
 .. c:function:: void  glm_mat3_identity(mat3 mat)
 
-    copy identity mat3 to mat, or makes mat to identiy
+    copy identity mat3 to mat, or makes mat to identity
 
     Parameters:
       | *[out]* **mat**  matrix
@@ -96,7 +96,7 @@ Functions documentation
 
 .. c:function:: void  glm_mat3_transpose(mat3 m)
 
-    tranpose mat3 and store result in same matrix
+    transpose mat3 and store result in same matrix
 
     Parameters:
       | *[in]*  **mat**   source

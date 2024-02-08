@@ -45,7 +45,7 @@
  * @brief creates NEW translate transform matrix by v vector
  *
  * @param[in]   v   translate vector [x, y, z]
- * @returns         affine transfrom
+ * @returns         affine transform
  */
 CGLM_INLINE
 mat4s
@@ -59,7 +59,7 @@ glms_translate_make(vec3s v) {
  * @brief creates NEW scale matrix by v vector
  *
  * @param[in]   v  scale vector [x, y, z]
- * @returns affine transfrom
+ * @returns affine transform
  */
 CGLM_INLINE
 mat4s
@@ -73,9 +73,9 @@ glms_scale_make(vec3s v) {
  * @brief scales existing transform matrix by v vector
  *        and stores result in same matrix
  *
- * @param[in]    m   affine transfrom
+ * @param[in]    m   affine transform
  * @param[in]    v   scale vector [x, y, z]
- * @returns          affine transfrom
+ * @returns          affine transform
  */
 CGLM_INLINE
 mat4s
@@ -89,9 +89,9 @@ glms_scale(mat4s m, vec3s v) {
  * @brief applies uniform scale to existing transform matrix v = [s, s, s]
  *        and stores result in same matrix
  *
- * @param[in]    m   affine transfrom
+ * @param[in]    m   affine transform
  * @param[in]    s   scale factor
- * @returns          affine transfrom
+ * @returns          affine transform
  */
 CGLM_INLINE
 mat4s
@@ -107,7 +107,7 @@ glms_scale_uni(mat4s m, float s) {
  *
  * @param[in]  angle  angle (radians)
  * @param[in]  axis   axis
- * @returns           affine transfrom
+ * @returns           affine transform
  */
 CGLM_INLINE
 mat4s
@@ -128,7 +128,7 @@ glms_rotate_make(float angle, vec3s axis) {
  * @param[in]  pivot  rotation center
  * @param[in]  angle  angle (radians)
  * @param[in]  axis   axis
- * @returns           affine transfrom
+ * @returns           affine transform
  */
 CGLM_INLINE
 mat4s
@@ -184,7 +184,7 @@ glms_decompose_rs(mat4s m, mat4s * __restrict r, vec3s * __restrict s) {
  * @brief decompose affine transform, TODO: extract shear factors.
  *        DON'T pass projected matrix here
  *
- * @param[in]  m affine transfrom
+ * @param[in]  m affine transform
  * @param[out] t translation vector
  * @param[out] r rotation matrix (mat4)
  * @param[out] s scaling vector [X, Y, Z]

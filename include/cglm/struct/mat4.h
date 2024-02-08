@@ -107,7 +107,7 @@ glms_mat4_(copy)(mat4s mat) {
  * mat4 mat = GLM_MAT4_IDENTITY_INIT;
  * @endcode
  *
- * @retuns  destination
+ * @returns  destination
  */
 CGLM_INLINE
 mat4s
@@ -319,7 +319,7 @@ glms_mat4_(mulv3)(mat4s m, vec3s v, float last) {
 }
 
 /*!
- * @brief tranpose mat4 and store result in same matrix
+ * @brief transpose mat4 and store result in same matrix
  *
  * @param[in] m source
  * @returns     result

@@ -537,7 +537,7 @@ glm_mat4_transpose_to(mat4 m, mat4 dest) {
 }
 
 /*!
- * @brief tranpose mat4 and store result in same matrix
+ * @brief transpose mat4 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */

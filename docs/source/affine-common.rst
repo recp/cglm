@@ -3,7 +3,7 @@
 3D Affine Transforms (common)
 ================================================================================
 
-Common transfrom functions.
+Common transform functions.
 
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -30,7 +30,7 @@ Functions documentation
     creates NEW translate transform matrix by *v* vector.
 
     Parameters:
-      | *[in, out]* **m**  affine transfrom
+      | *[in, out]* **m**  affine transform
       | *[in]*      **v**  translate vector [x, y, z]
 
 .. c:function:: void  glm_scale_to(mat4 m, vec3 v, mat4 dest)
@@ -38,7 +38,7 @@ Functions documentation
     scale existing transform matrix by *v* vector and store result in dest
 
     Parameters:
-      | *[in]*  **m**    affine transfrom
+      | *[in]*  **m**    affine transform
       | *[in]*  **v**    scale vector [x, y, z]
       | *[out]* **dest** scaled matrix
 
@@ -47,7 +47,7 @@ Functions documentation
     creates NEW scale matrix by v vector
 
     Parameters:
-      | *[out]* **m** affine transfrom
+      | *[out]* **m** affine transform
       | *[in]*  **v** scale vector [x, y, z]
 
 .. c:function:: void  glm_scale(mat4 m, vec3 v)
@@ -56,7 +56,7 @@ Functions documentation
     and stores result in same matrix
 
     Parameters:
-      | *[in, out]* **m** affine transfrom
+      | *[in, out]* **m** affine transform
       | *[in]*      **v** scale vector [x, y, z]
 
 .. c:function:: void  glm_scale_uni(mat4 m, float s)
@@ -65,7 +65,7 @@ Functions documentation
     and stores result in same matrix
 
     Parameters:
-      | *[in, out]* **m** affine transfrom
+      | *[in, out]* **m** affine transform
       | *[in]*      **v** scale factor
 
 .. c:function:: void  glm_rotate_make(mat4 m, float angle, vec3 axis)
@@ -74,7 +74,7 @@ Functions documentation
     axis will be normalized so you don't need to normalize it
 
     Parameters:
-      | *[out]* **m**    affine transfrom
+      | *[out]* **m**    affine transform
       | *[in]*  **axis** angle (radians)
       | *[in]*  **axis** axis
 
@@ -86,7 +86,7 @@ Functions documentation
     | this should work faster than glm_rotate_at because it reduces one glm_translate.
 
     Parameters:
-      | *[in, out]* **m**     affine transfrom
+      | *[in, out]* **m**     affine transform
       | *[in]*      **pivot** pivot, anchor point, rotation center
       | *[in]*      **angle** angle (radians)
       | *[in]*      **axis**  axis
@@ -123,7 +123,7 @@ Functions documentation
     DON'T pass projected matrix here
 
     Parameters:
-      | *[in]*  **m** affine transfrom
+      | *[in]*  **m** affine transform
       | *[out]* **t** translation vector
       | *[out]* **r** rotation matrix (mat4)
       | *[out]* **s** scaling vector [X, Y, Z]

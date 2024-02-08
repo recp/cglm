@@ -87,7 +87,7 @@ glm_deg(float rad) {
 }
 
 /*!
- * @brief convert exsisting degree to radians. this will override degrees value
+ * @brief convert existing degree to radians. this will override degrees value
  *
  * @param[in, out] deg pointer to angle in degrees
  */
@@ -98,7 +98,7 @@ glm_make_rad(float *deg) {
 }
 
 /*!
- * @brief convert exsisting radians to degree. this will override radians value
+ * @brief convert existing radians to degree. this will override radians value
  *
  * @param[in, out] rad pointer to angle in radians
  */

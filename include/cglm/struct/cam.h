@@ -495,7 +495,7 @@ glms_persp_decomp_x(mat4s proj,
 
 /*!
  * @brief decomposes top and bottom values of perspective projection.
- *        y stands for y axis (top / botom axis)
+ *        y stands for y axis (top / bottom axis)
  *
  * @param[in]  proj   perspective projection matrix
  * @param[out] top    top

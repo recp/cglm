@@ -3,10 +3,8 @@
 3D Affine Transforms (post)
 ================================================================================
 
-Post transfrom functions are similar to pre transform functions except order of application is reversed.  
-Post transform functions are applied after the object is transformed with given (model matrix) transfrom. 
-
-Ther are named af
+Post transform functions are similar to pre transform functions except order of application is reversed.
+Post transform functions are applied after the object is transformed with given (model matrix) transform.
 
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -33,7 +31,7 @@ Functions documentation
     translate existing transform matrix by *v* vector and store result in dest
 
     Parameters:
-      | *[in]*  **m**    affine transfrom
+      | *[in]*  **m**    affine transform
       | *[in]*  **v**    translate vector [x, y, z]
       | *[out]* **dest** translated matrix
 
@@ -43,7 +41,7 @@ Functions documentation
     and stores result in same matrix
 
     Parameters:
-      | *[in, out]* **m**  affine transfrom
+      | *[in, out]* **m**  affine transform
       | *[in]*      **v**  translate vector [x, y, z]
 
 .. c:function:: void  glm_translated_x(mat4 m, float x)
@@ -51,7 +49,7 @@ Functions documentation
     translate existing transform matrix by x factor
 
     Parameters:
-      | *[in, out]* **m**  affine transfrom
+      | *[in, out]* **m**  affine transform
       | *[in]*      **v**  x factor
 
 .. c:function:: void  glm_translated_y(mat4 m, float y)
@@ -59,7 +57,7 @@ Functions documentation
     translate existing transform matrix by *y* factor
 
     Parameters:
-      | *[in, out]* **m**  affine transfrom
+      | *[in, out]* **m**  affine transform
       | *[in]*      **v**  y factor
 
 .. c:function:: void  glm_translated_z(mat4 m, float z)
@@ -67,7 +65,7 @@ Functions documentation
     translate existing transform matrix by *z* factor
 
     Parameters:
-      | *[in, out]* **m**  affine transfrom
+      | *[in, out]* **m**  affine transform
       | *[in]*      **v**  z factor
 
 .. c:function:: void  glm_rotated_x(mat4 m, float angle, mat4 dest)
@@ -76,7 +74,7 @@ Functions documentation
     and store result in dest
 
     Parameters:
-      | *[in]*  **m**     affine transfrom
+      | *[in]*  **m**     affine transform
       | *[in]*  **angle** angle (radians)
       | *[out]* **dest**  rotated matrix
 
@@ -86,7 +84,7 @@ Functions documentation
     and store result in dest
 
     Parameters:
-      | *[in]*  **m**     affine transfrom
+      | *[in]*  **m**     affine transform
       | *[in]*  **angle** angle (radians)
       | *[out]* **dest**  rotated matrix
 
@@ -96,7 +94,7 @@ Functions documentation
     and store result in dest
 
     Parameters:
-      | *[in]*  **m**     affine transfrom
+      | *[in]*  **m**     affine transform
       | *[in]*  **angle** angle (radians)
       | *[out]* **dest**  rotated matrix
 
@@ -105,7 +103,7 @@ Functions documentation
     rotate existing transform matrix around Z axis by angle and axis
 
     Parameters:
-      | *[in, out]* **m**     affine transfrom
+      | *[in, out]* **m**     affine transform
       | *[in]*      **angle** angle (radians)
       | *[in]*      **axis**  axis
 
@@ -114,7 +112,7 @@ Functions documentation
     rotate existing transform around given axis by angle at given pivot point (rotation center)
 
     Parameters:
-      | *[in, out]* **m**     affine transfrom
+      | *[in, out]* **m**     affine transform
       | *[in]*      **pivot** pivot, anchor point, rotation center
       | *[in]*      **angle** angle (radians)
       | *[in]*      **axis**  axis
@@ -124,6 +122,6 @@ Functions documentation
     | rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
 
     Parameters:
-      | *[in, out]* **m**     affine transfrom
+      | *[in, out]* **m**     affine transform
       | *[in]*      **angle** angle (radians)
       | *[in]*      **axis**  axis

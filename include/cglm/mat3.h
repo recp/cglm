@@ -201,7 +201,7 @@ glm_mat3_transpose_to(mat3 m, mat3 dest) {
 }
 
 /*!
- * @brief tranpose mat3 and store result in same matrix
+ * @brief transpose mat3 and store result in same matrix
  *
  * @param[in, out] m source and dest
  */
