@@ -16,7 +16,7 @@
 #include "mat4.h"
 
 /* api definition */
-#define glms_aabb2d_(NAME) CGLM_STRUCTAPI(aabb, NAME)
+#define glms_aabb2d_(NAME) CGLM_STRUCTAPI(aabb2d, NAME)
 
 /*!
  * @brief apply transform to Axis-Aligned Bounding Box
