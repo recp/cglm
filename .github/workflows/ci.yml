@@ -1,0 +1,235 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build_autotools:
+    name: Autotools / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12, macos-14, ubuntu-22.04]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Autotools
+      if: runner.os == 'macOS'
+      run: brew upgrade && brew install autoconf automake libtool
+
+    - name: Generate Autotools
+      run: ./autogen.sh
+
+    - name: Configure Autotools
+      run: ./configure
+
+    - name: Build
+      run: make
+
+    - name: Test
+      run: make check
+
+  build_cmake_ios:
+    name: CMake / iOS
+    runs-on: macos-14
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: |
+        cmake \
+          -B build \
+          -GXcode \
+          -DCMAKE_SYSTEM_NAME=iOS \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO \
+          -DCGLM_STATIC=ON \
+          -DCGLM_USE_TEST=ON
+
+    - name: Build
+      run: cmake --build build
+
+  build_cmake_macos:
+    name: CMake / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12, macos-14]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Ninja
+      if: runner.os == 'macOS'
+      run: brew upgrade && brew install ninja
+
+    - name: Configure CMake
+      run: |
+        cmake \
+          -B build \
+          -GNinja \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCGLM_STATIC=ON \
+          -DCGLM_USE_TEST=ON
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      working-directory: build
+      run: ./tests
+
+  build_cmake_ubuntu:
+    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }}
+    runs-on: ${{ matrix.target.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - { os: ubuntu-20.04, cc: gcc-11 }
+          - { os: ubuntu-22.04, cc: gcc-12 }
+          - { os: ubuntu-22.04, cc: gcc-13 }
+          - { os: ubuntu-20.04, cc: clang-12 }
+          - { os: ubuntu-22.04, cc: clang-15 }
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Compiler and Ninja
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
+
+    - name: Configure CMake
+      run: |
+        cmake \
+          -B build \
+          -GNinja \
+          -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCGLM_STATIC=ON \
+          -DCGLM_USE_TEST=ON
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      working-directory: build
+      run: ./tests
+
+  build_cmake_windows:
+    name: CMake / ${{ matrix.platform.name }}
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        platform:
+        - { name: Windows (x64),          flags: -A x64 }
+        - { name: Windows (x86),          flags: -A Win32 }
+        - { name: Windows (clang-cl x64), flags: -T ClangCL -A x64 }
+        - { name: Windows (clang-cl x86), flags: -T ClangCL -A Win32 }
+        - { name: Windows (ARM),          flags: -A ARM, skip_tests: true, skip_build: true } # This fails to build.
+        - { name: Windows (ARM64),        flags: -A ARM64, skip_tests: true }
+        - { name: UWP (x64),              flags: -A x64 -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0", skip_tests: true }
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake
+      run: cmake -B build `
+          -DCGLM_STATIC=ON `
+          -DCGLM_USE_TEST=ON `
+          ${{ matrix.platform.flags }}
+
+    - name: Build
+      if: ${{ !matrix.platform.skip_build }}
+      run: cmake --build build --config Release --parallel
+
+    - name: Test
+      if: ${{ !matrix.platform.skip_tests }}
+      working-directory: build
+      run: .\Release\tests.exe
+
+  build_documentation:
+    name: Documentation
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+
+    - name: Install Dependencies
+      working-directory: docs
+      run: python3 -m pip install -r requirements.txt
+
+    - name: Build
+      working-directory: docs
+      run: sphinx-build source build
+
+  build_meson:
+    name: Meson / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, ubuntu-22.04]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install meson
+      run: python3 -m pip install meson ninja
+
+    - name: Build
+      run: meson setup build -Dbuildtype=release --default-library=static -Dbuild_tests=true
+
+    - name: Test
+      run: meson test -C build
+
+  build_msbuild:
+    name: MSBuild / Windows
+    runs-on: windows-2022
+
+    # This has no test yet.
+    # It could also try building for ARM, ARM64, ARM64EC, but those fail currently.
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: microsoft/setup-msbuild@v2
+
+    - name: Build (x86)
+      working-directory: win
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:BuildInParallel=true
+
+    - name: Build (x64)
+      working-directory: win
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:BuildInParallel=true
+
+  build_swift:
+    name: Swift ${{ matrix.swift }} / ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-12, macos-14, ubuntu-22.04]
+
+    # This has no test yet.
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        run: swift build
