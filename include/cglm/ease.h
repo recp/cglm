@@ -235,7 +235,7 @@ glm_ease_back_inout(float t) {
 
   o = 1.70158f;
   s = o * 1.525f;
-  x = 0.5;
+  x = 0.5f;
   n = t / 0.5f;
 
   if (n < 1.0f) {
