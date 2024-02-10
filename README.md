@@ -5,8 +5,8 @@
 </p>
 <br>
 <p align="center">
-    <a href="https://travis-ci.com/recp/cglm">
-        <img src="https://travis-ci.com/recp/cglm.svg?branch=master"
+    <a href="https://github.com/recp/cglm/actions/workflows/ci.yml">
+        <img src="https://github.com/recp/cglm/actions/workflows/ci.yml/badge.svg"
              alt="Build Status">
     </a>
     <a href="https://ci.appveyor.com/project/recp/cglm/branch/master">
