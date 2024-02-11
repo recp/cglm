@@ -507,7 +507,7 @@ Functions documentation
 
     Create three dimensional vector from pointer
 
-    | NOTE: **@src** must contain at least 3 elements.
+    .. note::: **@src** must contain at least 3 elements.
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats

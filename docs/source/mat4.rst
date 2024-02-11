@@ -263,7 +263,7 @@ Functions documentation
     | e.g Newton-Raphson. this should work faster than normal,
     | to get more precise use glm_mat4_inv version.
 
-    | NOTE: You will lose precision, glm_mat4_inv is more accurate
+    .. note:: You will lose precision, glm_mat4_inv is more accurate
 
     Parameters:
       | *[in]*  **mat**   source
@@ -308,7 +308,7 @@ Functions documentation
 
     Create mat4 matrix from pointer
 
-    | NOTE: **@src** must contain at least 16 elements.
+    .. note:: **@src** must contain at least 16 elements.
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats

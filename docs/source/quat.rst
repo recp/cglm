@@ -426,7 +426,7 @@ Functions documentation
 
     Create quaternion from pointer
 
-    | NOTE: **@src** must contain at least 4 elements. cglm store quaternions as [x, y, z, w].
+    .. note:: **@src** must contain at least 4 elements. cglm store quaternions as [x, y, z, w].
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats

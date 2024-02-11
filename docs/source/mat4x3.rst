@@ -45,7 +45,8 @@ Functions documentation
 
     Create mat4x3 matrix from pointer
 
-    | NOTE: **@src** must contain at least 12 elements.
+    .. note:: **@src** must contain at least 12 elements.
+
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination matrix4x3

@@ -18,10 +18,10 @@ fast if you don't care specific projection values.
 *_decomp* means decompose; these function can help to decompose projection
 matrices.
 
- **NOTE**: Be careful when working with high range (very small near, very large
- far) projection matrices. You may not get exact value you gave.
- **float** type cannot store very high precision so you will lose precision.
- Also your projection matrix will be inaccurate due to losing precision
+.. note:: Be careful when working with high range (very small near, very large
+   far) projection matrices. You may not get exact value you gave.
+   **float** type cannot store very high precision so you will lose precision.
+   Also your projection matrix will be inaccurate due to losing precision
 
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,7 +178,7 @@ Functions documentation
 
     | set up view matrix
 
-    **NOTE:** The UP vector must not be parallel to the line of sight from the eye point to the reference point.
+    .. note:: The UP vector must not be parallel to the line of sight from the eye point to the reference point.
 
     Parameters:
       | *[in]*  **eye**     eye vector
@@ -194,7 +194,7 @@ Functions documentation
     target self then this might be useful. Because you need to get target
     from direction.
 
-    **NOTE:** The UP vector must not be parallel to the line of sight from the eye point to the reference point.
+    .. note:: The UP vector must not be parallel to the line of sight from the eye point to the reference point.
 
     Parameters:
       | *[in]*  **eye**     eye vector
