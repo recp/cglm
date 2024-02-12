@@ -173,7 +173,7 @@ jobs:
 
     - name: Build
       working-directory: docs
-      run: sphinx-build source build
+      run: sphinx-build -W --keep-going source build
 
   build_meson:
     name: Meson / ${{ matrix.os }}
