@@ -136,6 +136,7 @@ jobs:
         - { name: Windows (clang-cl x86), flags: -T ClangCL -A Win32 }
         - { name: Windows (ARM),          flags: -A ARM, skip_tests: true, skip_build: true } # This fails to build.
         - { name: Windows (ARM64),        flags: -A ARM64, skip_tests: true }
+        - { name: UWP (ARM64),            flags: -A ARM64, -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0", skip_tests: true }
         - { name: UWP (x64),              flags: -A x64 -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0", skip_tests: true }
 
     steps:
