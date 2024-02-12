@@ -9,7 +9,7 @@ In the future there may be option to forward struct api to call api instead of i
 
 📌 **USE this API docs for similar functions in struct and call api** 
 
-📌 In struct api you can omit namespace e.g :code:`glms_vec3_dot` can be called as :code:`vec3_dot` in struct api, see :doc:`struct-api` to configure struct api for more details. 
+📌 In struct api you can omit namespace e.g :code:`glms_vec3_dot` can be called as :code:`vec3_dot` in struct api, see :doc:`api_struct` to configure struct api for more details.
 📌 In struct api functions can return struct/union
 📌 In struct api you can access items like **.x**, **.y**, **.z**, **.w**, **.r**, **.g**, **.b**, **.a**, **.m00**, **m01**... 
 
@@ -43,6 +43,7 @@ Follow the :doc:`build` documentation for this
    cam
    frustum
    box
+   aabb2d
    quat
    euler
    mat2

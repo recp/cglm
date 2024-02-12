@@ -3,9 +3,9 @@ Build cglm
 
 | **cglm** does not have any external dependencies.
 
-**NOTE:**
-If you only need to inline versions, you don't need to build **cglm**, you don't need to link it to your program.
-Just import cglm to your project as dependency / external lib by copy-paste then use it as usual
+.. note::
+   If you only need to inline versions, you don't need to build **cglm**, you don't need to link it to your program.
+   Just import cglm to your project as dependency / external lib by copy-paste then use it as usual
 
 CMake (All platforms):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

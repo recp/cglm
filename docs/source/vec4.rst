@@ -108,6 +108,13 @@ Functions documentation
     Parameters:
       | *[in, out]*  **v**     vector
 
+.. c:function:: void  glm_vec4_one(vec4 v)
+
+    makes all members one
+
+    Parameters:
+      | *[in, out]*  **v**     vector
+
 .. c:function:: float  glm_vec4_dot(vec4 a, vec4 b)
 
     dot product of vec4
@@ -412,7 +419,8 @@ Functions documentation
 
     Create four dimensional vector from pointer
 
-    | NOTE: **@src** must contain at least 4 elements.
+    .. note:: **@src** must contain at least 4 elements.
+
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination vector

@@ -194,7 +194,7 @@ Functions documentation
 
     Create mat3 matrix from pointer
 
-    | NOTE: **@src** must contain at least 9 elements.
+    .. note:: **@src** must contain at least 9 elements.
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats

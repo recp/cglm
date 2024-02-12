@@ -184,7 +184,7 @@ Functions documentation
 
     Create mat2 matrix from pointer
 
-    | NOTE: **@src** must contain at least 4 elements.
+    .. note:: **@src** must contain at least 4 elements.
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats

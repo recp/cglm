@@ -389,7 +389,8 @@ Functions documentation
 
     Create two dimensional vector from pointer
 
-    | NOTE: **@src** must contain at least 2 elements.
+    .. note:: **@src** must contain at least 2 elements.
+
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination vector

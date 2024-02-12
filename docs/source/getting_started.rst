@@ -42,9 +42,9 @@ Allocations:
 *cglm* doesn't alloc any memory on heap. So it doesn't provide any allocator.
 You must allocate memory yourself. You should alloc memory for out parameters too if you pass pointer of memory location. When allocating memory, don't forget that **vec4** and **mat4** require alignment.
 
-**NOTE:** Unaligned **vec4** and unaligned **mat4** operations will be supported in the future. Check todo list.
-Because you may want to multiply a CGLM matrix with external matrix.
-There is no guarantee that non-CGLM matrix is aligned. Unaligned types will have *u* prefix e.g. **umat4**
+.. note:: Unaligned **vec4** and unaligned **mat4** operations will be supported in the future. Check todo list.
+   Because you may want to multiply a CGLM matrix with external matrix.
+   There is no guarantee that non-CGLM matrix is aligned. Unaligned types will have *u* prefix e.g. **umat4**
 
 Array vs Struct:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

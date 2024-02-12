@@ -45,7 +45,8 @@ Functions documentation
 
     Create mat3x2 matrix from pointer
 
-    | NOTE: **@src** must contain at least 6 elements.
+    .. note:: **@src** must contain at least 6 elements.
+
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination matrix3x2
