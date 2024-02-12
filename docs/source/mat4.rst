@@ -34,8 +34,8 @@ Functions:
 #. :c:func:`glm_mat4_mulN`
 #. :c:func:`glm_mat4_mulv`
 #. :c:func:`glm_mat4_mulv3`
-#. :c:func:`glm_mat3_trace`
-#. :c:func:`glm_mat3_trace3`
+#. :c:func:`glm_mat4_trace`
+#. :c:func:`glm_mat4_trace3`
 #. :c:func:`glm_mat4_quat`
 #. :c:func:`glm_mat4_transpose_to`
 #. :c:func:`glm_mat4_transpose`

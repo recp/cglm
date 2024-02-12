@@ -108,6 +108,13 @@ Functions documentation
     Parameters:
       | *[in, out]*  **v**     vector
 
+.. c:function:: void  glm_vec4_one(vec4 v)
+
+    makes all members one
+
+    Parameters:
+      | *[in, out]*  **v**     vector
+
 .. c:function:: float  glm_vec4_dot(vec4 a, vec4 b)
 
     dot product of vec4
