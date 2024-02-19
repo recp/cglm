@@ -169,9 +169,10 @@ glm_aabb2d_diagonal(vec2 aabb[2]) {
 }
 
 /*!
- * @brief distance between of min and max
+ * @brief size of aabb
  *
  * @param[in]  aabb bounding aabb
+ * @param[out]  dest size
  */
 CGLM_INLINE
 void

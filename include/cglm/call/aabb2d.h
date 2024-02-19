@@ -50,7 +50,11 @@ glmc_aabb2d_isvalid(vec2 aabb[2]);
 
 CGLM_EXPORT
 float
-glmc_aabb2d_size(vec2 aabb[2]);
+glmc_aabb2d_diagonal(vec2 aabb[2]);
+
+CGLM_EXPORT
+void
+glmc_aabb2d_size(vec2 aabb[2], vec2 dest);
 
 CGLM_EXPORT
 float
