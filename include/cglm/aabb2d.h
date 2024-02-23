@@ -12,6 +12,9 @@
 #include "vec2.h"
 #include "util.h"
 
+/* DEPRECATED! use _diag */
+#define glm_aabb2d_size(aabb)         glm_aabb2d_diag(aabb)
+
 /*!
  * @brief copy all members of [aabb] to [dest]
  *
@@ -164,7 +167,7 @@ glm_aabb2d_isvalid(vec2 aabb[2]) {
  */
 CGLM_INLINE
 float
-glm_aabb2d_diagonal(vec2 aabb[2]) {
+glm_aabb2d_diag(vec2 aabb[2]) {
   return glm_vec2_distance(aabb[0], aabb[1]);
 }
 
@@ -176,7 +179,7 @@ glm_aabb2d_diagonal(vec2 aabb[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_size(vec2 aabb[2], vec2 dest) {
+glm_aabb2d_sizev(vec2 aabb[2], vec2 dest) {
   glm_vec2_sub(aabb[1], aabb[0], dest); 
 }
 
@@ -188,7 +191,7 @@ glm_aabb2d_size(vec2 aabb[2], vec2 dest) {
 CGLM_INLINE
 float
 glm_aabb2d_radius(vec2 aabb[2]) {
-  return glm_aabb2d_diagonal(aabb) * 0.5f;
+  return glm_aabb2d_diag(aabb) * 0.5f;
 }
 
 /*!
