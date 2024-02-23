@@ -24,6 +24,7 @@ Macros:
 Functions:
 
 1. :c:func:`glm_aabb2d_copy`
+#. :c:func:`glm_aabb2d_zero`
 #. :c:func:`glm_aabb2d_transform`
 #. :c:func:`glm_aabb2d_merge`
 #. :c:func:`glm_aabb2d_crop`
@@ -49,6 +50,13 @@ Functions documentation
     Parameters:
       | *[in]*  **aabb**  bounding box
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_aabb2d_zero(vec2 aabb[2])
+
+    | makes all members of [aabb] 0.0f (zero)
+
+    Parameters:
+      | *[in, out]*  **aabb**     bounding box
 
 .. c:function:: void  glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2])
 

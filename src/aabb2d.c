@@ -13,6 +13,12 @@
 
 CGLM_EXPORT
 void
+glmc_aabb2d_zero(vec2 aabb[2]) {
+  glm_aabb2d_zero(aabb);
+}
+
+CGLM_EXPORT
+void
 glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
   glm_aabb2d_copy(aabb, dest);
 }

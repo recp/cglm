@@ -16,10 +16,9 @@
 #define glm_aabb2d_size(aabb)         glm_aabb2d_diag(aabb)
 
 /*!
- * @brief copy all members of [aabb] to [dest]
+ * @brief make [aabb] zero
  *
- * @param[in]  aabb source
- * @param[out] dest destination
+ * @param[in, out]  aabb
  */
 CGLM_INLINE
 void
