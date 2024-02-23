@@ -8,6 +8,9 @@
 #include "../include/cglm/cglm.h"
 #include "../include/cglm/call.h"
 
+/* DEPRECATED! use _diag */
+#define glmc_aabb2d_size(aabb)         glmc_aabb2d_diag(aabb)
+
 CGLM_EXPORT
 void
 glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
