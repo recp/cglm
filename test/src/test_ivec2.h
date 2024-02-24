@@ -62,7 +62,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_dot) {
   dot1 = GLM(ivec2_dot)(a, b);
   dot2 = a[0] * b[0] + a[1] * b[1];
 
-  ASSERT(test_eq(dot1, dot2))
+  ASSERT(dot1, dot2)
   ASSERT(dot1 == 20)
 
   TEST_SUCCESS
@@ -76,7 +76,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_cross) {
   cross1 = GLM(ivec2_cross)(a, b);
   cross2 = a[0] * b[1] - a[1] * b[0];
 
-  ASSERT(test_eq(cross1, cross2))
+  ASSERT(cross1, cross2)
   ASSERT(cross1 == 11)
 
   TEST_SUCCESS
@@ -161,8 +161,8 @@ TEST_IMPL(GLM_PREFIX, ivec2_div) {
   
   GLM(ivec2_div)(v1, v2, v3);
 
-  ASSERT(test_eq(v1[0] / v2[0], v3[0]))
-  ASSERT(test_eq(v1[1] / v2[1], v3[1]))
+  ASSERT(v1[0] / v2[0] == v3[0])
+  ASSERT(v1[1] / v2[1] == v3[1])
   ASSERT(v3[0] == -3)
   ASSERT(v3[1] == 1)
   
@@ -175,8 +175,8 @@ TEST_IMPL(GLM_PREFIX, ivec2_divs) {
   
   GLM(ivec2_divs)(v1, s, v2);
 
-  ASSERT(test_eq(v1[0] / s, v2[0]))
-  ASSERT(test_eq(v1[1] / s, v2[1]))
+  ASSERT(v1[0] / s == v2[0])
+  ASSERT(v1[1] / s == v2[1])
   ASSERT(v2[0] == 4)
   ASSERT(v2[1] == -2)
   
@@ -190,8 +190,8 @@ TEST_IMPL(GLM_PREFIX, ivec2_mod) {
 
   GLM(ivec2_mod)(a, b, dest);
 
-  ASSERT(test_eq(a[0] % b[0], dest[0]))
-  ASSERT(test_eq(a[1] % b[1], dest[1]))
+  ASSERT(a[0] % b[0] == dest[0])
+  ASSERT(a[1] % b[1] == dest[1])
   ASSERT(dest[0] == 1)
   ASSERT(dest[1] == -3)
 
