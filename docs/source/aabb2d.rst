@@ -17,16 +17,22 @@ convert it before and after calling a cglm aabb2d function.
 Table of contents (click to go):
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Macros:
+
+1. :c:func:`glm_aabb2d_size`
+
 Functions:
 
 1. :c:func:`glm_aabb2d_copy`
+#. :c:func:`glm_aabb2d_zero`
 #. :c:func:`glm_aabb2d_transform`
 #. :c:func:`glm_aabb2d_merge`
 #. :c:func:`glm_aabb2d_crop`
 #. :c:func:`glm_aabb2d_crop_until`
 #. :c:func:`glm_aabb2d_invalidate`
 #. :c:func:`glm_aabb2d_isvalid`
-#. :c:func:`glm_aabb2d_size`
+#. :c:func:`glm_aabb2d_diag`
+#. :c:func:`glm_aabb2d_sizev`
 #. :c:func:`glm_aabb2d_radius`
 #. :c:func:`glm_aabb2d_center`
 #. :c:func:`glm_aabb2d_aabb`
@@ -44,6 +50,13 @@ Functions documentation
     Parameters:
       | *[in]*  **aabb**  bounding box
       | *[out]* **dest**  destination
+
+.. c:function:: void  glm_aabb2d_zero(vec2 aabb[2])
+
+    | makes all members of [aabb] 0.0f (zero)
+
+    Parameters:
+      | *[in, out]*  **aabb**     bounding box
 
 .. c:function:: void  glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2])
 
@@ -111,15 +124,27 @@ Functions documentation
     Returns:
       returns true if aabb is valid otherwise false
 
-.. c:function:: float  glm_aabb2d_size(vec2 aabb[2])
+.. c:function:: float  glm_aabb2d_diag(vec2 aabb[2])
 
-    | distance between of min and max
+    | distance between min and max
 
     Parameters:
       | *[in]*   **aabb**     bounding box
 
     Returns:
       distance between min - max
+
+
+.. c:function:: void  glm_aabb2d_sizev(vec2 aabb[2], vec2 dest)
+
+    | size vector of aabb
+
+    Parameters:
+      | *[in]*   **aabb**     bounding box
+      | *[out]*  **dest**     size vector
+
+    Returns:
+      size vector of aabb max - min
 
 .. c:function:: float  glm_aabb2d_radius(vec2 aabb[2])
 

@@ -15,6 +15,10 @@ extern "C" {
 
 CGLM_EXPORT
 void
+glmc_aabb2d_zero(vec2 aabb[2]);
+
+CGLM_EXPORT
+void
 glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]);
 
 CGLM_EXPORT
@@ -46,7 +50,11 @@ glmc_aabb2d_isvalid(vec2 aabb[2]);
 
 CGLM_EXPORT
 float
-glmc_aabb2d_size(vec2 aabb[2]);
+glmc_aabb2d_diag(vec2 aabb[2]);
+
+CGLM_EXPORT
+void
+glmc_aabb2d_sizev(vec2 aabb[2], vec2 dest);
 
 CGLM_EXPORT
 float
