@@ -62,7 +62,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_dot) {
   dot1 = GLM(ivec2_dot)(a, b);
   dot2 = a[0] * b[0] + a[1] * b[1];
 
-  ASSERT(dot1, dot2)
+  ASSERT(dot1 == dot2)
   ASSERT(dot1 == 20)
 
   TEST_SUCCESS
@@ -76,7 +76,7 @@ TEST_IMPL(GLM_PREFIX, ivec2_cross) {
   cross1 = GLM(ivec2_cross)(a, b);
   cross2 = a[0] * b[1] - a[1] * b[0];
 
-  ASSERT(cross1, cross2)
+  ASSERT(cross1 == cross2)
   ASSERT(cross1 == 11)
 
   TEST_SUCCESS

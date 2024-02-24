@@ -18,7 +18,7 @@
 /*!
  * @brief make [aabb] zero
  *
- * @param[in, out]  aabb
+ * @param[in, out]  aabb aabb
  */
 CGLM_INLINE
 void
