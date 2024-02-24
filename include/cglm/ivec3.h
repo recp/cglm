@@ -160,7 +160,7 @@ glm_ivec3_norm2(ivec3 v) {
 CGLM_INLINE
 int
 glm_ivec3_norm(ivec3 v) {
-  return (int)sqrtf(glm_ivec3_norm2(v));
+  return (int)sqrtf((float)glm_ivec3_norm2(v));
 }
 
 /*!
