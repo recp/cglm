@@ -13,6 +13,9 @@ extern "C" {
 
 #include "../cglm.h"
 
+/* DEPRECATED! use _diag */
+#define glmc_aabb2d_size(aabb) glmc_aabb2d_diag(aabb)
+
 CGLM_EXPORT
 void
 glmc_aabb2d_zero(vec2 aabb[2]);
