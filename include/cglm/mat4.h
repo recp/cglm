@@ -69,7 +69,7 @@
 #  include "simd/wasm/mat4.h"
 #endif
 
-#ifdef DEBUG
+#ifndef NDEBUG
 # include <assert.h>
 #endif
 
@@ -376,7 +376,7 @@ void
 glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
   uint32_t i;
 
-#ifdef DEBUG
+#ifndef NDEBUG
   assert(len > 1 && "there must be least 2 matrices to go!");
 #endif
 
