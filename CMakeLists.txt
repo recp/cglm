@@ -32,18 +32,23 @@ if(CGLM_USE_C99)
 endif()
 
 if(MSVC)
-  add_definitions(-DNDEBUG -D_WINDOWS -D_USRDLL)
-  add_compile_options(/W3 /Ox /Gy /Oi /TC)
-  
-  # Ref: https://skia.googlesource.com/third_party/sdl/+/refs/heads/master/CMakeLists.txt#225
-  # Make sure /RTC1 is disabled, otherwise it will use functions from the CRT
-  foreach(flag_var
-      CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
-      CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
-    string(REGEX REPLACE "/RTC(su|[1su])" "" ${flag_var} "${${flag_var}}")
-  endforeach(flag_var)
+  add_definitions(-D_WINDOWS -D_USRDLL)
+
+  if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+    add_definitions(-DNDEBUG)
+    add_compile_options(/W3 /Ox /Gy /Oi /TC)
+    foreach(flag_var
+        CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
+        CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      string(REGEX REPLACE "/RTC(su|[1su])" "" ${flag_var} "${${flag_var}}")
+    endforeach(flag_var)
+  endif()
 else()
-  add_compile_options(-Wall -O3)
+  add_compile_options(-Wall)
+
+  if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
+    add_compile_options(-O3)
+  endif()
 endif()
 
 get_directory_property(hasParent PARENT_DIRECTORY)
