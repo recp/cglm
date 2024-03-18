@@ -436,7 +436,7 @@ glm_mat3_rmc(vec3 r, mat3 m, vec3 c) {
  */
 CGLM_INLINE
 void
-glm_mat3_make(float * __restrict src, mat3 dest) {
+glm_mat3_make(const float * __restrict src, mat3 dest) {
   dest[0][0] = src[0];
   dest[0][1] = src[1];
   dest[0][2] = src[2];

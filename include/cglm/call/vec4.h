@@ -309,7 +309,7 @@ glmc_vec4_sqrt(vec4 v, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_make(float * __restrict src, vec4 dest);
+glmc_vec4_make(const float * __restrict src, vec4 dest);
 
 #ifdef __cplusplus
 }

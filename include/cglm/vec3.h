@@ -1196,7 +1196,7 @@ glm_normalize_to(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_make(float * __restrict src, vec3 dest) {
+glm_vec3_make(const float * __restrict src, vec3 dest) {
   dest[0] = src[0];
   dest[1] = src[1];
   dest[2] = src[2];

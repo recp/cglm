@@ -13,7 +13,7 @@
  Functions:
    CGLM_INLINE void glm_mat4x3_copy(mat4x3 mat, mat4x3 dest);
    CGLM_INLINE void glm_mat4x3_zero(mat4x3 mat);
-   CGLM_INLINE void glm_mat4x3_make(float * __restrict src, mat4x3 dest);
+   CGLM_INLINE void glm_mat4x3_make(const float * __restrict src, mat4x3 dest);
    CGLM_INLINE void glm_mat4x3_mul(mat4x3 m1, mat3x4 m2, mat4 dest);
    CGLM_INLINE void glm_mat4x3_mulv(mat4x3 m, vec3 v, vec4 dest);
    CGLM_INLINE void glm_mat4x3_transpose(mat4x3 m, mat3x4 dest);
@@ -77,7 +77,7 @@ glm_mat4x3_zero(mat4x3 mat) {
  */
 CGLM_INLINE
 void
-glm_mat4x3_make(float * __restrict src, mat4x3 dest) {
+glm_mat4x3_make(const float * __restrict src, mat4x3 dest) {
   dest[0][0] = src[0];
   dest[0][1] = src[1];
   dest[0][2] = src[2];

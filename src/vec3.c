@@ -456,6 +456,6 @@ glmc_vec3_sqrt(vec3 v, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec3_make(float * __restrict src, vec3 dest) {
+glmc_vec3_make(const float * __restrict src, vec3 dest) {
   glm_vec3_make(src, dest);
 }

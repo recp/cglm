@@ -921,7 +921,7 @@ glms_vec4_(swizzle)(vec4s v, int mask) {
  */
 CGLM_INLINE
 vec4s
-glms_vec4_(make)(float * __restrict src) {
+glms_vec4_(make)(const float * __restrict src) {
   vec4s dest;
   glm_vec4_make(src, dest.raw);
   return dest;

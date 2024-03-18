@@ -23,7 +23,7 @@ glmc_mat3x2_zero(mat3x2 mat);
 
 CGLM_EXPORT
 void
-glmc_mat3x2_make(float * __restrict src, mat3x2 dest);
+glmc_mat3x2_make(const float * __restrict src, mat3x2 dest);
 
 CGLM_EXPORT
 void

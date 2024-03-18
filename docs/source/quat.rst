@@ -422,7 +422,7 @@ Functions documentation
       | *[in]*       **q**      quaternion
       | *[in]*       **pivot**  pivot
 
-.. c:function:: void glm_quat_make(float * __restrict src, versor dest)
+.. c:function:: void glm_quat_make(const float * __restrict src, versor dest)
 
     Create quaternion from pointer
 

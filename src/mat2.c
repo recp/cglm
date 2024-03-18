@@ -100,6 +100,6 @@ glmc_mat2_rmc(vec2 r, mat2 m, vec2 c) {
 
 CGLM_EXPORT
 void
-glmc_mat2_make(float * __restrict src, mat2 dest) {
+glmc_mat2_make(const float * __restrict src, mat2 dest) {
   glm_mat2_make(src, dest);
 }

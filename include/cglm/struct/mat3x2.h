@@ -12,7 +12,7 @@
 
  Functions:
    CGLM_INLINE mat3x2s glms_mat3x2_zero(void);
-   CGLM_INLINE mat3x2s glms_mat3x2_make(float * __restrict src);
+   CGLM_INLINE mat3x2s glms_mat3x2_make(const float * __restrict src);
    CGLM_INLINE mat3s   glms_mat3x2_mul(mat3x2s m1, mat2x3s m2);
    CGLM_INLINE vec3s   glms_mat3x2_mulv(mat3x2s m, vec2s v);
    CGLM_INLINE mat2x3s glms_mat3x2_transpose(mat3x2s m);
@@ -55,7 +55,7 @@ glms_mat3x2_(zero)(void) {
  */
 CGLM_INLINE
 mat3x2s
-glms_mat3x2_(make)(float * __restrict src) {
+glms_mat3x2_(make)(const float * __restrict src) {
   mat3x2s r;
   glm_mat3x2_make(src, r.raw);
   return r;

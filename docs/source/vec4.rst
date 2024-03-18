@@ -415,7 +415,7 @@ Functions documentation
       | *[in]*  **s**      parameter
       | *[out]* **dest**   destination
 
-.. c:function:: void glm_vec4_make(float * __restrict src, vec4 dest)
+.. c:function:: void glm_vec4_make(const float * __restrict src, vec4 dest)
 
     Create four dimensional vector from pointer
 

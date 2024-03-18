@@ -190,7 +190,7 @@ Functions documentation
     Returns:
         scalar value e.g. Matrix1x1
 
-.. c:function:: void glm_mat3_make(float * __restrict src, mat3 dest)
+.. c:function:: void glm_mat3_make(const float * __restrict src, mat3 dest)
 
     Create mat3 matrix from pointer
 

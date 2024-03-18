@@ -894,7 +894,7 @@ glm_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
  */
 CGLM_INLINE
 void
-glm_quat_make(float * __restrict src, versor dest) {
+glm_quat_make(const float * __restrict src, versor dest) {
   dest[0] = src[0]; dest[1] = src[1];
   dest[2] = src[2]; dest[3] = src[3];
 }
