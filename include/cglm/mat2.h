@@ -354,7 +354,7 @@ glm_mat2_rmc(vec2 r, mat2 m, vec2 c) {
  */
 CGLM_INLINE
 void
-glm_mat2_make(float * __restrict src, mat2 dest) {
+glm_mat2_make(const float * __restrict src, mat2 dest) {
   dest[0][0] = src[0];
   dest[0][1] = src[1];
   dest[1][0] = src[2];

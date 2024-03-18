@@ -232,6 +232,6 @@ glmc_quat_rotate_atm(mat4 m, versor q, vec3 pivot) {
 
 CGLM_EXPORT
 void
-glmc_quat_make(float * __restrict src, versor dest) {
+glmc_quat_make(const float * __restrict src, versor dest) {
   glm_quat_make(src, dest);
 }

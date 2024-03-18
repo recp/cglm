@@ -708,7 +708,7 @@ glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_make(float * __restrict src, vec2 dest) {
+glm_vec2_make(const float * __restrict src, vec2 dest) {
   dest[0] = src[0]; dest[1] = src[1];
 }
 

@@ -385,7 +385,7 @@ Functions documentation
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
       | *[out]* **dest**   destination
 
-.. c:function:: void glm_vec2_make(float * __restrict src, vec2 dest)
+.. c:function:: void glm_vec2_make(const float * __restrict src, vec2 dest)
 
     Create two dimensional vector from pointer
 

@@ -685,7 +685,7 @@ glms_vec2_(lerp)(vec2s from, vec2s to, float t) {
  */
 CGLM_INLINE
 vec2s
-glms_vec2_(make)(float * __restrict src) {
+glms_vec2_(make)(const float * __restrict src) {
   vec2s dest;
   glm_vec2_make(src, dest.raw);
   return dest;

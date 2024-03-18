@@ -106,6 +106,6 @@ glmc_mat3_rmc(vec3 r, mat3 m, vec3 c) {
 
 CGLM_EXPORT
 void
-glmc_mat3_make(float * __restrict src, mat3 dest) {
+glmc_mat3_make(const float * __restrict src, mat3 dest) {
   glm_mat3_make(src, dest);
 }

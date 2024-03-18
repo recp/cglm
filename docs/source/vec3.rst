@@ -503,7 +503,7 @@ Functions documentation
       | *[in]*  **t**      interpolant (amount) clamped between 0 and 1
       | *[out]* **dest**   destination
 
-.. c:function:: void glm_vec3_make(float * __restrict src, vec3 dest)
+.. c:function:: void glm_vec3_make(const float * __restrict src, vec3 dest)
 
     Create three dimensional vector from pointer
 

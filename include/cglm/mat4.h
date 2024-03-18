@@ -790,7 +790,7 @@ glm_mat4_rmc(vec4 r, mat4 m, vec4 c) {
  */
 CGLM_INLINE
 void
-glm_mat4_make(float * __restrict src, mat4 dest) {
+glm_mat4_make(const float * __restrict src, mat4 dest) {
   dest[0][0] = src[0];   dest[1][0] = src[4];
   dest[0][1] = src[1];   dest[1][1] = src[5];
   dest[0][2] = src[2];   dest[1][2] = src[6];

@@ -574,7 +574,7 @@ glms_quat_(rotate_atm)(versors q, vec3s pivot) {
  */
 CGLM_INLINE
 versors
-glms_quat_(make)(float * __restrict src) {
+glms_quat_(make)(const float * __restrict src) {
   versors dest;
   glm_quat_make(src, dest.raw);
   return dest;

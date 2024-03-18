@@ -41,7 +41,7 @@ Functions documentation
     Parameters:
       | *[in,out]* **mat**  matrix
 
-.. c:function:: void glm_mat2x3_make(float * __restrict src, mat2x3 dest)
+.. c:function:: void glm_mat2x3_make(const float * __restrict src, mat2x3 dest)
 
     Create mat2x3 matrix from pointer
 

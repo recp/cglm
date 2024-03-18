@@ -1299,7 +1299,7 @@ glm_vec4_swizzle(vec4 v, int mask, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_make(float * __restrict src, vec4 dest) {
+glm_vec4_make(const float * __restrict src, vec4 dest) {
   dest[0] = src[0]; dest[1] = src[1];
   dest[2] = src[2]; dest[3] = src[3];
 }

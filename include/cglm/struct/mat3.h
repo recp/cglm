@@ -28,7 +28,7 @@
    CGLM_INLINE mat3s  glms_mat3_swap_col(mat3s mat, int col1, int col2);
    CGLM_INLINE mat3s  glms_mat3_swap_row(mat3s mat, int row1, int row2);
    CGLM_INLINE float  glms_mat3_rmc(vec3s r, mat3s m, vec3s c);
-   CGLM_INLINE mat3s  glms_mat3_make(float * __restrict src);
+   CGLM_INLINE mat3s  glms_mat3_make(const float * __restrict src);
  */
 
 #ifndef cglms_mat3s_h
@@ -294,7 +294,7 @@ glms_mat3_(rmc)(vec3s r, mat3s m, vec3s c) {
  */
 CGLM_INLINE
 mat3s
-glms_mat3_(make)(float * __restrict src) {
+glms_mat3_(make)(const float * __restrict src) {
   mat3s r;
   glm_mat3_make(src, r.raw);
   return r;
