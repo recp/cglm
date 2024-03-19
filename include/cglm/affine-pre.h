@@ -219,7 +219,7 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
  *   center of object if object does not lay out at ORIGIN perfectly.
  *
  *   Using `glm_rotate_at()` with center of bounding shape ( AABB, Sphere ... )
- *   would be an easy option to rotate around object if this is not work for you.
+ *   would be an easy option to rotate around object if object is not at origin.
  *
  *   One another option to rotate around itself at any point is `glm_spin()`
  *   which is perfect if only rotating around model position is desired e.g. not
