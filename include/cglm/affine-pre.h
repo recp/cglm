@@ -207,7 +207,25 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
 }
 
 /*!
- * @brief rotate existing transform matrix around given axis by angle
+ * @brief rotate existing transform matrix 
+ *        around given axis by angle at ORIGIN (0,0,0)
+ *
+ *   **❗️IMPORTANT ❗️**
+ *
+ *   If you need to rotate object around itself e.g. center of object or at
+ *   some point [of object] then `glm_rotate_at()` would be better choice to do so.
+ *
+ *   Even if object's model transform is identiy, rotation may not be around
+ *   center of object if object does not lay out at ORIGIN perfectly.
+ *
+ *   Using `glm_rotate_at()` with center of bounding shape ( AABB, Sphere ... )
+ *   would be an easy option to rotate around object if object is not at origin.
+ *
+ *   One another option to rotate around itself at any point is `glm_spin()`
+ *   which is perfect if only rotating around model position is desired e.g. not
+ *   specific point on model for instance center of geometry or center of mass,
+ *   again if geometry is not perfectly centered at origin at identity transform,
+ *   rotation may not be around geometry.
  *
  * @param[in, out]  m      affine transform
  * @param[in]       angle  angle (radians)
@@ -268,7 +286,8 @@ glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
 }
 
 /*!
- * @brief rotate existing transform matrix around given axis by angle around self (doesn't affected by position)
+ * @brief rotate existing transform matrix 
+ *        around given axis by angle around self (doesn't affected by position)
  *
  * @param[in, out]  m      affine transform
  * @param[in]       angle  angle (radians)
