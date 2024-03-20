@@ -459,3 +459,15 @@ void
 glmc_vec3_make(const float * __restrict src, vec3 dest) {
   glm_vec3_make(src, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec3_reflect(vec3 I, vec3 N, vec3 dest) {
+  glm_vec3_reflect(I, N, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest) {
+  glm_vec3_faceforward(N, I, Nref, dest);
+}

@@ -81,6 +81,7 @@
    CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
    CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
    CGLM_INLINE void  glm_vec3_reflect(vec3 I, vec3 N, vec3 dest);
+   CGLM_INLINE void  glm_vec3_refract(vec3 I, vec3 N, float ior, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);

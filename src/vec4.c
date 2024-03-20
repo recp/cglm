@@ -423,3 +423,9 @@ void
 glmc_vec4_make(const float * __restrict src, vec4 dest) {
   glm_vec4_make(src, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
+  glm_vec4_reflect(I, N, dest);
+}

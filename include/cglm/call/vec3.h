@@ -334,6 +334,10 @@ CGLM_EXPORT
 void
 glmc_vec3_make(const float * __restrict src, vec3 dest);
 
+CGLM_EXPORT
+void
+glmc_vec3_reflect(vec3 I, vec3 N, vec3 dest);
+
 #ifdef __cplusplus
 }
 #endif

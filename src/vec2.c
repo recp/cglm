@@ -302,3 +302,9 @@ void
 glmc_vec2_make(const float * __restrict src, vec2 dest) {
   glm_vec2_make(src, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec2_reflect(vec2 I, vec2 N, vec2 dest) {
+  glm_vec2_reflect(I, N, dest);
+}

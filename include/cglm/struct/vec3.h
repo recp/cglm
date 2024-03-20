@@ -76,6 +76,7 @@
    CGLM_INLINE vec3s glms_vec3_smoothinterpc(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
    CGLM_INLINE vec3s glms_vec3_make(float * restrict src);
+   CGLM_INLINE vec3s glms_vec3_reflect(vec3s I, vec3s N);
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -1080,6 +1081,21 @@ vec3s
 glms_vec3_(make)(const float * __restrict src) {
   vec3s dest;
   glm_vec3_make(src, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @returns reflection result
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(reflect)(vec3s I, vec3s N) {
+  vec3s dest;
+  glm_vec3_reflect(I.raw, N.raw, dest.raw);
   return dest;
 }
 

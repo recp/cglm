@@ -67,6 +67,7 @@
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
+   CGLM_INLINE vec4s glms_vec4_reflect(vec4s I, vec4s N);
  */
 
 #ifndef cglms_vec4s_h
@@ -924,6 +925,21 @@ vec4s
 glms_vec4_(make)(const float * __restrict src) {
   vec4s dest;
   glm_vec4_make(src, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @returns reflection result
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(reflect)(vec4s I, vec4s N) {
+  vec4s dest;
+  glm_vec4_reflect(I.raw, N.raw, dest.raw);
   return dest;
 }
 
