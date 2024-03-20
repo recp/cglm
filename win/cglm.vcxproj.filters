@@ -729,5 +729,8 @@
     <ClInclude Include="..\include\cglm\struct\ivec4.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\ray.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

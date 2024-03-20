@@ -20,7 +20,15 @@ glmc_ray_triangle(vec3   origin,
                   vec3   v1,
                   vec3   v2,
                   float *d);
-    
+
+CGLM_EXPORT
+bool
+glmc_ray_sphere(vec3 origin,
+                vec3 dir,
+                vec4 s,
+                float * __restrict t1,
+                float * __restrict t2);
+
 #ifdef __cplusplus
 }
 #endif

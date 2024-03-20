@@ -7,12 +7,17 @@
 
 /*
  Functions:
-   CGLM_INLINE bool glm_line_triangle_intersect(vec3   origin,
-                                                vec3   direction,
-                                                vec3   v0,
-                                                vec3   v1,
-                                                vec3   v2,
-                                                float *d);
+   CGLM_INLINE bool glm_ray_triangle(vec3   origin,
+                                     vec3   direction,
+                                     vec3   v0,
+                                     vec3   v1,
+                                     vec3   v2,
+                                     float *d);
+ CGLM_INLINE bool glm_ray_sphere(vec3 origin,
+                                 vec3 dir,
+                                 vec4 s,
+                                 float * __restrict t1,
+                                 float * __restrict t2)
 */
 
 #ifndef cglm_ray_h
@@ -31,7 +36,6 @@
  * @param[in, out] d         distance to intersection
  * @return whether there is intersection
  */
-
 CGLM_INLINE
 bool
 glm_ray_triangle(vec3   origin,
@@ -72,6 +76,72 @@ glm_ray_triangle(vec3   origin,
     *d = dist;
 
   return dist > epsilon;
+}
+
+/*!
+ * @brief ray sphere intersection
+ *
+ * @param[in]  origin ray origin
+ * @param[out] dir    normalized ray direction
+ * @param[in]  s      sphere  [center.x, center.y, center.z, radii]
+ * @param[in]  t1     near point1 (closer to origin)
+ * @param[in]  t2     far point2 (farther from origin)
+ */
+CGLM_INLINE
+bool 
+glm_ray_sphere(vec3 origin,
+               vec3 dir,
+               vec4 s,
+               float * __restrict t1,
+               float * __restrict t2) {
+  vec3  dp;
+  float r2, ddp, dpp, dscr, q, tmp, _t1, _t2;
+
+  /* ensure dir is normalized */
+  glm_vec3_sub(s, origin, dp);
+
+  ddp = glm_vec3_dot(dir, dp);
+  dpp = glm_vec3_norm2(dp);
+
+  /* compute the remedy term for numerical stability */
+  glm_vec3_mulsubs(dir, ddp, dp); /* dp: remedy term */
+
+  r2   = s[3] * s[3];
+  dscr = r2 - glm_vec3_norm2(dp);
+
+  if (dscr < 0.0f) {
+    /* no intersection */
+    return false;
+  }
+
+  dscr = sqrtf(dscr);
+  q    = (ddp >= 0.0f) ? (ddp + dscr) : (ddp - dscr);
+
+  /*
+     include Press, William H., Saul A. Teukolsky,
+     William T. Vetterling, and Brian P. Flannery,
+     "Numerical Recipes in C," Cambridge University Press, 1992.
+   */
+  _t1 = q;
+  _t2 = (dpp - r2) / q;
+
+  /* adjust t1 and t2 to ensure t1 is the closer intersection */
+  if (_t1 > _t2) {
+    tmp = _t1;
+    _t1 = _t2;
+    _t2 = tmp;
+  }
+
+  *t1 = _t1;
+  *t2 = _t2;
+
+  /* check if the closest intersection (t1) is behind the ray's origin */
+  if (_t1 < 0.0f && _t2 < 0.0f) {
+    /* both intersections are behind the ray, no visible intersection */
+    return false;
+  }
+
+  return true;
 }
 
 #endif
