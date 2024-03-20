@@ -82,6 +82,7 @@
    CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
    CGLM_INLINE void  glm_vec3_reflect(vec3 I, vec3 N, vec3 dest);
    CGLM_INLINE void  glm_vec3_refract(vec3 I, vec3 N, float ior, vec3 dest);
+   CGLM_INLINE void  glm_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -1217,6 +1218,28 @@ glm_vec3_reflect(vec3 I, vec3 N, vec3 dest) {
   vec3 temp;
   glm_vec3_scale(N, 2.0f * glm_vec3_dot(I, N), temp);
   glm_vec3_sub(I, temp, dest);
+}
+
+/*!
+ * @brief a vector pointing in the same direction as another
+ *
+ * orients a vector to point away from a surface as defined by its normal
+ *
+ * @param[in] N      vector to orient.
+ * @param[in] I      incident vector
+ * @param[in] Nref   reference vector
+ * @param[out] dest  oriented vector, pointing away from the surface.
+ */
+CGLM_INLINE
+void 
+glm_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest) {
+  if (glm_vec3_dot(I, Nref) < 0.0f) {
+    /* N is facing away from I */
+    glm_vec3_copy(N, dest);
+  } else {
+    /* N is facing towards I, negate it */
+    glm_vec3_negate_to(N, dest);
+  }
 }
 
 #endif /* cglm_vec3_h */
