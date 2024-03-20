@@ -238,6 +238,9 @@
     <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_lh.h" />
     <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_rh.h" />
     <ClInclude Include="..\include\cglm\struct\io.h" />
+    <ClInclude Include="..\include\cglm\struct\ivec2.h" />
+    <ClInclude Include="..\include\cglm\struct\ivec3.h" />
+    <ClInclude Include="..\include\cglm\struct\ivec4.h" />
     <ClInclude Include="..\include\cglm\struct\mat2.h" />
     <ClInclude Include="..\include\cglm\struct\mat2x3.h" />
     <ClInclude Include="..\include\cglm\struct\mat2x4.h" />

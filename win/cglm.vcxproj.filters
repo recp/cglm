@@ -720,5 +720,14 @@
     <ClInclude Include="..\include\cglm\struct\handed\euler_to_quat_rh.h">
       <Filter>include\cglm\struct\handed</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\ivec2.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\ivec3.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\ivec4.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
