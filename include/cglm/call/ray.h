@@ -29,6 +29,10 @@ glmc_ray_sphere(vec3 origin,
                 float * __restrict t1,
                 float * __restrict t2);
 
+CGLM_EXPORT
+void
+glmc_ray_at(vec3 orig, vec3 dir, float t, vec3 point);
+
 #ifdef __cplusplus
 }
 #endif

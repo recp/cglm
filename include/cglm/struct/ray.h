@@ -56,4 +56,20 @@ glms_ray_(sphere)(vec3s origin,
   return glm_ray_sphere(origin.raw, dir.raw, s.raw, t1, t2);
 }
 
+/*!
+ * @brief point using t by 𝐏(𝑡)=𝐀+𝑡𝐛
+ *
+ * @param[in]  orig  origin of ray
+ * @param[in]  dir   direction of ray
+ * @param[in]  t     parameter
+ * @returns point point at t
+ */
+CGLM_INLINE
+vec3s
+glms_ray_(at)(vec3s orig, vec3s dir, float t) {
+  vec3s r;
+  glm_ray_at(orig.raw, orig.raw, t, r.raw);
+  return r;
+}
+
 #endif /* cglms_ray_h */

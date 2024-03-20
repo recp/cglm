@@ -18,6 +18,7 @@
                                  vec4 s,
                                  float * __restrict t1,
                                  float * __restrict t2)
+ CGLM_INLINE void glm_ray_at(vec3 orig, vec3 dir, float t, vec3 point);
 */
 
 #ifndef cglm_ray_h
@@ -142,6 +143,22 @@ glm_ray_sphere(vec3 origin,
   }
 
   return true;
+}
+
+/*!
+ * @brief point using t by 𝐏(𝑡)=𝐀+𝑡𝐛
+ *
+ * @param[in]  orig  origin of ray
+ * @param[in]  dir   direction of ray
+ * @param[in]  t     parameter
+ * @param[out] point point at t
+ */
+CGLM_INLINE
+void
+glm_ray_at(vec3 orig, vec3 dir, float t, vec3 point) {
+  vec3 dst;
+  glm_vec3_scale(dir, t, dst);
+  glm_vec3_add(orig, dst, point);
 }
 
 #endif
