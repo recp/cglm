@@ -82,3 +82,17 @@ http://github.com/microsoft/DirectXMath
 17. Pick Matrix
 
 glu project -> project.c
+
+18. Ray sphere intersection
+
+RAY TRACING GEMS
+HIGH-QUALITY AND REAL-TIME RENDERING WITH DXR AND OTHER APIS
+
+CHAPTER 7
+Precision Improvements for Ray/Sphere Intersection
+Eric Haines (1), Johannes Günther (2), and Tomas Akenine-Möller (1)
+  (1) NVIDIA
+  (2) Intel
+
+Wyman, C., and Haines, E. Getting Started with RTX Ray Tracing.
+https://github.com/NVIDIAGameWorks/GettingStartedWithRTXRayTracing
