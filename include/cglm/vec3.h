@@ -80,6 +80,7 @@
    CGLM_INLINE void  glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
    CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
+   CGLM_INLINE void  glm_vec3_reflect(vec3 I, vec3 N, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -1200,6 +1201,21 @@ glm_vec3_make(const float * __restrict src, vec3 dest) {
   dest[0] = src[0];
   dest[1] = src[1];
   dest[2] = src[2];
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[out] dest reflection result
+ */
+CGLM_INLINE
+void
+glm_vec3_reflect(vec3 I, vec3 N, vec3 dest) {
+  vec3 temp;
+  glm_vec3_scale(N, 2.0f * glm_vec3_dot(I, N), temp);
+  glm_vec3_sub(I, temp, dest);
 }
 
 #endif /* cglm_vec3_h */

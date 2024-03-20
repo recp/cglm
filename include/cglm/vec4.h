@@ -65,6 +65,7 @@
    CGLM_INLINE void  glm_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
    CGLM_INLINE void  glm_vec4_make(float * restrict src, vec4 dest);
+   CGLM_INLINE void  glm_vec4_reflect(vec4 I, vec4 N, vec4 dest);
 
  DEPRECATED:
    glm_vec4_dup
@@ -1302,6 +1303,25 @@ void
 glm_vec4_make(const float * __restrict src, vec4 dest) {
   dest[0] = src[0]; dest[1] = src[1];
   dest[2] = src[2]; dest[3] = src[3];
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[out] dest destination vector for the reflection result
+ */
+CGLM_INLINE
+void
+glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
+  vec4 temp;
+
+  /* TODO: direct simd touch */
+  glm_vec4_scale(N, 2.0f * glm_vec4_dot(I, N), temp);
+  glm_vec4_sub(I, temp, dest);
+
+  dest[3] = I[3];
 }
 
 #endif /* cglm_vec4_h */
