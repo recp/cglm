@@ -66,6 +66,7 @@
    CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
    CGLM_INLINE void  glm_vec4_make(float * restrict src, vec4 dest);
    CGLM_INLINE void  glm_vec4_reflect(vec4 I, vec4 N, vec4 dest);
+   CGLM_INLINE void  glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest);
 
  DEPRECATED:
    glm_vec4_dup
@@ -1322,6 +1323,39 @@ glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
   glm_vec4_sub(I, temp, dest);
 
   dest[3] = I[3];
+}
+
+/*!
+ * @brief refraction vector using entering ray, surface normal and refraction index
+ *
+ * if the angle between the entering ray I and the surface normal N is too great
+ * for a given refraction index, the return value is zero
+ *
+ * this implementation does not explicitly preserve the 'w' component of the
+ * incident vector 'I' in the output 'dest', users requiring the preservation of
+ * the 'w' component should manually adjust 'dest' after calling this function.
+ *
+ * @param[in]  I    normalized incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[in]  eta  ratio of indices of refraction
+ * @param[out] dest refraction result
+ */
+CGLM_INLINE
+void 
+glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
+  float ndi, eni, k;
+
+  ndi = glm_vec4_dot(N, I);
+  eni = eta * ndi;
+  k   = eta * eta + eni * eni - 1.0f;
+
+  if (k > 0.0f) {
+    glm_vec4_zero(dest);
+    return;
+  }
+
+  glm_vec4_scale(I, eta, dest);
+  glm_vec4_mulsubs(N, eni + sqrt(1.0f - k), dest);
 }
 
 #endif /* cglm_vec4_h */
