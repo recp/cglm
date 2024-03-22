@@ -746,15 +746,15 @@ glm_vec2_refract(vec2 I, vec2 N, float eta, vec2 dest) {
 
   ndi = glm_vec2_dot(N, I);
   eni = eta * ndi;
-  k   = eta * eta + eni * eni;
+  k   = 1.0f + eta * eta - eni * eni;
 
-  if (k > 1.0f) {
+  if (k < 0.0f) {
     glm_vec2_zero(dest);
     return;
   }
 
   glm_vec2_scale(I, eta, dest);
-  glm_vec2_mulsubs(N, eni + sqrtf(1.0f - k), dest);
+  glm_vec2_mulsubs(N, eni + sqrtf(k), dest);
 }
 
 #endif /* cglm_vec2_h */
