@@ -1355,7 +1355,7 @@ glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
   }
 
   glm_vec4_scale(I, eta, dest);
-  glm_vec4_mulsubs(N, eni + sqrt(1.0f - k), dest);
+  glm_vec4_mulsubs(N, eni + sqrtf(1.0f - k), dest);
 }
 
 #endif /* cglm_vec4_h */
