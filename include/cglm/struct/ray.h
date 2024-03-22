@@ -40,6 +40,13 @@ glms_ray_(triangle)(vec3s  origin,
 /*!
  * @brief ray sphere intersection
  *
+ * - t1 > 0, t2 > 0: ray intersects the sphere at t1 and t2 both ahead of the origin
+ * - t1 < 0, t2 > 0: ray starts inside the sphere, exits at t2
+ * - t1 < 0, t2 < 0: no intersection ahead of the ray
+ * - the caller can check if the intersection points (t1 and t2) fall within a
+ *   specific range (for example, tmin < t1, t2 < tmax) to determine if the
+ *   intersections are within a desired segment of the ray
+ *
  * @param[in]  origin ray origin
  * @param[out] dir    normalized ray direction
  * @param[in]  s      sphere  [center.x, center.y, center.z, radii]
