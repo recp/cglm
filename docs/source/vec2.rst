@@ -53,6 +53,8 @@ Functions:
 #. :c:func:`glm_vec2_clamp`
 #. :c:func:`glm_vec2_lerp`
 #. :c:func:`glm_vec2_make`
+#. :c:func:`glm_vec2_reflect`
+#. :c:func:`glm_vec2_refract`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -394,3 +396,25 @@ Functions documentation
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination vector
+
+.. c:function:: void glm_vec2_reflect(vec2 I, vec2 N, vec2 dest) 
+
+    Reflection vector using an incident ray and a surface normal
+
+    Parameters:
+      | *[in]*  **I**     incident vector
+      | *[in]*  **N**     *❗️ normalized ❗️* normal vector
+      | *[out]* **dest**  destination: reflection result
+
+.. c:function:: void glm_vec2_refract(vec2 I, vec2 N, float eta, vec2 dest)
+
+    Refraction vector using entering ray, surface normal and refraction index
+
+    If the angle between the entering ray I and the surface normal N is too 
+    great for a given refraction index, the return value is zero
+
+    Parameters:
+      | *[in]*  **I**     *❗️ normalized ❗️* incident vector
+      | *[in]*  **N**     *❗️ normalized ❗️* normal vector
+      | *[in]*  **eta**   ratio of indices of refraction ( η )
+      | *[out]* **dest**  destination: refraction result

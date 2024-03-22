@@ -1210,10 +1210,10 @@ glm_vec3_make(const float * __restrict src, vec3 dest) {
  *
  * orients a vector to point away from a surface as defined by its normal
  *
- * @param[in] N      vector to orient.
+ * @param[in] N      vector to orient
  * @param[in] I      incident vector
  * @param[in] Nref   reference vector
- * @param[out] dest  oriented vector, pointing away from the surface.
+ * @param[out] dest  oriented vector, pointing away from the surface
  */
 CGLM_INLINE
 void
