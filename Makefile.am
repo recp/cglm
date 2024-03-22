@@ -216,7 +216,8 @@ cglm_struct_HEADERS = include/cglm/struct/mat4.h \
                       include/cglm/struct/project.h \
                       include/cglm/struct/sphere.h \
                       include/cglm/struct/color.h \
-                      include/cglm/struct/curve.h
+                      include/cglm/struct/curve.h \
+                      include/cglm/struct/ray.h
 
 cglm_struct_clipspacedir=$(includedir)/cglm/struct/clipspace
 cglm_struct_clipspace_HEADERS = include/cglm/struct/clipspace/persp_lh_no.h \
