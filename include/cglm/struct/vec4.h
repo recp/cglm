@@ -67,6 +67,8 @@
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
+   CGLM_INLINE vec4s glms_vec4_reflect(vec4s I, vec4s N);
+   CGLM_INLINE vec4s glms_vec4_refract(vec4s I, vec4s N, float eta);
  */
 
 #ifndef cglms_vec4s_h
@@ -924,6 +926,44 @@ vec4s
 glms_vec4_(make)(const float * __restrict src) {
   vec4s dest;
   glm_vec4_make(src, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @returns reflection result
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(reflect)(vec4s I, vec4s N) {
+  vec4s dest;
+  glm_vec4_reflect(I.raw, N.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief refraction vector using entering ray, surface normal and refraction index
+ *
+ * if the angle between the entering ray I and the surface normal N is too great
+ * for a given refraction index, the return value is zero
+ *
+ * this implementation does not explicitly preserve the 'w' component of the
+ * incident vector 'I' in the output 'dest', users requiring the preservation of
+ * the 'w' component should manually adjust 'dest' after calling this function.
+ *
+ * @param[in]  I    normalized incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[in]  eta  ratio of indices of refraction
+ * @returns refraction result
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(refract)(vec4s I, vec4s N, float eta) {
+  vec4s dest;
+  glm_vec4_refract(I.raw, N.raw, eta, dest.raw);
   return dest;
 }
 

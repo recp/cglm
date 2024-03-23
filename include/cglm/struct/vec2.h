@@ -54,6 +54,8 @@
    CGLM_INLINE vec2s glms_vec2_clamp(vec2s v, float minVal, float maxVal)
    CGLM_INLINE vec2s glms_vec2_lerp(vec2s from, vec2s to, float t)
    CGLM_INLINE vec2s glms_vec2_make(float * restrict src)
+   CGLM_INLINE vec2s glms_vec2_reflect(vec2s I, vec2s N)
+   CGLM_INLINE vec2s glms_vec2_refract(vec2s I, vec2s N, float eta)
  */
 
 #ifndef cglms_vec2s_h
@@ -688,6 +690,40 @@ vec2s
 glms_vec2_(make)(const float * __restrict src) {
   vec2s dest;
   glm_vec2_make(src, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @returns reflection result
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(reflect)(vec2s I, vec2s N) {
+  vec2s dest;
+  glm_vec2_reflect(I.raw, N.raw, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief refraction vector using entering ray, surface normal and refraction index
+ *
+ * if the angle between the entering ray I and the surface normal N is too great
+ * for a given refraction index, the return value is zero
+ *
+ * @param[in]  I    normalized incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[in]  eta  ratio of indices of refraction
+ * @param[out] dest refraction result
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(refract)(vec2s I, vec2s N, float eta) {
+  vec2s dest;
+  glm_vec2_refract(I.raw, N.raw, eta, dest.raw);
   return dest;
 }
 

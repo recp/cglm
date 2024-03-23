@@ -392,7 +392,12 @@ TEST_DECLARE(euler)
 
 /* ray */
 TEST_DECLARE(glm_ray_triangle)
+TEST_DECLARE(glm_ray_sphere)
+TEST_DECLARE(glm_ray_at)
+
 TEST_DECLARE(glmc_ray_triangle)
+TEST_DECLARE(glmc_ray_sphere)
+TEST_DECLARE(glmc_ray_at)
 
 /* quat */
 TEST_DECLARE(MACRO_GLM_QUAT_IDENTITY_INIT)
@@ -530,6 +535,8 @@ TEST_DECLARE(glm_vec2_lerp)
 TEST_DECLARE(glm_vec2_complex_mul)
 TEST_DECLARE(glm_vec2_complex_div)
 TEST_DECLARE(glm_vec2_make)
+TEST_DECLARE(glm_vec2_reflect)
+TEST_DECLARE(glm_vec2_refract)
 
 TEST_DECLARE(glmc_vec2)
 TEST_DECLARE(glmc_vec2_copy)
@@ -576,6 +583,8 @@ TEST_DECLARE(glmc_vec2_lerp)
 TEST_DECLARE(glmc_vec2_complex_mul)
 TEST_DECLARE(glmc_vec2_complex_div)
 TEST_DECLARE(glmc_vec2_make)
+TEST_DECLARE(glmc_vec2_reflect)
+TEST_DECLARE(glmc_vec2_refract)
 
 /* vec3 */
 TEST_DECLARE(MACRO_GLM_VEC3_ONE_INIT)
@@ -678,6 +687,9 @@ TEST_DECLARE(glm_vec3_fract)
 TEST_DECLARE(glm_vec3_hadd)
 TEST_DECLARE(glm_vec3_sqrt)
 TEST_DECLARE(glm_vec3_make)
+TEST_DECLARE(glm_vec3_faceforward)
+TEST_DECLARE(glm_vec3_reflect)
+TEST_DECLARE(glm_vec3_refract)
 
 TEST_DECLARE(glmc_vec3)
 TEST_DECLARE(glmc_vec3_copy)
@@ -754,6 +766,9 @@ TEST_DECLARE(glmc_vec3_fract)
 TEST_DECLARE(glmc_vec3_hadd)
 TEST_DECLARE(glmc_vec3_sqrt)
 TEST_DECLARE(glmc_vec3_make)
+TEST_DECLARE(glmc_vec3_faceforward)
+TEST_DECLARE(glmc_vec3_reflect)
+TEST_DECLARE(glmc_vec3_refract)
 
 /* vec4 */
 TEST_DECLARE(MACRO_GLM_VEC4_ONE_INIT)
@@ -842,6 +857,8 @@ TEST_DECLARE(glm_vec4_fract)
 TEST_DECLARE(glm_vec4_hadd)
 TEST_DECLARE(glm_vec4_sqrt)
 TEST_DECLARE(glm_vec4_make)
+TEST_DECLARE(glm_vec4_reflect)
+TEST_DECLARE(glm_vec4_refract)
 
 TEST_DECLARE(glmc_vec4)
 TEST_DECLARE(glmc_vec4_copy3)
@@ -914,6 +931,8 @@ TEST_DECLARE(glmc_vec4_fract)
 TEST_DECLARE(glmc_vec4_hadd)
 TEST_DECLARE(glmc_vec4_sqrt)
 TEST_DECLARE(glmc_vec4_make)
+TEST_DECLARE(glmc_vec4_reflect)
+TEST_DECLARE(glmc_vec4_refract)
 
 /* ivec2 */
 TEST_DECLARE(glm_ivec2)
@@ -1548,10 +1567,15 @@ TEST_LIST {
   TEST_ENTRY(glmc_euler_zyx_quat_lh)
 
   TEST_ENTRY(euler)
-  
+
   /* ray */
   TEST_ENTRY(glm_ray_triangle)
+  TEST_ENTRY(glm_ray_sphere)
+  TEST_ENTRY(glm_ray_at)
+
   TEST_ENTRY(glmc_ray_triangle)
+  TEST_ENTRY(glmc_ray_sphere)
+  TEST_ENTRY(glmc_ray_at)
 
   /* quat */
   TEST_ENTRY(MACRO_GLM_QUAT_IDENTITY_INIT)
@@ -1688,6 +1712,8 @@ TEST_LIST {
   TEST_ENTRY(glm_vec2_complex_mul)
   TEST_ENTRY(glm_vec2_complex_div)
   TEST_ENTRY(glm_vec2_make)
+  TEST_ENTRY(glm_vec2_reflect)
+  TEST_ENTRY(glm_vec2_refract)
 
   TEST_ENTRY(glmc_vec2)
   TEST_ENTRY(glmc_vec2_copy)
@@ -1734,6 +1760,8 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec2_complex_mul)
   TEST_ENTRY(glmc_vec2_complex_div)
   TEST_ENTRY(glmc_vec2_make)
+  TEST_ENTRY(glmc_vec2_reflect)
+  TEST_ENTRY(glmc_vec2_refract)
 
   /* vec3 */
   TEST_ENTRY(MACRO_GLM_VEC3_ONE_INIT)
@@ -1835,6 +1863,9 @@ TEST_LIST {
   TEST_ENTRY(glm_vec3_hadd)
   TEST_ENTRY(glm_vec3_sqrt)
   TEST_ENTRY(glm_vec3_make)
+  TEST_ENTRY(glm_vec3_faceforward)
+  TEST_ENTRY(glm_vec3_reflect)
+  TEST_ENTRY(glm_vec3_refract)
 
   TEST_ENTRY(glmc_vec3)
   TEST_ENTRY(glmc_vec3_copy)
@@ -1911,6 +1942,9 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec3_hadd)
   TEST_ENTRY(glmc_vec3_sqrt)
   TEST_ENTRY(glmc_vec3_make)
+  TEST_ENTRY(glmc_vec3_faceforward)
+  TEST_ENTRY(glmc_vec3_reflect)
+  TEST_ENTRY(glmc_vec3_refract)
 
   /* vec4 */
   TEST_ENTRY(MACRO_GLM_VEC4_ONE_INIT)
@@ -1999,6 +2033,8 @@ TEST_LIST {
   TEST_ENTRY(glm_vec4_hadd)
   TEST_ENTRY(glm_vec4_sqrt)
   TEST_ENTRY(glm_vec4_make)
+  TEST_ENTRY(glm_vec4_reflect)
+  TEST_ENTRY(glm_vec4_refract)
 
   TEST_ENTRY(glmc_vec4)
   TEST_ENTRY(glmc_vec4_copy3)
@@ -2071,6 +2107,8 @@ TEST_LIST {
   TEST_ENTRY(glmc_vec4_hadd)
   TEST_ENTRY(glmc_vec4_sqrt)
   TEST_ENTRY(glmc_vec4_make)
+  TEST_ENTRY(glmc_vec4_reflect)
+  TEST_ENTRY(glmc_vec4_refract)
 
   /* ivec2 */
   TEST_ENTRY(glm_ivec2)

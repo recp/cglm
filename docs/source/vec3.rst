@@ -80,6 +80,9 @@ Functions:
 #. :c:func:`glm_vec3_clamp`
 #. :c:func:`glm_vec3_lerp`
 #. :c:func:`glm_vec3_make`
+#. :c:func:`glm_vec3_faceforward`
+#. :c:func:`glm_vec3_reflect`
+#. :c:func:`glm_vec3_refract`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -512,3 +515,35 @@ Functions documentation
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination vector
+
+.. c:function:: void glm_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest)
+
+    A vector pointing in the same direction as another
+
+    Parameters:
+      | *[in]*  **N**     vector to orient
+      | *[in]*  **I**     incident vector
+      | *[in]*  **Nref**  reference vector
+      | *[out]* **dest**  destination: oriented vector, pointing away from the surface.
+
+.. c:function:: void glm_vec3_reflect(vec3 I, vec3 N, vec3 dest) 
+
+    Reflection vector using an incident ray and a surface normal
+
+    Parameters:
+      | *[in]*  **I**     incident vector
+      | *[in]*  **N**     *❗️ normalized ❗️* normal vector
+      | *[out]* **dest**  destination: reflection result
+
+.. c:function:: void glm_vec3_refract(vec3 I, vec3 N, float eta, vec3 dest)
+
+    Refraction vector using entering ray, surface normal and refraction index
+
+    If the angle between the entering ray I and the surface normal N is too 
+    great for a given refraction index, the return value is zero
+
+    Parameters:
+      | *[in]*  **I**     *❗️ normalized ❗️* incident vector
+      | *[in]*  **N**     *❗️ normalized ❗️* normal vector
+      | *[in]*  **eta**   ratio of indices of refraction ( η )
+      | *[out]* **dest**  destination: refraction result

@@ -80,6 +80,9 @@
    CGLM_INLINE void  glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_swizzle(vec3 v, int mask, vec3 dest);
    CGLM_INLINE void  glm_vec3_make(float * restrict src, vec3 dest);
+   CGLM_INLINE void  glm_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest);
+   CGLM_INLINE void  glm_vec3_reflect(vec3 I, vec3 N, vec3 dest);
+   CGLM_INLINE void  glm_vec3_refract(vec3 I, vec3 N, float eta, vec3 dest);
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -1200,6 +1203,72 @@ glm_vec3_make(const float * __restrict src, vec3 dest) {
   dest[0] = src[0];
   dest[1] = src[1];
   dest[2] = src[2];
+}
+
+/*!
+ * @brief a vector pointing in the same direction as another
+ *
+ * orients a vector to point away from a surface as defined by its normal
+ *
+ * @param[in] N      vector to orient
+ * @param[in] I      incident vector
+ * @param[in] Nref   reference vector
+ * @param[out] dest  oriented vector, pointing away from the surface
+ */
+CGLM_INLINE
+void
+glm_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest) {
+  if (glm_vec3_dot(I, Nref) < 0.0f) {
+    /* N is facing away from I */
+    glm_vec3_copy(N, dest);
+  } else {
+    /* N is facing towards I, negate it */
+    glm_vec3_negate_to(N, dest);
+  }
+}
+
+/*!
+ * @brief reflection vector using an incident ray and a surface normal
+ *
+ * @param[in]  I    incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[out] dest reflection result
+ */
+CGLM_INLINE
+void
+glm_vec3_reflect(vec3 I, vec3 N, vec3 dest) {
+  vec3 temp;
+  glm_vec3_scale(N, 2.0f * glm_vec3_dot(I, N), temp);
+  glm_vec3_sub(I, temp, dest);
+}
+
+/*!
+ * @brief refraction vector using entering ray, surface normal and refraction index
+ *
+ * if the angle between the entering ray I and the surface normal N is too great
+ * for a given refraction index, the return value is zero
+ *
+ * @param[in]  I    normalized incident vector
+ * @param[in]  N    normalized normal vector
+ * @param[in]  eta  ratio of indices of refraction
+ * @param[out] dest refraction result
+ */
+CGLM_INLINE
+void
+glm_vec3_refract(vec3 I, vec3 N, float eta, vec3 dest) {
+  float ndi, eni, k;
+
+  ndi = glm_vec3_dot(N, I);
+  eni = eta * ndi;
+  k   = 1.0f + eta * eta - eni * eni;
+
+  if (k < 0.0f) {
+    glm_vec3_zero(dest);
+    return;
+  }
+
+  glm_vec3_scale(I, eta, dest);
+  glm_vec3_mulsubs(N, eni + sqrtf(k), dest);
 }
 
 #endif /* cglm_vec3_h */

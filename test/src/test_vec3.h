@@ -1840,3 +1840,89 @@ TEST_IMPL(GLM_PREFIX, vec3_make) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, vec3_faceforward) {
+  vec3 N = {0.0f, 1.0f, 0.0f};
+  vec3 I = {1.0f, -1.0f, 0.0f};
+  vec3 Nref = {0.0f, -1.0f, 0.0f};
+  vec3 dest;
+
+  GLM(vec3_faceforward)(N, I, Nref, dest);
+  ASSERT(dest[0] == 0.0f 
+         && dest[1] == -1.0f
+         && dest[2] == 0.0f); /* Expect N flipped */
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_reflect) {
+  vec3 dest;
+
+  /* Original test: Reflecting off a horizontal surface */
+  vec3 I1 = {1.0f, -1.0f, 0.0f}; /* Incoming vector */
+  vec3 N1 = {0.0f, 1.0f, 0.0f};  /* Normal vector   */
+  GLM(vec3_reflect)(I1, N1, dest);
+  ASSERT(fabsf(dest[0] - 1.0f) < 0.00001f
+         && fabsf(dest[1] - 1.0f) < 0.00001f
+         && fabsf(dest[2] - 0.0f) < 0.00001f); /* Expect reflection */
+
+  /* Scenario 2: Reflecting off a vertical surface  */
+  vec3 I2 = {1.0f, 0.0f, 0.0f};  /* Incoming vector */
+  vec3 N2 = {-1.0f, 0.0f, 0.0f}; /* Normal vector   */
+  GLM(vec3_reflect)(I2, N2, dest);
+  ASSERT(fabsf(dest[0] + 1.0f) < 0.00001f
+         && fabsf(dest[1]) < 0.00001f
+         && fabsf(dest[2]) < 0.00001f); /* Expect reflection to the left */
+
+  /* Scenario 3: Reflecting at an angle */
+  vec3 I3 = {sqrtf(2)/2, -sqrtf(2)/2, 0.0f}; /* Incoming vector at 45 degrees */
+  vec3 N3 = {0.0f, 1.0f, 0.0f}; /* Upwards normal vector */
+  GLM(vec3_reflect)(I3, N3, dest);
+  ASSERT(fabsf(dest[0] - sqrtf(2)/2) < 0.00001f
+         && fabsf(dest[1] - sqrtf(2)/2) < 0.00001f
+         && fabsf(dest[2]) < 0.00001f); /* Expect reflection upwards */
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec3_refract) {
+  vec3 I = {sqrtf(0.5f), -sqrtf(0.5f), 0.0f}; /* Incoming vector at 45 degrees to normal */
+  vec3 N = {0.0f, 1.0f, 0.0f};                /* Surface normal */
+  vec3 dest;
+  float eta;
+
+  /* Water to Air (eta = 1.33/1.0) */
+  eta = 1.33f / 1.0f;
+  GLM(vec3_refract)(I, N, eta, dest);
+  if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f)) {
+    ASSERT(dest[1] < -sqrtf(0.5f));
+  } else {
+    ASSERT(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f);
+  }
+
+  /* Air to Glass (eta = 1.0 / 1.5) */
+  eta = 1.0f / 1.5f;
+  GLM(vec3_refract)(I, N, eta, dest);
+
+  /* Expect bending towards the normal */
+  ASSERT(dest[1] < -sqrtf(0.5f));
+
+  /* Glass to Water (eta = 1.5 / 1.33) */
+  eta = 1.5f / 1.33f;
+  GLM(vec3_refract)(I, N, eta, dest);
+
+  /* Expect bending towards the normal, less bending than air to glass */
+  ASSERT(dest[1] < -sqrtf(0.5f));
+
+  /* Diamond to Air (eta = 2.42 / 1.0) */
+  eta = 2.42f / 1.0f;
+  GLM(vec3_refract)(I, N, eta, dest);
+  if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f)) {
+    /* High potential for total internal reflection, but if it occurs, expect significant bending */
+    ASSERT(dest[1] < -sqrtf(0.5f));
+  } else {
+    ASSERT(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f);
+  }
+
+  TEST_SUCCESS
+}

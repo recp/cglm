@@ -253,6 +253,7 @@
     <ClInclude Include="..\include\cglm\struct\plane.h" />
     <ClInclude Include="..\include\cglm\struct\project.h" />
     <ClInclude Include="..\include\cglm\struct\quat.h" />
+    <ClInclude Include="..\include\cglm\struct\ray.h" />
     <ClInclude Include="..\include\cglm\struct\sphere.h" />
     <ClInclude Include="..\include\cglm\struct\vec2-ext.h" />
     <ClInclude Include="..\include\cglm\struct\vec2.h" />
