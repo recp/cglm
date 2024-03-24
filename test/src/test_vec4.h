@@ -1582,8 +1582,10 @@ TEST_IMPL(GLM_PREFIX, vec4_refract) {
   r = GLM(vec4_refract)(I, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f)) {
     ASSERT(dest[1] < -sqrtf(0.5f));
+    ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f);
+    ASSERT(r == false);
   }
 
   /* Air to Glass (eta = 1.0 / 1.5) */
@@ -1602,8 +1604,10 @@ TEST_IMPL(GLM_PREFIX, vec4_refract) {
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f)) {
     /* High potential for total internal reflection, but if it occurs, expect significant bending */
     ASSERT(dest[1] < -sqrtf(0.5f));
+    ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f);
+    ASSERT(r == false);
   }
 
   TEST_SUCCESS
