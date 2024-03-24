@@ -310,7 +310,7 @@ glmc_vec2_reflect(vec2 I, vec2 N, vec2 dest) {
 }
 
 CGLM_EXPORT
-void
+bool
 glmc_vec2_refract(vec2 I, vec2 N, float eta, vec2 dest) {
-  glm_vec2_refract(I, N, eta, dest);
+  return glm_vec2_refract(I, N, eta, dest);
 }

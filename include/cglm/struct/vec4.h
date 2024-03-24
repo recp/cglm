@@ -68,7 +68,7 @@
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
    CGLM_INLINE vec4s glms_vec4_reflect(vec4s I, vec4s N);
-   CGLM_INLINE vec4s glms_vec4_refract(vec4s I, vec4s N, float eta);
+   CGLM_INLINE bool  glms_vec4_refract(vec4s I, vec4s N, float eta, vec4s *dest)
  */
 
 #ifndef cglms_vec4s_h
@@ -945,10 +945,11 @@ glms_vec4_(reflect)(vec4s I, vec4s N) {
 }
 
 /*!
- * @brief refraction vector using entering ray, surface normal and refraction index
+ * @brief computes refraction vector for an incident vector and a surface normal.
  *
- * if the angle between the entering ray I and the surface normal N is too great
- * for a given refraction index, the return value is zero
+ * calculates the refraction vector based on Snell's law. If total internal reflection
+ * occurs (angle too great given eta), dest is set to zero and returns false.
+ * Otherwise, computes refraction vector, stores it in dest, and returns true.
  *
  * this implementation does not explicitly preserve the 'w' component of the
  * incident vector 'I' in the output 'dest', users requiring the preservation of
@@ -956,15 +957,15 @@ glms_vec4_(reflect)(vec4s I, vec4s N) {
  *
  * @param[in]  I    normalized incident vector
  * @param[in]  N    normalized normal vector
- * @param[in]  eta  ratio of indices of refraction
- * @returns refraction result
+ * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
+ * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
+ *
+ * @returns true if refraction occurs; false if total internal reflection occurs.
  */
 CGLM_INLINE
-vec4s
-glms_vec4_(refract)(vec4s I, vec4s N, float eta) {
-  vec4s dest;
-  glm_vec4_refract(I.raw, N.raw, eta, dest.raw);
-  return dest;
+bool
+glms_vec4_(refract)(vec4s I, vec4s N, float eta, vec4s * __restrict dest) {
+  return glm_vec4_refract(I.raw, N.raw, eta, dest->raw);
 }
 
 #endif /* cglms_vec4s_h */

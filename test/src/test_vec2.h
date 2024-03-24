@@ -785,35 +785,40 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
   vec2 N = {0.0f, 1.0f};                /* Surface normal */
   vec2 dest;
   float eta;
+  float r;
 
   /* Water to Air (eta = 1.33/1.0) */
   eta = 1.33f / 1.0f;
-  GLM(vec2_refract)(I, N, eta, dest);
+  r = GLM(vec2_refract)(I, N, eta, dest);
   // In 2D, we expect a similar bending behavior as in 3D, so we check dest[1]
   if (!(dest[0] == 0.0f && dest[1] == 0.0f)) {
     ASSERT(dest[1] < -sqrtf(0.5f)); // Refracted ray bends away from the normal
+    ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f); // Total internal reflection
+    ASSERT(r == false);
   }
 
   /* Air to Glass (eta = 1.0 / 1.5) */
   eta = 1.0f / 1.5f;
-  GLM(vec2_refract)(I, N, eta, dest);
+  r = GLM(vec2_refract)(I, N, eta, dest);
   ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal
 
   /* Glass to Water (eta = 1.5 / 1.33) */
   eta = 1.5f / 1.33f;
-  GLM(vec2_refract)(I, N, eta, dest);
+  r = GLM(vec2_refract)(I, N, eta, dest);
   ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal, less bending than air to glass
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
   eta = 2.42f / 1.0f;
-  GLM(vec2_refract)(I, N, eta, dest);
+  r = GLM(vec2_refract)(I, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f)) {
     /* High potential for total internal reflection, but if it occurs, expect significant bending */
     ASSERT(dest[1] < -sqrtf(0.5f));
+    ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f); // Total internal reflection
+    ASSERT(r == false);
   }
 
   TEST_SUCCESS

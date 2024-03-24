@@ -55,7 +55,7 @@
    CGLM_INLINE vec2s glms_vec2_lerp(vec2s from, vec2s to, float t)
    CGLM_INLINE vec2s glms_vec2_make(float * restrict src)
    CGLM_INLINE vec2s glms_vec2_reflect(vec2s I, vec2s N)
-   CGLM_INLINE vec2s glms_vec2_refract(vec2s I, vec2s N, float eta)
+   CGLM_INLINE bool  glms_vec2_refract(vec2s I, vec2s N, float eta, vec2s *dest)
  */
 
 #ifndef cglms_vec2s_h
@@ -709,22 +709,23 @@ glms_vec2_(reflect)(vec2s I, vec2s N) {
 }
 
 /*!
- * @brief refraction vector using entering ray, surface normal and refraction index
+ * @brief computes refraction vector for an incident vector and a surface normal.
  *
- * if the angle between the entering ray I and the surface normal N is too great
- * for a given refraction index, the return value is zero
+ * calculates the refraction vector based on Snell's law. If total internal reflection
+ * occurs (angle too great given eta), dest is set to zero and returns false.
+ * Otherwise, computes refraction vector, stores it in dest, and returns true.
  *
  * @param[in]  I    normalized incident vector
  * @param[in]  N    normalized normal vector
- * @param[in]  eta  ratio of indices of refraction
- * @param[out] dest refraction result
+ * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
+ * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
+ *
+ * @returns true if refraction occurs; false if total internal reflection occurs.
  */
 CGLM_INLINE
-vec2s
-glms_vec2_(refract)(vec2s I, vec2s N, float eta) {
-  vec2s dest;
-  glm_vec2_refract(I.raw, N.raw, eta, dest.raw);
-  return dest;
+bool
+glms_vec2_(refract)(vec2s I, vec2s N, float eta, vec2s * __restrict dest) {
+  return glm_vec2_refract(I.raw, N.raw, eta, dest->raw);
 }
 
 #endif /* cglms_vec2s_h */

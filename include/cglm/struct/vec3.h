@@ -78,7 +78,7 @@
    CGLM_INLINE vec3s glms_vec3_make(float * restrict src);
    CGLM_INLINE vec3s glms_vec3_faceforward(vec3s N, vec3s I, vec3s Nref);
    CGLM_INLINE vec3s glms_vec3_reflect(vec3s I, vec3s N);
-   CGLM_INLINE vec3s glms_vec3_refract(vec3s I, vec3s N, float eta);
+   CGLM_INLINE bool  glms_vec3_refract(vec3s I, vec3s N, float eta, vec3s *dest)
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -1120,22 +1120,23 @@ glms_vec3_(reflect)(vec3s I, vec3s N) {
 }
 
 /*!
- * @brief refraction vector using entering ray, surface normal and refraction index
+ * @brief computes refraction vector for an incident vector and a surface normal.
  *
- * if the angle between the entering ray I and the surface normal N is too great
- * for a given refraction index, the return value is zero
+ * calculates the refraction vector based on Snell's law. If total internal reflection
+ * occurs (angle too great given eta), dest is set to zero and returns false.
+ * Otherwise, computes refraction vector, stores it in dest, and returns true.
  *
  * @param[in]  I    normalized incident vector
  * @param[in]  N    normalized normal vector
- * @param[in]  eta  ratio of indices of refraction
- * @returns refraction result
+ * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
+ * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
+ *
+ * @returns true if refraction occurs; false if total internal reflection occurs.
  */
 CGLM_INLINE
-vec3s
-glms_vec3_(refract)(vec3s I, vec3s N, float eta) {
-  vec3s dest;
-  glm_vec3_refract(I.raw, N.raw, eta, dest.raw);
-  return dest;
+bool
+glms_vec3_(refract)(vec3s I, vec3s N, float eta, vec3s * __restrict dest) {
+  return glm_vec3_refract(I.raw, N.raw, eta, dest->raw);
 }
 
 #endif /* cglms_vec3s_h */

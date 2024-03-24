@@ -316,7 +316,7 @@ void
 glmc_vec4_reflect(vec4 I, vec4 N, vec4 dest);
 
 CGLM_EXPORT
-void
+bool
 glmc_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest);
 
 #ifdef __cplusplus

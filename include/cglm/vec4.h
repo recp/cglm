@@ -1326,10 +1326,11 @@ glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
 }
 
 /*!
- * @brief refraction vector using entering ray, surface normal and refraction index
+ * @brief computes refraction vector for an incident vector and a surface normal.
  *
- * if the angle between the entering ray I and the surface normal N is too great
- * for a given refraction index, the return value is zero
+ * calculates the refraction vector based on Snell's law. If total internal reflection
+ * occurs (angle too great given eta), dest is set to zero and returns false.
+ * Otherwise, computes refraction vector, stores it in dest, and returns true.
  *
  * this implementation does not explicitly preserve the 'w' component of the
  * incident vector 'I' in the output 'dest', users requiring the preservation of
@@ -1337,11 +1338,13 @@ glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
  *
  * @param[in]  I    normalized incident vector
  * @param[in]  N    normalized normal vector
- * @param[in]  eta  ratio of indices of refraction
- * @param[out] dest refraction result
+ * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
+ * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
+ *
+ * @returns true if refraction occurs; false if total internal reflection occurs.
  */
 CGLM_INLINE
-void 
+bool
 glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
   float ndi, eni, k;
 
@@ -1351,11 +1354,12 @@ glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
 
   if (k < 0.0f) {
     glm_vec4_zero(dest);
-    return;
+    return false;
   }
 
   glm_vec4_scale(I, eta, dest);
   glm_vec4_mulsubs(N, eni + sqrtf(k), dest);
+  return true;
 }
 
 #endif /* cglm_vec4_h */

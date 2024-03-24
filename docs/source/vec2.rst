@@ -406,15 +406,19 @@ Functions documentation
       | *[in]*  **N**     *❗️ normalized ❗️* normal vector
       | *[out]* **dest**  destination: reflection result
 
-.. c:function:: void glm_vec2_refract(vec2 I, vec2 N, float eta, vec2 dest)
+.. c:function:: bool glm_vec2_refract(vec2 I, vec2 N, float eta, vec2 dest)
 
-    Refraction vector using entering ray, surface normal and refraction index
-
-    If the angle between the entering ray I and the surface normal N is too 
-    great for a given refraction index, the return value is zero
+    Computes refraction vector for an incident vector and a surface normal.
+   
+    Calculates the refraction vector based on Snell's law. If total internal reflection
+    occurs (angle too great given eta), dest is set to zero and returns false.
+    Otherwise, computes refraction vector, stores it in dest, and returns true.
 
     Parameters:
       | *[in]*  **I**     *❗️ normalized ❗️* incident vector
       | *[in]*  **N**     *❗️ normalized ❗️* normal vector
-      | *[in]*  **eta**   ratio of indices of refraction ( η )
-      | *[out]* **dest**  destination: refraction result
+      | *[in]*  **eta**   ratio of indices of refraction (incident/transmitted)
+      | *[out]* **dest**  refraction vector if refraction occurs; zero vector otherwise
+
+    Returns:
+      returns true if refraction occurs; false if total internal reflection occurs.

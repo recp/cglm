@@ -1575,10 +1575,11 @@ TEST_IMPL(GLM_PREFIX, vec4_refract) {
   vec4 N = {0.0f, 1.0f, 0.0f, 0.0f};                /* Surface normal */
   vec4 dest;
   float eta;
+  float r;
 
   /* Water to Air (eta = 1.33/1.0) */
   eta = 1.33f / 1.0f;
-  GLM(vec4_refract)(I, N, eta, dest);
+  r = GLM(vec4_refract)(I, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f)) {
     ASSERT(dest[1] < -sqrtf(0.5f));
   } else {
@@ -1587,17 +1588,17 @@ TEST_IMPL(GLM_PREFIX, vec4_refract) {
 
   /* Air to Glass (eta = 1.0 / 1.5) */
   eta = 1.0f / 1.5f;
-  GLM(vec4_refract)(I, N, eta, dest);
+  r = GLM(vec4_refract)(I, N, eta, dest);
   ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal
 
   /* Glass to Water (eta = 1.5 / 1.33) */
   eta = 1.5f / 1.33f;
-  GLM(vec4_refract)(I, N, eta, dest);
+  r = GLM(vec4_refract)(I, N, eta, dest);
   ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal, less bending than air to glass
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
   eta = 2.42f / 1.0f;
-  GLM(vec4_refract)(I, N, eta, dest);
+  r = GLM(vec4_refract)(I, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f && dest[3] == 0.0f)) {
     /* High potential for total internal reflection, but if it occurs, expect significant bending */
     ASSERT(dest[1] < -sqrtf(0.5f));

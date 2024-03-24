@@ -427,7 +427,7 @@ Functions documentation
       | *[in]*  **src**  pointer to an array of floats
       | *[out]* **dest** destination vector
 
-.. c:function:: void glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) 
+.. c:function:: bool glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) 
 
     Reflection vector using an incident ray and a surface normal
 
@@ -436,19 +436,23 @@ Functions documentation
       | *[in]*  **N**     *❗️ normalized ❗️* normal vector
       | *[out]* **dest**  destination: reflection result
 
-.. c:function:: void glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest)
+.. c:function:: bool glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest)
 
-    Refraction vector using entering ray, surface normal and refraction index
-
-    If the angle between the entering ray I and the surface normal N is too 
-    great for a given refraction index, the return value is zero
-
-    this implementation does not explicitly preserve the 'w' component of the
+    computes refraction vector for an incident vector and a surface normal.
+   
+    Calculates the refraction vector based on Snell's law. If total internal reflection
+    occurs (angle too great given eta), dest is set to zero and returns false.
+    Otherwise, computes refraction vector, stores it in dest, and returns true.
+   
+    This implementation does not explicitly preserve the 'w' component of the
     incident vector 'I' in the output 'dest', users requiring the preservation of
     the 'w' component should manually adjust 'dest' after calling this function.
 
     Parameters:
       | *[in]*  **I**     *❗️ normalized ❗️* incident vector
       | *[in]*  **N**     *❗️ normalized ❗️* normal vector
-      | *[in]*  **eta**   ratio of indices of refraction ( η )
-      | *[out]* **dest**  destination: refraction result
+      | *[in]*  **eta**   ratio of indices of refraction (incident/transmitted)
+      | *[out]* **dest**  refraction vector if refraction occurs; zero vector otherwise
+
+    Returns:
+      returns true if refraction occurs; false if total internal reflection occurs.
