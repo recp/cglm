@@ -487,7 +487,7 @@ glm_vec4_scale_as(vec4 v, float s, vec4 dest) {
   float norm;
   norm = glm_vec4_norm(v);
 
-  if (norm == 0.0f) {
+  if (CGLM_UNLIKELY(norm < FLT_EPSILON)) {
     glm_vec4_zero(dest);
     return;
   }
@@ -918,7 +918,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
   /* dot  = _mm_cvtss_f32(xdot); */
   dot  = wasm_f32x4_extract_lane(xdot, 0);
 
-  if (dot == 0.0f) {
+  if (CGLM_UNLIKELY(dot < FLT_EPSILON)) {
     glmm_store(dest, wasm_f32x4_const_splat(0.f));
     return;
   }
@@ -932,7 +932,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
   xdot = glmm_vdot(x0, x0);
   dot  = _mm_cvtss_f32(xdot);
 
-  if (dot == 0.0f) {
+  if (CGLM_UNLIKELY(dot < FLT_EPSILON)) {
     glmm_store(dest, _mm_setzero_ps());
     return;
   }
@@ -943,7 +943,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
 
   norm = glm_vec4_norm(v);
 
-  if (norm == 0.0f) {
+  if (CGLM_UNLIKELY(norm < FLT_EPSILON)) {
     glm_vec4_zero(dest);
     return;
   }

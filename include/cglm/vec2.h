@@ -278,7 +278,7 @@ glm_vec2_scale_as(vec2 v, float s, vec2 dest) {
   float norm;
   norm = glm_vec2_norm(v);
 
-  if (norm == 0.0f) {
+  if (CGLM_UNLIKELY(norm < FLT_EPSILON)) {
     glm_vec2_zero(dest);
     return;
   }
@@ -542,7 +542,7 @@ glm_vec2_normalize(vec2 v) {
 
   norm = glm_vec2_norm(v);
 
-  if (norm == 0.0f) {
+  if (CGLM_UNLIKELY(norm < FLT_EPSILON)) {
     v[0] = v[1] = 0.0f;
     return;
   }
@@ -563,7 +563,7 @@ glm_vec2_normalize_to(vec2 v, vec2 dest) {
 
   norm = glm_vec2_norm(v);
 
-  if (norm == 0.0f) {
+  if (CGLM_UNLIKELY(norm < FLT_EPSILON)) {
     glm_vec2_zero(dest);
     return;
   }

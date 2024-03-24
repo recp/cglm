@@ -433,7 +433,7 @@ TEST_IMPL(GLM_PREFIX, vec3_scale_as) {
   GLM(vec3_scale_as)(v1, s, v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -704,7 +704,7 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize) {
   GLM(vec3_normalize)(v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -733,7 +733,7 @@ TEST_IMPL(GLM_PREFIX, vec3_normalize_to) {
   GLM(vec3_normalize_to)(v1, v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -764,7 +764,7 @@ TEST_IMPL(GLM_PREFIX, normalize) {
   GLM(vec3_normalize)(v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -795,7 +795,7 @@ TEST_IMPL(GLM_PREFIX, normalize_to) {
   GLM(vec3_normalize_to)(v1, v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))

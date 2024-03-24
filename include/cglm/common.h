@@ -37,6 +37,14 @@
 #  define CGLM_INLINE static inline __attribute((always_inline))
 #endif
 
+#if defined(__GNUC__) || defined(__clang__)
+#  define CGLM_UNLIKELY(expr) __builtin_expect(!!(expr), 0)
+#  define CGLM_LIKELY(expr)   __builtin_expect(!!(expr), 1)
+#else
+#  define CGLM_UNLIKELY(expr) (expr)
+#  define CGLM_LIKELY(expr)   (expr)
+#endif
+
 #define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
 #define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
 

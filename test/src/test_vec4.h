@@ -410,7 +410,7 @@ TEST_IMPL(GLM_PREFIX, vec4_scale_as) {
   GLM(vec4_scale_as)(v1, s, v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2] + v1[3] * v1[3]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -701,7 +701,7 @@ TEST_IMPL(GLM_PREFIX, vec4_normalize) {
   GLM(vec4_normalize)(v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2] + v1[3] * v1[3]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
@@ -732,7 +732,7 @@ TEST_IMPL(GLM_PREFIX, vec4_normalize_to) {
   GLM(vec4_normalize_to)(v1, v2);
 
   norm = sqrtf(v1[0] * v1[0] + v1[1] * v1[1] + v1[2] * v1[2] + v1[3] * v1[3]);
-  if (norm == 0.0f) {
+  if (norm < FLT_EPSILON) {
     ASSERT(test_eq(v1[0], 0.0f))
     ASSERT(test_eq(v1[1], 0.0f))
     ASSERT(test_eq(v1[2], 0.0f))
