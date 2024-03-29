@@ -75,7 +75,7 @@ CGLM_INLINE
 vec3s
 glms_ray_(at)(vec3s orig, vec3s dir, float t) {
   vec3s r;
-  glm_ray_at(orig.raw, orig.raw, t, r.raw);
+  glm_ray_at(orig.raw, dir.raw, t, r.raw);
   return r;
 }
 
