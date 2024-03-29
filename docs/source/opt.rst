@@ -5,6 +5,10 @@
 
 A few options are provided via macros.
 
+❗️ IMPORTANT ❗️
+
+It's a good idea to set up your config macros in build settings like CMake, Xcode, or Visual Studio. This is especially important if you're using features like Modules in Xcode, where adding macros directly before the **cglm** headers might not work.
+
 Alignment Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

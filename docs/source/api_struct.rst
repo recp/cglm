@@ -91,6 +91,9 @@ To configure the Struct API namespace, you can define the following macros befor
 - **CGLM_STRUCT_API_NS**:           define name space for struct api, DEFAULT is **glms**
 - **CGLM_STRUCT_API_NAME_SUFFIX**:  define name suffix, DEFAULT is **empty** e.g defining it as #define CGLM_STRUCT_API_NAME_SUFFIX  s will add s suffix to mat4_mul -> mat4s_mul
 
+❗️ IMPORTANT ❗️
+
+It's a good idea to set up your config macros in build settings like CMake, Xcode, or Visual Studio. This is especially important if you're using features like Modules in Xcode, where adding macros directly before the **cglm** headers might not work.
 
 Detailed documentation for Struct API:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
