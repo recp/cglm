@@ -36,6 +36,8 @@ Functions documentation
 
     ray sphere intersection
 
+    returns false if there is no intersection if true:
+
     - t1 > 0, t2 > 0: ray intersects the sphere at t1 and t2 both ahead of the origin
     - t1 < 0, t2 > 0: ray starts inside the sphere, exits at t2
     - t1 < 0, t2 < 0: no intersection ahead of the ray
