@@ -12,32 +12,26 @@ It's a good idea to set up your config macros in build settings like CMake, Xcod
 Alignment Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As default, cglm requires types to be aligned. Alignment requirements:
+By default, **cglm** requires types to be aligned with specific byte requirements:
 
-vec3:   8 byte
-vec4:   16 byte
-mat4:   16 byte
-versor: 16 byte
+- vec3: 8 bytes
+- vec4: 16 bytes
+- mat4: 16 bytes (32 on AVX)
+- versor: 16 bytes
 
-By starting **v0.4.5** cglm provides an option to disable alignment requirement.
-To enable this option define **CGLM_ALL_UNALIGNED** macro before all headers.
-You can define it in Xcode, Visual Studio (or other IDEs) or you can also prefer
-to define it in build system. If you use pre-compiled versions then you
-have to compile cglm with **CGLM_ALL_UNALIGNED** macro.
+Starting with **v0.4.5**, **cglm** offers an option to relax these alignment requirements. To use this option, define the **CGLM_ALL_UNALIGNED** macro before including any headers. This definition can be made within Xcode, Visual Studio, other IDEs, or directly in your build system. If using pre-compiled versions of **cglm**, you'll need to compile them with the **CGLM_ALL_UNALIGNED** macro.
 
-**VERY VERY IMPORTANT:** If you use cglm in multiple projects and
- those projects are depends on each other, then
+**❗️NOTE:❗️** If you're using **cglm** across multiple interdependent projects:
 
- | *ALWAYS* or *NEVER USE* **CGLM_ALL_UNALIGNED** macro in linked projects
+- Always or never use the **CGLM_ALL_UNALIGNED** macro in all linked projects to avoid configuration conflicts. A **cglm** header from one project could require alignment, while a header from another might not, leading to **cglm** functions accessing invalid memory locations.
 
- if you do not know what you are doing. Because a cglm header included
- via 'project A' may force types to be aligned and another cglm header
- included via 'project B' may not require alignment. In this case
- cglm functions will read from and write to **INVALID MEMORY LOCATIONSNs**.
+- **Key Point:** Maintain the same **cglm** configuration across all your projects. For example, if you activate **CGLM_ALL_UNALIGNED** in one project, ensure it's set in the others too.
 
- ALWAYS USE SAME CONFIGURATION / OPTION for **cglm** if you have multiple projects.
+**❗️NOTE:❗️**
 
- For instance if you set CGLM_ALL_UNALIGNED in a project then set it in other projects too
+While **CGLM_ALL_UNALIGNED** allows for flexibility in alignment, it doesn't override C's fundamental alignment rules. For example, an array like *vec4* decays to a pointer (float*) in functions, which must adhere to the alignment requirements of a float pointer (4 bytes). This adherence is crucial because **cglm** directly dereferences these pointers instead of copying data, and failing to meet alignment requirements can lead to unpredictable errors, such as crashes.
+
+You can use `CGLM_ALIGN` and `CGLM_ALIGN_MAT` macros for aligning local variables or struct members. However, when dealing with dynamic memory allocation or custom memory locations, you'll need to ensure alignment requirements are met appropriately for those cases
 
 Clipspace Option[s]
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
