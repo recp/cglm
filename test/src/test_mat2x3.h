@@ -83,42 +83,42 @@ TEST_IMPL(GLM_PREFIX, mat2x3_mul) {
   mat2x3 m1 = GLM_MAT2X3_ZERO_INIT;
   mat3x2 m2 = GLM_MAT3X2_ZERO_INIT;
 
-  mat2 m3 = GLM_MAT2_ZERO_INIT;
-  mat2 m4 = GLM_MAT2_ZERO_INIT;
+  mat3 m3 = GLM_MAT3_ZERO_INIT;
+  mat3 m4 = GLM_MAT3_ZERO_INIT;
 
-  int i, j, k;
+  int c, r, k;
 
   /* test random matrices */
   /* random matrices */
   test_rand_mat2x3(m1);
   test_rand_mat3x2(m2);
 
-  for (i = 0; i < 2; i++) {
-    for (j = 0; j < 2; j++) {
-      for (k = 0; k < 3; k++) {
-        m4[i][j] += m1[i][k] * m2[k][j];
+  for (r = 0; r < 3; r++) {
+    for (c = 0; c < 3; c++) {
+      for (k = 0; k < 2; k++) {
+        m4[c][r] += m1[k][r] * m2[c][k];
       }
     }
   }
 
   GLM(mat2x3_mul)(m1, m2, m3);
-  ASSERTIFY(test_assert_mat2_eq(m3, m4))
+  ASSERTIFY(test_assert_mat3_eq(m3, m4))
 
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, mat2x3_mulv) {
   mat2x3 mat = A_MATRIX2X3;
-  vec3 v = {11.0f, 21.0f, 31.0f};
+  vec2 v = {11.0f, 21.0f};
 
   int  i;
-  vec2 dest;
+  vec3 dest;
   float res = 0.0;
 
   GLM(mat2x3_mulv)(mat, v, dest);
 
-  for (i = 0; i < 2; i++) {
-    res = mat[i][0] * v[0] + mat[i][1] * v[1] + mat[i][2] * v[2];
+  for (i = 0; i < 3; i++) {
+    res = mat[0][i] * v[0] + mat[1][i] * v[1];
     ASSERT(test_eq(dest[i], res))
   }
 
