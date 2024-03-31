@@ -218,6 +218,7 @@ glmm_norm_inf(__m128 a) {
   return _mm_cvtss_f32(glmm_vhmax(glmm_abs(a)));
 }
 
+#if defined(__SSE2__)
 static inline
 __m128
 glmm_load3(float v[3]) {
@@ -236,6 +237,7 @@ glmm_store3(float v[3], __m128 vx) {
   _mm_storel_pi(CGLM_CASTPTR_ASSUME_ALIGNED(v, __m64), vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
+#endif
 
 static inline
 __m128
