@@ -426,12 +426,12 @@ glmc_vec4_make(const float * __restrict src, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
-  glm_vec4_reflect(I, N, dest);
+glmc_vec4_reflect(vec4 v, vec4 n, vec4 dest) {
+  glm_vec4_reflect(v, n, dest);
 }
 
 CGLM_EXPORT
 bool
-glmc_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
-  return glm_vec4_refract(I, N, eta, dest);
+glmc_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
+  return glm_vec4_refract(v, n, eta, dest);
 }
