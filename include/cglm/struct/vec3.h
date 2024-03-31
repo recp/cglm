@@ -76,9 +76,9 @@
    CGLM_INLINE vec3s glms_vec3_smoothinterpc(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_swizzle(vec3s v, int mask);
    CGLM_INLINE vec3s glms_vec3_make(float * restrict src);
-   CGLM_INLINE vec3s glms_vec3_faceforward(vec3s N, vec3s I, vec3s Nref);
-   CGLM_INLINE vec3s glms_vec3_reflect(vec3s I, vec3s N);
-   CGLM_INLINE bool  glms_vec3_refract(vec3s I, vec3s N, float eta, vec3s *dest)
+   CGLM_INLINE vec3s glms_vec3_faceforward(vec3s n, vec3s v, vec3s nref);
+   CGLM_INLINE vec3s glms_vec3_reflect(vec3s v, vec3s n);
+   CGLM_INLINE bool  glms_vec3_refract(vec3s v, vec3s n, float eta, vec3s *dest)
 
  Convenient:
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
@@ -1113,9 +1113,9 @@ glms_vec3_(faceforward)(vec3s N, vec3s I, vec3s Nref) {
  */
 CGLM_INLINE
 vec3s
-glms_vec3_(reflect)(vec3s I, vec3s N) {
+glms_vec3_(reflect)(vec3s v, vec3s n) {
   vec3s dest;
-  glm_vec3_reflect(I.raw, N.raw, dest.raw);
+  glm_vec3_reflect(v.raw, n.raw, dest.raw);
   return dest;
 }
 

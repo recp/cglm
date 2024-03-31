@@ -336,15 +336,15 @@ glmc_vec3_make(const float * __restrict src, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec3_faceforward(vec3 N, vec3 I, vec3 Nref, vec3 dest);
+glmc_vec3_faceforward(vec3 n, vec3 v, vec3 nref, vec3 dest);
 
 CGLM_EXPORT
 void
-glmc_vec3_reflect(vec3 I, vec3 N, vec3 dest);
+glmc_vec3_reflect(vec3 v, vec3 n, vec3 dest);
 
 CGLM_EXPORT
 bool
-glmc_vec3_refract(vec3 I, vec3 N, float eta, vec3 dest);
+glmc_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest);
 
 #ifdef __cplusplus
 }

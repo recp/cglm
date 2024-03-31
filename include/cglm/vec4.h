@@ -65,8 +65,8 @@
    CGLM_INLINE void  glm_vec4_smoothinterpc(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_swizzle(vec4 v, int mask, vec4 dest);
    CGLM_INLINE void  glm_vec4_make(float * restrict src, vec4 dest);
-   CGLM_INLINE void  glm_vec4_reflect(vec4 I, vec4 N, vec4 dest);
-   CGLM_INLINE void  glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest);
+   CGLM_INLINE void  glm_vec4_reflect(vec4 v, vec4 n, vec4 dest);
+   CGLM_INLINE void  glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest);
 
  DEPRECATED:
    glm_vec4_dup
@@ -1309,20 +1309,20 @@ glm_vec4_make(const float * __restrict src, vec4 dest) {
 /*!
  * @brief reflection vector using an incident ray and a surface normal
  *
- * @param[in]  I    incident vector
- * @param[in]  N    normalized normal vector
+ * @param[in]  v    incident vector
+ * @param[in]  n    normalized normal vector
  * @param[out] dest destination vector for the reflection result
  */
 CGLM_INLINE
 void
-glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
+glm_vec4_reflect(vec4 v, vec4 n, vec4 dest) {
   vec4 temp;
 
   /* TODO: direct simd touch */
-  glm_vec4_scale(N, 2.0f * glm_vec4_dot(I, N), temp);
-  glm_vec4_sub(I, temp, dest);
+  glm_vec4_scale(n, 2.0f * glm_vec4_dot(v, n), temp);
+  glm_vec4_sub(v, temp, dest);
 
-  dest[3] = I[3];
+  dest[3] = v[3];
 }
 
 /*!
@@ -1336,8 +1336,8 @@ glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
  * incident vector 'I' in the output 'dest', users requiring the preservation of
  * the 'w' component should manually adjust 'dest' after calling this function.
  *
- * @param[in]  I    normalized incident vector
- * @param[in]  N    normalized normal vector
+ * @param[in]  v    normalized incident vector
+ * @param[in]  n    normalized normal vector
  * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
  * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
  *
@@ -1345,10 +1345,10 @@ glm_vec4_reflect(vec4 I, vec4 N, vec4 dest) {
  */
 CGLM_INLINE
 bool
-glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
+glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
   float ndi, eni, k;
 
-  ndi = glm_vec4_dot(N, I);
+  ndi = glm_vec4_dot(n, v);
   eni = eta * ndi;
   k   = 1.0f + eta * eta - eni * eni;
 
@@ -1357,7 +1357,7 @@ glm_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest) {
     return false;
   }
 
-  glm_vec4_scale(I, eta, dest);
+  glm_vec4_scale(v, eta, dest);
   glm_vec4_mulsubs(N, eni + sqrtf(k), dest);
   return true;
 }
