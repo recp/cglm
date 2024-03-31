@@ -14,8 +14,8 @@
    CGLM_INLINE void glm_mat3x4_copy(mat3x4 mat, mat3x4 dest);
    CGLM_INLINE void glm_mat3x4_zero(mat3x4 mat);
    CGLM_INLINE void glm_mat3x4_make(const float * __restrict src, mat3x4 dest);
-   CGLM_INLINE void glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest);
-   CGLM_INLINE void glm_mat3x4_mulv(mat3x4 m, vec4 v, vec3 dest);
+   CGLM_INLINE void glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest);
+   CGLM_INLINE void glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest);
    CGLM_INLINE void glm_mat3x4_transpose(mat3x4 m, mat4x3 dest);
    CGLM_INLINE void glm_mat3x4_scale(mat3x4 m, float s);
  */
@@ -87,16 +87,16 @@ glm_mat3x4_make(const float * __restrict src, mat3x4 dest) {
  * @brief multiply m1 and m2 to dest
  *
  * @code
- * glm_mat3x4_mul(mat3x4, mat4x3, mat3);
+ * glm_mat3x4_mul(mat3x4, mat4x3, mat4);
  * @endcode
  *
  * @param[in]  m1   left matrix (mat3x4)
  * @param[in]  m2   right matrix (mat4x3)
- * @param[out] dest destination matrix (mat3)
+ * @param[out] dest destination matrix (mat4)
  */
 CGLM_INLINE
 void
-glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest) {
+glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest) {
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
         a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2], a23 = m1[2][3],
@@ -106,21 +106,29 @@ glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest) {
         b20 = m2[2][0], b21 = m2[2][1], b22 = m2[2][2],
         b30 = m2[3][0], b31 = m2[3][1], b32 = m2[3][2];
 
-  dest[0][0] = a00 * b00 + a01 * b10 + a02 * b20 + a03 * b30;
-  dest[0][1] = a00 * b01 + a01 * b11 + a02 * b21 + a03 * b31;
-  dest[0][2] = a00 * b02 + a01 * b12 + a02 * b22 + a03 * b32;
+  dest[0][0] = a00 * b00 + a10 * b01 + a20 * b02;
+  dest[0][1] = a01 * b00 + a11 * b01 + a21 * b02;
+  dest[0][2] = a02 * b00 + a12 * b01 + a22 * b02;
+  dest[0][3] = a03 * b00 + a13 * b01 + a23 * b02;
 
-  dest[1][0] = a10 * b00 + a11 * b10 + a12 * b20 + a13 * b30;
-  dest[1][1] = a10 * b01 + a11 * b11 + a12 * b21 + a13 * b31;
-  dest[1][2] = a10 * b02 + a11 * b12 + a12 * b22 + a13 * b32;
+  dest[1][0] = a00 * b10 + a10 * b11 + a20 * b12;
+  dest[1][1] = a01 * b10 + a11 * b11 + a21 * b12;
+  dest[1][2] = a02 * b10 + a12 * b11 + a22 * b12;
+  dest[1][3] = a03 * b10 + a13 * b11 + a23 * b12;
 
-  dest[2][0] = a20 * b00 + a21 * b10 + a22 * b20 + a23 * b30;
-  dest[2][1] = a20 * b01 + a21 * b11 + a22 * b21 + a23 * b31;
-  dest[2][2] = a20 * b02 + a21 * b12 + a22 * b22 + a23 * b32;
+  dest[2][0] = a00 * b20 + a10 * b21 + a20 * b22;
+  dest[2][1] = a01 * b20 + a11 * b21 + a21 * b22;
+  dest[2][2] = a02 * b20 + a12 * b21 + a22 * b22;
+  dest[2][3] = a03 * b20 + a13 * b21 + a23 * b22;
+
+  dest[3][0] = a00 * b30 + a10 * b31 + a20 * b32;
+  dest[3][1] = a01 * b30 + a11 * b31 + a21 * b32;
+  dest[3][2] = a02 * b30 + a12 * b31 + a22 * b32;
+  dest[3][3] = a03 * b30 + a13 * b31 + a23 * b32;
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest vector
+ * @brief multiply matrix with column vector and store in dest column vector
  *
  * @param[in]  m    matrix (left)
  * @param[in]  v    vector (right, column vector)
@@ -128,12 +136,13 @@ glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat3 dest) {
  */
 CGLM_INLINE
 void
-glm_mat3x4_mulv(mat3x4 m, vec4 v, vec3 dest) {
-  float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
+glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest) {
+  float v0 = v[0], v1 = v[1], v2 = v[2];
 
-  dest[0] = m[0][0] * v0 + m[0][1] * v1 + m[0][2] * v2 + m[0][3] * v3;
-  dest[1] = m[1][0] * v0 + m[1][1] * v1 + m[1][2] * v2 + m[1][3] * v3;
-  dest[2] = m[2][0] * v0 + m[2][1] * v1 + m[2][2] * v2 + m[2][3] * v3;
+  dest[0] = m[0][0] * v0 + m[1][0] * v1 + m[2][0] * v2;
+  dest[1] = m[0][1] * v0 + m[1][1] * v1 + m[2][1] * v2;
+  dest[2] = m[0][2] * v0 + m[1][2] * v1 + m[2][2] * v2;
+  dest[3] = m[0][3] * v0 + m[1][3] * v1 + m[2][3] * v2;
 }
 
 /*!
@@ -162,10 +171,9 @@ glm_mat3x4_transpose(mat3x4 m, mat4x3 dest) {
 CGLM_INLINE
 void
 glm_mat3x4_scale(mat3x4 m, float s) {
-  m[0][0] *= s;  m[1][0] *= s;   m[2][0] *= s;
-  m[0][1] *= s;  m[1][1] *= s;   m[2][1] *= s;
-  m[0][2] *= s;  m[1][2] *= s;   m[2][2] *= s;
-  m[0][3] *= s;  m[1][3] *= s;   m[2][3] *= s;
+  m[0][0] *= s; m[0][1] *= s; m[0][2] *= s; m[0][3] *= s;
+  m[1][0] *= s; m[1][1] *= s; m[1][2] *= s; m[1][3] *= s;
+  m[2][0] *= s; m[2][1] *= s; m[2][2] *= s; m[2][3] *= s;
 }
 
 #endif
