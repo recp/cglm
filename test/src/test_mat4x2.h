@@ -87,40 +87,40 @@ TEST_IMPL(GLM_PREFIX, mat4x2_mul) {
   mat4x2 m1 = GLM_MAT4X2_ZERO_INIT;
   mat2x4 m2 = GLM_MAT2X4_ZERO_INIT;
 
-  mat4 m3 = GLM_MAT4_ZERO_INIT;
-  mat4 m4 = GLM_MAT4_ZERO_INIT;
+  mat2 m3 = GLM_MAT2_ZERO_INIT;
+  mat2 m4 = GLM_MAT2_ZERO_INIT;
 
-  int i, j, k;
+  int c, r, k;
 
   test_rand_mat4x2(m1);
   test_rand_mat2x4(m2);
 
-  for (i = 0; i < 4; i++) {
-    for (j = 0; j < 4; j++) {
-      for (k = 0; k < 2; k++) {
-        m4[i][j] += m1[i][k] * m2[k][j];
+  for (r = 0; r < 2; r++) {
+    for (c = 0; c < 2; c++) {
+      for (k = 0; k < 4; k++) {
+	m4[c][r] += m1[k][r] * m2[c][k];
       }
     }
   }
 
   GLM(mat4x2_mul)(m1, m2, m3);
-  ASSERTIFY(test_assert_mat4_eq(m3, m4))
+  ASSERTIFY(test_assert_mat2_eq(m3, m4))
 
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, mat4x2_mulv) {
   mat4x2 mat = A_MATRIX4X2;
-  vec2 v = {11.0f, 21.0f};
+  vec4 v = {11.0f, 21.0f, 31.0f, 41.0f};
 
   int  i;
-  vec4 dest;
+  vec2 dest;
   float res = 0.0;
 
   GLM(mat4x2_mulv)(mat, v, dest);
 
-  for (i = 0; i < 4; i++) {
-    res = mat[i][0] * v[0] + mat[i][1] * v[1];
+  for (i = 0; i < 2; i++) {
+    res = mat[0][i] * v[0] + mat[1][i] * v[1] + mat[2][i] * v[2] + mat[3][i] * v[3];
     ASSERT(test_eq(dest[i], res))
   }
 
