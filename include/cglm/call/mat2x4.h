@@ -27,11 +27,11 @@ glmc_mat2x4_make(const float * __restrict src, mat2x4 dest);
 
 CGLM_EXPORT
 void
-glmc_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest);
+glmc_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_mat2x4_mulv(mat2x4 m, vec4 v, vec2 dest);
+glmc_mat2x4_mulv(mat2x4 m, vec2 v, vec4 dest);
 
 CGLM_EXPORT
 void
