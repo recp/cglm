@@ -1091,16 +1091,16 @@ glms_vec3_(make)(const float * __restrict src) {
  *
  * orients a vector to point away from a surface as defined by its normal
  *
- * @param[in] N      vector to orient.
- * @param[in] I      incident vector
- * @param[in] Nref   reference vector
+ * @param[in] n      vector to orient.
+ * @param[in] v      incident vector
+ * @param[in] nref   reference vector
  * @returns oriented vector, pointing away from the surface.
  */
 CGLM_INLINE
 vec3s
-glms_vec3_(faceforward)(vec3s N, vec3s I, vec3s Nref) {
+glms_vec3_(faceforward)(vec3s n, vec3s v, vec3s nref) {
   vec3s dest;
-  glm_vec3_faceforward(N.raw, I.raw, Nref.raw, dest.raw);
+  glm_vec3_faceforward(n.raw, v.raw, nref.raw, dest.raw);
   return dest;
 }
 
@@ -1126,8 +1126,8 @@ glms_vec3_(reflect)(vec3s v, vec3s n) {
  * occurs (angle too great given eta), dest is set to zero and returns false.
  * Otherwise, computes refraction vector, stores it in dest, and returns true.
  *
- * @param[in]  I    normalized incident vector
- * @param[in]  N    normalized normal vector
+ * @param[in]  v    normalized incident vector
+ * @param[in]  n    normalized normal vector
  * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
  * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
  *
@@ -1135,8 +1135,8 @@ glms_vec3_(reflect)(vec3s v, vec3s n) {
  */
 CGLM_INLINE
 bool
-glms_vec3_(refract)(vec3s I, vec3s N, float eta, vec3s * __restrict dest) {
-  return glm_vec3_refract(I.raw, N.raw, eta, dest->raw);
+glms_vec3_(refract)(vec3s v, vec3s n, float eta, vec3s * __restrict dest) {
+  return glm_vec3_refract(v.raw, n.raw, eta, dest->raw);
 }
 
 #endif /* cglms_vec3s_h */

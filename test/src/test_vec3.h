@@ -1843,12 +1843,12 @@ TEST_IMPL(GLM_PREFIX, vec3_make) {
 
 TEST_IMPL(GLM_PREFIX, vec3_faceforward) {
   vec3 N = {0.0f, 1.0f, 0.0f};
-  vec3 I = {1.0f, -1.0f, 0.0f};
+  vec3 v = {1.0f, -1.0f, 0.0f};
   vec3 Nref = {0.0f, -1.0f, 0.0f};
   vec3 dest;
 
-  GLM(vec3_faceforward)(N, I, Nref, dest);
-  ASSERT(dest[0] == 0.0f 
+  GLM(vec3_faceforward)(N, v, Nref, dest);
+  ASSERT(dest[0] == 0.0f
          && dest[1] == -1.0f
          && dest[2] == 0.0f); /* Expect N flipped */
 
@@ -1886,15 +1886,15 @@ TEST_IMPL(GLM_PREFIX, vec3_reflect) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec3_refract) {
-  vec3 I = {sqrtf(0.5f), -sqrtf(0.5f), 0.0f}; /* Incoming vector at 45 degrees to normal */
-  vec3 N = {0.0f, 1.0f, 0.0f};                /* Surface normal */
-  vec3 dest;
+  vec3  v = {sqrtf(0.5f), -sqrtf(0.5f), 0.0f}; /* Incoming vector at 45 degrees to normal */
+  vec3  N = {0.0f, 1.0f, 0.0f};                /* Surface normal */
+  vec3  dest;
   float eta;
   bool  r;
 
   /* Water to Air (eta = 1.33/1.0) */
   eta = 1.33f / 1.0f;
-  r = GLM(vec3_refract)(I, N, eta, dest);
+  r = GLM(vec3_refract)(v, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f)) {
     ASSERT(dest[1] < -sqrtf(0.5f));
     ASSERT(r == true);
@@ -1905,21 +1905,21 @@ TEST_IMPL(GLM_PREFIX, vec3_refract) {
 
   /* Air to Glass (eta = 1.0 / 1.5) */
   eta = 1.0f / 1.5f;
-  r = GLM(vec3_refract)(I, N, eta, dest);
+  r = GLM(vec3_refract)(v, N, eta, dest);
 
   /* Expect bending towards the normal */
   ASSERT(dest[1] < -sqrtf(0.5f));
 
   /* Glass to Water (eta = 1.5 / 1.33) */
   eta = 1.5f / 1.33f;
-  r = GLM(vec3_refract)(I, N, eta, dest);
+  r = GLM(vec3_refract)(v, N, eta, dest);
 
   /* Expect bending towards the normal, less bending than air to glass */
   ASSERT(dest[1] < -sqrtf(0.5f));
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
   eta = 2.42f / 1.0f;
-  r = GLM(vec3_refract)(I, N, eta, dest);
+  r = GLM(vec3_refract)(v, N, eta, dest);
   if (!(dest[0] == 0.0f && dest[1] == 0.0f && dest[2] == 0.0f)) {
     /* High potential for total internal reflection, but if it occurs, expect significant bending */
     ASSERT(dest[1] < -sqrtf(0.5f));
