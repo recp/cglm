@@ -1358,7 +1358,7 @@ glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
   }
 
   glm_vec4_scale(v, eta, dest);
-  glm_vec4_mulsubs(N, eni + sqrtf(k), dest);
+  glm_vec4_mulsubs(n, eni + sqrtf(k), dest);
   return true;
 }
 
