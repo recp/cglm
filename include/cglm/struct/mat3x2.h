@@ -13,8 +13,8 @@
  Functions:
    CGLM_INLINE mat3x2s glms_mat3x2_zero(void);
    CGLM_INLINE mat3x2s glms_mat3x2_make(const float * __restrict src);
-   CGLM_INLINE mat3s   glms_mat3x2_mul(mat3x2s m1, mat2x3s m2);
-   CGLM_INLINE vec3s   glms_mat3x2_mulv(mat3x2s m, vec2s v);
+   CGLM_INLINE mat2s   glms_mat3x2_mul(mat3x2s m1, mat2x3s m2);
+   CGLM_INLINE vec2s   glms_mat3x2_mulv(mat3x2s m, vec3s v);
    CGLM_INLINE mat2x3s glms_mat3x2_transpose(mat3x2s m);
    CGLM_INLINE mat3x2s glms_mat3x2_scale(mat3x2s m, float s);
  */
@@ -73,9 +73,9 @@ glms_mat3x2_(make)(const float * __restrict src) {
  * @returns destination matrix (mat3s)
  */
 CGLM_INLINE
-mat3s
+mat2s
 glms_mat3x2_(mul)(mat3x2s m1, mat2x3s m2) {
-  mat3s r;
+  mat2s r;
   glm_mat3x2_mul(m1.raw, m2.raw, r.raw);
   return r;
 }
@@ -88,9 +88,9 @@ glms_mat3x2_(mul)(mat3x2s m1, mat2x3s m2) {
  * @param[out] dest result vector
  */
 CGLM_INLINE
-vec3s
-glms_mat3x2_(mulv)(mat3x2s m, vec2s v) {
-  vec3s r;
+vec2s
+glms_mat3x2_(mulv)(mat3x2s m, vec3s v) {
+  vec2s r;
   glm_mat3x2_mulv(m.raw, v.raw, r.raw);
   return r;
 }
