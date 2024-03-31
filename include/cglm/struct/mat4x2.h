@@ -13,8 +13,8 @@
  Functions:
    CGLM_INLINE mat4x2s glms_mat4x2_zero(void);
    CGLM_INLINE mat4x2s glms_mat4x2_make(const float * __restrict src);
-   CGLM_INLINE mat4s   glms_mat4x2_mul(mat4x2s m1, mat2x4s m2);
-   CGLM_INLINE vec4s   glms_mat4x2_mulv(mat4x2s m, vec2s v);
+   CGLM_INLINE mat2s   glms_mat4x2_mul(mat4x2s m1, mat2x4s m2);
+   CGLM_INLINE vec2s   glms_mat4x2_mulv(mat4x2s m, vec4s v);
    CGLM_INLINE mat2x4s glms_mat4x2_transpose(mat4x2s m);
    CGLM_INLINE mat4x2s glms_mat4x2_scale(mat4x2s m, float s);
  */
@@ -71,27 +71,27 @@ glms_mat4x2_(make)(const float * __restrict src) {
  *
  * @param[in]  m1   left matrix (mat4x2s)
  * @param[in]  m2   right matrix (mat2x4s)
- * @returns destination matrix (mat4s)
+ * @returns destination matrix (mat2s)
  */
 CGLM_INLINE
-mat4s
+mat2s
 glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
-  mat4s r;
+  mat2s r;
   glm_mat4x2_mul(m1.raw, m2.raw, r.raw);
   return r;
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest vector
+ * @brief multiply matrix with column vector and store in dest column vector
  *
  * @param[in]  m    matrix (left)
  * @param[in]  v    vector (right, column vector)
- * @param[out] dest result vector
+ * @returns destination vector (vec2s)
  */
 CGLM_INLINE
-vec4s
-glms_mat4x2_(mulv)(mat4x2s m, vec2s v) {
-  vec4s r;
+vec2s
+glms_mat4x2_(mulv)(mat4x2s m, vec4s v) {
+  vec2s r;
   glm_mat4x2_mulv(m.raw, v.raw, r.raw);
   return r;
 }
