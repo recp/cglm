@@ -1908,6 +1908,7 @@ TEST_IMPL(GLM_PREFIX, vec3_refract) {
   r = GLM(vec3_refract)(v, N, eta, dest);
 
   /* Expect bending towards the normal */
+  ASSERT(r == true);
   ASSERT(dest[1] < -sqrtf(0.5f));
 
   /* Glass to Water (eta = 1.5 / 1.33) */
@@ -1915,6 +1916,7 @@ TEST_IMPL(GLM_PREFIX, vec3_refract) {
   r = GLM(vec3_refract)(v, N, eta, dest);
 
   /* Expect bending towards the normal, less bending than air to glass */
+  ASSERT(r == true);
   ASSERT(dest[1] < -sqrtf(0.5f));
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
