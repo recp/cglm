@@ -1,5 +1,5 @@
 project('cglm', 'c',
-    version : '0.9.4',
+    version : '0.9.5',
     license : 'mit',
     default_options : [
         'c_std=c11',
