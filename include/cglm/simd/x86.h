@@ -61,7 +61,7 @@
 #  define GLMM_POSZEROf ((int)0x00000000) /*  0x00000000 ---> +0.0f  */
 #else
 #  ifdef CGLM_FAST_MATH
-     union { int i; float f; } static GLMM_NEGZEROf_TU = { .i = 0x80000000 };
+     union { int i; float f; } static GLMM_NEGZEROf_TU = { .i = (int)0x80000000 };
 #    define GLMM_NEGZEROf GLMM_NEGZEROf_TU.f
 #    define GLMM_POSZEROf 0.0f
 #  else
