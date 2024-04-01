@@ -1351,7 +1351,9 @@ TEST_IMPL(GLM_PREFIX, vec4_max) {
 
   ASSERT(test_eq(GLM(vec4_max)(v1),  2.104f))
   ASSERT(test_eq(GLM(vec4_max)(v2), -12.35f))
+#ifndef CGLM_FAST_MATH
   ASSERT(isinf(GLM(vec4_max)(v3)))
+#endif
 //  ASSERT(isnan(GLM(vec4_max)(v4)))
 //  ASSERT(isnan(GLM(vec4_max)(v5)))
   ASSERT(test_eq(GLM(vec4_max)(v6),  11.0f))

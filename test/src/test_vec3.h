@@ -1678,7 +1678,9 @@ TEST_IMPL(GLM_PREFIX, vec3_max) {
 
   ASSERT(test_eq(GLM(vec3_max)(v1),  2.104f))
   ASSERT(test_eq(GLM(vec3_max)(v2), -12.35f))
+#ifndef CGLM_FAST_MATH
   ASSERT(isinf(GLM(vec3_max)(v3)))
+#endif
 //  ASSERT(isnan(GLM(vec3_max)(v4)))
 //  ASSERT(isnan(GLM(vec3_max)(v5)))
   ASSERT(test_eq(GLM(vec3_max)(v6),  11.0f))
