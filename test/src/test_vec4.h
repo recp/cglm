@@ -1378,6 +1378,7 @@ TEST_IMPL(GLM_PREFIX, vec4_min) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec4_isnan) {
+#ifndef CGLM_FAST_MATH
   vec4 v1 = {2.104f, -3.012f, -4.10f, -4.10f};
   vec4 v2 = {-12.35f, -31.140f, -43.502f, -43.502f};
   vec4 v3 = {INFINITY, 0.0f, 0.0f, 0.0f};
@@ -1391,11 +1392,12 @@ TEST_IMPL(GLM_PREFIX, vec4_isnan) {
   ASSERT(GLM(vec4_isnan)(v4))
   ASSERT(GLM(vec4_isnan)(v5))
   ASSERT(!GLM(vec4_isnan)(v6))
-
+#endif
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, vec4_isinf) {
+#ifndef CGLM_FAST_MATH
   vec4 v1 = {2.104f, -3.012f, -4.10f, -4.10f};
   vec4 v2 = {-12.35f, -31.140f, -43.502f, -43.502f};
   vec4 v3 = {INFINITY, 0.0f, 0.0f, 0.0f};
@@ -1409,11 +1411,12 @@ TEST_IMPL(GLM_PREFIX, vec4_isinf) {
   ASSERT(GLM(vec4_isinf)(v4))
   ASSERT(!GLM(vec4_isinf)(v5))
   ASSERT(!GLM(vec4_isinf)(v6))
-
+#endif
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, vec4_isvalid) {
+#ifndef CGLM_FAST_MATH
   vec4 v1 = {2.104f, -3.012f, -4.10f, -4.10f};
   vec4 v2 = {-12.35f, -31.140f, -43.502f, -43.502f};
   vec4 v3 = {INFINITY, 0.0f, 0.0f, 0.0f};
@@ -1427,7 +1430,7 @@ TEST_IMPL(GLM_PREFIX, vec4_isvalid) {
   ASSERT(!GLM(vec4_isvalid)(v4))
   ASSERT(!GLM(vec4_isvalid)(v5))
   ASSERT(GLM(vec4_isvalid)(v6))
-
+#endif
   TEST_SUCCESS
 }
 
