@@ -63,8 +63,17 @@ static inline float32x4_t glmm_max(float32x4_t a, float32x4_t b) { return vmaxq_
 static inline
 float32x4_t
 glmm_vhadd(float32x4_t v) {
+  float32x4_t p;
+  p = vpaddq_f32(v, v); /* [a+b, c+d, a+b, c+d] */
+  return vpaddq_f32(p, p); /* [t, t, t, t] */;
+
+  /* TODO: measure speed of this compare to above */
+  /* return vdupq_n_f32(vaddvq_f32(v)); */
+
+  /*
   return vaddq_f32(vaddq_f32(glmm_splat_x(v), glmm_splat_y(v)),
                    vaddq_f32(glmm_splat_z(v), glmm_splat_w(v)));
+   */
   /*
    this seems slower:
    v = vaddq_f32(v, vrev64q_f32(v));
@@ -106,6 +115,12 @@ static inline
 float
 glmm_dot(float32x4_t a, float32x4_t b) {
   return glmm_hadd(vmulq_f32(a, b));
+}
+
+static inline
+float32x4_t
+glmm_vdot(float32x4_t a, float32x4_t b) {
+  return glmm_vhadd(vmulq_f32(a, b));
 }
 
 static inline
