@@ -313,5 +313,152 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   glmm_store(dest[3], glmm_div(v3, x0));
 }
 
+CGLM_INLINE
+void
+glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
+  float32x4_t   r0, r1, r2, r3, r5, r6, r7, r8,
+                v0, v1, v2, v3,
+                t0, t1, t2;
+  float32x4x2_t a1, a2, a3, a4, a5, a6;
+  float32x2_t   l0, l1;
+  float32x4_t   s1 = glmm_float32x4_SIGNMASK_PNPN, s2;
+
+  s2 = vrev64q_f32(s1);
+
+  /* 127 <- 0 */
+  r0 = glmm_load(mat[0]);                  /* d c b a */
+  r1 = glmm_load(mat[1]);                  /* h g f e */
+  r2 = glmm_load(mat[2]);                  /* l k j i */
+  r3 = glmm_load(mat[3]);                  /* p o n m */
+
+  a1 = vzipq_f32(r2, r0);                  /* d l c k, b j a i */
+  a2 = vzipq_f32(r3, r1);                  /* h p g o, f n e m */
+  a3 = vtrnq_f32(r3, r1);                  /* h p f n, g o e m */
+  a4 = vtrnq_f32(r2, r0);                  /* d l b j, c k a i */
+
+  a5 = vzipq_f32(a3.val[0], a4.val[0]);    /* c g k o, a e i m */
+  a6 = vzipq_f32(a3.val[1], a4.val[1]);    /* d h l p, b f j n */
+
+  r5 = vextq_f32(a5.val[0], a5.val[0], 2); /* i m a e */
+  r6 = vextq_f32(a5.val[1], a5.val[1], 2); /* k o c g */
+
+  r7 = vextq_f32(a6.val[0], a6.val[0], 2); /* j n b f */
+  r8 = vextq_f32(a6.val[1], a6.val[1], 2); /* l p d h */
+
+  l0 = vget_high_f32(a2.val[1]);           /* h p */
+  l1 = vget_high_f32(a1.val[1]);           /* d l */
+
+  v0 = vcombine_f32(l0, l0);               /* h p h p */
+  v2 = vcombine_f32(l1, l1);               /* d l d l */
+  v1 = vextq_f32(a3.val[0], a2.val[1], 2); /* g o g o */
+  v3 = vextq_f32(a4.val[0], a1.val[1], 2); /* c k c k */
+
+  t0 = vmulq_f32(a4.val[0], v0);
+  t2 = vmulq_f32(a1.val[0], v1);
+  t1 = vmulq_f32(a1.val[0], a3.val[1]);
+
+  /* c3 = i * p - l * m    c7 = i * n - j * m    c11 = i * o - k * m
+     c4 = a * h - d * e    c8 = a * f - b * e    c12 = a * g - c * e
+     c1 = k * p - l * o    c5 = j * p - l * n    c9  = j * o - k * n
+     c2 = c * h - d * g    c6 = b * h - d * f    c10 = b * g - c * f */
+  t0 = glmm_fnmadd(v2, a3.val[0], t0);
+  t1 = glmm_fnmadd(a4.val[1], a2.val[0], t1);
+  t2 = glmm_fnmadd(v3, a2.val[0], t2);
+
+  /* det */
+
+  /* c3 * c10 + c4 * c9 + c1 * c8 + c2 * c7 */
+  v0 = vextq_f32(t2, t1, 2); /* c8 c7 c10 c9 */
+  v0 = vrev64q_f32(v0);      /* c7 c8 c9 c10 */
+  v0 = glmm_vdot(t0, v0);
+
+  /* c5 * c12 + c6 * c11 */
+  l1 = vget_low_f32(t2);
+  l0 = vget_high_f32(t1);
+  l1 = vrev64_f32(l1);
+
+  l0 = vmul_f32(l0, l1);
+  l0 = vpadd_f32(l0, l0);
+  v1 = vdupq_lane_f32(l0, 0);
+
+//  v1 = vextq_f32(t1, t2, 2); /* c12 c11 c6  c5 */
+//  v2 = vrev64q_f32(v1);      /* c11 c12 c5  c6 */
+//  v2 = vextq_f32(v2, v2, 2); /* c5  c6  c11 c12 */
+//  v1 = vmulq_f32(v1, v2);
+//  v1 = vpaddq_f32(v1, v1);
+//  /* v2 = vrev64q_f32(v1);
+//     v1 = vaddq_f32(v1, v2); */
+
+  v0 = vsubq_f32(v0, v1);    /* det */
+
+  /* inv div */
+  v1 = vdupq_n_f32(1.0f);
+  v0 = glmm_div(v1, v0);     /* inv div */
+
+  /* multiply t0, t1, t2 to reduce 1mul below: 2 eor + 34mul vs 3mul + 4eor */
+  t0 = vmulq_f32(t0, v0);
+  t1 = vmulq_f32(t1, v0);
+  t2 = vmulq_f32(t2, v0);
+
+  a1 = vzipq_f32(t0, t0);    /* c2  c2  c1 c1, c4  c4  c3  c3  */
+  a2 = vzipq_f32(t1, t1);    /* c6  c6  c5 c5, c8  c8  c7  c7  */
+  a3 = vzipq_f32(t2, t2);    /* c10 c10 c9 c9, c12 c12 c11 c11 */
+
+//  v1 = glmm_xor(v0, s1);     /* idt ndt idt ndt */
+//  v2 = glmm_xor(v0, s2);     /* ndt idt ndt idt */
+
+  /* result */
+
+  /* dest[0][0] = (f * c1  - g * c5  + h * c9)  * idt;
+     dest[0][1] = (b * c1  - c * c5  + d * c9)  * ndt;
+     dest[0][2] = (n * c2  - o * c6  + p * c10) * idt;
+     dest[0][3] = (j * c2  - k * c6  + l * c10) * ndt;
+
+     dest[1][0] = (e * c1  - g * c3  + h * c11) * ndt;
+     dest[1][1] = (a * c1  - c * c3  + d * c11) * idt;
+     dest[1][2] = (m * c2  - o * c4  + p * c12) * ndt;
+     dest[1][3] = (i * c2  - k * c4  + l * c12) * idt;
+
+     dest[2][0] = (e * c5  - f * c3  + h * c7)  * idt;
+     dest[2][1] = (a * c5  - b * c3  + d * c7)  * ndt;
+     dest[2][2] = (m * c6  - n * c4  + p * c8)  * idt;
+     dest[2][3] = (i * c6  - j * c4  + l * c8)  * ndt;
+
+     dest[3][0] = (e * c9  - f * c11 + g * c7)  * ndt;
+     dest[3][1] = (a * c9  - b * c11 + c * c7)  * idt;
+     dest[3][2] = (m * c10 - n * c12 + o * c8)  * ndt;
+     dest[3][3] = (i * c10 - j * c12 + k * c8)  * idt; */
+
+  r0 = vmulq_f32(r7, a1.val[1]);
+  r1 = vmulq_f32(r5, a1.val[1]);
+  r2 = vmulq_f32(r5, a2.val[1]);
+  r3 = vmulq_f32(r5, a3.val[1]);
+
+  r0 = glmm_fnmadd(r6, a2.val[1], r0);
+  r1 = glmm_fnmadd(r6, a1.val[0], r1);
+  r2 = glmm_fnmadd(r7, a1.val[0], r2);
+  r3 = glmm_fnmadd(r7, a3.val[0], r3);
+
+  r0 = glmm_fmadd(r8, a3.val[1], r0);
+  r1 = glmm_fmadd(r8, a3.val[0], r1);
+  r2 = glmm_fmadd(r8, a2.val[0], r2);
+  r3 = glmm_fmadd(r6, a2.val[0], r3);
+
+  r0 = glmm_xor(r0, s1);
+  r1 = glmm_xor(r1, s2);
+  r2 = glmm_xor(r2, s1);
+  r3 = glmm_xor(r3, s2);
+
+//  r0 = vmulq_f32(r0, v1);
+//  r1 = vmulq_f32(r1, v2);
+//  r2 = vmulq_f32(r2, v1);
+//  r3 = vmulq_f32(r3, v2);
+
+  glmm_store(dest[0], r0);
+  glmm_store(dest[1], r1);
+  glmm_store(dest[2], r2);
+  glmm_store(dest[3], r3);
+}
+
 #endif
 #endif /* cglm_mat4_neon_h */
