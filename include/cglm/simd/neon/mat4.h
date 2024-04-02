@@ -370,7 +370,9 @@ glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
   /* c3 * c10 + c4 * c9 + c1 * c8 + c2 * c7 */
   v0 = vextq_f32(t2, t1, 2); /* c8 c7 c10 c9 */
   v0 = vrev64q_f32(v0);      /* c7 c8 c9 c10 */
-  v0 = glmm_vdot(t0, v0);
+  v0 = vmulq_f32(t0, v0);
+  v0 = vpaddq_f32(v0, v0);
+  v0 = vpaddq_f32(v0, v0);
 
   /* c5 * c12 + c6 * c11 */
   l1 = vget_low_f32(t2);
@@ -394,8 +396,11 @@ glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
   /* inv div */
   v1 = vdupq_n_f32(1.0f);
   v0 = glmm_div(v1, v0);     /* inv div */
+  
+  //  v1 = glmm_xor(v0, s1);     /* idt ndt idt ndt */
+  //  v2 = glmm_xor(v0, s2);     /* ndt idt ndt idt */
 
-  /* multiply t0, t1, t2 to reduce 1mul below: 2 eor + 34mul vs 3mul + 4eor */
+  /* [*] multiply t0, t1, t2 to reduce 1mul below: 2 eor + 34mul vs 3mul + 4eor */
   t0 = vmulq_f32(t0, v0);
   t1 = vmulq_f32(t1, v0);
   t2 = vmulq_f32(t2, v0);
@@ -403,9 +408,6 @@ glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
   a1 = vzipq_f32(t0, t0);    /* c2  c2  c1 c1, c4  c4  c3  c3  */
   a2 = vzipq_f32(t1, t1);    /* c6  c6  c5 c5, c8  c8  c7  c7  */
   a3 = vzipq_f32(t2, t2);    /* c10 c10 c9 c9, c12 c12 c11 c11 */
-
-//  v1 = glmm_xor(v0, s1);     /* idt ndt idt ndt */
-//  v2 = glmm_xor(v0, s2);     /* ndt idt ndt idt */
 
   /* result */
 
@@ -444,6 +446,7 @@ glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
   r2 = glmm_fmadd(r8, a2.val[0], r2);
   r3 = glmm_fmadd(r6, a2.val[0], r3);
 
+  /* 4 xor may be fastart then 4mul, see aboe [**] */
   r0 = glmm_xor(r0, s1);
   r1 = glmm_xor(r1, s2);
   r2 = glmm_xor(r2, s1);
