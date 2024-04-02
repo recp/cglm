@@ -172,6 +172,8 @@ glm_mat4_det_neon(mat4 mat) {
   return glmm_hadd(vmulq_f32(x2, r0));
 }
 
+/* old one */
+#if 0
 CGLM_INLINE
 void
 glm_mat4_inv_neon(mat4 mat, mat4 dest) {
@@ -312,10 +314,11 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   glmm_store(dest[2], glmm_div(v2, x0));
   glmm_store(dest[3], glmm_div(v3, x0));
 }
+#endif
 
 CGLM_INLINE
 void
-glm_mat4_inv_neon_2(mat4 mat, mat4 dest) {
+glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   float32x4_t   r0, r1, r2, r3, r5, r6, r7, r8,
                 v0, v1, v2, v3,
                 t0, t1, t2;
