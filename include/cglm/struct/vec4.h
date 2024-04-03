@@ -67,8 +67,8 @@
    CGLM_INLINE vec4s glms_vec4_cubic(float s);
    CGLM_INLINE vec4s glms_vec4_swizzle(vec4s v, int mask);
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
-   CGLM_INLINE vec4s glms_vec4_reflect(vec4s I, vec4s N);
-   CGLM_INLINE bool  glms_vec4_refract(vec4s I, vec4s N, float eta, vec4s *dest)
+   CGLM_INLINE vec4s glms_vec4_reflect(vec4s v, vec4s n);
+   CGLM_INLINE bool  glms_vec4_refract(vec4s v, vec4s n, float eta, vec4s *dest)
  */
 
 #ifndef cglms_vec4s_h
@@ -932,15 +932,15 @@ glms_vec4_(make)(const float * __restrict src) {
 /*!
  * @brief reflection vector using an incident ray and a surface normal
  *
- * @param[in]  I    incident vector
- * @param[in]  N    normalized normal vector
+ * @param[in]  v    incident vector
+ * @param[in]  n    normalized normal vector
  * @returns reflection result
  */
 CGLM_INLINE
 vec4s
-glms_vec4_(reflect)(vec4s I, vec4s N) {
+glms_vec4_(reflect)(vec4s v, vec4s n) {
   vec4s dest;
-  glm_vec4_reflect(I.raw, N.raw, dest.raw);
+  glm_vec4_reflect(v.raw, n.raw, dest.raw);
   return dest;
 }
 
@@ -955,8 +955,8 @@ glms_vec4_(reflect)(vec4s I, vec4s N) {
  * incident vector 'I' in the output 'dest', users requiring the preservation of
  * the 'w' component should manually adjust 'dest' after calling this function.
  *
- * @param[in]  I    normalized incident vector
- * @param[in]  N    normalized normal vector
+ * @param[in]  v    normalized incident vector
+ * @param[in]  n    normalized normal vector
  * @param[in]  eta  ratio of indices of refraction (incident/transmitted)
  * @param[out] dest refraction vector if refraction occurs; zero vector otherwise
  *
@@ -964,8 +964,8 @@ glms_vec4_(reflect)(vec4s I, vec4s N) {
  */
 CGLM_INLINE
 bool
-glms_vec4_(refract)(vec4s I, vec4s N, float eta, vec4s * __restrict dest) {
-  return glm_vec4_refract(I.raw, N.raw, eta, dest->raw);
+glms_vec4_(refract)(vec4s v, vec4s n, float eta, vec4s * __restrict dest) {
+  return glm_vec4_refract(v.raw, n.raw, eta, dest->raw);
 }
 
 #endif /* cglms_vec4s_h */

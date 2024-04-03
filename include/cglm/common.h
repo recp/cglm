@@ -45,6 +45,10 @@
 #  define CGLM_LIKELY(expr)   (expr)
 #endif
 
+#if defined(_M_FP_FAST) || defined(__FAST_MATH__)
+#  define CGLM_FAST_MATH
+#endif
+
 #define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
 #define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
 

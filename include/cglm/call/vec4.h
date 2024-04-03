@@ -313,11 +313,11 @@ glmc_vec4_make(const float * __restrict src, vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_vec4_reflect(vec4 I, vec4 N, vec4 dest);
+glmc_vec4_reflect(vec4 v, vec4 n, vec4 dest);
 
 CGLM_EXPORT
 bool
-glmc_vec4_refract(vec4 I, vec4 N, float eta, vec4 dest);
+glmc_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest);
 
 #ifdef __cplusplus
 }

@@ -21,7 +21,7 @@
 #define glmm_set1(x) _mm_set1_ps(x)
 #define glmm_128     __m128
 
-#ifdef CGLM_USE_INT_DOMAIN
+#if defined(CGLM_USE_INT_DOMAIN) && defined(__SSE2__)
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
      _mm_castsi128_ps(_mm_shuffle_epi32(_mm_castps_si128(xmm),                \
                                         _MM_SHUFFLE(z, y, x, w)))
@@ -55,17 +55,40 @@
 #endif
 
 /* Note that `0x80000000` corresponds to `INT_MIN` for a 32-bit int. */
-#define GLMM_NEGZEROf ((int)0x80000000) /*  0x80000000 ---> -0.0f  */
 
-#define GLMM__SIGNMASKf(X, Y, Z, W)                                           \
+#if defined(__SSE2__)
+#  define GLMM_NEGZEROf ((int)0x80000000) /*  0x80000000 ---> -0.0f  */
+#  define GLMM_POSZEROf ((int)0x00000000) /*  0x00000000 ---> +0.0f  */
+#else
+#  ifdef CGLM_FAST_MATH
+     union { int i; float f; } static GLMM_NEGZEROf_TU = { .i = (int)0x80000000 };
+#    define GLMM_NEGZEROf GLMM_NEGZEROf_TU.f
+#    define GLMM_POSZEROf 0.0f
+#  else
+#    define GLMM_NEGZEROf -0.0f
+#    define GLMM_POSZEROf  0.0f
+#  endif
+#endif
+
+#if defined(__SSE2__)
+#  define GLMM__SIGNMASKf(X, Y, Z, W)                                         \
    _mm_castsi128_ps(_mm_set_epi32(X, Y, Z, W))
   /* _mm_set_ps(X, Y, Z, W); */
+#else
+#  define GLMM__SIGNMASKf(X, Y, Z, W)  _mm_set_ps(X, Y, Z, W)
+#endif
 
-#define glmm_float32x4_SIGNMASK_PNPN GLMM__SIGNMASKf(0, GLMM_NEGZEROf, 0, GLMM_NEGZEROf)
-#define glmm_float32x4_SIGNMASK_NPNP GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, GLMM_NEGZEROf, 0)
-#define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, 0, 0, GLMM_NEGZEROf)
+#define glmm_float32x4_SIGNMASK_PNPN GLMM__SIGNMASKf(GLMM_POSZEROf, GLMM_NEGZEROf, GLMM_POSZEROf, GLMM_NEGZEROf)
+#define glmm_float32x4_SIGNMASK_NPNP GLMM__SIGNMASKf(GLMM_NEGZEROf, GLMM_POSZEROf, GLMM_NEGZEROf, GLMM_POSZEROf)
+#define glmm_float32x4_SIGNMASK_NPPN GLMM__SIGNMASKf(GLMM_NEGZEROf, GLMM_POSZEROf, GLMM_POSZEROf, GLMM_NEGZEROf)
 
-#define glmm_float32x4_SIGNMASK_NEG _mm_castsi128_ps(_mm_set1_epi32(GLMM_NEGZEROf)) /* _mm_set1_ps(-0.0f) */
+/* fasth math prevents -0.0f to work */
+#if defined(__SSE2__)
+#  define glmm_float32x4_SIGNMASK_NEG _mm_castsi128_ps(_mm_set1_epi32(GLMM_NEGZEROf)) /* _mm_set1_ps(-0.0f) */
+#else
+#  define glmm_float32x4_SIGNMASK_NEG _mm_set1_ps(GLMM_NEGZEROf)
+#endif
+
 #define glmm_float32x8_SIGNMASK_NEG _mm256_castsi256_ps(_mm256_set1_epi32(GLMM_NEGZEROf))
 
 static inline
@@ -207,6 +230,7 @@ glmm_norm_inf(__m128 a) {
   return _mm_cvtss_f32(glmm_vhmax(glmm_abs(a)));
 }
 
+#if defined(__SSE2__)
 static inline
 __m128
 glmm_load3(float v[3]) {
@@ -225,6 +249,7 @@ glmm_store3(float v[3], __m128 vx) {
   _mm_storel_pi(CGLM_CASTPTR_ASSUME_ALIGNED(v, __m64), vx);
   _mm_store_ss(&v[2], glmm_shuff1(vx, 2, 2, 2, 2));
 }
+#endif
 
 static inline
 __m128

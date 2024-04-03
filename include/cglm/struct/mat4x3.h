@@ -13,8 +13,8 @@
  Functions:
    CGLM_INLINE mat4x3s glms_mat4x3_zero(void);
    CGLM_INLINE mat4x3s glms_mat4x3_make(const float * __restrict src);
-   CGLM_INLINE mat4s   glms_mat4x3_mul(mat4x3s m1, mat3x4s m2);
-   CGLM_INLINE vec4s   glms_mat4x3_mulv(mat4x3s m, vec3s v);
+   CGLM_INLINE mat3s   glms_mat4x3_mul(mat4x3s m1, mat3x4s m2);
+   CGLM_INLINE vec3s   glms_mat4x3_mulv(mat4x3s m, vec4s v);
    CGLM_INLINE mat3x4s glms_mat4x3_transpose(mat4x3s m);
    CGLM_INLINE mat4x3s glms_mat4x3_scale(mat4x3s m, float s);
  */
@@ -70,12 +70,12 @@ glms_mat4x3_(make)(const float * __restrict src) {
  *
  * @param[in]  m1   left matrix (mat4x3s)
  * @param[in]  m2   right matrix (mat3x4s)
- * @returns destination matrix (mat4s)
+ * @returns destination matrix (mat3s)
  */
 CGLM_INLINE
-mat4s
+mat3s
 glms_mat4x3_(mul)(mat4x3s m1, mat3x4s m2) {
-  mat4s r;
+  mat3s r;
   glm_mat4x3_mul(m1.raw, m2.raw, r.raw);
   return r;
 }
@@ -85,12 +85,12 @@ glms_mat4x3_(mul)(mat4x3s m1, mat3x4s m2) {
  *
  * @param[in]  m    matrix (left)
  * @param[in]  v    vector (right, column vector)
- * @param[out] dest result vector
+ * @returns destination vector (vec3s)
  */
 CGLM_INLINE
-vec4s
-glms_mat4x3_(mulv)(mat4x3s m, vec3s v) {
-  vec4s r;
+vec3s
+glms_mat4x3_(mulv)(mat4x3s m, vec4s v) {
+  vec3s r;
   glm_mat4x3_mulv(m.raw, v.raw, r.raw);
   return r;
 }

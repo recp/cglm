@@ -1494,13 +1494,13 @@ TEST_LIST {
   TEST_ENTRY(glm_mat2x4_transpose)
   TEST_ENTRY(glm_mat2x4_scale)
 
-  TEST_ENTRY(glm_mat2x4_copy)
-  TEST_ENTRY(glm_mat2x4_zero)
-  TEST_ENTRY(glm_mat2x4_make)
-  TEST_ENTRY(glm_mat2x4_mul)
-  TEST_ENTRY(glm_mat2x4_mulv)
-  TEST_ENTRY(glm_mat2x4_transpose)
-  TEST_ENTRY(glm_mat2x4_scale)
+  TEST_ENTRY(glmc_mat2x4_copy)
+  TEST_ENTRY(glmc_mat2x4_zero)
+  TEST_ENTRY(glmc_mat2x4_make)
+  TEST_ENTRY(glmc_mat2x4_mul)
+  TEST_ENTRY(glmc_mat2x4_mulv)
+  TEST_ENTRY(glmc_mat2x4_transpose)
+  TEST_ENTRY(glmc_mat2x4_scale)
 
   /* camera (incl [LR]H cross [NZ]O) */
   TEST_ENTRY(glm_perspective_lh_zo)

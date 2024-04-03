@@ -10,6 +10,9 @@
 
 #if defined( _MSC_VER )
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
+#    ifndef __SSE__
+#      define __SSE__
+#    endif
 #    ifndef __SSE2__
 #      define __SSE2__
 #    endif
@@ -24,10 +27,17 @@
 #  endif
 #endif
 
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__SSE__)
 #  include <xmmintrin.h>
-#  include <emmintrin.h>
 #  define CGLM_SSE_FP 1
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
+#  endif
+#endif
+
+#if defined(__SSE2__)
+#  include <emmintrin.h>
+#  define CGLM_SSE2_FP 1
 #  ifndef CGLM_SIMD_x86
 #    define CGLM_SIMD_x86
 #  endif

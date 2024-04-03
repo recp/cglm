@@ -14,8 +14,8 @@
    CGLM_INLINE void glm_mat2x4_copy(mat2x4 mat, mat2x4 dest);
    CGLM_INLINE void glm_mat2x4_zero(mat2x4 mat);
    CGLM_INLINE void glm_mat2x4_make(const float * __restrict src, mat2x4 dest);
-   CGLM_INLINE void glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest);
-   CGLM_INLINE void glm_mat2x4_mulv(mat2x4 m, vec4 v, vec2 dest);
+   CGLM_INLINE void glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat4 dest);
+   CGLM_INLINE void glm_mat2x4_mulv(mat2x4 m, vec2 v, vec4 dest);
    CGLM_INLINE void glm_mat2x4_transpose(mat2x4 m, mat4x2 dest);
    CGLM_INLINE void glm_mat2x4_scale(mat2x4 m, float s);
  */
@@ -80,16 +80,16 @@ glm_mat2x4_make(const float * __restrict src, mat2x4 dest) {
  * @brief multiply m1 and m2 to dest
  *
  * @code
- * glm_mat2x4_mul(mat2x4, mat4x2, mat2);
+ * glm_mat2x4_mul(mat2x4, mat4x2, mat4);
  * @endcode
  *
  * @param[in]  m1   left matrix (mat2x4)
  * @param[in]  m2   right matrix (mat4x2)
- * @param[out] dest destination matrix (mat2)
+ * @param[out] dest destination matrix (mat4)
  */
 CGLM_INLINE
 void
-glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest) {
+glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat4 dest) {
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
 
@@ -98,15 +98,29 @@ glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest) {
         b20 = m2[2][0], b21 = m2[2][1],
         b30 = m2[3][0], b31 = m2[3][1];
 
-  dest[0][0] = a00 * b00 + a01 * b10 + a02 * b20 + a03 * b30;
-  dest[0][1] = a00 * b01 + a01 * b11 + a02 * b21 + a03 * b31;
+  dest[0][0] = a00 * b00 + a10 * b01;
+  dest[0][1] = a01 * b00 + a11 * b01;
+  dest[0][2] = a02 * b00 + a12 * b01;
+  dest[0][3] = a03 * b00 + a13 * b01;
 
-  dest[1][0] = a10 * b00 + a11 * b10 + a12 * b20 + a13 * b30;
-  dest[1][1] = a10 * b01 + a11 * b11 + a12 * b21 + a13 * b31;
+  dest[1][0] = a00 * b10 + a10 * b11;
+  dest[1][1] = a01 * b10 + a11 * b11;
+  dest[1][2] = a02 * b10 + a12 * b11;
+  dest[1][3] = a03 * b10 + a13 * b11;
+
+  dest[2][0] = a00 * b20 + a10 * b21;
+  dest[2][1] = a01 * b20 + a11 * b21;
+  dest[2][2] = a02 * b20 + a12 * b21;
+  dest[2][3] = a03 * b20 + a13 * b21;
+
+  dest[3][0] = a00 * b30 + a10 * b31;
+  dest[3][1] = a01 * b30 + a11 * b31;
+  dest[3][2] = a02 * b30 + a12 * b31;
+  dest[3][3] = a03 * b30 + a13 * b31;
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest vector
+ * @brief multiply matrix with column vector and store in dest column vector
  *
  * @param[in]  m    matrix (left)
  * @param[in]  v    vector (right, column vector)
@@ -114,11 +128,13 @@ glm_mat2x4_mul(mat2x4 m1, mat4x2 m2, mat2 dest) {
  */
 CGLM_INLINE
 void
-glm_mat2x4_mulv(mat2x4 m, vec4 v, vec2 dest) {
-  float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
+glm_mat2x4_mulv(mat2x4 m, vec2 v, vec4 dest) {
+  float v0 = v[0], v1 = v[1];
 
-  dest[0] = m[0][0] * v0 + m[0][1] * v1 + m[0][2] * v2 + m[0][3] * v3;
-  dest[1] = m[1][0] * v0 + m[1][1] * v1 + m[1][2] * v2 + m[1][3] * v3;
+  dest[0] = m[0][0] * v0 + m[1][0] * v1;
+  dest[1] = m[0][1] * v0 + m[1][1] * v1;
+  dest[2] = m[0][2] * v0 + m[1][2] * v1;
+  dest[3] = m[0][3] * v0 + m[1][3] * v1;
 }
 
 /*!
