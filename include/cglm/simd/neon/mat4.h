@@ -326,7 +326,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   float32x4_t   s1 = glmm_float32x4_SIGNMASK_PNPN, s2;
 
 #if !CGLM_ARM64
-  float32x2_t l0, l1;
+  float32x2_t   l0, l1;
 #endif
 
   s2 = vrev64q_f32(s1);
