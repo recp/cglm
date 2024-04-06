@@ -14,7 +14,7 @@
 
 #if defined(_MSC_VER)
 /* do not use alignment for older visual studio versions */
-#  if _MSC_VER < 1913 /*  Visual Studio 2017 version 15.6  */
+#  if _MSC_VER < 1913 || _M_ARM /*  Visual Studio 2017 version 15.6  */
 #    define CGLM_ALL_UNALIGNED
 #    define CGLM_ALIGN(X) /* no alignment */
 #  else
