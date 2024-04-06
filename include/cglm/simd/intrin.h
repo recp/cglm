@@ -100,7 +100,7 @@
 #else /* non-windows */
 #  if defined(__ARM_NEON) || defined(__ARM_NEON__)
 #    include <arm_neon.h>
-#    if defined(__ARM_NEON_FP)
+#    if defined(__ARM_NEON_FP) || defined(__ARM_FP)
 #      define CGLM_NEON_FP 1
 #    endif
 #    ifndef CGLM_SIMD_ARM
