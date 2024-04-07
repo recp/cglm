@@ -13,7 +13,9 @@
 #    ifndef __SSE__
 #      define __SSE__
 #    endif
-
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
 #  elif _M_IX86_FP == 1
 #    ifndef __SSE__
 #      define __SSE__
@@ -23,6 +25,29 @@
 /* also ARM32 also causes similar error, disable it for now on ARM32 too */
 #  if _MSC_VER < 1913 || _M_ARM     /* Visual Studio 2017 version 15.6 */
 #    define CGLM_ALL_UNALIGNED
+#  endif
+#endif
+
+#ifdef __AVX__
+#  include <immintrin.h>
+#  define CGLM_AVX_FP 1
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
+#    ifndef __SSE3__
+#      define __SSE3__
+#    endif
+#    ifndef __SSE4__
+#      define __SSE4__
+#    endif
+#    ifndef __SSE4_1__
+#      define __SSE4_1__
+#    endif
+#    ifndef __SSE4_2__
+#      define __SSE4_2__
+#    endif
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
 #  endif
 #endif
 
@@ -58,14 +83,6 @@
 
 #if defined(__SSE4_2__)
 #  include <nmmintrin.h>
-#  ifndef CGLM_SIMD_x86
-#    define CGLM_SIMD_x86
-#  endif
-#endif
-
-#ifdef __AVX__
-#  include <immintrin.h>
-#  define CGLM_AVX_FP 1
 #  ifndef CGLM_SIMD_x86
 #    define CGLM_SIMD_x86
 #  endif
