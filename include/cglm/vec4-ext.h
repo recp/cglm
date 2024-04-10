@@ -48,7 +48,7 @@ glm_vec4_broadcast(float val, vec4 d) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(d, wasm_f32x4_splat(val));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(d, _mm_set1_ps(val));
+  glmm_store(d, glmm_set1(val));
 #else
   d[0] = d[1] = d[2] = d[3] = val;
 #endif
@@ -66,7 +66,7 @@ glm_vec4_fill(vec4 v, float val) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(v, wasm_f32x4_splat(val));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(v, _mm_set1_ps(val));
+  glmm_store(v, glmm_set1(val));
 #else
   v[0] = v[1] = v[2] = v[3] = val;
 #endif

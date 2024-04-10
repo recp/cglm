@@ -18,8 +18,15 @@
 #  define glmm_store(p, a)  _mm_store_ps(p, a)
 #endif
 
-#define glmm_set1(x) _mm_set1_ps(x)
 #define glmm_128     __m128
+
+#ifdef __AVX__
+#  define glmm_set1(x)     _mm_broadcast_ss(&x)
+#  define glmm_set1_ptr(x) _mm_broadcast_ss(x)
+#else
+#  define glmm_set1(x)     _mm_set1_ps(x)
+#  define glmm_set1_ptr(x) _mm_set1_ps(*x)
+#endif
 
 #if defined(CGLM_USE_INT_DOMAIN) && defined(__SSE2__)
 #  define glmm_shuff1(xmm, z, y, x, w)                                        \
@@ -86,7 +93,7 @@
 #if defined(__SSE2__)
 #  define glmm_float32x4_SIGNMASK_NEG _mm_castsi128_ps(_mm_set1_epi32(GLMM_NEGZEROf)) /* _mm_set1_ps(-0.0f) */
 #else
-#  define glmm_float32x4_SIGNMASK_NEG _mm_set1_ps(GLMM_NEGZEROf)
+#  define glmm_float32x4_SIGNMASK_NEG glmm_set1(GLMM_NEGZEROf)
 #endif
 
 #define glmm_float32x8_SIGNMASK_NEG _mm256_castsi256_ps(_mm256_set1_epi32(GLMM_NEGZEROf))

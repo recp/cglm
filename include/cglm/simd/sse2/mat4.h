@@ -18,7 +18,7 @@ CGLM_INLINE
 void
 glm_mat4_scale_sse2(mat4 m, float s) {
   __m128 x0;
-  x0 = _mm_set1_ps(s);
+  x0 = glmm_set1(s);
 
   glmm_store(m[0], _mm_mul_ps(glmm_load(m[0]), x0));
   glmm_store(m[1], _mm_mul_ps(glmm_load(m[1]), x0));
@@ -426,7 +426,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x1 = _mm_shuffle_ps(v2, v3, _MM_SHUFFLE(0, 0, 0, 0));
   x0 = _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 0, 2, 0));
 
-  x0 = _mm_div_ps(_mm_set1_ps(1.0f), glmm_vhadd(_mm_mul_ps(x0, r0)));
+  x0 = _mm_div_ps(glmm_set1(1.0f), glmm_vhadd(_mm_mul_ps(x0, r0)));
 
   glmm_store(dest[0], _mm_mul_ps(v0, x0));
   glmm_store(dest[1], _mm_mul_ps(v1, x0));
@@ -494,7 +494,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   /* v0: c3 * c10 + c4 * c9 + c1 * c8 + c2 * c7 */
   /* v1: c5 * c12 + c6 * c11 */
 
-  v5 = _mm_set1_ps(1.0f);
+  v5 = glmm_set1(1.0f);
   v0 = glmm_shuff1(t2, 2, 3, 0, 1);
   v1 = glmm_shuff1(t1, 0, 1, 2, 3);
   v0 = _mm_mul_ps(t0, v0);

@@ -235,7 +235,7 @@ glm_mat2_scale(mat2 m, float s) {
   glmm_store(m[0], wasm_f32x4_mul(wasm_v128_load(m[0]),
                                   wasm_f32x4_splat(s)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(m[0], _mm_mul_ps(_mm_loadu_ps(m[0]), _mm_set1_ps(s)));
+  glmm_store(m[0], _mm_mul_ps(_mm_loadu_ps(m[0]), glmm_set1(s)));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), vdupq_n_f32(s)));
 #else
