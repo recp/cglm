@@ -54,13 +54,6 @@
 #  define glmm_splat_w(x)  glmm_splat(x, 3)
 #endif
 
-/* glmm_shuff1x() is DEPRECATED!, use glmm_splat() */
-#define glmm_shuff1x(xmm, x) glmm_shuff1(xmm, x, x, x, x)
-
-#define glmm_shuff2(a, b, z0, y0, x0, w0, z1, y1, x1, w1)                     \
-     glmm_shuff1(_mm_shuffle_ps(a, b, _MM_SHUFFLE(z0, y0, x0, w0)),           \
-                 z1, y1, x1, w1)
-
 #ifdef __AVX__
 #  ifdef CGLM_ALL_UNALIGNED
 #    define glmm_load256(p)      _mm256_loadu_ps(p)
