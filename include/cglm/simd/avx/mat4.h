@@ -12,8 +12,6 @@
 #include "../../common.h"
 #include "../intrin.h"
 
-#include <immintrin.h>
-
 CGLM_INLINE
 void
 glm_mat4_scale_avx(mat4 m, float s) {
@@ -22,6 +20,31 @@ glm_mat4_scale_avx(mat4 m, float s) {
 
   glmm_store256(m[0], _mm256_mul_ps(y0, glmm_load256(m[0])));
   glmm_store256(m[2], _mm256_mul_ps(y0, glmm_load256(m[2])));
+}
+
+/* TODO: this must be tested and compared to SSE version, may be slower!!! */
+CGLM_INLINE
+void
+glm_mat4_transp_avx(mat4 m, mat4 dest) {
+  __m256 y0, y1, y2, y3;
+
+  y0 = glmm_load256(m[0]);                   /* h g f e d c b a */
+  y1 = glmm_load256(m[2]);                   /* p o n m l k j i */
+
+  y2 = _mm256_unpacklo_ps(y0, y1);           /* n f m e j b i a */
+  y3 = _mm256_unpackhi_ps(y0, y1);           /* p h o g l d k c */
+  
+  y0 = _mm256_permute2f128_ps(y2, y3, 0x20); /* l d k c j b i a */
+  y1 = _mm256_permute2f128_ps(y2, y3, 0x31); /* p h o g n f m e */
+
+  y2 = _mm256_unpacklo_ps(y0, y1);           /* o k g c m i e a */
+  y3 = _mm256_unpackhi_ps(y0, y1);           /* p l h d n j f b */
+
+  y0 = _mm256_permute2f128_ps(y2, y3, 0x20); /* n j f b m i e a */
+  y1 = _mm256_permute2f128_ps(y2, y3, 0x31); /* p l h d o k g c */
+
+  glmm_store256(dest[0], y0);
+  glmm_store256(dest[2], y1);
 }
 
 CGLM_INLINE

@@ -520,6 +520,8 @@ void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, dest);
+#elif defined(__AVX__)
+  glm_mat4_transp_avx(m, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
 #elif defined(CGLM_NEON_FP)
@@ -546,6 +548,8 @@ void
 glm_mat4_transpose(mat4 m) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, m);
+#elif defined(__AVX__)
+  glm_mat4_transp_avx(m, m);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
 #elif defined(CGLM_NEON_FP)
