@@ -37,21 +37,26 @@
 #define glmm_splat(x, lane) glmm_shuff1(x, lane, lane, lane, lane)
 
 #ifdef __AVX__
-#  define glmm_set1(x)     _mm_broadcast_ss(&x)
-#  define glmm_set1_ptr(x) _mm_broadcast_ss(x)
-
-#  define glmm_splat_x(x)  _mm_broadcastss_ps(x)
-#  define glmm_splat_y(x)  _mm_permute_ps(x, _MM_SHUFFLE(1, 1, 1, 1))
-#  define glmm_splat_z(x)  _mm_permute_ps(x, _MM_SHUFFLE(2, 2, 2, 2))
-#  define glmm_splat_w(x)  _mm_permute_ps(x, _MM_SHUFFLE(3, 3, 3, 3))
+#  define glmm_set1(x)      _mm_broadcast_ss(&x)
+#  define glmm_set1_ptr(x)  _mm_broadcast_ss(x)
+#  define glmm_set1_rval(x) _mm_set1_ps(x)
+#  ifdef __AVX2__
+#    define glmm_splat_x(x) _mm_broadcastss_ps(x)
+#  else
+#    define glmm_splat_x(x) _mm_permute_ps(x, _MM_SHUFFLE(0, 0, 0, 0))
+#  endif
+#  define glmm_splat_y(x)   _mm_permute_ps(x, _MM_SHUFFLE(1, 1, 1, 1))
+#  define glmm_splat_z(x)   _mm_permute_ps(x, _MM_SHUFFLE(2, 2, 2, 2))
+#  define glmm_splat_w(x)   _mm_permute_ps(x, _MM_SHUFFLE(3, 3, 3, 3))
 #else
-#  define glmm_set1(x)     _mm_set1_ps(x)
-#  define glmm_set1_ptr(x) _mm_set1_ps(*x)
+#  define glmm_set1(x)      _mm_set1_ps(x)
+#  define glmm_set1_ptr(x)  _mm_set1_ps(*x)
+#  define glmm_set1_rval(x) _mm_set1_ps(x)
 
-#  define glmm_splat_x(x)  glmm_splat(x, 0)
-#  define glmm_splat_y(x)  glmm_splat(x, 1)
-#  define glmm_splat_z(x)  glmm_splat(x, 2)
-#  define glmm_splat_w(x)  glmm_splat(x, 3)
+#  define glmm_splat_x(x)   glmm_splat(x, 0)
+#  define glmm_splat_y(x)   glmm_splat(x, 1)
+#  define glmm_splat_z(x)   glmm_splat(x, 2)
+#  define glmm_splat_w(x)   glmm_splat(x, 3)
 #endif
 
 #ifdef __AVX__

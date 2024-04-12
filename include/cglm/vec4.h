@@ -215,7 +215,7 @@ glm_vec4_one(vec4 v) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(v, wasm_f32x4_const_splat(1.0f));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(v, glmm_set1(1.0f));
+  glmm_store(v, glmm_set1_rval(1.0f));
 #elif defined(CGLM_NEON_FP)
   vst1q_f32(v, vdupq_n_f32(1.0f));
 #else

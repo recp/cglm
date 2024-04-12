@@ -471,15 +471,15 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x8  = _mm_shuffle_ps(x0, x3, _MM_SHUFFLE(3, 1, 3, 1)); /* k c j b */
   x9  = _mm_shuffle_ps(x0, x3, _MM_SHUFFLE(2, 0, 2, 0)); /* o g n f */
 
-  x10 = glmm_shuff1(x2, 2, 0, 2, 0);                                 /* p h p h */
-  x11 = glmm_shuff1(x2, 3, 1, 3, 1);                                 /* l d l d */
+  x10 = glmm_shuff1(x2, 2, 0, 2, 0);                     /* p h p h */
+  x11 = glmm_shuff1(x2, 3, 1, 3, 1);                     /* l d l d */
 
-#if 1 /* TODO measure both */
+#if 0 /* TODO measure both */
   x12 = _mm_shuffle_ps(x4, x5, _MM_SHUFFLE(1, 0, 1, 0)); /* i a k c */
   x13 = _mm_shuffle_ps(x6, x7, _MM_SHUFFLE(1, 0, 1, 0)); /* m e o g */
 #else
-  x12 = _mm_movelh_ps(x4, x5);                                       /* i a k c */
-  x13 = _mm_movelh_ps(x6, x7);                                       /* m e o g */
+  x12 = _mm_movelh_ps(x4, x5);                           /* i a k c */
+  x13 = _mm_movelh_ps(x6, x7);                           /* m e o g */
 #endif
   
   t0 = _mm_mul_ps(x12, x10);
@@ -494,7 +494,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   /* v0: c3 * c10 + c4 * c9 + c1 * c8 + c2 * c7 */
   /* v1: c5 * c12 + c6 * c11 */
 
-  v5 = glmm_set1(1.0f);
+  v5 = glmm_set1_rval(1.0f);
   v0 = glmm_shuff1(t2, 2, 3, 0, 1);
   v1 = glmm_shuff1(t1, 0, 1, 2, 3);
   v0 = _mm_mul_ps(t0, v0);
