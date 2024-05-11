@@ -39,6 +39,7 @@
    CGLM_INLINE void glm_quat_lerp(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_lerpc(versor from, versor to, float t, versor dest);
    CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_slerp_longest(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_nlerp(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
    CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
@@ -721,6 +722,52 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
   }
 
   if (cosTheta < 0.0f) {
+    glm_vec4_negate(q1);
+    cosTheta = -cosTheta;
+  }
+
+  sinTheta = sqrtf(1.0f - cosTheta * cosTheta);
+
+  /* LERP to avoid zero division */
+  if (fabsf(sinTheta) < 0.001f) {
+    glm_quat_lerp(from, to, t, dest);
+    return;
+  }
+
+  /* SLERP */
+  angle = acosf(cosTheta);
+  glm_vec4_scale(q1, sinf((1.0f - t) * angle), q1);
+  glm_vec4_scale(to, sinf(t * angle), q2);
+
+  glm_vec4_add(q1, q2, q1);
+  glm_vec4_scale(q1, 1.0f / sinTheta, dest);
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        using spherical linear interpolation (SLERP) and always takes the long path
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     amout
+ * @param[out]  dest  result quaternion
+ */
+CGLM_INLINE
+void
+glm_quat_slerp_longest(versor from, versor to, float t, versor dest) {
+  CGLM_ALIGN(16) vec4 q1, q2;
+  float cosTheta, sinTheta, angle;
+
+  cosTheta = glm_quat_dot(from, to);
+  glm_quat_copy(from, q1);
+
+  if (fabsf(cosTheta) >= 1.0f) {
+    glm_quat_copy(q1, dest);
+    return;
+  }
+
+//NOTE THAT ONLY THIS CHANGED
+  if (!(cosTheta < 0.0f)) {
     glm_vec4_negate(q1);
     cosTheta = -cosTheta;
   }
