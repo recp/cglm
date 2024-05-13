@@ -135,6 +135,10 @@ glmc_quat_slerp(versor q, versor r, float t, versor dest);
 
 CGLM_EXPORT
 void
+glmc_quat_slerp_longest(versor q, versor r, float t, versor dest);
+
+CGLM_EXPORT
+void
 glmc_quat_look(vec3 eye, versor ori, mat4 dest);
 
 CGLM_EXPORT
