@@ -766,7 +766,7 @@ glm_quat_slerp_longest(versor from, versor to, float t, versor dest) {
     return;
   }
 
-//NOTE THAT ONLY THIS CHANGED
+  /* longest path */
   if (!(cosTheta < 0.0f)) {
     glm_vec4_negate(q1);
     cosTheta = -cosTheta;
