@@ -38,6 +38,11 @@
    CGLM_INLINE versors glms_quat_nlerp(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_slerp(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_slerp_longest(versors from, versors to, float t)
+   CGLM_INLINE versors glms_quat_bezier(versor from, 
+                                    versor ctrl1, 
+                                    versor ctrl2, 
+                                    versor to, 
+                                    float t);
    CGLM_INLINE mat4s.  glms_quat_look(vec3s eye, versors ori)
    CGLM_INLINE versors glms_quat_for(vec3s dir, vec3s fwd, vec3s up)
    CGLM_INLINE versors glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up)
@@ -472,6 +477,24 @@ versors
 glms_quat_(slerp_longest)(versors from, versors to, float t) {
   versors dest;
   glm_quat_slerp_longest(from.raw, to.raw, t, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief interpolates between two quaternions using a cubic bezier
+ * 
+ * @param[in]  from  from
+ * @param[in]  ctrl1 control point corresponding to from
+ * @param[in]  ctrl2 control point corresponding to to
+ * @param[in]  to    to
+ * @param[in]  t     interpolant (amount)
+ * @returns          result
+ */
+CGLM_INLINE
+versors
+glms_quat_(bezier)(versors from, versors ctrl1, versors ctrl2, versors to, float t) {
+  versors dest;
+  glm_quat_bezier(from.raw, ctrl1.raw, ctrl2.raw, to.raw, t, dest.raw);
   return dest;
 }
 

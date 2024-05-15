@@ -41,6 +41,12 @@
    CGLM_INLINE void glm_quat_slerp(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_slerp_longest(versor q, versor r, float t, versor dest);
    CGLM_INLINE void glm_quat_nlerp(versor q, versor r, float t, versor dest);
+   CGLM_INLINE void glm_quat_bezier(versor from, 
+                                    versor ctrl1, 
+                                    versor ctrl2, 
+                                    versor to, 
+                                    float t, 
+                                    versor dest);
    CGLM_INLINE void glm_quat_look(vec3 eye, versor ori, mat4 dest);
    CGLM_INLINE void glm_quat_for(vec3 dir, vec3 fwd, vec3 up, versor dest);
    CGLM_INLINE void glm_quat_forp(vec3 from,
@@ -787,6 +793,35 @@ glm_quat_slerp_longest(versor from, versor to, float t, versor dest) {
 
   glm_vec4_add(q1, q2, q1);
   glm_vec4_scale(q1, 1.0f / sinTheta, dest);
+}
+
+/*!
+ * @brief interpolates between two quaternions using a cubic bezier
+ * 
+ * @param[in]  from  from
+ * @param[in]  ctrl1 control point corresponding to from
+ * @param[in]  ctrl2 control point corresponding to to
+ * @param[in]  to    to
+ * @param[in]  t     interpolant (amount)
+ * @param[out] dest  result
+ */
+CGLM_INLINE
+void
+glm_quat_bezier(versor from, versor ctrl1, versor ctrl2, versor to, float t, versor dest) {
+
+  //do normal Decasteljau bezier but replace lerp with slerp
+
+  //tried to get it into bernstein polynomial but seems more efficient this way?
+  //because unlike normal bezier, this one depends on angle between quaternions to slerp
+  CGLM_ALIGN(16) versor a, b, c, d, e;
+  
+  glm_quat_slerp(from, ctrl1, t, a);
+  glm_quat_slerp(ctrl1, ctrl2, t, b);
+  glm_quat_slerp(ctrl2, to, t, c);
+  glm_quat_slerp(a, b, t, d);
+  glm_quat_slerp(b, c, t, e);
+  glm_quat_slerp(d, e, t, dest);
+
 }
 
 /*!

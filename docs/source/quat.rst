@@ -56,6 +56,7 @@ Functions:
 #. :c:func:`glm_quat_nlerp`
 #. :c:func:`glm_quat_slerp`
 #. :c:func:`glm_quat_slerp_longest`
+#. :c:func:`glm_quat_bezier`
 #. :c:func:`glm_quat_look`
 #. :c:func:`glm_quat_for`
 #. :c:func:`glm_quat_forp`
@@ -359,6 +360,18 @@ Functions documentation
     
     Parameters:
       | *[in]*  **from**  from
+      | *[in]*  **to**    to
+      | *[in]*  **t**     interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**  result quaternion
+
+.. c:function:: void glm_quat_bezier(versor from, versor ctrl1, versor ctrl2, versor to, float t, versor dest);
+    
+    | interpolates between two quaternions using a cubic bezier
+    
+    Parameters:
+      | *[in]*  **from**  from
+      | *[in]*  **ctrl1** control point corresponding to from
+      | *[in]*  **ctrl2** control point corresponding to to
       | *[in]*  **to**    to
       | *[in]*  **t**     interpolant (amount) clamped between 0 and 1
       | *[out]* **dest**  result quaternion
