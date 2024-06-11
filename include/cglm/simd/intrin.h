@@ -8,7 +8,7 @@
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
 
-#if defined( _MSC_VER )
+#if defined(_MSC_VER) && !defined(_M_ARM64EC)
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
 #    ifndef __SSE__
 #      define __SSE__
@@ -20,10 +20,34 @@
 #    ifndef __SSE__
 #      define __SSE__
 #    endif
-#endif
+#  endif
 /* do not use alignment for older visual studio versions */
-#  if _MSC_VER < 1913     /* Visual Studio 2017 version 15.6 */
+/* also ARM32 also causes similar error, disable it for now on ARM32 too */
+#  if _MSC_VER < 1913 || _M_ARM     /* Visual Studio 2017 version 15.6 */
 #    define CGLM_ALL_UNALIGNED
+#  endif
+#endif
+
+#ifdef __AVX__
+#  include <immintrin.h>
+#  define CGLM_AVX_FP 1
+#    ifndef __SSE2__
+#      define __SSE2__
+#    endif
+#    ifndef __SSE3__
+#      define __SSE3__
+#    endif
+#    ifndef __SSE4__
+#      define __SSE4__
+#    endif
+#    ifndef __SSE4_1__
+#      define __SSE4_1__
+#    endif
+#    ifndef __SSE4_2__
+#      define __SSE4_2__
+#    endif
+#  ifndef CGLM_SIMD_x86
+#    define CGLM_SIMD_x86
 #  endif
 #endif
 
@@ -64,14 +88,6 @@
 #  endif
 #endif
 
-#ifdef __AVX__
-#  include <immintrin.h>
-#  define CGLM_AVX_FP 1
-#  ifndef CGLM_SIMD_x86
-#    define CGLM_SIMD_x86
-#  endif
-#endif
-
 /* ARM Neon */
 #if defined(_WIN32) && defined(_MSC_VER)
 /* TODO: non-ARM stuff already inported, will this be better option */
@@ -100,7 +116,7 @@
 #else /* non-windows */
 #  if defined(__ARM_NEON) || defined(__ARM_NEON__)
 #    include <arm_neon.h>
-#    if defined(__ARM_NEON_FP)
+#    if defined(__ARM_NEON_FP) || defined(__ARM_FP)
 #      define CGLM_NEON_FP 1
 #    endif
 #    ifndef CGLM_SIMD_ARM
