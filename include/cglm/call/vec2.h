@@ -19,6 +19,18 @@ glmc_vec2(float * __restrict v, vec2 dest);
 
 CGLM_EXPORT
 void
+glmc_vec2_fill(vec2 v, float val);
+
+CGLM_EXPORT
+bool
+glmc_vec2_eq(vec2 v, float val);
+
+CGLM_EXPORT
+bool
+glmc_vec2_eqv(vec2 a, vec2 b);
+
+CGLM_EXPORT
+void
 glmc_vec2_copy(vec2 a, vec2 dest);
 
 CGLM_EXPORT
