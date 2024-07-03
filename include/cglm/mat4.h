@@ -645,7 +645,9 @@ glm_mat4_det(mat4 mat) {
 CGLM_INLINE
 void
 glm_mat4_inv(mat4 mat, mat4 dest) {
-#if defined( __SSE__ ) || defined( __SSE2__ )
+#if defined(__wasm__) && defined(__wasm_simd128__)
+  glm_mat4_inv_wasm(mat, dest);
+#elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_inv_sse2(mat, dest);
 #elif defined(CGLM_NEON_FP)
   glm_mat4_inv_neon(mat, dest);
