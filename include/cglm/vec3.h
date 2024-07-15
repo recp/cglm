@@ -1263,7 +1263,7 @@ glm_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest) {
 
   ndi = glm_vec3_dot(n, v);
   eni = eta * ndi;
-  k   = 1.0f + eta * eta - eni * eni;
+  k   = 1.0f - eta * eta + eni * eni;
 
   if (k < 0.0f) {
     glm_vec3_zero(dest);

@@ -749,7 +749,7 @@ glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest) {
 
   ndi = glm_vec2_dot(n, v);
   eni = eta * ndi;
-  k   = 1.0f + eta * eta - eni * eni;
+  k   = 1.0f - eta * eta + eni * eni;
 
   if (k < 0.0f) {
     glm_vec2_zero(dest);

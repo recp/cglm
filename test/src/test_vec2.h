@@ -792,7 +792,7 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
   r = GLM(vec2_refract)(v, N, eta, dest);
   // In 2D, we expect a similar bending behavior as in 3D, so we check dest[1]
   if (!(dest[0] == 0.0f && dest[1] == 0.0f)) {
-    ASSERT(dest[1] < -sqrtf(0.5f)); // Refracted ray bends away from the normal
+    ASSERT(dest[1] < -0.3f); // Refracted ray bends away from the normal
     ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f); // Total internal reflection
@@ -809,7 +809,7 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
   eta = 1.5f / 1.33f;
   r = GLM(vec2_refract)(v, N, eta, dest);
   ASSERT(r == true);
-  ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal, less bending than air to glass
+  ASSERT(dest[1] < -0.6f); // Expect bending towards the normal, less bending than air to glass
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
   eta = 2.42f / 1.0f;

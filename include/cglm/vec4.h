@@ -1350,7 +1350,7 @@ glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
 
   ndi = glm_vec4_dot(n, v);
   eni = eta * ndi;
-  k   = 1.0f + eta * eta - eni * eni;
+  k   = 1.0f - eta * eta + eni * eni;
 
   if (k < 0.0f) {
     glm_vec4_zero(dest);
