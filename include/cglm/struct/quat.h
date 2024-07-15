@@ -105,7 +105,7 @@ glms_quat_(identity_array)(versors * __restrict q, size_t count) {
 }
 
 /*!
- * @brief inits quaterion with raw values
+ * @brief inits quaternion with raw values
  *
  * @param[in]   x     x
  * @param[in]   y     y
@@ -464,7 +464,7 @@ glms_quat_(slerp)(versors from, versors to, float t) {
  *
  * @param[in]   from  from
  * @param[in]   to    to
- * @param[in]   t     amout
+ * @param[in]   t     amount
  * @returns result quaternion
  */
 CGLM_INLINE

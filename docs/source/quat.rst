@@ -11,9 +11,9 @@ Header: cglm/quat.h
 
 What you can do with quaternions with existing functions is (Some of them):
 
-- You can rotate transform matrix using quaterion
-- You can rotate vector using quaterion
-- You can create view matrix using quaterion
+- You can rotate transform matrix using quaternion
+- You can rotate vector using quaternion
+- You can create view matrix using quaternion
 - You can create a lookrotation (from source point to dest)
 
 Table of contents (click to go):

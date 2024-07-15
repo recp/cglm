@@ -123,7 +123,7 @@ glm_quat_identity_array(versor * __restrict q, size_t count) {
 }
 
 /*!
- * @brief inits quaterion with raw values
+ * @brief inits quaternion with raw values
  *
  * @param[out]  q     quaternion
  * @param[in]   x     x
@@ -749,7 +749,7 @@ glm_quat_slerp(versor from, versor to, float t, versor dest) {
  *
  * @param[in]   from  from
  * @param[in]   to    to
- * @param[in]   t     amout
+ * @param[in]   t     amount
  * @param[out]  dest  result quaternion
  */
 CGLM_INLINE

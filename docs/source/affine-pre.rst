@@ -117,7 +117,7 @@ Functions documentation
     If you need to rotate object around itself e.g. center of object or at
     some point [of object] then `glm_rotate_at()` would be better choice to do so.
     
-    Even if object's model transform is identiy, rotation may not be around
+    Even if object's model transform is identity, rotation may not be around
     center of object if object does not lay out at ORIGIN perfectly.
     
     Using `glm_rotate_at()` with center of bounding shape ( AABB, Sphere ... )

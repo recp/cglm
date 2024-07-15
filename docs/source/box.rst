@@ -62,7 +62,7 @@ Functions documentation
 
     | crops a bounding box with another one.
 
-    this could be useful for gettng a bbox which fits with view frustum and
+    this could be useful for getting a bbox which fits with view frustum and
     object bounding boxes. In this case you crop view frustum box with objects
     box
 
@@ -75,7 +75,7 @@ Functions documentation
 
     | crops a bounding box with another one.
 
-    this could be useful for gettng a bbox which fits with view frustum and
+    this could be useful for getting a bbox which fits with view frustum and
     object bounding boxes. In this case you crop view frustum box with objects
     box
 

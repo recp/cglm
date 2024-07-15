@@ -62,7 +62,7 @@ glms_aabb2d_(merge)(vec2s aabb1[2], vec2s aabb2[2], vec2s dest[2]) {
 /*!
  * @brief crops a bounding box with another one.
  *
- * this could be useful for gettng a bbox which fits with view frustum and
+ * this could be useful for getting a bbox which fits with view frustum and
  * object bounding boxes. In this case you crop view frustum box with objects
  * box
  *
@@ -86,7 +86,7 @@ glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
 /*!
  * @brief crops a bounding box with another one.
  *
- * this could be useful for gettng a bbox which fits with view frustum and
+ * this could be useful for getting a bbox which fits with view frustum and
  * object bounding boxes. In this case you crop view frustum box with objects
  * box
  *

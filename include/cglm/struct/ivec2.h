@@ -238,7 +238,7 @@ glms_ivec2_(subs)(ivec2s v, int s) {
 /*!
  * @brief multiply vector [a] with vector [b] and store result in [dest]
  *
- * @param[in]  a    frist vector
+ * @param[in]  a    first vector
  * @param[in]  b    second vector
  * @returns         destination
  */

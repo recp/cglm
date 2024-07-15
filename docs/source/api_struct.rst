@@ -9,7 +9,7 @@ By default struct api adds `s` suffix to every type name e.g. vec3s, mat4s, vers
 Also struct api `s` suffix to namespace e.g. `glms_vec3_add`, `glms_mat4_mul` etc.
 
 By starting v0.9.0, struct api namespace is configurable. We can omit **glms_** namespace or 
-even change it with custom name to move existing api integrations to **cglm** more easliy...
+even change it with custom name to move existing api integrations to **cglm** more easily...
 We can also add **s** to function names if we want e.g. `glms_vec3_add()` -> `vec3_add()` or `vec3s_add()`.
 
 By including **cglm/struct.h** header you will include all struct api. It will also include **cglm/cglm.h** too. 
