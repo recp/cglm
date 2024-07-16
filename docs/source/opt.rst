@@ -76,7 +76,7 @@ SSE and SSE2 Shuffle Option
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **_mm_shuffle_ps** generates **shufps** instruction even if registers are same.
 You can force it to generate **pshufd** instruction by defining
-**CGLM_USE_INT_DOMAIN** macro. As default it is not defined.
+**CGLM_NO_INT_DOMAIN** macro. As default it is not defined.
 
 SSE3 and SSE4 Dot Product Options
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
