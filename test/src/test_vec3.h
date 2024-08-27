@@ -1673,7 +1673,9 @@ TEST_IMPL(GLM_PREFIX, vec3_eqv_eps) {
 
 TEST_IMPL(GLM_PREFIX, vec3_max) {
   vec3 v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+#ifndef CGLM_FAST_MATH
   vec3 v3 = {INFINITY, 0.0f, 0.0f}/*, v4 = {NAN, INFINITY, 2.0f}*/;
+#endif
   vec3 /*v5 = {NAN, -1.0f, -1.0f}, */v6 = {-1.0f, -11.0f, 11.0f};
 
   ASSERT(test_eq(GLM(vec3_max)(v1),  2.104f))
