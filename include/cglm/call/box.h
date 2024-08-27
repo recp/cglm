@@ -76,4 +76,3 @@ glmc_aabb_sphere(vec3 box[2], vec4 s);
 }
 #endif
 #endif /* cglmc_box_h */
-

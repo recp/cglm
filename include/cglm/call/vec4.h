@@ -323,4 +323,3 @@ glmc_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest);
 }
 #endif
 #endif /* cglmc_vec4_h */
-

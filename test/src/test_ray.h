@@ -71,4 +71,3 @@ TEST_IMPL(GLM_PREFIX, ray_at) {
 
   TEST_SUCCESS
 }
-

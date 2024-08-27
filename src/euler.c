@@ -97,4 +97,3 @@ void
 glmc_euler_zyx_quat(vec3 angles, versor dest) {
   glm_euler_zyx_quat(angles, dest);
 }
-

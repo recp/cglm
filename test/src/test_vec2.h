@@ -825,4 +825,3 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
 
   TEST_SUCCESS
 }
-

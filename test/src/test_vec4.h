@@ -1619,4 +1619,3 @@ TEST_IMPL(GLM_PREFIX, vec4_refract) {
 
   TEST_SUCCESS
 }
-

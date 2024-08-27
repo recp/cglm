@@ -232,4 +232,3 @@ glms_aabb2d_(contains)(vec2s aabb[2], vec2s other[2]) {
 }
 
 #endif /* cglms_aabb2ds_h */
-

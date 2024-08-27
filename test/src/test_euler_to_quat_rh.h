@@ -571,5 +571,3 @@ TEST_IMPL(GLM_PREFIX, euler_zyx_quat_rh) {
   }
   TEST_SUCCESS
 }
-
-

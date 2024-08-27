@@ -253,4 +253,3 @@ void
 glmc_ivec3_abs(ivec3 v, ivec3 dest) {
   glm_ivec3_abs(v, dest);
 }
-

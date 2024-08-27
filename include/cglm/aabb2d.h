@@ -268,4 +268,3 @@ glm_aabb2d_contains(vec2 aabb[2], vec2 other[2]) {
 }
 
 #endif /* cglm_aabb2d_h */
-
