@@ -172,7 +172,11 @@ glm_vec3_min(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec3_isnan(vec3 v) {
+#ifndef CGLM_FAST_MATH
   return isnan(v[0]) || isnan(v[1]) || isnan(v[2]);
+#else
+  return false;
+#endif
 }
 
 /*!
@@ -184,7 +188,11 @@ glm_vec3_isnan(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec3_isinf(vec3 v) {
+#ifndef CGLM_FAST_MATH
   return isinf(v[0]) || isinf(v[1]) || isinf(v[2]);
+#else
+  return false;
+#endif
 }
 
 /*!

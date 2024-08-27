@@ -872,18 +872,30 @@ TEST_IMPL(GLM_PREFIX, vec3_angle) {
   float a;
 
   a = GLM(vec3_angle)(v1, v1);
+
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+  
   ASSERT(test_eq(a, 0.0f))
 
   a = GLM(vec3_angle)(v1, v2);
+  
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_4f))
 
   a = GLM(vec3_angle)(v1, v3);
+  
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_2f))
 
   TEST_SUCCESS
@@ -1227,23 +1239,39 @@ TEST_IMPL(GLM_PREFIX, vec3_ortho) {
   GLM(vec3_ortho)(v4, v8);
   
   a = glm_vec3_angle(v1, v5);
+  
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_2f))
   
   a = glm_vec3_angle(v2, v6);
+  
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_2f))
   
   a = glm_vec3_angle(v3, v7);
+
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_2f))
 
   a = glm_vec3_angle(v4, v8);
+  
+#ifndef CGLM_FAST_MATH
   ASSERT(!isinf(a))
   ASSERT(!isnan(a))
+#endif
+
   ASSERT(test_eq(a, GLM_PI_2f))
 
   TEST_SUCCESS
@@ -1692,12 +1720,16 @@ TEST_IMPL(GLM_PREFIX, vec3_max) {
 
 TEST_IMPL(GLM_PREFIX, vec3_min) {
   vec3  v1 = {2.104f, -3.012f, -4.10f}, v2 = {-12.35f, -31.140f, -43.502f};
+#ifndef CGLM_FAST_MATH
   vec3  v3 = {INFINITY, 0.0f, 0.0f}/*, v4 = {NAN, INFINITY, 2.0f}*/;
+#endif
   vec3  /*v5 = {NAN, -1.0f, -1.0f},*/ v6 = {-1.0f, -11.0f, 11.0f};
 
   ASSERT(test_eq(GLM(vec3_min)(v1), -4.10f))
   ASSERT(test_eq(GLM(vec3_min)(v2), -43.502f))
+#ifndef CGLM_FAST_MATH
   ASSERT(test_eq(GLM(vec3_min)(v3),  0.0f))
+#endif
 //  ASSERT(isnan(GLM(vec3_min)(v4)))
 //  ASSERT(isnan(GLM(vec3_min)(v5)))
   ASSERT(test_eq(GLM(vec3_min)(v6), -11.0f))
