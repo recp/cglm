@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.8.2)
+cmake_minimum_required(VERSION 3.13)
 project(cglm
   VERSION 0.9.5
   HOMEPAGE_URL https://github.com/recp/cglm
@@ -37,9 +37,10 @@ if(MSVC)
   if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
     add_definitions(-DNDEBUG)
     add_compile_options(/W3 /Ox /Gy /Oi /TC)
+
     foreach(flag_var
-        CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
-        CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
+      CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
       string(REGEX REPLACE "/RTC(su|[1su])" "" ${flag_var} "${${flag_var}}")
     endforeach(flag_var)
   endif()
@@ -56,6 +57,7 @@ get_directory_property(hasParent PARENT_DIRECTORY)
 if(NOT hasParent AND NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
   message(STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
   set(CMAKE_BUILD_TYPE "${DEFAULT_BUILD_TYPE}" CACHE STRING "Choose the type of build." FORCE)
+
   # Set the possible values of build type for cmake-gui
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release" "MinSizeRel" "RelWithDebInfo")
 endif()
@@ -116,7 +118,7 @@ add_library(${PROJECT_NAME}
   src/clipspace/view_rh_zo.c
   src/clipspace/project_no.c
   src/clipspace/project_zo.c
-  )
+)
 
 if(CGLM_SHARED)
   add_definitions(-DCGLM_EXPORTS)
@@ -125,8 +127,8 @@ else()
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
-                              VERSION ${PROJECT_VERSION} 
-                            SOVERSION ${PROJECT_VERSION_MAJOR})
+  VERSION ${PROJECT_VERSION}
+  SOVERSION ${PROJECT_VERSION_MAJOR})
 
 if(WIN32)
   # Because SOVERSION has no effect to file naming on Windows
@@ -135,11 +137,11 @@ if(WIN32)
 endif()
 
 target_include_directories(${PROJECT_NAME}
-    PUBLIC 
-        $<INSTALL_INTERFACE:include>    
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src
+  PUBLIC
+  $<INSTALL_INTERFACE:include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  PRIVATE
+  ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
 
 # Target for header-only usage
@@ -154,40 +156,43 @@ if(CGLM_USE_TEST)
   add_subdirectory(test)
 endif()
 
-# Install 
+# Install
 install(TARGETS ${PROJECT_NAME}
-        EXPORT  ${PROJECT_NAME}
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+  EXPORT ${PROJECT_NAME}
+  LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+  RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
 
 install(DIRECTORY include/${PROJECT_NAME} DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
-        PATTERN ".*" EXCLUDE)
+  PATTERN ".*" EXCLUDE)
 
 # Config
 export(TARGETS ${PROJECT_NAME}
-       NAMESPACE ${PROJECT_NAME}::
-       FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
+  NAMESPACE ${PROJECT_NAME}::
+  FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake"
 )
 
-install(EXPORT      ${PROJECT_NAME}
-        FILE        "${PROJECT_NAME}Config.cmake"
-        NAMESPACE   ${PROJECT_NAME}::
-        DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+install(EXPORT ${PROJECT_NAME}
+  FILE "${PROJECT_NAME}Config.cmake"
+  NAMESPACE ${PROJECT_NAME}::
+  DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
 set(PACKAGE_NAME ${PROJECT_NAME})
 set(prefix ${CMAKE_INSTALL_PREFIX})
 set(exec_prefix ${CMAKE_INSTALL_PREFIX})
-if (IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
+
+if(IS_ABSOLUTE "${CMAKE_INSTALL_INCLUDEDIR}")
   set(includedir "${CMAKE_INSTALL_INCLUDEDIR}")
 else()
   set(includedir "\${prefix}/${CMAKE_INSTALL_INCLUDEDIR}")
 endif()
-if (IS_ABSOLUTE "${CMAKE_INSTALL_LIBDIR}")
+
+if(IS_ABSOLUTE "${CMAKE_INSTALL_LIBDIR}")
   set(libdir "${CMAKE_INSTALL_LIBDIR}")
 else()
   set(libdir "\${exec_prefix}/${CMAKE_INSTALL_LIBDIR}")
 endif()
+
 set(PACKAGE_VERSION "${PROJECT_VERSION}")
 configure_file(cglm.pc.in cglm.pc @ONLY)
 
