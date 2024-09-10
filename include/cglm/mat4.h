@@ -520,6 +520,8 @@ void
 glm_mat4_transpose_to(mat4 m, mat4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, dest);
+#elif defined(__AVX__)
+  glm_mat4_transp_avx(m, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, dest);
 #elif defined(CGLM_NEON_FP)
@@ -546,6 +548,8 @@ void
 glm_mat4_transpose(mat4 m) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat4_transp_wasm(m, m);
+#elif defined(__AVX__)
+  glm_mat4_transp_avx(m, m);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glm_mat4_transp_sse2(m, m);
 #elif defined(CGLM_NEON_FP)
@@ -652,46 +656,37 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
 #elif defined(CGLM_NEON_FP)
   glm_mat4_inv_neon(mat, dest);
 #else
-  float t[6];
-  float det;
   float a = mat[0][0], b = mat[0][1], c = mat[0][2], d = mat[0][3],
         e = mat[1][0], f = mat[1][1], g = mat[1][2], h = mat[1][3],
         i = mat[2][0], j = mat[2][1], k = mat[2][2], l = mat[2][3],
-        m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3];
+        m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3],
 
-  t[0] = k * p - o * l; t[1] = j * p - n * l; t[2] = j * o - n * k;
-  t[3] = i * p - m * l; t[4] = i * o - m * k; t[5] = i * n - m * j;
+        c1  = k * p - l * o,  c2  = c * h - d * g,  c3  = i * p - l * m,
+        c4  = a * h - d * e,  c5  = j * p - l * n,  c6  = b * h - d * f, 
+        c7  = i * n - j * m,  c8  = a * f - b * e,  c9  = j * o - k * n,
+        c10 = b * g - c * f,  c11 = i * o - k * m,  c12 = a * g - c * e,
 
-  dest[0][0] =  f * t[0] - g * t[1] + h * t[2];
-  dest[1][0] =-(e * t[0] - g * t[3] + h * t[4]);
-  dest[2][0] =  e * t[1] - f * t[3] + h * t[5];
-  dest[3][0] =-(e * t[2] - f * t[4] + g * t[5]);
+        idt = 1.0f/(c8*c1+c4*c9+c10*c3+c2*c7-c12*c5-c6*c11), ndt = -idt;
 
-  dest[0][1] =-(b * t[0] - c * t[1] + d * t[2]);
-  dest[1][1] =  a * t[0] - c * t[3] + d * t[4];
-  dest[2][1] =-(a * t[1] - b * t[3] + d * t[5]);
-  dest[3][1] =  a * t[2] - b * t[4] + c * t[5];
+  dest[0][0] = (f * c1  - g * c5  + h * c9)  * idt;
+  dest[0][1] = (b * c1  - c * c5  + d * c9)  * ndt;
+  dest[0][2] = (n * c2  - o * c6  + p * c10) * idt;
+  dest[0][3] = (j * c2  - k * c6  + l * c10) * ndt;
 
-  t[0] = g * p - o * h; t[1] = f * p - n * h; t[2] = f * o - n * g;
-  t[3] = e * p - m * h; t[4] = e * o - m * g; t[5] = e * n - m * f;
+  dest[1][0] = (e * c1  - g * c3  + h * c11) * ndt;
+  dest[1][1] = (a * c1  - c * c3  + d * c11) * idt;
+  dest[1][2] = (m * c2  - o * c4  + p * c12) * ndt;
+  dest[1][3] = (i * c2  - k * c4  + l * c12) * idt;
 
-  dest[0][2] =  b * t[0] - c * t[1] + d * t[2];
-  dest[1][2] =-(a * t[0] - c * t[3] + d * t[4]);
-  dest[2][2] =  a * t[1] - b * t[3] + d * t[5];
-  dest[3][2] =-(a * t[2] - b * t[4] + c * t[5]);
+  dest[2][0] = (e * c5  - f * c3  + h * c7)  * idt;
+  dest[2][1] = (a * c5  - b * c3  + d * c7)  * ndt;
+  dest[2][2] = (m * c6  - n * c4  + p * c8)  * idt;
+  dest[2][3] = (i * c6  - j * c4  + l * c8)  * ndt;
 
-  t[0] = g * l - k * h; t[1] = f * l - j * h; t[2] = f * k - j * g;
-  t[3] = e * l - i * h; t[4] = e * k - i * g; t[5] = e * j - i * f;
-
-  dest[0][3] =-(b * t[0] - c * t[1] + d * t[2]);
-  dest[1][3] =  a * t[0] - c * t[3] + d * t[4];
-  dest[2][3] =-(a * t[1] - b * t[3] + d * t[5]);
-  dest[3][3] =  a * t[2] - b * t[4] + c * t[5];
-
-  det = 1.0f / (a * dest[0][0] + b * dest[1][0]
-              + c * dest[2][0] + d * dest[3][0]);
-
-  glm_mat4_scale_p(dest, det);
+  dest[3][0] = (e * c9  - f * c11 + g * c7)  * ndt;
+  dest[3][1] = (a * c9  - b * c11 + c * c7)  * idt;
+  dest[3][2] = (m * c10 - n * c12 + o * c8)  * ndt;
+  dest[3][3] = (i * c10 - j * c12 + k * c8)  * idt;
 #endif
 }
 
