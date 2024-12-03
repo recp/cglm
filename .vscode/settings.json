@@ -3,6 +3,7 @@
   "restructuredtext.confPath": "${workspaceFolder}/docs/source",
   "workbench.colorTheme": "Default Light+ Experimental",
   "editor.fontSize": 14,
+  "editor.formatOnSave": false,
   "workbench.colorCustomizations": {
 	"[Default Light*]": {
   	    "editor.background": "#fefefe",
