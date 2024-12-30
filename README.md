@@ -39,61 +39,85 @@
 <br>
 
 <p align="center">
-Highly optimized 2D|3D math library, also known as <b>OpenGL Mathematics (glm) for `C`</b>. <b>cglm</b> provides lot of utils to help math operations to be fast and quick to write. It is community friendly, feel free to bring any issues, bugs you faced. 
+Also known as <b>OpenGL Mathematics (glm) for C</b>, <b>cglm</b> provides fast and ergonomic math functions to ease graphics programming. It is community friendly – feel free to report any bugs and issues you face. <br>
+<i>If you're using C++, you might want to check out <a href="https://github.com/g-truc/glm">GLM</a></i>
 </p>
+
+ - Allocation-free
+ - Header-only
+ - SIMD-optimized
+ - API-agnostic
 
 ---
 
-#### 📚 Documentation
+### 📚 Documentation
 
-Almost all functions (inline versions) and parameters are documented inside the corresponding headers. <br />
-Complete documentation: http://cglm.readthedocs.io
+All functions and their parameters are documented above their declaration inside their corresponding headers. <br />
+Alternatively, you can read the complete documentation [here](http://cglm.readthedocs.io).
 
-#### 📌 Note for previous versions:
+### 🔨 Building
 
-- _dup (duplicate) is changed to _copy. For instance `glm_vec_dup -> glm_vec3_copy`
-- OpenGL related functions are dropped to make this lib platform/third-party independent
-- make sure you have latest version and feel free to report bugs, troubles
-- **[bugfix]** euler angles was implemented in reverse order (extrinsic) it was fixed, now they are intrinsic. Make sure that
-you have the latest version
-- **[major change]** by starting v0.4.0, quaternions are stored as [x, y, z, w], it was [w, x, y, z] in v0.3.5 and earlier versions
-- **[api rename]** by starting v0.4.5, **glm_simd** functions are renamed to **glmm_**  
-- **[new option]** by starting v0.4.5, you can disable alignment requirement, check options in docs.  
-- **[major change]** by starting v0.5.0, vec3 functions use **glm_vec3_** namespace, it was **glm_vec_** until v0.5.0
-- **[major change]** by starting v0.5.1, built-in alignment is removed from **vec3** and **mat3** types
-- **[major change]** by starting v0.7.3, inline print functions are disabled in release/production mode to eliminate print costs (see options in documentation). Print output also improved. You can disable colors if you need  (see documentation)
-- **[major change]** by starting v0.8.3, **cglm** supports alternative clipspace configurations e.g. Left Handed, Zero-to-One (_zo)... `CGLM_FORCE_DEPTH_ZERO_TO_ONE` and `CGLM_FORCE_LEFT_HANDED` is provided to control clipspace. You should be able to use **cglm** with Vulkan, DirectX and Metal now... see https://cglm.readthedocs.io/en/latest/opt.html#clipspace-option-s
+cglm can be used in it's entirety as a header-only library simply by including `cglm/cglm.h`. If you wish to link against it instead, it can be built using one of the supported build systems. Detailed information about building on individual platforms and build systems along with the instructions for building the documentation can be found in [BUILDING.md](./BUILDING.md).
 
-#### 📌 Note for C++ developers:
-If you are not aware of the original GLM library yet, you may also want to look at:
-https://github.com/g-truc/glm
+### ✅ Usage
 
-#### 📌 Note for new comers (Important):
-- `vec4` and `mat4` variables must be aligned. (There will be unaligned versions later)
-- **in** and **[in, out]** parameters must be initialized (please). But **[out]** parameters not, initializing out param is  also redundant
-- All functions are inline if you don't want to use pre-compiled versions with glmc_ prefix, you can ignore build process. Just include headers.
-- if your debugger takes you to cglm headers then make sure you are not trying to copy vec4 to vec3 or alig issues...
-- Welcome!
+#### Header-only
 
-#### 📌 Note for experienced developers:
-- Since I'm testing this library in my projects, sometimes bugs occurs; finding that bug[s] and making improvements would be more easy with multiple developer/contributor and their projects or knowledge. Consider to make some tests if you suspect something is wrong and any feedbacks, contributions and bug reports are always welcome.
+Include the `cglm/cglm.h` header and use functions with the `glm_` prefix.
+```c
+#include "cglm/cglm.h"
 
-#### 📌 Allocations?
-`cglm` doesn't alloc any memory on heap. So it doesn't provide any allocator. You should alloc memory for **out** parameters too if you pass pointer of memory location. Don't forget that **vec4** (also quat/**versor**) and **mat4** must be aligned (16-bytes), because *cglm* uses SIMD instructions to optimize most operations if available.
+// ...
 
-#### 📌 Returning vector or matrix... ?
+vec2 vector;
+glm_vec2_zero(vector);
+```
 
-**cglm** supports both *ARRAY API* and *STRUCT API*, so you can return structs if you utilize struct api (`glms_`).
+#### Struct API
 
-<hr/>
+Include `cglm/struct.h` and use `glms_`.
+```c
+#include "cglm/struct.h"
+
+// ...
+
+vec2s vector = glms_vec2_zero();
+```
+
+#### Linked
+
+Include `cglm/call.h` and use `glmc_`.
+```c
+#include "cglm/call.h"
+
+// ...
+
+vec2 vector;
+glmc_vec2_zero(vector);
+```
+
+### 📌 Migration notes:
+
+- `_dup` (duplicate) functions were renamed to `_copy`. For instance: `glm_vec_dup` -> `glm_vec3_copy`.
+- OpenGL related functions were dropped to make cglm API independent.
+- **[bugfix]** Euler angles had been previously implemented in reverse order (extrinsic). This was fixed to be intrinsic.
+- **[major change]** Starting with **v0.4.0**, quaternions are stored as [x, y, z, w]. Previously it was [w, x, y, z].
+- **[api rename]** Starting with **v0.4.5**, `glm_simd_` functions are renamed to `glmm_`.
+- **[new option]** Starting with **v0.4.5**, alignment requirements can be disabled. Read more in the documentation.  
+- **[major change]** Starting with **v0.5.0**, vec3 functions occupy the **glm_vec3_** namespace. This used to be **glm_vec_** in earlier versions.
+- **[major change]** Starting with **v0.5.1**, `vec3` and `mat3` types are not aligned by default.
+- **[major change]** Starting with **v0.7.3**, inline print functions are disabled by default in release mode to eliminate printing costs (see the Options chapter of the docs). <br> Colored output can be disabled (see documentation).
+- **[major change]** Starting with **v0.8.3**, alternate clipspace configurations are supported. The `CGLM_FORCE_DEPTH_ZERO_TO_ONE` and `CGLM_FORCE_LEFT_HANDED` flags are provided to control clip depth and handedness. This makes it easier to incorporate cglm into projects using graphics APIs such as Vulkan or Metal. See https://cglm.readthedocs.io/en/latest/opt.html#clipspace-option-s
+
+---
 
 <table>
   <tbody>
     <tr>
       <td>
-        <div>Like some other graphics libraries (especially OpenGL) this library use Column-Major layout to keep matrices in the memory. </div>
+        <div>Like other graphics libraries (especially OpenGL), cglm uses column-major layout to keep matrices in memory. </div>
         <div>&nbsp;</div>
-        <div>In the future the library may support an option to use row-major layout, CURRENTLY if you need to row-major layout you will need to transpose it. </div>
+        <div>While we might support row-major matrices in the future, currently if you need your matrices to be in row-major layout you have to transpose them. </div>
       </td>
       <td>
         <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Matrix_Columns.svg" width="300px" />
@@ -102,64 +126,9 @@ https://github.com/g-truc/glm
   </tbody>
 </table>
 
-## 🚀 Features
-- **scalar** and **simd** (sse, avx, neon...) optimizations
-- option to use different clipspaces e.g. Left Handed, Zero-to-One... (currently right handed negative-one is default)
-- array api and struct api, you can use arrays or structs.
-- general purpose matrix operations (mat4, mat3)
-- chain matrix multiplication (square only)
-- general purpose vector operations (cross, dot, rotate, proj, angle...)
-- affine transformations
-- matrix decomposition (extract rotation, scaling factor)
-- optimized affine transform matrices (mul, rigid-body inverse)
-- camera (lookat)
-- projections (ortho, perspective)
-- quaternions
-- euler angles / yaw-pitch-roll to matrix
-- extract euler angles
-- inline or pre-compiled function call
-- frustum (extract view frustum planes, corners...)
-- bounding box (AABB in Frustum (culling), crop, merge...)
-- bounding sphere
-- project, unproject
-- easing functions
-- curves
-- curve interpolation helpers (S*M*C, deCasteljau...)
-- helpers to convert cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
-- ray intersection helpers
-- and others...
+---
 
-<hr />
-
-You have two options to call a function/operation: inline or library call (link)
-Almost all functions are marked inline (always_inline) so compiler will probably inline.
-To call pre-compiled versions, just use `glmc_` (c stands for 'call') instead of `glm_`.
-
-```C
-  #include <cglm/cglm.h>   /* for inline */
-  #include <cglm/call.h>   /* for library call (this also includes cglm.h) */
-
-  mat4 rot, trans, rt;
-  /* ... */
-  glm_mul(trans, rot, rt);  /* inline */
-  glmc_mul(trans, rot, rt); /* call from library */
-```
-Most of math functions are optimized manually with SSE2 if available, if not? Dont worry there are non-sse versions of all operations
-
-You can pass matrices and vectors as array to functions rather than get address.
-
-```C
-  mat4 m = {
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-  };
-
-  glm_translate(m, (vec3){1.0f, 0.0f, 0.0f});
-```
-
-Library contains general purpose mat4 mul and inverse functions, and also contains some special forms (optimized) of these functions for affine transformations' matrices. If you want to multiply two affine transformation matrices you can use glm_mul instead of glm_mat4_mul and glm_inv_tr (ROT + TR) instead glm_mat4_inv
+cglm contains general purpose mat4 product and inverse functions but also provides optimized versions for affine transformations. If you want to multiply two affine transformation matrices you can use glm_mul instead of glm_mat4_mul and glm_inv_tr (ROT + TR) instead glm_mat4_inv.
 ```C
 /* multiplication */
 mat4 modelMat;
@@ -171,7 +140,7 @@ glm_inv_tr(modelMat);
 
 ### Struct API
 
-The struct API works as follows, note the `s` suffix on types, the `glms_` prefix on functions and the `GLMS_` prefix on constants:
+The struct API works as follows (note the `s` suffix on types, `glms_` prefix on functions and `GLMS_` on constants):
 
 ```C
 #include <cglm/struct.h>
@@ -180,300 +149,15 @@ mat4s mat = GLMS_MAT4_IDENTITY_INIT;
 mat4s inv = glms_mat4_inv(mat);
 ```
 
-Struct functions generally take their parameters as *values* and *return* their results, rather than taking pointers and writing to out parameters. That means your parameters can usually be `const`, if you're into that.
-
-The types used are actually unions that allow access to the same data multiple ways. One of those ways involves anonymous structures, available since C11. MSVC also supports it for earlier C versions out of the box and GCC/Clang do if you enable `-fms-extensions`. To explicitly enable these anonymous structures, `#define CGLM_USE_ANONYMOUS_STRUCT` to `1`, to disable them, to `0`. For backward compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` (value is irrelevant) to disable them. If you don't specify explicitly, cglm will do a best guess based on your compiler and the C version you're using.
-
-## 🔨 Build
-
-### CMake (All platforms)
-```bash
-$ mkdir build
-$ cd build
-$ cmake .. # [Optional] -DCGLM_SHARED=ON
-$ make
-$ sudo make install # [Optional]
-```
-
-##### Cmake options with Defaults:
-
-```CMake
-option(CGLM_SHARED "Shared build" ON)
-option(CGLM_STATIC "Static build" OFF)
-option(CGLM_USE_C99 "" OFF) # C11 
-option(CGLM_USE_TEST "Enable Tests" OFF) # for make check - make test
-```
-
-#### Use as header-only library with your CMake project
-
-This requires no building or installation of cglm.
-
-* Example:
-
-``` cmake
-cmake_minimum_required(VERSION 3.8.2)
-
-project(<Your Project Name>)
-
-add_executable(${PROJECT_NAME} src/main.c)
-target_link_libraries(${LIBRARY_NAME} PRIVATE
-  cglm_headers)
-
-add_subdirectory(external/cglm/ EXCLUDE_FROM_ALL)
-```
-
-#### Use with your CMake project
-* Example:
-```cmake
-cmake_minimum_required(VERSION 3.8.2)
-
-project(<Your Project Name>)
-
-add_executable(${PROJECT_NAME} src/main.c)
-target_link_libraries(${LIBRARY_NAME} PRIVATE
-  cglm)
-
-add_subdirectory(external/cglm/)
-
-# or you can use find_package to configure cglm
-```
-
-#### Use CMake to build for WebAssembly
-
-Since math functions like `sinf` is used, this can not be targeted at `wasm32-unknown-unknown`, one of [wasi-sdk](https://github.com/WebAssembly/wasi-sdk) or [emscripten](https://github.com/emscripten-core/emsdk) should be used.
-
-Should note that shared build is not yet supported for WebAssembly.
-
-For [simd128](https://github.com/WebAssembly/simd) support, add `-msimd128` to `CMAKE_C_FLAGS`, in command line `-DCMAKE_C_FLAGS="-msimd128"`.
-
-For tests, the cmake option `CGLM_USE_TEST` would still work, you'll need a wasi runtime for running tests, see our [ci config file](.github/workflows/cmake-wasm.yml) for a detailed example.
-
-##### Use CMake and WASI SDK to build for WebAssembly
-
-```bash
-$ cmake .. \
-  -DCMAKE_TOOLCHAIN_FILE=/path/to/wasi-sdk-19.0/share/cmake/wasi-sdk.cmake \
-  -DWASI_SDK_PREFIX=/path/to/wasi-sdk-19.0
-```
-
-Where `/path/to/wasi-sdk-19.0/` is the path to extracted [wasi sdk](https://github.com/WebAssembly/wasi-sdk).
-
-In this case it would by default make a static build.
-
-##### Use CMake and Emscripten SDK to build for WebAssembly
-
-```bash
-$ emcmake cmake .. \
-  -DCMAKE_EXE_LINKER_FLAGS="-s STANDALONE_WASM" \
-  -DCGLM_STATIC=ON
-```
-
-The `emcmake` here is the cmake wrapper for Emscripten from installed [emsdk](https://github.com/emscripten-core/emsdk).
-
-### Meson (All platforms)
-
-```bash
-$ meson build # [Optional] --default-library=static
-$ cd build
-$ ninja
-$ sudo ninja install # [Optional]
-```
-
-##### Meson options with Defaults:
-
-```meson
-c_std=c11
-buildtype=release
-default_library=shared
-build_tests=true # to run tests: ninja test
-```
-#### Use with your Meson project
-* Example:
-```meson
-# Clone cglm or create a cglm.wrap under <source_root>/subprojects
-project('name', 'c')
-
-cglm_dep = dependency('cglm', fallback : 'cglm', 'cglm_dep')
-
-executable('exe', 'src/main.c', dependencies : cglm_dep)
-```
-
-### Swift (Swift Package Manager)
-
-Currently only default build options are supported. Add **cglm** dependency to your project:
-
-```swift
-...
-Package( 
-  ...
-  dependencies: [
-    ...
-    .package(url: "https://github.com/recp/cglm", .branch("master")),
-  ]
-  ...
-)
-```
-
-Now add **cgml** as a dependency to your target. Product choices are:
-- **cglm** for inlined version of the library which can be linked only statically
-- **cglmc** for a compiled version of the library with no linking limitation
-
-```swift
-...
-.target(
-  ...
-  dependencies: [
-    ...
-    .product(name: "cglm", package: "cglm"),
-  ]
-  ...
-)
-...
-```
-
-### Unix (Autotools)
-
-```bash
-$ sh autogen.sh
-$ ./configure
-$ make
-$ make check # [Optional]
-$ [sudo] make install # [Optional]
-```
-
-This will also install pkg-config files so you can use
-`pkg-config --cflags cglm` and `pkg-config --libs cglm` to retrieve compiler
-and linker flags.
-
-The files will be installed into the given prefix (usually `/usr/local` by
-default on Linux), but your pkg-config may not be configured to actually check
-there. You can figure out where it's looking by running `pkg-config --variable
-pc_path pkg-config` and change the path the files are installed to via
-`./configure --with-pkgconfigdir=/your/path`. Alternatively, you can add the
-prefix path to your `PKG_CONFIG_PATH` environment variable.
-
-### Windows (MSBuild)
-Windows related build file and project files are located in `win` folder,
-make sure you are inside `cglm/win` folder.
-Code Analysis is enabled, so it may take awhile to build.
-
-```Powershell
-$ cd win
-$ .\build.bat
-```
-if `msbuild` won't work (because of multi version VS) then try to build with `devenv`:
-```Powershell
-$ devenv cglm.sln /Build Release
-```
-
-#### Running Tests on Windows
-
-You can see test project in same visual studio solution file. It is enough to run that project to run tests.
-
-### Building Docs
-First you need install Sphinx: http://www.sphinx-doc.org/en/master/usage/installation.html
-then:
-```bash
-$ cd docs
-$ sphinx-build source build
-```
-it will compile docs into build folder, you can run index.html inside that function.
-
-## How to use
-If you want to use the inline versions of functions, then include the main header
-```C
-#include <cglm/cglm.h>
-```
-the header will include all headers. Then call the func you want e.g. rotate vector by axis:
-```C
-glm_vec3_rotate(v1, glm_rad(45), (vec3){1.0f, 0.0f, 0.0f});
-```
-some functions are overloaded :) e.g you can normalize vector:
-```C
-glm_vec3_normalize(vec);
-```
-this will normalize vec and store normalized vector into `vec` but if you will store normalized vector into another vector do this:
-```C
-glm_vec3_normalize_to(vec, result);
-```
-like this function you may see `_to` postfix, this functions store results to another variables and save temp memory
-
-
-to call pre-compiled versions include header with `c` postfix, c means call. Pre-compiled versions are just wrappers.
-```C
-#include <cglm/call.h>
-```
-this header will include all headers with c postfix. You need to call functions with c posfix:
-```C
-glmc_vec3_normalize(vec);
-```
-
-Function usage and parameters are documented inside related headers. You may see same parameter passed twice in some examples like this:
-```C
-glm_mat4_mul(m1, m2, m1);
-
-/* or */
-glm_mat4_mul(m1, m1, m1);
-```
-the first two parameter are **[in]** and the last one is **[out]** parameter. After multiplying *m1* and *m2*, the result is stored in *m1*. This is why we send *m1* twice. You may store the result in a different matrix, this is just an example.
-
-### Example: Computing MVP matrix
-
-#### Option 1
-```C
-mat4 proj, view, model, mvp;
-
-/* init proj, view and model ... */
-
-glm_mat4_mul(proj, view, viewProj);
-glm_mat4_mul(viewProj, model, mvp);
-```
-
-#### Option 2
-```C
-mat4 proj, view, model, mvp;
-
-/* init proj, view and model ... */
-
-glm_mat4_mulN((mat4 *[]){&proj, &view, &model}, 3, mvp);
-```
-
-## How to send matrix to OpenGL
-
-mat4 is array of vec4 and vec4 is array of floats. `glUniformMatrix4fv` functions accecpts `float*` as `value` (last param), so you can cast mat4 to float* or you can pass first column of matrix as beginning of memory of matrix:
-
-Option 1: Send first column
-```C
-glUniformMatrix4fv(location, 1, GL_FALSE, matrix[0]);
-
-/* array of matrices */
-glUniformMatrix4fv(location, 1, GL_FALSE, matrix[0][0]);
-```
-
-Option 2: Cast matrix to pointer type (also valid for multiple dimensional arrays)
-```C
-glUniformMatrix4fv(location, 1, GL_FALSE, (float *)matrix);
-```
-
-You can pass matrices the same way to other APIs e.g. Vulkan, DX...
-
-## Notes
-
-- This library does not support double type... yet
-- If headers are not working properly with your compiler, IDE please open an issue, because I'm using GCC and clang to test it maybe sometimes MSVC
-
-**TODO:**
-- [ ] Unit tests (In Progress)
-- [ ] Unit tests for comparing cglm with glm results
-- [x] Add version info
-- [ ] Unaligned operations (e.g. `glm_umat4_mul`)
-- [x] Extra documentation
-- [x] ARM Neon Arch
-
+Struct functions generally take parameters *by copy* and *return* the results rather than taking pointers and writing to out parameters. That means your variables can usually be `const`, if you're into that.
+
+The types used are actually unions that allow access to the same data in multiple ways. One of these involves anonymous structures available since C11. MSVC supports them in earlier versions out of the box and GCC/Clang as well if you enable `-fms-extensions`.
+To explicitly enable anonymous structures #define `CGLM_USE_ANONYMOUS_STRUCT` as `1` or as `0` to disable them.
+For backwards compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` to disable them. If you don't specify explicitly, cglm will attempt a best guess based on your compiler and C version.
 
 ## Contributors
 
-This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)].
+This project exists thanks to all the people who contribute. [[Contribute](CONTRIBUTING.md)]
 <a href="https://github.com/recp/cglm/graphs/contributors"><img src="https://opencollective.com/cglm/contributors.svg?width=890&button=false" /></a>
 
 
@@ -498,6 +182,3 @@ Support this project by becoming a sponsor. Your logo will show up here with a l
 <a href="https://opencollective.com/cglm/sponsor/7/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/7/avatar.svg"></a>
 <a href="https://opencollective.com/cglm/sponsor/8/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/cglm/sponsor/9/website" target="_blank"><img src="https://opencollective.com/cglm/sponsor/9/avatar.svg"></a>
-
-## License
-MIT. check the LICENSE file
