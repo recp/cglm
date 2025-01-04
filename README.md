@@ -39,7 +39,7 @@
 <br>
 
 <p align="center">
-Also known as <b>OpenGL Mathematics (glm) for C</b>, <b>cglm</b> provides fast and ergonomic math functions to ease graphics programming. It is community friendly – feel free to report any bugs and issues you face. <br>
+A highly optimized 2D|3D math library. Also known as OpenGL Mathematics (glm) for C. <b>cglm</b> provides fast and ergonomic math functions to ease graphics programming. It is community friendly – feel free to report any bugs and issues you face. <br>
 <i>If you're using C++, you might want to check out <a href="https://github.com/g-truc/glm">GLM</a></i>
 </p>
 
@@ -95,6 +95,10 @@ Include `cglm/call.h` and use `glmc_`.
 vec2 vector;
 glmc_vec2_zero(vector);
 ```
+
+### ❗ Alignment
+
+While cglm by default aligns what's necessary, it is possible to disable this by defining `CGLM_ALL_UNALIGNED`. If you're targeting machines with any kind of SIMD support, make sure that all `vec4`, `mat4` and `mat2` arguments you pass to cglm functions are aligned to prevent unexpected crashes, alternatively use the unaligned versions if present. 
 
 ### Struct API
 
