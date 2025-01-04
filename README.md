@@ -126,6 +126,29 @@ For backwards compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` to 
 - **[major change]** Starting with **v0.7.3**, inline print functions are disabled by default in release mode to eliminate printing costs (see the Options chapter of the docs). <br> Colored output can be disabled (see documentation).
 - **[major change]** Starting with **v0.8.3**, alternate clipspace configurations are supported. The `CGLM_FORCE_DEPTH_ZERO_TO_ONE` and `CGLM_FORCE_LEFT_HANDED` flags are provided to control clip depth and handedness. This makes it easier to incorporate cglm into projects using graphics APIs such as Vulkan or Metal. See https://cglm.readthedocs.io/en/latest/opt.html#clipspace-option-s
 
+### 🚀 Features
+
+- scalar and simd (sse, avx, neon...) optimizations
+- general purpose matrix operations (mat4, mat3)
+- chain matrix multiplication (square only)
+- general purpose vector operations (cross, dot, rotate, proj, angle...)
+- affine transformations
+- matrix decomposition (extract rotation, scaling factor)
+- optimized affine transform matrices (mul, rigid-body inverse)
+- camera (lookat)
+- projections (ortho, perspective)
+- quaternions
+- euler angles / yaw-pitch-roll to matrix
+- extract euler angles
+- frustum (extract view frustum planes, corners...)
+- bounding box (AABB in Frustum (culling), crop, merge...)
+- bounding sphere
+- project, unproject
+- easing functions
+- curves
+- curve interpolation helpers (SMC, deCasteljau...)
+- comversion helpers from cglm types to Apple's simd library to pass cglm types to Metal GL without packing them on both sides
+- ray intersection helpers
 ---
 
 <table>
