@@ -96,6 +96,23 @@ vec2 vector;
 glmc_vec2_zero(vector);
 ```
 
+### Struct API
+
+The struct API works as follows (note the `s` suffix on types, `glms_` prefix on functions and `GLMS_` on constants):
+
+```C
+#include <cglm/struct.h>
+
+mat4s mat = GLMS_MAT4_IDENTITY_INIT;
+mat4s inv = glms_mat4_inv(mat);
+```
+
+Struct functions generally take parameters *by copy* and *return* the results rather than taking pointers and writing to out parameters. That means your variables can usually be `const`, if you're into that.
+
+The types used are actually unions that allow access to the same data in multiple ways. One of these involves anonymous structures available since C11. MSVC supports them in earlier versions out of the box and GCC/Clang as well if you enable `-fms-extensions`.
+To explicitly enable anonymous structures `#define CGLM_USE_ANONYMOUS_STRUCT 1`, or `0` to disable them.
+For backwards compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` to disable them. If you don't specify explicitly, cglm will attempt a best guess based on your compiler and C version.
+
 ### 📌 Migration notes:
 
 - `_dup` (duplicate) functions were renamed to `_copy`. For instance: `glm_vec_dup` -> `glm_vec3_copy`.
@@ -137,23 +154,6 @@ glm_mul(T, R, modelMat);
 /* othonormal rot + tr matrix inverse (rigid-body) */
 glm_inv_tr(modelMat);
 ```
-
-### Struct API
-
-The struct API works as follows (note the `s` suffix on types, `glms_` prefix on functions and `GLMS_` on constants):
-
-```C
-#include <cglm/struct.h>
-
-mat4s mat = GLMS_MAT4_IDENTITY_INIT;
-mat4s inv = glms_mat4_inv(mat);
-```
-
-Struct functions generally take parameters *by copy* and *return* the results rather than taking pointers and writing to out parameters. That means your variables can usually be `const`, if you're into that.
-
-The types used are actually unions that allow access to the same data in multiple ways. One of these involves anonymous structures available since C11. MSVC supports them in earlier versions out of the box and GCC/Clang as well if you enable `-fms-extensions`.
-To explicitly enable anonymous structures #define `CGLM_USE_ANONYMOUS_STRUCT` as `1` or as `0` to disable them.
-For backwards compatibility, you can also `#define CGLM_NO_ANONYMOUS_STRUCT` to disable them. If you don't specify explicitly, cglm will attempt a best guess based on your compiler and C version.
 
 ## Contributors
 
