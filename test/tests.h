@@ -356,6 +356,10 @@ TEST_DECLARE(glmc_project)
 TEST_DECLARE(glm_plane_normalize)
 TEST_DECLARE(glmc_plane_normalize)
 
+/* perlin */
+TEST_DECLARE(glm_perlin)
+TEST_DECLARE(glmc_perlin)
+
 /* utils */
 TEST_DECLARE(clamp)
 
@@ -1533,6 +1537,10 @@ TEST_LIST {
   /* plane */
   TEST_ENTRY(glm_plane_normalize)
   TEST_ENTRY(glmc_plane_normalize)
+
+  /* perlin */
+  TEST_ENTRY(glm_perlin)
+  TEST_ENTRY(glmc_perlin)
   
   /* utils */
   TEST_ENTRY(clamp)
