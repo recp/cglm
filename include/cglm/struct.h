@@ -31,6 +31,7 @@ extern "C" {
 #include "struct/affine.h"
 #include "struct/frustum.h"
 #include "struct/plane.h"
+#include "struct/perlin.h"
 #include "struct/box.h"
 #include "struct/color.h"
 #include "struct/io.h"
