@@ -36,10 +36,10 @@ _glm_perlinDetail_mod289(float x) {
 CGLM_INLINE
 void
 _glm_perlinDetail_permute(vec4 x, vec4 dest) {
-    dest[0] = _glm_perlinDetail_mod289(x[0] * 34.0f + 1.0f) * x[0];
-    dest[1] = _glm_perlinDetail_mod289(x[1] * 34.0f + 1.0f) * x[1];
-    dest[2] = _glm_perlinDetail_mod289(x[2] * 34.0f + 1.0f) * x[2];
-    dest[3] = _glm_perlinDetail_mod289(x[3] * 34.0f + 1.0f) * x[3];
+    dest[0] = _glm_perlinDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]);
+    dest[1] = _glm_perlinDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]);
+    dest[2] = _glm_perlinDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]);
+    dest[3] = _glm_perlinDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]);
 }
 
 
