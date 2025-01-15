@@ -5,8 +5,8 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglm_perlin_h
-#define cglm_perlin_h
+#ifndef cglm_noise_h
+#define cglm_noise_h
 
 #include "vec4.h"
 #include "vec4-ext.h"
@@ -109,7 +109,7 @@ _glm_vec4_muls(vec4 x, float y, vec4 dest) {
 
 CGLM_INLINE
 float
-_glm_perlinDetail_mod289(float x) {
+_glm_noiseDetail_mod289(float x) {
     return x - floorf(x * (1.0f / 289.0f)) * 289.0f;
 }
 
@@ -121,11 +121,11 @@ _glm_perlinDetail_mod289(float x) {
 //     }
 CGLM_INLINE
 void
-_glm_perlinDetail_permute(vec4 x, vec4 dest) {
-    dest[0] = _glm_perlinDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]);
-    dest[1] = _glm_perlinDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]);
-    dest[2] = _glm_perlinDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]);
-    dest[3] = _glm_perlinDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]);
+_glm_noiseDetail_permute(vec4 x, vec4 dest) {
+    dest[0] = _glm_noiseDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]);
+    dest[1] = _glm_noiseDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]);
+    dest[2] = _glm_noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]);
+    dest[3] = _glm_noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]);
 }
 
 
@@ -137,7 +137,7 @@ _glm_perlinDetail_permute(vec4 x, vec4 dest) {
 
 CGLM_INLINE
 void
-_glm_perlinDetail_fade(vec4 t, vec4 dest) {
+_glm_noiseDetail_fade(vec4 t, vec4 dest) {
     dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f);
     dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f);
     dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f);
@@ -146,7 +146,7 @@ _glm_perlinDetail_fade(vec4 t, vec4 dest) {
 
 CGLM_INLINE
 void
-_glm_perlinDetail_taylorInvSqrt(vec4 x, vec4 dest) {
+_glm_noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) {
     dest[0] = 1.79284291400159f - 0.85373472095314f * x[0];
     dest[1] = 1.79284291400159f - 0.85373472095314f * x[1];
     dest[2] = 1.79284291400159f - 0.85373472095314f * x[2];
@@ -163,7 +163,7 @@ _glm_perlinDetail_taylorInvSqrt(vec4 x, vec4 dest) {
  */
 CGLM_INLINE
 void
-_glm_perlinDetail_gradNorm(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
+_glm_noiseDetail_gradNorm(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
 
     // norm = taylorInvSqrt(vec4(
     //     dot(g00__, g00__),
@@ -176,7 +176,7 @@ _glm_perlinDetail_gradNorm(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
     norm[1] = glm_vec4_dot(g01__, g01__); // norm.y = dot(g01__, g01__)
     norm[2] = glm_vec4_dot(g10__, g10__); // norm.z = dot(g10__, g10__)
     norm[3] = glm_vec4_dot(g11__, g11__); // norm.w = dot(g11__, g11__)
-    _glm_perlinDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
+    _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
     _glm_vec4_muls(g00__, norm[0], g00__); // g00__ *= norm.x
     _glm_vec4_muls(g01__, norm[1], g01__); // g01__ *= norm.y
@@ -186,7 +186,7 @@ _glm_perlinDetail_gradNorm(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
 
 CGLM_INLINE
 void
-_glm_perlinDetail_xy2g(
+_glm_noiseDetail_xy2g(
     vec4 ixy,
     /* out */
     vec4 gx,
@@ -258,7 +258,7 @@ _glm_perlinDetail_xy2g(
  */
 CGLM_INLINE
 float
-glm_perlin(vec4 point) {
+glm_perlin_vec4(vec4 point) {
     // Integer part of p for indexing
     vec4 Pi0;
     _glm_vec4_floor(point, Pi0); // Pi0 = floor(point);
@@ -287,53 +287,53 @@ glm_perlin(vec4 point) {
 
     // ixy = permute(permute(ix) + iy)
     vec4 ixy;
-    _glm_perlinDetail_permute(ix, ixy); // ixy = permute(ix)
+    _glm_noiseDetail_permute(ix, ixy); // ixy = permute(ix)
     glm_vec4_add(ixy, iy, ixy); // ixy += iy;
-    _glm_perlinDetail_permute(ixy, ixy); // ixy = permute(ixy)
+    _glm_noiseDetail_permute(ixy, ixy); // ixy = permute(ixy)
 
     // ixy0 = permute(ixy + iz0)
     vec4 ixy0;
     glm_vec4_add(ixy, iz0, ixy0); // ixy0 = ixy + iz0
-    _glm_perlinDetail_permute(ixy0, ixy0); // ixy0 = permute(ixy0)
+    _glm_noiseDetail_permute(ixy0, ixy0); // ixy0 = permute(ixy0)
 
     // ixy1 = permute(ixy + iz1)
     vec4 ixy1;
     glm_vec4_add(ixy, iz1, ixy1); // ixy1 = ixy, iz1
-    _glm_perlinDetail_permute(ixy1, ixy1); // ixy1 = permute(ixy1)
+    _glm_noiseDetail_permute(ixy1, ixy1); // ixy1 = permute(ixy1)
 
     // ixy00 = permute(ixy0 + iw0)
     vec4 ixy00;
     glm_vec4_add(ixy0, iw0, ixy00); // ixy00 = ixy0 + iw0
-    _glm_perlinDetail_permute(ixy00, ixy00); // ixy00 = permute(ixy00)
+    _glm_noiseDetail_permute(ixy00, ixy00); // ixy00 = permute(ixy00)
 
     // ixy01 = permute(ixy0 + iw1)
     vec4 ixy01;
     glm_vec4_add(ixy0, iw1, ixy01); // ixy01 = ixy0 + iw1
-    _glm_perlinDetail_permute(ixy01, ixy01); // ixy01 = permute(ixy01)
+    _glm_noiseDetail_permute(ixy01, ixy01); // ixy01 = permute(ixy01)
 
     // ixy10 = permute(ixy1 + iw0)
     vec4 ixy10;
     glm_vec4_add(ixy1, iw0, ixy10); // ixy10 = ixy1 + iw0
-    _glm_perlinDetail_permute(ixy10, ixy10); // ixy10 = permute(ixy10)
+    _glm_noiseDetail_permute(ixy10, ixy10); // ixy10 = permute(ixy10)
 
     // ixy11 = permute(ixy1 + iw1)
     vec4 ixy11;
     glm_vec4_add(ixy1, iw1, ixy11); // ixy11 = ixy1 + iw1
-    _glm_perlinDetail_permute(ixy11, ixy11); // ixy11 = permute(ixy11)
+    _glm_noiseDetail_permute(ixy11, ixy11); // ixy11 = permute(ixy11)
 
     // ------------
 
     vec4 gx00, gy00, gz00, gw00;
-    _glm_perlinDetail_xy2g(ixy00, gx00, gy00, gz00, gw00);
+    _glm_noiseDetail_xy2g(ixy00, gx00, gy00, gz00, gw00);
 
     vec4 gx01, gy01, gz01, gw01;
-    _glm_perlinDetail_xy2g(ixy01, gx01, gy01, gz01, gw01);
+    _glm_noiseDetail_xy2g(ixy01, gx01, gy01, gz01, gw01);
 
     vec4 gx10, gy10, gz10, gw10;
-    _glm_perlinDetail_xy2g(ixy10, gx10, gy10, gz10, gw10);
+    _glm_noiseDetail_xy2g(ixy10, gx10, gy10, gz10, gw10);
 
     vec4 gx11, gy11, gz11, gw11;
-    _glm_perlinDetail_xy2g(ixy11, gx11, gy11, gz11, gw11);
+    _glm_noiseDetail_xy2g(ixy11, gx11, gy11, gz11, gw11);
 
     // ------------
 
@@ -357,10 +357,10 @@ glm_perlin(vec4 point) {
     vec4 g1011 = {gx11[1], gy11[1], gz11[1], gw11[1]}; // g1011 = vec4(gx11.y, gy11.y, gz11.y, gw11.y);
     vec4 g1111 = {gx11[3], gy11[3], gz11[3], gw11[3]}; // g1111 = vec4(gx11.w, gy11.w, gz11.w, gw11.w);
 
-    _glm_perlinDetail_gradNorm(g0000, g0100, g1000, g1100);
-    _glm_perlinDetail_gradNorm(g0001, g0101, g1001, g1101);
-    _glm_perlinDetail_gradNorm(g0010, g0110, g1010, g1110);
-    _glm_perlinDetail_gradNorm(g0011, g0111, g1011, g1111);
+    _glm_noiseDetail_gradNorm(g0000, g0100, g1000, g1100);
+    _glm_noiseDetail_gradNorm(g0001, g0101, g1001, g1101);
+    _glm_noiseDetail_gradNorm(g0010, g0110, g1010, g1110);
+    _glm_noiseDetail_gradNorm(g0011, g0111, g1011, g1111);
 
     // ------------
 
@@ -427,7 +427,7 @@ glm_perlin(vec4 point) {
     // ------------
 
     vec4 fade_xyzw;
-    _glm_perlinDetail_fade(Pf0, fade_xyzw); // fade_xyzw = fade(Pf0)
+    _glm_noiseDetail_fade(Pf0, fade_xyzw); // fade_xyzw = fade(Pf0)
     
     // n_0w = lerp(vec4(n0000, n1000, n0100, n1100), vec4(n0001, n1001, n0101, n1101), fade_xyzw.w)
     vec4 n_0w1 = {n0000, n1000, n0100, n1100};
@@ -458,4 +458,4 @@ glm_perlin(vec4 point) {
 }
 
 
-#endif /* cglm_perlin_h */
+#endif /* cglm_noise_h */

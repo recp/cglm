@@ -5,17 +5,17 @@
  * Full license can be found in the LICENSE file
  */
 
-#ifndef cglms_perlins_h
-#define cglms_perlins_h
+#ifndef cglms_noises_h
+#define cglms_noises_h
 
 #include "../common.h"
 #include "../types-struct.h"
-#include "../perlin.h"
+#include "../noise.h"
 #include "vec4.h"
 
 /*
  Functions:
-   CGLM_INLINE float glms_perlin(vec4s point);
+   CGLM_INLINE float glms_perlin_vec4(vec4s point);
  */
 
 /*!
@@ -26,8 +26,8 @@
  */
 CGLM_INLINE
 float
-glms_perlin(vec4s point) {
-  return glm_perlin(point.raw);
+glms_perlin_vec4(vec4s point) {
+  return glm_perlin_vec4(point.raw);
 }
 
-#endif /* cglms_perlins_h */
+#endif /* cglms_noises_h */

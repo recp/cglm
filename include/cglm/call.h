@@ -32,7 +32,7 @@ extern "C" {
 #include "call/quat.h"
 #include "call/euler.h"
 #include "call/plane.h"
-#include "call/perlin.h"
+#include "call/noise.h"
 #include "call/frustum.h"
 #include "call/aabb2d.h"
 #include "call/box.h"

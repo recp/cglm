@@ -10,6 +10,6 @@
 
 CGLM_EXPORT
 float
-glmc_perlin(vec4 p) {
-    return glm_perlin(p);
+glmc_perlin_vec4(vec4 p) {
+    return glm_perlin_vec4(p);
 }

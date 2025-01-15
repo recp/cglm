@@ -30,7 +30,7 @@
 #include "quat.h"
 #include "euler.h"
 #include "plane.h"
-#include "perlin.h"
+#include "noise.h"
 #include "aabb2d.h"
 #include "box.h"
 #include "color.h"

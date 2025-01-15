@@ -7,7 +7,7 @@
 
 #include "test_common.h"
 
-TEST_IMPL(GLM_PREFIX, perlin) {
+TEST_IMPL(GLM_PREFIX, perlin_vec4) {
   vec4 p1[] = {
     {0.1f, 0.2f, 0.3f, 0.4f},
     {0.2f, 0.3f, 0.4f, 0.5f},
@@ -36,7 +36,7 @@ TEST_IMPL(GLM_PREFIX, perlin) {
   };
   
   for (int i = 0; i < 10; i++) {
-    ASSERT(test_eq(GLM(perlin)(p1[i]), e[i]));
+    ASSERT(test_eq(GLM(perlin_vec4)(p1[i]), e[i]));
   }
 
   TEST_SUCCESS
