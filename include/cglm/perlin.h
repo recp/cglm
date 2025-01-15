@@ -248,10 +248,10 @@ glm_perlin(vec4 point) {
 
     vec4 ix = {Pi0[0], Pi1[0], Pi0[0], Pi1[0]};
     vec4 iy = {Pi0[1], Pi0[1], Pi1[1], Pi1[1]};
-    vec4 iz0 = {Pi0[2], Pi0[2], Pi0[2], Pi0[2]};
-    vec4 iz1 = {Pi1[2], Pi1[2], Pi1[2], Pi1[2]};
-    vec4 iw0 = {Pi0[3], Pi0[3], Pi0[3], Pi0[3]};
-    vec4 iw1 = {Pi1[3], Pi1[3], Pi1[3], Pi1[3]};
+    vec4 iz0 = {Pi0[2], Pi0[2], Pi0[2], Pi0[2]}; // iz0 = vec4(Pi0.z);
+    vec4 iz1 = {Pi1[2], Pi1[2], Pi1[2], Pi1[2]}; // iz1 = vec4(Pi1.z);
+    vec4 iw0 = {Pi0[3], Pi0[3], Pi0[3], Pi0[3]}; // iw0 = vec4(Pi0.w);
+    vec4 iw1 = {Pi1[3], Pi1[3], Pi1[3], Pi1[3]}; // iw1 = vec4(Pi1.w);
 
     // ixy = permute(permute(ix) + iy)
     vec4 ixy;
