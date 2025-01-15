@@ -129,20 +129,6 @@ _glm_perlinDetail_permute(vec4 x, vec4 dest) {
 }
 
 
-// GLM_FUNC_QUALIFIER vec<4, T, Q> taylorInvSqrt(vec<4, T, Q> const& r)
-// {
-//     return static_cast<T>(1.79284291400159) - static_cast<T>(0.85373472095314) * r;
-// }
-
-CGLM_INLINE
-void
-_glm_perlinDetail_taylorInvSqrt(vec4 x, vec4 dest) {
-    dest[0] = 1.79284291400159f - 0.85373472095314f * x[0];
-    dest[1] = 1.79284291400159f - 0.85373472095314f * x[1];
-    dest[2] = 1.79284291400159f - 0.85373472095314f * x[2];
-    dest[3] = 1.79284291400159f - 0.85373472095314f * x[3];
-}
-
 // template<typename T, qualifier Q>
 // GLM_FUNC_QUALIFIER vec<4, T, Q> fade(vec<4, T, Q> const& t)
 // {
@@ -160,27 +146,42 @@ _glm_perlinDetail_fade(vec4 t, vec4 dest) {
 
 CGLM_INLINE
 void
-_glm_perlinDetail_gNorm(vec4 g0000, vec4 g0100, vec4 g1000, vec4 g1100) {
+_glm_perlinDetail_taylorInvSqrt(vec4 x, vec4 dest) {
+    dest[0] = 1.79284291400159f - 0.85373472095314f * x[0];
+    dest[1] = 1.79284291400159f - 0.85373472095314f * x[1];
+    dest[2] = 1.79284291400159f - 0.85373472095314f * x[2];
+    dest[3] = 1.79284291400159f - 0.85373472095314f * x[3];
+}
 
-    // norm = taylorInvSqrt(
-    //              vec4(
-    //                  dot(g0000, g0000),
-    //                  dot(g0100, g0100),
-    //                  dot(g1000, g1000),
-    //                  dot(g1100, g1100)
-    //              )
-    //          );
+/*!
+ * @brief Normalize gradients inplace
+ *
+ * @param[in, out]  g00__ gradient from point 00
+ * @param[in, out]  g01__ gradient from point 01
+ * @param[in, out]  g10__ gradient from point 10
+ * @param[in, out]  g11__ gradient from point 11
+ */
+CGLM_INLINE
+void
+_glm_perlinDetail_gradNorm(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
+
+    // norm = taylorInvSqrt(vec4(
+    //     dot(g00__, g00__),
+    //     dot(g01__, g01__),
+    //     dot(g10__, g10__),
+    //     dot(g11__, g11__)
+    // ));
     vec4 norm;
-    norm[0] = glm_vec4_dot(g0000, g0000); // norm.x = dot(g0000, g0000)
-    norm[1] = glm_vec4_dot(g0100, g0100); // norm.y = dot(g0100, g0100)
-    norm[2] = glm_vec4_dot(g1000, g1000); // norm.z = dot(g1000, g1000)
-    norm[3] = glm_vec4_dot(g1100, g1100); // norm.w = dot(g1100, g1100)
+    norm[0] = glm_vec4_dot(g00__, g00__); // norm.x = dot(g00__, g00__)
+    norm[1] = glm_vec4_dot(g01__, g01__); // norm.y = dot(g01__, g01__)
+    norm[2] = glm_vec4_dot(g10__, g10__); // norm.z = dot(g10__, g10__)
+    norm[3] = glm_vec4_dot(g11__, g11__); // norm.w = dot(g11__, g11__)
     _glm_perlinDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
-    _glm_vec4_muls(g0000, norm[0], g0000); // g0000 *= norm.x
-    _glm_vec4_muls(g0100, norm[1], g0100); // g0100 *= norm.y
-    _glm_vec4_muls(g1000, norm[2], g1000); // g1000 *= norm.z
-    _glm_vec4_muls(g1100, norm[3], g1100); // g1100 *= norm.w
+    _glm_vec4_muls(g00__, norm[0], g00__); // g00__ *= norm.x
+    _glm_vec4_muls(g01__, norm[1], g01__); // g01__ *= norm.y
+    _glm_vec4_muls(g10__, norm[2], g10__); // g10__ *= norm.z
+    _glm_vec4_muls(g11__, norm[3], g11__); // g11__ *= norm.w
 }
 
 CGLM_INLINE
@@ -262,7 +263,6 @@ glm_perlin(vec4 point) {
     vec4 Pi0;
     _glm_vec4_floor(point, Pi0); // Pi0 = floor(point);
 
-
     // Integer part + 1
     vec4 Pi1;
     glm_vec4_adds(Pi0, 1.0f, Pi1); // Pi1 = Pi0 + 1.0f;
@@ -323,53 +323,44 @@ glm_perlin(vec4 point) {
 
     // ------------
 
-    vec4 gx00;
-    vec4 gy00;
-    vec4 gz00;
-    vec4 gw00;
+    vec4 gx00, gy00, gz00, gw00;
     _glm_perlinDetail_xy2g(ixy00, gx00, gy00, gz00, gw00);
 
-    vec4 gx01;
-    vec4 gy01;
-    vec4 gz01;
-    vec4 gw01;
+    vec4 gx01, gy01, gz01, gw01;
     _glm_perlinDetail_xy2g(ixy01, gx01, gy01, gz01, gw01);
 
-    vec4 gx10;
-    vec4 gy10;
-    vec4 gz10;
-    vec4 gw10;
+    vec4 gx10, gy10, gz10, gw10;
     _glm_perlinDetail_xy2g(ixy10, gx10, gy10, gz10, gw10);
 
-    vec4 gx11;
-    vec4 gy11;
-    vec4 gz11;
-    vec4 gw11;
+    vec4 gx11, gy11, gz11, gw11;
     _glm_perlinDetail_xy2g(ixy11, gx11, gy11, gz11, gw11);
 
     // ------------
 
     vec4 g0000 = {gx00[0], gy00[0], gz00[0], gw00[0]}; // g0000 = vec4(gx00.x, gy00.x, gz00.x, gw00.x);
-    vec4 g1000 = {gx00[1], gy00[1], gz00[1], gw00[1]}; // g1000 = vec4(gx00.y, gy00.y, gz00.y, gw00.y);
     vec4 g0100 = {gx00[2], gy00[2], gz00[2], gw00[2]}; // g0100 = vec4(gx00.z, gy00.z, gz00.z, gw00.z);
+    vec4 g1000 = {gx00[1], gy00[1], gz00[1], gw00[1]}; // g1000 = vec4(gx00.y, gy00.y, gz00.y, gw00.y);
     vec4 g1100 = {gx00[3], gy00[3], gz00[3], gw00[3]}; // g1100 = vec4(gx00.w, gy00.w, gz00.w, gw00.w);
-    vec4 g0010 = {gx10[0], gy10[0], gz10[0], gw10[0]}; // g0010 = vec4(gx10.x, gy10.x, gz10.x, gw10.x);
-    vec4 g1010 = {gx10[1], gy10[1], gz10[1], gw10[1]}; // g1010 = vec4(gx10.y, gy10.y, gz10.y, gw10.y);
-    vec4 g0110 = {gx10[2], gy10[2], gz10[2], gw10[2]}; // g0110 = vec4(gx10.z, gy10.z, gz10.z, gw10.z);
-    vec4 g1110 = {gx10[3], gy10[3], gz10[3], gw10[3]}; // g1110 = vec4(gx10.w, gy10.w, gz10.w, gw10.w);
+
     vec4 g0001 = {gx01[0], gy01[0], gz01[0], gw01[0]}; // g0001 = vec4(gx01.x, gy01.x, gz01.x, gw01.x);
-    vec4 g1001 = {gx01[1], gy01[1], gz01[1], gw01[1]}; // g1001 = vec4(gx01.y, gy01.y, gz01.y, gw01.y);
     vec4 g0101 = {gx01[2], gy01[2], gz01[2], gw01[2]}; // g0101 = vec4(gx01.z, gy01.z, gz01.z, gw01.z);
+    vec4 g1001 = {gx01[1], gy01[1], gz01[1], gw01[1]}; // g1001 = vec4(gx01.y, gy01.y, gz01.y, gw01.y);
     vec4 g1101 = {gx01[3], gy01[3], gz01[3], gw01[3]}; // g1101 = vec4(gx01.w, gy01.w, gz01.w, gw01.w);
+
+    vec4 g0010 = {gx10[0], gy10[0], gz10[0], gw10[0]}; // g0010 = vec4(gx10.x, gy10.x, gz10.x, gw10.x);
+    vec4 g0110 = {gx10[2], gy10[2], gz10[2], gw10[2]}; // g0110 = vec4(gx10.z, gy10.z, gz10.z, gw10.z);
+    vec4 g1010 = {gx10[1], gy10[1], gz10[1], gw10[1]}; // g1010 = vec4(gx10.y, gy10.y, gz10.y, gw10.y);
+    vec4 g1110 = {gx10[3], gy10[3], gz10[3], gw10[3]}; // g1110 = vec4(gx10.w, gy10.w, gz10.w, gw10.w);
+    
     vec4 g0011 = {gx11[0], gy11[0], gz11[0], gw11[0]}; // g0011 = vec4(gx11.x, gy11.x, gz11.x, gw11.x);
-    vec4 g1011 = {gx11[1], gy11[1], gz11[1], gw11[1]}; // g1011 = vec4(gx11.y, gy11.y, gz11.y, gw11.y);
     vec4 g0111 = {gx11[2], gy11[2], gz11[2], gw11[2]}; // g0111 = vec4(gx11.z, gy11.z, gz11.z, gw11.z);
+    vec4 g1011 = {gx11[1], gy11[1], gz11[1], gw11[1]}; // g1011 = vec4(gx11.y, gy11.y, gz11.y, gw11.y);
     vec4 g1111 = {gx11[3], gy11[3], gz11[3], gw11[3]}; // g1111 = vec4(gx11.w, gy11.w, gz11.w, gw11.w);
 
-    _glm_perlinDetail_gNorm(g0000, g0100, g1000, g1100);
-    _glm_perlinDetail_gNorm(g0001, g0101, g1001, g1101);
-    _glm_perlinDetail_gNorm(g0010, g0110, g1010, g1110);
-    _glm_perlinDetail_gNorm(g0011, g0111, g1011, g1111);
+    _glm_perlinDetail_gradNorm(g0000, g0100, g1000, g1100);
+    _glm_perlinDetail_gradNorm(g0001, g0101, g1001, g1101);
+    _glm_perlinDetail_gradNorm(g0010, g0110, g1010, g1110);
+    _glm_perlinDetail_gradNorm(g0011, g0111, g1011, g1111);
 
     // ------------
 
@@ -434,13 +425,6 @@ glm_perlin(vec4 point) {
     float n1111 = glm_vec4_dot(g1111, Pf1); // n1111 = dot(g1111, Pf1)
 
     // ------------
-
-    // fade_xyzw = detail::fade(Pf0);
-    // n_0w = lerp(
-    //           vec4(n0000, n1000, n0100, n1100),
-    //           vec4(n0001, n1001, n0101, n1101),
-    //           fade_xyzw.w,
-    //       );
 
     vec4 fade_xyzw;
     _glm_perlinDetail_fade(Pf0, fade_xyzw); // fade_xyzw = fade(Pf0)
