@@ -185,11 +185,11 @@ _glm_perlinDetail_xy2g(
     glm_vec4_subs(gz, 0.5f, gz); // gz -= 0.5f
 
     // abs(gx), abs(gy), abs(gz)
-    vec4 gxa = {0.0f};
+    vec4 gxa;
     glm_vec4_abs(gx, gxa); // gxa = abs(gx)
-    vec4 gya = {0.0f};
+    vec4 gya;
     glm_vec4_abs(gy, gya); // gya = abs(gy)
-    vec4 gza = {0.0f};
+    vec4 gza;
     glm_vec4_abs(gz, gza); // gza = abs(gz)
 
     // gw = 0.75 - abs(gx) - abs(gy) - abs(gz)
@@ -199,7 +199,7 @@ _glm_perlinDetail_xy2g(
     glm_vec4_sub(gw, gya, gw); // gw -= gya
 
     // sw = step(gw, 0.0);
-    vec4 sw = {0.0f};
+    vec4 sw;
     _glm_vec4_steps(gw, 0.0f, sw); // sw = step(gw, 0.0)
 
     // gx -= sw * (step(vec4(0), gx) - T(0.5));
@@ -227,11 +227,12 @@ CGLM_INLINE
 float
 glm_perlin(vec4 point) {
     // Integer part of p for indexing
-    vec4 Pi0 = {0.0f};
+    vec4 Pi0;
     _glm_vec4_floor(point, Pi0); // Pi0 = floor(point);
 
+
     // Integer part + 1
-    vec4 Pi1 = {0.0f};
+    vec4 Pi1;
     glm_vec4_adds(Pi0, 1.0f, Pi1); // Pi1 = Pi0 + 1.0f;
 
     _glm_vec4_mods(Pi0, 289.0f, Pi0); // Pi0 = mod(Pi0, 289.0f);
@@ -253,65 +254,65 @@ glm_perlin(vec4 point) {
     vec4 iw1 = {Pi1[3], Pi1[3], Pi1[3], Pi1[3]};
 
     // ixy = permute(permute(ix) + iy)
-    vec4 ixy = {0.0f};
+    vec4 ixy;
     _glm_perlinDetail_permute(ix, ixy); // ixy = permute(ix)
     glm_vec4_add(ixy, iy, ixy); // ixy += iy;
     _glm_perlinDetail_permute(ixy, ixy); // ixy = permute(ixy)
 
     // ixy0 = permute(ixy + iz0)
-    vec4 ixy0 = {0.0f};
+    vec4 ixy0;
     glm_vec4_add(ixy, iz0, ixy0); // ixy0 = ixy + iz0
     _glm_perlinDetail_permute(ixy0, ixy0); // ixy0 = permute(ixy0)
 
     // ixy1 = permute(ixy + iz1)
-    vec4 ixy1 = {0.0f};
+    vec4 ixy1;
     glm_vec4_add(ixy, iz1, ixy1); // ixy1 = ixy, iz1
     _glm_perlinDetail_permute(ixy1, ixy1); // ixy1 = permute(ixy1)
 
     // ixy00 = permute(ixy0 + iw0)
-    vec4 ixy00 = {0.0f};
+    vec4 ixy00;
     glm_vec4_add(ixy0, iw0, ixy00); // ixy00 = ixy0 + iw0
     _glm_perlinDetail_permute(ixy00, ixy00); // ixy00 = permute(ixy00)
 
     // ixy01 = permute(ixy0 + iw1)
-    vec4 ixy01 = {0.0f};
+    vec4 ixy01;
     glm_vec4_add(ixy0, iw1, ixy01); // ixy01 = ixy0 + iw1
     _glm_perlinDetail_permute(ixy01, ixy01); // ixy01 = permute(ixy01)
 
     // ixy10 = permute(ixy1 + iw0)
-    vec4 ixy10 = {0.0f};
+    vec4 ixy10;
     glm_vec4_add(ixy1, iw0, ixy10); // ixy10 = ixy1 + iw0
     _glm_perlinDetail_permute(ixy10, ixy10); // ixy10 = permute(ixy10)
 
     // ixy11 = permute(ixy1 + iw1)
-    vec4 ixy11 = {0.0f};
+    vec4 ixy11;
     glm_vec4_add(ixy1, iw1, ixy11); // ixy11 = ixy1 + iw1
     _glm_perlinDetail_permute(ixy11, ixy11); // ixy11 = permute(ixy11)
 
     // ------------
 
-    vec4 gx00 = {0.0f};
-    vec4 gy00 = {0.0f};
-    vec4 gz00 = {0.0f};
-    vec4 gw00 = {0.0f};
+    vec4 gx00;
+    vec4 gy00;
+    vec4 gz00;
+    vec4 gw00;
     _glm_perlinDetail_xy2g(ixy00, gx00, gy00, gz00, gw00);
 
-    vec4 gx01 = {0.0f};
-    vec4 gy01 = {0.0f};
-    vec4 gz01 = {0.0f};
-    vec4 gw01 = {0.0f};
+    vec4 gx01;
+    vec4 gy01;
+    vec4 gz01;
+    vec4 gw01;
     _glm_perlinDetail_xy2g(ixy01, gx01, gy01, gz01, gw01);
 
-    vec4 gx10 = {0.0f};
-    vec4 gy10 = {0.0f};
-    vec4 gz10 = {0.0f};
-    vec4 gw10 = {0.0f};
+    vec4 gx10;
+    vec4 gy10;
+    vec4 gz10;
+    vec4 gw10;
     _glm_perlinDetail_xy2g(ixy10, gx10, gy10, gz10, gw10);
 
-    vec4 gx11 = {0.0f};
-    vec4 gy11 = {0.0f};
-    vec4 gz11 = {0.0f};
-    vec4 gw11 = {0.0f};
+    vec4 gx11;
+    vec4 gy11;
+    vec4 gz11;
+    vec4 gw11;
     _glm_perlinDetail_xy2g(ixy11, gx11, gy11, gz11, gw11);
 
     // ------------
@@ -343,7 +344,7 @@ glm_perlin(vec4 point) {
     //              )
     //          );
 
-    vec4 norm00 = {0.0f};
+    vec4 norm00;
     norm00[0] = glm_vec4_dot(g0000, g0000); // norm00.x = dot(g0000, g0000)
     norm00[1] = glm_vec4_dot(g0100, g0100); // norm00.y = dot(g0100, g0100)
     norm00[2] = glm_vec4_dot(g1000, g1000); // norm00.z = dot(g1000, g1000)
@@ -355,7 +356,7 @@ glm_perlin(vec4 point) {
     _glm_vec4_muls(g1000, norm00[2], g1000); // g1000 *= norm00.z
     _glm_vec4_muls(g1100, norm00[3], g1100); // g1100 *= norm00.w
 
-    vec4 norm01 = {0.0f};
+    vec4 norm01;
     norm01[0] = glm_vec4_dot(g0001, g0001); // norm01.x = dot(g0001, g0001)
     norm01[1] = glm_vec4_dot(g0101, g0101); // norm01.y = dot(g0101, g0101)
     norm01[2] = glm_vec4_dot(g1001, g1001); // norm01.z = dot(g1001, g1001)
@@ -367,7 +368,7 @@ glm_perlin(vec4 point) {
     _glm_vec4_muls(g1001, norm01[2], g1001); // g1001 *= norm01.z
     _glm_vec4_muls(g1101, norm01[3], g1101); // g1101 *= norm01.w
 
-    vec4 norm10 = {0.0f};
+    vec4 norm10;
     norm10[0] = glm_vec4_dot(g0010, g0010); // norm10.x = dot(g0010, g0010)
     norm10[1] = glm_vec4_dot(g0110, g0110); // norm10.y = dot(g0110, g0110)
     norm10[2] = glm_vec4_dot(g1010, g1010); // norm10.z = dot(g1010, g1010)
@@ -379,7 +380,7 @@ glm_perlin(vec4 point) {
     _glm_vec4_muls(g1010, norm10[2], g1010); // g1010 *= norm10.z
     _glm_vec4_muls(g1110, norm10[3], g1110); // g1110 *= norm10.w
 
-    vec4 norm11 = {0.0f};
+    vec4 norm11;
     norm11[0] = glm_vec4_dot(g0011, g0011); // norm11.x = dot(g0011, g0011)
     norm11[1] = glm_vec4_dot(g0111, g0111); // norm11.y = dot(g0111, g0111)
     norm11[2] = glm_vec4_dot(g1011, g1011); // norm11.z = dot(g1011, g1011)
@@ -435,23 +436,23 @@ glm_perlin(vec4 point) {
     //           fade_xyzw.w,
     //       );
 
-    vec4 fade_xyzw = {0.0f};
+    vec4 fade_xyzw;
     _glm_perlinDetail_fade(Pf0, fade_xyzw); // fade_xyzw = fade(Pf0)
     
     vec4 n_0w1 = {n0000, n1000, n0100, n1100};
     vec4 n_0w2 = {n0001, n1001, n0101, n1101};
-    vec4 n_0w = {0.0f};
+    vec4 n_0w;
     glm_vec4_lerp(n_0w1, n_0w2, fade_xyzw[3], n_0w); // n_0w = lerp(vec4(n0000, n1000, n0100, n1100), vec4(n0001, n1001, n0101, n1101), fade_xyzw.w)
     
     vec4 n_1w1 = {n0010, n1010, n0110, n1110};
     vec4 n_1w2 = {n0011, n1011, n0111, n1111};
-    vec4 n_1w = {0.0f};
+    vec4 n_1w;
     glm_vec4_lerp(n_1w1, n_1w2, fade_xyzw[3], n_1w); // n_1w = lerp(vec4(n0010, n1010, n0110, n1110), vec4(n0011, n1011, n0111, n1111), fade_xyzw.w)
     
-    vec4 n_zw = {0.0f};
+    vec4 n_zw;
     glm_vec4_lerp(n_0w, n_1w, fade_xyzw[2], n_zw); // n_zw = lerp(n_0w, n_1w, fade_xyzw.z)
     
-    vec2 n_yzw = {0.0f};
+    vec2 n_yzw;
     vec2 n_yzw1 = {n_zw[0], n_zw[1]};
     vec2 n_yzw2 = {n_zw[2], n_zw[3]};
     glm_vec2_lerp(n_yzw1, n_yzw2, fade_xyzw[1], n_yzw); // n_yzw = lerp(vec2(n_zw.x, n_zw.y), vec2(n_zw.z, n_zw.w), fade_xyzw.y)
