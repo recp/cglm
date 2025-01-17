@@ -13,6 +13,7 @@ Table of contents (click to go):
 Functions:
 
 1. :c:func:`glm_perlin_vec4`
+#. :c:func:`glm_perlin_vec3`
 
 
 Functions documentation
@@ -24,6 +25,17 @@ Functions documentation
 
     Parameters:
       | *[in]*  **point**  4D point
+
+    Returns:
+      | noise value
+
+
+.. c:function:: float  glm_perlin_vec3(vec3 point)
+
+    | Classic Perlin noise
+
+    Parameters:
+      | *[in]*  **point**  3D point
 
     Returns:
       | noise value
