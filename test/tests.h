@@ -359,6 +359,8 @@ TEST_DECLARE(glmc_plane_normalize)
 /* noise */
 TEST_DECLARE(glm_perlin_vec4)
 TEST_DECLARE(glmc_perlin_vec4)
+TEST_DECLARE(glm_perlin_vec3)
+TEST_DECLARE(glmc_perlin_vec3)
 
 /* utils */
 TEST_DECLARE(clamp)
@@ -1541,6 +1543,8 @@ TEST_LIST {
   /* noise */
   TEST_ENTRY(glm_perlin_vec4)
   TEST_ENTRY(glmc_perlin_vec4)
+  TEST_ENTRY(glm_perlin_vec3)
+  TEST_ENTRY(glmc_perlin_vec3)
   
   /* utils */
   TEST_ENTRY(clamp)
