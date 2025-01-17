@@ -618,6 +618,12 @@ glm_perlin_vec4(vec4 point) {
 }
 
 
+/*!
+ * @brief Classic perlin noise
+ *
+ * @param[in]  point  3D vector
+ * @returns           perlin noise value
+ */
 CGLM_INLINE
 float
 glm_perlin_vec3(vec3 point) {
