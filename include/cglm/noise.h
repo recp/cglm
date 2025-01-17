@@ -9,7 +9,7 @@
  * Following Stefan Gustavson's paper "Simplex noise demystified":
  * http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
  * 
- * Implementation based on glm::glc::noise.hpp:
+ * Implementation based on glm::perlin function:
  * https://github.com/g-truc/glm/blob/master/glm/gtc/noise.inl
  */
 
