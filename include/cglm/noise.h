@@ -23,7 +23,7 @@
 #include "vec2-ext.h"
 
 //////////////////////////////
-
+// Proposed vec4_ext functions
 
 /*!
  * @brief floor each element of v, result is written to dest
@@ -105,15 +105,7 @@ _glm_vec4_muls(vec4 x, float y, vec4 dest) {
 
 
 //////////////////////////////
-
-
-
-// Based on glm::detail::mod289
-// template<typename T>
-// GLM_FUNC_QUALIFIER T mod289(T const& x)
-// {
-//     return x - floor(x * (static_cast<T>(1.0) / static_cast<T>(289.0))) * static_cast<T>(289.0);
-// }
+// GLM noise detail functions
 
 CGLM_INLINE
 float
@@ -121,12 +113,6 @@ _glm_noiseDetail_mod289(float x) {
     return x - floorf(x * (1.0f / 289.0f)) * 289.0f;
 }
 
-// Based on glm::detail::permute
-// template<typename T, qualifier Q>
-//     GLM_FUNC_QUALIFIER vec<4, T, Q> permute(vec<4, T, Q> const& x)
-//     {
-//         return mod289(((x * static_cast<T>(34)) + static_cast<T>(1)) * x);
-//     }
 CGLM_INLINE
 void
 _glm_noiseDetail_permute(vec4 x, vec4 dest) {
@@ -135,13 +121,6 @@ _glm_noiseDetail_permute(vec4 x, vec4 dest) {
     dest[2] = _glm_noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]);
     dest[3] = _glm_noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]);
 }
-
-
-// template<typename T, qualifier Q>
-// GLM_FUNC_QUALIFIER vec<4, T, Q> fade(vec<4, T, Q> const& t)
-// {
-//     return (t * t * t) * (t * (t * static_cast<T>(6) - static_cast<T>(15)) + static_cast<T>(10));
-// }
 
 CGLM_INLINE
 void
@@ -257,6 +236,10 @@ _glm_noiseDetail_xy2g(
     glm_vec4_mul(sw, temp, temp); // temp *= sw
     glm_vec4_sub(gy, temp, gy); // gy -= temp
 }
+
+
+//////////////////////////////
+// Perlin noise
 
 /*!
  * @brief Classic perlin noise
