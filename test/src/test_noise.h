@@ -76,3 +76,43 @@ TEST_IMPL(GLM_PREFIX, perlin_vec3) {
 
   TEST_SUCCESS
 }
+
+
+TEST_IMPL(GLM_PREFIX, perlin_vec2) {
+  vec2 p1[] = {
+    {0.1f, 0.2f},
+    {0.2f, 0.3f},
+    {0.3f, 0.4f},
+    {0.4f, 0.5f},
+    {0.5f, 0.6f},
+    {0.6f, 0.7f},
+    {0.7f, 0.8f},
+    {0.8f, 0.9f},
+    {0.9f, 1.0f},
+    {1.0f, 1.1f},
+  };
+
+  // expected values calculated by glm::perlin
+  float e[] = {
+    0.2841092348098755f,
+    0.2328013032674789f,
+    -0.0017980185803026f,
+    -0.3300299644470215f,
+    -0.5998955368995667f,
+    -0.6914522647857666f,
+    -0.5896517634391785f,
+    -0.3778679668903351f,
+    -0.1557840555906296f,
+    0.0453133136034012f
+  };
+  
+  for (int i = 0; i < 10; i++) {
+    ASSERT(test_eq(GLM(perlin_vec2)(p1[i]), e[i]));
+  }
+
+  TEST_SUCCESS
+}
+
+
+
+
