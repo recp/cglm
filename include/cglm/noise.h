@@ -363,6 +363,10 @@ _glm_noiseDetail_xy2gxyz(
     vec4 gy,
     vec4 gz
 ) {
+    // NOTE: This function is not *quite* analogous to _glm_noiseDetail_xy2gxyzw
+    // to try to match the output of glm::perlin. I think it might be a bug in
+    // in the original implementation, but for now I'm keeping it consistent. -MK
+    
     // gx = ixy / 7.0
     glm_vec4_divs(ixy, 7.0f, gx); // gx = ixy / 7.0
 
@@ -379,7 +383,6 @@ _glm_noiseDetail_xy2gxyz(
     vec4 gxa, gya;
     glm_vec4_abs(gx, gxa); // gxa = abs(gx)
     glm_vec4_abs(gy, gya); // gya = abs(gy)
-    
 
     // gz = vec4(0.5) - abs(gx0) - abs(gy0);
     _glm_vec4_sets(gz, 0.5f); // gz = 0.5
