@@ -30,4 +30,16 @@ glms_perlin_vec4(vec4s point) {
   return glm_perlin_vec4(point.raw);
 }
 
+/*!
+ * @brief Classic perlin noise
+ *
+ * @param[in]  point  3D vector
+ * @returns           perlin noise value
+ */
+CGLM_INLINE
+float
+glms_perlin_vec3(vec3s point) {
+  return glm_perlin_vec3(point.raw);
+}
+
 #endif /* cglms_noises_h */

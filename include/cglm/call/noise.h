@@ -17,6 +17,10 @@ CGLM_EXPORT
 float
 glmc_perlin_vec4(vec4 point);
 
+CGLM_EXPORT
+float
+glmc_perlin_vec3(vec3 point);
+
 #ifdef __cplusplus
 }
 #endif
