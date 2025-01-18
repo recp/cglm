@@ -790,6 +790,29 @@ TEST_IMPL(GLM_PREFIX, vec2_stepr) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, vec2_step) {
+  vec2 v1 = {-100.0f, -200.0f};
+  vec2 s1 = {-100.0f, 0.0f};
+  vec2 s2 = {100.0f, -220.0f};
+  vec2 s3 = {100.0f, 200.0f};
+  vec2 v2;
+
+  GLM(vec2_step)(s1, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  
+  GLM(vec2_step)(s2, v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  
+  GLM(vec2_step)(s3, v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec2_complex_mul) {
   vec2 v1 = { 3.0f,  5.0f },
        v2 = { 7.0f, 11.0f },
