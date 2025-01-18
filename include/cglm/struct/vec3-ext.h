@@ -231,6 +231,20 @@ glms_vec3_(fract)(vec3s v) {
 }
 
 /*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @return          dest destination vector
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(floor)(vec3s v) {
+  vec3s r;
+  glm_vec3_floor(v.raw, r.raw);
+  return r;
+}
+
+/*!
  * @brief vector reduction by summation
  * @warning could overflow
  *
