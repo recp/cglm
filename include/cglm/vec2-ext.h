@@ -23,6 +23,8 @@
    CGLM_INLINE void  glm_vec2_fract(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_floor(vec2 v, vec2 dest);
    CGLM_INLINE float glm_vec2_mods(vec2 v, float s, vec2 dest);
+   CGLM_INLINE float glm_vec2_steps(float edge, vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_stepr(vec2 edge, float v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
@@ -269,6 +271,36 @@ glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest) {
   ti = a[0] * b[1] + a[1] * b[0];
   dest[0] = tr;
   dest[1] = ti;
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       vector to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_steps(float edge, vec2 x, vec2 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold vector
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_stepr(vec2 edge, float x, vec2 dest) {
+  dest[0] = glm_step(edge[0], x);
+  dest[1] = glm_step(edge[1], x);
 }
 
 /*!

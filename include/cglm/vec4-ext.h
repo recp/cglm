@@ -28,6 +28,8 @@
    CGLM_INLINE void  glm_vec4_fract(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_floor(vec4 v, vec4 dest);
    CGLM_INLINE float glm_vec4_mods(vec4 v, float s, vec4 dest);
+   CGLM_INLINE float glm_vec4_steps(float edge, vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_stepr(vec4 edge, float v, vec4 dest);
    CGLM_INLINE float glm_vec4_hadd(vec4 v);
    CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
  */
@@ -319,6 +321,40 @@ glm_vec4_mods(vec4 x, float y, vec4 dest) {
   dest[1] = fmodf(x[1], y);
   dest[2] = fmodf(x[2], y);
   dest[3] = fmodf(x[3], y);
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       vector to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec4_steps(float edge, vec4 x, vec4 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
+  dest[3] = glm_step(edge, x[3]);
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold vector
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec4_stepr(vec4 edge, float x, vec4 dest) {
+  dest[0] = glm_step(edge[0], x);
+  dest[1] = glm_step(edge[1], x);
+  dest[2] = glm_step(edge[2], x);
+  dest[3] = glm_step(edge[3], x);
 }
 
 /*!

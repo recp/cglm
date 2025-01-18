@@ -29,37 +29,6 @@
 // Proposed vec4_ext functions
 
 /*!
- * @brief threshold function with scalar
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @param[out]  dest    destination
- */
-CGLM_INLINE
-void
-_glm_vec4_steps(vec4 edge, float x, vec4 dest) {
-  dest[0] = glm_step(edge[0], x);
-  dest[1] = glm_step(edge[1], x);
-  dest[2] = glm_step(edge[2], x);
-  dest[3] = glm_step(edge[3], x);
-}
-
-/*!
- * @brief threshold function with scalar
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @param[out]  dest    destination
- */
-CGLM_INLINE
-void
-_glm_vec3_steps(vec3 edge, float x, vec3 dest) {
-  dest[0] = glm_step(edge[0], x);
-  dest[1] = glm_step(edge[1], x);
-  dest[2] = glm_step(edge[2], x);
-}
-
-/*!
  * @brief set all elements of dest to value
  *
  * @param[in]   vector  threshold
@@ -281,7 +250,7 @@ _glm_noiseDetail_i2gxyzw(
 
   // sw = step(gw, 0.0);
   vec4 sw;
-  _glm_vec4_steps(gw, 0.0f, sw); // sw = step(gw, 0.0)
+  glm_vec4_stepr(gw, 0.0f, sw); // sw = step(gw, 0.0)
 
   // gx -= sw * (step(vec4(0), gx) - T(0.5));
   vec4 temp = {0.0f}; // temp = 0.0
@@ -337,7 +306,7 @@ _glm_noiseDetail_i2gxyz(
   
   // sz = step(gw, 0.0);
   vec4 sz;
-  _glm_vec4_steps(gz, 0.0f, sz); // sz = step(gz, 0.0)
+  glm_vec4_stepr(gz, 0.0f, sz); // sz = step(gz, 0.0)
 
   // gx0 -= sz0 * (step(0.0, gx0) - T(0.5));
   vec4 temp = {0.0f}; // temp = 0.0
