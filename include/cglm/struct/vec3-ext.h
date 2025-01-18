@@ -26,6 +26,7 @@
    CGLM_INLINE vec3s glms_vec3_sign(vec3s v);
    CGLM_INLINE vec3s glms_vec3_abs(vec3s v);
    CGLM_INLINE vec3s glms_vec3_fract(vec3s v);
+   CGLM_INLINE vec3s glms_vec3_floor(vec3s v);
    CGLM_INLINE float glms_vec3_hadd(vec3s v);
    CGLM_INLINE vec3s glms_vec3_sqrt(vec3s v);
  */
