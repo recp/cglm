@@ -714,6 +714,28 @@ TEST_IMPL(GLM_PREFIX, vec2_floor) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_mods) {
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
+
+  /* Mod 1 - leaves just the fractional part */
+  GLM(vec2_mods)(v1, 1.0f, v3);
+  GLM(vec2_mods)(v2, 1.0f, v4);
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v5))
+  ASSERTIFY(test_assert_vec2_eq(v4, v6))
+
+  /* Mod 2 - parity + fractional part */
+  GLM(vec2_mods)(v1, 2.0f, v3);
+  GLM(vec2_mods)(v2, 2.0f, v4);
+
+  vec2 v7 = {0.104f, 1.012f}, v8 = {0.35f, 1.140f};
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v7))
+  ASSERTIFY(test_assert_vec2_eq(v4, v8))
+
+  TEST_SUCCESS
+}
 
 TEST_IMPL(GLM_PREFIX, vec2_lerp) {
   vec2 v1 = {-100.0f, -200.0f};

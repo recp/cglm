@@ -1839,6 +1839,29 @@ TEST_IMPL(GLM_PREFIX, vec3_floor) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec3_mods) {
+  vec3 v1 = {2.104f, 3.012f, 4.10f}, v2 = {12.35f, 31.140f, 43.502f}, v3, v4;
+  vec3 v5 = {0.104f, 0.012f, 0.10f}, v6 = {0.35f, 0.140f, 0.502f};
+
+  /* Mod 1 - leaves just the fractional part */
+  GLM(vec3_mods)(v1, 1.0f, v3);
+  GLM(vec3_mods)(v2, 1.0f, v4);
+
+  ASSERTIFY(test_assert_vec3_eq(v3, v5))
+  ASSERTIFY(test_assert_vec3_eq(v4, v6))
+
+  /* Mod 2 - parity + fractional part */
+  GLM(vec3_mods)(v1, 2.0f, v3);
+  GLM(vec3_mods)(v2, 2.0f, v4);
+
+  vec3 v7 = {0.104f, 1.012f, 0.10f}, v8 = {0.35f, 1.140f, 1.502f};
+
+  ASSERTIFY(test_assert_vec3_eq(v3, v7))
+  ASSERTIFY(test_assert_vec3_eq(v4, v8))
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec3_hadd) {
   vec3  v1 = {2.0f, 3.0f, 4.0f}, v2 = {12.0f, 31.0f, 43.0f};
   float r1, r2, r3, r4;
