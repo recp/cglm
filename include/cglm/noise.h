@@ -29,21 +29,6 @@
 // Proposed vec4_ext functions
 
 /*!
- * @brief floor each element of v, result is written to dest
- *
- * @param[in]  v    vector
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec4_floor(vec4 x, vec4 dest) {
-    dest[0] = floorf(x[0]);
-    dest[1] = floorf(x[1]);
-    dest[2] = floorf(x[2]);
-    dest[3] = floorf(x[3]);
-}
-
-/*!
  * @brief mod v by a scalar, result is written to dest (dest = v % s)
  *
  * @param[in]  v    vector
@@ -295,11 +280,11 @@ _glm_noiseDetail_i2gxyzw(
     glm_vec4_divs(ixy, 7.0f, gx); // gx = ixy / 7.0
 
     // gy = fract(gx) / 7.0
-    _glm_vec4_floor(gx, gy); // gy = floor(gx)
+    glm_vec4_floor(gx, gy); // gy = floor(gx)
     glm_vec4_divs(gy, 7.0f, gy); // gy /= 7.0
 
     // gz = floor(gy) / 6.0
-    _glm_vec4_floor(gy, gz); // gz = floor(gy)
+    glm_vec4_floor(gy, gz); // gz = floor(gy)
     glm_vec4_divs(gz, 6.0f, gz); // gz /= 6.0
 
     // gx = fract(gx) - 0.5f
@@ -363,7 +348,7 @@ _glm_noiseDetail_i2gxyz(
     glm_vec4_divs(ixy, 7.0f, gx); // gx = ixy / 7.0
 
     // gy = fract(floor(gx0) / 7.0)) - 0.5;
-    _glm_vec4_floor(gx, gy); // gy = floor(gx)
+    glm_vec4_floor(gx, gy); // gy = floor(gx)
     glm_vec4_divs(gy, 7.0f, gy); // gy /= 7.0
     glm_vec4_fract(gy, gy); // gy = fract(gy)
     glm_vec4_subs(gy, 0.5f, gy); // gy -= 0.5f
@@ -428,7 +413,7 @@ _glm_noiseDetail_i2gxy(
     // tx = floor(gx + 0.5);
     vec4 tx;
     glm_vec4_adds(gx, 0.5f, tx); // tx = gx + 0.5
-    _glm_vec4_floor(tx, tx); // tx = floor(tx)
+    glm_vec4_floor(tx, tx); // tx = floor(tx)
 
     // gx = gx - tx;
     glm_vec4_sub(gx, tx, gx); // gx -= tx
@@ -449,7 +434,7 @@ float
 glm_perlin_vec4(vec4 point) {
     // Integer part of p for indexing
     vec4 Pi0;
-    _glm_vec4_floor(point, Pi0); // Pi0 = floor(point);
+    glm_vec4_floor(point, Pi0); // Pi0 = floor(point);
 
     // Integer part + 1
     vec4 Pi1;
@@ -788,7 +773,7 @@ glm_perlin_vec2(vec2 point) {
     // Integer part of p for indexing
     // Pi = floor(vec4(point.x, point.y, point.x, point.y)) + vec4(0.0, 0.0, 1.0, 1.0);
     vec4 Pi = {point[0], point[1], point[0], point[1]}; // Pi = vec4(point.x, point.y, point.x, point.y)
-    _glm_vec4_floor(Pi, Pi); // Pi = floor(Pi)
+    glm_vec4_floor(Pi, Pi); // Pi = floor(Pi)
     Pi[2] += 1.0f; // Pi.z += 1.0
     Pi[3] += 1.0f; // Pi.w += 1.0
 

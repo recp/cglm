@@ -289,6 +289,21 @@ glm_vec4_fract(vec4 v, vec4 dest) {
 }
 
 /*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_floor(vec4 x, vec4 dest) {
+    dest[0] = floorf(x[0]);
+    dest[1] = floorf(x[1]);
+    dest[2] = floorf(x[2]);
+    dest[3] = floorf(x[3]);
+}
+
+/*!
  * @brief vector reduction by summation
  * @warning could overflow
  *
