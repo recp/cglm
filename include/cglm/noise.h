@@ -149,38 +149,6 @@ _glm_vec3_sets(vec3 v, float x) {
   v[2] = x;
 }
 
-/*!
- * @brief mul v by a scalar, result is written to dest (dest = v * s)
- *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec4_muls(vec4 x, float y, vec4 dest) {
-    dest[0] = x[0] * y;
-    dest[1] = x[1] * y;
-    dest[2] = x[2] * y;
-    dest[3] = x[3] * y;
-}
-
-/*!
- * @brief mul v by a scalar, result is written to dest (dest = v * s)
- *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec3_muls(vec3 x, float y, vec3 dest) {
-    dest[0] = x[0] * y;
-    dest[1] = x[1] * y;
-    dest[2] = x[2] * y;
-}
-
-
 //////////////////////////////
 // GLM noise detail functions
 
@@ -257,10 +225,10 @@ _glm_noiseDetail_gradNorm_vec4(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
     norm[3] = glm_vec4_dot(g11__, g11__); // norm.w = dot(g11__, g11__)
     _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
-    _glm_vec4_muls(g00__, norm[0], g00__); // g00__ *= norm.x
-    _glm_vec4_muls(g01__, norm[1], g01__); // g01__ *= norm.y
-    _glm_vec4_muls(g10__, norm[2], g10__); // g10__ *= norm.z
-    _glm_vec4_muls(g11__, norm[3], g11__); // g11__ *= norm.w
+    glm_vec4_scale(g00__, norm[0], g00__); // g00__ *= norm.x
+    glm_vec4_scale(g01__, norm[1], g01__); // g01__ *= norm.y
+    glm_vec4_scale(g10__, norm[2], g10__); // g10__ *= norm.z
+    glm_vec4_scale(g11__, norm[3], g11__); // g11__ *= norm.w
 }
 
 
@@ -289,10 +257,10 @@ _glm_noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) {
     norm[3] = glm_vec3_dot(g11_, g11_); // norm.w = dot(g11_, g11_)
     _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
-    _glm_vec3_muls(g00_, norm[0], g00_); // g00_ *= norm.x
-    _glm_vec3_muls(g01_, norm[1], g01_); // g01_ *= norm.y
-    _glm_vec3_muls(g10_, norm[2], g10_); // g10_ *= norm.z
-    _glm_vec3_muls(g11_, norm[3], g11_); // g11_ *= norm.w
+    glm_vec3_scale(g00_, norm[0], g00_); // g00_ *= norm.x
+    glm_vec3_scale(g01_, norm[1], g01_); // g01_ *= norm.y
+    glm_vec3_scale(g10_, norm[2], g10_); // g10_ *= norm.z
+    glm_vec3_scale(g11_, norm[3], g11_); // g11_ *= norm.w
 }
 
 /*!
@@ -320,10 +288,10 @@ _glm_noiseDetail_gradNorm_vec2(vec3 g00, vec3 g01, vec3 g10, vec3 g11) {
     norm[3] = glm_vec2_dot(g11, g11); // norm.w = dot(g11, g11)
     _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
-    _glm_vec3_muls(g00, norm[0], g00); // g00 *= norm.x
-    _glm_vec3_muls(g01, norm[1], g01); // g01 *= norm.y
-    _glm_vec3_muls(g10, norm[2], g10); // g10 *= norm.z
-    _glm_vec3_muls(g11, norm[3], g11); // g11 *= norm.w
+    glm_vec3_scale(g00, norm[0], g00); // g00 *= norm.x
+    glm_vec3_scale(g01, norm[1], g01); // g01 *= norm.y
+    glm_vec3_scale(g10, norm[2], g10); // g10 *= norm.z
+    glm_vec3_scale(g11, norm[3], g11); // g11 *= norm.w
 }
 
 
@@ -464,7 +432,7 @@ _glm_noiseDetail_i2gxy(
     // gx = 2.0 * fract(i / 41.0) - 1.0;
     glm_vec4_divs(i, 41.0f, gx); // gx = i / 41.0
     glm_vec4_fract(gx, gx); // gx = fract(gx)
-    _glm_vec4_muls(gx, 2.0f, gx); // gx *= 2.0
+    glm_vec4_scale(gx, 2.0f, gx); // gx *= 2.0
     glm_vec4_subs(gx, 1.0f, gx); // gx -= 1.0
 
     // gy = abs(gx) - 0.5;
