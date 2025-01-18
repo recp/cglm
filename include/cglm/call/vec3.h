@@ -19,6 +19,7 @@ extern "C" {
 #define glmc_vec3_flipsign_to(v, dest) glmc_vec3_negate_to(v, dest)
 #define glmc_vec3_inv(v)               glmc_vec3_negate(v)
 #define glmc_vec3_inv_to(v, dest)      glmc_vec3_negate_to(v, dest)
+#define glmc_vec3_step_uni(edge, x, dest) glmc_vec3_steps(edge, x, dest);
 
 CGLM_EXPORT
 void
@@ -230,13 +231,6 @@ CGLM_INLINE
 void
 glmc_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
   glmc_vec3_lerpc(from, to, t, dest);
-}
-
-/* DEPRECATED */
-CGLM_INLINE
-void
-glmc_vec3_step_uni(float edge, vec3 x, vec3 dest) {
-  glmc_vec3_steps(edge, x, dest);
 }
 
 CGLM_EXPORT
