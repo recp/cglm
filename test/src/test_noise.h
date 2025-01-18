@@ -21,7 +21,7 @@ TEST_IMPL(GLM_PREFIX, perlin_vec4) {
     {1.0f, 1.1f, 1.2f, 1.3f},
   };
 
-  // expected values calculated by glm::perlin
+  /* expected values calculated by glm::perlin */
   float e[] = {
     -0.5091819763183594f,
     -0.4375732541084290f,
@@ -56,7 +56,7 @@ TEST_IMPL(GLM_PREFIX, perlin_vec3) {
     {1.0f, 1.1f, 1.2f},
   };
 
-  // expected values calculated by glm::perlin
+  /* expected values calculated by glm::perlin */
   float e[] = {
     -0.2909241318702698f,
     -0.4667602181434631f,
@@ -92,7 +92,7 @@ TEST_IMPL(GLM_PREFIX, perlin_vec2) {
     {1.0f, 1.1f},
   };
 
-  // expected values calculated by glm::perlin
+  /* expected values calculated by glm::perlin */
   float e[] = {
     0.2841092348098755f,
     0.2328013032674789f,
