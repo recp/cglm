@@ -26,6 +26,7 @@
    CGLM_INLINE void  glm_vec4_sign(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_abs(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_fract(vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_floor(vec4 v, vec4 dest);
    CGLM_INLINE float glm_vec4_mods(vec4 v, float val);
    CGLM_INLINE float glm_vec4_hadd(vec4 v);
    CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
