@@ -1729,6 +1729,7 @@ TEST_LIST {
   TEST_ENTRY(glm_vec2_maxv)
   TEST_ENTRY(glm_vec2_minv)
   TEST_ENTRY(glm_vec2_clamp)
+  TEST_ENTRY(glm_vec2_abs)
   TEST_ENTRY(glm_vec2_fract)
   TEST_ENTRY(glm_vec2_lerp)
   TEST_ENTRY(glm_vec2_complex_mul)
