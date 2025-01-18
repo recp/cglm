@@ -28,35 +28,6 @@
 //////////////////////////////
 // Proposed vec4_ext functions
 
-/*!
- * @brief set all elements of dest to value
- *
- * @param[in]   vector  threshold
- * @param[in]   x       value
- */
-CGLM_INLINE
-void
-_glm_vec4_sets(vec4 v, float x) {
-  v[0] = x;
-  v[1] = x;
-  v[2] = x;
-  v[3] = x;
-}
-
-/*!
- * @brief set all elements of dest to value
- *
- * @param[in]   vector  threshold
- * @param[in]   x       value
- */
-CGLM_INLINE
-void
-_glm_vec3_sets(vec3 v, float x) {
-  v[0] = x;
-  v[1] = x;
-  v[2] = x;
-}
-
 //////////////////////////////
 // GLM noise detail functions
 
@@ -243,7 +214,7 @@ _glm_noiseDetail_i2gxyzw(
   glm_vec4_abs(gz, gza); // gza = abs(gz)
 
   // gw = 0.75 - abs(gx) - abs(gy) - abs(gz)
-  _glm_vec4_sets(gw, 0.75f); // gw = 0.75
+  glm_vec4_fill(gw, 0.75f); // gw = 0.75
   glm_vec4_sub(gw, gxa, gw); // gw -= gxa
   glm_vec4_sub(gw, gza, gw); // gw -= gza
   glm_vec4_sub(gw, gya, gw); // gw -= gya
@@ -299,7 +270,7 @@ _glm_noiseDetail_i2gxyz(
   glm_vec4_abs(gy, gya); // gya = abs(gy)
 
   // gz = vec4(0.5) - abs(gx0) - abs(gy0);
-  _glm_vec4_sets(gz, 0.5f); // gz = 0.5
+  glm_vec4_fill(gz, 0.5f); // gz = 0.5
   glm_vec4_sub(gz, gxa, gz); // gz -= gxa
   glm_vec4_sub(gz, gya, gz); // gz -= gya
 
