@@ -54,6 +54,7 @@
    CGLM_INLINE void  glm_vec2_minv(vec2 v1, vec2 v2, vec2 dest)
    CGLM_INLINE void  glm_vec2_clamp(vec2 v, float minVal, float maxVal)
    CGLM_INLINE void  glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest)
+   CGLM_INLINE void  glm_vec2_step(vec2 edge, vec2 x, vec2 dest)
    CGLM_INLINE void  glm_vec2_make(float * restrict src, vec2 dest)
    CGLM_INLINE void  glm_vec2_reflect(vec2 v, vec2 n, vec2 dest)
    CGLM_INLINE void  glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest)
@@ -699,6 +700,20 @@ glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
   glm_vec2_sub(to, from, v);
   glm_vec2_mul(s, v, v);
   glm_vec2_add(from, v, dest);
+}
+
+/*!
+ * @brief threshold function
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_step(vec2 edge, vec2 x, vec2 dest) {
+  dest[0] = glm_step(edge[0], x[0]);
+  dest[1] = glm_step(edge[1], x[1]);
 }
 
 /*!

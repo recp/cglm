@@ -207,6 +207,10 @@ glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest);
 
 CGLM_EXPORT
 void
+glmc_vec2_step(vec2 edge, vec2 x, vec2 dest);
+
+CGLM_EXPORT
+void
 glmc_vec2_steps(float edge, vec2 x, vec2 dest);
 
 CGLM_EXPORT
