@@ -980,23 +980,60 @@ TEST_IMPL(GLM_PREFIX, vec4_mixc) {
   TEST_SUCCESS
 }
 
-TEST_IMPL(GLM_PREFIX, vec4_step_uni) {
+TEST_IMPL(GLM_PREFIX, vec4_steps) {
   vec4 v1 = {-100.0f, -200.0f, -10.0f, -10.0f};
   vec4 v2;
 
-  GLM(vec4_step_uni)(-2.5f, v1, v2);
+  GLM(vec4_steps)(-2.5f, v1, v2);
   ASSERT(test_eq(v2[0], 0.0f))
   ASSERT(test_eq(v2[1], 0.0f))
   ASSERT(test_eq(v2[2], 0.0f))
   ASSERT(test_eq(v2[3], 0.0f))
   
-  GLM(vec4_step_uni)(-10.0f, v1, v2);
+  GLM(vec4_steps)(-10.0f, v1, v2);
   ASSERT(test_eq(v2[0], 0.0f))
   ASSERT(test_eq(v2[1], 0.0f))
   ASSERT(test_eq(v2[2], 1.0f))
   ASSERT(test_eq(v2[3], 1.0f))
   
-  GLM(vec4_step_uni)(-1000.0f, v1, v2);
+  GLM(vec4_steps)(-1000.0f, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_stepr) {
+  vec4 v1 = {-2.5f, -100.0f, -200.0f, -300.0f};
+  vec4 v2;
+
+  GLM(vec4_stepr)(v1, -1000.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 0.0f))
+  ASSERT(test_eq(v2[3], 0.0f))
+  
+  GLM(vec4_stepr)(v1, -250.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 0.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+  
+  GLM(vec4_stepr)(v1, -150.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(vec4_stepr)(v1, -10.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(vec4_stepr)(v1, 0.0f, v2);
   ASSERT(test_eq(v2[0], 1.0f))
   ASSERT(test_eq(v2[1], 1.0f))
   ASSERT(test_eq(v2[2], 1.0f))
