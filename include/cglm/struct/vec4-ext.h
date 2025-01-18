@@ -27,6 +27,7 @@
    CGLM_INLINE vec4s glms_vec4_abs(vec4s v);
    CGLM_INLINE vec4s glms_vec4_fract(vec4s v);
    CGLM_INLINE float glms_vec4_floor(vec4s v);
+   CGLM_INLINE float glms_vec4_mods(vec4s v, float s);
    CGLM_INLINE float glms_vec4_steps(float edge, vec4s v);
    CGLM_INLINE void  glms_vec4_stepr(vec4s edge, float v);
    CGLM_INLINE float glms_vec4_hadd(vec4s v);
