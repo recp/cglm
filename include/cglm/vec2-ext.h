@@ -21,6 +21,7 @@
    CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_abs(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_fract(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_floor(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
@@ -211,6 +212,20 @@ glm_vec2_fract(vec2 v, vec2 dest) {
   dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
 }
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_floor(vec2 x, vec2 dest) {
+    dest[0] = floorf(x[0]);
+    dest[1] = floorf(x[1]);
+}
+
 /*!
  * @brief square root of each vector item
  *
