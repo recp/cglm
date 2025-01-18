@@ -689,8 +689,8 @@ TEST_IMPL(GLM_PREFIX, vec2_abs) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec2_fract) {
-  vec3  v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
-  vec3  v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
 
   GLM(vec2_fract)(v1, v3);
   GLM(vec2_fract)(v2, v4);
@@ -702,8 +702,8 @@ TEST_IMPL(GLM_PREFIX, vec2_fract) {
 }
 
 TEST_IMPL(GLM_PREFIX, vec2_floor) {
-  vec3  v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
-  vec3  v5 = {2.0f, 3.0f}, v6 = {12.0f, 31.0f};
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {2.0f, 3.0f}, v6 = {12.0f, 31.0f};
 
   GLM(vec2_floor)(v1, v3);
   GLM(vec2_floor)(v2, v4);
