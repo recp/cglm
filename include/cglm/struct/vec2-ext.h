@@ -26,6 +26,7 @@
    CGLM_INLINE vec2s glms_vec2_abs(vec2s v)
    CGLM_INLINE vec2s glms_vec2_fract(vec2s v)
    CGLM_INLINE vec2s glms_vec2_floor(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_mods(vec2s v, float s)
    CGLM_INLINE vec2s glms_vec2_steps(float edge, vec2s v)
    CGLM_INLINE vec2s glms_vec2_stepr(vec2s edge, float v)
    CGLM_INLINE vec2s glms_vec2_sqrt(vec2s v)
