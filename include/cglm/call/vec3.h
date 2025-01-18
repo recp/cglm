@@ -55,7 +55,7 @@ glmc_vec3_norm(vec3 v);
 CGLM_EXPORT
 float
 glmc_vec3_norm2(vec3 v);
-    
+
 CGLM_EXPORT
 float
 glmc_vec3_norm_one(vec3 v);
@@ -211,15 +211,15 @@ glmc_vec3_clamp(vec3 v, float minVal, float maxVal);
 CGLM_EXPORT
 void
 glmc_vec3_ortho(vec3 v, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_lerp(vec3 from, vec3 to, float t, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest);
-    
+
 CGLM_INLINE
 void
 glmc_vec3_mix(vec3 from, vec3 to, float t, vec3 dest) {
@@ -231,27 +231,27 @@ void
 glmc_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
   glmc_vec3_lerpc(from, to, t, dest);
 }
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_step_uni(float edge, vec3 x, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_step(vec3 edge, vec3 x, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_smoothstep(vec3 edge0, vec3 edge1, vec3 x, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_smoothinterp(vec3 from, vec3 to, float t, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
@@ -265,7 +265,7 @@ glmc_vec3_mulv(vec3 a, vec3 b, vec3 d);
 CGLM_EXPORT
 void
 glmc_vec3_broadcast(float val, vec3 d);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_fill(vec3 v, float val);
@@ -313,11 +313,11 @@ glmc_vec3_isvalid(vec3 v);
 CGLM_EXPORT
 void
 glmc_vec3_sign(vec3 v, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_abs(vec3 v, vec3 dest);
-    
+
 CGLM_EXPORT
 void
 glmc_vec3_fract(vec3 v, vec3 dest);
