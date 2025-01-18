@@ -413,6 +413,18 @@ glmc_vec4_mods(vec4 v, float s, vec4 dest) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec4_steps(float edge, vec4 v, vec4 dest) {
+  glm_vec4_steps(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_stepr(vec4 edge, float v, vec4 dest) {
+  glm_vec4_stepr(edge, v, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec4_hadd(vec4 v) {
   return glm_vec4_hadd(v);
