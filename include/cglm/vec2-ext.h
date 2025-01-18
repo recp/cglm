@@ -222,8 +222,8 @@ glm_vec2_fract(vec2 v, vec2 dest) {
 CGLM_INLINE
 void
 glm_vec2_floor(vec2 x, vec2 dest) {
-    dest[0] = floorf(x[0]);
-    dest[1] = floorf(x[1]);
+  dest[0] = floorf(x[0]);
+  dest[1] = floorf(x[1]);
 }
 
 /*!

@@ -260,9 +260,9 @@ glm_vec3_fract(vec3 v, vec3 dest) {
 CGLM_INLINE
 void
 glm_vec3_floor(vec3 x, vec3 dest) {
-    dest[0] = floorf(x[0]);
-    dest[1] = floorf(x[1]);
-    dest[2] = floorf(x[2]);
+  dest[0] = floorf(x[0]);
+  dest[1] = floorf(x[1]);
+  dest[2] = floorf(x[2]);
 }
 
 /*!

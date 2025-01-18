@@ -11,17 +11,17 @@
 CGLM_EXPORT
 float
 glmc_perlin_vec4(vec4 p) {
-    return glm_perlin_vec4(p);
+  return glm_perlin_vec4(p);
 }
 
 CGLM_EXPORT
 float
 glmc_perlin_vec3(vec3 p) {
-    return glm_perlin_vec3(p);
+  return glm_perlin_vec3(p);
 }
 
 CGLM_EXPORT
 float
 glmc_perlin_vec2(vec2 p) {
-    return glm_perlin_vec2(p);
+  return glm_perlin_vec2(p);
 }
