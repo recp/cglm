@@ -199,6 +199,18 @@ glm_vec2_abs(vec2 v, vec2 dest) {
 }
 
 /*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_fract(vec2 v, vec2 dest) {
+  dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
+  dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
+}
+/*!
  * @brief square root of each vector item
  *
  * @param[in]  v    vector
