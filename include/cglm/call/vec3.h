@@ -232,9 +232,12 @@ glmc_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
   glmc_vec3_lerpc(from, to, t, dest);
 }
 
-CGLM_EXPORT
+/* DEPRECATED */
+CGLM_INLINE
 void
-glmc_vec3_step_uni(float edge, vec3 x, vec3 dest);
+glmc_vec3_step_uni(float edge, vec3 x, vec3 dest) {
+  glmc_vec3_steps(edge, x, dest);
+}
 
 CGLM_EXPORT
 void

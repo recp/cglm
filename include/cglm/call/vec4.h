@@ -205,9 +205,12 @@ glmc_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
   glmc_vec4_lerpc(from, to, t, dest);
 }
 
-CGLM_EXPORT
+/* DEPRECATED */
+CGLM_INLINE
 void
-glmc_vec4_step_uni(float edge, vec4 x, vec4 dest);
+glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
+    glmc_vec4_steps(edge, x, dest);
+}
 
 CGLM_EXPORT
 void

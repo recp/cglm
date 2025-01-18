@@ -268,12 +268,6 @@ glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
-  glm_vec4_step_uni(edge, x, dest);
-}
-
-CGLM_EXPORT
-void
 glmc_vec4_step(vec4 edge, vec4 x, vec4 dest) {
   glm_vec4_step(edge, x, dest);
 }

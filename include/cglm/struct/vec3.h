@@ -68,7 +68,6 @@
    CGLM_INLINE vec3s glms_vec3_lerpc(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_mix(vec3s from, vec3s to, float t);
    CGLM_INLINE vec3s glms_vec3_mixc(vec3s from, vec3s to, float t);
-   CGLM_INLINE vec3s glms_vec3_step_uni(float edge, vec3s x);
    CGLM_INLINE vec3s glms_vec3_step(vec3s edge, vec3s x);
    CGLM_INLINE vec3s glms_vec3_smoothstep_uni(float edge0, float edge1, vec3s x);
    CGLM_INLINE vec3s glms_vec3_smoothstep(vec3s edge0, vec3s edge1, vec3s x);
@@ -84,6 +83,9 @@
    CGLM_INLINE vec3s glms_cross(vec3s a, vec3s b);
    CGLM_INLINE float glms_dot(vec3s a, vec3s b);
    CGLM_INLINE vec3s glms_normalize(vec3s v);
+
+ Deprecated:
+   glms_vec3_step_uni  -->  use glms_vec3_steps
  */
 
 #ifndef cglms_vec3s_h
@@ -94,6 +96,9 @@
 #include "../util.h"
 #include "../vec3.h"
 #include "vec3-ext.h"
+
+/* DEPRECATED! */
+#define glms_vec3_step_uni(edge, x) glms_vec3_steps(edge, x)
 
 #define GLMS_VEC3_ONE_INIT   {GLM_VEC3_ONE_INIT}
 #define GLMS_VEC3_ZERO_INIT  {GLM_VEC3_ZERO_INIT}
@@ -907,21 +912,6 @@ vec3s
 glms_vec3_(mixc)(vec3s from, vec3s to, float t) {
   vec3s r;
   glm_vec3_mixc(from.raw, to.raw, t, r.raw);
-  return r;
-}
-
-/*!
- * @brief threshold function (unidimensional)
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @returns             0.0 if x < edge, else 1.0
- */
-CGLM_INLINE
-vec3s
-glms_vec3_(step_uni)(float edge, vec3s x) {
-  vec3s r;
-  glm_vec3_step_uni(edge, x.raw, r.raw);
   return r;
 }
 
