@@ -23,6 +23,15 @@ Functions:
 #. :c:func:`glm_vec4_eqv_eps`
 #. :c:func:`glm_vec4_max`
 #. :c:func:`glm_vec4_min`
+#. :c:func:`glm_vec4_isnan`
+#. :c:func:`glm_vec4_isinf`
+#. :c:func:`glm_vec4_isvalid`
+#. :c:func:`glm_vec4_sign`
+#. :c:func:`glm_vec4_abs`
+#. :c:func:`glm_vec4_fract`
+#. :c:func:`glm_vec4_floor`
+#. :c:func:`glm_vec4_sqrt`
+
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,6 +137,30 @@ Functions documentation
     Parameters:
       | *[in]*   **v**     vector
       | *[out]*  **dest**  sign vector (only keeps signs as -1, 0, -1)
+
+.. c:function:: void glm_vec4_abs(vec4 v, vec4 dest)
+
+    absolute value of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector (abs(v))
+
+.. c:function:: void glm_vec4_fract(vec4 v, vec4 dest)
+
+    fractional part of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector (fract(v))
+
+.. c:function:: void glm_vec4_floor(vec4 v, vec4 dest)
+    
+    floor of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector (floor(v))
 
 .. c:function:: void glm_vec4_sqrt(vec4 v, vec4 dest)
 
