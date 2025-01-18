@@ -26,6 +26,7 @@
    CGLM_INLINE void  glm_vec4_sign(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_abs(vec4 v, vec4 dest);
    CGLM_INLINE void  glm_vec4_fract(vec4 v, vec4 dest);
+   CGLM_INLINE float glm_vec4_mods(vec4 v, float val);
    CGLM_INLINE float glm_vec4_hadd(vec4 v);
    CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
  */
@@ -301,6 +302,22 @@ glm_vec4_floor(vec4 x, vec4 dest) {
   dest[1] = floorf(x[1]);
   dest[2] = floorf(x[2]);
   dest[3] = floorf(x[3]);
+}
+
+/*!
+ * @brief mod of each vector item, result is written to dest (dest = v % s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec4_mods(vec4 x, float y, vec4 dest) {
+  dest[0] = fmodf(x[0], y);
+  dest[1] = fmodf(x[1], y);
+  dest[2] = fmodf(x[2], y);
+  dest[3] = fmodf(x[3], y);
 }
 
 /*!

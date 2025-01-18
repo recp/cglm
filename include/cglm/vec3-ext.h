@@ -27,6 +27,7 @@
    CGLM_INLINE void  glm_vec3_abs(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_fract(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_floor(vec3 v, vec3 dest);
+   CGLM_INLINE float glm_vec3_mods(vec3 v, float s, vec3 dest);
    CGLM_INLINE float glm_vec3_hadd(vec3 v);
    CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
@@ -263,6 +264,21 @@ glm_vec3_floor(vec3 x, vec3 dest) {
   dest[0] = floorf(x[0]);
   dest[1] = floorf(x[1]);
   dest[2] = floorf(x[2]);
+}
+
+/*!
+ * @brief mod of each vector item, result is written to dest (dest = v % s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_mods(vec3 x, float y, vec3 dest) {
+  dest[0] = fmodf(x[0], y);
+  dest[1] = fmodf(x[1], y);
+  dest[2] = fmodf(x[2], y);
 }
 
 /*!

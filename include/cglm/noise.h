@@ -29,38 +29,6 @@
 // Proposed vec4_ext functions
 
 /*!
- * @brief mod v by a scalar, result is written to dest (dest = v % s)
- *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec4_mods(vec4 x, float y, vec4 dest) {
-  dest[0] = fmodf(x[0], y);
-  dest[1] = fmodf(x[1], y);
-  dest[2] = fmodf(x[2], y);
-  dest[3] = fmodf(x[3], y);
-}
-
-/*!
- * @brief mod v by a scalar, result is written to dest (dest = v % s)
- *
- * @param[in]  v    vector
- * @param[in]  s    scalar
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec3_mods(vec3 x, float y, vec3 dest) {
-  dest[0] = fmodf(x[0], y);
-  dest[1] = fmodf(x[1], y);
-  dest[2] = fmodf(x[2], y);
-}
-
-
-/*!
  * @brief threshold function with scalar
  *
  * @param[in]   edge    threshold
@@ -440,8 +408,8 @@ glm_perlin_vec4(vec4 point) {
   vec4 Pi1;
   glm_vec4_adds(Pi0, 1.0f, Pi1); // Pi1 = Pi0 + 1.0f;
 
-  _glm_vec4_mods(Pi0, 289.0f, Pi0); // Pi0 = mod(Pi0, 289.0f);
-  _glm_vec4_mods(Pi1, 289.0f, Pi1); // Pi1 = mod(Pi1, 289.0f);
+  glm_vec4_mods(Pi0, 289.0f, Pi0); // Pi0 = mod(Pi0, 289.0f);
+  glm_vec4_mods(Pi1, 289.0f, Pi1); // Pi1 = mod(Pi1, 289.0f);
 
   // Fractional part of p for interpolation
   vec4 Pf0;
@@ -650,8 +618,8 @@ glm_perlin_vec3(vec3 point) {
   vec3 Pi1;
   glm_vec3_adds(Pi0, 1.0f, Pi1); // Pi1 = Pi0 + 1.0f;
 
-  _glm_vec3_mods(Pi0, 289.0f, Pi0); // Pi0 = mod(Pi0, 289.0f);
-  _glm_vec3_mods(Pi1, 289.0f, Pi1); // Pi1 = mod(Pi1, 289.0f);
+  glm_vec3_mods(Pi0, 289.0f, Pi0); // Pi0 = mod(Pi0, 289.0f);
+  glm_vec3_mods(Pi1, 289.0f, Pi1); // Pi1 = mod(Pi1, 289.0f);
 
   // Fractional part of p for interpolation
   vec3 Pf0;
@@ -785,7 +753,7 @@ glm_perlin_vec2(vec2 point) {
   Pf[3] -= 1.0f; // Pf.w -= 1.0
 
   // Mod to avoid truncation effects in permutation
-  _glm_vec4_mods(Pi, 289.0f, Pi); // Pi = mod(Pi, 289.0f);
+  glm_vec4_mods(Pi, 289.0f, Pi); // Pi = mod(Pi, 289.0f);
 
   vec4 ix = {Pi[0], Pi[2], Pi[0], Pi[2]}; // ix = vec4(Pi.x, Pi.z, Pi.x, Pi.z)
   vec4 iy = {Pi[1], Pi[1], Pi[3], Pi[3]}; // iy = vec4(Pi.y, Pi.y, Pi.w, Pi.w)
