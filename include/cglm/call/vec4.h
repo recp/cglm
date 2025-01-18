@@ -236,6 +236,10 @@ CGLM_EXPORT
 void
 glmc_vec4_cubic(float s, vec4 dest);
 
+CGLM_EXPORT
+void
+glmc_vec4_swizzle(vec4 v, int mask, vec4 dest);
+
 /* ext */
 
 CGLM_EXPORT

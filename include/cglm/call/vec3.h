@@ -259,6 +259,10 @@ CGLM_EXPORT
 void
 glmc_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest);
 
+CGLM_EXPORT
+void
+glmc_vec3_swizzle(vec3 v, int mask, vec3 dest);
+
 /* ext */
 
 CGLM_EXPORT

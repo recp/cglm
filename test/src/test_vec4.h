@@ -1221,10 +1221,10 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_WZYX, v);
+  GLM(vec4_swizzle)(v, GLM_WZYX, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 3, 2, 1}))
   
-  glm_vec4_swizzle(v, GLM_XXXX, v);
+  GLM(vec4_swizzle)(v, GLM_XXXX, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 4, 4, 4}))
   
   v[0] = 1;
@@ -1232,7 +1232,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_YYYY, v);
+  GLM(vec4_swizzle)(v, GLM_YYYY, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){2, 2, 2, 2}))
   
   v[0] = 1;
@@ -1240,7 +1240,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_ZZZZ, v);
+  GLM(vec4_swizzle)(v, GLM_ZZZZ, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){3, 3, 3, 3}))
   
   v[0] = 1;
@@ -1248,7 +1248,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_WWWW, v);
+  GLM(vec4_swizzle)(v, GLM_WWWW, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 4, 4, 4}))
 
   TEST_SUCCESS
