@@ -278,6 +278,13 @@ void
 glmc_vec2_fract(vec2 v, vec2 dest) {
   glm_vec2_fract(v, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec2_floor(vec2 v, vec2 dest) {
+  glm_vec2_floor(v, dest);
+}
+
 CGLM_EXPORT
 void
 glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
