@@ -26,6 +26,7 @@
    CGLM_INLINE vec4s glms_vec4_sign(vec4s v);
    CGLM_INLINE vec4s glms_vec4_abs(vec4s v);
    CGLM_INLINE vec4s glms_vec4_fract(vec4s v);
+   CGLM_INLINE float glms_vec4_floor(vec4s v);
    CGLM_INLINE float glms_vec4_hadd(vec4s v);
    CGLM_INLINE vec4s glms_vec4_sqrt(vec4s v);
  */
@@ -227,6 +228,20 @@ vec4s
 glms_vec4_(fract)(vec4s v) {
   vec4s r;
   glm_vec4_fract(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns          dest destination vector
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(floor)(vec4s v) {
+  vec4s r;
+  glm_vec4_floor(v.raw, r.raw);
   return r;
 }
 

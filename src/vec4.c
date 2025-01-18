@@ -407,6 +407,12 @@ glmc_vec4_fract(vec4 v, vec4 dest) {
 }
 
 CGLM_EXPORT
+void
+glmc_vec4_floor(vec4 v, vec4 dest) {
+  glm_vec4_floor(v, dest);
+}
+
+CGLM_EXPORT
 float
 glmc_vec4_hadd(vec4 v) {
   return glm_vec4_hadd(v);
