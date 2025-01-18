@@ -273,7 +273,7 @@ _glm_noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) {
  */
 CGLM_INLINE
 void
-_glm_noiseDetail_gradNorm_vec2(vec3 g00, vec3 g01, vec3 g10, vec3 g11) {
+_glm_noiseDetail_gradNorm_vec2(vec2 g00, vec2 g01, vec2 g10, vec2 g11) {
 
     // norm = taylorInvSqrt(vec4(
     //     dot(g00, g00), 
@@ -288,10 +288,10 @@ _glm_noiseDetail_gradNorm_vec2(vec3 g00, vec3 g01, vec3 g10, vec3 g11) {
     norm[3] = glm_vec2_dot(g11, g11); // norm.w = dot(g11, g11)
     _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
     
-    glm_vec3_scale(g00, norm[0], g00); // g00 *= norm.x
-    glm_vec3_scale(g01, norm[1], g01); // g01 *= norm.y
-    glm_vec3_scale(g10, norm[2], g10); // g10 *= norm.z
-    glm_vec3_scale(g11, norm[3], g11); // g11 *= norm.w
+    glm_vec2_scale(g00, norm[0], g00); // g00 *= norm.x
+    glm_vec2_scale(g01, norm[1], g01); // g01 *= norm.y
+    glm_vec2_scale(g10, norm[2], g10); // g10 *= norm.z
+    glm_vec2_scale(g11, norm[3], g11); // g11 *= norm.w
 }
 
 
