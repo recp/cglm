@@ -27,6 +27,8 @@ Functions:
 #. :c:func:`glm_vec2_isvalid`
 #. :c:func:`glm_vec2_sign`
 #. :c:func:`glm_vec2_abs`
+#. :c:func:`glm_vec2_fract`
+#. :c:func:`glm_vec2_floor`
 #. :c:func:`glm_vec2_sqrt`
 
 Functions documentation
@@ -129,6 +131,22 @@ Functions documentation
 .. c:function:: void glm_vec2_abs(vec2 v, vec2 dest)
 
     absolute value of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector
+
+.. c:function:: void glm_vec2_fract(vec2 v, vec2 dest)
+    
+    get fractional part of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector
+
+.. c:function:: void glm_vec2_floor(vec2 v, vec2 dest)
+
+    floor value of each vector item
 
     Parameters:
       | *[in]*   **v**     vector
