@@ -53,6 +53,7 @@
    CGLM_INLINE void  glm_vec2_maxv(vec2 v1, vec2 v2, vec2 dest)
    CGLM_INLINE void  glm_vec2_minv(vec2 v1, vec2 v2, vec2 dest)
    CGLM_INLINE void  glm_vec2_clamp(vec2 v, float minVal, float maxVal)
+   CGLM_INLINE void  glm_vec2_swizzle(vec2 v, int mask, vec2 dest)
    CGLM_INLINE void  glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest)
    CGLM_INLINE void  glm_vec2_step(vec2 edge, vec2 x, vec2 dest)
    CGLM_INLINE void  glm_vec2_make(float * restrict src, vec2 dest)
@@ -678,6 +679,24 @@ void
 glm_vec2_clamp(vec2 v, float minval, float maxval) {
   v[0] = glm_clamp(v[0], minval, maxval);
   v[1] = glm_clamp(v[1], minval, maxval);
+}
+
+/*!
+ * @brief swizzle vector components
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec2_swizzle(vec2 v, int mask, vec2 dest) {
+  vec2 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+
+  glm_vec2_copy(t, dest);
 }
 
 /*!

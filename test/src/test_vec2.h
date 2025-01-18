@@ -737,6 +737,21 @@ TEST_IMPL(GLM_PREFIX, vec2_mods) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_swizzle) {
+  vec2 v;
+
+  v[0] = 1;
+  v[1] = 2;
+  
+  GLM(vec2_swizzle)(v, GLM_SHUFFLE2(1, 0), v);
+  ASSERTIFY(test_assert_vec2_eq(v, (vec2){2, 1}))
+  
+  GLM(vec2_swizzle)(v, GLM_SHUFFLE2(0, 0), v);
+  ASSERTIFY(test_assert_vec2_eq(v, (vec2){1, 1}))
+  
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec2_lerp) {
   vec2 v1 = {-100.0f, -200.0f};
   vec2 v2 = {100.0f, 200.0f};

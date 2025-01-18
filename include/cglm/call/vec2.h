@@ -203,6 +203,10 @@ glmc_vec2_mods(vec2 v, float s, vec2 dest);
 
 CGLM_EXPORT
 void
+glmc_vec2_swizzle(vec2 v, int mask, vec2 dest);
+
+CGLM_EXPORT
+void
 glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest);
 
 CGLM_EXPORT

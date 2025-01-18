@@ -308,6 +308,13 @@ void
 glmc_vec2_stepr(vec2 edge, float v, vec2 dest) {
   glm_vec2_stepr(edge, v, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec2_swizzle(vec2 v, int mask, vec2 dest) {
+  glm_vec2_swizzle(v, mask, dest);
+}
+
 CGLM_EXPORT
 void
 glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
