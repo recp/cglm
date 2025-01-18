@@ -25,311 +25,227 @@
 #include "vec2.h"
 #include "vec2-ext.h"
 
-//////////////////////////////
-// Proposed vec4_ext functions
+#define _glm_noiseDetail_mod289(x) (x - floorf(x * (1.0f / 289.0f)) * 289.0f)
 
-//////////////////////////////
-// GLM noise detail functions
-
-CGLM_INLINE
-float
-_glm_noiseDetail_mod289(float x) {
-  return x - floorf(x * (1.0f / 289.0f)) * 289.0f;
+/* _glm_noiseDetail_permute(vec4 x, vec4 dest) */
+#define _glm_noiseDetail_permute(x, dest) { \
+  dest[0] = _glm_noiseDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]); \
+  dest[1] = _glm_noiseDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]); \
+  dest[2] = _glm_noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]); \
+  dest[3] = _glm_noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]); \
 }
 
-CGLM_INLINE
-void
-_glm_noiseDetail_permute(vec4 x, vec4 dest) {
-  dest[0] = _glm_noiseDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]);
-  dest[1] = _glm_noiseDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]);
-  dest[2] = _glm_noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]);
-  dest[3] = _glm_noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]);
+/* _glm_noiseDetail_fade_vec4(vec4 t, vec4 dest) */
+#define _glm_noiseDetail_fade_vec4(t, dest) { \
+  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
+  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
+  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
+  dest[3] = (t[3] * t[3] * t[3]) * (t[3] * (t[3] * 6.0f - 15.0f) + 10.0f); \
 }
 
-CGLM_INLINE
-void
-_glm_noiseDetail_fade_vec4(vec4 t, vec4 dest) {
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f);
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f);
-  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f);
-  dest[3] = (t[3] * t[3] * t[3]) * (t[3] * (t[3] * 6.0f - 15.0f) + 10.0f);
+/* _glm_noiseDetail_fade_vec3(vec3 t, vec3 dest) */
+#define _glm_noiseDetail_fade_vec3(t, dest) { \
+  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
+  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
+  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
 }
 
-CGLM_INLINE
-void
-_glm_noiseDetail_fade_vec3(vec3 t, vec3 dest) {
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f);
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f);
-  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f);
+/* _glm_noiseDetail_fade_vec2(vec2 t, vec2 dest) */
+#define _glm_noiseDetail_fade_vec2(t, dest) { \
+  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
+  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
 }
 
-CGLM_INLINE
-void
-_glm_noiseDetail_fade_vec2(vec2 t, vec2 dest) {
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f);
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f);
+/* _glm_noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) */
+#define _glm_noiseDetail_taylorInvSqrt(x, dest) { \
+  dest[0] = 1.79284291400159f - 0.85373472095314f * x[0]; \
+  dest[1] = 1.79284291400159f - 0.85373472095314f * x[1]; \
+  dest[2] = 1.79284291400159f - 0.85373472095314f * x[2]; \
+  dest[3] = 1.79284291400159f - 0.85373472095314f * x[3]; \
 }
 
-CGLM_INLINE
-void
-_glm_noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) {
-  dest[0] = 1.79284291400159f - 0.85373472095314f * x[0];
-  dest[1] = 1.79284291400159f - 0.85373472095314f * x[1];
-  dest[2] = 1.79284291400159f - 0.85373472095314f * x[2];
-  dest[3] = 1.79284291400159f - 0.85373472095314f * x[3];
+/* norm = taylorInvSqrt(vec4(
+ *     dot(g00__, g00__),
+ *     dot(g01__, g01__),
+ *     dot(g10__, g10__),
+ *     dot(g11__, g11__)
+ * ));
+*/
+
+/* _glm_noiseDetail_gradNorm_vec4(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) */
+#define _glm_noiseDetail_gradNorm_vec4(g00__, g01__, g10__, g11__) {           \
+  vec4 norm;                                                                   \
+  norm[0] = glm_vec4_dot(g00__, g00__); /* norm.x = dot(g00__, g00__) */       \
+  norm[1] = glm_vec4_dot(g01__, g01__); /* norm.y = dot(g01__, g01__) */       \
+  norm[2] = glm_vec4_dot(g10__, g10__); /* norm.z = dot(g10__, g10__) */       \
+  norm[3] = glm_vec4_dot(g11__, g11__); /* norm.w = dot(g11__, g11__) */       \
+  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+                                                                               \
+  glm_vec4_scale(g00__, norm[0], g00__); /* g00__ *= norm.x */                 \
+  glm_vec4_scale(g01__, norm[1], g01__); /* g01__ *= norm.y */                 \
+  glm_vec4_scale(g10__, norm[2], g10__); /* g10__ *= norm.z */                 \
+  glm_vec4_scale(g11__, norm[3], g11__); /* g11__ *= norm.w */                 \
 }
 
-/*!
- * @brief Normalize 4D gradients inplace
- *
- * @param[in, out]  g00__ gradient from point 00
- * @param[in, out]  g01__ gradient from point 01
- * @param[in, out]  g10__ gradient from point 10
- * @param[in, out]  g11__ gradient from point 11
+/* _glm_noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) */
+#define _glm_noiseDetail_gradNorm_vec3(g00_, g01_, g10_, g11_) {               \
+  vec4 norm;                                                                   \
+  norm[0] = glm_vec3_dot(g00_, g00_); /* norm.x = dot(g00_, g00_) */           \
+  norm[1] = glm_vec3_dot(g01_, g01_); /* norm.y = dot(g01_, g01_) */           \
+  norm[2] = glm_vec3_dot(g10_, g10_); /* norm.z = dot(g10_, g10_) */           \
+  norm[3] = glm_vec3_dot(g11_, g11_); /* norm.w = dot(g11_, g11_) */           \
+  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+                                                                               \
+  glm_vec3_scale(g00_, norm[0], g00_); /* g00_ *= norm.x */                    \
+  glm_vec3_scale(g01_, norm[1], g01_); /* g01_ *= norm.y */                    \
+  glm_vec3_scale(g10_, norm[2], g10_); /* g10_ *= norm.z */                    \
+  glm_vec3_scale(g11_, norm[3], g11_); /* g11_ *= norm.w */                    \
+}
+
+/* _glm_noiseDetail_gradNorm_vec2(vec2 g00, vec2 g01, vec2 g10, vec2 g11) */
+#define _glm_noiseDetail_gradNorm_vec2(g00, g01, g10, g11) {                   \
+  vec4 norm;                                                                   \
+  norm[0] = glm_vec2_dot(g00, g00); /* norm.x = dot(g00, g00) */               \
+  norm[1] = glm_vec2_dot(g01, g01); /* norm.y = dot(g01, g01) */               \
+  norm[2] = glm_vec2_dot(g10, g10); /* norm.z = dot(g10, g10) */               \
+  norm[3] = glm_vec2_dot(g11, g11); /* norm.w = dot(g11, g11) */               \
+  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+                                                                               \
+  glm_vec2_scale(g00, norm[0], g00); /* g00 *= norm.x */                       \
+  glm_vec2_scale(g01, norm[1], g01); /* g01 *= norm.y */                       \
+  glm_vec2_scale(g10, norm[2], g10); /* g10 *= norm.z */                       \
+  glm_vec2_scale(g11, norm[3], g11); /* g11 *= norm.w */                       \
+}
+
+/* _glm_noiseDetail_i2gxyzw(vec4 ixy, vec4 gx, vec4 gy, vec4 gz, vec4 gw) */
+#define _glm_noiseDetail_i2gxyzw(ixy, gx, gy, gz, gw) {      \
+  /* gx = ixy / 7.0 */                                       \
+  glm_vec4_divs(ixy, 7.0f, gx); /* gx = ixy / 7.0 */         \
+                                                             \
+  /* gy = fract(gx) / 7.0 */                                 \
+  glm_vec4_floor(gx, gy); /* gy = floor(gx) */               \
+  glm_vec4_divs(gy, 7.0f, gy); /* gy /= 7.0 */               \
+                                                             \
+  /* gz = floor(gy) / 6.0 */                                 \
+  glm_vec4_floor(gy, gz); /* gz = floor(gy) */               \
+  glm_vec4_divs(gz, 6.0f, gz); /* gz /= 6.0 */               \
+                                                             \
+  /* gx = fract(gx) - 0.5f */                                \
+  glm_vec4_fract(gx, gx); /* gx = fract(gx) */               \
+  glm_vec4_subs(gx, 0.5f, gx); /* gx -= 0.5f */              \
+                                                             \
+  /* gy = fract(gy) - 0.5f */                                \
+  glm_vec4_fract(gy, gy); /* gy = fract(gy) */               \
+  glm_vec4_subs(gy, 0.5f, gy); /* gy -= 0.5f */              \
+                                                             \
+  /* gz = fract(gz) - 0.5f */                                \
+  glm_vec4_fract(gz, gz); /* gz = fract(gz) */               \
+  glm_vec4_subs(gz, 0.5f, gz); /* gz -= 0.5f */              \
+                                                             \
+  /* abs(gx), abs(gy), abs(gz) */                            \
+  vec4 gxa, gya, gza;                                        \
+  glm_vec4_abs(gx, gxa); /* gxa = abs(gx) */                 \
+  glm_vec4_abs(gy, gya); /* gya = abs(gy) */                 \
+  glm_vec4_abs(gz, gza); /* gza = abs(gz) */                 \
+                                                             \
+  /* gw = 0.75 - abs(gx) - abs(gy) - abs(gz) */              \
+  glm_vec4_fill(gw, 0.75f); /* gw = 0.75 */                  \
+  glm_vec4_sub(gw, gxa, gw); /* gw -= gxa */                 \
+  glm_vec4_sub(gw, gza, gw); /* gw -= gza */                 \
+  glm_vec4_sub(gw, gya, gw); /* gw -= gya */                 \
+                                                             \
+  /* sw = step(gw, 0.0); */                                  \
+  vec4 sw;                                                   \
+  glm_vec4_stepr(gw, 0.0f, sw); /* sw = step(gw, 0.0) */     \
+                                                             \
+  /* gx -= sw * (step(vec4(0), gx) - T(0.5)); */             \
+  vec4 temp = {0.0f}; /* temp = 0.0 */                       \
+  glm_vec4_step(temp, gx, temp); /* temp = step(temp, gx) */ \
+  glm_vec4_subs(temp, 0.5f, temp); /* temp -= 0.5 */         \
+  glm_vec4_mul(sw, temp, temp); /* temp *= sw */             \
+  glm_vec4_sub(gx, temp, gx); /* gx -= temp */               \
+                                                             \
+  /* gy -= sw * (step(vec4(0), gy) - T(0.5)); */             \
+  glm_vec4_zero(temp); /* reset temp */                      \
+  glm_vec4_step(temp, gy, temp); /* temp = step(temp, gy) */ \
+  glm_vec4_subs(temp, 0.5f, temp); /* temp -= 0.5 */         \
+  glm_vec4_mul(sw, temp, temp); /* temp *= sw */             \
+  glm_vec4_sub(gy, temp, gy); /* gy -= temp */               \
+}
+
+/* NOTE: This function is not *quite* analogous to _glm_noiseDetail_i2gxyzw
+ * to try to match the output of glm::perlin. I think it might be a bug in
+ * in the original implementation, but for now I'm keeping it consistent. -MK
  */
-CGLM_INLINE
-void
-_glm_noiseDetail_gradNorm_vec4(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) {
 
-  // norm = taylorInvSqrt(vec4(
-  //     dot(g00__, g00__),
-  //     dot(g01__, g01__),
-  //     dot(g10__, g10__),
-  //     dot(g11__, g11__)
-  // ));
-  vec4 norm;
-  norm[0] = glm_vec4_dot(g00__, g00__); // norm.x = dot(g00__, g00__)
-  norm[1] = glm_vec4_dot(g01__, g01__); // norm.y = dot(g01__, g01__)
-  norm[2] = glm_vec4_dot(g10__, g10__); // norm.z = dot(g10__, g10__)
-  norm[3] = glm_vec4_dot(g11__, g11__); // norm.w = dot(g11__, g11__)
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
-  
-  glm_vec4_scale(g00__, norm[0], g00__); // g00__ *= norm.x
-  glm_vec4_scale(g01__, norm[1], g01__); // g01__ *= norm.y
-  glm_vec4_scale(g10__, norm[2], g10__); // g10__ *= norm.z
-  glm_vec4_scale(g11__, norm[3], g11__); // g11__ *= norm.w
+// _glm_noiseDetail_i2gxyz(vec4 i, vec4 gx, vec4 gy, vec4 gz)
+#define _glm_noiseDetail_i2gxyz(ixy, gx, gy, gz) {               \
+  /* gx = ixy / 7.0 */                                           \
+  glm_vec4_divs(ixy, 7.0f, gx); /* gx = ixy / 7.0 */             \
+                                                                 \
+  /* gy = fract(floor(gx0) / 7.0)) - 0.5; */                     \
+  glm_vec4_floor(gx, gy); /* gy = floor(gx) */                   \
+  glm_vec4_divs(gy, 7.0f, gy); /* gy /= 7.0 */                   \
+  glm_vec4_fract(gy, gy); /* gy = fract(gy) */                   \
+  glm_vec4_subs(gy, 0.5f, gy); /* gy -= 0.5f */                  \
+                                                                 \
+  /* gx = fract(gx); */                                          \
+  glm_vec4_fract(gx, gx); /* gx = fract(gx) */                   \
+                                                                 \
+  /* abs(gx), abs(gy) */                                         \
+  vec4 gxa, gya;                                                 \
+  glm_vec4_abs(gx, gxa); /* gxa = abs(gx) */                     \
+  glm_vec4_abs(gy, gya); /* gya = abs(gy) */                     \
+                                                                 \
+  /* gz = vec4(0.5) - abs(gx0) - abs(gy0); */                    \
+  glm_vec4_fill(gz, 0.5f); /* gz = 0.5 */                        \
+  glm_vec4_sub(gz, gxa, gz); /* gz -= gxa */                     \
+  glm_vec4_sub(gz, gya, gz); /* gz -= gya */                     \
+                                                                 \
+  /* sz = step(gw, 0.0); */                                      \
+  vec4 sz;                                                       \
+  glm_vec4_stepr(gz, 0.0f, sz); /* sz = step(gz, 0.0) */         \
+                                                                 \
+  /* gx0 -= sz0 * (step(0.0, gx0) - T(0.5)); */                  \
+  vec4 temp = {0.0f}; /* temp = 0.0 */                           \
+  glm_vec4_step(temp, gx, temp); /* temp = step(temp, gx) */     \
+  glm_vec4_subs(temp, 0.5f, temp); /* temp -= 0.5 */             \
+  glm_vec4_mul(sz, temp, temp); /* temp *= sz */                 \
+  glm_vec4_sub(gx, temp, gx); /* gx -= temp */                   \
+                                                                 \
+  /* gy0 -= sz0 * (step(0.0, gy0) - T(0.5)); */                  \
+  glm_vec4_zero(temp); /* reset temp */                          \
+  glm_vec4_step(temp, gy, temp); /* temp = step(temp, gy) */     \
+  glm_vec4_subs(temp, 0.5f, temp); /* temp -= 0.5 */             \
+  glm_vec4_mul(sz, temp, temp); /* temp *= sz */                 \
+  glm_vec4_sub(gy, temp, gy); /* gy -= temp */                   \
 }
 
+/* _glm_noiseDetail_i2gxy(vec4 i, vec4 gx, vec4 gy) */
+#define _glm_noiseDetail_i2gxy(i, gx, gy) {                      \
+  /* gx = 2.0 * fract(i / 41.0) - 1.0; */                        \
+  glm_vec4_divs(i, 41.0f, gx); /* gx = i / 41.0 */               \
+  glm_vec4_fract(gx, gx); /* gx = fract(gx) */                   \
+  glm_vec4_scale(gx, 2.0f, gx); /* gx *= 2.0 */                  \
+  glm_vec4_subs(gx, 1.0f, gx); /* gx -= 1.0 */                   \
+                                                                 \
+  /* gy = abs(gx) - 0.5; */                                      \
+  glm_vec4_abs(gx, gy); /* gy = abs(gx) */                       \
+  glm_vec4_subs(gy, 0.5f, gy); /* gy -= 0.5 */                   \
+                                                                 \
+  /* tx = floor(gx + 0.5); */                                    \
+  vec4 tx;                                                       \
+  glm_vec4_adds(gx, 0.5f, tx); /* tx = gx + 0.5 */               \
+  glm_vec4_floor(tx, tx); /* tx = floor(tx) */                   \
+                                                                 \
+  /* gx = gx - tx; */                                            \
+  glm_vec4_sub(gx, tx, gx); /* gx -= tx */                       \
+}
 
-/*!
- * @brief Normalize 3D gradients inplace
- *
- * @param[in, out]  g00_ gradient from point 00
- * @param[in, out]  g01_ gradient from point 01
- * @param[in, out]  g10_ gradient from point 10
- * @param[in, out]  g11_ gradient from point 11
+/* ============================================================================
+ * Classic perlin noise
+ * ============================================================================
  */
-CGLM_INLINE
-void
-_glm_noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) {
-
-  // norm = taylorInvSqrt(vec4(
-  //     dot(g00_, g00_), 
-  //     dot(g01_, g01_), 
-  //     dot(g10_, g10_), 
-  //     dot(g11_, g11_)
-  // ));
-  vec4 norm;
-  norm[0] = glm_vec3_dot(g00_, g00_); // norm.x = dot(g00_, g00_)
-  norm[1] = glm_vec3_dot(g01_, g01_); // norm.y = dot(g01_, g01_)
-  norm[2] = glm_vec3_dot(g10_, g10_); // norm.z = dot(g10_, g10_)
-  norm[3] = glm_vec3_dot(g11_, g11_); // norm.w = dot(g11_, g11_)
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
-  
-  glm_vec3_scale(g00_, norm[0], g00_); // g00_ *= norm.x
-  glm_vec3_scale(g01_, norm[1], g01_); // g01_ *= norm.y
-  glm_vec3_scale(g10_, norm[2], g10_); // g10_ *= norm.z
-  glm_vec3_scale(g11_, norm[3], g11_); // g11_ *= norm.w
-}
-
-/*!
- * @brief Normalize 2D gradients inplace
- *
- * @param[in, out]  g00 gradient from point 00
- * @param[in, out]  g01 gradient from point 01
- * @param[in, out]  g10 gradient from point 10
- * @param[in, out]  g11 gradient from point 11
- */
-CGLM_INLINE
-void
-_glm_noiseDetail_gradNorm_vec2(vec2 g00, vec2 g01, vec2 g10, vec2 g11) {
-
-  // norm = taylorInvSqrt(vec4(
-  //     dot(g00, g00), 
-  //     dot(g01, g01), 
-  //     dot(g10, g10), 
-  //     dot(g11, g11)
-  // ));
-  vec4 norm;
-  norm[0] = glm_vec2_dot(g00, g00); // norm.x = dot(g00, g00)
-  norm[1] = glm_vec2_dot(g01, g01); // norm.y = dot(g01, g01)
-  norm[2] = glm_vec2_dot(g10, g10); // norm.z = dot(g10, g10)
-  norm[3] = glm_vec2_dot(g11, g11); // norm.w = dot(g11, g11)
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); // norm = taylorInvSqrt(norm)
-  
-  glm_vec2_scale(g00, norm[0], g00); // g00 *= norm.x
-  glm_vec2_scale(g01, norm[1], g01); // g01 *= norm.y
-  glm_vec2_scale(g10, norm[2], g10); // g10 *= norm.z
-  glm_vec2_scale(g11, norm[3], g11); // g11 *= norm.w
-}
-
-
-CGLM_INLINE
-void
-_glm_noiseDetail_i2gxyzw(
-  vec4 ixy,
-  /* out */
-  vec4 gx,
-  vec4 gy,
-  vec4 gz,
-  vec4 gw
-) {
-  // gx = ixy / 7.0
-  glm_vec4_divs(ixy, 7.0f, gx); // gx = ixy / 7.0
-
-  // gy = fract(gx) / 7.0
-  glm_vec4_floor(gx, gy); // gy = floor(gx)
-  glm_vec4_divs(gy, 7.0f, gy); // gy /= 7.0
-
-  // gz = floor(gy) / 6.0
-  glm_vec4_floor(gy, gz); // gz = floor(gy)
-  glm_vec4_divs(gz, 6.0f, gz); // gz /= 6.0
-
-  // gx = fract(gx) - 0.5f
-  glm_vec4_fract(gx, gx); // gx = fract(gx)
-  glm_vec4_subs(gx, 0.5f, gx); // gx -= 0.5f
-
-  // gy = fract(gy) - 0.5f
-  glm_vec4_fract(gy, gy); // gy = fract(gy)
-  glm_vec4_subs(gy, 0.5f, gy); // gy -= 0.5f
-
-  // gz = fract(gz) - 0.5f
-  glm_vec4_fract(gz, gz); // gz = fract(gz)
-  glm_vec4_subs(gz, 0.5f, gz); // gz -= 0.5f
-
-  // abs(gx), abs(gy), abs(gz)
-  vec4 gxa, gya, gza;
-  glm_vec4_abs(gx, gxa); // gxa = abs(gx)
-  glm_vec4_abs(gy, gya); // gya = abs(gy)
-  glm_vec4_abs(gz, gza); // gza = abs(gz)
-
-  // gw = 0.75 - abs(gx) - abs(gy) - abs(gz)
-  glm_vec4_fill(gw, 0.75f); // gw = 0.75
-  glm_vec4_sub(gw, gxa, gw); // gw -= gxa
-  glm_vec4_sub(gw, gza, gw); // gw -= gza
-  glm_vec4_sub(gw, gya, gw); // gw -= gya
-
-  // sw = step(gw, 0.0);
-  vec4 sw;
-  glm_vec4_stepr(gw, 0.0f, sw); // sw = step(gw, 0.0)
-
-  // gx -= sw * (step(vec4(0), gx) - T(0.5));
-  vec4 temp = {0.0f}; // temp = 0.0
-  glm_vec4_step(temp, gx, temp); // temp = step(temp, gx)
-  glm_vec4_subs(temp, 0.5f, temp); // temp -= 0.5
-  glm_vec4_mul(sw, temp, temp); // temp *= sw
-  glm_vec4_sub(gx, temp, gx); // gx -= temp
-
-  // gy -= sw * (step(vec4(0), gy) - T(0.5));
-  glm_vec4_zero(temp); // reset temp
-  glm_vec4_step(temp, gy, temp); // temp = step(temp, gy)
-  glm_vec4_subs(temp, 0.5f, temp); // temp -= 0.5
-  glm_vec4_mul(sw, temp, temp); // temp *= sw
-  glm_vec4_sub(gy, temp, gy); // gy -= temp
-}
-
-
-CGLM_INLINE
-void
-_glm_noiseDetail_i2gxyz(
-  vec4 ixy,
-  /* out */
-  vec4 gx,
-  vec4 gy,
-  vec4 gz
-) {
-  // NOTE: This function is not *quite* analogous to _glm_noiseDetail_i2gxyzw
-  // to try to match the output of glm::perlin. I think it might be a bug in
-  // in the original implementation, but for now I'm keeping it consistent. -MK
-  
-  // gx = ixy / 7.0
-  glm_vec4_divs(ixy, 7.0f, gx); // gx = ixy / 7.0
-
-  // gy = fract(floor(gx0) / 7.0)) - 0.5;
-  glm_vec4_floor(gx, gy); // gy = floor(gx)
-  glm_vec4_divs(gy, 7.0f, gy); // gy /= 7.0
-  glm_vec4_fract(gy, gy); // gy = fract(gy)
-  glm_vec4_subs(gy, 0.5f, gy); // gy -= 0.5f
-
-  // gx = fract(gx);
-  glm_vec4_fract(gx, gx); // gx = fract(gx)
-
-  // abs(gx), abs(gy)
-  vec4 gxa, gya;
-  glm_vec4_abs(gx, gxa); // gxa = abs(gx)
-  glm_vec4_abs(gy, gya); // gya = abs(gy)
-
-  // gz = vec4(0.5) - abs(gx0) - abs(gy0);
-  glm_vec4_fill(gz, 0.5f); // gz = 0.5
-  glm_vec4_sub(gz, gxa, gz); // gz -= gxa
-  glm_vec4_sub(gz, gya, gz); // gz -= gya
-
-  
-  // sz = step(gw, 0.0);
-  vec4 sz;
-  glm_vec4_stepr(gz, 0.0f, sz); // sz = step(gz, 0.0)
-
-  // gx0 -= sz0 * (step(0.0, gx0) - T(0.5));
-  vec4 temp = {0.0f}; // temp = 0.0
-  glm_vec4_step(temp, gx, temp); // temp = step(temp, gx)
-  glm_vec4_subs(temp, 0.5f, temp); // temp -= 0.5
-  glm_vec4_mul(sz, temp, temp); // temp *= sz
-  glm_vec4_sub(gx, temp, gx); // gx -= temp
-
-  // gy0 -= sz0 * (step(0.0, gy0) - T(0.5));
-  glm_vec4_zero(temp); // reset temp
-  glm_vec4_step(temp, gy, temp); // temp = step(temp, gy)
-  glm_vec4_subs(temp, 0.5f, temp); // temp -= 0.5
-  glm_vec4_mul(sz, temp, temp); // temp *= sz
-  glm_vec4_sub(gy, temp, gy); // gy -= temp
-}
-
-CGLM_INLINE
-void
-_glm_noiseDetail_i2gxy(
-  vec4 i,
-  /* out */
-  vec4 gx,
-  vec4 gy
-) {
-  // vec<4, T, Q> gx = static_cast<T>(2) * glm::fract(i / T(41)) - T(1);
-  // vec<4, T, Q> gy = glm::abs(gx) - T(0.5);
-  // vec<4, T, Q> tx = glm::floor(gx + T(0.5));
-  // gx = gx - tx;
-  
-
-  // gx = 2.0 * fract(i / 41.0) - 1.0;
-  glm_vec4_divs(i, 41.0f, gx); // gx = i / 41.0
-  glm_vec4_fract(gx, gx); // gx = fract(gx)
-  glm_vec4_scale(gx, 2.0f, gx); // gx *= 2.0
-  glm_vec4_subs(gx, 1.0f, gx); // gx -= 1.0
-
-  // gy = abs(gx) - 0.5;
-  glm_vec4_abs(gx, gy); // gy = abs(gx)
-  glm_vec4_subs(gy, 0.5f, gy); // gy -= 0.5
-
-  // tx = floor(gx + 0.5);
-  vec4 tx;
-  glm_vec4_adds(gx, 0.5f, tx); // tx = gx + 0.5
-  glm_vec4_floor(tx, tx); // tx = floor(tx)
-
-  // gx = gx - tx;
-  glm_vec4_sub(gx, tx, gx); // gx -= tx
-}
-
-
-//////////////////////////////
-// Perlin noise
 
 /*!
  * @brief Classic perlin noise
@@ -759,5 +675,19 @@ glm_perlin_vec2(vec2 point) {
   return n_xy * 2.3f;
 }
 
+/* Undefine all helper macros */
+
+#undef _glm_noiseDetail_mod289
+#undef _glm_noiseDetail_permute
+#undef _glm_noiseDetail_fade_vec4
+#undef _glm_noiseDetail_fade_vec3
+#undef _glm_noiseDetail_fade_vec2
+#undef _glm_noiseDetail_taylorInvSqrt
+#undef _glm_noiseDetail_gradNorm_vec4
+#undef _glm_noiseDetail_gradNorm_vec3
+#undef _glm_noiseDetail_gradNorm_vec2
+#undef _glm_noiseDetail_i2gxyzw
+#undef _glm_noiseDetail_i2gxyz
+#undef _glm_noiseDetail_i2gxy
 
 #endif /* cglm_noise_h */
