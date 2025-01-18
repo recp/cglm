@@ -23,6 +23,7 @@
    CGLM_INLINE bool  glms_vec2_isinf(vec2s v)
    CGLM_INLINE bool  glms_vec2_isvalid(vec2s v)
    CGLM_INLINE vec2s glms_vec2_sign(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_fract(vec2s v)
    CGLM_INLINE vec2s glms_vec2_sqrt(vec2s v)
  */
 
@@ -184,6 +185,19 @@ glms_vec2_(sign)(vec2s v) {
   return r;
 }
 
+/*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(fract)(vec2s v) {
+  vec2s r;
+  glm_vec2_fract(v.raw, r.raw);
+  return r;
+}
 /*!
  * @brief square root of each vector item
  *

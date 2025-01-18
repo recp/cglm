@@ -20,6 +20,7 @@
    CGLM_INLINE bool  glm_vec2_isvalid(vec2 v);
    CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_abs(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_fract(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
