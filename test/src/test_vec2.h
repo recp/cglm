@@ -688,6 +688,18 @@ TEST_IMPL(GLM_PREFIX, vec2_abs) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_fract) {
+  vec3  v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec3  v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
+
+  GLM(vec2_fract)(v1, v3);
+  GLM(vec2_fract)(v2, v4);
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v5))
+  ASSERTIFY(test_assert_vec2_eq(v4, v6))
+
+  TEST_SUCCESS
+}
 TEST_IMPL(GLM_PREFIX, vec2_lerp) {
   vec2 v1 = {-100.0f, -200.0f};
   vec2 v2 = {100.0f, 200.0f};
