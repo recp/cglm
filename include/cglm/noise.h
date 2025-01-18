@@ -44,20 +44,6 @@ _glm_vec4_floor(vec4 x, vec4 dest) {
 }
 
 /*!
- * @brief floor each element of v, result is written to dest
- *
- * @param[in]  v    vector
- * @param[out] dest destination vector
- */
-CGLM_INLINE
-void
-_glm_vec3_floor(vec3 x, vec3 dest) {
-    dest[0] = floorf(x[0]);
-    dest[1] = floorf(x[1]);
-    dest[2] = floorf(x[2]);
-}
-
-/*!
  * @brief mod v by a scalar, result is written to dest (dest = v % s)
  *
  * @param[in]  v    vector
@@ -673,7 +659,7 @@ float
 glm_perlin_vec3(vec3 point) {
     // Integer part of p for indexing
     vec3 Pi0;
-    _glm_vec3_floor(point, Pi0); // Pi0 = floor(point);
+    glm_vec3_floor(point, Pi0); // Pi0 = floor(point);
 
     // Integer part + 1
     vec3 Pi1;
