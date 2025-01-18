@@ -246,6 +246,21 @@ glms_vec3_(floor)(vec3s v) {
 }
 
 /*!
+ * @brief mod of each vector item by scalar
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(mods)(vec3s v, float s) {
+  vec3s r;
+  glm_vec3_mods(v.raw, s, r.raw);
+  return r;
+}
+
+/*!
  * @brief vector reduction by summation
  * @warning could overflow
  *

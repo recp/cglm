@@ -230,6 +230,21 @@ glms_vec2_(floor)(vec2s v) {
 }
 
 /*!
+ * @brief mod of each vector item by scalar
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(mods)(vec2s v, float s) {
+  vec2s r;
+  glm_vec2_mods(v.raw, s, r.raw);
+  return r;
+}
+
+/*!
  * @brief square root of each vector item
  *
  * @param[in]  v    vector

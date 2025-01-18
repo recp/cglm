@@ -327,6 +327,10 @@ void
 glmc_vec3_floor(vec3 v, vec3 dest);
 
 CGLM_EXPORT
+void
+glmc_vec3_mods(vec3 v, float s, vec3 dest);
+
+CGLM_EXPORT
 float
 glmc_vec3_hadd(vec3 v);
 
