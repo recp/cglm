@@ -27,6 +27,8 @@
    CGLM_INLINE vec4s glms_vec4_abs(vec4s v);
    CGLM_INLINE vec4s glms_vec4_fract(vec4s v);
    CGLM_INLINE float glms_vec4_floor(vec4s v);
+   CGLM_INLINE float glms_vec4_steps(float edge, vec4s v);
+   CGLM_INLINE void  glms_vec4_stepr(vec4s edge, float v);
    CGLM_INLINE float glms_vec4_hadd(vec4s v);
    CGLM_INLINE vec4s glms_vec4_sqrt(vec4s v);
  */
@@ -257,6 +259,38 @@ vec4s
 glms_vec4_(mods)(vec4s v, float s) {
   vec4s r;
   glm_vec4_mods(v.raw, s, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold
+ * @param[in]   x      vector to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(steps)(float edge, vec4s x) {
+  vec4s r;
+  glm_vec4_steps(edge, x.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold vector
+ * @param[in]   x      value to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec4s
+glms_vec4_(stepr)(vec4s edge, float x) {
+  vec4s r;
+  glm_vec4_stepr(edge.raw, x, r.raw);
   return r;
 }
 

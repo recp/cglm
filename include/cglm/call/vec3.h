@@ -331,6 +331,14 @@ void
 glmc_vec3_mods(vec3 v, float s, vec3 dest);
 
 CGLM_EXPORT
+void
+glmc_vec3_steps(float edge, vec3 x, vec3 dest);
+
+CGLM_EXPORT
+void
+glmc_vec3_stepr(vec3 edge, float x, vec3 dest);
+
+CGLM_EXPORT
 float
 glmc_vec3_hadd(vec3 v);
 
