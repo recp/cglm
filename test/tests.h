@@ -97,6 +97,9 @@ TEST_DECLARE(glmc_rotate2d_make)
 TEST_DECLARE(glmc_rotate2d)
 TEST_DECLARE(glmc_rotate2d_to)
 
+/* aabb2d */
+TEST_DECLARE(glm_aabb2d_sizev)
+
 /* mat4 */
 TEST_DECLARE(glm_mat4_ucopy)
 TEST_DECLARE(glm_mat4_copy)
@@ -1274,6 +1277,9 @@ TEST_LIST {
   TEST_ENTRY(glmc_rotate2d_make)
   TEST_ENTRY(glmc_rotate2d)
   TEST_ENTRY(glmc_rotate2d_to)
+
+  /* aabb2d */
+  TEST_ENTRY(glm_aabb2d_sizev)
   
   /* mat4 */
   TEST_ENTRY(glm_mat4_ucopy)

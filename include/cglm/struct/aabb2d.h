@@ -137,8 +137,27 @@ glms_aabb2d_(isvalid)(vec2s aabb[2]) {
  */
 CGLM_INLINE
 float
-glms_aabb2d_(size)(vec2s aabb[2]) {
-  return glm_vec2_distance(aabb[0].raw, aabb[1].raw);
+glms_aabb2d_(diag)(vec2s aabb[2]) {
+  vec2 rawAabb[2];
+  glms_vec2_(unpack)(rawAabb, aabb, 2);
+  return glm_aabb2d_diag(rawAabb);
+}
+
+
+/*!
+ * @brief size of aabb
+ *
+ * @param[in]  aabb bounding aabb
+ * @param[out]  dest size
+ */
+CGLM_INLINE
+vec2s
+glms_aabb2d_(sizev)(vec2s aabb[2]) {
+  vec2s size;
+  vec2 rawAabb[2];
+  glms_vec2_(unpack)(rawAabb, aabb, 2);
+  glm_aabb2d_sizev(rawAabb, size.raw);
+  return size;
 }
 
 /*!
