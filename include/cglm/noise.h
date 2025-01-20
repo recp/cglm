@@ -25,39 +25,39 @@
 #include "vec2.h"
 #include "vec2-ext.h"
 
-#define _glm_noiseDetail_mod289(x) (x - floorf(x * (1.0f / 289.0f)) * 289.0f)
+#define glm__noiseDetail_mod289(x) (x - floorf(x * (1.0f / 289.0f)) * 289.0f)
 
-/* _glm_noiseDetail_permute(vec4 x, vec4 dest) */
-#define _glm_noiseDetail_permute(x, dest) { \
-  dest[0] = _glm_noiseDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]); \
-  dest[1] = _glm_noiseDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]); \
-  dest[2] = _glm_noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]); \
-  dest[3] = _glm_noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]); \
+/* glm__noiseDetail_permute(vec4 x, vec4 dest) */
+#define glm__noiseDetail_permute(x, dest) { \
+  dest[0] = glm__noiseDetail_mod289((x[0] * 34.0f + 1.0f) * x[0]); \
+  dest[1] = glm__noiseDetail_mod289((x[1] * 34.0f + 1.0f) * x[1]); \
+  dest[2] = glm__noiseDetail_mod289((x[2] * 34.0f + 1.0f) * x[2]); \
+  dest[3] = glm__noiseDetail_mod289((x[3] * 34.0f + 1.0f) * x[3]); \
 }
 
-/* _glm_noiseDetail_fade_vec4(vec4 t, vec4 dest) */
-#define _glm_noiseDetail_fade_vec4(t, dest) { \
+/* glm__noiseDetail_fade_vec4(vec4 t, vec4 dest) */
+#define glm__noiseDetail_fade_vec4(t, dest) { \
   dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
   dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
   dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
   dest[3] = (t[3] * t[3] * t[3]) * (t[3] * (t[3] * 6.0f - 15.0f) + 10.0f); \
 }
 
-/* _glm_noiseDetail_fade_vec3(vec3 t, vec3 dest) */
-#define _glm_noiseDetail_fade_vec3(t, dest) { \
+/* glm__noiseDetail_fade_vec3(vec3 t, vec3 dest) */
+#define glm__noiseDetail_fade_vec3(t, dest) { \
   dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
   dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
   dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
 }
 
-/* _glm_noiseDetail_fade_vec2(vec2 t, vec2 dest) */
-#define _glm_noiseDetail_fade_vec2(t, dest) { \
+/* glm__noiseDetail_fade_vec2(vec2 t, vec2 dest) */
+#define glm__noiseDetail_fade_vec2(t, dest) { \
   dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
   dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
 }
 
-/* _glm_noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) */
-#define _glm_noiseDetail_taylorInvSqrt(x, dest) { \
+/* glm__noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) */
+#define glm__noiseDetail_taylorInvSqrt(x, dest) { \
   dest[0] = 1.79284291400159f - 0.85373472095314f * x[0]; \
   dest[1] = 1.79284291400159f - 0.85373472095314f * x[1]; \
   dest[2] = 1.79284291400159f - 0.85373472095314f * x[2]; \
@@ -72,14 +72,14 @@
  * ));
 */
 
-/* _glm_noiseDetail_gradNorm_vec4(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) */
-#define _glm_noiseDetail_gradNorm_vec4(g00__, g01__, g10__, g11__) {           \
+/* glm__noiseDetail_gradNorm_vec4(vec4 g00__, vec4 g01__, vec4 g10__, vec4 g11__) */
+#define glm__noiseDetail_gradNorm_vec4(g00__, g01__, g10__, g11__) {           \
   vec4 norm;                                                                   \
   norm[0] = glm_vec4_dot(g00__, g00__); /* norm.x = dot(g00__, g00__) */       \
   norm[1] = glm_vec4_dot(g01__, g01__); /* norm.y = dot(g01__, g01__) */       \
   norm[2] = glm_vec4_dot(g10__, g10__); /* norm.z = dot(g10__, g10__) */       \
   norm[3] = glm_vec4_dot(g11__, g11__); /* norm.w = dot(g11__, g11__) */       \
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+  glm__noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
                                                                                \
   glm_vec4_scale(g00__, norm[0], g00__); /* g00__ *= norm.x */                 \
   glm_vec4_scale(g01__, norm[1], g01__); /* g01__ *= norm.y */                 \
@@ -87,14 +87,14 @@
   glm_vec4_scale(g11__, norm[3], g11__); /* g11__ *= norm.w */                 \
 }
 
-/* _glm_noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) */
-#define _glm_noiseDetail_gradNorm_vec3(g00_, g01_, g10_, g11_) {               \
+/* glm__noiseDetail_gradNorm_vec3(vec3 g00_, vec3 g01_, vec3 g10_, vec3 g11_) */
+#define glm__noiseDetail_gradNorm_vec3(g00_, g01_, g10_, g11_) {               \
   vec4 norm;                                                                   \
   norm[0] = glm_vec3_dot(g00_, g00_); /* norm.x = dot(g00_, g00_) */           \
   norm[1] = glm_vec3_dot(g01_, g01_); /* norm.y = dot(g01_, g01_) */           \
   norm[2] = glm_vec3_dot(g10_, g10_); /* norm.z = dot(g10_, g10_) */           \
   norm[3] = glm_vec3_dot(g11_, g11_); /* norm.w = dot(g11_, g11_) */           \
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+  glm__noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
                                                                                \
   glm_vec3_scale(g00_, norm[0], g00_); /* g00_ *= norm.x */                    \
   glm_vec3_scale(g01_, norm[1], g01_); /* g01_ *= norm.y */                    \
@@ -102,14 +102,14 @@
   glm_vec3_scale(g11_, norm[3], g11_); /* g11_ *= norm.w */                    \
 }
 
-/* _glm_noiseDetail_gradNorm_vec2(vec2 g00, vec2 g01, vec2 g10, vec2 g11) */
-#define _glm_noiseDetail_gradNorm_vec2(g00, g01, g10, g11) {                   \
+/* glm__noiseDetail_gradNorm_vec2(vec2 g00, vec2 g01, vec2 g10, vec2 g11) */
+#define glm__noiseDetail_gradNorm_vec2(g00, g01, g10, g11) {                   \
   vec4 norm;                                                                   \
   norm[0] = glm_vec2_dot(g00, g00); /* norm.x = dot(g00, g00) */               \
   norm[1] = glm_vec2_dot(g01, g01); /* norm.y = dot(g01, g01) */               \
   norm[2] = glm_vec2_dot(g10, g10); /* norm.z = dot(g10, g10) */               \
   norm[3] = glm_vec2_dot(g11, g11); /* norm.w = dot(g11, g11) */               \
-  _glm_noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
+  glm__noiseDetail_taylorInvSqrt(norm, norm); /* norm = taylorInvSqrt(norm) */ \
                                                                                \
   glm_vec2_scale(g00, norm[0], g00); /* g00 *= norm.x */                       \
   glm_vec2_scale(g01, norm[1], g01); /* g01 *= norm.y */                       \
@@ -117,8 +117,8 @@
   glm_vec2_scale(g11, norm[3], g11); /* g11 *= norm.w */                       \
 }
 
-/* _glm_noiseDetail_i2gxyzw(vec4 ixy, vec4 gx, vec4 gy, vec4 gz, vec4 gw) */
-#define _glm_noiseDetail_i2gxyzw(ixy, gx, gy, gz, gw) {      \
+/* glm__noiseDetail_i2gxyzw(vec4 ixy, vec4 gx, vec4 gy, vec4 gz, vec4 gw) */
+#define glm__noiseDetail_i2gxyzw(ixy, gx, gy, gz, gw) {      \
   /* gx = ixy / 7.0 */                                       \
   glm_vec4_divs(ixy, 7.0f, gx); /* gx = ixy / 7.0 */         \
                                                              \
@@ -173,13 +173,13 @@
   glm_vec4_sub(gy, temp, gy); /* gy -= temp */               \
 }
 
-/* NOTE: This function is not *quite* analogous to _glm_noiseDetail_i2gxyzw
+/* NOTE: This function is not *quite* analogous to glm__noiseDetail_i2gxyzw
  * to try to match the output of glm::perlin. I think it might be a bug in
  * in the original implementation, but for now I'm keeping it consistent. -MK
  */
 
-/* _glm_noiseDetail_i2gxyz(vec4 i, vec4 gx, vec4 gy, vec4 gz) */
-#define _glm_noiseDetail_i2gxyz(ixy, gx, gy, gz) {               \
+/* glm__noiseDetail_i2gxyz(vec4 i, vec4 gx, vec4 gy, vec4 gz) */
+#define glm__noiseDetail_i2gxyz(ixy, gx, gy, gz) {               \
   /* gx = ixy / 7.0 */                                           \
   glm_vec4_divs(ixy, 7.0f, gx); /* gx = ixy / 7.0 */             \
                                                                  \
@@ -221,8 +221,8 @@
   glm_vec4_sub(gy, temp, gy); /* gy -= temp */                   \
 }
 
-/* _glm_noiseDetail_i2gxy(vec4 i, vec4 gx, vec4 gy) */
-#define _glm_noiseDetail_i2gxy(i, gx, gy) {                      \
+/* glm__noiseDetail_i2gxy(vec4 i, vec4 gx, vec4 gy) */
+#define glm__noiseDetail_i2gxy(i, gx, gy) {                      \
   /* gx = 2.0 * fract(i / 41.0) - 1.0; */                        \
   glm_vec4_divs(i, 41.0f, gx); /* gx = i / 41.0 */               \
   glm_vec4_fract(gx, gx); /* gx = fract(gx) */                   \
@@ -286,53 +286,53 @@ glm_perlin_vec4(vec4 point) {
 
   /* ixy = permute(permute(ix) + iy) */
   vec4 ixy;
-  _glm_noiseDetail_permute(ix, ixy); /* ixy = permute(ix) */
+  glm__noiseDetail_permute(ix, ixy); /* ixy = permute(ix) */
   glm_vec4_add(ixy, iy, ixy); /* ixy += iy; */
-  _glm_noiseDetail_permute(ixy, ixy); /* ixy = permute(ixy) */
+  glm__noiseDetail_permute(ixy, ixy); /* ixy = permute(ixy) */
 
   /* ixy0 = permute(ixy + iz0) */
   vec4 ixy0;
   glm_vec4_add(ixy, iz0, ixy0); /* ixy0 = ixy + iz0 */
-  _glm_noiseDetail_permute(ixy0, ixy0); /* ixy0 = permute(ixy0) */
+  glm__noiseDetail_permute(ixy0, ixy0); /* ixy0 = permute(ixy0) */
 
   /* ixy1 = permute(ixy + iz1) */
   vec4 ixy1;
   glm_vec4_add(ixy, iz1, ixy1); /* ixy1 = ixy, iz1 */
-  _glm_noiseDetail_permute(ixy1, ixy1); /* ixy1 = permute(ixy1) */
+  glm__noiseDetail_permute(ixy1, ixy1); /* ixy1 = permute(ixy1) */
 
   /* ixy00 = permute(ixy0 + iw0) */
   vec4 ixy00;
   glm_vec4_add(ixy0, iw0, ixy00); /* ixy00 = ixy0 + iw0 */
-  _glm_noiseDetail_permute(ixy00, ixy00); /* ixy00 = permute(ixy00) */
+  glm__noiseDetail_permute(ixy00, ixy00); /* ixy00 = permute(ixy00) */
 
   /* ixy01 = permute(ixy0 + iw1) */
   vec4 ixy01;
   glm_vec4_add(ixy0, iw1, ixy01); /* ixy01 = ixy0 + iw1 */
-  _glm_noiseDetail_permute(ixy01, ixy01); /* ixy01 = permute(ixy01) */
+  glm__noiseDetail_permute(ixy01, ixy01); /* ixy01 = permute(ixy01) */
 
   /* ixy10 = permute(ixy1 + iw0) */
   vec4 ixy10;
   glm_vec4_add(ixy1, iw0, ixy10); /* ixy10 = ixy1 + iw0 */
-  _glm_noiseDetail_permute(ixy10, ixy10); /* ixy10 = permute(ixy10) */
+  glm__noiseDetail_permute(ixy10, ixy10); /* ixy10 = permute(ixy10) */
 
   /* ixy11 = permute(ixy1 + iw1) */
   vec4 ixy11;
   glm_vec4_add(ixy1, iw1, ixy11); /* ixy11 = ixy1 + iw1 */
-  _glm_noiseDetail_permute(ixy11, ixy11); /* ixy11 = permute(ixy11) */
+  glm__noiseDetail_permute(ixy11, ixy11); /* ixy11 = permute(ixy11) */
 
   /* ------------ */
 
   vec4 gx00, gy00, gz00, gw00;
-  _glm_noiseDetail_i2gxyzw(ixy00, gx00, gy00, gz00, gw00);
+  glm__noiseDetail_i2gxyzw(ixy00, gx00, gy00, gz00, gw00);
 
   vec4 gx01, gy01, gz01, gw01;
-  _glm_noiseDetail_i2gxyzw(ixy01, gx01, gy01, gz01, gw01);
+  glm__noiseDetail_i2gxyzw(ixy01, gx01, gy01, gz01, gw01);
 
   vec4 gx10, gy10, gz10, gw10;
-  _glm_noiseDetail_i2gxyzw(ixy10, gx10, gy10, gz10, gw10);
+  glm__noiseDetail_i2gxyzw(ixy10, gx10, gy10, gz10, gw10);
 
   vec4 gx11, gy11, gz11, gw11;
-  _glm_noiseDetail_i2gxyzw(ixy11, gx11, gy11, gz11, gw11);
+  glm__noiseDetail_i2gxyzw(ixy11, gx11, gy11, gz11, gw11);
 
   /* ------------ */
 
@@ -356,10 +356,10 @@ glm_perlin_vec4(vec4 point) {
   vec4 g1011 = {gx11[1], gy11[1], gz11[1], gw11[1]}; /* g1011 = vec4(gx11.y, gy11.y, gz11.y, gw11.y); */
   vec4 g1111 = {gx11[3], gy11[3], gz11[3], gw11[3]}; /* g1111 = vec4(gx11.w, gy11.w, gz11.w, gw11.w); */
 
-  _glm_noiseDetail_gradNorm_vec4(g0000, g0100, g1000, g1100);
-  _glm_noiseDetail_gradNorm_vec4(g0001, g0101, g1001, g1101);
-  _glm_noiseDetail_gradNorm_vec4(g0010, g0110, g1010, g1110);
-  _glm_noiseDetail_gradNorm_vec4(g0011, g0111, g1011, g1111);
+  glm__noiseDetail_gradNorm_vec4(g0000, g0100, g1000, g1100);
+  glm__noiseDetail_gradNorm_vec4(g0001, g0101, g1001, g1101);
+  glm__noiseDetail_gradNorm_vec4(g0010, g0110, g1010, g1110);
+  glm__noiseDetail_gradNorm_vec4(g0011, g0111, g1011, g1111);
 
   /* ------------ */
 
@@ -426,7 +426,7 @@ glm_perlin_vec4(vec4 point) {
   /* ------------ */
 
   vec4 fade_xyzw;
-  _glm_noiseDetail_fade_vec4(Pf0, fade_xyzw); /* fade_xyzw = fade(Pf0) */
+  glm__noiseDetail_fade_vec4(Pf0, fade_xyzw); /* fade_xyzw = fade(Pf0) */
   
   /* n_0w = lerp(vec4(n0000, n1000, n0100, n1100), vec4(n0001, n1001, n0101, n1101), fade_xyzw.w) */
   vec4 n_0w1 = {n0000, n1000, n0100, n1100};
@@ -494,27 +494,27 @@ glm_perlin_vec3(vec3 point) {
 
   /* ixy = permute(permute(ix) + iy) */
   vec4 ixy;
-  _glm_noiseDetail_permute(ix, ixy); /* ixy = permute(ix) */
+  glm__noiseDetail_permute(ix, ixy); /* ixy = permute(ix) */
   glm_vec4_add(ixy, iy, ixy); /* ixy += iy; */
-  _glm_noiseDetail_permute(ixy, ixy); /* ixy = permute(ixy) */
+  glm__noiseDetail_permute(ixy, ixy); /* ixy = permute(ixy) */
 
   /* ixy0 = permute(ixy + iz0) */
   vec4 ixy0;
   glm_vec4_add(ixy, iz0, ixy0); /* ixy0 = ixy + iz0 */
-  _glm_noiseDetail_permute(ixy0, ixy0); /* ixy0 = permute(ixy0) */
+  glm__noiseDetail_permute(ixy0, ixy0); /* ixy0 = permute(ixy0) */
 
   /* ixy1 = permute(ixy + iz1) */
   vec4 ixy1;
   glm_vec4_add(ixy, iz1, ixy1); /* ixy1 = ixy, iz1 */
-  _glm_noiseDetail_permute(ixy1, ixy1); /* ixy1 = permute(ixy1) */
+  glm__noiseDetail_permute(ixy1, ixy1); /* ixy1 = permute(ixy1) */
 
   /* ------------ */
 
   vec4 gx0, gy0, gz0;
-  _glm_noiseDetail_i2gxyz(ixy0, gx0, gy0, gz0);
+  glm__noiseDetail_i2gxyz(ixy0, gx0, gy0, gz0);
 
   vec4 gx1, gy1, gz1;
-  _glm_noiseDetail_i2gxyz(ixy1, gx1, gy1, gz1);
+  glm__noiseDetail_i2gxyz(ixy1, gx1, gy1, gz1);
 
   /* ------------ */
 
@@ -528,8 +528,8 @@ glm_perlin_vec3(vec3 point) {
   vec3 g011 = {gx1[2], gy1[2], gz1[2]}; /* g011 = vec3(gx1.z, gy1.z, gz1.z); */
   vec3 g111 = {gx1[3], gy1[3], gz1[3]}; /* g111 = vec3(gx1.w, gy1.w, gz1.w); */
 
-  _glm_noiseDetail_gradNorm_vec3(g000, g100, g010, g110);
-  _glm_noiseDetail_gradNorm_vec3(g001, g101, g011, g111);
+  glm__noiseDetail_gradNorm_vec3(g000, g100, g010, g110);
+  glm__noiseDetail_gradNorm_vec3(g001, g101, g011, g111);
 
   /* ------------ */
 
@@ -564,7 +564,7 @@ glm_perlin_vec3(vec3 point) {
   /* ------------ */
 
   vec3 fade_xyz;
-  _glm_noiseDetail_fade_vec3(Pf0, fade_xyz); /* fade_xyz = fade(Pf0) */
+  glm__noiseDetail_fade_vec3(Pf0, fade_xyz); /* fade_xyz = fade(Pf0) */
 
   /* n_z = lerp(vec4(n000, n100, n010, n110), vec4(n001, n101, n011, n111), fade_xyz.z); */
   vec4 n_z;
@@ -620,14 +620,14 @@ glm_perlin_vec2(vec2 point) {
 
   /* i = permute(permute(ix) + iy); */
   vec4 i;
-  _glm_noiseDetail_permute(ix, i); /* i = permute(ix) */
+  glm__noiseDetail_permute(ix, i); /* i = permute(ix) */
   glm_vec4_add(i, iy, i); /* i += iy; */
-  _glm_noiseDetail_permute(i, i); /* i = permute(i) */
+  glm__noiseDetail_permute(i, i); /* i = permute(i) */
 
   /* ------------ */
 
   vec4 gx, gy;
-  _glm_noiseDetail_i2gxy(i, gx, gy);
+  glm__noiseDetail_i2gxy(i, gx, gy);
 
   /* ------------ */
 
@@ -636,7 +636,7 @@ glm_perlin_vec2(vec2 point) {
   vec2 g01 = {gx[2], gy[2]}; /* g01 = vec2(gx.z, gy.z) */
   vec2 g11 = {gx[3], gy[3]}; /* g11 = vec2(gx.w, gy.w) */
 
-  _glm_noiseDetail_gradNorm_vec2(g00, g10, g01, g11);
+  glm__noiseDetail_gradNorm_vec2(g00, g10, g01, g11);
 
   /* ------------ */
 
@@ -660,7 +660,7 @@ glm_perlin_vec2(vec2 point) {
 
   /* fade_xyz = fade(vec2(Pf.x, Pf.y)) */
   vec2 fade_xy = {Pf[0], Pf[1]}; /* fade_xy = vec2(Pf.x, Pf.y) */
-  _glm_noiseDetail_fade_vec2(fade_xy, fade_xy); /* fade_xy = fade(fade_xy) */
+  glm__noiseDetail_fade_vec2(fade_xy, fade_xy); /* fade_xy = fade(fade_xy) */
 
   /* n_x = lerp(vec2(n00, n01), vec2(n10, n11), fade_xy.x); */
   vec2 n_x;
@@ -677,17 +677,17 @@ glm_perlin_vec2(vec2 point) {
 
 /* Undefine all helper macros */
 
-#undef _glm_noiseDetail_mod289
-#undef _glm_noiseDetail_permute
-#undef _glm_noiseDetail_fade_vec4
-#undef _glm_noiseDetail_fade_vec3
-#undef _glm_noiseDetail_fade_vec2
-#undef _glm_noiseDetail_taylorInvSqrt
-#undef _glm_noiseDetail_gradNorm_vec4
-#undef _glm_noiseDetail_gradNorm_vec3
-#undef _glm_noiseDetail_gradNorm_vec2
-#undef _glm_noiseDetail_i2gxyzw
-#undef _glm_noiseDetail_i2gxyz
-#undef _glm_noiseDetail_i2gxy
+#undef glm__noiseDetail_mod289
+#undef glm__noiseDetail_permute
+#undef glm__noiseDetail_fade_vec4
+#undef glm__noiseDetail_fade_vec3
+#undef glm__noiseDetail_fade_vec2
+#undef glm__noiseDetail_taylorInvSqrt
+#undef glm__noiseDetail_gradNorm_vec4
+#undef glm__noiseDetail_gradNorm_vec3
+#undef glm__noiseDetail_gradNorm_vec2
+#undef glm__noiseDetail_i2gxyzw
+#undef glm__noiseDetail_i2gxyz
+#undef glm__noiseDetail_i2gxy
 
 #endif /* cglm_noise_h */
