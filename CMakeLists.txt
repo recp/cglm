@@ -95,6 +95,7 @@ add_library(${PROJECT_NAME}
   src/plane.c
   src/frustum.c
   src/box.c
+  src/aabb2d.c
   src/project.c
   src/sphere.c
   src/ease.c
