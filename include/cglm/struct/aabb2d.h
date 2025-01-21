@@ -154,7 +154,7 @@ CGLM_INLINE
 vec2s
 glms_aabb2d_(sizev)(vec2s aabb[2]) {
   vec2s size;
-  vec2 rawAabb[2];
+  vec2  rawAabb[2];
   glms_vec2_(unpack)(rawAabb, aabb, 2);
   glm_aabb2d_sizev(rawAabb, size.raw);
   return size;
