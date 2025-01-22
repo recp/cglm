@@ -8,25 +8,62 @@ on:
 
 jobs:
   build_autotools:
-    name: Autotools / ${{ matrix.os }}
+    name: Autotools / ${{ matrix.os }} / ${{ matrix.simd }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04]
+        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04, fedora-latest, debian-latest, centos-latest, archlinux-latest]
+        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install Autotools
+    - name: Install Autotools on macOS
       if: runner.os == 'macOS'
       run: brew upgrade && brew install autoconf automake libtool
+
+    - name: Install Autotools on Fedora
+      if: matrix.os == 'fedora-latest'
+      run: sudo dnf install -y autoconf automake libtool
+
+    - name: Install Autotools on Debian
+      if: matrix.os == 'debian-latest'
+      run: sudo apt-get install -y autoconf automake libtool
+
+    - name: Install Autotools on CentOS
+      if: matrix.os == 'centos-latest'
+      run: sudo yum install -y autoconf automake libtool
+
+    - name: Install Autotools on Arch Linux
+      if: matrix.os == 'archlinux-latest'
+      run: sudo pacman -Syu --noconfirm autoconf automake libtool
+
+    - name: Set SIMD flags
+      run: |
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
 
     - name: Generate Autotools
       run: ./autogen.sh
 
     - name: Configure Autotools
-      run: ./configure
+      run: ./configure CFLAGS="$CFLAGS"
 
     - name: Build
       run: make
@@ -54,6 +91,65 @@ jobs:
 
     - name: Build
       run: cmake --build build
+
+  build_cmake_ubuntu:
+    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.simd }}
+    runs-on: ${{ matrix.target.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - { os: ubuntu-20.04, cc: gcc-11 }
+          - { os: ubuntu-22.04, cc: gcc-12 }
+          - { os: ubuntu-24.04, cc: gcc-13 }
+          - { os: ubuntu-20.04, cc: clang-12 }
+          - { os: ubuntu-22.04, cc: clang-15 }
+        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Add Ubuntu Toolchain PPA
+      if: matrix.target.os == 'ubuntu-20.04'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+
+    - name: Install Compiler and Ninja
+      run: |
+        sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
+
+    - name: Set SIMD flags
+      run: |
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
+
+    - name: Configure CMake
+      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{ matrix.target.cc }} -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      working-directory: build
+      run: ./tests
 
   build_cmake_macos:
     name: CMake / ${{ matrix.os }}
@@ -86,42 +182,47 @@ jobs:
       working-directory: build
       run: ./tests
 
-  build_cmake_ubuntu:
-    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }}
-    runs-on: ${{ matrix.target.os }}
+  build_cmake:
+    name: CMake / ${{ matrix.os }} / ${{ matrix.simd }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        target:
-          - { os: ubuntu-20.04, cc: gcc-11 }
-          - { os: ubuntu-22.04, cc: gcc-12 }
-          - { os: ubuntu-24.04, cc: gcc-13 }
-          - { os: ubuntu-20.04, cc: clang-12 }
-          - { os: ubuntu-22.04, cc: clang-15 }
+        os: [macos-13, macos-14, windows-2022]
+        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add Ubuntu Toolchain PPA
-      if: matrix.target.os == 'ubuntu-20.04'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
+    - name: Install Ninja on macOS
+      if: runner.os == 'macOS'
+      run: brew upgrade && brew install ninja
 
-    - name: Install Compiler and Ninja
+    - name: Set SIMD flags
       run: |
-        sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
 
     - name: Configure CMake
-      run: |
-        cmake \
-          -B build \
-          -GNinja \
-          -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DCGLM_STATIC=ON \
-          -DCGLM_USE_TEST=ON
+      if: runner.os == 'windows-2022'
+      run: cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      else:
+      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
 
     - name: Build
       run: cmake --build build
@@ -130,46 +231,97 @@ jobs:
       working-directory: build
       run: ./tests
 
-  build_cmake_windows:
-    name: CMake / ${{ matrix.platform.name }}
+  build_meson:
+    name: Meson / ${{ matrix.os }} / ${{ matrix.simd }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, ubuntu-22.04, ubuntu-24.04, windows-2022]
+        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+
+    - name: Install meson
+      run: python3 -m pip install meson ninja
+
+    - name: Set SIMD flags
+      run: |
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
+
+    - name: Build with meson
+      run: |
+        meson setup build -Dbuildtype=release --default-library=static -Dbuild_tests=true -Dc_args="$CFLAGS"
+        meson test -C build
+
+  build_msbuild:
+    name: MSBuild / Windows / ${{ matrix.simd }}
     runs-on: windows-2022
     strategy:
       fail-fast: false
       matrix:
-        platform:
-        - { name: Windows (x64),          flags: -A x64 }
-        - { name: Windows (x86),          flags: -A Win32 }
-        - { name: Windows (clang-cl x64), flags: -T ClangCL -A x64 }
-        - { name: Windows (clang-cl x86), flags: -T ClangCL -A Win32 }
-        - { name: Windows (ARM),          flags: -A ARM, skip_tests: true, skip_build: true } # This fails to build.
-        - { name: Windows (ARM64),        flags: -A ARM64, skip_tests: true }
-        - { name: UWP (ARM64),            flags: -A ARM64, -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0", skip_tests: true }
-        - { name: UWP (x64),              flags: -A x64 -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0", skip_tests: true }
+        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
 
     steps:
     - uses: actions/checkout@v4
 
     - uses: microsoft/setup-msbuild@v2
 
-    - name: Install Windows SDK for ARM
-      if: matrix.platform.name == 'Windows (ARM)' || matrix.platform.name == 'Windows (ARM64)'
+    - name: Retarget solution
       run: |
-        choco install windows-sdk-10.0 -y
+        vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+        $vsInstallPath = vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
+        & "$vsInstallPath\Common7\IDE\devenv.com" cglm.sln /Upgrade
 
-    - name: Configure CMake
-      run: cmake -B build `
-          -DCGLM_STATIC=ON `
-          -DCGLM_USE_TEST=ON `
-          ${{ matrix.platform.flags }}
+    - name: Set SIMD flags
+      run: |
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          $env:CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          $env:CFLAGS="-arch:SSE"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          $env:CFLAGS="-arch:SSE2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          $env:CFLAGS="-arch:SSE3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          $env:CFLAGS="-arch:SSE4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          $env:CFLAGS="-arch:AVX"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          $env:CFLAGS="-arch:AVX2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          $env:CFLAGS="-arch:NEON"
+        fi
 
-    - name: Build
-      if: ${{ !matrix.platform.skip_build }}
-      run: cmake --build build --config Release --parallel
+    - name: Build (x86)
+      working-directory: win
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$env:CFLAGS"
 
-    - name: Test
-      if: ${{ !matrix.platform.skip_tests }}
-      working-directory: build
-      run: .\Release\tests.exe
+    - name: Build (x64)
+      working-directory: win
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$env:CFLAGS"
 
   build_documentation:
     name: Documentation
@@ -189,50 +341,6 @@ jobs:
     - name: Build
       working-directory: docs
       run: sphinx-build -W --keep-going source build
-
-  build_meson:
-    name: Meson / ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-14, ubuntu-22.04]
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
-        cache: 'pip'
-
-    - name: Install meson
-      run: python3 -m pip install meson ninja
-
-    - name: Build
-      run: meson setup build -Dbuildtype=release --default-library=static -Dbuild_tests=true
-
-    - name: Test
-      run: meson test -C build
-
-  build_msbuild:
-    name: MSBuild / Windows
-    runs-on: windows-2022
-
-    # This has no test yet.
-    # It could also try building for ARM, ARM64, ARM64EC, but those fail currently.
-    steps:
-    - uses: actions/checkout@v4
-
-    - uses: microsoft/setup-msbuild@v2
-
-    - name: Build (x86)
-      working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v143 /p:BuildInParallel=true
-
-    - name: Build (x64)
-      working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:BuildInParallel=true
 
   build_swift:
     name: Swift ${{ matrix.swift }} / ${{ matrix.os }}
