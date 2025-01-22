@@ -56,6 +56,7 @@ cglm_src = files(
     'src/mat4x2.c',
     'src/mat4x3.c',
     'src/plane.c',
+    'src/noise.c',
     'src/frustum.c',
     'src/box.c',
     'src/aabb2d.c',

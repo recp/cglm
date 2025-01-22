@@ -23,6 +23,12 @@
    CGLM_INLINE bool  glms_vec2_isinf(vec2s v)
    CGLM_INLINE bool  glms_vec2_isvalid(vec2s v)
    CGLM_INLINE vec2s glms_vec2_sign(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_abs(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_fract(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_floor(vec2s v)
+   CGLM_INLINE vec2s glms_vec2_mods(vec2s v, float s)
+   CGLM_INLINE vec2s glms_vec2_steps(float edge, vec2s v)
+   CGLM_INLINE vec2s glms_vec2_stepr(vec2s edge, float v)
    CGLM_INLINE vec2s glms_vec2_sqrt(vec2s v)
  */
 
@@ -181,6 +187,95 @@ vec2s
 glms_vec2_(sign)(vec2s v) {
   vec2s r;
   glm_vec2_sign(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief fractional part of each vector item
+ *
+ * @param   v   vector
+ * @returns     abs vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(abs)(vec2s v) {
+  vec2s r;
+  glm_vec2_abs(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(fract)(vec2s v) {
+  vec2s r;
+  glm_vec2_fract(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(floor)(vec2s v) {
+  vec2s r;
+  glm_vec2_floor(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief mod of each vector item by scalar
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(mods)(vec2s v, float s) {
+  vec2s r;
+  glm_vec2_mods(v.raw, s, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold
+ * @param[in]   x      vector to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(steps)(float edge, vec2s x) {
+  vec2s r;
+  glm_vec2_steps(edge, x.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold vector
+ * @param[in]   x      value to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(stepr)(vec2s edge, float x) {
+  vec2s r;
+  glm_vec2_stepr(edge.raw, x, r.raw);
   return r;
 }
 

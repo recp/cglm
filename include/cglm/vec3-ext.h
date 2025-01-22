@@ -26,6 +26,10 @@
    CGLM_INLINE void  glm_vec3_sign(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_abs(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_fract(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_floor(vec3 v, vec3 dest);
+   CGLM_INLINE float glm_vec3_mods(vec3 v, float s, vec3 dest);
+   CGLM_INLINE float glm_vec3_steps(float edge, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_stepr(vec3 edge, float v, vec3 dest);
    CGLM_INLINE float glm_vec3_hadd(vec3 v);
    CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
@@ -248,6 +252,67 @@ glm_vec3_fract(vec3 v, vec3 dest) {
   dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
   dest[2] = fminf(v[2] - floorf(v[2]), 0.999999940395355224609375f);
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_floor(vec3 x, vec3 dest) {
+  dest[0] = floorf(x[0]);
+  dest[1] = floorf(x[1]);
+  dest[2] = floorf(x[2]);
+}
+
+/*!
+ * @brief mod of each vector item, result is written to dest (dest = v % s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_mods(vec3 x, float y, vec3 dest) {
+  dest[0] = fmodf(x[0], y);
+  dest[1] = fmodf(x[1], y);
+  dest[2] = fmodf(x[2], y);
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       vector to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_steps(float edge, vec3 x, vec3 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold vector
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_stepr(vec3 edge, float x, vec3 dest) {
+  dest[0] = glm_step(edge[0], x);
+  dest[1] = glm_step(edge[1], x);
+  dest[2] = glm_step(edge[2], x);
 }
 
 /*!

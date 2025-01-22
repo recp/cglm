@@ -26,6 +26,10 @@
    CGLM_INLINE vec3s glms_vec3_sign(vec3s v);
    CGLM_INLINE vec3s glms_vec3_abs(vec3s v);
    CGLM_INLINE vec3s glms_vec3_fract(vec3s v);
+   CGLM_INLINE vec3s glms_vec3_floor(vec3s v);
+   CGLM_INLINE vec3s glms_vec3_mods(vec3s v, float s);
+   CGLM_INLINE vec3s glms_vec3_steps(float edge, vec3s v);
+   CGLM_INLINE vec3s glms_vec3_stepr(vec3s edge, float v);
    CGLM_INLINE float glms_vec3_hadd(vec3s v);
    CGLM_INLINE vec3s glms_vec3_sqrt(vec3s v);
  */
@@ -227,6 +231,67 @@ vec3s
 glms_vec3_(fract)(vec3s v) {
   vec3s r;
   glm_vec3_fract(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @return          dest destination vector
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(floor)(vec3s v) {
+  vec3s r;
+  glm_vec3_floor(v.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief mod of each vector item by scalar
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @returns         destination vector
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(mods)(vec3s v, float s) {
+  vec3s r;
+  glm_vec3_mods(v.raw, s, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold
+ * @param[in]   x      vector to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(steps)(float edge, vec3s x) {
+  vec3s r;
+  glm_vec3_steps(edge, x.raw, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge   threshold vector
+ * @param[in]   x      value to test against threshold
+ * @returns            destination
+ */
+CGLM_INLINE
+vec3s
+glms_vec3_(stepr)(vec3s edge, float x) {
+  vec3s r;
+  glm_vec3_stepr(edge.raw, x, r.raw);
   return r;
 }
 

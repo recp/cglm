@@ -980,23 +980,60 @@ TEST_IMPL(GLM_PREFIX, vec4_mixc) {
   TEST_SUCCESS
 }
 
-TEST_IMPL(GLM_PREFIX, vec4_step_uni) {
+TEST_IMPL(GLM_PREFIX, vec4_steps) {
   vec4 v1 = {-100.0f, -200.0f, -10.0f, -10.0f};
   vec4 v2;
 
-  GLM(vec4_step_uni)(-2.5f, v1, v2);
+  GLM(vec4_steps)(-2.5f, v1, v2);
   ASSERT(test_eq(v2[0], 0.0f))
   ASSERT(test_eq(v2[1], 0.0f))
   ASSERT(test_eq(v2[2], 0.0f))
   ASSERT(test_eq(v2[3], 0.0f))
   
-  GLM(vec4_step_uni)(-10.0f, v1, v2);
+  GLM(vec4_steps)(-10.0f, v1, v2);
   ASSERT(test_eq(v2[0], 0.0f))
   ASSERT(test_eq(v2[1], 0.0f))
   ASSERT(test_eq(v2[2], 1.0f))
   ASSERT(test_eq(v2[3], 1.0f))
   
-  GLM(vec4_step_uni)(-1000.0f, v1, v2);
+  GLM(vec4_steps)(-1000.0f, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_stepr) {
+  vec4 v1 = {-2.5f, -100.0f, -200.0f, -300.0f};
+  vec4 v2;
+
+  GLM(vec4_stepr)(v1, -1000.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 0.0f))
+  ASSERT(test_eq(v2[3], 0.0f))
+  
+  GLM(vec4_stepr)(v1, -250.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 0.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+  
+  GLM(vec4_stepr)(v1, -150.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(vec4_stepr)(v1, -10.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 1.0f))
+
+  GLM(vec4_stepr)(v1, 0.0f, v2);
   ASSERT(test_eq(v2[0], 1.0f))
   ASSERT(test_eq(v2[1], 1.0f))
   ASSERT(test_eq(v2[2], 1.0f))
@@ -1184,10 +1221,10 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_WZYX, v);
+  GLM(vec4_swizzle)(v, GLM_WZYX, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 3, 2, 1}))
   
-  glm_vec4_swizzle(v, GLM_XXXX, v);
+  GLM(vec4_swizzle)(v, GLM_XXXX, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 4, 4, 4}))
   
   v[0] = 1;
@@ -1195,7 +1232,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_YYYY, v);
+  GLM(vec4_swizzle)(v, GLM_YYYY, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){2, 2, 2, 2}))
   
   v[0] = 1;
@@ -1203,7 +1240,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_ZZZZ, v);
+  GLM(vec4_swizzle)(v, GLM_ZZZZ, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){3, 3, 3, 3}))
   
   v[0] = 1;
@@ -1211,7 +1248,7 @@ TEST_IMPL(GLM_PREFIX, vec4_swizzle) {
   v[2] = 3;
   v[3] = 4;
   
-  glm_vec4_swizzle(v, GLM_WWWW, v);
+  GLM(vec4_swizzle)(v, GLM_WWWW, v);
   ASSERTIFY(test_assert_vec4_eq(v, (vec4){4, 4, 4, 4}))
 
   TEST_SUCCESS
@@ -1489,6 +1526,47 @@ TEST_IMPL(GLM_PREFIX, vec4_fract) {
 
   TEST_SUCCESS
 }
+
+TEST_IMPL(GLM_PREFIX, vec4_floor) {
+  vec4 v1 = {2.104f, 3.012f, 4.10f, 4.10f};
+  vec4 v2 = {12.35f, 31.140f, 43.502f, 43.502f};
+  vec4 v3, v4;
+  vec4 v5 = {2.0f, 3.0f, 4.0f, 4.0f};
+  vec4 v6 = {12.0f, 31.0f, 43.0f, 43.0f};
+
+  GLM(vec4_floor)(v1, v3);
+  GLM(vec4_floor)(v2, v4);
+
+  ASSERTIFY(test_assert_vec4_eq(v3, v5))
+  ASSERTIFY(test_assert_vec4_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec4_mods) {
+  vec4 v1 = {2.104f, 3.012f, 4.10f, 5.78f}, v2 = {12.35f, 31.140f, 43.502f, 198.999f};
+  vec4 v3, v4;
+  vec4 v5 = {0.104f, 0.012f, 0.10f, 0.78f}, v6 = {0.35f, 0.140f, 0.502f, 0.999f};
+
+  /* Mod 1 - leaves just the fractional part */
+  GLM(vec4_mods)(v1, 1.0f, v3);
+  GLM(vec4_mods)(v2, 1.0f, v4);
+
+  ASSERTIFY(test_assert_vec4_eq(v3, v5))
+  ASSERTIFY(test_assert_vec4_eq(v4, v6))
+
+  /* Mod 2 - parity + fractional part */
+  GLM(vec4_mods)(v1, 2.0f, v3);
+  GLM(vec4_mods)(v2, 2.0f, v4);
+
+  vec4 v7 = {0.104f, 1.012f, 0.10f, 1.78f}, v8 = {0.35f, 1.140f, 1.502f, 0.999f};
+
+  ASSERTIFY(test_assert_vec4_eq(v3, v7))
+  ASSERTIFY(test_assert_vec4_eq(v4, v8))
+
+  TEST_SUCCESS
+}
+
 
 TEST_IMPL(GLM_PREFIX, vec4_hadd) {
   vec4  v1 = {2.0f, 3.0f, 4.0f, 4.0f}, v2 = {12.0f, 31.0f, 43.0f, 43.0f};

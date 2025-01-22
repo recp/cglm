@@ -57,7 +57,6 @@
    CGLM_INLINE void  glm_vec4_clamp(vec4 v, float minVal, float maxVal);
    CGLM_INLINE void  glm_vec4_lerp(vec4 from, vec4 to, float t, vec4 dest);
    CGLM_INLINE void  glm_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest);
-   CGLM_INLINE void  glm_vec4_step_uni(float edge, vec4 x, vec4 dest);
    CGLM_INLINE void  glm_vec4_step(vec4 edge, vec4 x, vec4 dest);
    CGLM_INLINE void  glm_vec4_smoothstep_uni(float edge0, float edge1, vec4 x, vec4 dest);
    CGLM_INLINE void  glm_vec4_smoothstep(vec4 edge0, vec4 edge1, vec4 x, vec4 dest);
@@ -75,6 +74,7 @@
    glm_vec4_inv
    glm_vec4_inv_to
    glm_vec4_mulv
+   glm_vec4_step_uni  --> use glm_vec4_steps
  */
 
 #ifndef cglm_vec4_h
@@ -92,6 +92,7 @@
 #define glm_vec4_inv(v)                glm_vec4_negate(v)
 #define glm_vec4_inv_to(v, dest)       glm_vec4_negate_to(v, dest)
 #define glm_vec4_mulv(a, b, d)         glm_vec4_mul(a, b, d)
+#define glm_vec4_step_uni(edge, x, dest) glm_vec4_steps(edge, x, dest)
 
 #define GLM_VEC4_ONE_INIT   {1.0f, 1.0f, 1.0f, 1.0f}
 #define GLM_VEC4_BLACK_INIT {0.0f, 0.0f, 0.0f, 1.0f}
@@ -529,6 +530,8 @@ glm_vec4_divs(vec4 v, float s, vec4 dest) {
   glmm_store(dest, wasm_f32x4_div(glmm_load(v), wasm_f32x4_splat(s)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_div_ps(glmm_load(v), _mm_set1_ps(s)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(dest, vdivq_f32(vld1q_f32(v), vdupq_n_f32(s)));
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
 #endif
@@ -1146,22 +1149,6 @@ CGLM_INLINE
 void
 glm_vec4_mixc(vec4 from, vec4 to, float t, vec4 dest) {
   glm_vec4_lerpc(from, to, t, dest);
-}
-
-/*!
- * @brief threshold function (unidimensional)
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @param[out]  dest    destination
- */
-CGLM_INLINE
-void
-glm_vec4_step_uni(float edge, vec4 x, vec4 dest) {
-  dest[0] = glm_step(edge, x[0]);
-  dest[1] = glm_step(edge, x[1]);
-  dest[2] = glm_step(edge, x[2]);
-  dest[3] = glm_step(edge, x[3]);
 }
 
 /*!

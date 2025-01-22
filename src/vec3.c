@@ -310,12 +310,6 @@ glmc_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec3_step_uni(float edge, vec3 x, vec3 dest) {
-  glm_vec3_step_uni(edge, x, dest);
-}
-
-CGLM_EXPORT
-void
 glmc_vec3_step(vec3 edge, vec3 x, vec3 dest) {
   glm_vec3_step(edge, x, dest);
 }
@@ -342,6 +336,12 @@ CGLM_EXPORT
 void
 glmc_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
   glm_vec3_smoothinterpc(from, to, t, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_swizzle(vec3 v, int mask, vec3 dest) {
+  glm_vec3_swizzle(v, mask, dest);
 }
 
 /* ext */
@@ -440,6 +440,30 @@ CGLM_EXPORT
 void
 glmc_vec3_fract(vec3 v, vec3 dest) {
   glm_vec3_fract(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_floor(vec3 v, vec3 dest) {
+  glm_vec3_floor(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_mods(vec3 v, float s, vec3 dest) {
+  glm_vec3_mods(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_steps(float edge, vec3 v, vec3 dest) {
+  glm_vec3_steps(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec3_stepr(vec3 edge, float v, vec3 dest) {
+  glm_vec3_stepr(edge, v, dest);
 }
 
 CGLM_EXPORT

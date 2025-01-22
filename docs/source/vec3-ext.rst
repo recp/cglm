@@ -28,6 +28,8 @@ Functions:
 #. :c:func:`glm_vec3_isvalid`
 #. :c:func:`glm_vec3_sign`
 #. :c:func:`glm_vec3_abs`
+#. :c:func:`glm_vec3_fract`
+#. :c:func:`glm_vec3_floor`
 #. :c:func:`glm_vec3_sqrt`
 
 Functions documentation
@@ -146,6 +148,22 @@ Functions documentation
 .. c:function:: void glm_vec3_abs(vec3 v, vec3 dest)
 
     absolute value of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector
+
+.. c:function:: void glm_vec3_fract(vec3 v, vec3 dest)
+    
+    fractional part of each vector item
+
+    Parameters:
+      | *[in]*   **v**     vector
+      | *[out]*  **dest**  destination vector
+
+.. c:function:: void glm_vec3_floor(vec3 v, vec3 dest)
+    
+    floor of each vector item
 
     Parameters:
       | *[in]*   **v**     vector
