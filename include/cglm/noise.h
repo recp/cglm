@@ -542,8 +542,8 @@ glm_perlin_vec3(vec3 point) {
   vec3 g011 = {gx1[2], gy1[2], gz1[2]}; /* g011 = vec3(gx1.z, gy1.z, gz1.z); */
   vec3 g111 = {gx1[3], gy1[3], gz1[3]}; /* g111 = vec3(gx1.w, gy1.w, gz1.w); */
 
-  glm__noiseDetail_gradNorm_vec3(g000, g100, g010, g110);
-  glm__noiseDetail_gradNorm_vec3(g001, g101, g011, g111);
+  glm__noiseDetail_gradNorm_vec3(g000, g010, g100, g110);
+  glm__noiseDetail_gradNorm_vec3(g001, g011, g101, g111);
 
   /* ------------ */
 
@@ -650,7 +650,7 @@ glm_perlin_vec2(vec2 point) {
   vec2 g01 = {gx[2], gy[2]}; /* g01 = vec2(gx.z, gy.z) */
   vec2 g11 = {gx[3], gy[3]}; /* g11 = vec2(gx.w, gy.w) */
 
-  glm__noiseDetail_gradNorm_vec2(g00, g10, g01, g11);
+  glm__noiseDetail_gradNorm_vec2(g00, g01, g10, g11);
 
   /* ------------ */
 
