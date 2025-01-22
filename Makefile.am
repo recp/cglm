@@ -270,6 +270,7 @@ libcglm_la_SOURCES=\
     src/bezier.c \
     src/ray.c \
     src/affine2d.c \
+    src/aabb2d.c \
     src/clipspace/ortho_lh_no.c \
     src/clipspace/ortho_lh_zo.c \
     src/clipspace/ortho_rh_no.c \
