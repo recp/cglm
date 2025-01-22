@@ -37,23 +37,49 @@
 
 /* glm__noiseDetail_fade_vec4(vec4 t, vec4 dest) */
 #define glm__noiseDetail_fade_vec4(t, dest) { \
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
-  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
-  dest[3] = (t[3] * t[3] * t[3]) * (t[3] * (t[3] * 6.0f - 15.0f) + 10.0f); \
+  /* dest = (t * t * t) * (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+  vec4 temp; \
+  glm_vec4_mul(t, t, temp); \
+  glm_vec4_mul(temp, t, temp); \
+  /* dest = (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+  glm_vec4_scale(t, 6.0f, dest); \
+  glm_vec4_subs(dest, 15.0f, dest); \
+  glm_vec4_mul(t, dest, dest); \
+  glm_vec4_adds(dest, 10.0f, dest); \
+  /* dest = temp * dest */ \
+  glm_vec4_mul(temp, dest, dest); \
 }
 
 /* glm__noiseDetail_fade_vec3(vec3 t, vec3 dest) */
 #define glm__noiseDetail_fade_vec3(t, dest) { \
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
-  dest[2] = (t[2] * t[2] * t[2]) * (t[2] * (t[2] * 6.0f - 15.0f) + 10.0f); \
+  /* dest = (t * t * t) * (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+  /* temp = t * t * t */ \
+  vec3 temp; \
+  glm_vec3_mul(t, t, temp); \
+  glm_vec3_mul(temp, t, temp); \
+  /* dest = (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+  glm_vec3_scale(t, 6.0f, dest); \
+  glm_vec3_subs(dest, 15.0f, dest); \
+  glm_vec3_mul(t, dest, dest); \
+  glm_vec3_adds(dest, 10.0f, dest); \
+  /* dest = temp * dest */ \
+  glm_vec3_mul(temp, dest, dest); \
 }
 
 /* glm__noiseDetail_fade_vec2(vec2 t, vec2 dest) */
 #define glm__noiseDetail_fade_vec2(t, dest) { \
-  dest[0] = (t[0] * t[0] * t[0]) * (t[0] * (t[0] * 6.0f - 15.0f) + 10.0f); \
-  dest[1] = (t[1] * t[1] * t[1]) * (t[1] * (t[1] * 6.0f - 15.0f) + 10.0f); \
+    /* dest = (t * t * t) * (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+    /* temp = t * t * t */ \
+    vec2 temp; \
+    glm_vec2_mul(t, t, temp); \
+    glm_vec2_mul(temp, t, temp); \
+    /* dest = (t * (t * 6.0f - 15.0f) + 10.0f) */ \
+    glm_vec2_scale(t, 6.0f, dest); \
+    glm_vec2_subs(dest, 15.0f, dest); \
+    glm_vec2_mul(t, dest, dest); \
+    glm_vec2_adds(dest, 10.0f, dest); \
+    /* dest = temp * dest */ \
+    glm_vec2_mul(temp, dest, dest); \
 }
 
 /* glm__noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) */
@@ -674,8 +700,8 @@ glm_perlin_vec2(vec2 point) {
 
   /* fade_xyz = fade(vec2(Pf.x, Pf.y)) */
   vec2 fade_xy;
-  vec2 temp = {Pf[0], Pf[1]}; /* temp = vec2(Pf.x, Pf.y) */
-  glm__noiseDetail_fade_vec2(temp, fade_xy); /* fade_xy = fade(temp) */
+  vec2 temp2 = {Pf[0], Pf[1]}; /* temp = vec2(Pf.x, Pf.y) */
+  glm__noiseDetail_fade_vec2(temp2, fade_xy); /* fade_xy = fade(temp) */
 
   /* n_x = lerp(vec2(n00, n01), vec2(n10, n11), fade_xy.x); */
   vec2 n_x;
