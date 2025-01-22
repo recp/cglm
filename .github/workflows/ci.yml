@@ -102,9 +102,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Add Ubuntu Toolchain PPA
+      if: matrix.target.os == 'ubuntu-20.04'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+        sudo apt-get update
+
     - name: Install Compiler and Ninja
       run: |
-        sudo apt-get update -y
         sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
 
     - name: Configure CMake
@@ -142,6 +149,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+
+    - uses: microsoft/setup-msbuild@v2
+
+    - name: Install Windows SDK for ARM
+      if: matrix.platform.name == 'Windows (ARM)' || matrix.platform.name == 'Windows (ARM64)'
+      run: |
+        choco install windows-sdk-10.0 -y --version=10.0.26100.0
 
     - name: Configure CMake
       run: cmake -B build `
