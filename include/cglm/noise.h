@@ -673,8 +673,9 @@ glm_perlin_vec2(vec2 point) {
   /* ------------ */
 
   /* fade_xyz = fade(vec2(Pf.x, Pf.y)) */
-  vec2 fade_xy = {Pf[0], Pf[1]}; /* fade_xy = vec2(Pf.x, Pf.y) */
-  glm__noiseDetail_fade_vec2(fade_xy, fade_xy); /* fade_xy = fade(fade_xy) */
+  vec2 fade_xy;
+  vec2 temp = {Pf[0], Pf[1]}; /* temp = vec2(Pf.x, Pf.y) */
+  glm__noiseDetail_fade_vec2(temp, fade_xy); /* fade_xy = fade(temp) */
 
   /* n_x = lerp(vec2(n00, n01), vec2(n10, n11), fade_xy.x); */
   vec2 n_x;
