@@ -95,7 +95,8 @@ jobs:
         target:
           - { os: ubuntu-20.04, cc: gcc-11 }
           - { os: ubuntu-22.04, cc: gcc-12 }
-          - { os: ubuntu-22.04, cc: gcc-13 }
+          # GCC 13 is no longer available on Ubuntu 20.04.
+          - { os: ubuntu-24.04, cc: gcc-13 }
           - { os: ubuntu-20.04, cc: clang-12 }
           - { os: ubuntu-22.04, cc: clang-15 }
     steps:
@@ -214,11 +215,11 @@ jobs:
 
     - name: Build (x86)
       working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:BuildInParallel=true
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v143 /p:BuildInParallel=true
 
     - name: Build (x64)
       working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:BuildInParallel=true
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:BuildInParallel=true
 
   build_swift:
     name: Swift ${{ matrix.swift }} / ${{ matrix.os }}
