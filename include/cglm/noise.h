@@ -57,11 +57,12 @@
 }
 
 /* glm__noiseDetail_taylorInvSqrt(vec4 x, vec4 dest) */
-#define glm__noiseDetail_taylorInvSqrt(x, dest) { \
-  dest[0] = 1.79284291400159f - 0.85373472095314f * x[0]; \
-  dest[1] = 1.79284291400159f - 0.85373472095314f * x[1]; \
-  dest[2] = 1.79284291400159f - 0.85373472095314f * x[2]; \
-  dest[3] = 1.79284291400159f - 0.85373472095314f * x[3]; \
+#define glm__noiseDetail_taylorInvSqrt(x, dest) {                        \
+  /* dest = 1.79284291400159f - 0.85373472095314f * x */                 \
+  vec4 temp;                                                             \
+  glm_vec4_scale(x, 0.85373472095314f, temp); /* temp = 0.853...f * x */ \
+  glm_vec4_fill(dest, 1.79284291400159f); /* dest = 1.792...f */         \
+  glm_vec4_sub(dest, temp, dest); /* dest = 1.79284291400159f - temp */  \
 }
 
 /* norm = taylorInvSqrt(vec4(
