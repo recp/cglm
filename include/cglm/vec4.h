@@ -530,6 +530,8 @@ glm_vec4_divs(vec4 v, float s, vec4 dest) {
   glmm_store(dest, wasm_f32x4_div(glmm_load(v), wasm_f32x4_splat(s)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   glmm_store(dest, _mm_div_ps(glmm_load(v), _mm_set1_ps(s)));
+#elif defined(CGLM_NEON_FP)
+  vst1q_f32(dest, vdivq_f32(vld1q_f32(v), vdupq_n_f32(s)));
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
 #endif
