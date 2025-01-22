@@ -187,52 +187,55 @@ jobs:
       run: brew upgrade && brew install ninja
 
     - name: Set SIMD flags
+      shell: ${{ runner.os == 'Windows' && 'pwsh' || 'bash' }}
       run: |
-        if ($Env:RUNNER_OS -eq 'Windows') {
-          if ($Env:SIMD -eq 'none') {
-            $Env:CFLAGS=""
-          } elseif ($Env:SIMD -eq 'sse') {
-            $Env:CFLAGS="-arch:SSE"
-          } elseif ($Env:SIMD -eq 'sse2') {
-            $Env:CFLAGS="-arch:SSE2"
-          } elseif ($Env:SIMD -eq 'sse3') {
-            $Env:CFLAGS="-arch:SSE3"
-          } elseif ($Env:SIMD -eq 'sse4') {
-            $Env:CFLAGS="-arch:SSE4"
-          } elseif ($Env:SIMD -eq 'avx') {
-            $Env:CFLAGS="-arch:AVX"
-          } elseif ($Env:SIMD -eq 'avx2') {
-            $Env:CFLAGS="-arch:AVX2"
-          } elseif ($Env:SIMD -eq 'neon') {
-            $Env:CFLAGS="-arch:NEON"
-          }
-        } else {
-          if [ "${{ matrix.simd }}" == "none" ]; then
-            export CFLAGS=""
-          elif [ "${{ matrix.simd }}" == "sse" ]; then
-            export CFLAGS="-msse"
-          elif [ "${{ matrix.simd }}" == "sse2" ]; then
-            export CFLAGS="-msse2"
-          elif [ "${{ matrix.simd }}" == "sse3" ]; then
-            export CFLAGS="-msse3"
-          elif [ "${{ matrix.simd }}" == "sse4" ]; then
-            export CFLAGS="-msse4"
-          elif [ "${{ matrix.simd }}" == "avx" ]; then
-            export CFLAGS="-mavx"
-          elif [ "${{ matrix.simd }}" == "avx2" ]; then
-            export CFLAGS="-mavx2"
-          elif [ "${{ matrix.simd }}" == "neon" ]; then
-            export CFLAGS="-mfpu=neon"
-          fi
+        ${{ runner.os == 'Windows' && '
+        $simd = "${{ matrix.simd }}"
+        if ($simd -eq "none") {
+          $Env:CFLAGS = ""
+        } elseif ($simd -eq "sse") {
+          $Env:CFLAGS = "-arch:SSE"
+        } elseif ($simd -eq "sse2") {
+          $Env:CFLAGS = "-arch:SSE2"
+        } elseif ($simd -eq "sse3") {
+          $Env:CFLAGS = "-arch:SSE3"
+        } elseif ($simd -eq "sse4") {
+          $Env:CFLAGS = "-arch:SSE4"
+        } elseif ($simd -eq "avx") {
+          $Env:CFLAGS = "-arch:AVX"
+        } elseif ($simd -eq "avx2") {
+          $Env:CFLAGS = "-arch:AVX2"
+        } elseif ($simd -eq "neon") {
+          $Env:CFLAGS = "-arch:NEON"
         }
+        ' || '
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
+        ' }}
 
     - name: Configure CMake
+      shell: ${{ runner.os == 'Windows' && 'pwsh' || 'bash' }}
       run: |
-        if ($Env:RUNNER_OS -eq 'Windows') {
-          cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$Env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
-        } else {
-          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
-        }
+        ${{ runner.os == 'Windows' && '
+        cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$Env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        ' || '
+        cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        ' }}
 
     - name: Build
       run: cmake --build build
