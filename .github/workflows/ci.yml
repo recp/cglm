@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04, fedora-latest, debian-latest, centos-latest, archlinux-latest]
+        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04]
         simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
 
     steps:
@@ -23,21 +23,9 @@ jobs:
       if: runner.os == 'macOS'
       run: brew upgrade && brew install autoconf automake libtool
 
-    - name: Install Autotools on Fedora
-      if: matrix.os == 'fedora-latest'
-      run: sudo dnf install -y autoconf automake libtool
-
-    - name: Install Autotools on Debian
-      if: matrix.os == 'debian-latest'
+    - name: Install Autotools on Ubuntu
+      if: matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04'
       run: sudo apt-get install -y autoconf automake libtool
-
-    - name: Install Autotools on CentOS
-      if: matrix.os == 'centos-latest'
-      run: sudo yum install -y autoconf automake libtool
-
-    - name: Install Autotools on Arch Linux
-      if: matrix.os == 'archlinux-latest'
-      run: sudo pacman -Syu --noconfirm autoconf automake libtool
 
     - name: Set SIMD flags
       run: |
@@ -219,10 +207,12 @@ jobs:
         fi
 
     - name: Configure CMake
-      if: runner.os == 'windows-2022'
-      run: cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
-      else:
-      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      run: |
+        if [ "${{ runner.os }}" == "Windows" ]; then
+          cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        else
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        fi
 
     - name: Build
       run: cmake --build build
