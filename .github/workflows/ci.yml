@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12, macos-14, ubuntu-22.04]
+        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04]
 
     steps:
     - uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12, macos-14]
+        os: [macos-13, macos-14]
 
     steps:
     - uses: actions/checkout@v4
@@ -95,7 +95,6 @@ jobs:
         target:
           - { os: ubuntu-20.04, cc: gcc-11 }
           - { os: ubuntu-22.04, cc: gcc-12 }
-          # GCC 13 is no longer available on Ubuntu 20.04.
           - { os: ubuntu-24.04, cc: gcc-13 }
           - { os: ubuntu-20.04, cc: clang-12 }
           - { os: ubuntu-22.04, cc: clang-15 }
@@ -155,7 +154,7 @@ jobs:
     - name: Install Windows SDK for ARM
       if: matrix.platform.name == 'Windows (ARM)' || matrix.platform.name == 'Windows (ARM64)'
       run: |
-        choco install windows-sdk-10.0 -y --version=10.0.26100.0
+        choco install windows-sdk-10.0 -y
 
     - name: Configure CMake
       run: cmake -B build `
@@ -241,7 +240,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-12, macos-14, ubuntu-22.04]
+        os: [macos-13, macos-14, ubuntu-22.04]
 
     # This has no test yet.
     steps:
