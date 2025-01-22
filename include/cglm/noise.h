@@ -176,16 +176,29 @@
 /* NOTE: This function is not *quite* analogous to glm__noiseDetail_i2gxyzw
  * to try to match the output of glm::perlin. I think it might be a bug in
  * in the original implementation, but for now I'm keeping it consistent. -MK
+ * 
+ * Follow up: The original implementation (glm v 1.0.1) does:
+ * 
+ *   vec<4, T, Q> gx0 = ixy0 * T(1.0 / 7.0);
+ * 
+ * as opposed to:
+ * 
+ *   vec<4, T, Q> gx0 = ixy0 / T(7);
+ * 
+ * This ends up mapping to different simd instructions, at least on AMD.
+ * The delta is tiny but it gets amplified by the rest of the noise function.
+ * Hence we too need to do `glm_vec4_scale` as opposed to `glm_vec4_divs`, to
+ * match it. -MK
  */
 
 /* glm__noiseDetail_i2gxyz(vec4 i, vec4 gx, vec4 gy, vec4 gz) */
 #define glm__noiseDetail_i2gxyz(ixy, gx, gy, gz) {               \
   /* gx = ixy / 7.0 */                                           \
-  glm_vec4_divs(ixy, 7.0f, gx); /* gx = ixy / 7.0 */             \
+  glm_vec4_scale(ixy, 1.0f / 7.0f, gx); /* gx = ixy * (1/7.0) */\
                                                                  \
   /* gy = fract(floor(gx0) / 7.0)) - 0.5; */                     \
   glm_vec4_floor(gx, gy); /* gy = floor(gx) */                   \
-  glm_vec4_divs(gy, 7.0f, gy); /* gy /= 7.0 */                   \
+  glm_vec4_scale(gy, 1.0f / 7.0f, gy); /* gy *= 1 / 7.0 */       \
   glm_vec4_fract(gy, gy); /* gy = fract(gy) */                   \
   glm_vec4_subs(gy, 0.5f, gy); /* gy -= 0.5f */                  \
                                                                  \
