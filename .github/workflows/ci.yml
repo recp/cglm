@@ -188,31 +188,51 @@ jobs:
 
     - name: Set SIMD flags
       run: |
-        if [ "${{ matrix.simd }}" == "none" ]; then
-          export CFLAGS=""
-        elif [ "${{ matrix.simd }}" == "sse" ]; then
-          export CFLAGS="-msse"
-        elif [ "${{ matrix.simd }}" == "sse2" ]; then
-          export CFLAGS="-msse2"
-        elif [ "${{ matrix.simd }}" == "sse3" ]; then
-          export CFLAGS="-msse3"
-        elif [ "${{ matrix.simd }}" == "sse4" ]; then
-          export CFLAGS="-msse4"
-        elif [ "${{ matrix.simd }}" == "avx" ]; then
-          export CFLAGS="-mavx"
-        elif [ "${{ matrix.simd }}" == "avx2" ]; then
-          export CFLAGS="-mavx2"
-        elif [ "${{ matrix.simd }}" == "neon" ]; then
-          export CFLAGS="-mfpu=neon"
-        fi
+        if ($Env:RUNNER_OS -eq 'Windows') {
+          if ($Env:SIMD -eq 'none') {
+            $Env:CFLAGS=""
+          } elseif ($Env:SIMD -eq 'sse') {
+            $Env:CFLAGS="-arch:SSE"
+          } elseif ($Env:SIMD -eq 'sse2') {
+            $Env:CFLAGS="-arch:SSE2"
+          } elseif ($Env:SIMD -eq 'sse3') {
+            $Env:CFLAGS="-arch:SSE3"
+          } elseif ($Env:SIMD -eq 'sse4') {
+            $Env:CFLAGS="-arch:SSE4"
+          } elseif ($Env:SIMD -eq 'avx') {
+            $Env:CFLAGS="-arch:AVX"
+          } elseif ($Env:SIMD -eq 'avx2') {
+            $Env:CFLAGS="-arch:AVX2"
+          } elseif ($Env:SIMD -eq 'neon') {
+            $Env:CFLAGS="-arch:NEON"
+          }
+        } else {
+          if [ "${{ matrix.simd }}" == "none" ]; then
+            export CFLAGS=""
+          elif [ "${{ matrix.simd }}" == "sse" ]; then
+            export CFLAGS="-msse"
+          elif [ "${{ matrix.simd }}" == "sse2" ]; then
+            export CFLAGS="-msse2"
+          elif [ "${{ matrix.simd }}" == "sse3" ]; then
+            export CFLAGS="-msse3"
+          elif [ "${{ matrix.simd }}" == "sse4" ]; then
+            export CFLAGS="-msse4"
+          elif [ "${{ matrix.simd }}" == "avx" ]; then
+            export CFLAGS="-mavx"
+          elif [ "${{ matrix.simd }}" == "avx2" ]; then
+            export CFLAGS="-mavx2"
+          elif [ "${{ matrix.simd }}" == "neon" ]; then
+            export CFLAGS="-mfpu=neon"
+          fi
+        }
 
     - name: Configure CMake
       run: |
-        if [ "${{ runner.os }}" == "Windows" ]; then
-          cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
-        else
+        if ($Env:RUNNER_OS -eq 'Windows') {
+          cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$Env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        } else {
           cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
-        fi
+        }
 
     - name: Build
       run: cmake --build build
@@ -243,23 +263,43 @@ jobs:
 
     - name: Set SIMD flags
       run: |
-        if [ "${{ matrix.simd }}" == "none" ]; then
-          export CFLAGS=""
-        elif [ "${{ matrix.simd }}" == "sse" ]; then
-          export CFLAGS="-msse"
-        elif [ "${{ matrix.simd }}" == "sse2" ]; then
-          export CFLAGS="-msse2"
-        elif [ "${{ matrix.simd }}" == "sse3" ]; then
-          export CFLAGS="-msse3"
-        elif [ "${{ matrix.simd }}" == "sse4" ]; then
-          export CFLAGS="-msse4"
-        elif [ "${{ matrix.simd }}" == "avx" ]; then
-          export CFLAGS="-mavx"
-        elif [ "${{ matrix.simd }}" == "avx2" ]; then
-          export CFLAGS="-mavx2"
-        elif [ "${{ matrix.simd }}" == "neon" ]; then
-          export CFLAGS="-mfpu=neon"
-        fi
+        if ($Env:RUNNER_OS -eq 'Windows') {
+          if ($Env:SIMD -eq 'none') {
+            $Env:CFLAGS=""
+          } elseif ($Env:SIMD -eq 'sse') {
+            $Env:CFLAGS="-arch:SSE"
+          } elseif ($Env:SIMD -eq 'sse2') {
+            $Env:CFLAGS="-arch:SSE2"
+          } elseif ($Env:SIMD -eq 'sse3') {
+            $Env:CFLAGS="-arch:SSE3"
+          } elseif ($Env:SIMD -eq 'sse4') {
+            $Env:CFLAGS="-arch:SSE4"
+          } elseif ($Env:SIMD -eq 'avx') {
+            $Env:CFLAGS="-arch:AVX"
+          } elseif ($Env:SIMD -eq 'avx2') {
+            $Env:CFLAGS="-arch:AVX2"
+          } elseif ($Env:SIMD -eq 'neon') {
+            $Env:CFLAGS="-arch:NEON"
+          }
+        } else {
+          if [ "${{ matrix.simd }}" == "none" ]; then
+            export CFLAGS=""
+          elif [ "${{ matrix.simd }}" == "sse" ]; then
+            export CFLAGS="-msse"
+          elif [ "${{ matrix.simd }}" == "sse2" ]; then
+            export CFLAGS="-msse2"
+          elif [ "${{ matrix.simd }}" == "sse3" ]; then
+            export CFLAGS="-msse3"
+          elif [ "${{ matrix.simd }}" == "sse4" ]; then
+            export CFLAGS="-msse4"
+          elif [ "${{ matrix.simd }}" == "avx" ]; then
+            export CFLAGS="-mavx"
+          elif [ "${{ matrix.simd }}" == "avx2" ]; then
+            export CFLAGS="-mavx2"
+          elif [ "${{ matrix.simd }}" == "neon" ]; then
+            export CFLAGS="-mfpu=neon"
+          fi
+        }
 
     - name: Build with meson
       run: |
@@ -287,31 +327,31 @@ jobs:
 
     - name: Set SIMD flags
       run: |
-        if [ "${{ matrix.simd }}" == "none" ]; then
-          $env:CFLAGS=""
-        elif [ "${{ matrix.simd }}" == "sse" ]; then
-          $env:CFLAGS="-arch:SSE"
-        elif [ "${{ matrix.simd }}" == "sse2" ]; then
-          $env:CFLAGS="-arch:SSE2"
-        elif [ "${{ matrix.simd }}" == "sse3" ]; then
-          $env:CFLAGS="-arch:SSE3"
-        elif [ "${{ matrix.simd }}" == "sse4" ]; then
-          $env:CFLAGS="-arch:SSE4"
-        elif [ "${{ matrix.simd }}" == "avx" ]; then
-          $env:CFLAGS="-arch:AVX"
-        elif [ "${{ matrix.simd }}" == "avx2" ]; then
-          $env:CFLAGS="-arch:AVX2"
-        elif [ "${{ matrix.simd }}" == "neon" ]; then
-          $env:CFLAGS="-arch:NEON"
-        fi
+        if ($Env:SIMD -eq 'none') {
+          $Env:CFLAGS=""
+        } elseif ($Env:SIMD -eq 'sse') {
+          $Env:CFLAGS="-arch:SSE"
+        } elseif ($Env:SIMD -eq 'sse2') {
+          $Env:CFLAGS="-arch:SSE2"
+        } elseif ($Env:SIMD -eq 'sse3') {
+          $Env:CFLAGS="-arch:SSE3"
+        } elseif ($Env:SIMD -eq 'sse4') {
+          $Env:CFLAGS="-arch:SSE4"
+        } elseif ($Env:SIMD -eq 'avx') {
+          $Env:CFLAGS="-arch:AVX"
+        } elseif ($Env:SIMD -eq 'avx2') {
+          $Env:CFLAGS="-arch:AVX2"
+        } elseif ($Env:SIMD -eq 'neon') {
+          $Env:CFLAGS="-arch:NEON"
+        }
 
     - name: Build (x86)
       working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$env:CFLAGS"
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x86 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$Env:CFLAGS"
 
     - name: Build (x64)
       working-directory: win
-      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$env:CFLAGS"
+      run: msbuild cglm.vcxproj /p:Configuration=Release /p:Platform=x64 /p:PlatformToolset=v143 /p:BuildInParallel=true /p:AdditionalOptions="$Env:CFLAGS"
 
   build_documentation:
     name: Documentation
