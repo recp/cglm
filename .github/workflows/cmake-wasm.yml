@@ -42,6 +42,8 @@ jobs:
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
+      # Below suppress <<'clock' is deprecated: WASI lacks process-associated clocks; ...>> warns:
+      #   -D_WASI_EMULATED_PROCESS_CLOCKS" -DCMAKE_EXE_LINKER_FLAGS="-lwasi-emulated-process-clocks
       run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}} -D_WASI_EMULATED_PROCESS_CLOCKS" -DCMAKE_EXE_LINKER_FLAGS="-lwasi-emulated-process-clocks" -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0/share/cmake/wasi-sdk.cmake -DWASI_SDK_PREFIX=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0 -DCGLM_STATIC=ON -DCGLM_SHARED=OFF -DCGLM_USE_TEST=ON
 
     - name: Build
