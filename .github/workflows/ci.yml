@@ -188,33 +188,24 @@ jobs:
       if: runner.os == 'macOS'
       run: brew upgrade && brew install ninja
 
-    - name: Set SIMD flags (Windows)
-      if: runner.os == 'Windows'
-      shell: pwsh
+    - name: Set SIMD flags
+      shell: ${{ (runner.os == 'Windows' && 'pwsh') || 'bash' }}
       run: |
-        $simd = "${{ matrix.simd }}"
-        if ($simd -eq "none") {
-          $env:CFLAGS = ""
-        } elseif ($simd -eq "sse") {
-          $env:CFLAGS = "-arch:SSE"
-        } elseif ($simd -eq "sse2") {
-          $env:CFLAGS = "-arch:SSE2"
-        } elseif ($simd -eq "sse3") {
-          $env:CFLAGS = "-arch:SSE3"
-        } elseif ($simd -eq "sse4") {
-          $env:CFLAGS = "-arch:SSE4"
-        } elseif ($simd -eq "avx") {
-          $env:CFLAGS = "-arch:AVX"
-        } elseif ($simd -eq "avx2") {
-          $env:CFLAGS = "-arch:AVX2"
-        } elseif ($simd -eq "neon") {
-          $env:CFLAGS = "-arch:NEON"
+        ${{ (runner.os == 'Windows' && 'function Set-Flags {
+          $simd = $env:MATRIX_SIMD
+          switch ($simd) {
+            "none"  { $env:CFLAGS = "" }
+            "sse"   { $env:CFLAGS = "-arch:SSE" }
+            "sse2"  { $env:CFLAGS = "-arch:SSE2" }
+            "sse3"  { $env:CFLAGS = "-arch:SSE3" }
+            "sse4"  { $env:CFLAGS = "-arch:SSE4" }
+            "avx"   { $env:CFLAGS = "-arch:AVX" }
+            "avx2"  { $env:CFLAGS = "-arch:AVX2" }
+            "neon"  { $env:CFLAGS = "-arch:NEON" }
+          }
         }
-
-    - name: Set SIMD flags (Unix)
-      if: runner.os != 'Windows'
-      shell: bash
-      run: |
+        $env:MATRIX_SIMD = "' + matrix.simd + '"
+        Set-Flags') || '
         if [ "${{ matrix.simd }}" == "none" ]; then
           export CFLAGS=""
         elif [ "${{ matrix.simd }}" == "sse" ]; then
@@ -231,25 +222,20 @@ jobs:
           export CFLAGS="-mavx2"
         elif [ "${{ matrix.simd }}" == "neon" ]; then
           export CFLAGS="-mfpu=neon"
-        fi
+        fi' }}
 
-    - name: Configure CMake (Windows)
-      if: runner.os == 'Windows'
-      shell: pwsh
-      run: cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF
-
-    - name: Configure CMake (Unix)
-      if: runner.os != 'Windows'
-      shell: bash
-      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF
+    - name: Configure CMake
+      shell: ${{ (runner.os == 'Windows' && 'pwsh') || 'bash' }}
+      run: |
+        ${{ (runner.os == 'Windows' && 'cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF -DCMAKE_C_FLAGS="$env:CFLAGS"') || 'cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF -DCMAKE_C_FLAGS="$CFLAGS"' }}
 
     - name: Build
       run: cmake --build build --config Release
 
     - name: Test
       working-directory: build
-      shell: ${{ runner.os == 'Windows' && 'pwsh' || 'bash' }}
-      run: ${{ runner.os == 'Windows' && '.\Release\tests.exe' || './tests' }}
+      shell: ${{ (runner.os == 'Windows' && 'pwsh') || 'bash' }}
+      run: ${{ (runner.os == 'Windows' && '.\Release\tests.exe') || './tests' }}
 
   build_meson:
     name: Meson / ${{ matrix.os }} / ${{ matrix.simd }}
