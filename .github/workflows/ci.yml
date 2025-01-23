@@ -248,7 +248,7 @@ jobs:
       if: runner.os == 'Windows'
       shell: pwsh
       working-directory: build
-      run: .\tests.exe
+      run: .\Debug\tests.exe
 
     - name: Test (Unix)
       if: runner.os != 'Windows'
