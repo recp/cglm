@@ -130,7 +130,7 @@ jobs:
         fi
 
     - name: Configure CMake
-      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{ matrix.target.cc }} -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{ matrix.target.cc }} -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF
 
     - name: Build
       run: cmake --build build
@@ -161,7 +161,9 @@ jobs:
           -GNinja \
           -DCMAKE_BUILD_TYPE=Release \
           -DCGLM_STATIC=ON \
-          -DCGLM_USE_TEST=ON
+          -DCGLM_USE_TEST=ON \
+          -DCGLM_USE_C99=OFF \
+          -DCGLM_SHARED=OFF
 
     - name: Build
       run: cmake --build build
@@ -234,19 +236,20 @@ jobs:
     - name: Configure CMake (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
-      run: cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      run: cmake -B build -G "Visual Studio 17 2022" -A x64 -T host=x64 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$env:CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF
 
     - name: Configure CMake (Unix)
       if: runner.os != 'Windows'
       shell: bash
-      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON -DCGLM_USE_C99=OFF -DCGLM_SHARED=OFF
 
     - name: Build
-      run: cmake --build build
+      run: cmake --build build --config Release
 
     - name: Test
       working-directory: build
-      run: ./tests
+      shell: ${{ runner.os == 'Windows' && 'pwsh' || 'bash' }}
+      run: ${{ runner.os == 'Windows' && '.\Release\tests.exe' || './tests' }}
 
   build_meson:
     name: Meson / ${{ matrix.os }} / ${{ matrix.simd }}
