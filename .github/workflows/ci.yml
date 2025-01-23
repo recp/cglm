@@ -276,47 +276,61 @@ jobs:
     - name: Install meson
       run: python3 -m pip install meson ninja
 
-    - name: Set SIMD flags
+    - name: Set SIMD flags (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
       run: |
-        if ($Env:RUNNER_OS -eq 'Windows') {
-          if ($Env:SIMD -eq 'none') {
-            $Env:CFLAGS=""
-          } elseif ($Env:SIMD -eq 'sse') {
-            $Env:CFLAGS="-arch:SSE"
-          } elseif ($Env:SIMD -eq 'sse2') {
-            $Env:CFLAGS="-arch:SSE2"
-          } elseif ($Env:SIMD -eq 'sse3') {
-            $Env:CFLAGS="-arch:SSE3"
-          } elseif ($Env:SIMD -eq 'sse4') {
-            $Env:CFLAGS="-arch:SSE4"
-          } elseif ($Env:SIMD -eq 'avx') {
-            $Env:CFLAGS="-arch:AVX"
-          } elseif ($Env:SIMD -eq 'avx2') {
-            $Env:CFLAGS="-arch:AVX2"
-          } elseif ($Env:SIMD -eq 'neon') {
-            $Env:CFLAGS="-arch:NEON"
-          }
-        } else {
-          if [ "${{ matrix.simd }}" == "none" ]; then
-            export CFLAGS=""
-          elif [ "${{ matrix.simd }}" == "sse" ]; then
-            export CFLAGS="-msse"
-          elif [ "${{ matrix.simd }}" == "sse2" ]; then
-            export CFLAGS="-msse2"
-          elif [ "${{ matrix.simd }}" == "sse3" ]; then
-            export CFLAGS="-msse3"
-          elif [ "${{ matrix.simd }}" == "sse4" ]; then
-            export CFLAGS="-msse4"
-          elif [ "${{ matrix.simd }}" == "avx" ]; then
-            export CFLAGS="-mavx"
-          elif [ "${{ matrix.simd }}" == "avx2" ]; then
-            export CFLAGS="-mavx2"
-          elif [ "${{ matrix.simd }}" == "neon" ]; then
-            export CFLAGS="-mfpu=neon"
-          fi
+        $simd = "${{ matrix.simd }}"
+        if ($simd -eq "none") {
+          $env:CFLAGS = ""
+        } elseif ($simd -eq "sse") {
+          $env:CFLAGS = "-arch:SSE"
+        } elseif ($simd -eq "sse2") {
+          $env:CFLAGS = "-arch:SSE2"
+        } elseif ($simd -eq "sse3") {
+          $env:CFLAGS = "-arch:SSE3"
+        } elseif ($simd -eq "sse4") {
+          $env:CFLAGS = "-arch:SSE4"
+        } elseif ($simd -eq "avx") {
+          $env:CFLAGS = "-arch:AVX"
+        } elseif ($simd -eq "avx2") {
+          $env:CFLAGS = "-arch:AVX2"
+        } elseif ($simd -eq "neon") {
+          $env:CFLAGS = "-arch:NEON"
         }
 
-    - name: Build with meson
+    - name: Set SIMD flags (Unix)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        if [ "${{ matrix.simd }}" == "none" ]; then
+          export CFLAGS=""
+        elif [ "${{ matrix.simd }}" == "sse" ]; then
+          export CFLAGS="-msse"
+        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+          export CFLAGS="-msse2"
+        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+          export CFLAGS="-msse3"
+        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+          export CFLAGS="-msse4"
+        elif [ "${{ matrix.simd }}" == "avx" ]; then
+          export CFLAGS="-mavx"
+        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+          export CFLAGS="-mavx2"
+        elif [ "${{ matrix.simd }}" == "neon" ]; then
+          export CFLAGS="-mfpu=neon"
+        fi
+
+    - name: Build with meson (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        meson setup build -Dbuildtype=release --default-library=static -Dbuild_tests=true -Dc_args="$env:CFLAGS"
+        meson test -C build
+
+    - name: Build with meson (Unix)
+      if: runner.os != 'Windows'
+      shell: bash
       run: |
         meson setup build -Dbuildtype=release --default-library=static -Dbuild_tests=true -Dc_args="$CFLAGS"
         meson test -C build
