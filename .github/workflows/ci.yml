@@ -244,7 +244,15 @@ jobs:
     - name: Build
       run: cmake --build build
 
-    - name: Test
+    - name: Test (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      working-directory: build
+      run: .\tests.exe
+
+    - name: Test (Unix)
+      if: runner.os != 'Windows'
+      shell: bash
       working-directory: build
       run: ./tests
 
