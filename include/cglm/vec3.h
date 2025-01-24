@@ -72,7 +72,6 @@
    CGLM_INLINE void  glm_vec3_lerpc(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_mix(vec3 from, vec3 to, float t, vec3 dest);
    CGLM_INLINE void  glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest);
-   CGLM_INLINE void  glm_vec3_step_uni(float edge, vec3 x, vec3 dest);
    CGLM_INLINE void  glm_vec3_step(vec3 edge, vec3 x, vec3 dest);
    CGLM_INLINE void  glm_vec3_smoothstep_uni(float edge0, float edge1, vec3 x, vec3 dest);
    CGLM_INLINE void  glm_vec3_smoothstep(vec3 edge0, vec3 edge1, vec3 x, vec3 dest);
@@ -97,6 +96,7 @@
    glm_vec3_inv
    glm_vec3_inv_to
    glm_vec3_mulv
+   glm_vec3_step_uni  -->  use glm_vec3_steps
  */
 
 #ifndef cglm_vec3_h
@@ -114,6 +114,7 @@
 #define glm_vec3_inv(v)               glm_vec3_negate(v)
 #define glm_vec3_inv_to(v, dest)      glm_vec3_negate_to(v, dest)
 #define glm_vec3_mulv(a, b, d)        glm_vec3_mul(a, b, d)
+#define glm_vec3_step_uni(edge, x, dest) glm_vec3_steps(edge, x, dest)
 
 #define GLM_VEC3_ONE_INIT   {1.0f, 1.0f, 1.0f}
 #define GLM_VEC3_ZERO_INIT  {0.0f, 0.0f, 0.0f}
@@ -1013,21 +1014,6 @@ glm_vec3_mixc(vec3 from, vec3 to, float t, vec3 dest) {
 }
 
 /*!
- * @brief threshold function (unidimensional)
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @param[out]  dest    destination
- */
-CGLM_INLINE
-void
-glm_vec3_step_uni(float edge, vec3 x, vec3 dest) {
-  dest[0] = glm_step(edge, x[0]);
-  dest[1] = glm_step(edge, x[1]);
-  dest[2] = glm_step(edge, x[2]);
-}
-
-/*!
  * @brief threshold function
  *
  * @param[in]   edge    threshold
@@ -1263,7 +1249,7 @@ glm_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest) {
 
   ndi = glm_vec3_dot(n, v);
   eni = eta * ndi;
-  k   = 1.0f + eta * eta - eni * eni;
+  k   = 1.0f - eta * eta + eni * eni;
 
   if (k < 0.0f) {
     glm_vec3_zero(dest);

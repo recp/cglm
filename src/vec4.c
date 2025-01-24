@@ -268,12 +268,6 @@ glmc_vec4_lerpc(vec4 from, vec4 to, float t, vec4 dest) {
 
 CGLM_EXPORT
 void
-glmc_vec4_step_uni(float edge, vec4 x, vec4 dest) {
-  glm_vec4_step_uni(edge, x, dest);
-}
-
-CGLM_EXPORT
-void
 glmc_vec4_step(vec4 edge, vec4 x, vec4 dest) {
   glm_vec4_step(edge, x, dest);
 }
@@ -306,6 +300,12 @@ CGLM_EXPORT
 void
 glmc_vec4_cubic(float s, vec4 dest) {
   glm_vec4_cubic(s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_swizzle(vec4 v, int mask, vec4 dest) {
+  glm_vec4_swizzle(v, mask, dest);
 }
 
 /* ext */
@@ -404,6 +404,30 @@ CGLM_EXPORT
 void
 glmc_vec4_fract(vec4 v, vec4 dest) {
   glm_vec4_fract(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_floor(vec4 v, vec4 dest) {
+  glm_vec4_floor(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_mods(vec4 v, float s, vec4 dest) {
+  glm_vec4_mods(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_steps(float edge, vec4 v, vec4 dest) {
+  glm_vec4_steps(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec4_stepr(vec4 edge, float v, vec4 dest) {
+  glm_vec4_stepr(edge, v, dest);
 }
 
 CGLM_EXPORT

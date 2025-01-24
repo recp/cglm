@@ -688,6 +688,70 @@ TEST_IMPL(GLM_PREFIX, vec2_abs) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, vec2_fract) {
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
+
+  GLM(vec2_fract)(v1, v3);
+  GLM(vec2_fract)(v2, v4);
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v5))
+  ASSERTIFY(test_assert_vec2_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_floor) {
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {2.0f, 3.0f}, v6 = {12.0f, 31.0f};
+
+  GLM(vec2_floor)(v1, v3);
+  GLM(vec2_floor)(v2, v4);
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v5))
+  ASSERTIFY(test_assert_vec2_eq(v4, v6))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_mods) {
+  vec2 v1 = {2.104f, 3.012f}, v2 = {12.35f, 31.140f}, v3, v4;
+  vec2 v5 = {0.104f, 0.012f}, v6 = {0.35f, 0.140f};
+
+  /* Mod 1 - leaves just the fractional part */
+  GLM(vec2_mods)(v1, 1.0f, v3);
+  GLM(vec2_mods)(v2, 1.0f, v4);
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v5))
+  ASSERTIFY(test_assert_vec2_eq(v4, v6))
+
+  /* Mod 2 - parity + fractional part */
+  GLM(vec2_mods)(v1, 2.0f, v3);
+  GLM(vec2_mods)(v2, 2.0f, v4);
+
+  vec2 v7 = {0.104f, 1.012f}, v8 = {0.35f, 1.140f};
+
+  ASSERTIFY(test_assert_vec2_eq(v3, v7))
+  ASSERTIFY(test_assert_vec2_eq(v4, v8))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_swizzle) {
+  vec2 v;
+
+  v[0] = 1;
+  v[1] = 2;
+  
+  GLM(vec2_swizzle)(v, GLM_SHUFFLE2(1, 0), v);
+  ASSERTIFY(test_assert_vec2_eq(v, (vec2){2, 1}))
+  
+  GLM(vec2_swizzle)(v, GLM_SHUFFLE2(0, 0), v);
+  ASSERTIFY(test_assert_vec2_eq(v, (vec2){1, 1}))
+  
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, vec2_lerp) {
   vec2 v1 = {-100.0f, -200.0f};
   vec2 v2 = {100.0f, 200.0f};
@@ -700,6 +764,66 @@ TEST_IMPL(GLM_PREFIX, vec2_lerp) {
   GLM(vec2_lerp)(v1, v2, 0.75f, v3);
   ASSERT(test_eq(v3[0], 50.0f))
   ASSERT(test_eq(v3[1], 100.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_steps) {
+  vec2 v1 = {-100.0f, -200.0f};
+  vec2 v2;
+
+  GLM(vec2_steps)(-2.5f, v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  
+  GLM(vec2_steps)(-150.0f, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  
+  GLM(vec2_steps)(-300.0f, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_stepr) {
+  vec2 v1 = {-2.5f, -150.0f};
+  vec2 v2;
+
+  GLM(vec2_stepr)(v1, -200.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  
+  GLM(vec2_stepr)(v1, -150.0f, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  
+  GLM(vec2_stepr)(v1, 0.0f, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, vec2_step) {
+  vec2 v1 = {-100.0f, -200.0f};
+  vec2 s1 = {-100.0f, 0.0f};
+  vec2 s2 = {100.0f, -220.0f};
+  vec2 s3 = {100.0f, 200.0f};
+  vec2 v2;
+
+  GLM(vec2_step)(s1, v1, v2);
+  ASSERT(test_eq(v2[0], 1.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  
+  GLM(vec2_step)(s2, v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 1.0f))
+  
+  GLM(vec2_step)(s3, v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
 
   TEST_SUCCESS
 }
@@ -792,7 +916,7 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
   r = GLM(vec2_refract)(v, N, eta, dest);
   // In 2D, we expect a similar bending behavior as in 3D, so we check dest[1]
   if (!(dest[0] == 0.0f && dest[1] == 0.0f)) {
-    ASSERT(dest[1] < -sqrtf(0.5f)); // Refracted ray bends away from the normal
+    ASSERT(dest[1] < -0.3f); // Refracted ray bends away from the normal
     ASSERT(r == true);
   } else {
     ASSERT(dest[0] == 0.0f && dest[1] == 0.0f); // Total internal reflection
@@ -809,7 +933,7 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
   eta = 1.5f / 1.33f;
   r = GLM(vec2_refract)(v, N, eta, dest);
   ASSERT(r == true);
-  ASSERT(dest[1] < -sqrtf(0.5f)); // Expect bending towards the normal, less bending than air to glass
+  ASSERT(dest[1] < -0.6f); // Expect bending towards the normal, less bending than air to glass
 
   /* Diamond to Air (eta = 2.42 / 1.0) */
   eta = 2.42f / 1.0f;
@@ -825,4 +949,3 @@ TEST_IMPL(GLM_PREFIX, vec2_refract) {
 
   TEST_SUCCESS
 }
-

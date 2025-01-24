@@ -199,4 +199,3 @@ void
 glmc_ivec4_abs(ivec4 v, ivec4 dest) {
   glm_ivec4_abs(v, dest);
 }
-

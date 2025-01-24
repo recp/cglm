@@ -37,6 +37,7 @@
    CGLM_INLINE versors glms_quat_lerpc(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_nlerp(versors from, versors to, float t)
    CGLM_INLINE versors glms_quat_slerp(versors from, versors to, float t)
+   CGLM_INLINE versors glms_quat_slerp_longest(versors from, versors to, float t)
    CGLM_INLINE mat4s.  glms_quat_look(vec3s eye, versors ori)
    CGLM_INLINE versors glms_quat_for(vec3s dir, vec3s fwd, vec3s up)
    CGLM_INLINE versors glms_quat_forp(vec3s from, vec3s to, vec3s fwd, vec3s up)
@@ -104,7 +105,7 @@ glms_quat_(identity_array)(versors * __restrict q, size_t count) {
 }
 
 /*!
- * @brief inits quaterion with raw values
+ * @brief inits quaternion with raw values
  *
  * @param[in]   x     x
  * @param[in]   y     y
@@ -454,6 +455,23 @@ versors
 glms_quat_(slerp)(versors from, versors to, float t) {
   versors dest;
   glm_quat_slerp(from.raw, to.raw, t, dest.raw);
+  return dest;
+}
+
+/*!
+ * @brief interpolates between two quaternions
+ *        using spherical linear interpolation (SLERP) and always takes the longest path
+ *
+ * @param[in]   from  from
+ * @param[in]   to    to
+ * @param[in]   t     amount
+ * @returns result quaternion
+ */
+CGLM_INLINE
+versors
+glms_quat_(slerp_longest)(versors from, versors to, float t) {
+  versors dest;
+  glm_quat_slerp_longest(from.raw, to.raw, t, dest.raw);
   return dest;
 }
 

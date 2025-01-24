@@ -20,6 +20,11 @@
    CGLM_INLINE bool  glm_vec2_isvalid(vec2 v);
    CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_abs(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_fract(vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_floor(vec2 v, vec2 dest);
+   CGLM_INLINE float glm_vec2_mods(vec2 v, float s, vec2 dest);
+   CGLM_INLINE float glm_vec2_steps(float edge, vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_stepr(vec2 edge, float v, vec2 dest);
    CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
    CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
    CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
@@ -128,7 +133,7 @@ glm_vec2_min(vec2 v) {
 }
 
 /*!
- * @brief check if all items are NaN (not a number)
+ * @brief check if one of items is NaN (not a number)
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -136,11 +141,15 @@ glm_vec2_min(vec2 v) {
 CGLM_INLINE
 bool
 glm_vec2_isnan(vec2 v) {
+#ifndef CGLM_FAST_MATH
   return isnan(v[0]) || isnan(v[1]);
+#else
+  return false;
+#endif
 }
 
 /*!
- * @brief check if all items are INFINITY
+ * @brief check if one of items is INFINITY
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -148,7 +157,11 @@ glm_vec2_isnan(vec2 v) {
 CGLM_INLINE
 bool
 glm_vec2_isinf(vec2 v) {
+#ifndef CGLM_FAST_MATH
   return isinf(v[0]) || isinf(v[1]);
+#else
+  return false;
+#endif
 }
 
 /*!
@@ -191,6 +204,46 @@ glm_vec2_abs(vec2 v, vec2 dest) {
 }
 
 /*!
+ * @brief fractional part of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_fract(vec2 v, vec2 dest) {
+  dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
+  dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_floor(vec2 v, vec2 dest) {
+  dest[0] = floorf(v[0]);
+  dest[1] = floorf(v[1]);
+}
+
+/*!
+ * @brief mod of each vector item, result is written to dest (dest = v % s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec2_mods(vec2 v, float s, vec2 dest) {
+  dest[0] = fmodf(v[0], s);
+  dest[1] = fmodf(v[1], s);
+}
+
+/*!
  * @brief square root of each vector item
  *
  * @param[in]  v    vector
@@ -218,6 +271,36 @@ glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest) {
   ti = a[0] * b[1] + a[1] * b[0];
   dest[0] = tr;
   dest[1] = ti;
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       vector to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_steps(float edge, vec2 x, vec2 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold vector
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_stepr(vec2 edge, float x, vec2 dest) {
+  dest[0] = glm_step(edge[0], x);
+  dest[1] = glm_step(edge[1], x);
 }
 
 /*!

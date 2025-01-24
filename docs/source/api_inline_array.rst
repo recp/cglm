@@ -66,6 +66,7 @@ Follow the :doc:`build` documentation for this
    ivec4
    color
    plane
+   noise
    project
    util
    io

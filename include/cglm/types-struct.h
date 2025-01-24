@@ -25,6 +25,12 @@
       * only #define governing the use of anonymous structs, so for backward
       * compatibility, we still honor that choice and disable them. */
 #    define CGLM_USE_ANONYMOUS_STRUCT 0
+     /* Disable anonymous structs if strict ANSI mode is enabled for C89 or C99 */
+#  elif defined(__STRICT_ANSI__) && \
+        (!defined(__STDC_VERSION__) || (__STDC_VERSION__ < 201112L))
+     /* __STRICT_ANSI__ is defined and we're in C89
+      * or C99 mode (C11 or later not detected) */
+#    define CGLM_USE_ANONYMOUS_STRUCT 0
 #  elif (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L) || \
         (defined(__cplusplus)      && __cplusplus >= 201103L)
      /* We're compiling for C11 or this is the MSVC compiler. In either

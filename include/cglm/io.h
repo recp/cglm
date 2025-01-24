@@ -132,9 +132,9 @@ glm_mat4_print(mat4              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }
@@ -175,9 +175,9 @@ glm_mat3_print(mat3              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }
@@ -217,9 +217,9 @@ glm_mat2_print(mat2              matrix,
   for (i = 0; i < m; i++) {
     for (j = 0; j < n; j++) {
       if (matrix[i][j] < CGLM_PRINT_MAX_TO_SHORT)
-        cwi = sprintf(buff, "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% .*f", CGLM_PRINT_PRECISION, (double)matrix[i][j]);
       else
-        cwi = sprintf(buff, "% g", (double)matrix[i][j]);
+        cwi = snprintf(buff, sizeof(buff), "% g", (double)matrix[i][j]);
       cw[i] = GLM_MAX(cw[i], cwi);
     }
   }

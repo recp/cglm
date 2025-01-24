@@ -87,5 +87,3 @@ glmc_aabb2d_circle(vec2 aabb[2], vec3 s);
 }
 #endif
 #endif /* cglmc_aabb2d_h */
-
-

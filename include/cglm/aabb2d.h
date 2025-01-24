@@ -95,7 +95,7 @@ glm_aabb2d_merge(vec2 aabb1[2], vec2 aabb2[2], vec2 dest[2]) {
 /*!
  * @brief crops a bounding aabb with another one.
  *
- * this could be useful for gettng a baabb which fits with view frustum and
+ * this could be useful for getting a baabb which fits with view frustum and
  * object bounding aabbes. In this case you crop view frustum aabb with objects
  * aabb
  *
@@ -116,7 +116,7 @@ glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
 /*!
  * @brief crops a bounding aabb with another one.
  *
- * this could be useful for gettng a baabb which fits with view frustum and
+ * this could be useful for getting a baabb which fits with view frustum and
  * object bounding aabbes. In this case you crop view frustum aabb with objects
  * aabb
  *
@@ -268,4 +268,3 @@ glm_aabb2d_contains(vec2 aabb[2], vec2 other[2]) {
 }
 
 #endif /* cglm_aabb2d_h */
-

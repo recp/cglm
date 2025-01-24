@@ -53,6 +53,7 @@
    CGLM_INLINE vec2s glms_vec2_minv(vec2s a, vec2s b)
    CGLM_INLINE vec2s glms_vec2_clamp(vec2s v, float minVal, float maxVal)
    CGLM_INLINE vec2s glms_vec2_lerp(vec2s from, vec2s to, float t)
+   CGLM_INLINE vec2s glms_vec2_step(vec2s edge, vec2s x)
    CGLM_INLINE vec2s glms_vec2_make(float * restrict src)
    CGLM_INLINE vec2s glms_vec2_reflect(vec2s v, vec2s n)
    CGLM_INLINE bool  glms_vec2_refract(vec2s v, vec2s n, float eta, vec2s *dest)
@@ -676,6 +677,21 @@ vec2s
 glms_vec2_(lerp)(vec2s from, vec2s to, float t) {
   vec2s r;
   glm_vec2_lerp(from.raw, to.raw, t, r.raw);
+  return r;
+}
+
+/*!
+ * @brief threshold function
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @returns             destination
+ */
+CGLM_INLINE
+vec2s
+glms_vec2_(step)(vec2s edge, vec2s x) {
+  vec2s r;
+  glm_vec2_step(edge.raw, x.raw, r.raw);
   return r;
 }
 

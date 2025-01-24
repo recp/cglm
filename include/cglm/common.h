@@ -51,6 +51,7 @@
 
 #define GLM_SHUFFLE4(z, y, x, w) (((z) << 6) | ((y) << 4) | ((x) << 2) | (w))
 #define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
+#define GLM_SHUFFLE2(y, x)       (((y) << 2) | (x))
 
 #include "types.h"
 #include "simd/intrin.h"

@@ -275,6 +275,48 @@ glmc_vec2_abs(vec2 v, vec2 dest) {
 
 CGLM_EXPORT
 void
+glmc_vec2_fract(vec2 v, vec2 dest) {
+  glm_vec2_fract(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_floor(vec2 v, vec2 dest) {
+  glm_vec2_floor(v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_mods(vec2 v, float s, vec2 dest) {
+  glm_vec2_mods(v, s, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_step(vec2 edge, vec2 v, vec2 dest) {
+  glm_vec2_step(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_steps(float edge, vec2 v, vec2 dest) {
+  glm_vec2_steps(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_stepr(vec2 edge, float v, vec2 dest) {
+  glm_vec2_stepr(edge, v, dest);
+}
+
+CGLM_EXPORT
+void
+glmc_vec2_swizzle(vec2 v, int mask, vec2 dest) {
+  glm_vec2_swizzle(v, mask, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
   glm_vec2_lerp(from, to, t, dest);
 }

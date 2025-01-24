@@ -11,9 +11,9 @@ Header: cglm/quat.h
 
 What you can do with quaternions with existing functions is (Some of them):
 
-- You can rotate transform matrix using quaterion
-- You can rotate vector using quaterion
-- You can create view matrix using quaterion
+- You can rotate transform matrix using quaternion
+- You can rotate vector using quaternion
+- You can create view matrix using quaternion
 - You can create a lookrotation (from source point to dest)
 
 Table of contents (click to go):
@@ -55,6 +55,7 @@ Functions:
 #. :c:func:`glm_quat_lerp`
 #. :c:func:`glm_quat_nlerp`
 #. :c:func:`glm_quat_slerp`
+#. :c:func:`glm_quat_slerp_longest`
 #. :c:func:`glm_quat_look`
 #. :c:func:`glm_quat_for`
 #. :c:func:`glm_quat_forp`
@@ -345,6 +346,17 @@ Functions documentation
     | interpolates between two quaternions
     | using spherical linear interpolation (SLERP)
 
+    Parameters:
+      | *[in]*  **from**  from
+      | *[in]*  **to**    to
+      | *[in]*  **t**     interpolant (amount) clamped between 0 and 1
+      | *[out]* **dest**  result quaternion
+
+.. c:function:: void glm_quat_slerp_longest(versor q, versor r, float  t, versor dest)
+    
+    | interpolates between two quaternions
+    | using spherical linear interpolation (SLERP) and always takes the longest path
+    
     Parameters:
       | *[in]*  **from**  from
       | *[in]*  **to**    to

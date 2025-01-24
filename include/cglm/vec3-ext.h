@@ -26,6 +26,10 @@
    CGLM_INLINE void  glm_vec3_sign(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_abs(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_fract(vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_floor(vec3 v, vec3 dest);
+   CGLM_INLINE float glm_vec3_mods(vec3 v, float s, vec3 dest);
+   CGLM_INLINE float glm_vec3_steps(float edge, vec3 v, vec3 dest);
+   CGLM_INLINE void  glm_vec3_stepr(vec3 edge, float v, vec3 dest);
    CGLM_INLINE float glm_vec3_hadd(vec3 v);
    CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
@@ -164,7 +168,7 @@ glm_vec3_min(vec3 v) {
 }
 
 /*!
- * @brief check if all items are NaN (not a number)
+ * @brief check if one of items is NaN (not a number)
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -172,11 +176,15 @@ glm_vec3_min(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec3_isnan(vec3 v) {
+#ifndef CGLM_FAST_MATH
   return isnan(v[0]) || isnan(v[1]) || isnan(v[2]);
+#else
+  return false;
+#endif
 }
 
 /*!
- * @brief check if all items are INFINITY
+ * @brief check if one of items is INFINITY
  *        you should only use this in DEBUG mode or very critical asserts
  *
  * @param[in] v vector
@@ -184,7 +192,11 @@ glm_vec3_isnan(vec3 v) {
 CGLM_INLINE
 bool
 glm_vec3_isinf(vec3 v) {
+#ifndef CGLM_FAST_MATH
   return isinf(v[0]) || isinf(v[1]) || isinf(v[2]);
+#else
+  return false;
+#endif
 }
 
 /*!
@@ -240,6 +252,67 @@ glm_vec3_fract(vec3 v, vec3 dest) {
   dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
   dest[2] = fminf(v[2] - floorf(v[2]), 0.999999940395355224609375f);
+}
+
+/*!
+ * @brief floor of each vector item
+ *
+ * @param[in]  v    vector
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_floor(vec3 v, vec3 dest) {
+  dest[0] = floorf(v[0]);
+  dest[1] = floorf(v[1]);
+  dest[2] = floorf(v[2]);
+}
+
+/*!
+ * @brief mod of each vector item, result is written to dest (dest = v % s)
+ *
+ * @param[in]  v    vector
+ * @param[in]  s    scalar
+ * @param[out] dest destination vector
+ */
+CGLM_INLINE
+void
+glm_vec3_mods(vec3 v, float s, vec3 dest) {
+  dest[0] = fmodf(v[0], s);
+  dest[1] = fmodf(v[1], s);
+  dest[2] = fmodf(v[2], s);
+}
+
+/*!
+ * @brief threshold each vector item with scalar
+ *        condition is: (x[i] < edge) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       vector to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_steps(float edge, vec3 x, vec3 dest) {
+  dest[0] = glm_step(edge, x[0]);
+  dest[1] = glm_step(edge, x[1]);
+  dest[2] = glm_step(edge, x[2]);
+}
+
+/*!
+ * @brief threshold a value with *vector* as the threshold
+ *        condition is: (x < edge[i]) ? 0.0 : 1.0
+ *
+ * @param[in]   edge    threshold vector
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec3_stepr(vec3 edge, float x, vec3 dest) {
+  dest[0] = glm_step(edge[0], x);
+  dest[1] = glm_step(edge[1], x);
+  dest[2] = glm_step(edge[2], x);
 }
 
 /*!

@@ -58,7 +58,6 @@
    CGLM_INLINE vec4s glms_vec4_lerpc(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_mix(vec4s from, vec4s to, float t);
    CGLM_INLINE vec4s glms_vec4_mixc(vec4s from, vec4s to, float t);
-   CGLM_INLINE vec4s glms_vec4_step_uni(float edge, vec4s x);
    CGLM_INLINE vec4s glms_vec4_step(vec4s edge, vec4s x);
    CGLM_INLINE vec4s glms_vec4_smoothstep_uni(float edge0, float edge1, vec4s x);
    CGLM_INLINE vec4s glms_vec4_smoothstep(vec4s edge0, vec4s edge1, vec4s x);
@@ -69,6 +68,9 @@
    CGLM_INLINE vec4s glms_vec4_make(float * restrict src);
    CGLM_INLINE vec4s glms_vec4_reflect(vec4s v, vec4s n);
    CGLM_INLINE bool  glms_vec4_refract(vec4s v, vec4s n, float eta, vec4s *dest)
+
+ Deprecated:
+   glms_vec4_step_uni  -->  use glms_vec4_steps
  */
 
 #ifndef cglms_vec4s_h
@@ -79,6 +81,9 @@
 #include "../util.h"
 #include "../vec4.h"
 #include "vec4-ext.h"
+
+/* DEPRECATED! */
+#define glms_vec4_step_uni(edge, x) glms_vec4_steps(edge, x)
 
 #define GLMS_VEC4_ONE_INIT   {GLM_VEC4_ONE_INIT}
 #define GLMS_VEC4_BLACK_INIT {GLM_VEC4_BLACK_INIT}
@@ -783,21 +788,6 @@ vec4s
 glms_vec4_(mixc)(vec4s from, vec4s to, float t) {
   vec4s r;
   glm_vec4_mixc(from.raw, to.raw, t, r.raw);
-  return r;
-}
-
-/*!
- * @brief threshold function (unidimensional)
- *
- * @param[in]   edge    threshold
- * @param[in]   x       value to test against threshold
- * @returns             0.0 if x < edge, else 1.0
- */
-CGLM_INLINE
-vec4s
-glms_vec4_(step_uni)(float edge, vec4s x) {
-  vec4s r;
-  glm_vec4_step_uni(edge, x.raw, r.raw);
   return r;
 }
 

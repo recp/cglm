@@ -31,10 +31,20 @@ jobs:
         wget --no-verbose https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${{matrix.wasi_sdk_version}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0-linux.tar.gz
         tar xf wasi-sdk-${{matrix.wasi_sdk_version}}.0-linux.tar.gz
 
+    # Building a wasm library without needing to define a main():
+    #   https://github.com/WebAssembly/wasi-sdk/issues/332
+    - name: Modify CMakeLists.txt for WASI
+      run: |
+        echo 'if (CMAKE_SYSTEM_NAME STREQUAL "WASI")' >> CMakeLists.txt
+        echo '  target_link_options(${PROJECT_NAME} PRIVATE -mexec-model=reactor)' >> CMakeLists.txt
+        echo 'endif()' >> CMakeLists.txt
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
-      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}}" -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0/share/cmake/wasi-sdk.cmake -DWASI_SDK_PREFIX=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0 -DCGLM_USE_TEST=ON
+      # Below suppress <<'clock' is deprecated: WASI lacks process-associated clocks; ...>> warns:
+      #   -D_WASI_EMULATED_PROCESS_CLOCKS" -DCMAKE_EXE_LINKER_FLAGS="-lwasi-emulated-process-clocks
+      run: cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=${{matrix.BUILD_TYPE}} -DCMAKE_C_FLAGS="${{matrix.C_FLAGS}} -D_WASI_EMULATED_PROCESS_CLOCKS" -DCMAKE_EXE_LINKER_FLAGS="-lwasi-emulated-process-clocks" -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0/share/cmake/wasi-sdk.cmake -DWASI_SDK_PREFIX=${{github.workspace}}/wasi-sdk-${{matrix.wasi_sdk_version}}.0 -DCGLM_STATIC=ON -DCGLM_SHARED=OFF -DCGLM_USE_TEST=ON
 
     - name: Build
       # Build your program with the given configuration

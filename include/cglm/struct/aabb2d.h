@@ -62,7 +62,7 @@ glms_aabb2d_(merge)(vec2s aabb1[2], vec2s aabb2[2], vec2s dest[2]) {
 /*!
  * @brief crops a bounding box with another one.
  *
- * this could be useful for gettng a bbox which fits with view frustum and
+ * this could be useful for getting a bbox which fits with view frustum and
  * object bounding boxes. In this case you crop view frustum box with objects
  * box
  *
@@ -86,7 +86,7 @@ glms_aabb2d_(crop)(vec2s aabb[2], vec2s cropAabb[2], vec2s dest[2]) {
 /*!
  * @brief crops a bounding box with another one.
  *
- * this could be useful for gettng a bbox which fits with view frustum and
+ * this could be useful for getting a bbox which fits with view frustum and
  * object bounding boxes. In this case you crop view frustum box with objects
  * box
  *
@@ -137,8 +137,27 @@ glms_aabb2d_(isvalid)(vec2s aabb[2]) {
  */
 CGLM_INLINE
 float
-glms_aabb2d_(size)(vec2s aabb[2]) {
-  return glm_vec2_distance(aabb[0].raw, aabb[1].raw);
+glms_aabb2d_(diag)(vec2s aabb[2]) {
+  vec2 rawAabb[2];
+  glms_vec2_(unpack)(rawAabb, aabb, 2);
+  return glm_aabb2d_diag(rawAabb);
+}
+
+
+/*!
+ * @brief size of aabb
+ *
+ * @param[in]  aabb bounding aabb
+ * @param[out]  dest size
+ */
+CGLM_INLINE
+vec2s
+glms_aabb2d_(sizev)(vec2s aabb[2]) {
+  vec2s size;
+  vec2  rawAabb[2];
+  glms_vec2_(unpack)(rawAabb, aabb, 2);
+  glm_aabb2d_sizev(rawAabb, size.raw);
+  return size;
 }
 
 /*!
@@ -232,4 +251,3 @@ glms_aabb2d_(contains)(vec2s aabb[2], vec2s other[2]) {
 }
 
 #endif /* cglms_aabb2ds_h */
-

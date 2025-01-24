@@ -37,5 +37,3 @@ glmc_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest);
 }
 #endif
 #endif /* cglmc_project_h */
-
-

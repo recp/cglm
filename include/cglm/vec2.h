@@ -53,7 +53,9 @@
    CGLM_INLINE void  glm_vec2_maxv(vec2 v1, vec2 v2, vec2 dest)
    CGLM_INLINE void  glm_vec2_minv(vec2 v1, vec2 v2, vec2 dest)
    CGLM_INLINE void  glm_vec2_clamp(vec2 v, float minVal, float maxVal)
+   CGLM_INLINE void  glm_vec2_swizzle(vec2 v, int mask, vec2 dest)
    CGLM_INLINE void  glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest)
+   CGLM_INLINE void  glm_vec2_step(vec2 edge, vec2 x, vec2 dest)
    CGLM_INLINE void  glm_vec2_make(float * restrict src, vec2 dest)
    CGLM_INLINE void  glm_vec2_reflect(vec2 v, vec2 n, vec2 dest)
    CGLM_INLINE void  glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest)
@@ -680,6 +682,24 @@ glm_vec2_clamp(vec2 v, float minval, float maxval) {
 }
 
 /*!
+ * @brief swizzle vector components
+ *
+ * @param[in]  v    source
+ * @param[in]  mask mask
+ * @param[out] dest destination
+ */
+CGLM_INLINE
+void
+glm_vec2_swizzle(vec2 v, int mask, vec2 dest) {
+  vec2 t;
+
+  t[0] = v[(mask & (3 << 0))];
+  t[1] = v[(mask & (3 << 2)) >> 2];
+
+  glm_vec2_copy(t, dest);
+}
+
+/*!
  * @brief linear interpolation between two vector
  *
  * formula:  from + s * (to - from)
@@ -699,6 +719,20 @@ glm_vec2_lerp(vec2 from, vec2 to, float t, vec2 dest) {
   glm_vec2_sub(to, from, v);
   glm_vec2_mul(s, v, v);
   glm_vec2_add(from, v, dest);
+}
+
+/*!
+ * @brief threshold function
+ *
+ * @param[in]   edge    threshold
+ * @param[in]   x       value to test against threshold
+ * @param[out]  dest    destination
+ */
+CGLM_INLINE
+void
+glm_vec2_step(vec2 edge, vec2 x, vec2 dest) {
+  dest[0] = glm_step(edge[0], x[0]);
+  dest[1] = glm_step(edge[1], x[1]);
 }
 
 /*!
@@ -749,7 +783,7 @@ glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest) {
 
   ndi = glm_vec2_dot(n, v);
   eni = eta * ndi;
-  k   = 1.0f + eta * eta - eni * eni;
+  k   = 1.0f - eta * eta + eni * eni;
 
   if (k < 0.0f) {
     glm_vec2_zero(dest);
