@@ -527,11 +527,7 @@ CGLM_INLINE
 void
 glm_vec4_divs(vec4 v, float s, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glmm_store(dest, wasm_f32x4_div(glmm_load(v), wasm_f32x4_splat(s)));
-#elif defined( __SSE__ ) || defined( __SSE2__ )
-  glmm_store(dest, _mm_div_ps(glmm_load(v), _mm_set1_ps(s)));
-#elif defined(CGLM_NEON_FP)
-  vst1q_f32(dest, vdivq_f32(vld1q_f32(v), vdupq_n_f32(s)));
+#if defined(CGLM_SIMD)
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
 #endif
@@ -926,7 +922,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
     return;
   }
 
-  glmm_store(dest, wasm_f32x4_div(x0, wasm_f32x4_sqrt(xdot)));
+  glmm_store(dest, glmm_div(x0, wasm_f32x4_sqrt(xdot)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
   __m128 xdot, x0;
   float  dot;
@@ -940,7 +936,7 @@ glm_vec4_normalize_to(vec4 v, vec4 dest) {
     return;
   }
 
-  glmm_store(dest, _mm_div_ps(x0, _mm_sqrt_ps(xdot)));
+  glmm_store(dest, glmm_div(x0, _mm_sqrt_ps(xdot)));
 #else
   float norm;
 
