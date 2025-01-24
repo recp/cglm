@@ -526,8 +526,8 @@ glm_vec4_div(vec4 a, vec4 b, vec4 dest) {
 CGLM_INLINE
 void
 glm_vec4_divs(vec4 v, float s, vec4 dest) {
-#if defined(__wasm__) && defined(__wasm_simd128__)
 #if defined(CGLM_SIMD)
+  glmm_store(dest, glmm_div(glmm_load(v), glmm_set1(s)));
 #else
   glm_vec4_scale(v, 1.0f / s, dest);
 #endif
