@@ -262,10 +262,10 @@ glm_vec3_fract(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_floor(vec3 x, vec3 dest) {
-  dest[0] = floorf(x[0]);
-  dest[1] = floorf(x[1]);
-  dest[2] = floorf(x[2]);
+glm_vec3_floor(vec3 v, vec3 dest) {
+  dest[0] = floorf(v[0]);
+  dest[1] = floorf(v[1]);
+  dest[2] = floorf(v[2]);
 }
 
 /*!
@@ -277,10 +277,10 @@ glm_vec3_floor(vec3 x, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_mods(vec3 x, float y, vec3 dest) {
-  dest[0] = fmodf(x[0], y);
-  dest[1] = fmodf(x[1], y);
-  dest[2] = fmodf(x[2], y);
+glm_vec3_mods(vec3 v, float s, vec3 dest) {
+  dest[0] = fmodf(v[0], s);
+  dest[1] = fmodf(v[1], s);
+  dest[2] = fmodf(v[2], s);
 }
 
 /*!

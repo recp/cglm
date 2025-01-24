@@ -224,9 +224,9 @@ glm_vec2_fract(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_floor(vec2 x, vec2 dest) {
-  dest[0] = floorf(x[0]);
-  dest[1] = floorf(x[1]);
+glm_vec2_floor(vec2 v, vec2 dest) {
+  dest[0] = floorf(v[0]);
+  dest[1] = floorf(v[1]);
 }
 
 /*!
@@ -238,9 +238,9 @@ glm_vec2_floor(vec2 x, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_mods(vec2 x, float y, vec2 dest) {
-  dest[0] = fmodf(x[0], y);
-  dest[1] = fmodf(x[1], y);
+glm_vec2_mods(vec2 v, float s, vec2 dest) {
+  dest[0] = fmodf(v[0], s);
+  dest[1] = fmodf(v[1], s);
 }
 
 /*!
