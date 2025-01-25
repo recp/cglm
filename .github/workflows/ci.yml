@@ -94,23 +94,24 @@ jobs:
       run: cmake --build build
 
   build_cmake_ubuntu:
-    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.arch }} / ${{ matrix.simd }}
+    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.target.arch }} / ${{ matrix.simd }}
     runs-on: ${{ matrix.target.arch == 'arm64' && 'ubuntu-latest-arm64' || matrix.target.os }}
     strategy:
       fail-fast: false
       matrix:
         target:
           # x86/x64 builds
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64 }
-          - { os: ubuntu-22.04, cc: gcc-12, arch: x64 }
-          - { os: ubuntu-24.04, cc: gcc-13, arch: x64 }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64 }
-          - { os: ubuntu-22.04, cc: clang-15, arch: x64 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
           # ARM64 builds
-          - { os: ubuntu-latest, cc: gcc-12, arch: arm64 }
-          - { os: ubuntu-latest, cc: gcc-13, arch: arm64 }
-        simd:
-          - ${{ (matrix.target.arch == 'arm64' || matrix.target.arch == 'armv7') && 'neon' || matrix.target.arch == 'x64' && ['none', 'sse', 'sse2', 'sse3', 'sse4', 'avx', 'avx2'] }}
+          - { os: ubuntu-latest, cc: gcc-12, arch: arm64, simd: neon }
+          - { os: ubuntu-latest, cc: gcc-13, arch: arm64, simd: neon }
+          # ARMv7 builds
+          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: neon }
+          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: none }
 
     steps:
     - uses: actions/checkout@v4
