@@ -15,19 +15,36 @@ jobs:
       matrix:
         include:
           # x86/x64 builds
-          - os: macos-13
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
-          - os: macos-14
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
-          - os: ubuntu-22.04
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
-          - os: ubuntu-24.04
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
+          - { os: macos-13, simd: none }
+          - { os: macos-13, simd: sse }
+          - { os: macos-13, simd: sse2 }
+          - { os: macos-13, simd: sse3 }
+          - { os: macos-13, simd: sse4 }
+          - { os: macos-13, simd: avx }
+          - { os: macos-13, simd: avx2 }
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: ubuntu-22.04, simd: none }
+          - { os: ubuntu-22.04, simd: sse }
+          - { os: ubuntu-22.04, simd: sse2 }
+          - { os: ubuntu-22.04, simd: sse3 }
+          - { os: ubuntu-22.04, simd: sse4 }
+          - { os: ubuntu-22.04, simd: avx }
+          - { os: ubuntu-22.04, simd: avx2 }
+          - { os: ubuntu-24.04, simd: none }
+          - { os: ubuntu-24.04, simd: sse }
+          - { os: ubuntu-24.04, simd: sse2 }
+          - { os: ubuntu-24.04, simd: sse3 }
+          - { os: ubuntu-24.04, simd: sse4 }
+          - { os: ubuntu-24.04, simd: avx }
+          - { os: ubuntu-24.04, simd: avx2 }
           # ARM64 builds
-          - os: [ubuntu-22.04-arm64]
-            simd: [neon]
-          - os: [ubuntu-24.04-arm64]
-            simd: [neon]
+          - { os: ubuntu-latest-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -226,11 +243,29 @@ jobs:
       matrix:
         include:
           # x86/x64 builds
-          - os: [macos-13, macos-14, windows-2022]
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
+          - { os: macos-13, simd: none }
+          - { os: macos-13, simd: sse }
+          - { os: macos-13, simd: sse2 }
+          - { os: macos-13, simd: sse3 }
+          - { os: macos-13, simd: sse4 }
+          - { os: macos-13, simd: avx }
+          - { os: macos-13, simd: avx2 }
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: windows-2022, simd: none }
+          - { os: windows-2022, simd: sse }
+          - { os: windows-2022, simd: sse2 }
+          - { os: windows-2022, simd: sse3 }
+          - { os: windows-2022, simd: sse4 }
+          - { os: windows-2022, simd: avx }
+          - { os: windows-2022, simd: avx2 }
           # ARM64 builds
-          - os: [macos-14-arm64]
-            simd: [neon]
+          - { os: macos-14-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -317,11 +352,36 @@ jobs:
       matrix:
         include:
           # x86/x64 builds
-          - os: [macos-14, ubuntu-22.04, ubuntu-24.04, windows-2022]
-            simd: [none, sse, sse2, sse3, sse4, avx, avx2]
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: ubuntu-22.04, simd: none }
+          - { os: ubuntu-22.04, simd: sse }
+          - { os: ubuntu-22.04, simd: sse2 }
+          - { os: ubuntu-22.04, simd: sse3 }
+          - { os: ubuntu-22.04, simd: sse4 }
+          - { os: ubuntu-22.04, simd: avx }
+          - { os: ubuntu-22.04, simd: avx2 }
+          - { os: ubuntu-24.04, simd: none }
+          - { os: ubuntu-24.04, simd: sse }
+          - { os: ubuntu-24.04, simd: sse2 }
+          - { os: ubuntu-24.04, simd: sse3 }
+          - { os: ubuntu-24.04, simd: sse4 }
+          - { os: ubuntu-24.04, simd: avx }
+          - { os: ubuntu-24.04, simd: avx2 }
+          - { os: windows-2022, simd: none }
+          - { os: windows-2022, simd: sse }
+          - { os: windows-2022, simd: sse2 }
+          - { os: windows-2022, simd: sse3 }
+          - { os: windows-2022, simd: sse4 }
+          - { os: windows-2022, simd: avx }
+          - { os: windows-2022, simd: avx2 }
           # ARM64 builds
-          - os: ubuntu-latest-arm64
-            simd: [neon]
+          - { os: ubuntu-latest-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
