@@ -111,18 +111,52 @@ jobs:
       run: cmake --build build
 
   build_cmake_ubuntu:
-    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.target.arch }} / ${{ matrix.simd }}
+    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.target.arch }} / ${{ matrix.target.simd }}
     runs-on: ${{ matrix.target.arch == 'arm64' && 'ubuntu-latest-arm64' || matrix.target.os }}
     strategy:
       fail-fast: false
       matrix:
         target:
-          # x86/x64 builds
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
-          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
-          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
-          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: [none, sse, sse2, sse3, sse4, avx, avx2] }
+          # GCC 11 builds
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: none }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse2 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse3 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse4 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx2 }
+          # GCC 12 builds
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: avx2 }
+          # GCC 13 builds
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: none }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse2 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse3 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse4 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx2 }
+          # Clang 12 builds
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: none }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse2 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse3 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse4 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx2 }
+          # Clang 15 builds
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx2 }
           # ARM64 builds
           - { os: ubuntu-latest, cc: gcc-12, arch: arm64, simd: neon }
           - { os: ubuntu-latest, cc: gcc-13, arch: arm64, simd: neon }
