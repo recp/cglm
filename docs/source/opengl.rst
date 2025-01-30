@@ -34,7 +34,7 @@ array of matrices:
    /* ... */
    glUniformMatrix4fv(location, count, GL_FALSE, matrix[0][0]);
 
-1. Cast matrix to pointer
+2. Cast matrix to pointer
 --------------------------
 
 .. code-block:: c
