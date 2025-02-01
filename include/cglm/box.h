@@ -258,7 +258,7 @@ glm_aabb_sphere(vec3 box[2], vec4 s) {
  */
 CGLM_INLINE
 bool
-glm_aabb_point(vec3 box[2], vec3 point) {
+glm_aabb_point(vec3 box[2], const vec3 point) {
   return (point[0] >= box[0][0] && point[0] <= box[1][0])
       && (point[1] >= box[0][1] && point[1] <= box[1][1])
       && (point[2] >= box[0][2] && point[2] <= box[1][2]);

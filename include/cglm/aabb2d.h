@@ -249,7 +249,7 @@ glm_aabb2d_circle(vec2 aabb[2], vec3 c) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_point(vec2 aabb[2], vec2 point) {
+glm_aabb2d_point(vec2 aabb[2], const vec2 point) {
   return (point[0] >= aabb[0][0] && point[0] <= aabb[1][0])
       && (point[1] >= aabb[0][1] && point[1] <= aabb[1][1]);
 }

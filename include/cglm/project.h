@@ -146,7 +146,7 @@ glm_project_z(vec3 v, mat4 m) {
  */
 CGLM_INLINE
 void
-glm_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest) {
+glm_pickmatrix(const vec2 center, const vec2 size, const vec4 vp, mat4 dest) {
   mat4 res;
   vec3 v;
 

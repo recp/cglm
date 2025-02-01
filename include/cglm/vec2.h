@@ -82,7 +82,7 @@
  */
 CGLM_INLINE
 void
-glm_vec2(float * __restrict v, vec2 dest) {
+glm_vec2(const float * __restrict v, vec2 dest) {
   dest[0] = v[0];
   dest[1] = v[1];
 }
@@ -95,7 +95,7 @@ glm_vec2(float * __restrict v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_copy(vec2 a, vec2 dest) {
+glm_vec2_copy(const vec2 a, vec2 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
 }
@@ -132,7 +132,7 @@ glm_vec2_one(vec2 v) {
  */
 CGLM_INLINE
 float
-glm_vec2_dot(vec2 a, vec2 b) {
+glm_vec2_dot(const vec2 a, const vec2 b) {
   return a[0] * b[0] + a[1] * b[1];
 }
 
@@ -148,7 +148,7 @@ glm_vec2_dot(vec2 a, vec2 b) {
  */
 CGLM_INLINE
 float
-glm_vec2_cross(vec2 a, vec2 b) {
+glm_vec2_cross(const vec2 a, const vec2 b) {
   /* just calculate the z-component */
   return a[0] * b[1] - a[1] * b[0];
 }
@@ -192,7 +192,7 @@ glm_vec2_norm(vec2 vec) {
  */
 CGLM_INLINE
 void
-glm_vec2_add(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_add(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] = a[0] + b[0];
   dest[1] = a[1] + b[1];
 }
@@ -206,7 +206,7 @@ glm_vec2_add(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_adds(vec2 v, float s, vec2 dest) {
+glm_vec2_adds(const vec2 v, float s, vec2 dest) {
   dest[0] = v[0] + s;
   dest[1] = v[1] + s;
 }
@@ -220,7 +220,7 @@ glm_vec2_adds(vec2 v, float s, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_sub(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_sub(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] = a[0] - b[0];
   dest[1] = a[1] - b[1];
 }
@@ -234,7 +234,7 @@ glm_vec2_sub(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_subs(vec2 v, float s, vec2 dest) {
+glm_vec2_subs(const vec2 v, float s, vec2 dest) {
   dest[0] = v[0] - s;
   dest[1] = v[1] - s;
 }
@@ -248,7 +248,7 @@ glm_vec2_subs(vec2 v, float s, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_mul(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_mul(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] = a[0] * b[0];
   dest[1] = a[1] * b[1];
 }
@@ -262,7 +262,7 @@ glm_vec2_mul(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_scale(vec2 v, float s, vec2 dest) {
+glm_vec2_scale(const vec2 v, float s, vec2 dest) {
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
 }
@@ -297,7 +297,7 @@ glm_vec2_scale_as(vec2 v, float s, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_div(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_div(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] = a[0] / b[0];
   dest[1] = a[1] / b[1];
 }
@@ -311,7 +311,7 @@ glm_vec2_div(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_divs(vec2 v, float s, vec2 dest) {
+glm_vec2_divs(const vec2 v, float s, vec2 dest) {
   dest[0] = v[0] / s;
   dest[1] = v[1] / s;
 }
@@ -327,7 +327,7 @@ glm_vec2_divs(vec2 v, float s, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_addadd(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_addadd(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] += a[0] + b[0];
   dest[1] += a[1] + b[1];
 }
@@ -343,7 +343,7 @@ glm_vec2_addadd(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_subadd(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_subadd(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] += a[0] - b[0];
   dest[1] += a[1] - b[1];
 }
@@ -359,7 +359,7 @@ glm_vec2_subadd(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_muladd(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_muladd(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] += a[0] * b[0];
   dest[1] += a[1] * b[1];
 }
@@ -375,7 +375,7 @@ glm_vec2_muladd(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_muladds(vec2 a, float s, vec2 dest) {
+glm_vec2_muladds(const vec2 a, float s, vec2 dest) {
   dest[0] += a[0] * s;
   dest[1] += a[1] * s;
 }
@@ -423,7 +423,7 @@ glm_vec2_minadd(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_subsub(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_subsub(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] -= a[0] - b[0];
   dest[1] -= a[1] - b[1];
 }
@@ -439,7 +439,7 @@ glm_vec2_subsub(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_addsub(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_addsub(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] -= a[0] + b[0];
   dest[1] -= a[1] + b[1];
 }
@@ -455,7 +455,7 @@ glm_vec2_addsub(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_mulsub(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_mulsub(const vec2 a, const vec2 b, vec2 dest) {
   dest[0] -= a[0] * b[0];
   dest[1] -= a[1] * b[1];
 }
@@ -471,7 +471,7 @@ glm_vec2_mulsub(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_mulsubs(vec2 a, float s, vec2 dest) {
+glm_vec2_mulsubs(const vec2 a, float s, vec2 dest) {
   dest[0] -= a[0] * s;
   dest[1] -= a[1] * s;
 }
@@ -516,7 +516,7 @@ glm_vec2_minsub(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_negate_to(vec2 v, vec2 dest) {
+glm_vec2_negate_to(const vec2 v, vec2 dest) {
   dest[0] = -v[0];
   dest[1] = -v[1];
 }
@@ -586,7 +586,7 @@ glm_vec2_normalize_to(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_rotate(vec2 v, float angle, vec2 dest) {
+glm_vec2_rotate(const vec2 v, float angle, vec2 dest) {
   float c, s, x1, y1;
 
   c  = cosf(angle);
@@ -690,7 +690,7 @@ glm_vec2_clamp(vec2 v, float minval, float maxval) {
  */
 CGLM_INLINE
 void
-glm_vec2_swizzle(vec2 v, int mask, vec2 dest) {
+glm_vec2_swizzle(const vec2 v, int mask, vec2 dest) {
   vec2 t;
 
   t[0] = v[(mask & (3 << 0))];

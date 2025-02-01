@@ -68,7 +68,7 @@
  */
 CGLM_INLINE
 void
-glm_ivec4(ivec3 v3, int last, ivec4 dest) {
+glm_ivec4(const ivec3 v3, int last, ivec4 dest) {
   dest[0] = v3[0];
   dest[1] = v3[1];
   dest[2] = v3[2];
@@ -83,7 +83,7 @@ glm_ivec4(ivec3 v3, int last, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_copy(ivec4 a, ivec4 dest) {
+glm_ivec4_copy(const ivec4 a, ivec4 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
   dest[2] = a[2];
@@ -121,7 +121,7 @@ glm_ivec4_one(ivec4 v) {
  */
 CGLM_INLINE
 void
-glm_ivec4_add(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_add(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] = a[0] + b[0];
   dest[1] = a[1] + b[1];
   dest[2] = a[2] + b[2];
@@ -137,7 +137,7 @@ glm_ivec4_add(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_adds(ivec4 v, int s, ivec4 dest) {
+glm_ivec4_adds(const ivec4 v, int s, ivec4 dest) {
   dest[0] = v[0] + s;
   dest[1] = v[1] + s;
   dest[2] = v[2] + s;
@@ -153,7 +153,7 @@ glm_ivec4_adds(ivec4 v, int s, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_sub(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_sub(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] = a[0] - b[0];
   dest[1] = a[1] - b[1];
   dest[2] = a[2] - b[2];
@@ -169,7 +169,7 @@ glm_ivec4_sub(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_subs(ivec4 v, int s, ivec4 dest) {
+glm_ivec4_subs(const ivec4 v, int s, ivec4 dest) {
   dest[0] = v[0] - s;
   dest[1] = v[1] - s;
   dest[2] = v[2] - s;
@@ -185,7 +185,7 @@ glm_ivec4_subs(ivec4 v, int s, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_mul(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_mul(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] = a[0] * b[0];
   dest[1] = a[1] * b[1];
   dest[2] = a[2] * b[2];
@@ -201,7 +201,7 @@ glm_ivec4_mul(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_scale(ivec4 v, int s, ivec4 dest) {
+glm_ivec4_scale(const ivec4 v, int s, ivec4 dest) {
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
   dest[2] = v[2] * s;
@@ -219,7 +219,7 @@ glm_ivec4_scale(ivec4 v, int s, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_addadd(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_addadd(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] += a[0] + b[0];
   dest[1] += a[1] + b[1];
   dest[2] += a[2] + b[2];
@@ -237,7 +237,7 @@ glm_ivec4_addadd(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_addadds(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_addadds(const ivec4 a, int s, ivec4 dest) {
   dest[0] += a[0] + s;
   dest[1] += a[1] + s;
   dest[2] += a[2] + s;
@@ -255,7 +255,7 @@ glm_ivec4_addadds(ivec4 a, int s, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_subadd(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_subadd(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] += a[0] - b[0];
   dest[1] += a[1] - b[1];
   dest[2] += a[2] - b[2];
@@ -273,7 +273,7 @@ glm_ivec4_subadd(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_subadds(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_subadds(const ivec4 a, int s, ivec4 dest) {
   dest[0] += a[0] - s;
   dest[1] += a[1] - s;
   dest[2] += a[2] - s;
@@ -291,7 +291,7 @@ glm_ivec4_subadds(ivec4 a, int s, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_muladd(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_muladd(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] += a[0] * b[0];
   dest[1] += a[1] * b[1];
   dest[2] += a[2] * b[2];
@@ -309,7 +309,7 @@ glm_ivec4_muladd(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_muladds(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_muladds(const ivec4 a, int s, ivec4 dest) {
   dest[0] += a[0] * s;
   dest[1] += a[1] * s;
   dest[2] += a[2] * s;
@@ -363,7 +363,7 @@ glm_ivec4_minadd(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_subsub(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_subsub(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] -= a[0] - b[0];
   dest[1] -= a[1] - b[1];
   dest[2] -= a[2] - b[2];
@@ -381,7 +381,7 @@ glm_ivec4_subsub(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_subsubs(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_subsubs(const ivec4 a, int s, ivec4 dest) {
   dest[0] -= a[0] - s;
   dest[1] -= a[1] - s;
   dest[2] -= a[2] - s;
@@ -399,7 +399,7 @@ glm_ivec4_subsubs(ivec4 a, int s, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_addsub(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_addsub(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] -= a[0] + b[0];
   dest[1] -= a[1] + b[1];
   dest[2] -= a[2] + b[2];
@@ -417,7 +417,7 @@ glm_ivec4_addsub(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_addsubs(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_addsubs(const ivec4 a, int s, ivec4 dest) {
   dest[0] -= a[0] + s;
   dest[1] -= a[1] + s;
   dest[2] -= a[2] + s;
@@ -435,7 +435,7 @@ glm_ivec4_addsubs(ivec4 a, int s, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_mulsub(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_mulsub(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] -= a[0] * b[0];
   dest[1] -= a[1] * b[1];
   dest[2] -= a[2] * b[2];
@@ -453,7 +453,7 @@ glm_ivec4_mulsub(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE 
 void 
-glm_ivec4_mulsubs(ivec4 a, int s, ivec4 dest) {
+glm_ivec4_mulsubs(const ivec4 a, int s, ivec4 dest) {
   dest[0] -= a[0] * s;
   dest[1] -= a[1] * s;
   dest[2] -= a[2] * s;
@@ -505,7 +505,7 @@ glm_ivec4_minsub(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE
 int
-glm_ivec4_distance2(ivec4 a, ivec4 b) {
+glm_ivec4_distance2(const ivec4 a, const ivec4 b) {
   int xd, yd, zd, wd;
   xd = a[0] - b[0];
   yd = a[1] - b[1];
@@ -536,7 +536,7 @@ glm_ivec4_distance(ivec4 a, ivec4 b) {
  */
 CGLM_INLINE
 void
-glm_ivec4_maxv(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_maxv(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] = a[0] > b[0] ? a[0] : b[0];
   dest[1] = a[1] > b[1] ? a[1] : b[1];
   dest[2] = a[2] > b[2] ? a[2] : b[2];
@@ -552,7 +552,7 @@ glm_ivec4_maxv(ivec4 a, ivec4 b, ivec4 dest) {
  */
 CGLM_INLINE
 void
-glm_ivec4_minv(ivec4 a, ivec4 b, ivec4 dest) {
+glm_ivec4_minv(const ivec4 a, const ivec4 b, ivec4 dest) {
   dest[0] = a[0] < b[0] ? a[0] : b[0];
   dest[1] = a[1] < b[1] ? a[1] : b[1];
   dest[2] = a[2] < b[2] ? a[2] : b[2];

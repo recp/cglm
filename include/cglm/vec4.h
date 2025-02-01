@@ -117,7 +117,7 @@
  */
 CGLM_INLINE
 void
-glm_vec4(vec3 v3, float last, vec4 dest) {
+glm_vec4(const vec3 v3, float last, vec4 dest) {
   dest[0] = v3[0];
   dest[1] = v3[1];
   dest[2] = v3[2];
@@ -132,7 +132,7 @@ glm_vec4(vec3 v3, float last, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_copy3(vec4 a, vec3 dest) {
+glm_vec4_copy3(const vec4 a, vec3 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
   dest[2] = a[2];
@@ -171,7 +171,7 @@ glm_vec4_copy(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_ucopy(vec4 v, vec4 dest) {
+glm_vec4_ucopy(const vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   /* note here wasm v128.load/v128.store support unaligned loads and stores */
   wasm_v128_store(dest, wasm_v128_load(v));
@@ -1265,7 +1265,7 @@ glm_vec4_cubic(float s, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_swizzle(vec4 v, int mask, vec4 dest) {
+glm_vec4_swizzle(const vec4 v, int mask, vec4 dest) {
   vec4 t;
 
   t[0] = v[(mask & (3 << 0))];

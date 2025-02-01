@@ -202,7 +202,7 @@ glm_mat2_transpose(mat2 m) {
  */
 CGLM_INLINE
 void
-glm_mat2_mulv(mat2 m, vec2 v, vec2 dest) {
+glm_mat2_mulv(mat2 m, const vec2 v, vec2 dest) {
   dest[0] = m[0][0] * v[0] + m[1][0] * v[1];
   dest[1] = m[0][1] * v[0] + m[1][1] * v[1];
 }

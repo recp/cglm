@@ -104,7 +104,7 @@ typedef enum glm_euler_seq {
 
 CGLM_INLINE
 glm_euler_seq
-glm_euler_order(int ord[3]) {
+glm_euler_order(const int ord[3]) {
   return (glm_euler_seq)(ord[0] << 0 | ord[1] << 2 | ord[2] << 4);
 }
 

@@ -140,7 +140,7 @@
  */
 CGLM_INLINE
 void
-glm_vec3(vec4 v4, vec3 dest) {
+glm_vec3(const vec4 v4, vec3 dest) {
   dest[0] = v4[0];
   dest[1] = v4[1];
   dest[2] = v4[2];
@@ -154,7 +154,7 @@ glm_vec3(vec4 v4, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_copy(vec3 a, vec3 dest) {
+glm_vec3_copy(const vec3 a, vec3 dest) {
   dest[0] = a[0];
   dest[1] = a[1];
   dest[2] = a[2];
@@ -192,7 +192,7 @@ glm_vec3_one(vec3 v) {
  */
 CGLM_INLINE
 float
-glm_vec3_dot(vec3 a, vec3 b) {
+glm_vec3_dot(const vec3 a, const vec3 b) {
   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 }
 
@@ -279,7 +279,7 @@ glm_vec3_norm_inf(vec3 v) {
  */
 CGLM_INLINE
 void
-glm_vec3_add(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_add(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] = a[0] + b[0];
   dest[1] = a[1] + b[1];
   dest[2] = a[2] + b[2];
@@ -294,7 +294,7 @@ glm_vec3_add(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_adds(vec3 v, float s, vec3 dest) {
+glm_vec3_adds(const vec3 v, float s, vec3 dest) {
   dest[0] = v[0] + s;
   dest[1] = v[1] + s;
   dest[2] = v[2] + s;
@@ -309,7 +309,7 @@ glm_vec3_adds(vec3 v, float s, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_sub(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_sub(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] = a[0] - b[0];
   dest[1] = a[1] - b[1];
   dest[2] = a[2] - b[2];
@@ -324,7 +324,7 @@ glm_vec3_sub(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_subs(vec3 v, float s, vec3 dest) {
+glm_vec3_subs(const vec3 v, float s, vec3 dest) {
   dest[0] = v[0] - s;
   dest[1] = v[1] - s;
   dest[2] = v[2] - s;
@@ -339,7 +339,7 @@ glm_vec3_subs(vec3 v, float s, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_mul(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_mul(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] = a[0] * b[0];
   dest[1] = a[1] * b[1];
   dest[2] = a[2] * b[2];
@@ -354,7 +354,7 @@ glm_vec3_mul(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_scale(vec3 v, float s, vec3 dest) {
+glm_vec3_scale(const vec3 v, float s, vec3 dest) {
   dest[0] = v[0] * s;
   dest[1] = v[1] * s;
   dest[2] = v[2] * s;
@@ -390,7 +390,7 @@ glm_vec3_scale_as(vec3 v, float s, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_div(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_div(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] = a[0] / b[0];
   dest[1] = a[1] / b[1];
   dest[2] = a[2] / b[2];
@@ -405,7 +405,7 @@ glm_vec3_div(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_divs(vec3 v, float s, vec3 dest) {
+glm_vec3_divs(const vec3 v, float s, vec3 dest) {
   dest[0] = v[0] / s;
   dest[1] = v[1] / s;
   dest[2] = v[2] / s;
@@ -422,7 +422,7 @@ glm_vec3_divs(vec3 v, float s, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_addadd(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_addadd(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] += a[0] + b[0];
   dest[1] += a[1] + b[1];
   dest[2] += a[2] + b[2];
@@ -439,7 +439,7 @@ glm_vec3_addadd(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_subadd(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_subadd(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] += a[0] - b[0];
   dest[1] += a[1] - b[1];
   dest[2] += a[2] - b[2];
@@ -456,7 +456,7 @@ glm_vec3_subadd(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_muladd(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_muladd(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] += a[0] * b[0];
   dest[1] += a[1] * b[1];
   dest[2] += a[2] * b[2];
@@ -473,7 +473,7 @@ glm_vec3_muladd(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_muladds(vec3 a, float s, vec3 dest) {
+glm_vec3_muladds(const vec3 a, float s, vec3 dest) {
   dest[0] += a[0] * s;
   dest[1] += a[1] * s;
   dest[2] += a[2] * s;
@@ -524,7 +524,7 @@ glm_vec3_minadd(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_subsub(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_subsub(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] -= a[0] - b[0];
   dest[1] -= a[1] - b[1];
   dest[2] -= a[2] - b[2];
@@ -541,7 +541,7 @@ glm_vec3_subsub(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_addsub(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_addsub(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] -= a[0] + b[0];
   dest[1] -= a[1] + b[1];
   dest[2] -= a[2] + b[2];
@@ -558,7 +558,7 @@ glm_vec3_addsub(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_mulsub(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_mulsub(const vec3 a, const vec3 b, vec3 dest) {
   dest[0] -= a[0] * b[0];
   dest[1] -= a[1] * b[1];
   dest[2] -= a[2] * b[2];
@@ -575,7 +575,7 @@ glm_vec3_mulsub(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_mulsubs(vec3 a, float s, vec3 dest) {
+glm_vec3_mulsubs(const vec3 a, float s, vec3 dest) {
   dest[0] -= a[0] * s;
   dest[1] -= a[1] * s;
   dest[2] -= a[2] * s;
@@ -623,7 +623,7 @@ glm_vec3_minsub(vec3 a, vec3 b, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_negate_to(vec3 v, vec3 dest) {
+glm_vec3_negate_to(const vec3 v, vec3 dest) {
   dest[0] = -v[0];
   dest[1] = -v[1];
   dest[2] = -v[2];
@@ -690,7 +690,7 @@ glm_vec3_normalize_to(vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_cross(vec3 a, vec3 b, vec3 dest) {
+glm_vec3_cross(const vec3 a, const vec3 b, vec3 dest) {
   vec3 c;
   /* (u2.v3 - u3.v2, u3.v1 - u1.v3, u1.v2 - u2.v1) */
   c[0] = a[1] * b[2] - a[2] * b[1];
@@ -1109,7 +1109,7 @@ glm_vec3_smoothinterpc(vec3 from, vec3 to, float t, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_swizzle(vec3 v, int mask, vec3 dest) {
+glm_vec3_swizzle(const vec3 v, int mask, vec3 dest) {
   vec3 t;
 
   t[0] = v[(mask & (3 << 0))];

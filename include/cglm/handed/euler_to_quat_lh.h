@@ -35,7 +35,7 @@
  */
 CGLM_INLINE
 void
-glm_euler_xyz_quat_lh(vec3 angles, versor dest) {
+glm_euler_xyz_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -58,7 +58,7 @@ glm_euler_xyz_quat_lh(vec3 angles, versor dest) {
  */
 CGLM_INLINE
 void
-glm_euler_xzy_quat_lh(vec3 angles, versor dest) {
+glm_euler_xzy_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -81,7 +81,7 @@ glm_euler_xzy_quat_lh(vec3 angles, versor dest) {
  */
 CGLM_INLINE
 void
-glm_euler_yxz_quat_lh(vec3 angles, versor dest) {
+glm_euler_yxz_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -104,7 +104,7 @@ glm_euler_yxz_quat_lh(vec3 angles, versor dest) {
  */
 CGLM_INLINE
 void
-glm_euler_yzx_quat_lh(vec3 angles, versor dest) {
+glm_euler_yzx_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -127,7 +127,7 @@ glm_euler_yzx_quat_lh(vec3 angles, versor dest) {
  */
 CGLM_INLINE
 void
-glm_euler_zxy_quat_lh(vec3 angles, versor dest) {
+glm_euler_zxy_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 
@@ -150,7 +150,7 @@ glm_euler_zxy_quat_lh(vec3 angles, versor dest) {
  */
 CGLM_INLINE
 void
-glm_euler_zyx_quat_lh(vec3 angles, versor dest) {
+glm_euler_zyx_quat_lh(const vec3 angles, versor dest) {
   float xc, yc, zc,
         xs, ys, zs;
 

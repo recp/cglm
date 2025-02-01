@@ -124,7 +124,7 @@ glm_mat4x2_mul(mat4x2 m1, mat2x4 m2, mat2 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4x2_mulv(mat4x2 m, vec4 v, vec2 dest) {
+glm_mat4x2_mulv(mat4x2 m, const vec4 v, vec2 dest) {
   float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
 
   dest[0] = m[0][0] * v0 + m[1][0] * v1 + m[2][0] * v2 + m[3][0] * v3;

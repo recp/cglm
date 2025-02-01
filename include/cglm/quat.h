@@ -382,7 +382,7 @@ glm_quat_real(versor q) {
  */
 CGLM_INLINE
 void
-glm_quat_imag(versor q, vec3 dest) {
+glm_quat_imag(const versor q, vec3 dest) {
   dest[0] = q[0];
   dest[1] = q[1];
   dest[2] = q[2];

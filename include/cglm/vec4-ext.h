@@ -84,7 +84,7 @@ glm_vec4_fill(vec4 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eq(vec4 v, float val) {
+glm_vec4_eq(const vec4 v, float val) {
   return v[0] == val
          && v[0] == v[1]
          && v[0] == v[2]
@@ -125,7 +125,7 @@ glm_vec4_eq_all(vec4 v) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eqv(vec4 a, vec4 b) {
+glm_vec4_eqv(const vec4 a, const vec4 b) {
   return a[0] == b[0]
          && a[1] == b[1]
          && a[2] == b[2]

@@ -72,7 +72,7 @@ glm_vec3_fill(vec3 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec3_eq(vec3 v, float val) {
+glm_vec3_eq(const vec3 v, float val) {
   return v[0] == val && v[0] == v[1] && v[0] == v[2];
 }
 
@@ -109,7 +109,7 @@ glm_vec3_eq_all(vec3 v) {
  */
 CGLM_INLINE
 bool
-glm_vec3_eqv(vec3 a, vec3 b) {
+glm_vec3_eqv(const vec3 a, const vec3 b) {
   return a[0] == b[0]
          && a[1] == b[1]
          && a[2] == b[2];
@@ -136,7 +136,7 @@ glm_vec3_eqv_eps(vec3 a, vec3 b) {
  */
 CGLM_INLINE
 float
-glm_vec3_max(vec3 v) {
+glm_vec3_max(const vec3 v) {
   float max;
 
   max = v[0];
@@ -155,7 +155,7 @@ glm_vec3_max(vec3 v) {
  */
 CGLM_INLINE
 float
-glm_vec3_min(vec3 v) {
+glm_vec3_min(const vec3 v) {
   float min;
 
   min = v[0];
