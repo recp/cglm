@@ -353,7 +353,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 /*!
- * @brief mupliply N mat4 matrices and store result in dest
+ * @brief multiply N mat4 matrices and store result in dest
  *
  * this function lets you multiply multiple (more than two or more...) matrices
  * <br><br>multiplication will be done in loop, this may reduce instructions
