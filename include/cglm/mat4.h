@@ -393,7 +393,7 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
  * <br></br>it multiplies m, v, and p matricies in reverse order
  * to create an mvp matrix
  * 
- * example (w/ m, v, p matricies):
+ * example:
  * @code
  * mat m, v, p, mvp;
  *
