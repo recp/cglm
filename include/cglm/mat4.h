@@ -387,7 +387,7 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 }
 
 /*!
- * @brief multiply 3 mat4 matrices and store result in dest
+ * @brief multiply 3 mat4 matrices and store result in mvp 
  *
  * this function does not wrap glm_mat4_mulN
  * <br></br>it multiplies m, v, and p matricies in reverse order
@@ -397,12 +397,13 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
  * @code
  * mat m, v, p, mvp;
  *
- * glm_mat4_mulN(m, v, p, mvp);
+ * glm_mat4_mul_mvp(m, v, p, mvp);
  * @endcode
  *
- * @param[in]  matrices mat4 * array
- * @param[in]  len      matrices count
- * @param[out] dest     result
+ * @param[in]  m        model matrix
+ * @param[in]  v        view matrix
+ * @param[in]  p        projection matrix
+ * @param[out] mvp      result
  */
 CGLM_INLINE
 void
