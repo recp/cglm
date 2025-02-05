@@ -408,8 +408,8 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 CGLM_INLINE
 void
 glm_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 mvp) {
-    glm_mat4_mul(p, v, mvp);
-    glm_mat4_mul(m, mvp, mvp);
+    glm_mat4_mul(v, m, mvp);
+    glm_mat4_mul(p, mvp, mvp);
 }
 
 /*!
