@@ -13,8 +13,38 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, ubuntu-22.04, ubuntu-24.04]
-        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+        include:
+          # x86/x64 builds
+          - { os: macos-13, simd: none }
+          - { os: macos-13, simd: sse }
+          - { os: macos-13, simd: sse2 }
+          - { os: macos-13, simd: sse3 }
+          - { os: macos-13, simd: sse4 }
+          - { os: macos-13, simd: avx }
+          - { os: macos-13, simd: avx2 }
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: ubuntu-22.04, simd: none }
+          - { os: ubuntu-22.04, simd: sse }
+          - { os: ubuntu-22.04, simd: sse2 }
+          - { os: ubuntu-22.04, simd: sse3 }
+          - { os: ubuntu-22.04, simd: sse4 }
+          - { os: ubuntu-22.04, simd: avx }
+          - { os: ubuntu-22.04, simd: avx2 }
+          - { os: ubuntu-24.04, simd: none }
+          - { os: ubuntu-24.04, simd: sse }
+          - { os: ubuntu-24.04, simd: sse2 }
+          - { os: ubuntu-24.04, simd: sse3 }
+          - { os: ubuntu-24.04, simd: sse4 }
+          - { os: ubuntu-24.04, simd: avx }
+          - { os: ubuntu-24.04, simd: avx2 }
+          # ARM64 builds
+          - { os: ubuntu-latest-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -81,18 +111,58 @@ jobs:
       run: cmake --build build
 
   build_cmake_ubuntu:
-    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.simd }}
-    runs-on: ${{ matrix.target.os }}
+    name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.target.arch }} / ${{ matrix.target.simd }}
+    runs-on: ${{ matrix.target.arch == 'arm64' && 'ubuntu-latest-arm64' || matrix.target.os }}
     strategy:
       fail-fast: false
       matrix:
         target:
-          - { os: ubuntu-20.04, cc: gcc-11 }
-          - { os: ubuntu-22.04, cc: gcc-12 }
-          - { os: ubuntu-24.04, cc: gcc-13 }
-          - { os: ubuntu-20.04, cc: clang-12 }
-          - { os: ubuntu-22.04, cc: clang-15 }
-        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+          # GCC 11 builds
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: none }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse2 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse3 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse4 }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx }
+          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx2 }
+          # GCC 12 builds
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: avx2 }
+          # GCC 13 builds
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: none }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse2 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse3 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: sse4 }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx }
+          - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx2 }
+          # Clang 12 builds
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: none }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse2 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse3 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse4 }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx }
+          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx2 }
+          # Clang 15 builds
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx2 }
+          # ARM64 builds
+          - { os: ubuntu-latest, cc: gcc-12, arch: arm64, simd: neon }
+          - { os: ubuntu-latest, cc: gcc-13, arch: arm64, simd: neon }
+          # ARMv7 builds
+          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: neon }
+          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: none }
 
     steps:
     - uses: actions/checkout@v4
@@ -130,7 +200,36 @@ jobs:
         fi
 
     - name: Configure CMake
-      run: cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=${{ matrix.target.cc }} -DCMAKE_C_FLAGS="$CFLAGS" -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+      run: |
+        if [ "${{ matrix.target.arch }}" == "armv7" ]; then
+          # Build for ARMv7
+          neon_flags=""
+          if [ "${{ matrix.simd }}" == "neon" ]; then
+            neon_flags="-mfpu=neon -mfloat-abi=hard"
+          fi
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
+            -DCMAKE_C_FLAGS="$CFLAGS -m32 -march=armv7-a ${neon_flags}" \
+            -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        elif [ "${{ matrix.target.arch }}" == "arm64" ]; then
+          # Build for ARM64 (AArch64)
+          neon_flags=""
+          if [ "${{ matrix.simd }}" == "neon" ]; then
+            neon_flags="+simd" # Enable SIMD/NEON features on ARM64
+          else
+            neon_flags="+nosimd" # Explicitly disable SIMD/NEON
+          fi
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
+            -DCMAKE_C_FLAGS="$CFLAGS -march=armv8-a${neon_flags}" \
+            -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        else
+          # Normal build (x86/x64)
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
+            -DCMAKE_C_FLAGS="$CFLAGS" \
+            -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        fi
 
     - name: Build
       run: cmake --build build
@@ -176,8 +275,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, windows-2022]
-        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+        include:
+          # x86/x64 builds
+          - { os: macos-13, simd: none }
+          - { os: macos-13, simd: sse }
+          - { os: macos-13, simd: sse2 }
+          - { os: macos-13, simd: sse3 }
+          - { os: macos-13, simd: sse4 }
+          - { os: macos-13, simd: avx }
+          - { os: macos-13, simd: avx2 }
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: windows-2022, simd: none }
+          - { os: windows-2022, simd: sse }
+          - { os: windows-2022, simd: sse2 }
+          - { os: windows-2022, simd: sse3 }
+          - { os: windows-2022, simd: sse4 }
+          - { os: windows-2022, simd: avx }
+          - { os: windows-2022, simd: avx2 }
+          # ARM64 builds
+          - { os: macos-14-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -258,12 +380,42 @@ jobs:
 
   build_meson:
     name: Meson / ${{ matrix.os }} / ${{ matrix.simd }}
-    runs-on: ${{ matrix.os }}
+    runs-on: ${{ contains(matrix.os, 'arm64') && 'ubuntu-latest-arm64' || matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-14, ubuntu-22.04, ubuntu-24.04, windows-2022]
-        simd: [none, sse, sse2, sse3, sse4, avx, avx2, neon]
+        include:
+          # x86/x64 builds
+          - { os: macos-14, simd: none }
+          - { os: macos-14, simd: sse }
+          - { os: macos-14, simd: sse2 }
+          - { os: macos-14, simd: sse3 }
+          - { os: macos-14, simd: sse4 }
+          - { os: macos-14, simd: avx }
+          - { os: macos-14, simd: avx2 }
+          - { os: ubuntu-22.04, simd: none }
+          - { os: ubuntu-22.04, simd: sse }
+          - { os: ubuntu-22.04, simd: sse2 }
+          - { os: ubuntu-22.04, simd: sse3 }
+          - { os: ubuntu-22.04, simd: sse4 }
+          - { os: ubuntu-22.04, simd: avx }
+          - { os: ubuntu-22.04, simd: avx2 }
+          - { os: ubuntu-24.04, simd: none }
+          - { os: ubuntu-24.04, simd: sse }
+          - { os: ubuntu-24.04, simd: sse2 }
+          - { os: ubuntu-24.04, simd: sse3 }
+          - { os: ubuntu-24.04, simd: sse4 }
+          - { os: ubuntu-24.04, simd: avx }
+          - { os: ubuntu-24.04, simd: avx2 }
+          - { os: windows-2022, simd: none }
+          - { os: windows-2022, simd: sse }
+          - { os: windows-2022, simd: sse2 }
+          - { os: windows-2022, simd: sse3 }
+          - { os: windows-2022, simd: sse4 }
+          - { os: windows-2022, simd: avx }
+          - { os: windows-2022, simd: avx2 }
+          # ARM64 builds
+          - { os: ubuntu-latest-arm64, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -415,3 +567,79 @@ jobs:
 
       - name: Build
         run: swift build
+
+  build_cmake_arm:
+    name: CMake / ARM / ${{ matrix.os }} / ${{ matrix.arch }} / ${{ matrix.simd }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Linux ARM builds
+          - os: ubuntu-latest-arm64
+            arch: arm64
+            simd: neon
+          - os: ubuntu-latest-arm64
+            arch: armv7
+            simd: neon
+          - os: ubuntu-latest-arm64
+            arch: armv7
+            simd: none
+          # Windows ARM builds
+          - os: windows-latest-arm64
+            arch: arm64
+            simd: neon
+          - os: windows-latest-arm64
+            arch: arm
+            simd: neon
+          - os: windows-latest-arm64
+            arch: arm
+            simd: none
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Configure CMake (Windows)
+      if: runner.os == 'Windows'
+      shell: pwsh
+      run: |
+        $flags = ""
+        if ("${{ matrix.arch }}" -eq "arm") {
+          $flags = "-m32 -march=armv7-a"
+          if ("${{ matrix.simd }}" -eq "neon") {
+            $flags += " -mfpu=neon"
+          }
+        }
+        elseif ("${{ matrix.simd }}" -eq "neon") {
+          $flags = "-march=armv8-a+simd"
+        }
+        
+        cmake -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch == 'arm64' && 'ARM64' || 'ARM' }} `
+          -DCMAKE_BUILD_TYPE=Release `
+          -DCMAKE_C_FLAGS="$flags" `
+          -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+
+    - name: Configure CMake (Unix)
+      if: runner.os != 'Windows'
+      shell: bash
+      run: |
+        flags=""
+        if [ "${{ matrix.arch }}" = "armv7" ]; then
+          flags="-m32 -march=armv7-a"
+          if [ "${{ matrix.simd }}" = "neon" ]; then
+            flags="$flags -mfpu=neon -mfloat-abi=hard"
+          fi
+        elif [ "${{ matrix.simd }}" = "neon" ]; then
+          flags="-march=armv8-a+simd"
+        fi
+        
+        cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_C_FLAGS="$flags" \
+          -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+
+    - name: Build
+      run: cmake --build build
+
+    - name: Test
+      working-directory: build
+      run: ./tests

@@ -130,5 +130,11 @@
     <ClInclude Include="..\test\src\test_euler_to_quat_rh.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_aabb2d.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\test\src\test_noise.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

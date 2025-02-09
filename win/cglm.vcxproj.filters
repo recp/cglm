@@ -184,6 +184,9 @@
     <ClCompile Include="..\src\aabb2d.c">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\noise.c">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\config.h">
@@ -730,6 +733,15 @@
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\ray.h">
+      <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\noise.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\call\noise.h">
+      <Filter>include\cglm\call</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\struct\noise.h">
       <Filter>include\cglm\struct</Filter>
     </ClInclude>
   </ItemGroup>
