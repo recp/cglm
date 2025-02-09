@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\test\include\common.h" />
+    <ClInclude Include="..\test\src\test_aabb2d.h" />
     <ClInclude Include="..\test\src\test_affine.h" />
     <ClInclude Include="..\test\src\test_affine2d.h" />
     <ClInclude Include="..\test\src\test_affine_mat.h" />
@@ -76,6 +77,7 @@
     <ClInclude Include="..\test\src\test_mat4.h" />
     <ClInclude Include="..\test\src\test_mat4x2.h" />
     <ClInclude Include="..\test\src\test_mat4x3.h" />
+    <ClInclude Include="..\test\src\test_noise.h" />
     <ClInclude Include="..\test\src\test_plane.h" />
     <ClInclude Include="..\test\src\test_project.h" />
     <ClInclude Include="..\test\src\test_quat.h" />

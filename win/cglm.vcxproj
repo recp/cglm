@@ -80,6 +80,7 @@
     <ClCompile Include="..\src\mat4.c" />
     <ClCompile Include="..\src\mat4x2.c" />
     <ClCompile Include="..\src\mat4x3.c" />
+    <ClCompile Include="..\src\noise.c" />
     <ClCompile Include="..\src\plane.c" />
     <ClCompile Include="..\src\project.c" />
     <ClCompile Include="..\src\quat.c" />
@@ -137,6 +138,7 @@
     <ClInclude Include="..\include\cglm\call\mat4.h" />
     <ClInclude Include="..\include\cglm\call\mat4x2.h" />
     <ClInclude Include="..\include\cglm\call\mat4x3.h" />
+    <ClInclude Include="..\include\cglm\call\noise.h" />
     <ClInclude Include="..\include\cglm\call\plane.h" />
     <ClInclude Include="..\include\cglm\call\project.h" />
     <ClInclude Include="..\include\cglm\call\quat.h" />
@@ -183,6 +185,7 @@
     <ClInclude Include="..\include\cglm\mat4.h" />
     <ClInclude Include="..\include\cglm\mat4x2.h" />
     <ClInclude Include="..\include\cglm\mat4x3.h" />
+    <ClInclude Include="..\include\cglm\noise.h" />
     <ClInclude Include="..\include\cglm\plane.h" />
     <ClInclude Include="..\include\cglm\project.h" />
     <ClInclude Include="..\include\cglm\quat.h" />
@@ -250,6 +253,7 @@
     <ClInclude Include="..\include\cglm\struct\mat4.h" />
     <ClInclude Include="..\include\cglm\struct\mat4x2.h" />
     <ClInclude Include="..\include\cglm\struct\mat4x3.h" />
+    <ClInclude Include="..\include\cglm\struct\noise.h" />
     <ClInclude Include="..\include\cglm\struct\plane.h" />
     <ClInclude Include="..\include\cglm\struct\project.h" />
     <ClInclude Include="..\include\cglm\struct\quat.h" />
@@ -278,7 +282,7 @@
     <ProjectGuid>{CA8BCAF9-CD25-4133-8F62-3D1449B5D2FC}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>cglm</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
