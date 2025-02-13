@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 project(cglm
-  VERSION 0.9.5
+  VERSION 0.9.6
   HOMEPAGE_URL https://github.com/recp/cglm
   DESCRIPTION "OpenGL Mathematics (glm) for C"
   LANGUAGES C
