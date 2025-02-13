@@ -131,7 +131,8 @@ cglm_call_HEADERS = include/cglm/call/mat4.h \
                     include/cglm/call/bezier.h \
                     include/cglm/call/ray.h \
                     include/cglm/call/affine.h \
-                    include/cglm/call/affine2d.h
+                    include/cglm/call/affine2d.h \
+                    include/cglm/call/aabb2d.h
 
 cglm_call_clipspacedir=$(includedir)/cglm/call/clipspace
 cglm_call_clipspace_HEADERS = include/cglm/call/clipspace/persp_lh_no.h \
