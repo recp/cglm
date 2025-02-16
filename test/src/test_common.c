@@ -16,7 +16,7 @@ test_rand_mat4(mat4 dest) {
   dest[3][2] = drand48();
 
   /* random rotatation around random axis with random angle */
-  glm_rotate(dest, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_rotate(dest, drand48(), (vec3) { drand48(), drand48(), drand48() });
 
   /* random scale */
   /* glm_scale(dest, (vec3){drand48(), drand48(), drand48()}); */
@@ -61,7 +61,7 @@ test_rand_mat3(mat3 dest) {
   mat4 m4;
 
   /* random rotatation around random axis with random angle */
-  glm_rotate_make(m4, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_rotate_make(m4, drand48(), (vec3) { drand48(), drand48(), drand48() });
   glm_mat4_pick3(m4, dest);
 }
 
@@ -121,6 +121,13 @@ test_rand_mat2x4(mat2x4 dest) {
   dest[1][1] = drand48();
   dest[1][2] = drand48();
   dest[1][3] = drand48();
+}
+
+void
+test_rand_transform2d(mat3 dest) {
+  glm_translate2d_make(dest, (vec2) { drand48(), drand48() });
+  glm_rotate2d(dest, drand48());
+  glm_scale2d(dest, (vec2) { drand48(), drand48() });
 }
 
 void
@@ -236,7 +243,8 @@ test_assert_mat2_eq_identity(mat2 m2) {
     for (j = 0; j < 2; j++) {
       if (i == j) {
         ASSERT(test_eq(m2[i][j], 1.0f))
-      } else {
+      }
+      else {
         ASSERT(test_eq(m2[i][j], 0.0f))
       }
     }
@@ -344,7 +352,8 @@ test_assert_mat3_eq_identity(mat3 m3) {
     for (j = 0; j < 3; j++) {
       if (i == j) {
         ASSERT(test_eq(m3[i][j], 1.0f))
-      } else {
+      }
+      else {
         ASSERT(test_eq(m3[i][j], 0.0f))
       }
     }
@@ -426,7 +435,8 @@ test_assert_mat4_eq_identity(mat4 m4) {
     for (j = 0; j < 4; j++) {
       if (i == j) {
         ASSERT(test_eq(m4[i][j], 1.0f))
-      } else {
+      }
+      else {
         ASSERT(test_eq(m4[i][j], 0.0f))
       }
     }
