@@ -353,7 +353,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
 }
 
 /*!
- * @brief mupliply N mat4 matrices and store result in dest
+ * @brief multiply N mat4 matrices and store result in dest
  *
  * this function lets you multiply multiple (more than two or more...) matrices
  * <br><br>multiplication will be done in loop, this may reduce instructions
@@ -384,6 +384,32 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 
   for (i = 2; i < len; i++)
     glm_mat4_mul(dest, *matrices[i], dest);
+}
+
+/*!
+ * @brief multiply 3 mat4 matrices and store result in mvp 
+ *
+ * this function does not wrap glm_mat4_mulN
+ * <br></br>it multiplies m, v, and p matricies in reverse order
+ * to create an mvp matrix
+ * 
+ * example:
+ * @code
+ * mat m, v, p, mvp;
+ *
+ * glm_mat4_mul_mvp(m, v, p, mvp);
+ * @endcode
+ *
+ * @param[in]  m        model matrix
+ * @param[in]  v        view matrix
+ * @param[in]  p        projection matrix
+ * @param[out] mvp      result
+ */
+CGLM_INLINE
+void
+glm_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 mvp) {
+    glm_mat4_mul(v, m, mvp);
+    glm_mat4_mul(p, mvp, mvp);
 }
 
 /*!
