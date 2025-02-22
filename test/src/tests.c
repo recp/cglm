@@ -33,6 +33,7 @@
 #include "test_noise.h"
 #include "test_affine.h"
 #include "test_affine2d.h"
+#include "test_affine2d_post.h"
 #include "test_affine_mat.h"
 #include "test_aabb2d.h"
 #include "test_ray.h"

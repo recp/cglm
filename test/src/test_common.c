@@ -124,6 +124,13 @@ test_rand_mat2x4(mat2x4 dest) {
 }
 
 void
+test_rand_transform2d(mat3 dest) {
+  glm_translate2d_make(dest, (vec2) { drand48(), drand48() });
+  glm_rotate2d(dest, drand48());
+  glm_scale2d(dest, (vec2) { drand48(), drand48() });
+}
+
+void
 test_rand_vec3(vec3 dest) {
   dest[0] = drand48();
   dest[1] = drand48();

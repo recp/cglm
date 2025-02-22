@@ -97,6 +97,14 @@ TEST_DECLARE(glmc_rotate2d_make)
 TEST_DECLARE(glmc_rotate2d)
 TEST_DECLARE(glmc_rotate2d_to)
 
+/* affine 2d post */
+TEST_DECLARE(glm_translated2d)
+TEST_DECLARE(glm_translated2d_x)
+TEST_DECLARE(glm_translated2d_y)
+TEST_DECLARE(glm_rotated2d)
+TEST_DECLARE(glm_scaled2d)
+TEST_DECLARE(glm_scaled2d_uni)
+
 /* aabb2d */
 TEST_DECLARE(glm_aabb2d_sizev)
 
@@ -1307,6 +1315,14 @@ TEST_LIST {
   TEST_ENTRY(glmc_rotate2d_make)
   TEST_ENTRY(glmc_rotate2d)
   TEST_ENTRY(glmc_rotate2d_to)
+
+  /* affine 2d post */
+  TEST_ENTRY(glm_translated2d)
+  TEST_ENTRY(glm_translated2d_x)
+  TEST_ENTRY(glm_translated2d_y)
+  TEST_ENTRY(glm_rotated2d)
+  TEST_ENTRY(glm_scaled2d)
+  TEST_ENTRY(glm_scaled2d_uni)
 
   /* aabb2d */
   TEST_ENTRY(glm_aabb2d_sizev)
