@@ -32,6 +32,7 @@ Functions:
 #. :c:func:`glm_mat4_ins3`
 #. :c:func:`glm_mat4_mul`
 #. :c:func:`glm_mat4_mulN`
+#. :c:func:`glm_mat4_mul_mvp`
 #. :c:func:`glm_mat4_mulv`
 #. :c:func:`glm_mat4_mulv3`
 #. :c:func:`glm_mat4_trace`
@@ -150,6 +151,25 @@ Functions documentation
       | *[in]*  **matrices** array of mat4
       | *[in]*  **len**      matrices count
       | *[out]* **dest**     destination matrix
+
+.. c:function:: void glm_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 mvp)
+    
+    multiply 3 mat4 matrices and store result in mvp
+    this function does not wrap glm_mat4_mulN
+    it multiplies m, v, and p matricies in reverse order
+    to create an mvp matrix
+    example:
+
+    .. code-block:: c
+
+       mat4 m, v, p, mvp;
+       glm_mat4_mul_mvp(m, v, p, mvp);
+
+    Parameters:
+        | *[in]*  **m**     model matrix
+        | *[in]*  **v**     view matrix
+        | *[in]*  **p**     projection matrix
+        | *[out]* **mvp**   result
 
 .. c:function:: void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest)
 
