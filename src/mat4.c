@@ -70,8 +70,8 @@ glmc_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 
 CGLM_EXPORT
 void
-glmc_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 mvp) {
-    glm_mat4_mul_mvp(m, v, p, mvp);
+glmc_mat4_mul3(mat4 m1, mat4 m2, mat4 m3, mat4 dest) {
+    glm_mat4_mul3(m1, m2, m3, dest);
 }
 
 CGLM_EXPORT

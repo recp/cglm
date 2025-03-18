@@ -176,27 +176,27 @@ TEST_IMPL(GLM_PREFIX, mat4_mulN) {
   TEST_SUCCESS
 }
 
-TEST_IMPL(GLM_PREFIX, mat4_mul_mvp) {
-    mat4 m;
-    GLM(mat4_identity)(m);
+TEST_IMPL(GLM_PREFIX, mat4_mul3) {
+    mat4 m1;
+    GLM(mat4_identity)(m1);
 
-    mat4 v;
-    GLM(mat4_identity)(v);
-    GLM(mat4_scale)(v, 2);
+    mat4 m2;
+    GLM(mat4_identity)(m2);
+    GLM(mat4_scale)(m2, 2);
 
-    mat4 p;
-    GLM(mat4_identity)(p);
-    GLM(mat4_scale)(p, 3);
+    mat4 m3;
+    GLM(mat4_identity)(m3);
+    GLM(mat4_scale)(m3, 3);
 
-    mat4 mvp = {0};
+    mat4 dest = {0};
 
     mat4 _6i;
     GLM(mat4_identity)(_6i);
     GLM(mat4_scale)(_6i, 6);
 
-    GLM(mat4_mul_mvp)(m, v, p, mvp);
+    GLM(mat4_mul3)(m1, m2, m3, dest);
 
-    ASSERTIFY(test_assert_mat4_eq(mvp, _6i))
+    ASSERTIFY(test_assert_mat4_eq(dest, _6i))
 
     TEST_SUCCESS
 }

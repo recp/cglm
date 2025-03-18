@@ -259,7 +259,7 @@ CGLM_INLINE
 mat4s
 glms_mat4_(mul_mvp)(mat4s m, mat4s v, mat4s p) {
   mat4s dest;
-  glm_mat4_mul_mvp(m.raw, v.raw, p.raw, dest.raw);
+  glm_mat4_mul3(m.raw, v.raw, p.raw, dest.raw);
   return dest;
 }
 

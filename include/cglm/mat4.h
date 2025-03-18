@@ -28,7 +28,7 @@
    CGLM_INLINE void  glm_mat4_ins3(mat3 mat, mat4 dest);
    CGLM_INLINE void  glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest);
    CGLM_INLINE void  glm_mat4_mulN(mat4 *matrices[], int len, mat4 dest);
-   CGLM_INLINE void  glm_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 dest);
+   CGLM_INLINE void  glm_mat4_mul3(mat4 m1, mat4 m2, mat4 m3, mat4 dest);
    CGLM_INLINE void  glm_mat4_mulv(mat4 m, vec4 v, vec4 dest);
    CGLM_INLINE void  glm_mat4_mulv3(mat4 m, vec3 v, float last, vec3 dest);
    CGLM_INLINE float glm_mat4_trace(mat4 m);
@@ -388,29 +388,34 @@ glm_mat4_mulN(mat4 * __restrict matrices[], uint32_t len, mat4 dest) {
 }
 
 /*!
- * @brief multiply 3 mat4 matrices and store result in mvp 
+ * @brief multiply 3 mat4 matrices and store result in dest 
  *
  * this function does not wrap glm_mat4_mulN
- * <br></br>it multiplies m, v, and p matricies in reverse order
- * to create an mvp matrix
+ * <br></br>it multiplies m1, m2, and m3 matricies in reverse order
  * 
  * example:
  * @code
- * mat m, v, p, mvp;
+ * mat4 m1, m2, m3, dest;
  *
- * glm_mat4_mul_mvp(m, v, p, mvp);
+ * glm_mat4_mul3(m1, m2, m3, dest);
  * @endcode
  *
- * @param[in]  m        model matrix
- * @param[in]  v        view matrix
- * @param[in]  p        projection matrix
- * @param[out] mvp      result
+ * to construct a ModelViewProjection matrix, you would do so like this:
+ * @code
+ * mat4 m, v, p, dest;
+ * // . . .
+ * glm_mat4_mul3(m1, m2, m3, dest);
+ *
+ * @param[in]  m1        right matrix
+ * @param[in]  m2        center matrix
+ * @param[in]  m3        left matrix
+ * @param[out] dest      result
  */
 CGLM_INLINE
 void
-glm_mat4_mul_mvp(mat4 m, mat4 v, mat4 p, mat4 mvp) {
-    glm_mat4_mul(v, m, mvp);
-    glm_mat4_mul(p, mvp, mvp);
+glm_mat4_mul3(mat4 m1, mat4 m2, mat4 m3, mat4 dest) {
+    glm_mat4_mul(m2, m1, dest);
+    glm_mat4_mul(m3, dest, dest);
 }
 
 /*!
