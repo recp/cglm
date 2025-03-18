@@ -248,6 +248,22 @@ glms_mat4_(mulN)(mat4s * __restrict matrices[], uint32_t len) {
 }
 
 /*!
+ * @brief multiply 3 mat4 matrices and store result in mvp
+ *
+ * @param[in]  m    mat4 (left)
+ * @param[in]  v    mat4 (middle)
+ * @param[in]  p    mat4 (right)
+ * @returns         mat4 (result)
+ */
+CGLM_INLINE
+mat4s
+glms_mat4_(mul_mvp)(mat4s m, mat4s v, mat4s p) {
+  mat4s dest;
+  glm_mat4_mul_mvp(m.raw, v.raw, p.raw, dest.raw);
+  return dest;
+}
+
+/*!
  * @brief multiply mat4 with vec4 (column vector) and store in dest vector
  *
  * @param[in]  m    mat4 (left)
