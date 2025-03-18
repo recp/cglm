@@ -61,8 +61,8 @@ TEST_IMPL(GLM_PREFIX, mul_rot) {
   mat4 m4 = GLM_MAT4_ZERO_INIT;
   int  i, j, k;
 
-  glm_rotate(m1, drand48(), (vec3){drand48(), drand48(), drand48()});
-  glm_rotate(m2, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_rotate(m1, frand48(), (vec3){frand48(), frand48(), frand48()});
+  glm_rotate(m2, frand48(), (vec3){frand48(), frand48(), frand48()});
 
   GLM(mul_rot)(m1, m2, m3);
   for (i = 0; i < 4; i++) {

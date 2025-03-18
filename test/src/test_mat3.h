@@ -184,11 +184,12 @@ TEST_IMPL(GLM_PREFIX, mat3_transpose) {
 TEST_IMPL(GLM_PREFIX, mat3_scale) {
   mat3 m1 = A_MATRIX;
   mat3 m2 = A_MATRIX;
-  int i, j, k, scale;
+  int i, j, k;
+  float scale;
 
   scale = rand() % 100;
 
-  GLM(mat3_scale)(m1, (float)scale);
+  GLM(mat3_scale)(m1, scale);
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {

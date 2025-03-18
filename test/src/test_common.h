@@ -176,4 +176,11 @@ test_eq_th(float a, float b, float th) {
   return fabsf(a - b) <= th;
 }
 
+/* drand with explicit conversion to lower precision */
+CGLM_INLINE
+float
+frand48(void) {
+  return (float)drand48();
+}
+
 #endif /* test_common_h */

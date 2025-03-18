@@ -142,11 +142,12 @@ TEST_IMPL(GLM_PREFIX, mat4x2_transpose) {
 TEST_IMPL(GLM_PREFIX, mat4x2_scale) {
   mat4x2 m1 = A_MATRIX4X2;
   mat4x2 m2 = A_MATRIX4X2;
-  int i, j, scale;
+  int i, j;
+  float scale;
 
   scale = rand() % 100;
 
-  GLM(mat4x2_scale)(m1, (float) scale);
+  GLM(mat4x2_scale)(m1, scale);
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 2; j++) {

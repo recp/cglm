@@ -196,11 +196,12 @@ TEST_IMPL(GLM_PREFIX, mat2_trace) {
 TEST_IMPL(GLM_PREFIX, mat2_scale) {
   mat2 m1 = A_MATRIX2x2;
   mat2 m2 = A_MATRIX2x2;
-  int i, j, scale;
+  int i, j;
+  float scale;
 
   scale = rand() % 100;
 
-  GLM(mat2_scale)(m1, (float)scale);
+  GLM(mat2_scale)(m1, scale);
 
   for (i = 0; i < 2; i++) {
     for (j = 0; j < 2; j++) {
