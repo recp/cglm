@@ -162,7 +162,7 @@ Functions documentation
 
     .. code-block:: c
 
-       mat m, v, p, mvp;
+       mat4 m, v, p, mvp;
        glm_mat4_mul_mvp(m, v, p, mvp);
 
     Parameters:
