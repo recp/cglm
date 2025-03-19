@@ -292,11 +292,12 @@ TEST_IMPL(GLM_PREFIX, mat4_transpose) {
 TEST_IMPL(GLM_PREFIX, mat4_scale_p) {
   mat4 m1 = A_MATRIX;
   mat4 m2 = A_MATRIX;
-  int i, j, k, scale;
+  int i, j, k;
+  float scale;
 
   scale = rand() % 100;
   
-  GLM(mat4_scale_p)(m1, (float)scale);
+  GLM(mat4_scale_p)(m1, scale);
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
@@ -311,11 +312,12 @@ TEST_IMPL(GLM_PREFIX, mat4_scale_p) {
 TEST_IMPL(GLM_PREFIX, mat4_scale) {
   mat4 m1 = A_MATRIX;
   mat4 m2 = A_MATRIX;
-  int i, j, k, scale;
+  int i, j, k;
+  float scale;
 
   scale = rand() % 100;
   
-  GLM(mat4_scale)(m1, (float)scale);
+  GLM(mat4_scale)(m1, scale);
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {

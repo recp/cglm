@@ -11,49 +11,49 @@ test_rand_mat4(mat4 dest) {
   glm_mat4_copy(GLM_MAT4_IDENTITY, dest);
 
   /* random position */
-  dest[3][0] = drand48();
-  dest[3][1] = drand48();
-  dest[3][2] = drand48();
+  dest[3][0] = frand48();
+  dest[3][1] = frand48();
+  dest[3][2] = frand48();
 
   /* random rotatation around random axis with random angle */
-  glm_rotate(dest, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_rotate(dest, frand48(), (vec3){frand48(), frand48(), frand48()});
 
   /* random scale */
-  /* glm_scale(dest, (vec3){drand48(), drand48(), drand48()}); */
+  /* glm_scale(dest, (vec3){frand48(), frand48(), frand48()}); */
 }
 
 void
 test_rand_mat4x2(mat4x2 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
 
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
 
-  dest[2][0] = drand48();
-  dest[2][1] = drand48();
+  dest[2][0] = frand48();
+  dest[2][1] = frand48();
 
-  dest[3][0] = drand48();
-  dest[3][1] = drand48();
+  dest[3][0] = frand48();
+  dest[3][1] = frand48();
 }
 
 void
 test_rand_mat4x3(mat4x3 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[0][2] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[0][2] = frand48();
 
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
-  dest[1][2] = drand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
+  dest[1][2] = frand48();
 
-  dest[2][0] = drand48();
-  dest[2][1] = drand48();
-  dest[2][2] = drand48();
+  dest[2][0] = frand48();
+  dest[2][1] = frand48();
+  dest[2][2] = frand48();
 
-  dest[3][0] = drand48();
-  dest[3][1] = drand48();
-  dest[3][2] = drand48();
+  dest[3][0] = frand48();
+  dest[3][1] = frand48();
+  dest[3][2] = frand48();
 }
 
 void
@@ -61,80 +61,80 @@ test_rand_mat3(mat3 dest) {
   mat4 m4;
 
   /* random rotatation around random axis with random angle */
-  glm_rotate_make(m4, drand48(), (vec3){drand48(), drand48(), drand48()});
+  glm_rotate_make(m4, frand48(), (vec3){frand48(), frand48(), frand48()});
   glm_mat4_pick3(m4, dest);
 }
 
 void
 test_rand_mat3x2(mat3x2 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
-  dest[2][0] = drand48();
-  dest[2][1] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
+  dest[2][0] = frand48();
+  dest[2][1] = frand48();
 }
 
 void
 test_rand_mat3x4(mat3x4 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[0][2] = drand48();
-  dest[0][3] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[0][2] = frand48();
+  dest[0][3] = frand48();
 
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
-  dest[1][2] = drand48();
-  dest[1][3] = drand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
+  dest[1][2] = frand48();
+  dest[1][3] = frand48();
 
-  dest[2][0] = drand48();
-  dest[2][1] = drand48();
-  dest[2][2] = drand48();
-  dest[2][3] = drand48();
+  dest[2][0] = frand48();
+  dest[2][1] = frand48();
+  dest[2][2] = frand48();
+  dest[2][3] = frand48();
 }
 
 void
 test_rand_mat2(mat2 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
 }
 
 void
 test_rand_mat2x3(mat2x3 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[0][2] = drand48();
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
-  dest[1][2] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[0][2] = frand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
+  dest[1][2] = frand48();
 }
 
 void
 test_rand_mat2x4(mat2x4 dest) {
-  dest[0][0] = drand48();
-  dest[0][1] = drand48();
-  dest[0][2] = drand48();
-  dest[0][3] = drand48();
-  dest[1][0] = drand48();
-  dest[1][1] = drand48();
-  dest[1][2] = drand48();
-  dest[1][3] = drand48();
+  dest[0][0] = frand48();
+  dest[0][1] = frand48();
+  dest[0][2] = frand48();
+  dest[0][3] = frand48();
+  dest[1][0] = frand48();
+  dest[1][1] = frand48();
+  dest[1][2] = frand48();
+  dest[1][3] = frand48();
 }
 
 void
 test_rand_transform2d(mat3 dest) {
-  glm_translate2d_make(dest, (vec2) { drand48(), drand48() });
-  glm_rotate2d(dest, drand48());
-  glm_scale2d(dest, (vec2) { drand48(), drand48() });
+  glm_translate2d_make(dest, (vec2) { frand48(), frand48() });
+  glm_rotate2d(dest, frand48());
+  glm_scale2d(dest, (vec2) { frand48(), frand48() });
 }
 
 void
 test_rand_vec3(vec3 dest) {
-  dest[0] = drand48();
-  dest[1] = drand48();
-  dest[2] = drand48();
+  dest[0] = frand48();
+  dest[1] = frand48();
+  dest[2] = frand48();
 }
 
 vec3s
@@ -146,10 +146,10 @@ test_rand_vec3s(void) {
 
 void
 test_rand_vec4(vec4 dest) {
-  dest[0] = drand48();
-  dest[1] = drand48();
-  dest[2] = drand48();
-  dest[3] = drand48();
+  dest[0] = frand48();
+  dest[1] = frand48();
+  dest[2] = frand48();
+  dest[3] = frand48();
 }
 
 vec4s
@@ -161,12 +161,12 @@ test_rand_vec4s(void) {
 
 float
 test_rand(void) {
-  return drand48();
+  return frand48();
 }
 
 void
 test_rand_quat(versor q) {
-  glm_quat(q, drand48(), drand48(), drand48(), drand48());
+  glm_quat(q, frand48(), frand48(), frand48(), frand48());
   glm_quat_normalize(q);
 }
 

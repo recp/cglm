@@ -44,7 +44,7 @@ if(MSVC)
     endforeach(flag_var)
   endif()
 else()
-  add_compile_options(-Wall)
+  add_compile_options(-Wall -Wextra -Wpedantic -Wconversion)
 
   if(NOT CMAKE_BUILD_TYPE MATCHES Debug)
     add_compile_options(-O3)

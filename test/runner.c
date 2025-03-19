@@ -17,7 +17,7 @@ main(int argc, const char * argv[]) {
   test_entry_t *entry;
   test_status_t st;
   int32_t       i, count, passed, failed, maxlen;
-  double        start, end, elapsed, total;
+  clock_t       start, end, elapsed, total;
   (void)argc;
   (void)argv;
 
@@ -70,7 +70,7 @@ main(int argc, const char * argv[]) {
       fprintf(stderr, GREEN  "  " OK_TEXT RESET " %-*s  ", maxlen, entry->name);
 
       if (elapsed > 0.01)
-        fprintf(stderr, YELLOW "%.2fs", elapsed);
+        fprintf(stderr, YELLOW "%.2lus", elapsed);
       else
         fprintf(stderr, "0");
 
@@ -85,7 +85,7 @@ main(int argc, const char * argv[]) {
   }
 
   fprintf(stderr,
-          CYAN "\ncglm test results (%0.2fs):\n" RESET
+          CYAN "\ncglm test results (%0.2lus):\n" RESET
           "--------------------------\n"
 
           MAGENTA "%d" RESET " tests ran, "
