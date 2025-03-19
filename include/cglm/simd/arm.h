@@ -19,8 +19,10 @@
 #define glmm_load(p)      vld1q_f32(p)
 #define glmm_store(p, a)  vst1q_f32(p, a)
 
-#define glmm_set1(x) vdupq_n_f32(x)
-#define glmm_128     float32x4_t
+#define glmm_set1(x)      vdupq_n_f32(x)
+#define glmm_set1_ptr(x)  vdupq_n_f32(*x)
+#define glmm_set1_rval(x) vdupq_n_f32(x)
+#define glmm_128          float32x4_t
 
 #define glmm_splat_x(x) vdupq_lane_f32(vget_low_f32(x),  0)
 #define glmm_splat_y(x) vdupq_lane_f32(vget_low_f32(x),  1)

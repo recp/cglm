@@ -15,6 +15,7 @@
 #define glmm_store(p, a)  wasm_v128_store(p, (a))
 
 #define glmm_set1(x)      wasm_f32x4_splat(x)
+#define glmm_set1_ptr(x)  wasm_f32x4_splat(*x)
 #define glmm_set1_rval(x) wasm_f32x4_splat(x)
 #define glmm_128          v128_t
 
