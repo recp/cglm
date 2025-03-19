@@ -360,7 +360,7 @@ glm_mat4_mul(mat4 m1, mat4 m2, mat4 dest) {
  * size but if <b>len</b> is too small then compiler may unroll whole loop,
  * usage:
  * @code
- * mat m1, m2, m3, m4, res;
+ * mat4 m1, m2, m3, m4, res;
  *
  * glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4, res);
  * @endcode

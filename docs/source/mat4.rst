@@ -143,7 +143,7 @@ Functions documentation
 
     .. code-block:: c
 
-       mat m1, m2, m3, m4, res;
+       mat4 m1, m2, m3, m4, res;
        glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4, res);
 
     Parameters:

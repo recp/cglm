@@ -223,7 +223,7 @@ glms_mat4_(mul)(mat4s m1, mat4s m2) {
  * size but if <b>len</b> is too small then compiler may unroll whole loop,
  * usage:
  * @code
- * mat m1, m2, m3, m4, res;
+ * mat4 m1, m2, m3, m4, res;
  *
  * res = glm_mat4_mulN((mat4 *[]){&m1, &m2, &m3, &m4}, 4);
  * @endcode
