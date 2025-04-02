@@ -11,12 +11,12 @@
    GLM_MAT2X3_ZERO
 
  Functions:
-   CGLM_INLINE void glm_mat2x3_copy(mat2x3 mat, mat2x3 dest);
-   CGLM_INLINE void glm_mat2x3_zero(mat2x3 mat);
+   CGLM_INLINE void glm_mat2x3_copy(mat2x3 src, mat2x3 dest);
+   CGLM_INLINE void glm_mat2x3_zero(mat2x3 m);
    CGLM_INLINE void glm_mat2x3_make(const float * __restrict src, mat2x3 dest);
    CGLM_INLINE void glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat3 dest);
    CGLM_INLINE void glm_mat2x3_mulv(mat2x3 m, vec2 v, vec3 dest);
-   CGLM_INLINE void glm_mat2x3_transpose(mat2x3 m, mat3x2 dest);
+   CGLM_INLINE void glm_mat2x3_transpose(mat2x3 src, mat3x2 dest);
    CGLM_INLINE void glm_mat2x3_scale(mat2x3 m, float s);
  */
 
@@ -31,40 +31,35 @@
 #define GLM_MAT2X3_ZERO GLM_MAT2X3_ZERO_INIT
 
 /*!
- * @brief copy all members of [mat] to [dest]
+ * @brief Copy mat2x3 (src) to mat2x3 (dest).
  *
- * @param[in]  mat  source
- * @param[out] dest destination
+ * @param[in]  src  mat2x3 (left)
+ * @param[out] dest destination (result, mat2x3)
  */
 CGLM_INLINE
 void
-glm_mat2x3_copy(mat2x3 mat, mat2x3 dest) {
-  dest[0][0] = mat[0][0];
-  dest[0][1] = mat[0][1];
-  dest[0][2] = mat[0][2];
-
-  dest[1][0] = mat[1][0];
-  dest[1][1] = mat[1][1];
-  dest[1][2] = mat[1][2];
+glm_mat2x3_copy(mat2x3 src, mat2x3 dest) {
+  glm_vec3_copy(src[0], dest[0]);
+  glm_vec3_copy(src[1], dest[1]);
 }
 
 /*!
- * @brief make given matrix zero.
+ * @brief Zero out the mat2x3 (m).
  *
- * @param[in, out]  mat  matrix
+ * @param[in, out] mat2x3 (src, dest)
  */
 CGLM_INLINE
 void
-glm_mat2x3_zero(mat2x3 mat) {
+glm_mat2x3_zero(mat2x3 m) {
   CGLM_ALIGN_MAT mat2x3 t = GLM_MAT2X3_ZERO_INIT;
-  glm_mat2x3_copy(t, mat);
+  glm_mat2x3_copy(t, m);
 }
 
 /*!
- * @brief Create mat2x3 matrix from pointer
+ * @brief Create mat2x3 (dest) from pointer (src).
  *
- * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
+ * @param[in]  src  pointer to an array of floats (left)
+ * @param[out] dest destination (result, mat2x3)
  */
 CGLM_INLINE
 void
@@ -79,15 +74,15 @@ glm_mat2x3_make(const float * __restrict src, mat2x3 dest) {
 }
 
 /*!
- * @brief multiply m1 and m2 to dest
+ * @brief Multiply mat2x3 (m1) by mat3x2 (m2) and store in mat3 (dest).
  *
  * @code
  * glm_mat2x3_mul(mat2x3, mat3x2, mat3);
  * @endcode
  *
- * @param[in]  m1   left matrix (mat2x3)
- * @param[in]  m2   right matrix (mat3x2)
- * @param[out] dest destination matrix (mat2)
+ * @param[in]  m1   mat2x3 (left)
+ * @param[in]  m2   mat3x2 (right)
+ * @param[out] dest destination (result, mat3)
  */
 CGLM_INLINE
 void
@@ -113,11 +108,11 @@ glm_mat2x3_mul(mat2x3 m1, mat3x2 m2, mat3 dest) {
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest vector
+ * @brief Multiply mat2x3 (m) by vec2 (v) and store in vec3 (dest).
  *
- * @param[in]  m    matrix (left)
- * @param[in]  v    vector (right, column vector)
- * @param[out] dest result vector
+ * @param[in]  m    mat2x3 (left)
+ * @param[in]  v    vec2 (right, column vector)
+ * @param[out] dest destination (result, column vector)
  */
 CGLM_INLINE
 void
@@ -130,26 +125,24 @@ glm_mat2x3_mulv(mat2x3 m, vec2 v, vec3 dest) {
 }
 
 /*!
- * @brief transpose matrix and store in dest
+ * @brief Transpose mat2x3 (src) and store in mat3x2 (dest).
  *
- * @param[in]  m     matrix
- * @param[out] dest  result
+ * @param[in]  src  mat2x3 (left)
+ * @param[out] dest destination (result, mat3x2)
  */
 CGLM_INLINE
 void
-glm_mat2x3_transpose(mat2x3 m, mat3x2 dest) {
-  dest[0][0] = m[0][0];  dest[0][1] = m[1][0];
-  dest[1][0] = m[0][1];  dest[1][1] = m[1][1];
-  dest[2][0] = m[0][2];  dest[2][1] = m[1][2];
+glm_mat2x3_transpose(mat2x3 src, mat3x2 dest) {
+  dest[0][0] = src[0][0];  dest[0][1] = src[1][0];
+  dest[1][0] = src[0][1];  dest[1][1] = src[1][1];
+  dest[2][0] = src[0][2];  dest[2][1] = src[1][2];
 }
 
 /*!
- * @brief scale (multiply with scalar) matrix
+ * @brief Multiply mat2x3 (m) by scalar constant (s).
  *
- * multiply matrix with scalar
- *
- * @param[in, out] m matrix
- * @param[in]    s scalar
+ * @param[in, out] m (src, dest)
+ * @param[in]      float (scalar)
  */
 CGLM_INLINE
 void
