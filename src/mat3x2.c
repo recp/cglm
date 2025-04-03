@@ -10,14 +10,14 @@
 
 CGLM_EXPORT
 void
-glmc_mat3x2_copy(mat3x2 mat, mat3x2 dest) {
-  glm_mat3x2_copy(mat, dest);
+glmc_mat3x2_copy(mat3x2 src, mat3x2 dest) {
+  glm_mat3x2_copy(src, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_mat3x2_zero(mat3x2 mat) {
-  glm_mat3x2_zero(mat);
+glmc_mat3x2_zero(mat3x2 m) {
+  glm_mat3x2_zero(m);
 }
 
 CGLM_EXPORT
@@ -40,8 +40,8 @@ glmc_mat3x2_mulv(mat3x2 m, vec3 v, vec2 dest) {
 
 CGLM_EXPORT
 void
-glmc_mat3x2_transpose(mat3x2 m, mat2x3 dest) {
-  glm_mat3x2_transpose(m, dest);
+glmc_mat3x2_transpose(mat3x2 src, mat2x3 dest) {
+  glm_mat3x2_transpose(src, dest);
 }
 
 CGLM_EXPORT
