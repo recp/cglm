@@ -35,87 +35,85 @@
 #define GLMS_MAT3X4_ZERO ((mat3x4s)GLMS_MAT3X4_ZERO_INIT)
 
 /*!
- * @brief make given matrix zero.
+ * @brief Zero out the mat3x4s (dest).
  *
- * @param[in, out]  mat  matrix
+ * @return[out] dest constructed mat3x4s from raw pointer
  */
 CGLM_INLINE
 mat3x4s
 glms_mat3x4_(zero)(void) {
-  mat3x4s r;
-  glm_mat3x4_zero(r.raw);
-  return r;
+  mat3x4s dest;
+  glm_mat3x4_zero(dest.raw);
+  return dest;
 }
 
 /*!
- * @brief Create mat3x4 matrix from pointer
+ * @brief Create mat3x4s (dest) from pointer (src).
  *
- * @param[in]  src  pointer to an array of floats
- * @return constructed matrix from raw pointer
+ * @param[in]   src  pointer to an array of floats
+ * @return[out] dest constructed mat3x4s from raw pointer
  */
 CGLM_INLINE
 mat3x4s
 glms_mat3x4_(make)(const float * __restrict src) {
-  mat3x4s r;
-  glm_mat3x4_make(src, r.raw);
-  return r;
+  mat3x4s dest;
+  glm_mat3x4_make(src, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief multiply m1 and m2 to dest
+ * @brief Multiply mat3x4s (m1) by mat4x3s (m2) and store in mat4s (dest).
  *
  * @code
  * r = glms_mat3x4_mul(mat3x4s, mat4x3s);
  * @endcode
  *
- * @param[in]  m1   left matrix (mat3x4s)
- * @param[in]  m2   right matrix (mat4x3s)
- * @returns destination matrix (mat4s)
+ * @param[in]   m1   mat3x4s (left)
+ * @param[in]   m2   mat4x3s (right)
+ * @return[out] dest constructed mat4s from raw pointers
  */
 CGLM_INLINE
 mat4s
 glms_mat3x4_(mul)(mat3x4s m1, mat4x3s m2) {
-  mat4s r;
-  glm_mat3x4_mul(m1.raw, m2.raw, r.raw);
-  return r;
+  mat4s dest;
+  glm_mat3x4_mul(m1.raw, m2.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest column vector
+ * @brief Multiply mat3x4s (m) by vec3s (v) and store in vec4s (dest).
  *
- * @param[in]  m    matrix (left)
- * @param[in]  v    vector (right, column vector)
- * @returns destination vector (vec4s)
+ * @param[in]   m    mat3x4s (left)
+ * @param[in]   v    vec3s (right, column vector)
+ * @return[out] dest constructed vec4s from raw pointers
  */
 CGLM_INLINE
 vec4s
 glms_mat3x4_(mulv)(mat3x4s m, vec3s v) {
-  vec4s r;
-  glm_mat3x4_mulv(m.raw, v.raw, r.raw);
-  return r;
+  vec4s dest;
+  glm_mat3x4_mulv(m.raw, v.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief transpose matrix and store in dest
+ * @brief Transpose mat3x4s (m) and store in mat4x3s (dest).
  *
- * @param[in]  m     matrix
- * @param[out] dest  result
+ * @param[in]   m    mat3x4s (left)
+ * @return[out] dest constructed mat4x3s from raw pointers
  */
 CGLM_INLINE
 mat4x3s
 glms_mat3x4_(transpose)(mat3x4s m) {
-  mat4x3s r;
-  glm_mat3x4_transpose(m.raw, r.raw);
-  return r;
+  mat4x3s dest;
+  glm_mat3x4_transpose(m.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief scale (multiply with scalar) matrix
+ * @brief Multiply mat3x4s (m) by scalar constant (s).
  *
- * multiply matrix with scalar
- *
- * @param[in, out] m matrix
- * @param[in]    s scalar
+ * @param[in, out] m mat3x4s (src, dest)
+ * @param[in]      s float (scalar)
  */
 CGLM_INLINE
 mat3x4s
