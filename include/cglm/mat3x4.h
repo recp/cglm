@@ -11,12 +11,12 @@
    GLM_MAT3X4_ZERO
 
  Functions:
-   CGLM_INLINE void glm_mat3x4_copy(mat3x4 mat, mat3x4 dest);
-   CGLM_INLINE void glm_mat3x4_zero(mat3x4 mat);
+   CGLM_INLINE void glm_mat3x4_copy(mat3x4 src, mat3x4 dest);
+   CGLM_INLINE void glm_mat3x4_zero(mat3x4 m);
    CGLM_INLINE void glm_mat3x4_make(const float * __restrict src, mat3x4 dest);
    CGLM_INLINE void glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest);
    CGLM_INLINE void glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest);
-   CGLM_INLINE void glm_mat3x4_transpose(mat3x4 m, mat4x3 dest);
+   CGLM_INLINE void glm_mat3x4_transpose(mat3x4 src, mat4x3 dest);
    CGLM_INLINE void glm_mat3x4_scale(mat3x4 m, float s);
  */
 
@@ -33,36 +33,36 @@
 #define GLM_MAT3X4_ZERO GLM_MAT3X4_ZERO_INIT
 
 /*!
- * @brief copy all members of [mat] to [dest]
+ * @brief Copy mat3x4 (src) to mat3x4 (dest).
  *
- * @param[in]  mat  source
- * @param[out] dest destination
+ * @param[in]  src  mat3x4 (left)
+ * @param[out] dest destination (result, mat3x4)
  */
 CGLM_INLINE
 void
-glm_mat3x4_copy(mat3x4 mat, mat3x4 dest) {
-  glm_vec4_ucopy(mat[0], dest[0]);
-  glm_vec4_ucopy(mat[1], dest[1]);
-  glm_vec4_ucopy(mat[2], dest[2]);
+glm_mat3x4_copy(mat3x4 src, mat3x4 dest) {
+  glm_vec4_ucopy(src[0], dest[0]);
+  glm_vec4_ucopy(src[1], dest[1]);
+  glm_vec4_ucopy(src[2], dest[2]);
 }
 
 /*!
- * @brief make given matrix zero.
+ * @brief Zero out the mat3x4 (m).
  *
- * @param[in, out]  mat  matrix
+ * @param[in, out] mat3x4 (src, dest)
  */
 CGLM_INLINE
 void
-glm_mat3x4_zero(mat3x4 mat) {
+glm_mat3x4_zero(mat3x4 m) {
   CGLM_ALIGN_MAT mat3x4 t = GLM_MAT3X4_ZERO_INIT;
-  glm_mat3x4_copy(t, mat);
+  glm_mat3x4_copy(t, m);
 }
 
 /*!
- * @brief Create mat3x4 matrix from pointer
+ * @brief Create mat3x4 (dest) from pointer (src).
  *
- * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
+ * @param[in]  src  pointer to an array of floats (left)
+ * @param[out] dest destination (result, mat3x4)
  */
 CGLM_INLINE
 void
@@ -84,15 +84,15 @@ glm_mat3x4_make(const float * __restrict src, mat3x4 dest) {
 }
 
 /*!
- * @brief multiply m1 and m2 to dest
+ * @brief Multiply mat3x4 (m1) by mat4x3 (m2) and store in mat4 (dest).
  *
  * @code
  * glm_mat3x4_mul(mat3x4, mat4x3, mat4);
  * @endcode
  *
- * @param[in]  m1   left matrix (mat3x4)
- * @param[in]  m2   right matrix (mat4x3)
- * @param[out] dest destination matrix (mat4)
+ * @param[in]  m1   mat3x4 (left)
+ * @param[in]  m2   mat4x3 (right)
+ * @param[out] dest destination (result, mat4)
  */
 CGLM_INLINE
 void
@@ -128,11 +128,11 @@ glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest) {
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest column vector
+ * @brief Multiply mat3x4 (m) by vec3 (v) and store in vec4 (dest).
  *
- * @param[in]  m    matrix (left)
- * @param[in]  v    vector (right, column vector)
- * @param[out] dest result vector
+ * @param[in]  m    mat3x4 (left)
+ * @param[in]  v    vec3 (right, column vector)
+ * @param[out] dest destination (result, column vector)
  */
 CGLM_INLINE
 void
@@ -146,27 +146,25 @@ glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest) {
 }
 
 /*!
- * @brief transpose matrix and store in dest
+ * @brief Transpose mat3x4 (src) and store in mat4x3 (dest).
  *
- * @param[in]  m     matrix
- * @param[out] dest  result
+ * @param[in]  src  mat3x4 (left)
+ * @param[out] dest destination (result, mat4x3)
  */
 CGLM_INLINE
 void
-glm_mat3x4_transpose(mat3x4 m, mat4x3 dest) {
-  dest[0][0] = m[0][0];  dest[0][1] = m[1][0];  dest[0][2] = m[2][0];
-  dest[1][0] = m[0][1];  dest[1][1] = m[1][1];  dest[1][2] = m[2][1];
-  dest[2][0] = m[0][2];  dest[2][1] = m[1][2];  dest[2][2] = m[2][2];
-  dest[3][0] = m[0][3];  dest[3][1] = m[1][3];  dest[3][2] = m[2][3];
+glm_mat3x4_transpose(mat3x4 src, mat4x3 dest) {
+  dest[0][0] = src[0][0];  dest[0][1] = src[1][0];  dest[0][2] = src[2][0];
+  dest[1][0] = src[0][1];  dest[1][1] = src[1][1];  dest[1][2] = src[2][1];
+  dest[2][0] = src[0][2];  dest[2][1] = src[1][2];  dest[2][2] = src[2][2];
+  dest[3][0] = src[0][3];  dest[3][1] = src[1][3];  dest[3][2] = src[2][3];
 }
 
 /*!
- * @brief scale (multiply with scalar) matrix
+ * @brief Multiply mat3x4 (m) by scalar constant (s).
  *
- * multiply matrix with scalar
- *
- * @param[in, out] m matrix
- * @param[in]    s scalar
+ * @param[in, out] m (src, dest)
+ * @param[in]      s float (scalar)
  */
 CGLM_INLINE
 void
