@@ -133,7 +133,7 @@ glm_mat3x2_transpose(mat3x2 src, mat2x3 dest) {
 }
 
 /*!
- * @brief Multiply mat2x4 (m) by scalar constant (s).
+ * @brief Multiply mat3x2 (m) by scalar constant (s).
  *
  * @param[in, out] m (src, dest)
  * @param[in]      s float (scalar)
