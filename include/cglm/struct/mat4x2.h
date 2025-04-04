@@ -36,87 +36,85 @@
 
 
 /*!
- * @brief make given matrix zero.
+ * @brief Zero out the mat4x2s (dest).
  *
- * @param[in, out]  mat  matrix
+ * @return[out] dest constructed mat4x2s from raw pointer
  */
 CGLM_INLINE
 mat4x2s
 glms_mat4x2_(zero)(void) {
-  mat4x2s r;
-  glm_mat4x2_zero(r.raw);
-  return r;
+  mat4x2s dest;
+  glm_mat4x2_zero(dest.raw);
+  return dest;
 }
 
 /*!
- * @brief Create mat4x2 matrix from pointer
+ * @brief Create mat4x2s (dest) from pointer (src).
  *
- * @param[in]  src  pointer to an array of floats
- * @return constructed matrix from raw pointer
+ * @param[in]   src  pointer to an array of floats
+ * @return[out] dest constructed mat4x2s from raw pointer
  */
 CGLM_INLINE
 mat4x2s
 glms_mat4x2_(make)(const float * __restrict src) {
-  mat4x2s r;
-  glm_mat4x2_make(src, r.raw);
-  return r;
+  mat4x2s dest;
+  glm_mat4x2_make(src, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief multiply m1 and m2 to dest
+ * @brief Multiply mat4x2s (m1) by mat2x4s (m2) and store in mat2s (dest).
  *
  * @code
  * r = glms_mat4x2_mul(mat4x2s, mat2x4s);
  * @endcode
  *
- * @param[in]  m1   left matrix (mat4x2s)
- * @param[in]  m2   right matrix (mat2x4s)
- * @returns destination matrix (mat2s)
+ * @param[in]   m1   mat4x2s (left)
+ * @param[in]   m2   mat2x4s (right)
+ * @return[out] dest constructed mat2s from raw pointers
  */
 CGLM_INLINE
 mat2s
 glms_mat4x2_(mul)(mat4x2s m1, mat2x4s m2) {
-  mat2s r;
-  glm_mat4x2_mul(m1.raw, m2.raw, r.raw);
-  return r;
+  mat2s dest;
+  glm_mat4x2_mul(m1.raw, m2.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief multiply matrix with column vector and store in dest column vector
+ * @brief Multiply mat4x2s (m) by vec4s (v) and store in vec2s (dest).
  *
- * @param[in]  m    matrix (left)
- * @param[in]  v    vector (right, column vector)
- * @returns destination vector (vec2s)
+ * @param[in]   m    mat4x2s (left)
+ * @param[in]   v    vec4s (right, column vector)
+ * @return[out] dest constructed vec2s from raw pointers
  */
 CGLM_INLINE
 vec2s
 glms_mat4x2_(mulv)(mat4x2s m, vec4s v) {
-  vec2s r;
-  glm_mat4x2_mulv(m.raw, v.raw, r.raw);
-  return r;
+  vec2s dest;
+  glm_mat4x2_mulv(m.raw, v.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief transpose matrix and store in dest
+ * @brief Transpose mat4x2s (m) and store in mat2x4s (dest).
  *
- * @param[in]  m     matrix
- * @param[out] dest  result
+ * @param[in]   m    mat4x2s (left)
+ * @return[out] dest constructed mat2x4s from raw pointers
  */
 CGLM_INLINE
 mat2x4s
 glms_mat4x2_(transpose)(mat4x2s m) {
-  mat2x4s r;
-  glm_mat4x2_transpose(m.raw, r.raw);
-  return r;
+  mat2x4s dest;
+  glm_mat4x2_transpose(m.raw, dest.raw);
+  return dest;
 }
 
 /*!
- * @brief scale (multiply with scalar) matrix
+ * @brief Multiply mat4x2s (m) by scalar constant (s).
  *
- * multiply matrix with scalar
- *
- * @param[in, out] m matrix
- * @param[in]    s scalar
+ * @param[in, out] m mat4x2s (src, dest)
+ * @param[in]      s float (scalar)
  */
 CGLM_INLINE
 mat4x2s

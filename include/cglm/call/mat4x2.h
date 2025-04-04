@@ -15,11 +15,11 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_mat4x2_copy(mat4x2 mat, mat4x2 dest);
+glmc_mat4x2_copy(mat4x2 src, mat4x2 dest);
 
 CGLM_EXPORT
 void
-glmc_mat4x2_zero(mat4x2 mat);
+glmc_mat4x2_zero(mat4x2 m);
 
 CGLM_EXPORT
 void
@@ -35,7 +35,7 @@ glmc_mat4x2_mulv(mat4x2 m, vec4 v, vec2 dest);
 
 CGLM_EXPORT
 void
-glmc_mat4x2_transpose(mat4x2 m, mat2x4 dest);
+glmc_mat4x2_transpose(mat4x2 src, mat2x4 dest);
 
 CGLM_EXPORT
 void
