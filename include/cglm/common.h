@@ -8,6 +8,8 @@
 #ifndef cglm_common_h
 #define cglm_common_h
 
+#define __cglm__ 1
+
 #ifndef _USE_MATH_DEFINES
 #  define _USE_MATH_DEFINES       /* for windows */
 #endif
