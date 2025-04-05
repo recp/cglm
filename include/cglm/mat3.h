@@ -31,7 +31,7 @@
    CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
    CGLM_INLINE float glm_mat3_rmc(vec3 r, mat3 m, vec3 c);
    CGLM_INLINE void  glm_mat3_make(float * restrict src, mat3 dest);
-   CGLM_INLINE void  glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest);
+   CGLM_INLINE void  glm_mat3_textrans(float sx, float sy, float rot, float tx, float ty, mat3 dest);
  */
 
 #ifndef cglm_mat3_h
