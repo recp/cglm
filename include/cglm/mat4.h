@@ -44,6 +44,7 @@
    CGLM_INLINE void  glm_mat4_swap_row(mat4 mat, int row1, int row2);
    CGLM_INLINE float glm_mat4_rmc(vec4 r, mat4 m, vec4 c);
    CGLM_INLINE void  glm_mat4_make(float * restrict src, mat4 dest);
+   CGLM_INLINE void  glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest);
  */
 
 #ifndef cglm_mat_h
@@ -797,6 +798,34 @@ glm_mat4_make(const float * __restrict src, mat4 dest) {
   dest[2][1] = src[9];   dest[3][1] = src[13];
   dest[2][2] = src[10];  dest[3][2] = src[14];
   dest[2][3] = src[11];  dest[3][3] = src[15];
+}
+
+/*!
+ * @brief Create mat4 matrix from texture transform parameters
+ *
+ * @param[in]  sx   scale x
+ * @param[in]  sy   scale y
+ * @param[in]  rot  rotation in radians CCW/RH
+ * @param[in]  tx   translate x
+ * @param[in]  ty   translate y
+ * @param[out] dest texture transform matrix
+ */
+CGLM_INLINE
+void
+glm_mat4_textrans(float sx, float sy, float rot, float tx, float ty, mat4 dest) {
+  float c, s;
+
+  c = cosf(rot);
+  s = sinf(rot);
+
+  glm_mat4_identity(dest);
+
+  dest[0][0] =  c * sx;
+  dest[0][1] = -s * sy;
+  dest[1][0] =  s * sx;
+  dest[1][1] =  c * sy;
+  dest[3][0] =  tx;
+  dest[3][1] =  ty;
 }
 
 #endif /* cglm_mat_h */

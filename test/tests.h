@@ -136,6 +136,7 @@ TEST_DECLARE(glm_mat4_swap_col)
 TEST_DECLARE(glm_mat4_swap_row)
 TEST_DECLARE(glm_mat4_rmc)
 TEST_DECLARE(glm_mat4_make)
+TEST_DECLARE(glm_mat4_textrans)
 
 TEST_DECLARE(glmc_mat4_ucopy)
 TEST_DECLARE(glmc_mat4_copy)
@@ -218,6 +219,7 @@ TEST_DECLARE(glm_mat3_swap_col)
 TEST_DECLARE(glm_mat3_swap_row)
 TEST_DECLARE(glm_mat3_rmc)
 TEST_DECLARE(glm_mat3_make)
+TEST_DECLARE(glm_mat3_textrans)
 
 TEST_DECLARE(glmc_mat3_copy)
 TEST_DECLARE(glmc_mat3_identity)
@@ -1355,7 +1357,8 @@ TEST_LIST {
   TEST_ENTRY(glm_mat4_swap_row)
   TEST_ENTRY(glm_mat4_rmc)
   TEST_ENTRY(glm_mat4_make)
-  
+  TEST_ENTRY(glm_mat4_textrans)
+
   TEST_ENTRY(glmc_mat4_ucopy)
   TEST_ENTRY(glmc_mat4_copy)
   TEST_ENTRY(glmc_mat4_identity)
@@ -1437,6 +1440,7 @@ TEST_LIST {
   TEST_ENTRY(glm_mat3_swap_row)
   TEST_ENTRY(glm_mat3_rmc)
   TEST_ENTRY(glm_mat3_make)
+  TEST_ENTRY(glm_mat3_textrans)
 
   TEST_ENTRY(glmc_mat3_copy)
   TEST_ENTRY(glmc_mat3_identity)

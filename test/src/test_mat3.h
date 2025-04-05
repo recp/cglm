@@ -327,4 +327,26 @@ TEST_IMPL(GLM_PREFIX, mat3_make) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, mat3_textrans) {
+  mat3  m, expected;
+  float sx = 2.0f, sy = 3.0f, rot = GLM_PI_4f;
+  float tx = 10.0f, ty = 20.0f;
+
+  GLM(mat3_textrans)(sx, sy, rot, tx, ty, m);
+
+  ASSERT(test_eq(m[0][0], cosf(rot) * sx))
+  ASSERT(test_eq(m[0][1],-sinf(rot) * sy))
+  ASSERT(test_eq(m[1][0], sinf(rot) * sx))
+  ASSERT(test_eq(m[1][1], cosf(rot) * sy))
+  ASSERT(test_eq(m[2][0], tx))
+  ASSERT(test_eq(m[2][1], ty))
+
+  GLM(mat3_textrans)(1.0f, 1.0f, 0.0f, 0.0f, 0.0f, m);
+  GLM(mat3_identity)(expected);
+
+  ASSERTIFY(test_assert_mat3_eq(m, expected))
+
+  TEST_SUCCESS
+}
+
 #undef A_MATRIX

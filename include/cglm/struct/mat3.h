@@ -29,6 +29,7 @@
    CGLM_INLINE mat3s  glms_mat3_swap_row(mat3s mat, int row1, int row2);
    CGLM_INLINE float  glms_mat3_rmc(vec3s r, mat3s m, vec3s c);
    CGLM_INLINE mat3s  glms_mat3_make(const float * __restrict src);
+   CGLM_INLINE mat3s  glms_mat3_textrans(float sx, float sy, float rot, float tx, float ty);
  */
 
 #ifndef cglms_mat3s_h
@@ -297,6 +298,24 @@ mat3s
 glms_mat3_(make)(const float * __restrict src) {
   mat3s r;
   glm_mat3_make(src, r.raw);
+  return r;
+}
+
+/*!
+ * @brief Create mat3 matrix from texture transform parameters
+ *
+ * @param[in]  sx  scale x
+ * @param[in]  sy  scale y
+ * @param[in]  rot rotation in radians CCW/RH
+ * @param[in]  tx  translate x
+ * @param[in]  ty  translate y
+ * @return texture transform matrix
+ */
+CGLM_INLINE
+mat3s
+glms_mat3_(textrans)(float sx, float sy, float rot, float tx, float ty) {
+  mat3s r;
+  glm_mat3_textrans(sx, sy, rot, tx, ty, r.raw);
   return r;
 }
 
