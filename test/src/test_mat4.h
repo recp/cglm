@@ -504,5 +504,27 @@ TEST_IMPL(GLM_PREFIX, mat4_make) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, mat4_textrans) {
+  mat4  m, expected;
+  float sx = 2.0f, sy = 3.0f, rot = GLM_PI_4f;
+  float tx = 10.0f, ty = 20.0f;
+
+  GLM(mat4_textrans)(sx, sy, rot, tx, ty, m);
+
+  ASSERT(test_eq(m[0][0], cosf(rot) * sx))
+  ASSERT(test_eq(m[0][1],-sinf(rot) * sy))
+  ASSERT(test_eq(m[1][0], sinf(rot) * sx))
+  ASSERT(test_eq(m[1][1], cosf(rot) * sy))
+  ASSERT(test_eq(m[3][0], tx))
+  ASSERT(test_eq(m[3][1], ty))
+
+  GLM(mat4_textrans)(1.0f, 1.0f, 0.0f, 0.0f, 0.0f, m);
+  GLM(mat4_identity)(expected);
+
+  ASSERTIFY(test_assert_mat4_eq(m, expected))
+
+  TEST_SUCCESS
+}
+
 #undef A_MATRIX
 #undef A_MATRIX3

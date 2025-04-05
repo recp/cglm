@@ -35,6 +35,7 @@ Functions:
 #. :c:func:`glm_mat3_swap_row`
 #. :c:func:`glm_mat3_rmc`
 #. :c:func:`glm_mat3_make`
+#. :c:func:`glm_mat3_textrans`
 
 Functions documentation
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -198,4 +199,16 @@ Functions documentation
 
     Parameters:
       | *[in]*  **src**  pointer to an array of floats
+      | *[out]* **dest** destination matrix3x3
+
+.. c:function:: void glm_mat3_textrans(float sx, float sy, float rot, float tx, float ty, mat3 dest) 
+  
+    Create texture transformation matrix, rotation is in radians CCW/RH
+
+    Parameters:
+      | *[in]*  **sx**   scale x
+      | *[in]*  **sy**   scale y
+      | *[in]*  **rot**  rotation in radians CCW/RH
+      | *[in]*  **tx**   translation x
+      | *[in]*  **ty**   translation y
       | *[out]* **dest** destination matrix3x3

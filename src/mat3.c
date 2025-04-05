@@ -109,3 +109,9 @@ void
 glmc_mat3_make(const float * __restrict src, mat3 dest) {
   glm_mat3_make(src, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_mat3_textrans(float sx, float sy, float rot, float tx, float ty, mat3 dest) {
+  glm_mat3_textrans(sx, sy, rot, tx, ty, dest);
+}
