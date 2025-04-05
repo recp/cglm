@@ -13,22 +13,22 @@
    GLM_MAT2_ZERO
 
  Functions:
+   CGLM_INLINE void  glm_mat2_make(float * restrict src, mat2 dest)
    CGLM_INLINE void  glm_mat2_copy(mat2 mat, mat2 dest)
-   CGLM_INLINE void  glm_mat2_identity(mat2 mat)
-   CGLM_INLINE void  glm_mat2_identity_array(mat2 * restrict mat, size_t count)
-   CGLM_INLINE void  glm_mat2_zero(mat2 mat)
+   CGLM_INLINE void  glm_mat2_identity(mat2 m)
+   CGLM_INLINE void  glm_mat2_identity_array(mat2 * restrict mats, size_t count)
+   CGLM_INLINE void  glm_mat2_zero(mat2 m)
    CGLM_INLINE void  glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest)
-   CGLM_INLINE void  glm_mat2_transpose_to(mat2 m, mat2 dest)
-   CGLM_INLINE void  glm_mat2_transpose(mat2 m)
    CGLM_INLINE void  glm_mat2_mulv(mat2 m, vec2 v, vec2 dest)
-   CGLM_INLINE float glm_mat2_trace(mat2 m)
+   CGLM_INLINE void  glm_mat2_transpose_to(mat2 mat, mat2 dest)
+   CGLM_INLINE void  glm_mat2_transpose(mat2 m)
    CGLM_INLINE void  glm_mat2_scale(mat2 m, float s)
-   CGLM_INLINE float glm_mat2_det(mat2 mat)
    CGLM_INLINE void  glm_mat2_inv(mat2 mat, mat2 dest)
    CGLM_INLINE void  glm_mat2_swap_col(mat2 mat, int col1, int col2)
    CGLM_INLINE void  glm_mat2_swap_row(mat2 mat, int row1, int row2)
+   CGLM_INLINE float glm_mat2_det(mat2 m)
+   CGLM_INLINE float glm_mat2_trace(mat2 m)
    CGLM_INLINE float glm_mat2_rmc(vec2 r, mat2 m, vec2 c)
-   CGLM_INLINE void  glm_mat2_make(float * restrict src, mat2 dest)
  */
 
 #ifndef cglm_mat2_h
@@ -57,10 +57,25 @@
 #define GLM_MAT2_ZERO     ((mat2)GLM_MAT2_ZERO_INIT)
 
 /*!
- * @brief copy all members of [mat] to [dest]
+ * @brief Create mat2 (dest) from pointer (src).
  *
- * @param[in]  mat  source
- * @param[out] dest destination
+ * @param[in]  src  pointer to an array of floats (left)
+ * @param[out] dest destination (result, mat2)
+ */
+CGLM_INLINE
+void
+glm_mat2_make(const float * __restrict src, mat2 dest) {
+  dest[0][0] = src[0];
+  dest[0][1] = src[1];
+  dest[1][0] = src[2];
+  dest[1][1] = src[3];
+}
+
+/*!
+ * @brief Copy mat2 (mat) to mat2 (dest).
+ *
+ * @param[in]  mat  mat2 (left)
+ * @param[out] dest destination (result, mat2)
  */
 CGLM_INLINE
 void
@@ -69,7 +84,9 @@ glm_mat2_copy(mat2 mat, mat2 dest) {
 }
 
 /*!
- * @brief make given matrix identity. It is identical with below,
+ * @brief Copy a mat2 identity to mat2 (m), or makes mat2 (m) an identity.
+ *
+ *        The same thing may be achieved with either of bellow methods,
  *        but it is more easy to do that with this func especially for members
  *        e.g. glm_mat2_identity(aStruct->aMatrix);
  *
@@ -80,59 +97,57 @@ glm_mat2_copy(mat2 mat, mat2 dest) {
  * mat2 mat = GLM_MAT2_IDENTITY_INIT;
  * @endcode
  *
- * @param[in, out]  mat  destination
+ * @param[in, out] m mat2 (src, dest)
  */
 CGLM_INLINE
 void
-glm_mat2_identity(mat2 mat) {
+glm_mat2_identity(mat2 m) {
   CGLM_ALIGN_MAT mat2 t = GLM_MAT2_IDENTITY_INIT;
-  glm_mat2_copy(t, mat);
+  glm_mat2_copy(t, m);
 }
 
 /*!
- * @brief make given matrix array's each element identity matrix
+ * @brief Given an array of mat2’s (mats) make each matrix an identity matrix.
  *
- * @param[in, out]  mat   matrix array (must be aligned (16)
- *                        if alignment is not disabled)
- *
- * @param[in]       count count of matrices
+ * @param[in, out] mats Array of mat2’s (must be aligned (16/32) if alignment is not disabled)
+ * @param[in]      count Array size of mats or number of matrices
  */
 CGLM_INLINE
 void
-glm_mat2_identity_array(mat2 * __restrict mat, size_t count) {
+glm_mat2_identity_array(mat2 * __restrict mats, size_t count) {
   CGLM_ALIGN_MAT mat2 t = GLM_MAT2_IDENTITY_INIT;
   size_t i;
 
   for (i = 0; i < count; i++) {
-    glm_mat2_copy(t, mat[i]);
+    glm_mat2_copy(t, mats[i]);
   }
 }
 
 /*!
- * @brief make given matrix zero.
+ * @brief Zero out the mat2 (m).
  *
- * @param[in, out]  mat  matrix
+ * @param[in, out] m mat2 (src, dest)
  */
 CGLM_INLINE
 void
-glm_mat2_zero(mat2 mat) {
+glm_mat2_zero(mat2 m) {
   CGLM_ALIGN_MAT mat2 t = GLM_MAT2_ZERO_INIT;
-  glm_mat2_copy(t, mat);
+  glm_mat2_copy(t, m);
 }
 
 /*!
- * @brief multiply m1 and m2 to dest
+ * @brief Multiply mat2 (m1) by mat2 (m2) and store in mat2 (dest).
  *
- * m1, m2 and dest matrices can be same matrix, it is possible to write this:
+ *        m1, m2 and dest matrices can be same matrix, it is possible to write this: 
  *
  * @code
  * mat2 m = GLM_MAT2_IDENTITY_INIT;
  * glm_mat2_mul(m, m, m);
  * @endcode
  *
- * @param[in]  m1   left matrix
- * @param[in]  m2   right matrix
- * @param[out] dest destination matrix
+ * @param[in]  m1   mat2 (left)
+ * @param[in]  m2   mat2 (right)
+ * @param[out] dest destination (result, mat2)
  */
 CGLM_INLINE
 void
@@ -157,32 +172,44 @@ glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest) {
 }
 
 /*!
- * @brief transpose mat2 and store in dest
+ * @brief Multiply mat2 (m) by vec2 (v) and store in vec2 (dest).
  *
- * source matrix will not be transposed unless dest is m
- *
- * @param[in]  m     matrix
- * @param[out] dest  result
+ * @param[in]  m    mat2 (left)
+ * @param[in]  v    vec2 (right, column vector)
+ * @param[out] dest destination (result, column vector)
  */
 CGLM_INLINE
 void
-glm_mat2_transpose_to(mat2 m, mat2 dest) {
+glm_mat2_mulv(mat2 m, vec2 v, vec2 dest) {
+  dest[0] = m[0][0] * v[0] + m[1][0] * v[1];
+  dest[1] = m[0][1] * v[0] + m[1][1] * v[1];
+}
+
+/*!
+ * @brief Transpose mat2 (mat) and store in mat2 (dest).
+ *
+ * @param[in]  mat  mat2 (left)
+ * @param[out] dest destination (result, mat2)
+ */
+CGLM_INLINE
+void
+glm_mat2_transpose_to(mat2 mat, mat2 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
-  glm_mat2_transp_wasm(m, dest);
+  glm_mat2_transp_wasm(mat, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
-  glm_mat2_transp_sse2(m, dest);
+  glm_mat2_transp_sse2(mat, dest);
 #else
-  dest[0][0] = m[0][0];
-  dest[0][1] = m[1][0];
-  dest[1][0] = m[0][1];
-  dest[1][1] = m[1][1];
+  dest[0][0] = mat[0][0];
+  dest[0][1] = mat[1][0];
+  dest[1][0] = mat[0][1];
+  dest[1][1] = mat[1][1];
 #endif
 }
 
 /*!
- * @brief transpose mat2 and store result in same matrix
+ * @brief Transpose mat2 (m) and store result in the same matrix.
  *
- * @param[in, out] m source and dest
+ * @param[in, out] m mat2 (src, dest)
  */
 CGLM_INLINE
 void
@@ -194,39 +221,10 @@ glm_mat2_transpose(mat2 m) {
 }
 
 /*!
- * @brief multiply mat2 with vec2 (column vector) and store in dest vector
+ * @brief Multiply mat2 (m) by scalar constant (s).
  *
- * @param[in]  m    mat2 (left)
- * @param[in]  v    vec2 (right, column vector)
- * @param[out] dest vec2 (result, column vector)
- */
-CGLM_INLINE
-void
-glm_mat2_mulv(mat2 m, vec2 v, vec2 dest) {
-  dest[0] = m[0][0] * v[0] + m[1][0] * v[1];
-  dest[1] = m[0][1] * v[0] + m[1][1] * v[1];
-}
-
-/*!
- * @brief trace of matrix
- *
- * sum of the elements on the main diagonal from upper left to the lower right
- *
- * @param[in]  m matrix
- */
-CGLM_INLINE
-float
-glm_mat2_trace(mat2 m) {
-  return m[0][0] + m[1][1];
-}
-
-/*!
- * @brief scale (multiply with scalar) matrix
- *
- * multiply matrix with scalar
- *
- * @param[in, out] m matrix
- * @param[in]      s scalar
+ * @param[in, out] m mat2 (src, dest)
+ * @param[in]      s float (scalar)
  */
 CGLM_INLINE
 void
@@ -247,23 +245,10 @@ glm_mat2_scale(mat2 m, float s) {
 }
 
 /*!
- * @brief mat2 determinant
+ * @brief Inverse mat2 (mat) and store in mat2 (dest).
  *
- * @param[in] mat matrix
- *
- * @return determinant
- */
-CGLM_INLINE
-float
-glm_mat2_det(mat2 mat) {
-  return mat[0][0] * mat[1][1] - mat[1][0] * mat[0][1];
-}
-
-/*!
- * @brief inverse mat2 and store in dest
- *
- * @param[in]  mat  matrix
- * @param[out] dest inverse matrix
+ * @param[in]  mat  mat2 (left)
+ * @param[out] dest destination (result, inverse mat2)
  */
 CGLM_INLINE
 void
@@ -281,11 +266,11 @@ glm_mat2_inv(mat2 mat, mat2 dest) {
 }
 
 /*!
- * @brief swap two matrix columns
+ * @brief Swap two columns in mat2 (mat) and store in same matrix.
  *
- * @param[in,out] mat  matrix
- * @param[in]     col1 col1
- * @param[in]     col2 col2
+ * @param[in, out] mat  mat2 (src, dest)
+ * @param[in]      col1 Column 1 array index
+ * @param[in]      col2 Column 2 array index
  */
 CGLM_INLINE
 void
@@ -303,11 +288,11 @@ glm_mat2_swap_col(mat2 mat, int col1, int col2) {
 }
 
 /*!
- * @brief swap two matrix rows
+ * @brief Swap two rows in mat2 (mat) and store in same matrix.
  *
- * @param[in,out] mat  matrix
- * @param[in]     row1 row1
- * @param[in]     row2 row2
+ * @param[in, out] mat  mat2 (src, dest)
+ * @param[in]      row1 Row 1 array index
+ * @param[in]      row2 Row 2 array index
  */
 CGLM_INLINE
 void
@@ -325,18 +310,47 @@ glm_mat2_swap_row(mat2 mat, int row1, int row2) {
 }
 
 /*!
- * @brief helper for  R (row vector) * M (matrix) * C (column vector)
+ * @brief Returns mat2 determinant.
  *
- * rmc stands for Row * Matrix * Column
+ * @param[in] m mat2 (src)
  *
- * the result is scalar because R * M = Matrix1x2 (row vector),
- * then Matrix1x2 * Vec2 (column vector) = Matrix1x1 (Scalar)
+ * @return[out] mat2 determinant (float)
+ */
+CGLM_INLINE
+float
+glm_mat2_det(mat2 m) {
+  return m[0][0] * m[1][1] - m[1][0] * m[0][1];
+}
+
+/*!
+ * @brief Returns trace of matrix. Which is:
  *
- * @param[in]  r   row vector or matrix1x2
- * @param[in]  m   matrix2x2
- * @param[in]  c   column vector or matrix2x1
+ *        The sum of the elements on the main diagonal from
+ *        upper left corner to the bottom right corner.
  *
- * @return scalar value e.g. Matrix1x1
+ * @param[in] m mat2 (src)
+ *
+ * @return[out] mat2 trace (float)
+ */
+CGLM_INLINE
+float
+glm_mat2_trace(mat2 m) {
+  return m[0][0] + m[1][1];
+}
+
+/*!
+ * @brief Helper for  R (row vector) * M (matrix) * C (column vector)
+ *
+ *        rmc stands for Row * Matrix * Column
+ *
+ *        the result is scalar because M * C = ResC (1x2, column vector),
+ *        then if you take the dot_product(R (2x1), ResC (1x2)) = scalar value.
+ *
+ * @param[in] r vec2 (2x1, row vector)
+ * @param[in] m mat2 (2x2, matrix)
+ * @param[in] c vec2 (1x2, column vector)
+ *
+ * @return[out] Scalar value (float, 1x1)
  */
 CGLM_INLINE
 float
@@ -344,21 +358,6 @@ glm_mat2_rmc(vec2 r, mat2 m, vec2 c) {
   vec2 tmp;
   glm_mat2_mulv(m, c, tmp);
   return glm_vec2_dot(r, tmp);
-}
-
-/*!
- * @brief Create mat2 matrix from pointer
- *
- * @param[in]  src  pointer to an array of floats
- * @param[out] dest matrix
- */
-CGLM_INLINE
-void
-glm_mat2_make(const float * __restrict src, mat2 dest) {
-  dest[0][0] = src[0];
-  dest[0][1] = src[1];
-  dest[1][0] = src[2];
-  dest[1][1] = src[3];
 }
 
 #endif /* cglm_mat2_h */

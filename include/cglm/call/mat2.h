@@ -15,19 +15,23 @@ extern "C" {
 
 CGLM_EXPORT
 void
+glmc_mat2_make(const float * __restrict src, mat2 dest);
+
+CGLM_EXPORT
+void
 glmc_mat2_copy(mat2 mat, mat2 dest);
 
 CGLM_EXPORT
 void
-glmc_mat2_identity(mat2 mat);
+glmc_mat2_identity(mat2 m);
 
 CGLM_EXPORT
 void
-glmc_mat2_identity_array(mat2 * __restrict mat, size_t count);
+glmc_mat2_identity_array(mat2 * __restrict mats, size_t count);
 
 CGLM_EXPORT
 void
-glmc_mat2_zero(mat2 mat);
+glmc_mat2_zero(mat2 m);
 
 CGLM_EXPORT
 void
@@ -35,7 +39,11 @@ glmc_mat2_mul(mat2 m1, mat2 m2, mat2 dest);
 
 CGLM_EXPORT
 void
-glmc_mat2_transpose_to(mat2 m, mat2 dest);
+glmc_mat2_mulv(mat2 m, vec2 v, vec2 dest);
+
+CGLM_EXPORT
+void
+glmc_mat2_transpose_to(mat2 mat, mat2 dest);
 
 CGLM_EXPORT
 void
@@ -43,19 +51,7 @@ glmc_mat2_transpose(mat2 m);
 
 CGLM_EXPORT
 void
-glmc_mat2_mulv(mat2 m, vec2 v, vec2 dest);
-
-CGLM_EXPORT
-float
-glmc_mat2_trace(mat2 m);
-
-CGLM_EXPORT
-void
 glmc_mat2_scale(mat2 m, float s);
-
-CGLM_EXPORT
-float
-glmc_mat2_det(mat2 mat);
 
 CGLM_EXPORT
 void
@@ -71,11 +67,15 @@ glmc_mat2_swap_row(mat2 mat, int row1, int row2);
 
 CGLM_EXPORT
 float
-glmc_mat2_rmc(vec2 r, mat2 m, vec2 c);
+glmc_mat2_trace(mat2 m);
 
 CGLM_EXPORT
-void
-glmc_mat2_make(const float * __restrict src, mat2 dest);
+float
+glmc_mat2_det(mat2 m);
+
+CGLM_EXPORT
+float
+glmc_mat2_rmc(vec2 r, mat2 m, vec2 c);
 
 #ifdef __cplusplus
 }
