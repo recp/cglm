@@ -82,3 +82,4 @@ cmake-build-debug
 xcode/*
 .vscode
 .build
+*.swp
