@@ -63,7 +63,7 @@ Functions documentation
     Zero out the mat2x3 (m).
 
     Parameters:
-      | *[in, out]* **mat** mat2x3 (src, dest)
+      | *[in, out]* **m** mat2x3 (src, dest)
 
     .. csv-table:: mat2x3 **(m)**
         :header: "", "column 1", "column 2"
