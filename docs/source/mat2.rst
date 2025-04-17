@@ -105,7 +105,7 @@ Functions documentation
     Copy mat2 (mat) to mat2 (dest).
 
     Parameters:
-      | *[in]*  **mat**  mat2 (left)
+      | *[in]*  **mat**  mat2 (left,src)
       | *[out]* **dest** destination (result, mat2)
 
     .. note:: Mathematical explanation
@@ -150,11 +150,11 @@ Functions documentation
 
 .. c:function:: void glm_mat2_identity(mat2 m)
 
-    Copy a mat2 identity to mat2 **(m)**, or makes mat2 **(m)** an identity.
-
-    The same thing may be achieved with either of bellow methods,
-    but it is more easy to do that with this func especially for members
-    e.g. ``glm_mat2_identity(aStruct->aMatrix);``.
+    | Copy a mat2 identity to mat2 **(m)**, or makes mat2 **(m)** an identity.
+    |
+    | The same thing may be achieved with either of bellow methods,
+    | but it is more easy to do that with this func especially for members
+    | e.g. ``glm_mat2_identity(aStruct->aMatrix);``.
 
     .. code-block:: c
 
@@ -313,9 +313,9 @@ Functions documentation
 
 .. c:function:: void glm_mat2_mul(mat2 m1, mat2 m2, mat2 dest)
 
-    Multiply mat2 (m1) by mat2 (m2) and store in mat2 (dest).
-
-    m1, m2 and dest matrices can be same matrix, it is possible to write this:
+    | Multiply mat2 (m1) by mat2 (m2) and store in mat2 (dest).
+    |
+    | m1, m2 and dest matrices can be same matrix, it is possible to write this:
 
     .. code-block:: c
 
@@ -425,15 +425,15 @@ Functions documentation
     .. csv-table:: vec2 **(dest)** Result
         :header: "", "column 1"
 
-        "row 1", "**143.00** = 1.00 * 33.00 + 2.00 * 55.00"
-        "row 2", "**286.00** = 2.00 * 33.00 + 4.00 * 5.00"
+        "row 1", "**198.00** = 1.00 * 33.00 + 3.00 * 55.00"
+        "row 2", "**286.00** = 2.00 * 33.00 + 4.00 * 55.00"
 
 .. c:function:: void glm_mat2_transpose_to(mat2 mat, mat2 dest)
 
     Transpose mat2 (mat) and store in mat2 (dest).
 
     Parameters:
-      | *[in]*  **mat**  mat2 (left)
+      | *[in]*  **mat**  mat2 (left,src)
       | *[out]* **dest** destination (result, mat2)
 
     .. note:: Mathematical explanation
@@ -540,13 +540,13 @@ Functions documentation
         mat2 m = {{1.00,2.00},{3.00,4.00}};
         glm_mat2_scale(m, s);
 
-    .. csv-table:: mat2 **(src)** Before
+    .. csv-table:: mat2 **(m)** Before
         :header: "", "column 1", "column 2"
 
         "row 1", "1.00", "3.00"
         "row 2", "2.00", "4.00"
 
-    .. csv-table:: mat2 **(dest)** After
+    .. csv-table:: mat2 **(m)** After
         :header: "", "column 1", "column 2"
 
         "row 1", "**3.00** = 1.00 * 3.00", "**9.00** = 3.00 * 3.00"
@@ -557,7 +557,7 @@ Functions documentation
     Inverse mat2 (mat) and store in mat2 (dest).
 
     Parameters:
-      | *[in]*  **mat**  mat2 (left)
+      | *[in]*  **mat**  mat2 (left,src)
       | *[out]* **dest** destination (result, inverse mat2)
 
     .. note:: Mathematical explanation
@@ -568,11 +568,18 @@ Functions documentation
         "row 1", "m00", "m10"
         "row 2", "m01", "m11"
 
-    .. csv-table:: mat2 **(dest)**
-        :header: "", "column 1", "column 2"
+    .. list-table:: mat2 **(dest)**
+        :header-rows: 1
 
-        "row 1", "m11 * (1.0f / (m00 * m11 - m01 * m10))", "-m10 * (1.0f / (m00 * m11 - m01 * m10))"
-        "row 2", "-m01 * (1.0f / (m00 * m11 - m01 * m10))", "m00 * (1.0f / (m00 * m11 - m01 * m10))"
+        * -
+          - column 1
+          - column 2
+        * - row 1
+          - m11 * (1.0f / (m00 * m11 - m01 * m10))
+          - -m10 * (1.0f / (m00 * m11 - m01 * m10))
+        * - row 2
+          - -m01 * (1.0f / (m00 * m11 - m01 * m10))
+          - m00 * (1.0f / (m00 * m11 - m01 * m10))
 
     .. note:: Example
 
@@ -588,11 +595,18 @@ Functions documentation
         "row 1", "1.00", "3.00"
         "row 2", "2.00", "4.00"
 
-    .. csv-table:: mat2 **(dest)** After
-        :header: "", "column 1", "column 2"
+    .. list-table:: mat2 **(dest)** After
+        :header-rows: 1
 
-        "row 1", "**-2.00** = 4.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))", "**1.50** = -3.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))"
-        "row 2", "**1.00** = -2.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))", "**-0.50** = 1.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))"
+        * -
+          - column 1
+          - column 2
+        * - row 1
+          - **-2.00** = 4.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))
+          - **1.50** = -3.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))
+        * - row 2
+          - **1.00** = -2.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))
+          - **-0.50** = 1.00 * (1.00 / (1.00 * 4.00 - 2.00 * 3.00))
 
 .. c:function:: void glm_mat2_swap_col(mat2 mat, int col1, int col2)
 
