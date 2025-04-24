@@ -74,7 +74,7 @@ glm_mat2_make(const float * __restrict src, mat2 dest) {
 /*!
  * @brief Copy mat2 (mat) to mat2 (dest).
  *
- * @param[in]  mat  mat2 (left)
+ * @param[in]  mat  mat2 (left, src)
  * @param[out] dest destination (result, mat2)
  */
 CGLM_INLINE
@@ -188,7 +188,7 @@ glm_mat2_mulv(mat2 m, vec2 v, vec2 dest) {
 /*!
  * @brief Transpose mat2 (mat) and store in mat2 (dest).
  *
- * @param[in]  mat  mat2 (left)
+ * @param[in]  mat  mat2 (left, src)
  * @param[out] dest destination (result, mat2)
  */
 CGLM_INLINE
@@ -247,7 +247,7 @@ glm_mat2_scale(mat2 m, float s) {
 /*!
  * @brief Inverse mat2 (mat) and store in mat2 (dest).
  *
- * @param[in]  mat  mat2 (left)
+ * @param[in]  mat  mat2 (left, src)
  * @param[out] dest destination (result, inverse mat2)
  */
 CGLM_INLINE
