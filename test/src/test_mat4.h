@@ -176,6 +176,31 @@ TEST_IMPL(GLM_PREFIX, mat4_mulN) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, mat4_mul3) {
+    mat4 m1;
+    GLM(mat4_identity)(m1);
+
+    mat4 m2;
+    GLM(mat4_identity)(m2);
+    GLM(mat4_scale)(m2, 2);
+
+    mat4 m3;
+    GLM(mat4_identity)(m3);
+    GLM(mat4_scale)(m3, 3);
+
+    mat4 dest = {0};
+
+    mat4 _6i;
+    GLM(mat4_identity)(_6i);
+    GLM(mat4_scale)(_6i, 6);
+
+    GLM(mat4_mul3)(m1, m2, m3, dest);
+
+    ASSERTIFY(test_assert_mat4_eq(dest, _6i))
+
+    TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, mat4_mulv) {
   vec4 res;
   mat4 mat = A_MATRIX;
