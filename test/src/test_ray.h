@@ -20,7 +20,7 @@ TEST_IMPL(GLM_PREFIX, ray_triangle) {
 
   hit = GLM(ray_triangle)(origin, direction, v0, v1, v2, &d);
   ASSERT(hit);
-  ASSERT(fabsf(d - 5.0f) <= 0.0000009);
+  ASSERT(fabsf(d - 5.0f) <= 0.0000009f);
 
   /* Check whether a simple miss works */
   hit = GLM(ray_triangle)(origin, opposite, v0, v1, v2, &d);
@@ -65,9 +65,9 @@ TEST_IMPL(GLM_PREFIX, ray_at) {
   glm_vec3_normalize(direction);
 
   GLM(ray_at)(origin, direction, distance, result);
-  ASSERT(fabsf(result[0] - 1.0f) <= 0.0000009);  /* Expecting to be 1 unit along the x-axis */
-  ASSERT(fabsf(result[1] - 1.0f) <= 0.0000009);  /* Expecting to be 1 unit along the y-axis */
-  ASSERT(fabsf(result[2] - 1.0f) <= 0.0000009);  /* Expecting to be 1 unit along the z-axis */
+  ASSERT(fabsf(result[0] - 1.0f) <= 0.0000009f);  /* Expecting to be 1 unit along the x-axis */
+  ASSERT(fabsf(result[1] - 1.0f) <= 0.0000009f);  /* Expecting to be 1 unit along the y-axis */
+  ASSERT(fabsf(result[2] - 1.0f) <= 0.0000009f);  /* Expecting to be 1 unit along the z-axis */
 
   TEST_SUCCESS
 }

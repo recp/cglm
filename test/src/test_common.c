@@ -176,7 +176,7 @@ test_assert_mat4_eq(mat4 m1, mat4 m2) {
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -189,7 +189,7 @@ test_assert_mat4_eqt(mat4 m1, mat4 m2) {
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 4; j++) {
-      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -215,7 +215,7 @@ test_assert_mat2_eqt(mat2 m1, mat2 m2) {
 
   for (i = 0; i < 2; i++) {
     for (j = 0; j < 2; j++) {
-      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009f);
     }
   }
 
@@ -228,7 +228,7 @@ test_assert_mat2_eq(mat2 m1, mat2 m2) {
 
   for (i = 0; i < 2; i++) {
     for (j = 0; j < 2; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f);
     }
   }
 
@@ -284,7 +284,7 @@ test_assert_mat2x3_eq(mat2x3 m1, mat2x3 m2) {
 
   for (i = 0; i < 2; i++) {
     for (j = 0; j < 3; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -310,7 +310,7 @@ test_assert_mat2x4_eq(mat2x4 m1, mat2x4 m2) {
 
   for (i = 0; i < 2; i++) {
     for (j = 0; j < 4; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -323,7 +323,7 @@ test_assert_mat3_eq(mat3 m1, mat3 m2) {
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f);
     }
   }
 
@@ -336,7 +336,7 @@ test_assert_mat3_eqt(mat3 m1, mat3 m2) {
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 3; j++) {
-      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009);
+      ASSERT(fabsf(m1[j][i] - m2[i][j]) <= 0.0000009f);
     }
   }
 
@@ -392,7 +392,7 @@ test_assert_mat3x2_eq(mat3x2 m1, mat3x2 m2) {
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 2; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -418,7 +418,7 @@ test_assert_mat3x4_eq(mat3x4 m1, mat3x4 m2) {
 
   for (i = 0; i < 3; i++) {
     for (j = 0; j < 4; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -474,7 +474,7 @@ test_assert_mat4x2_eq(mat4x2 m1, mat4x2 m2) {
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 2; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -500,7 +500,7 @@ test_assert_mat4x3_eq(mat4x3 m1, mat4x3 m2) {
 
   for (i = 0; i < 4; i++) {
     for (j = 0; j < 3; j++) {
-      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009)
+      ASSERT(fabsf(m1[i][j] - m2[i][j]) <= 0.0000009f)
     }
   }
 
@@ -509,24 +509,24 @@ test_assert_mat4x3_eq(mat4x3 m1, mat4x3 m2) {
 
 test_status_t
 test_assert_eqf(float a, float b) {
-  ASSERT(fabsf(a - b) <= 0.000009); /* rounding errors */
+  ASSERT(fabsf(a - b) <= 0.000009f); /* rounding errors */
 
   TEST_SUCCESS
 }
 
 test_status_t
 test_assert_vec2_eq(vec2 v1, vec2 v2) {
-  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
-  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009);
+  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009f); /* rounding errors */
+  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009f);
 
   TEST_SUCCESS
 }
 
 test_status_t
 test_assert_vec3_eq(vec3 v1, vec3 v2) {
-  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
-  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009);
-  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009);
+  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009f); /* rounding errors */
+  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009f);
+  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009f);
 
   TEST_SUCCESS
 }
@@ -540,10 +540,10 @@ test_assert_vec3s_eq(vec3s v1, vec3s v2) {
 
 test_status_t
 test_assert_vec4_eq(vec4 v1, vec4 v2) {
-  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
-  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009);
-  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009);
-  ASSERT(fabsf(v1[3] - v2[3]) <= 0.000009);
+  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009f); /* rounding errors */
+  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009f);
+  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009f);
+  ASSERT(fabsf(v1[3] - v2[3]) <= 0.000009f);
 
   TEST_SUCCESS
 }
@@ -557,20 +557,20 @@ test_assert_vec4s_eq(vec4s v1, vec4s v2) {
 
 test_status_t
 test_assert_quat_eq_abs(versor v1, versor v2) {
-  ASSERT(fabsf(fabsf(v1[0]) - fabsf(v2[0])) <= 0.0009); /* rounding errors */
-  ASSERT(fabsf(fabsf(v1[1]) - fabsf(v2[1])) <= 0.0009);
-  ASSERT(fabsf(fabsf(v1[2]) - fabsf(v2[2])) <= 0.0009);
-  ASSERT(fabsf(fabsf(v1[3]) - fabsf(v2[3])) <= 0.0009);
+  ASSERT(fabsf(fabsf(v1[0]) - fabsf(v2[0])) <= 0.0009f); /* rounding errors */
+  ASSERT(fabsf(fabsf(v1[1]) - fabsf(v2[1])) <= 0.0009f);
+  ASSERT(fabsf(fabsf(v1[2]) - fabsf(v2[2])) <= 0.0009f);
+  ASSERT(fabsf(fabsf(v1[3]) - fabsf(v2[3])) <= 0.0009f);
 
   TEST_SUCCESS
 }
 
 test_status_t
 test_assert_quat_eq(versor v1, versor v2) {
-  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009); /* rounding errors */
-  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009);
-  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009);
-  ASSERT(fabsf(v1[3] - v2[3]) <= 0.000009);
+  ASSERT(fabsf(v1[0] - v2[0]) <= 0.000009f); /* rounding errors */
+  ASSERT(fabsf(v1[1] - v2[1]) <= 0.000009f);
+  ASSERT(fabsf(v1[2] - v2[2]) <= 0.000009f);
+  ASSERT(fabsf(v1[3] - v2[3]) <= 0.000009f);
 
   TEST_SUCCESS
 }
@@ -579,10 +579,10 @@ test_status_t
 test_assert_quat_eq_identity(versor q) {
   versor p = GLM_QUAT_IDENTITY_INIT;
 
-  ASSERT(fabsf(q[0] - p[0]) <= 0.000009); /* rounding errors */
-  ASSERT(fabsf(q[1] - p[1]) <= 0.000009);
-  ASSERT(fabsf(q[2] - p[2]) <= 0.000009);
-  ASSERT(fabsf(q[3] - p[3]) <= 0.000009);
+  ASSERT(fabsf(q[0] - p[0]) <= 0.000009f); /* rounding errors */
+  ASSERT(fabsf(q[1] - p[1]) <= 0.000009f);
+  ASSERT(fabsf(q[2] - p[2]) <= 0.000009f);
+  ASSERT(fabsf(q[3] - p[3]) <= 0.000009f);
 
   TEST_SUCCESS
 }

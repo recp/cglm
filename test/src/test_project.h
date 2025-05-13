@@ -27,13 +27,13 @@ TEST_IMPL(GLM_PREFIX, unprojecti) {
   /* unprojected of projected vector must be same as original one */
   /* we used 0.01 because of projection floating point errors */
 #ifndef CGLM_FAST_MATH
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01f)
 #else
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1f)
 #endif
 
   TEST_SUCCESS
@@ -58,13 +58,13 @@ TEST_IMPL(GLM_PREFIX, unproject) {
   /* we used 0.01 because of projection floating point errors */
 
 #ifndef CGLM_FAST_MATH
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01f)
 #else
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1f)
 #endif
 
   TEST_SUCCESS
@@ -89,13 +89,13 @@ TEST_IMPL(GLM_PREFIX, project) {
   /* we used 0.01 because of projection floating point errors */
 
 #ifndef CGLM_FAST_MATH
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.01f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.01f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.01f)
 #else
-  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1)
-  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1)
-  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1)
+  ASSERT(fabsf(pos[0] - unprojected[0]) < 0.1f)
+  ASSERT(fabsf(pos[1] - unprojected[1]) < 0.1f)
+  ASSERT(fabsf(pos[2] - unprojected[2]) < 0.1f)
 #endif
 
   /* test with no projection */
