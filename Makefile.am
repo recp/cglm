@@ -23,7 +23,7 @@ checkCFLAGS = $(AM_CFLAGS) \
                -std=gnu11 \
                -O3 \
                -DCGLM_DEFINE_PRINTS \
-               -I./include
+               -I$(srcdir)/include
 
 check_PROGRAMS = test/tests
 TESTS = $(check_PROGRAMS)
