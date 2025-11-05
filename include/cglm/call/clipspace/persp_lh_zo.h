@@ -27,6 +27,10 @@ glmc_perspective_lh_zo(float fovy,
                        float nearVal,
                        float farVal,
                        mat4 dest);
+                       
+CGLM_EXPORT
+void
+glmc_perspective_resize_lh_zo(float aspect, mat4 proj);
 
 CGLM_EXPORT
 void
