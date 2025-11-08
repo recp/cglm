@@ -36,6 +36,12 @@ glmc_perspective_rh_no(float fovy,
 
 CGLM_EXPORT
 void
+glmc_perspective_resize_rh_no(float aspect, mat4 proj) {
+  glm_perspective_resize_rh_no(aspect, proj);
+}
+
+CGLM_EXPORT
+void
 glmc_persp_move_far_rh_no(mat4 proj, float deltaFar) {
   glm_persp_move_far_rh_no(proj, deltaFar);
 }
