@@ -501,3 +501,9 @@ bool
 glmc_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest) {
   return glm_vec3_refract(v, n, eta, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec3_swap(vec3 a, vec3 b) {
+	glm_vec3_swap(a, b);
+}

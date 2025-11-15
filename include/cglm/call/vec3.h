@@ -363,6 +363,10 @@ CGLM_EXPORT
 bool
 glmc_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest);
 
+CGLM_EXPORT
+void
+glmc_vec3_swap(vec3 a, vec3 b);
+
 #ifdef __cplusplus
 }
 #endif

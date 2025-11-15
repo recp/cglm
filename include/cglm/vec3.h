@@ -82,6 +82,7 @@
    CGLM_INLINE void  glm_vec3_faceforward(vec3 n, vec3 v, vec3 nref, vec3 dest);
    CGLM_INLINE void  glm_vec3_reflect(vec3 v, vec3 n, vec3 dest);
    CGLM_INLINE void  glm_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest);
+   CGLM_INLINE void  glm_vec3_swap(vec3 a, vec3 b)
 
  Convenient:
    CGLM_INLINE void  glm_cross(vec3 a, vec3 b, vec3 d);
@@ -1259,6 +1260,18 @@ glm_vec3_refract(vec3 v, vec3 n, float eta, vec3 dest) {
   glm_vec3_scale(v, eta, dest);
   glm_vec3_mulsubs(n, eni + sqrtf(k), dest);
   return true;
+}
+
+/*!
+ * @brief swap two vectors
+ * @param a the first vector to swap
+ * @param b the second vector to swap
+ */
+CGLM_INLINE void glm_vec3_swap(vec3 a, vec3 b) {
+	vec3 tmp;
+	glm_vec3_copy(a, tmp);
+	glm_vec3_copy(b, a);
+	glm_vec3_copy(tmp, b);
 }
 
 #endif /* cglm_vec3_h */

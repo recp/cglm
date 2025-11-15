@@ -459,3 +459,9 @@ bool
 glmc_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
   return glm_vec4_refract(v, n, eta, dest);
 }
+
+CGLM_EXPORT
+void
+glmc_vec4_swap(vec4 a, vec4 b) {
+	glm_vec4_swap(a, b);
+}

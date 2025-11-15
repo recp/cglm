@@ -59,6 +59,7 @@
    CGLM_INLINE void  glm_vec2_make(float * restrict src, vec2 dest)
    CGLM_INLINE void  glm_vec2_reflect(vec2 v, vec2 n, vec2 dest)
    CGLM_INLINE void  glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest)
+   CGLM_INLINE void  glm_vec2_swap(vec2 a, vec2 b)
  */
 
 #ifndef cglm_vec2_h
@@ -793,6 +794,18 @@ glm_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest) {
   glm_vec2_scale(v, eta, dest);
   glm_vec2_mulsubs(n, eni + sqrtf(k), dest);
   return true;
+}
+
+/*!
+ * @brief swap two vectors
+ * @param a the first vector to swap
+ * @param b the second vector to swap
+ */
+CGLM_INLINE void glm_vec2_swap(vec2 a, vec2 b) {
+	vec2 tmp;
+	glm_vec2_copy(a, tmp);
+	glm_vec2_copy(b, a);
+	glm_vec2_copy(tmp, b);
 }
 
 #endif /* cglm_vec2_h */

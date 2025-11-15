@@ -245,6 +245,10 @@ CGLM_EXPORT
 bool
 glmc_vec2_refract(vec2 v, vec2 n, float eta, vec2 dest);
 
+CGLM_EXPORT
+void
+glmc_vec2_swap(vec2 a, vec2 b);
+
 #ifdef __cplusplus
 }
 #endif

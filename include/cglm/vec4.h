@@ -66,6 +66,7 @@
    CGLM_INLINE void  glm_vec4_make(float * restrict src, vec4 dest);
    CGLM_INLINE void  glm_vec4_reflect(vec4 v, vec4 n, vec4 dest);
    CGLM_INLINE void  glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest);
+   CGLM_INLINE void  glm_vec4_swap(vec4 a, vec4 b)
 
  DEPRECATED:
    glm_vec4_dup
@@ -1343,6 +1344,18 @@ glm_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest) {
   glm_vec4_scale(v, eta, dest);
   glm_vec4_mulsubs(n, eni + sqrtf(k), dest);
   return true;
+}
+
+/*!
+ * @brief swap two vectors
+ * @param a the first vector to swap
+ * @param b the second vector to swap
+ */
+CGLM_INLINE void glm_vec4_swap(vec4 a, vec4 b) {
+	vec4 tmp;
+	glm_vec4_copy(a, tmp);
+	glm_vec4_copy(b, a);
+	glm_vec4_copy(tmp, b);
 }
 
 #endif /* cglm_vec4_h */
