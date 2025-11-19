@@ -336,6 +336,10 @@ CGLM_EXPORT
 bool
 glmc_vec4_refract(vec4 v, vec4 n, float eta, vec4 dest);
 
+CGLM_EXPORT
+void
+glmc_vec4_swap(vec4 a, vec4 b);
+
 #ifdef __cplusplus
 }
 #endif
