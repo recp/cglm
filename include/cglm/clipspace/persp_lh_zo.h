@@ -21,6 +21,7 @@
                                                    float nearZ,
                                                    mat4  dest)
    CGLM_INLINE void glm_perspective_default_lh_zo(float aspect, mat4 dest)
+   CGLM_INLINE void glm_perspective_default_infinite_lh_zo(float aspect, mat4 dest)
    CGLM_INLINE void glm_perspective_resize_lh_zo(float aspect, mat4 proj)
    CGLM_INLINE void glm_persp_move_far_lh_zo(mat4 proj,
                                              float deltaFar)
@@ -177,7 +178,7 @@ glm_persp_move_far_lh_zo(mat4 proj, float deltaFar) {
 
 /*!
  * @brief set up perspective projection matrix with default near/far
- *        and angle values with a left-hand coordinate system and a 
+ *        and angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *
  * @param[in]  aspect aspect ratio ( width / height )
@@ -187,6 +188,20 @@ CGLM_INLINE
 void
 glm_perspective_default_lh_zo(float aspect, mat4 dest) {
   glm_perspective_lh_zo(GLM_PI_4f, aspect, 0.01f, 100.0f, dest);
+}
+
+/*!
+ * @brief set up infinite perspective projection matrix with default near
+ *        and angle values with a left-hand coordinate system and a
+ *        clip-space of [0, 1].
+ *
+ * @param[in]  aspect aspect ratio ( width / height )
+ * @param[out] dest   result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_default_infinite_lh_zo(float aspect, mat4 dest) {
+  glm_perspective_infinite_lh_zo(GLM_PI_4f, aspect, 0.01f, dest);
 }
 
 /*!

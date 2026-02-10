@@ -82,6 +82,12 @@ glmc_perspective_default(float aspect, mat4 dest) {
 
 CGLM_EXPORT
 void
+glmc_perspective_default_infinite(float aspect, mat4 dest) {
+  glm_perspective_default_infinite(aspect, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_perspective_resize(float aspect, mat4 proj) {
   glm_perspective_resize(aspect, proj);
 }
