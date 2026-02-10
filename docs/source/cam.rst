@@ -36,8 +36,10 @@ Functions:
 #. :c:func:`glm_ortho_default`
 #. :c:func:`glm_ortho_default_s`
 #. :c:func:`glm_perspective`
+#. :c:func:`glm_perspective_infinite`
 #. :c:func:`glm_persp_move_far`
 #. :c:func:`glm_perspective_default`
+#. :c:func:`glm_perspective_default_infinite`
 #. :c:func:`glm_perspective_resize`
 #. :c:func:`glm_lookat`
 #. :c:func:`glm_look`
@@ -146,6 +148,21 @@ Functions documentation
       | *[in]*  **farVal**  far clipping planes
       | *[out]* **dest**    result matrix
 
+.. c:function:: void  glm_perspective_infinite(float fovy, float aspect, float nearZ, mat4 dest)
+
+    | set up perspective projection matrix with infinite far plane
+
+    The far clipping plane is pushed to infinity. This can improve depth
+    precision for distant objects and is required by some rendering techniques
+    such as shadow volumes. Dispatches to the appropriate clipspace variant
+    based on compile-time configuration (LH/RH, NO/ZO).
+
+    Parameters:
+      | *[in]*  **fovy**    field of view angle (in radians)
+      | *[in]*  **aspect**  aspect ratio ( width / height )
+      | *[in]*  **nearZ**   near clipping plane
+      | *[out]* **dest**    result matrix
+
 .. c:function:: void  glm_persp_move_far(mat4 proj, float deltaFar)
 
     | extend perspective projection matrix's far distance
@@ -163,6 +180,20 @@ Functions documentation
 
     Parameters:
       | *[in]*  **aspect** aspect aspect ratio ( width / height )
+      | *[out]* **dest**   result matrix
+
+.. c:function:: void glm_perspective_default_infinite(float aspect, mat4 dest)
+
+    | set up infinite perspective projection matrix with default near
+      and angle values
+
+    Equivalent to calling :c:func:`glm_perspective_infinite` with
+    ``fovy = GLM_PI_4`` (45°) and ``nearZ = 0.01``. Useful as a
+    quick drop-in when you need an infinite projection without tuning
+    the individual parameters.
+
+    Parameters:
+      | *[in]*  **aspect** aspect ratio ( width / height )
       | *[out]* **dest**   result matrix
 
 .. c:function:: void  glm_perspective_resize(float aspect, mat4 proj)
