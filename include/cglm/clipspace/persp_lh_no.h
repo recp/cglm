@@ -16,7 +16,12 @@
                                           float nearZ,
                                           float farZ,
                                           mat4  dest)
+   CGLM_INLINE void glm_perspective_infinite_lh_no(float fovy,
+                                                   float aspect,
+                                                   float nearZ,
+                                                   mat4  dest)
    CGLM_INLINE void glm_perspective_default_lh_no(float aspect, mat4 dest)
+   CGLM_INLINE void glm_perspective_default_infinite_lh_no(float aspect, mat4 dest)
    CGLM_INLINE void glm_perspective_resize_lh_no(float aspect, mat4 proj)
    CGLM_INLINE void glm_persp_move_far_lh_no(mat4 proj,
                                              float deltaFar)
@@ -116,7 +121,35 @@ glm_perspective_lh_no(float fovy,
   dest[2][2] =-(nearZ + farZ) * fn;
   dest[2][3] = 1.0f;
   dest[3][2] = 2.0f * nearZ * farZ * fn;
+}
 
+/*!
+ * @brief set up infinite perspective projection matrix
+ *        with a left-hand coordinate system and a
+ *        clip-space of [-1, 1].
+ *
+ * @param[in]  fovy    field of view angle
+ * @param[in]  aspect  aspect ratio ( width / height )
+ * @param[in]  nearZ   near clipping plane
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_infinite_lh_no(float fovy,
+                               float aspect,
+                               float nearZ,
+                               mat4  dest) {
+  float f;
+
+  glm_mat4_zero(dest);
+
+  f  = 1.0f / tanf(fovy * 0.5f);
+
+  dest[0][0] = f / aspect;
+  dest[1][1] = f;
+  dest[2][2] = 1.0f;
+  dest[2][3] = 1.0f;
+  dest[3][2] =-2.0f * nearZ;
 }
 
 /*!
@@ -131,6 +164,20 @@ CGLM_INLINE
 void
 glm_perspective_default_lh_no(float aspect, mat4 dest) {
   glm_perspective_lh_no(GLM_PI_4f, aspect, 0.01f, 100.0f, dest);
+}
+
+/*!
+ * @brief set up infinite perspective projection matrix with default near
+ *        and angle values with a left-hand coordinate system and a
+ *        clip-space of [-1, 1].
+ *
+ * @param[in]  aspect aspect ratio ( width / height )
+ * @param[out] dest   result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_default_infinite_lh_no(float aspect, mat4 dest) {
+  glm_perspective_infinite_lh_no(GLM_PI_4f, aspect, 0.01f, dest);
 }
 
 /*!

@@ -16,7 +16,12 @@
                                           float nearZ,
                                           float farZ,
                                           mat4  dest)
+   CGLM_INLINE void glm_perspective_infinite_rh_zo(float fovy,
+                                                   float aspect,
+                                                   float nearZ,
+                                                   mat4  dest)
    CGLM_INLINE void glm_perspective_default_rh_zo(float aspect, mat4 dest)
+   CGLM_INLINE void glm_perspective_default_infinite_rh_zo(float aspect, mat4 dest)
    CGLM_INLINE void glm_perspective_resize_rh_zo(float aspect, mat4 proj)
    CGLM_INLINE void glm_persp_move_far_rh_zo(mat4 proj,
                                              float deltaFar)
@@ -117,6 +122,35 @@ glm_perspective_rh_zo(float fovy,
 }
 
 /*!
+ * @brief set up infinite perspective projection matrix
+ *        with a right-hand coordinate system and a
+ *        clip-space of [0, 1].
+ *
+ * @param[in]  fovy    field of view angle
+ * @param[in]  aspect  aspect ratio ( width / height )
+ * @param[in]  nearZ   near clipping plane
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_infinite_rh_zo(float fovy,
+                               float aspect,
+                               float nearZ,
+                               mat4  dest) {
+  float f;
+
+  glm_mat4_zero(dest);
+
+  f  = 1.0f / tanf(fovy * 0.5f);
+
+  dest[0][0] = f / aspect;
+  dest[1][1] = f;
+  dest[2][2] =-1.0f;
+  dest[2][3] =-1.0f;
+  dest[3][2] =-nearZ;
+}
+
+/*!
  * @brief set up perspective projection matrix with default near/far
  *        and angle values with a right-hand coordinate system and a
  *        clip-space of [0, 1].
@@ -128,6 +162,20 @@ CGLM_INLINE
 void
 glm_perspective_default_rh_zo(float aspect, mat4 dest) {
   glm_perspective_rh_zo(GLM_PI_4f, aspect, 0.01f, 100.0f, dest);
+}
+
+/*!
+ * @brief set up infinite perspective projection matrix with default near
+ *        and angle values with a right-hand coordinate system and a
+ *        clip-space of [0, 1].
+ *
+ * @param[in]  aspect aspect ratio ( width / height )
+ * @param[out] dest   result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_default_infinite_rh_zo(float aspect, mat4 dest) {
+  glm_perspective_infinite_rh_zo(GLM_PI_4f, aspect, 0.01f, dest);
 }
 
 /*!
