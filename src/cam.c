@@ -64,6 +64,12 @@ glmc_perspective(float fovy, float aspect, float nearZ, float farZ, mat4 dest) {
 
 CGLM_EXPORT
 void
+glmc_perspective_infinite(float fovy, float aspect, float nearZ, mat4 dest) {
+  glm_perspective_infinite(fovy, aspect, nearZ, dest);
+}
+
+CGLM_EXPORT
+void
 glmc_persp_move_far(mat4 proj, float deltaFar) {
   glm_persp_move_far(proj, deltaFar);
 }

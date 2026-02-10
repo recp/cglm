@@ -25,6 +25,10 @@
                                      float nearZ,
                                      float farZ,
                                      mat4  dest)
+   CGLM_INLINE void  glm_perspective_infinite(float fovy,
+                                              float aspect,
+                                              float nearZ,
+                                              mat4  dest)
    CGLM_INLINE void  glm_perspective_default(float aspect, mat4 dest)
    CGLM_INLINE void  glm_perspective_resize(float aspect, mat4 proj)
    CGLM_INLINE void  glm_lookat(vec3 eye, vec3 center, vec3 up, mat4 dest)
@@ -87,7 +91,7 @@
 #endif
 
 /*!
- * @brief set up perspective peprojection matrix
+ * @brief set up perspective projection matrix
  *
  * @param[in]  left    viewport.left
  * @param[in]  right   viewport.right
@@ -271,6 +275,28 @@ glm_perspective(float fovy, float aspect, float nearZ, float farZ, mat4 dest) {
   glm_perspective_rh_zo(fovy, aspect, nearZ, farZ, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
   glm_perspective_rh_no(fovy, aspect, nearZ, farZ, dest);
+#endif
+}
+
+/*!
+ * @brief set up perspective projection matrix with infinite far plane
+ *
+ * @param[in]  fovy    field of view angle
+ * @param[in]  aspect  aspect ratio ( width / height )
+ * @param[in]  nearZ   near clipping plane
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_infinite(float fovy, float aspect, float nearZ, mat4 dest) {
+#if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
+  glm_perspective_infinite_lh_zo(fovy, aspect, nearZ, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
+  glm_perspective_infinite_lh_no(fovy, aspect, nearZ, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_ZO
+  glm_perspective_infinite_rh_zo(fovy, aspect, nearZ, dest);
+#elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_RH_NO
+  glm_perspective_infinite_rh_no(fovy, aspect, nearZ, dest);
 #endif
 }
 

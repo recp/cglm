@@ -16,6 +16,10 @@
                                           float nearZ,
                                           float farZ,
                                           mat4  dest)
+   CGLM_INLINE void glm_perspective_infinite_lh_zo(float fovy,
+                                                   float aspect,
+                                                   float nearZ,
+                                                   mat4  dest)
    CGLM_INLINE void glm_perspective_default_lh_zo(float aspect, mat4 dest)
    CGLM_INLINE void glm_perspective_resize_lh_zo(float aspect, mat4 proj)
    CGLM_INLINE void glm_persp_move_far_lh_zo(mat4 proj,
@@ -114,6 +118,35 @@ glm_perspective_lh_zo(float fovy,
   dest[2][2] =-farZ * fn;
   dest[2][3] = 1.0f;
   dest[3][2] = nearZ * farZ * fn;
+}
+
+/*!
+* @brief set up infinite perspective projection matrix
+ *        with a left-hand coordinate system and a
+ *        clip-space of [0, 1].
+ *
+ * @param[in]  fovy    field of view angle
+ * @param[in]  aspect  aspect ratio ( width / height )
+ * @param[in]  nearZ   near clipping plane
+ * @param[out] dest    result matrix
+ */
+CGLM_INLINE
+void
+glm_perspective_infinite_lh_zo(float fovy,
+                               float aspect,
+                               float nearZ,
+                               mat4  dest) {
+  float f;
+
+  glm_mat4_zero(dest);
+
+  f  = 1.0f / tanf(fovy * 0.5f);
+
+  dest[0][0] = f / aspect;
+  dest[1][1] = f;
+  dest[2][2] = 1.0f;
+  dest[2][3] = 1.0f;
+  dest[3][2] =-nearZ;
 }
 
 /*!
