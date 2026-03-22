@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-#include "../cglm.h"
+#include "cglm/common.h"
 
 CGLM_EXPORT
 void
