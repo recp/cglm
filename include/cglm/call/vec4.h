@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#include "cglm/common.h"
+#include "../common.h"
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glmc_vec4_dup3(v, dest)         glmc_vec4_copy3(v, dest)

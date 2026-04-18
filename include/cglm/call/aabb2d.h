@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#include "cglm/common.h"
+#include "../common.h"
 
 /* DEPRECATED! use _diag */
 #define glmc_aabb2d_size(aabb) glmc_aabb2d_diag(aabb)
