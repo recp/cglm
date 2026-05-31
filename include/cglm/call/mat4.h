@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-#include "../cglm.h"
+#include "../common.h"
 
 /* DEPRECATED! use _copy, _ucopy versions */
 #define glmc_mat4_udup(mat, dest) glmc_mat4_ucopy(mat, dest)

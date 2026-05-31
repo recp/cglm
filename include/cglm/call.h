@@ -11,7 +11,6 @@
 extern "C" {
 #endif
 
-#include "cglm.h"
 #include "call/vec2.h"
 #include "call/vec3.h"
 #include "call/vec4.h"

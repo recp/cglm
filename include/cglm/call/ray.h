@@ -10,7 +10,8 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "../cglm.h"
+
+#include "../common.h"
 
 CGLM_EXPORT
 bool

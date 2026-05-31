@@ -15,5 +15,6 @@ It would be duplicate documentation also it
 would be hard to sync documentation between inline and call version for me.
 
 By including **clgm/cglm.h** you include all inline versions. To get precompiled
-versions you need to include **cglm/call.h** header it also includes all
-call versions plus *clgm/cglm.h* (inline versions)
+versions you need to include **cglm/call.h** header. When using the
+precompiled versions, explicitly including **cglm/cglm.h** is still necessary
+for the inline versions to be included.
