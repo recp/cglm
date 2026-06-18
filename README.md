@@ -59,6 +59,8 @@ Alternatively, you can read the complete documentation [here](http://cglm.readth
 
 cglm can be used in it's entirety as a header-only library simply by including `cglm/cglm.h`. If you wish to link against it instead, it can be built using one of the supported build systems. Detailed information about building on individual platforms and build systems along with the instructions for building the documentation can be found in [BUILDING.md](./BUILDING.md).
 
+When targeting `riscv64`, cglm currently uses its generic non-SIMD path unless a dedicated RISC-V backend is added. Cross-target or simulated target builds should avoid inheriting host-only x86 SIMD macros.
+
 ### ✅ Usage
 
 #### Header-only

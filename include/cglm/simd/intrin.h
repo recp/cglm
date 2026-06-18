@@ -8,7 +8,18 @@
 #ifndef cglm_intrin_h
 #define cglm_intrin_h
 
-#if defined(_MSC_VER) && !defined(_M_ARM64EC)
+/* target architecture detection */
+#if defined(__riscv)
+#  define CGLM_ARCH_RISCV 1
+#elif defined(_M_ARM64) || defined(_M_HYBRID_X86_ARM64) || defined(_M_ARM64EC) || \
+      defined(_M_ARM) || defined(__aarch64__) || defined(__arm__) || defined(__ARM_NEON) || defined(__ARM_NEON__)
+#  define CGLM_ARCH_ARM 1
+#elif defined(_M_AMD64) || defined(_M_X64) || defined(_M_IX86) || \
+      defined(__x86_64__) || defined(__i386__)
+#  define CGLM_ARCH_X86 1
+#endif
+
+#if defined(_MSC_VER) && defined(CGLM_ARCH_X86) && !defined(_M_ARM64EC)
 #  if (defined(_M_AMD64) || defined(_M_X64)) || _M_IX86_FP == 2
 #    ifndef __SSE__
 #      define __SSE__
@@ -28,7 +39,7 @@
 #  endif
 #endif
 
-#ifdef __AVX__
+#if defined(CGLM_ARCH_X86) && defined(__AVX__)
 #  include <immintrin.h>
 #  define CGLM_AVX_FP 1
 #    ifndef __SSE2__
@@ -51,7 +62,7 @@
 #  endif
 #endif
 
-#if defined(__SSE__)
+#if defined(CGLM_ARCH_X86) && defined(__SSE__)
 #  include <xmmintrin.h>
 #  define CGLM_SSE_FP 1
 #  ifndef CGLM_SIMD_x86
@@ -59,7 +70,7 @@
 #  endif
 #endif
 
-#if defined(__SSE2__)
+#if defined(CGLM_ARCH_X86) && defined(__SSE2__)
 #  include <emmintrin.h>
 #  define CGLM_SSE2_FP 1
 #  ifndef CGLM_SIMD_x86
@@ -67,21 +78,21 @@
 #  endif
 #endif
 
-#if defined(__SSE3__)
+#if defined(CGLM_ARCH_X86) && defined(__SSE3__)
 #  include <pmmintrin.h>
 #  ifndef CGLM_SIMD_x86
 #    define CGLM_SIMD_x86
 #  endif
 #endif
 
-#if defined(__SSE4_1__)
+#if defined(CGLM_ARCH_X86) && defined(__SSE4_1__)
 #  include <smmintrin.h>
 #  ifndef CGLM_SIMD_x86
 #    define CGLM_SIMD_x86
 #  endif
 #endif
 
-#if defined(__SSE4_2__)
+#if defined(CGLM_ARCH_X86) && defined(__SSE4_2__)
 #  include <nmmintrin.h>
 #  ifndef CGLM_SIMD_x86
 #    define CGLM_SIMD_x86

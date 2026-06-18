@@ -55,6 +55,38 @@
 #define GLM_SHUFFLE3(z, y, x)    (((z) << 4) | ((y) << 2) | (x))
 #define GLM_SHUFFLE2(y, x)       (((y) << 2) | (x))
 
+/*
+ * Cross-target preprocessing can inherit host x86 SIMD builtins. When the
+ * target is forced to RISC-V, drop those host-only macros before selecting
+ * alignment or SIMD backends.
+ */
+#if defined(__riscv)
+#  ifdef __AVX2__
+#    undef __AVX2__
+#  endif
+#  ifdef __AVX__
+#    undef __AVX__
+#  endif
+#  ifdef __SSE4_2__
+#    undef __SSE4_2__
+#  endif
+#  ifdef __SSE4_1__
+#    undef __SSE4_1__
+#  endif
+#  ifdef __SSE4__
+#    undef __SSE4__
+#  endif
+#  ifdef __SSE3__
+#    undef __SSE3__
+#  endif
+#  ifdef __SSE2__
+#    undef __SSE2__
+#  endif
+#  ifdef __SSE__
+#    undef __SSE__
+#  endif
+#endif
+
 #include "types.h"
 #include "simd/intrin.h"
 
