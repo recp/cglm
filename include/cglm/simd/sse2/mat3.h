@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat3_mul_sse2(mat3 m1, mat3 m2, mat3 dest) {
+glm_mat3_mul_sse2(const mat3 m1, const mat3 m2, mat3 dest) {
   __m128 l0, l1, l2, r0, r1, r2, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
   
   l0 = _mm_loadu_ps(m1[0]);

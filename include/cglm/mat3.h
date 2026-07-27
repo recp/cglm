@@ -14,23 +14,23 @@
    glm_mat3_dup(mat, dest)
 
  Functions:
-   CGLM_INLINE void  glm_mat3_copy(mat3 mat, mat3 dest);
+   CGLM_INLINE void  glm_mat3_copy(const mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_identity(mat3 mat);
    CGLM_INLINE void  glm_mat3_identity_array(mat3 * restrict mat, size_t count);
    CGLM_INLINE void  glm_mat3_zero(mat3 mat);
-   CGLM_INLINE void  glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest);
-   CGLM_INLINE void  glm_mat3_transpose_to(mat3 m, mat3 dest);
+   CGLM_INLINE void  glm_mat3_mul(const mat3 m1, const mat3 m2, mat3 dest);
+   CGLM_INLINE void  glm_mat3_transpose_to(const mat3 m, mat3 dest);
    CGLM_INLINE void  glm_mat3_transpose(mat3 m);
-   CGLM_INLINE void  glm_mat3_mulv(mat3 m, vec3 v, vec3 dest);
-   CGLM_INLINE float glm_mat3_trace(mat3 m);
-   CGLM_INLINE void  glm_mat3_quat(mat3 m, versor dest);
+   CGLM_INLINE void  glm_mat3_mulv(const mat3 m, const vec3 v, vec3 dest);
+   CGLM_INLINE float glm_mat3_trace(const mat3 m);
+   CGLM_INLINE void  glm_mat3_quat(const mat3 m, versor dest);
    CGLM_INLINE void  glm_mat3_scale(mat3 m, float s);
-   CGLM_INLINE float glm_mat3_det(mat3 mat);
-   CGLM_INLINE void  glm_mat3_inv(mat3 mat, mat3 dest);
+   CGLM_INLINE float glm_mat3_det(const mat3 mat);
+   CGLM_INLINE void  glm_mat3_inv(const mat3 mat, mat3 dest);
    CGLM_INLINE void  glm_mat3_swap_col(mat3 mat, int col1, int col2);
    CGLM_INLINE void  glm_mat3_swap_row(mat3 mat, int row1, int row2);
-   CGLM_INLINE float glm_mat3_rmc(vec3 r, mat3 m, vec3 c);
-   CGLM_INLINE void  glm_mat3_make(float * restrict src, mat3 dest);
+   CGLM_INLINE float glm_mat3_rmc(const vec3 r, const mat3 m, const vec3 c);
+   CGLM_INLINE void  glm_mat3_make(const float * restrict src, mat3 dest);
    CGLM_INLINE void  glm_mat3_textrans(float sx, float sy, float rot, float tx, float ty, mat3 dest);
  */
 
@@ -71,7 +71,7 @@
  */
 CGLM_INLINE
 void
-glm_mat3_copy(mat3 mat, mat3 dest) {
+glm_mat3_copy(const mat3 mat, mat3 dest) {
   dest[0][0] = mat[0][0];
   dest[0][1] = mat[0][1];
   dest[0][2] = mat[0][2];
@@ -94,7 +94,7 @@ glm_mat3_copy(mat3 mat, mat3 dest) {
  * glm_mat3_copy(GLM_MAT3_IDENTITY, mat); // C only
  *
  * // or
- * mat3 mat = GLM_MAT3_IDENTITY_INIT;
+ * const mat3 mat = GLM_MAT3_IDENTITY_INIT;
  * @endcode
  *
  * @param[in, out]  mat  destination
@@ -143,7 +143,7 @@ glm_mat3_zero(mat3 mat) {
  * m1, m2 and dest matrices can be same matrix, it is possible to write this:
  *
  * @code
- * mat3 m = GLM_MAT3_IDENTITY_INIT;
+ * const mat3 m = GLM_MAT3_IDENTITY_INIT;
  * glm_mat3_mul(m, m, m);
  * @endcode
  *
@@ -153,7 +153,7 @@ glm_mat3_zero(mat3 mat) {
  */
 CGLM_INLINE
 void
-glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
+glm_mat3_mul(const mat3 m1, const mat3 m2, mat3 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat3_mul_wasm(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -189,7 +189,7 @@ glm_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
  */
 CGLM_INLINE
 void
-glm_mat3_transpose_to(mat3 m, mat3 dest) {
+glm_mat3_transpose_to(const mat3 m, mat3 dest) {
   dest[0][0] = m[0][0];
   dest[0][1] = m[1][0];
   dest[0][2] = m[2][0];
@@ -235,7 +235,7 @@ glm_mat3_transpose(mat3 m) {
  */
 CGLM_INLINE
 void
-glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
+glm_mat3_mulv(const mat3 m, const vec3 v, vec3 dest) {
   vec3 res;
   res[0] = m[0][0] * v[0] + m[1][0] * v[1] + m[2][0] * v[2];
   res[1] = m[0][1] * v[0] + m[1][1] * v[1] + m[2][1] * v[2];
@@ -252,7 +252,7 @@ glm_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
  */
 CGLM_INLINE
 float
-glm_mat3_trace(mat3 m) {
+glm_mat3_trace(const mat3 m) {
   return m[0][0] + m[1][1] + m[2][2];
 }
 
@@ -264,7 +264,7 @@ glm_mat3_trace(mat3 m) {
  */
 CGLM_INLINE
 void
-glm_mat3_quat(mat3 m, versor dest) {
+glm_mat3_quat(const mat3 m, versor dest) {
   float trace, r, rinv;
 
   /* it seems using like m12 instead of m[1][2] causes extra instructions */
@@ -330,7 +330,7 @@ glm_mat3_scale(mat3 m, float s) {
  */
 CGLM_INLINE
 float
-glm_mat3_det(mat3 mat) {
+glm_mat3_det(const mat3 mat) {
   float a = mat[0][0], b = mat[0][1], c = mat[0][2],
         d = mat[1][0], e = mat[1][1], f = mat[1][2],
         g = mat[2][0], h = mat[2][1], i = mat[2][2];
@@ -346,7 +346,7 @@ glm_mat3_det(mat3 mat) {
  */
 CGLM_INLINE
 void
-glm_mat3_inv(mat3 mat, mat3 dest) {
+glm_mat3_inv(const mat3 mat, mat3 dest) {
   float a = mat[0][0], b = mat[0][1], c = mat[0][2],
         d = mat[1][0], e = mat[1][1], f = mat[1][2],
         g = mat[2][0], h = mat[2][1], i = mat[2][2],
@@ -421,7 +421,7 @@ glm_mat3_swap_row(mat3 mat, int row1, int row2) {
  */
 CGLM_INLINE
 float
-glm_mat3_rmc(vec3 r, mat3 m, vec3 c) {
+glm_mat3_rmc(const vec3 r, const mat3 m, const vec3 c) {
   vec3 tmp;
   glm_mat3_mulv(m, c, tmp);
   return glm_vec3_dot(r, tmp);
