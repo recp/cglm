@@ -83,3 +83,14 @@ xcode/*
 .vscode
 .build
 *.swp
+*.swp
+.tags
+.vimrc
+.lastsession.vim
+*.un~
+.cache/
+.ccls-cache/
+compile_commands.json
+.compile_commands.json
+.clang_complete
+.ccls-root
