@@ -13,7 +13,7 @@
    GLM_VEC2_ZERO
 
  Functions:
-   CGLM_INLINE void  glm_vec2(float * __restrict v, vec2 dest)
+   CGLM_INLINE void  glm_vec2(const float * __restrict v, vec2 dest)
    CGLM_INLINE void  glm_vec2_copy(const vec2 a, vec2 dest)
    CGLM_INLINE void  glm_vec2_zero(vec2 v)
    CGLM_INLINE void  glm_vec2_one(vec2 v)
@@ -83,7 +83,7 @@
  */
 CGLM_INLINE
 void
-glm_vec2(float * __restrict v, vec2 dest) {
+glm_vec2(const float * __restrict v, vec2 dest) {
   dest[0] = v[0];
   dest[1] = v[1];
 }
@@ -801,11 +801,13 @@ glm_vec2_refract(const vec2 v, const vec2 n, float eta, vec2 dest) {
  * @param a the first vector to swap
  * @param b the second vector to swap
  */
-CGLM_INLINE void glm_vec2_swap(vec2 a, vec2 b) {
-	vec2 tmp;
-	glm_vec2_copy(a, tmp);
-	glm_vec2_copy(b, a);
-	glm_vec2_copy(tmp, b);
+CGLM_INLINE
+void
+glm_vec2_swap(vec2 a, vec2 b) {
+  vec2 tmp;
+  glm_vec2_copy(a, tmp);
+  glm_vec2_copy(b, a);
+  glm_vec2_copy(tmp, b);
 }
 
 #endif /* cglm_vec2_h */

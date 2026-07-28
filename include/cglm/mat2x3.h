@@ -87,7 +87,7 @@ glm_mat2x3_make(const float * __restrict src, mat2x3 dest) {
 CGLM_INLINE
 void
 glm_mat2x3_mul(CGLM_IN(mat2x3) m1, CGLM_IN(mat3x2) m2, mat3 dest) {
-  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], 
+  float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
 
         b00 = m2[0][0], b01 = m2[0][1],

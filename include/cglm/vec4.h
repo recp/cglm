@@ -1212,7 +1212,7 @@ CGLM_INLINE
 void
 glm_vec4_smoothinterp(const vec4 from, const vec4 to, float t, vec4 dest) {
   vec4 s, v;
-    
+
   /* from + smoothstep * (to - from) */
   glm_vec4_broadcast(glm_smooth(t), s);
   glm_vec4_sub(to, from, v);
@@ -1351,11 +1351,13 @@ glm_vec4_refract(const vec4 v, const vec4 n, float eta, vec4 dest) {
  * @param a the first vector to swap
  * @param b the second vector to swap
  */
-CGLM_INLINE void glm_vec4_swap(vec4 a, vec4 b) {
-	vec4 tmp;
-	glm_vec4_copy(a, tmp);
-	glm_vec4_copy(b, a);
-	glm_vec4_copy(tmp, b);
+CGLM_INLINE
+void
+glm_vec4_swap(vec4 a, vec4 b) {
+  vec4 tmp;
+  glm_vec4_copy(a, tmp);
+  glm_vec4_copy(b, a);
+  glm_vec4_copy(tmp, b);
 }
 
 #endif /* cglm_vec4_h */

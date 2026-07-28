@@ -138,7 +138,7 @@ glm_mat2_zero(mat2 m) {
 /*!
  * @brief Multiply mat2 (m1) by mat2 (m2) and store in mat2 (dest).
  *
- *        m1, m2 and dest matrices can be same matrix, it is possible to write this: 
+ *        m1, m2 and dest matrices can be same matrix, it is possible to write this:
  *
  * @code
  * CGLM_IN(mat2) m = GLM_MAT2_IDENTITY_INIT;
