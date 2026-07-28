@@ -15,9 +15,9 @@
                                float bottom, float top,
                                float nearZ,  float farZ,
                                mat4  dest)
-   CGLM_INLINE void  glm_ortho_aabb(const vec3 box[2], mat4 dest)
-   CGLM_INLINE void  glm_ortho_aabb_p(const vec3 box[2],  float padding, mat4 dest)
-   CGLM_INLINE void  glm_ortho_aabb_pz(const vec3 box[2], float padding, mat4 dest)
+   CGLM_INLINE void  glm_ortho_aabb(CGLM_IN(vec3) box[2], mat4 dest)
+   CGLM_INLINE void  glm_ortho_aabb_p(CGLM_IN(vec3) box[2],  float padding, mat4 dest)
+   CGLM_INLINE void  glm_ortho_aabb_pz(CGLM_IN(vec3) box[2], float padding, mat4 dest)
    CGLM_INLINE void  glm_ortho_default(float aspect, mat4  dest)
    CGLM_INLINE void  glm_ortho_default_s(float aspect, float size, mat4 dest)
    CGLM_INLINE void  glm_perspective(float fovy,
@@ -32,9 +32,9 @@
    CGLM_INLINE void  glm_perspective_default(float aspect, mat4 dest)
    CGLM_INLINE void  glm_perspective_default_infinite(float aspect, mat4 dest)
    CGLM_INLINE void  glm_perspective_resize(float aspect, mat4 proj)
-   CGLM_INLINE void  glm_lookat(const vec3 eye, const vec3 center, const vec3 up, mat4 dest)
-   CGLM_INLINE void  glm_look(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest)
-   CGLM_INLINE void  glm_look_anyup(const vec3 eye, const vec3 dir, mat4 dest)
+   CGLM_INLINE void  glm_lookat(CGLM_IN(vec3) eye, CGLM_IN(vec3) center, CGLM_IN(vec3) up, mat4 dest)
+   CGLM_INLINE void  glm_look(CGLM_IN(vec3) eye, CGLM_IN(vec3) dir, CGLM_IN(vec3) up, mat4 dest)
+   CGLM_INLINE void  glm_look_anyup(CGLM_IN(vec3) eye, CGLM_IN(vec3) dir, mat4 dest)
    CGLM_INLINE void  glm_persp_decomp(mat4   proj,
                                       float *nearZ, float *farZ,
                                       float *top,   float *bottom,
@@ -157,7 +157,7 @@ glm_ortho(float left,    float right,
  */
 CGLM_INLINE
 void
-glm_ortho_aabb(const vec3 box[2], mat4 dest) {
+glm_ortho_aabb(CGLM_IN(vec3) box[2], mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_ortho_aabb_lh_zo(box, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -180,7 +180,7 @@ glm_ortho_aabb(const vec3 box[2], mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_p(const vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_p(CGLM_IN(vec3) box[2], float padding, mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_ortho_aabb_p_lh_zo(box, padding, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -203,7 +203,7 @@ glm_ortho_aabb_p(const vec3 box[2], float padding, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_pz(const vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_pz(CGLM_IN(vec3) box[2], float padding, mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_ZO
   glm_ortho_aabb_pz_lh_zo(box, padding, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL == CGLM_CLIP_CONTROL_LH_NO
@@ -395,7 +395,7 @@ glm_perspective_resize(float aspect, mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_lookat(const vec3 eye, const vec3 center, const vec3 up, mat4 dest) {
+glm_lookat(CGLM_IN(vec3) eye, CGLM_IN(vec3) center, CGLM_IN(vec3) up, mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_lookat_lh(eye, center, up, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
@@ -419,7 +419,7 @@ glm_lookat(const vec3 eye, const vec3 center, const vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
+glm_look(CGLM_IN(vec3) eye, CGLM_IN(vec3) dir, CGLM_IN(vec3) up, mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_look_lh(eye, dir, up, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
@@ -439,7 +439,7 @@ glm_look(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look_anyup(const vec3 eye, const vec3 dir, mat4 dest) {
+glm_look_anyup(CGLM_IN(vec3) eye, CGLM_IN(vec3) dir, mat4 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_LH_BIT
   glm_look_anyup_lh(eye, dir, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_RH_BIT
