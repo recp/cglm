@@ -28,8 +28,8 @@
    CGLM_INLINE void  glm_vec3_fract(vec3 v, vec3 dest);
    CGLM_INLINE void  glm_vec3_floor(vec3 v, vec3 dest);
    CGLM_INLINE float glm_vec3_mods(vec3 v, float s, vec3 dest);
-   CGLM_INLINE float glm_vec3_steps(float edge, vec3 v, vec3 dest);
-   CGLM_INLINE void  glm_vec3_stepr(vec3 edge, float v, vec3 dest);
+   CGLM_INLINE float glm_vec3_steps(float edge, const vec3 x, vec3 dest);
+   CGLM_INLINE void  glm_vec3_stepr(const vec3 edge, float v, vec3 dest);
    CGLM_INLINE float glm_vec3_hadd(vec3 v);
    CGLM_INLINE void  glm_vec3_sqrt(vec3 v, vec3 dest);
  */
@@ -295,7 +295,7 @@ glm_vec3_mods(const vec3 v, float s, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_steps(float edge, vec3 x, vec3 dest) {
+glm_vec3_steps(float edge, const vec3 x, vec3 dest) {
   dest[0] = glm_step(edge, x[0]);
   dest[1] = glm_step(edge, x[1]);
   dest[2] = glm_step(edge, x[2]);
@@ -311,7 +311,7 @@ glm_vec3_steps(float edge, vec3 x, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_vec3_stepr(vec3 edge, float x, vec3 dest) {
+glm_vec3_stepr(const vec3 edge, float x, vec3 dest) {
   dest[0] = glm_step(edge[0], x);
   dest[1] = glm_step(edge[1], x);
   dest[2] = glm_step(edge[2], x);
