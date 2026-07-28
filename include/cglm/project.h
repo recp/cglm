@@ -52,7 +52,7 @@
  */
 CGLM_INLINE
 void
-glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+glm_unprojecti(const vec3 pos, CGLM_IN(mat4) invMat, const vec4 vp, vec3 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
   glm_unprojecti_zo(pos, invMat, vp, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
@@ -86,7 +86,7 @@ glm_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glm_unproject(const vec3 pos, CGLM_IN(mat4) m, const vec4 vp, vec3 dest) {
   mat4 inv;
   glm_mat4_inv(m, inv);
   glm_unprojecti(pos, inv, vp, dest);
@@ -106,7 +106,7 @@ glm_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glm_project(const vec3 pos, CGLM_IN(mat4) m, const vec4 vp, vec3 dest) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
   glm_project_zo(pos, m, vp, dest);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
@@ -128,7 +128,7 @@ glm_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  */
 CGLM_INLINE
 float
-glm_project_z(vec3 v, mat4 m) {
+glm_project_z(const vec3 v, CGLM_IN(mat4) m) {
 #if CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_ZO_BIT
   return glm_project_z_zo(v, m);
 #elif CGLM_CONFIG_CLIP_CONTROL & CGLM_CLIP_CONTROL_NO_BIT
@@ -146,20 +146,20 @@ glm_project_z(vec3 v, mat4 m) {
  */
 CGLM_INLINE
 void
-glm_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest) {
+glm_pickmatrix(vec2 center, vec2 size, const vec4 vp, mat4 dest) {
   mat4 res;
   vec3 v;
 
   if (size[0] <= 0.0f || size[1] <= 0.0f)
     return;
-  
+
   /* Translate and scale the picked region to the entire window */
   v[0] = (vp[2] - 2.0f * (center[0] - vp[0])) / size[0];
   v[1] = (vp[3] - 2.0f * (center[1] - vp[1])) / size[1];
   v[2] = 0.0f;
 
   glm_translate_make(res, v);
-  
+
   v[0] = vp[2] / size[0];
   v[1] = vp[3] / size[1];
   v[2] = 1.0f;

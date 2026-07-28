@@ -7,9 +7,9 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_lookat_rh(vec3 eye, vec3 center, vec3 up, mat4 dest)
-   CGLM_INLINE void glm_look_rh(vec3 eye, vec3 dir, vec3 up, mat4 dest)
-   CGLM_INLINE void glm_look_anyup_rh(vec3 eye, vec3 dir, mat4 dest)
+   CGLM_INLINE void glm_lookat_rh(const vec3 eye, const vec3 center, const vec3 up, mat4 dest)
+   CGLM_INLINE void glm_look_rh(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest)
+   CGLM_INLINE void glm_look_anyup_rh(const vec3 eye, const vec3 dir, mat4 dest)
  */
 
 #ifndef cglm_view_rh_h
@@ -31,7 +31,7 @@
  */
 CGLM_INLINE
 void
-glm_lookat_rh(vec3 eye, vec3 center, vec3 up, mat4 dest) {
+glm_lookat_rh(const vec3 eye, const vec3 center, const vec3 up, mat4 dest) {
   CGLM_ALIGN(8) vec3 f, u, s;
 
   glm_vec3_sub(center, eye, f);
@@ -72,7 +72,7 @@ glm_lookat_rh(vec3 eye, vec3 center, vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look_rh(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
+glm_look_rh(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
   CGLM_ALIGN(8) vec3 target;
   glm_vec3_add(eye, dir, target);
   glm_lookat_rh(eye, target, up, dest);
@@ -90,7 +90,7 @@ glm_look_rh(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_look_anyup_rh(vec3 eye, vec3 dir, mat4 dest) {
+glm_look_anyup_rh(const vec3 eye, const vec3 dir, mat4 dest) {
   CGLM_ALIGN(8) vec3 up;
   glm_vec3_ortho(dir, up);
   glm_look_rh(eye, dir, up, dest);
