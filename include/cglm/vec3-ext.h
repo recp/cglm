@@ -60,7 +60,7 @@ glm_vec3_broadcast(float val, vec3 d) {
  */
 CGLM_INLINE
 void
-glm_vec3_fill(vec3 v, const float val) {
+glm_vec3_fill(vec3 v, float val) {
   v[0] = v[1] = v[2] = val;
 }
 
@@ -72,7 +72,7 @@ glm_vec3_fill(vec3 v, const float val) {
  */
 CGLM_INLINE
 bool
-glm_vec3_eq(const vec3 v, const float val) {
+glm_vec3_eq(const vec3 v, float val) {
   return v[0] == val && v[0] == v[1] && v[0] == v[2];
 }
 
@@ -84,7 +84,7 @@ glm_vec3_eq(const vec3 v, const float val) {
  */
 CGLM_INLINE
 bool
-glm_vec3_eq_eps(const vec3 v, const float val) {
+glm_vec3_eq_eps(const vec3 v, float val) {
   return fabsf(v[0] - val) <= GLM_FLT_EPSILON
          && fabsf(v[1] - val) <= GLM_FLT_EPSILON
          && fabsf(v[2] - val) <= GLM_FLT_EPSILON;
