@@ -151,7 +151,7 @@ glm_mat4_copy(mat4 mat, mat4 dest) {
 }
 
 /*!
- * @brief make given matrix identity. It is identical with below, 
+ * @brief make given matrix identity. It is identical with below,
  *        but it is more easy to do that with this func especially for members
  *        e.g. glm_mat4_identity(aStruct->aMatrix);
  *
@@ -663,7 +663,7 @@ glm_mat4_inv(mat4 mat, mat4 dest) {
         m = mat[3][0], n = mat[3][1], o = mat[3][2], p = mat[3][3],
 
         c1  = k * p - l * o,  c2  = c * h - d * g,  c3  = i * p - l * m,
-        c4  = a * h - d * e,  c5  = j * p - l * n,  c6  = b * h - d * f, 
+        c4  = a * h - d * e,  c5  = j * p - l * n,  c6  = b * h - d * f,
         c7  = i * n - j * m,  c8  = a * f - b * e,  c9  = j * o - k * n,
         c10 = b * g - c * f,  c11 = i * o - k * m,  c12 = a * g - c * e,
 
