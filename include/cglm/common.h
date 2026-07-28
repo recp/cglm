@@ -47,6 +47,13 @@
 #  define CGLM_LIKELY(expr)   (expr)
 #endif
 
+/* @tooold2rock-n-roll - issue #83 */
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202000L
+#  define CGLM_IN(T) const T
+#else
+#  define CGLM_IN(T) T
+#endif
+
 #if defined(_M_FP_FAST) || defined(__FAST_MATH__)
 #  define CGLM_FAST_MATH
 #endif

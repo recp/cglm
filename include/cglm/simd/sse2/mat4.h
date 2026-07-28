@@ -1,5 +1,4 @@
-/*
- * Copyright (c), Recep Aslantas.
+/* Copyright (c), Recep Aslantas.
  *
  * MIT License (MIT), http://opensource.org/licenses/MIT
  * Full license can be found in the LICENSE file
@@ -28,7 +27,7 @@ glm_mat4_scale_sse2(mat4 m, float s) {
 
 CGLM_INLINE
 void
-glm_mat4_transp_sse2(mat4 m, mat4 dest) {
+glm_mat4_transp_sse2(CGLM_IN(mat4) m, mat4 dest) {
   __m128 r0, r1, r2, r3;
 
   r0 = glmm_load(m[0]);
@@ -46,7 +45,7 @@ glm_mat4_transp_sse2(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_sse2(CGLM_IN(mat4) m1, CGLM_IN(mat4) m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -88,7 +87,7 @@ glm_mat4_mul_sse2(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv_sse2(CGLM_IN(mat4) m, const vec4 v, vec4 dest) {
   __m128 x0, x1, m0, m1, m2, m3, v0, v1, v2, v3;
 
   m0 = glmm_load(m[0]);
@@ -112,7 +111,7 @@ glm_mat4_mulv_sse2(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_INLINE
 float
-glm_mat4_det_sse2(mat4 mat) {
+glm_mat4_det_sse2(CGLM_IN(mat4) mat) {
   __m128 r0, r1, r2, r3, x0, x1, x2;
 
   /* 127 <- 0, [square] det(A) = det(At) */
@@ -152,15 +151,15 @@ glm_mat4_det_sse2(mat4 mat) {
   x2 = glmm_fmadd(glmm_shuff1(r1, 2, 3, 3, 3),
                   _mm_shuffle_ps(x0, x1, _MM_SHUFFLE(2, 2, 3, 1)),
                   x2);
-  
+
   x2 = _mm_xor_ps(x2, glmm_float32x4_SIGNMASK_NPNP);
-  
+
   return glmm_hadd(_mm_mul_ps(x2, r0));
 }
 
 CGLM_INLINE
 void
-glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
+glm_mat4_inv_fast_sse2(CGLM_IN(mat4) mat, mat4 dest) {
   __m128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
@@ -175,7 +174,7 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
   r1 = glmm_load(mat[1]); /* h g f e */
   r2 = glmm_load(mat[2]); /* l k j i */
   r3 = glmm_load(mat[3]); /* p o n m */
-  
+
   x0 = _mm_movehl_ps(r3, r2);                            /* p o l k */
   x3 = _mm_movelh_ps(r2, r3);                            /* n m j i */
   x1 = glmm_shuff1(x0, 1, 3, 3 ,3);                      /* l p p p */
@@ -187,68 +186,68 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
   x5 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(1, 1, 1, 1));  /* f f j j */
   x3 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(2, 2, 2, 2));  /* g g k k */
   x0 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(3, 3, 3, 3));  /* h h l l */
-  
+
   t0 = _mm_mul_ps(x3, x1);
   t1 = _mm_mul_ps(x5, x1);
   t2 = _mm_mul_ps(x5, x2);
   t3 = _mm_mul_ps(x6, x1);
   t4 = _mm_mul_ps(x6, x2);
   t5 = _mm_mul_ps(x6, x4);
-  
+
   /* t1[0] = k * p - o * l;
      t1[0] = k * p - o * l;
      t2[0] = g * p - o * h;
      t3[0] = g * l - k * h; */
   t0 = glmm_fnmadd(x2, x0, t0);
-  
+
   /* t1[1] = j * p - n * l;
      t1[1] = j * p - n * l;
      t2[1] = f * p - n * h;
      t3[1] = f * l - j * h; */
    t1 = glmm_fnmadd(x4, x0, t1);
-  
+
   /* t1[2] = j * o - n * k
      t1[2] = j * o - n * k;
      t2[2] = f * o - n * g;
      t3[2] = f * k - j * g; */
   t2 = glmm_fnmadd(x4, x3, t2);
-  
+
   /* t1[3] = i * p - m * l;
      t1[3] = i * p - m * l;
      t2[3] = e * p - m * h;
      t3[3] = e * l - i * h; */
   t3 = glmm_fnmadd(x7, x0, t3);
-  
+
   /* t1[4] = i * o - m * k;
      t1[4] = i * o - m * k;
      t2[4] = e * o - m * g;
      t3[4] = e * k - i * g; */
   t4 = glmm_fnmadd(x7, x3, t4);
-  
+
   /* t1[5] = i * n - m * j;
      t1[5] = i * n - m * j;
      t2[5] = e * n - m * f;
      t3[5] = e * j - i * f; */
   t5 = glmm_fnmadd(x7, x5, t5);
-  
+
   x4 = _mm_movelh_ps(r0, r1);        /* f e b a */
   x5 = _mm_movehl_ps(r1, r0);        /* h g d c */
-  
+
   x0 = glmm_shuff1(x4, 0, 0, 0, 2);  /* a a a e */
   x1 = glmm_shuff1(x4, 1, 1, 1, 3);  /* b b b f */
   x2 = glmm_shuff1(x5, 0, 0, 0, 2);  /* c c c g */
   x3 = glmm_shuff1(x5, 1, 1, 1, 3);  /* d d d h */
-  
+
   v2 = _mm_mul_ps(x0, t1);
   v1 = _mm_mul_ps(x0, t0);
   v3 = _mm_mul_ps(x0, t2);
   v0 = _mm_mul_ps(x1, t0);
-  
+
   v2 = glmm_fnmadd(x1, t3, v2);
   v3 = glmm_fnmadd(x1, t4, v3);
   v0 = glmm_fnmadd(x2, t1, v0);
   v1 = glmm_fnmadd(x2, t3, v1);
-  
+
   v3 = glmm_fmadd(x2, t5, v3);
   v0 = glmm_fmadd(x3, t2, v0);
   v2 = glmm_fmadd(x3, t5, v2);
@@ -260,7 +259,7 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
    dest[0][2] =  b * t2[0] - c * t2[1] + d * t2[2];
    dest[0][3] =-(b * t3[0] - c * t3[1] + d * t3[2]); */
   v0 = _mm_xor_ps(v0, x8);
-  
+
   /*
    dest[2][0] =  e * t1[1] - f * t1[3] + h * t1[5];
    dest[2][1] =-(a * t1[1] - b * t1[3] + d * t1[5]);
@@ -299,7 +298,7 @@ glm_mat4_inv_fast_sse2(mat4 mat, mat4 dest) {
 #if 0
 CGLM_INLINE
 void
-glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
+glm_mat4_inv_sse2(CGLM_IN(mat4) mat, mat4 dest) {
   __m128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
@@ -314,7 +313,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   r1 = glmm_load(mat[1]); /* h g f e */
   r2 = glmm_load(mat[2]); /* l k j i */
   r3 = glmm_load(mat[3]); /* p o n m */
-  
+
   x0 = _mm_movehl_ps(r3, r2);                            /* p o l k */
   x3 = _mm_movelh_ps(r2, r3);                            /* n m j i */
   x1 = glmm_shuff1(x0, 1, 3, 3 ,3);                      /* l p p p */
@@ -326,68 +325,68 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x5 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(1, 1, 1, 1));  /* f f j j */
   x3 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(2, 2, 2, 2));  /* g g k k */
   x0 = _mm_shuffle_ps(r2, r1, _MM_SHUFFLE(3, 3, 3, 3));  /* h h l l */
-  
+
   t0 = _mm_mul_ps(x3, x1);
   t1 = _mm_mul_ps(x5, x1);
   t2 = _mm_mul_ps(x5, x2);
   t3 = _mm_mul_ps(x6, x1);
   t4 = _mm_mul_ps(x6, x2);
   t5 = _mm_mul_ps(x6, x4);
-  
+
   /* t1[0] = k * p - o * l;
      t1[0] = k * p - o * l;
      t2[0] = g * p - o * h;
      t3[0] = g * l - k * h; */
   t0 = glmm_fnmadd(x2, x0, t0);
-  
+
   /* t1[1] = j * p - n * l;
      t1[1] = j * p - n * l;
      t2[1] = f * p - n * h;
      t3[1] = f * l - j * h; */
    t1 = glmm_fnmadd(x4, x0, t1);
-  
+
   /* t1[2] = j * o - n * k
      t1[2] = j * o - n * k;
      t2[2] = f * o - n * g;
      t3[2] = f * k - j * g; */
   t2 = glmm_fnmadd(x4, x3, t2);
-  
+
   /* t1[3] = i * p - m * l;
      t1[3] = i * p - m * l;
      t2[3] = e * p - m * h;
      t3[3] = e * l - i * h; */
   t3 = glmm_fnmadd(x7, x0, t3);
-  
+
   /* t1[4] = i * o - m * k;
      t1[4] = i * o - m * k;
      t2[4] = e * o - m * g;
      t3[4] = e * k - i * g; */
   t4 = glmm_fnmadd(x7, x3, t4);
-  
+
   /* t1[5] = i * n - m * j;
      t1[5] = i * n - m * j;
      t2[5] = e * n - m * f;
      t3[5] = e * j - i * f; */
   t5 = glmm_fnmadd(x7, x5, t5);
-  
+
   x4 = _mm_movelh_ps(r0, r1);        /* f e b a */
   x5 = _mm_movehl_ps(r1, r0);        /* h g d c */
-  
+
   x0 = glmm_shuff1(x4, 0, 0, 0, 2);  /* a a a e */
   x1 = glmm_shuff1(x4, 1, 1, 1, 3);  /* b b b f */
   x2 = glmm_shuff1(x5, 0, 0, 0, 2);  /* c c c g */
   x3 = glmm_shuff1(x5, 1, 1, 1, 3);  /* d d d h */
-  
+
   v2 = _mm_mul_ps(x0, t1);
   v1 = _mm_mul_ps(x0, t0);
   v3 = _mm_mul_ps(x0, t2);
   v0 = _mm_mul_ps(x1, t0);
-  
+
   v2 = glmm_fnmadd(x1, t3, v2);
   v3 = glmm_fnmadd(x1, t4, v3);
   v0 = glmm_fnmadd(x2, t1, v0);
   v1 = glmm_fnmadd(x2, t3, v1);
-  
+
   v3 = glmm_fmadd(x2, t5, v3);
   v0 = glmm_fmadd(x3, t2, v0);
   v2 = glmm_fmadd(x3, t5, v2);
@@ -399,7 +398,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
    dest[0][2] =  b * t2[0] - c * t2[1] + d * t2[2];
    dest[0][3] =-(b * t3[0] - c * t3[1] + d * t3[2]); */
   v0 = _mm_xor_ps(v0, x8);
-  
+
   /*
    dest[2][0] =  e * t1[1] - f * t1[3] + h * t1[5];
    dest[2][1] =-(a * t1[1] - b * t1[3] + d * t1[5]);
@@ -437,7 +436,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
+glm_mat4_inv_sse2(CGLM_IN(mat4) mat, mat4 dest) {
   __m128 r0, r1, r2, r3, s1, s2,
          v0, v1, v2, v3, v4, v5,
          t0, t1, t2,
@@ -452,7 +451,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   r0 = glmm_load(mat[0]); /* d c b a */
   r3 = glmm_load(mat[3]); /* p o n m */
   r2 = glmm_load(mat[2]); /* l k j i */
-  
+
   x4  = _mm_unpackhi_ps(r0, r2); /* l d k c */
   x5  = _mm_unpacklo_ps(r0, r2); /* j b i a */
   x6  = _mm_unpackhi_ps(r1, r3); /* p h o g */
@@ -481,7 +480,7 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   x12 = _mm_movelh_ps(x4, x5);                           /* i a k c */
   x13 = _mm_movelh_ps(x6, x7);                           /* m e o g */
 #endif
-  
+
   t0 = _mm_mul_ps(x12, x10);
   t1 = _mm_mul_ps(x5, x6);
   t2 = _mm_mul_ps(x5, x9);
@@ -498,13 +497,13 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
   v0 = glmm_shuff1(t2, 2, 3, 0, 1);
   v1 = glmm_shuff1(t1, 0, 1, 2, 3);
   v0 = _mm_mul_ps(t0, v0);
-  v1 = _mm_mul_ps(t1, v1);  
+  v1 = _mm_mul_ps(t1, v1);
   v2 = glmm_shuff1(v1, 1, 0, 0, 1);
   v3 = glmm_shuff1(v0, 0, 1, 2, 3);
   v1 = _mm_add_ps(v1, v2);
   v0 = _mm_add_ps(v0, v3);
   v2 = glmm_shuff1(v0, 1, 0, 0, 1);
-  v0 = _mm_add_ps(v0, v2); 
+  v0 = _mm_add_ps(v0, v2);
 
   v0 = _mm_sub_ps(v0, v1); /* det */
   v0 = _mm_div_ps(v5, v0); /* idt */
@@ -527,17 +526,17 @@ glm_mat4_inv_sse2(mat4 mat, mat4 dest) {
      dest[0][1] = (b * c1  - c * c5  + d * c9)  * ndt;
      dest[0][2] = (n * c2  - o * c6  + p * c10) * idt;
      dest[0][3] = (j * c2  - k * c6  + l * c10) * ndt;
-  
+
      dest[1][0] = (e * c1  - g * c3  + h * c11) * ndt;
      dest[1][1] = (a * c1  - c * c3  + d * c11) * idt;
      dest[1][2] = (m * c2  - o * c4  + p * c12) * ndt;
      dest[1][3] = (i * c2  - k * c4  + l * c12) * idt;
-  
+
      dest[2][0] = (e * c5  - f * c3  + h * c7)  * idt;
      dest[2][1] = (a * c5  - b * c3  + d * c7)  * ndt;
      dest[2][2] = (m * c6  - n * c4  + p * c8)  * idt;
      dest[2][3] = (i * c6  - j * c4  + l * c8)  * ndt;
-  
+
      dest[3][0] = (e * c9  - f * c11 + g * c7)  * ndt;
      dest[3][1] = (a * c9  - b * c11 + c * c7)  * idt;
      dest[3][2] = (m * c10 - n * c12 + o * c8)  * ndt;

@@ -14,21 +14,21 @@
 
  Functions:
    CGLM_INLINE void  glm_mat2_make(const float * restrict src, mat2 dest)
-   CGLM_INLINE void  glm_mat2_copy(const mat2 mat, mat2 dest)
+   CGLM_INLINE void  glm_mat2_copy(CGLM_IN(mat2) mat, mat2 dest)
    CGLM_INLINE void  glm_mat2_identity(mat2 m)
    CGLM_INLINE void  glm_mat2_identity_array(mat2 * restrict mats, size_t count)
    CGLM_INLINE void  glm_mat2_zero(mat2 m)
-   CGLM_INLINE void  glm_mat2_mul(const mat2 m1, const mat2 m2, mat2 dest)
-   CGLM_INLINE void  glm_mat2_mulv(const mat2 m, const vec2 v, vec2 dest)
-   CGLM_INLINE void  glm_mat2_transpose_to(const mat2 mat, mat2 dest)
+   CGLM_INLINE void  glm_mat2_mul(CGLM_IN(mat2) m1, CGLM_IN(mat2) m2, mat2 dest)
+   CGLM_INLINE void  glm_mat2_mulv(CGLM_IN(mat2) m, const vec2 v, vec2 dest)
+   CGLM_INLINE void  glm_mat2_transpose_to(CGLM_IN(mat2) mat, mat2 dest)
    CGLM_INLINE void  glm_mat2_transpose(mat2 m)
    CGLM_INLINE void  glm_mat2_scale(mat2 m, float s)
-   CGLM_INLINE void  glm_mat2_inv(const mat2 mat, mat2 dest)
+   CGLM_INLINE void  glm_mat2_inv(CGLM_IN(mat2) mat, mat2 dest)
    CGLM_INLINE void  glm_mat2_swap_col(mat2 mat, int col1, int col2)
    CGLM_INLINE void  glm_mat2_swap_row(mat2 mat, int row1, int row2)
-   CGLM_INLINE float glm_mat2_det(const mat2 m)
-   CGLM_INLINE float glm_mat2_trace(const mat2 m)
-   CGLM_INLINE float glm_mat2_rmc(const vec2 r, const mat2 m, const vec2 c)
+   CGLM_INLINE float glm_mat2_det(CGLM_IN(mat2) m)
+   CGLM_INLINE float glm_mat2_trace(CGLM_IN(mat2) m)
+   CGLM_INLINE float glm_mat2_rmc(const vec2 r, CGLM_IN(mat2) m, const vec2 c)
  */
 
 #ifndef cglm_mat2_h
@@ -79,7 +79,7 @@ glm_mat2_make(const float * __restrict src, mat2 dest) {
  */
 CGLM_INLINE
 void
-glm_mat2_copy(const mat2 mat, mat2 dest) {
+glm_mat2_copy(CGLM_IN(mat2) mat, mat2 dest) {
   glm_vec4_ucopy(mat[0], dest[0]);
 }
 
@@ -94,7 +94,7 @@ glm_mat2_copy(const mat2 mat, mat2 dest) {
  * glm_mat2_copy(GLM_MAT2_IDENTITY, mat); // C only
  *
  * // or
- * const mat2 mat = GLM_MAT2_IDENTITY_INIT;
+ * CGLM_IN(mat2) mat = GLM_MAT2_IDENTITY_INIT;
  * @endcode
  *
  * @param[in, out] m mat2 (src, dest)
@@ -141,7 +141,7 @@ glm_mat2_zero(mat2 m) {
  *        m1, m2 and dest matrices can be same matrix, it is possible to write this: 
  *
  * @code
- * const mat2 m = GLM_MAT2_IDENTITY_INIT;
+ * CGLM_IN(mat2) m = GLM_MAT2_IDENTITY_INIT;
  * glm_mat2_mul(m, m, m);
  * @endcode
  *
@@ -151,7 +151,7 @@ glm_mat2_zero(mat2 m) {
  */
 CGLM_INLINE
 void
-glm_mat2_mul(const mat2 m1, const mat2 m2, mat2 dest) {
+glm_mat2_mul(CGLM_IN(mat2) m1, CGLM_IN(mat2) m2, mat2 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat2_mul_wasm(m1, m2, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -180,7 +180,7 @@ glm_mat2_mul(const mat2 m1, const mat2 m2, mat2 dest) {
  */
 CGLM_INLINE
 void
-glm_mat2_mulv(const mat2 m, const vec2 v, vec2 dest) {
+glm_mat2_mulv(CGLM_IN(mat2) m, const vec2 v, vec2 dest) {
   dest[0] = m[0][0] * v[0] + m[1][0] * v[1];
   dest[1] = m[0][1] * v[0] + m[1][1] * v[1];
 }
@@ -193,7 +193,7 @@ glm_mat2_mulv(const mat2 m, const vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_mat2_transpose_to(const mat2 mat, mat2 dest) {
+glm_mat2_transpose_to(CGLM_IN(mat2) mat, mat2 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glm_mat2_transp_wasm(mat, dest);
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -252,7 +252,7 @@ glm_mat2_scale(mat2 m, float s) {
  */
 CGLM_INLINE
 void
-glm_mat2_inv(const mat2 mat, mat2 dest) {
+glm_mat2_inv(CGLM_IN(mat2) mat, mat2 dest) {
   float det;
   float a = mat[0][0], b = mat[0][1],
         c = mat[1][0], d = mat[1][1];
@@ -318,7 +318,7 @@ glm_mat2_swap_row(mat2 mat, int row1, int row2) {
  */
 CGLM_INLINE
 float
-glm_mat2_det(const mat2 m) {
+glm_mat2_det(CGLM_IN(mat2) m) {
   return m[0][0] * m[1][1] - m[1][0] * m[0][1];
 }
 
@@ -334,7 +334,7 @@ glm_mat2_det(const mat2 m) {
  */
 CGLM_INLINE
 float
-glm_mat2_trace(const mat2 m) {
+glm_mat2_trace(CGLM_IN(mat2) m) {
   return m[0][0] + m[1][1];
 }
 
@@ -354,7 +354,7 @@ glm_mat2_trace(const mat2 m) {
  */
 CGLM_INLINE
 float
-glm_mat2_rmc(const vec2 r, const mat2 m, const vec2 c) {
+glm_mat2_rmc(const vec2 r, CGLM_IN(mat2) m, const vec2 c) {
   vec2 tmp;
   glm_mat2_mulv(m, c, tmp);
   return glm_vec2_dot(r, tmp);

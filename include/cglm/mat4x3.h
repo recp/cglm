@@ -1,5 +1,4 @@
-/*
- * Copyright (c), Recep Aslantas.
+/* Copyright (c), Recep Aslantas.
  *
  * MIT License (MIT), http://opensource.org/licenses/MIT
  * Full license can be found in the LICENSE file
@@ -11,12 +10,12 @@
    GLM_MAT4X3_ZERO
 
  Functions:
-   CGLM_INLINE void glm_mat4x3_copy(const mat4x3 src, mat4x3 dest);
+   CGLM_INLINE void glm_mat4x3_copy(CGLM_IN(mat4x3) src, mat4x3 dest);
    CGLM_INLINE void glm_mat4x3_zero(mat4x3 m);
    CGLM_INLINE void glm_mat4x3_make(const float * __restrict src, mat4x3 dest);
-   CGLM_INLINE void glm_mat4x3_mul(const mat4x3 m1, const mat3x4 m2, mat3 dest);
-   CGLM_INLINE void glm_mat4x3_mulv(const mat4x3 m, const vec4 v, vec3 dest);
-   CGLM_INLINE void glm_mat4x3_transpose(const mat4x3 src, mat3x4 dest);
+   CGLM_INLINE void glm_mat4x3_mul(CGLM_IN(mat4x3) m1, CGLM_IN(mat3x4) m2, mat3 dest);
+   CGLM_INLINE void glm_mat4x3_mulv(CGLM_IN(mat4x3) m, const vec4 v, vec3 dest);
+   CGLM_INLINE void glm_mat4x3_transpose(CGLM_IN(mat4x3) src, mat3x4 dest);
    CGLM_INLINE void glm_mat4x3_scale(mat4x3 m, float s);
  */
 
@@ -39,7 +38,7 @@
  */
 CGLM_INLINE
 void
-glm_mat4x3_copy(const mat4x3 src, mat4x3 dest) {
+glm_mat4x3_copy(CGLM_IN(mat4x3) src, mat4x3 dest) {
   glm_vec3_copy(src[0], dest[0]);
   glm_vec3_copy(src[1], dest[1]);
   glm_vec3_copy(src[2], dest[2]);
@@ -97,7 +96,7 @@ glm_mat4x3_make(const float * __restrict src, mat4x3 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4x3_mul(const mat4x3 m1, const mat3x4 m2, mat3 dest) {
+glm_mat4x3_mul(CGLM_IN(mat4x3) m1, CGLM_IN(mat3x4) m2, mat3 dest) {
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2],
         a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2],
@@ -129,7 +128,7 @@ glm_mat4x3_mul(const mat4x3 m1, const mat3x4 m2, mat3 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4x3_mulv(const mat4x3 m, const vec4 v, vec3 dest) {
+glm_mat4x3_mulv(CGLM_IN(mat4x3) m, const vec4 v, vec3 dest) {
   float v0 = v[0], v1 = v[1], v2 = v[2], v3 = v[3];
 
   dest[0] = m[0][0] * v0 + m[1][0] * v1 + m[2][0] * v2 + m[3][0] * v3;
@@ -145,7 +144,7 @@ glm_mat4x3_mulv(const mat4x3 m, const vec4 v, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_mat4x3_transpose(const mat4x3 src, mat3x4 dest) {
+glm_mat4x3_transpose(CGLM_IN(mat4x3) src, mat3x4 dest) {
   dest[0][0] = src[0][0]; dest[0][1] = src[1][0]; dest[0][2] = src[2][0]; dest[0][3] = src[3][0];
   dest[1][0] = src[0][1]; dest[1][1] = src[1][1]; dest[1][2] = src[2][1]; dest[1][3] = src[3][1];
   dest[2][0] = src[0][2]; dest[2][1] = src[1][2]; dest[2][2] = src[2][2]; dest[2][3] = src[3][2];
