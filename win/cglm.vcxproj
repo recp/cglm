@@ -97,6 +97,7 @@
     <ClInclude Include="..\include\cglm\affine-pre.h" />
     <ClInclude Include="..\include\cglm\affine.h" />
     <ClInclude Include="..\include\cglm\affine2d.h" />
+    <ClInclude Include="..\include\cglm\affine2d-post.h" />
     <ClInclude Include="..\include\cglm\applesimd.h" />
     <ClInclude Include="..\include\cglm\bezier.h" />
     <ClInclude Include="..\include\cglm\box.h" />
@@ -172,6 +173,8 @@
     <ClInclude Include="..\include\cglm\ease.h" />
     <ClInclude Include="..\include\cglm\euler.h" />
     <ClInclude Include="..\include\cglm\frustum.h" />
+    <ClInclude Include="..\include\cglm\handed\euler_to_quat_lh.h" />
+    <ClInclude Include="..\include\cglm\handed\euler_to_quat_rh.h" />
     <ClInclude Include="..\include\cglm\io.h" />
     <ClInclude Include="..\include\cglm\ivec2.h" />
     <ClInclude Include="..\include\cglm\ivec3.h" />

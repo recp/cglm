@@ -52,6 +52,9 @@
     <ClInclude Include="..\test\src\test_affine2d.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="..\test\src\test_affine2d_post.h">
+      <Filter>src</Filter>
+    </ClInclude>
     <ClInclude Include="..\test\src\test_cam.h">
       <Filter>src</Filter>
     </ClInclude>

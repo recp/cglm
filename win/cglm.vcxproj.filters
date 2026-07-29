@@ -47,6 +47,9 @@
     <Filter Include="include\cglm\struct\handed">
       <UniqueIdentifier>{e6a410e7-83db-41a5-b9fc-34bbfcf46ae5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="include\cglm\handed">
+      <UniqueIdentifier>{BA6FE2A0-1E8D-4FBA-A272-8C0989F28E0D}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\affine.c">
@@ -743,6 +746,15 @@
     </ClInclude>
     <ClInclude Include="..\include\cglm\struct\noise.h">
       <Filter>include\cglm\struct</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\affine2d-post.h">
+      <Filter>include\cglm</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\handed\euler_to_quat_lh.h">
+      <Filter>include\cglm\handed</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cglm\handed\euler_to_quat_rh.h">
+      <Filter>include\cglm\handed</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

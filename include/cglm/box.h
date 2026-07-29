@@ -244,9 +244,9 @@ glm_aabb_sphere(CGLM_IN(vec3) box[2], CGLM_IN(vec4) s) {
   b = (s[1] < box[0][1]) + (s[1] > box[1][1]);
   c = (s[2] < box[0][2]) + (s[2] > box[1][2]);
 
-  dmin  = glm_pow2((s[0] - box[!(a - 1)][0]) * (a != 0))
-        + glm_pow2((s[1] - box[!(b - 1)][1]) * (b != 0))
-        + glm_pow2((s[2] - box[!(c - 1)][2]) * (c != 0));
+  dmin  = glm_pow2((s[0] - box[s[0] > box[1][0]][0]) * (a != 0))
+        + glm_pow2((s[1] - box[s[1] > box[1][1]][1]) * (b != 0))
+        + glm_pow2((s[2] - box[s[2] > box[1][2]][2]) * (c != 0));
 
   return dmin <= glm_pow2(s[3]);
 }

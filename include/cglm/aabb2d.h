@@ -235,8 +235,8 @@ glm_aabb2d_circle(CGLM_IN(vec2) aabb[2], const vec3 c) {
   a = (c[0] < aabb[0][0]) + (c[0] > aabb[1][0]);
   b = (c[1] < aabb[0][1]) + (c[1] > aabb[1][1]);
 
-  dmin  = glm_pow2((c[0] - aabb[!(a - 1)][0]) * (a != 0))
-        + glm_pow2((c[1] - aabb[!(b - 1)][1]) * (b != 0));
+  dmin  = glm_pow2((c[0] - aabb[c[0] > aabb[1][0]][0]) * (a != 0))
+        + glm_pow2((c[1] - aabb[c[1] > aabb[1][1]][1]) * (b != 0));
 
   return dmin <= glm_pow2(c[2]);
 }

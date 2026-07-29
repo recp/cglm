@@ -79,7 +79,8 @@ cglm_HEADERS = include/cglm/version.h \
                include/cglm/bezier.h \
                include/cglm/applesimd.h \
                include/cglm/ray.h \
-               include/cglm/affine2d.h
+               include/cglm/affine2d.h \
+               include/cglm/affine2d-post.h
 
 cglm_clipspacedir=$(includedir)/cglm/clipspace
 cglm_clipspace_HEADERS = include/cglm/clipspace/persp.h \
