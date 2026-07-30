@@ -14,9 +14,9 @@
 
 CGLM_INLINE
 void
-glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
+glm_mat3_mul_wasm(CGLM_IN(mat3) m1, CGLM_IN(mat3) m2, mat3 dest) {
   glmm_128 l0, l1, l2, r0, r1, r2, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
-  
+
   l0 = wasm_v128_load(m1[0]);
   l1 = wasm_v128_load(&m1[1][1]);
 
@@ -55,7 +55,7 @@ glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
   x3 = glmm_shuff1(x2, 0, 2, 1, 0);                     /* a20 a22 a21 a20 */
   x2 = glmm_shuff1(x2, 1, 0, 2, 1);                     /* a21 a20 a22 a21 */
   x4 = wasm_i32x4_shuffle(r0, r1, 2, 2, 5, 5);          /* b12 b12 b02 b02 */
-  
+
   x5 = glmm_shuff1(x4, 3, 0, 0, 0);                     /* b12 b02 b02 b02 */
   /* x4 = _mm_movehl_ps(r2, x4); */
   x4 = wasm_i32x4_shuffle(r2, x4, 6, 7, 2, 3);          /* b22 b22 b12 b12 */

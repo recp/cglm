@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat4_scale_avx(mat4 m, float s) {
+glm_mat4_scale_avx(CGLM_IN(mat4) m, float s) {
   __m256 y0, y1, y2, y3, y4;
 
   y0 = glmm_load256(m[0]);            /* h g f e d c b a */
@@ -32,7 +32,7 @@ glm_mat4_scale_avx(mat4 m, float s) {
 /* TODO: this must be tested and compared to SSE version, may be slower!!! */
 CGLM_INLINE
 void
-glm_mat4_transp_avx(mat4 m, mat4 dest) {
+glm_mat4_transp_avx(CGLM_IN(mat4) m, mat4 dest) {
   __m256 y0, y1, y2, y3;
 
   y0 = glmm_load256(m[0]);                   /* h g f e d c b a */
@@ -40,7 +40,7 @@ glm_mat4_transp_avx(mat4 m, mat4 dest) {
 
   y2 = _mm256_unpacklo_ps(y0, y1);           /* n f m e j b i a */
   y3 = _mm256_unpackhi_ps(y0, y1);           /* p h o g l d k c */
-  
+
   y0 = _mm256_permute2f128_ps(y2, y3, 0x20); /* l d k c j b i a */
   y1 = _mm256_permute2f128_ps(y2, y3, 0x31); /* p h o g n f m e */
 
@@ -56,7 +56,7 @@ glm_mat4_transp_avx(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_avx(CGLM_IN(mat4) m1, CGLM_IN(mat4) m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   __m256  y0, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, y12, y13;
@@ -76,7 +76,7 @@ glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
   yi1 = _mm256_set_epi32(3, 3, 3, 3, 2, 2, 2, 2);
   yi2 = _mm256_set_epi32(0, 0, 0, 0, 1, 1, 1, 1);
   yi3 = _mm256_set_epi32(2, 2, 2, 2, 3, 3, 3, 3);
-  
+
   /* f f f f a a a a */
   /* h h h h c c c c */
   /* e e e e b b b b */

@@ -47,6 +47,14 @@
 #  define CGLM_LIKELY(expr)   (expr)
 #endif
 
+/* @tooold2rock-n-roll - issue #83 */
+/* it should be [__STDC_VERSION__ >= 202311L] for C23, but the current value seam to be the correct one. */
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202000L
+#  define CGLM_IN(T) const T
+#else
+#  define CGLM_IN(T) T
+#endif
+
 #if defined(_M_FP_FAST) || defined(__FAST_MATH__)
 #  define CGLM_FAST_MATH
 #endif

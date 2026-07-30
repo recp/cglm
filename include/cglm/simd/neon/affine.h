@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_neon(CGLM_IN(mat4) m1, CGLM_IN(mat4) m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -52,7 +52,7 @@ glm_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
+glm_mul_rot_neon(CGLM_IN(mat4) m1, CGLM_IN(mat4) m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, v0, v1, v2;
@@ -70,7 +70,7 @@ glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
   v0 = glmm_fmadd(glmm_splat_y(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_y(r1), l, v1);
   v2 = glmm_fmadd(glmm_splat_y(r2), l, v2);
-  
+
   l  = glmm_load(m1[2]);
   v0 = glmm_fmadd(glmm_splat_z(r0), l, v0);
   v1 = glmm_fmadd(glmm_splat_z(r1), l, v1);
@@ -84,7 +84,7 @@ glm_mul_rot_neon(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_inv_tr_neon(mat4 mat) {
+glm_inv_tr_neon(CGLM_IN(mat4) mat) {
   float32x4x4_t vmat;
   glmm_128      r0, r1, r2, x0;
 
@@ -102,7 +102,7 @@ glm_inv_tr_neon(mat4 mat) {
   glmm_store(mat[1], r1);
   glmm_store(mat[2], r2);
   glmm_store(mat[3], x0);
-  
+
   mat[0][3] = 0.0f;
   mat[1][3] = 0.0f;
   mat[2][3] = 0.0f;

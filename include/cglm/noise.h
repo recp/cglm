@@ -8,7 +8,7 @@
  * https://github.com/stegu/webgl-noise
  * Following Stefan Gustavson's paper "Simplex noise demystified":
  * http://www.itn.liu.se/~stegu/simplexnoise/simplexnoise.pdf
- * 
+ *
  * Implementation based on glm::perlin function:
  * https://github.com/g-truc/glm/blob/master/glm/gtc/noise.inl
  */
@@ -203,15 +203,15 @@
 /* NOTE: This function is not *quite* analogous to glm__noiseDetail_i2gxyzw
  * to try to match the output of glm::perlin. I think it might be a bug in
  * in the original implementation, but for now I'm keeping it consistent. -MK
- * 
+ *
  * Follow up: The original implementation (glm v 1.0.1) does:
- * 
+ *
  *   vec<4, T, Q> gx0 = ixy0 * T(1.0 / 7.0);
- * 
+ *
  * as opposed to:
- * 
+ *
  *   vec<4, T, Q> gx0 = ixy0 / T(7);
- * 
+ *
  * This ends up mapping to different simd instructions, at least on AMD.
  * The delta is tiny but it gets amplified by the rest of the noise function.
  * Hence we too need to do `glm_vec4_scale` as opposed to `glm_vec4_divs`, to
@@ -390,7 +390,7 @@ glm_perlin_vec4(vec4 point) {
   vec4 g0110 = {gx10[2], gy10[2], gz10[2], gw10[2]}; /* g0110 = vec4(gx10.z, gy10.z, gz10.z, gw10.z); */
   vec4 g1010 = {gx10[1], gy10[1], gz10[1], gw10[1]}; /* g1010 = vec4(gx10.y, gy10.y, gz10.y, gw10.y); */
   vec4 g1110 = {gx10[3], gy10[3], gz10[3], gw10[3]}; /* g1110 = vec4(gx10.w, gy10.w, gz10.w, gw10.w); */
-  
+
   vec4 g0011 = {gx11[0], gy11[0], gz11[0], gw11[0]}; /* g0011 = vec4(gx11.x, gy11.x, gz11.x, gw11.x); */
   vec4 g0111 = {gx11[2], gy11[2], gz11[2], gw11[2]}; /* g0111 = vec4(gx11.z, gy11.z, gz11.z, gw11.z); */
   vec4 g1011 = {gx11[1], gy11[1], gz11[1], gw11[1]}; /* g1011 = vec4(gx11.y, gy11.y, gz11.y, gw11.y); */
@@ -408,15 +408,15 @@ glm_perlin_vec4(vec4 point) {
   /* n1000 = dot(g1000, vec4(Pf1.x, Pf0.y, Pf0.z, Pf0.w)) */
   vec4 n1000d = {Pf1[0], Pf0[1], Pf0[2], Pf0[3]};
   float n1000 = glm_vec4_dot(g1000, n1000d);
-  
+
   /* n0100 = dot(g0100, vec4(Pf0.x, Pf1.y, Pf0.z, Pf0.w)) */
   vec4 n0100d = {Pf0[0], Pf1[1], Pf0[2], Pf0[3]};
   float n0100 = glm_vec4_dot(g0100, n0100d);
-  
+
   /* n1100 = dot(g1100, vec4(Pf1.x, Pf1.y, Pf0.z, Pf0.w)) */
   vec4 n1100d = {Pf1[0], Pf1[1], Pf0[2], Pf0[3]};
   float n1100 = glm_vec4_dot(g1100, n1100d);
-  
+
   /* n0010 = dot(g0010, vec4(Pf0.x, Pf0.y, Pf1.z, Pf0.w)) */
   vec4 n0010d = {Pf0[0], Pf0[1], Pf1[2], Pf0[3]};
   float n0010 = glm_vec4_dot(g0010, n0010d);
@@ -467,23 +467,23 @@ glm_perlin_vec4(vec4 point) {
 
   vec4 fade_xyzw;
   glm__noiseDetail_fade_vec4(Pf0, fade_xyzw); /* fade_xyzw = fade(Pf0) */
-  
+
   /* n_0w = lerp(vec4(n0000, n1000, n0100, n1100), vec4(n0001, n1001, n0101, n1101), fade_xyzw.w) */
   vec4 n_0w1 = {n0000, n1000, n0100, n1100};
   vec4 n_0w2 = {n0001, n1001, n0101, n1101};
   vec4 n_0w;
   glm_vec4_lerp(n_0w1, n_0w2, fade_xyzw[3], n_0w);
-  
+
   /* n_1w = lerp(vec4(n0010, n1010, n0110, n1110), vec4(n0011, n1011, n0111, n1111), fade_xyzw.w) */
   vec4 n_1w1 = {n0010, n1010, n0110, n1110};
   vec4 n_1w2 = {n0011, n1011, n0111, n1111};
   vec4 n_1w;
   glm_vec4_lerp(n_1w1, n_1w2, fade_xyzw[3], n_1w);
-  
+
   /* n_zw = lerp(n_0w, n_1w, fade_xyzw.z) */
   vec4 n_zw;
   glm_vec4_lerp(n_0w, n_1w, fade_xyzw[2], n_zw);
-  
+
   /* n_yzw = lerp(vec2(n_zw.x, n_zw.y), vec2(n_zw.z, n_zw.w), fade_xyzw.y) */
   vec2 n_yzw;
   vec2 n_yzw1 = {n_zw[0], n_zw[1]};
@@ -505,7 +505,7 @@ glm_perlin_vec4(vec4 point) {
  */
 CGLM_INLINE
 float
-glm_perlin_vec3(vec3 point) {
+glm_perlin_vec3(const vec3 point) {
   /* Integer part of p for indexing */
   vec3 Pi0;
   glm_vec3_floor(point, Pi0); /* Pi0 = floor(point); */
@@ -632,7 +632,7 @@ glm_perlin_vec3(vec3 point) {
  */
 CGLM_INLINE
 float
-glm_perlin_vec2(vec2 point) {
+glm_perlin_vec2(const vec2 point) {
 
   /* Integer part of p for indexing */
   /* Pi = floor(vec4(point.x, point.y, point.x, point.y)) + vec4(0.0, 0.0, 1.0, 1.0); */

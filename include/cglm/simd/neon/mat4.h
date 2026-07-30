@@ -14,9 +14,9 @@
 
 CGLM_INLINE
 void
-glm_mat4_scale_neon(mat4 m, float s) {
+glm_mat4_scale_neon(CGLM_IN(mat4) m, float s) {
   float32x4_t v0;
-  
+
   v0 = vdupq_n_f32(s);
 
   vst1q_f32(m[0], vmulq_f32(vld1q_f32(m[0]), v0));
@@ -27,9 +27,9 @@ glm_mat4_scale_neon(mat4 m, float s) {
 
 CGLM_INLINE
 void
-glm_mat4_transp_neon(mat4 m, mat4 dest) {
+glm_mat4_transp_neon(CGLM_IN(mat4) m, mat4 dest) {
   float32x4x4_t vmat;
-  
+
   vmat = vld4q_f32(m[0]);
 
   vst1q_f32(dest[0], vmat.val[0]);
@@ -40,7 +40,7 @@ glm_mat4_transp_neon(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_neon(CGLM_IN(mat4) m1, CGLM_IN(mat4) m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -82,10 +82,10 @@ glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv_neon(CGLM_IN(mat4) m, const vec4 v, vec4 dest) {
   float32x4_t l0, l1, l2, l3;
   float32x2_t vlo, vhi;
-  
+
   l0  = vld1q_f32(m[0]);
   l1  = vld1q_f32(m[1]);
   l2  = vld1q_f32(m[2]);
@@ -104,7 +104,7 @@ glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_INLINE
 float
-glm_mat4_det_neon(mat4 mat) {
+glm_mat4_det_neon(CGLM_IN(mat4) mat) {
   float32x4_t   r0, r1, r2, r3, x0, x1, x2;
   float32x2_t   ij, op, mn, kl, nn, mm, jj, ii, gh, ef, t12, t34;
   float32x4x2_t a1;
@@ -126,7 +126,7 @@ glm_mat4_det_neon(mat4 mat) {
   nn = vdup_lane_f32(mn, 0);
   ii = vdup_lane_f32(ij, 1);
   jj = vdup_lane_f32(ij, 0);
-  
+
   /*
    t[1] = j * p - n * l;
    t[2] = j * o - n * k;
@@ -138,10 +138,10 @@ glm_mat4_det_neon(mat4 mat) {
 
   t12 = vget_low_f32(x0);
   t34 = vget_high_f32(x0);
-  
+
   /* 1 3 1 3 2 4 2 4 */
   a1 = vuzpq_f32(x0, x0);
-  
+
   /*
    t[0] = k * p - o * l;
    t[0] = k * p - o * l;
@@ -176,7 +176,7 @@ glm_mat4_det_neon(mat4 mat) {
 #if 0
 CGLM_INLINE
 void
-glm_mat4_inv_neon(mat4 mat, mat4 dest) {
+glm_mat4_inv_neon(CGLM_IN(mat4) mat, mat4 dest) {
   float32x4_t   r0, r1, r2, r3,
                 v0, v1, v2, v3,
                 t0, t1, t2, t3, t4, t5,
@@ -192,10 +192,10 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   r1 = glmm_load(mat[1]); /* h g f e */
   r2 = glmm_load(mat[2]); /* l k j i */
   r3 = glmm_load(mat[3]); /* p o n m */
-  
+
   /* l p k o, j n i m */
   a1  = vzipq_f32(r3, r2);
-  
+
   jn  = vget_high_f32(a1.val[0]);
   im  = vget_low_f32(a1.val[0]);
   lp  = vget_high_f32(a1.val[1]);
@@ -206,7 +206,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   x2  = vcombine_f32(vdup_lane_f32(ko, 0), ko);                   /* k o o o */
   x0  = vcombine_f32(vdup_lane_f32(lp, 1), vdup_lane_f32(hg, 1)); /* h h l l */
   x3  = vcombine_f32(vdup_lane_f32(ko, 1), vdup_lane_f32(hg, 0)); /* g g k k */
-  
+
   /* t1[0] = k * p - o * l;
      t1[0] = k * p - o * l;
      t2[0] = g * p - o * h;
@@ -216,43 +216,43 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   fe = vget_low_f32(r1);
   x4 = vcombine_f32(vdup_lane_f32(jn, 0), jn);                   /* j n n n */
   x5 = vcombine_f32(vdup_lane_f32(jn, 1), vdup_lane_f32(fe, 1)); /* f f j j */
-  
+
   /* t1[1] = j * p - n * l;
      t1[1] = j * p - n * l;
      t2[1] = f * p - n * h;
      t3[1] = f * l - j * h; */
    t1 = glmm_fnmadd(x4, x0, vmulq_f32(x5, x1));
-  
+
   /* t1[2] = j * o - n * k
      t1[2] = j * o - n * k;
      t2[2] = f * o - n * g;
      t3[2] = f * k - j * g; */
   t2 = glmm_fnmadd(x4, x3, vmulq_f32(x5, x2));
-  
+
   x6 = vcombine_f32(vdup_lane_f32(im, 1), vdup_lane_f32(fe, 0)); /* e e i i */
   x7 = vcombine_f32(vdup_lane_f32(im, 0), im);                   /* i m m m */
-  
+
   /* t1[3] = i * p - m * l;
      t1[3] = i * p - m * l;
      t2[3] = e * p - m * h;
      t3[3] = e * l - i * h; */
   t3 = glmm_fnmadd(x7, x0, vmulq_f32(x6, x1));
-  
+
   /* t1[4] = i * o - m * k;
      t1[4] = i * o - m * k;
      t2[4] = e * o - m * g;
      t3[4] = e * k - i * g; */
   t4 = glmm_fnmadd(x7, x3, vmulq_f32(x6, x2));
-  
+
   /* t1[5] = i * n - m * j;
      t1[5] = i * n - m * j;
      t2[5] = e * n - m * f;
      t3[5] = e * j - i * f; */
   t5 = glmm_fnmadd(x7, x5, vmulq_f32(x6, x4));
-  
+
   /* h d f b, g c e a */
   a1 = vtrnq_f32(r0, r1);
-  
+
   x4 = vrev64q_f32(a1.val[0]); /* c g a e */
   x5 = vrev64q_f32(a1.val[1]); /* d h b f */
 
@@ -260,19 +260,19 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   cg = vget_high_f32(x4);
   bf = vget_low_f32(x5);
   dh = vget_high_f32(x5);
-  
+
   x0 = vcombine_f32(ae, vdup_lane_f32(ae, 1)); /* a a a e */
   x1 = vcombine_f32(bf, vdup_lane_f32(bf, 1)); /* b b b f */
   x2 = vcombine_f32(cg, vdup_lane_f32(cg, 1)); /* c c c g */
   x3 = vcombine_f32(dh, vdup_lane_f32(dh, 1)); /* d d d h */
-  
+
   /*
    dest[0][0] =  f * t1[0] - g * t1[1] + h * t1[2];
    dest[0][1] =-(b * t1[0] - c * t1[1] + d * t1[2]);
    dest[0][2] =  b * t2[0] - c * t2[1] + d * t2[2];
    dest[0][3] =-(b * t3[0] - c * t3[1] + d * t3[2]); */
   v0 = glmm_xor(glmm_fmadd(x3, t2, glmm_fnmadd(x2, t1, vmulq_f32(x1, t0))), x8);
-  
+
   /*
    dest[2][0] =  e * t1[1] - f * t1[3] + h * t1[5];
    dest[2][1] =-(a * t1[1] - b * t1[3] + d * t1[5]);
@@ -286,7 +286,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
    dest[1][2] =-(a * t2[0] - c * t2[3] + d * t2[4]);
    dest[1][3] =  a * t3[0] - c * t3[3] + d * t3[4]; */
   v1 = glmm_xor(glmm_fmadd(x3, t4, glmm_fnmadd(x2, t3, vmulq_f32(x0, t0))), x9);
-  
+
   /*
    dest[3][0] =-(e * t1[2] - f * t1[4] + g * t1[5]);
    dest[3][1] =  a * t1[2] - b * t1[4] + c * t1[5];
@@ -318,7 +318,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_neon(mat4 mat, mat4 dest) {
+glm_mat4_inv_neon(CGLM_IN(mat4) mat, mat4 dest) {
   float32x4_t   r0, r1, r2, r3,
                 v0, v1, v2, v3, v4, v5,
                 t0, t1, t2;
@@ -380,11 +380,11 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   l0 = vget_low_f32(v0);
   l1 = vget_high_f32(v0);
 
-  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */ 
-  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */ 
-  l0 = vadd_f32(l0, l1);  /* [sum, sum] */ 
+  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */
+  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */
+  l0 = vadd_f32(l0, l1);  /* [sum, sum] */
 
-  v0 = vcombine_f32(l0, l0); 
+  v0 = vcombine_f32(l0, l0);
 #endif
 
   /* c5 * c12 + c6 * c11 */
@@ -394,8 +394,8 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
   l0 = vget_low_f32(v1);
   l1 = vget_high_f32(v1);
 
-  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */ 
-  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */ 
+  l0 = vpadd_f32(l0, l0); /* [a+b, a+b] */
+  l1 = vpadd_f32(l1, l1); /* [c+d, c+d] */
 
   v1 = vcombine_f32(l0, l1);
 #endif
