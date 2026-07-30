@@ -39,11 +39,11 @@ glm_quat_mul_wasm(versor p, versor q, versor dest) {
   x  = wasm_v128_xor(x, x1);
   y  = wasm_v128_xor(y, x2);
   z  = wasm_v128_xor(z, x3);
-  
+
   x1 = glmm_shuff1(xq, 0, 1, 2, 3);
   x2 = glmm_shuff1(xq, 1, 0, 3, 2);
   x3 = glmm_shuff1(xq, 2, 3, 0, 1);
-  
+
   r  = glmm_fmadd(x, x1, r);
   r  = glmm_fmadd(y, x2, r);
   r  = glmm_fmadd(z, x3, r);

@@ -19,23 +19,23 @@
 
  Functions:
    CGLM_INLINE glm_euler_seq glm_euler_order(int newOrder[3]);
-   CGLM_INLINE void glm_euler_angles(mat4 m, vec3 dest);
-   CGLM_INLINE void glm_euler(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xyz(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zyx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_zxy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_xzy(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yzx(vec3 angles, mat4 dest);
-   CGLM_INLINE void glm_euler_yxz(vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_angles(CGLM_IN(mat4) m, vec3 dest);
+   CGLM_INLINE void glm_euler(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_xyz(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_zyx(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_zxy(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_xzy(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_yzx(const vec3 angles, mat4 dest);
+   CGLM_INLINE void glm_euler_yxz(const vec3 angles, mat4 dest);
    CGLM_INLINE void glm_euler_by_order(vec3         angles,
                                        glm_euler_seq ord,
                                        mat4         dest);
-   CGLM_INLINE void glm_euler_xyz_quat(vec3 angles, versor dest);
-   CGLM_INLINE void glm_euler_xzy_quat(vec3 angles, versor dest);
-   CGLM_INLINE void glm_euler_yxz_quat(vec3 angles, versor dest);
-   CGLM_INLINE void glm_euler_yzx_quat(vec3 angles, versor dest);
-   CGLM_INLINE void glm_euler_zxy_quat(vec3 angles, versor dest);
-   CGLM_INLINE void glm_euler_zyx_quat(vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_xyz_quat(const vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_xzy_quat(const vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yxz_quat(const vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_yzx_quat(const vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zxy_quat(const vec3 angles, versor dest);
+   CGLM_INLINE void glm_euler_zyx_quat(const vec3 angles, versor dest);
  */
 
 #ifndef cglm_euler_h
@@ -97,7 +97,7 @@ glm_euler_order(int ord[3]) {
  */
 CGLM_INLINE
 void
-glm_euler_angles(mat4 m, vec3 dest) {
+glm_euler_angles(CGLM_IN(mat4) m, vec3 dest) {
   float m00, m01, m10, m11, m20, m21, m22;
   float thetaX, thetaY, thetaZ;
 
@@ -135,7 +135,7 @@ glm_euler_angles(mat4 m, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_xyz(vec3 angles, mat4 dest) {
+glm_euler_xyz(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz, czsx, cxcz, sysz;
 
@@ -173,7 +173,7 @@ glm_euler_xyz(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler(vec3 angles, mat4 dest) {
+glm_euler(const vec3 angles, mat4 dest) {
   glm_euler_xyz(angles, dest);
 }
 
@@ -185,7 +185,7 @@ glm_euler(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_xzy(vec3 angles, mat4 dest) {
+glm_euler_xzy(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
   sx, sy, sz, sxsy, cysx, cxsy, cxcy;
 
@@ -224,7 +224,7 @@ glm_euler_xzy(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_yxz(vec3 angles, mat4 dest) {
+glm_euler_yxz(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz, cycz, sysz, czsy, cysz;
 
@@ -263,7 +263,7 @@ glm_euler_yxz(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_yzx(vec3 angles, mat4 dest) {
+glm_euler_yzx(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz, sxsy, cxcy, cysx, cxsy;
 
@@ -302,7 +302,7 @@ glm_euler_yzx(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_zxy(vec3 angles, mat4 dest) {
+glm_euler_zxy(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz, cycz, sxsy, cysz;
 
@@ -340,7 +340,7 @@ glm_euler_zxy(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_zyx(vec3 angles, mat4 dest) {
+glm_euler_zyx(const vec3 angles, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz, czsx, cxcz, sysz;
 
@@ -379,7 +379,7 @@ glm_euler_zyx(vec3 angles, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
+glm_euler_by_order(const vec3 angles, glm_euler_seq ord, mat4 dest) {
   float cx, cy, cz,
         sx, sy, sz;
 
@@ -479,13 +479,13 @@ glm_euler_by_order(vec3 angles, glm_euler_seq ord, mat4 dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in x y z order (roll pitch yaw)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_xyz_quat(vec3 angles, versor dest) {
+glm_euler_xyz_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_xyz_quat_lh(angles, dest);
 #else
@@ -496,13 +496,13 @@ glm_euler_xyz_quat(vec3 angles, versor dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in x z y order (roll yaw pitch)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_xzy_quat(vec3 angles, versor dest) {
+glm_euler_xzy_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_xzy_quat_lh(angles, dest);
 #else
@@ -513,13 +513,13 @@ glm_euler_xzy_quat(vec3 angles, versor dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in y x z order (pitch roll yaw)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_yxz_quat(vec3 angles, versor dest) {
+glm_euler_yxz_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_yxz_quat_lh(angles, dest);
 #else
@@ -530,13 +530,13 @@ glm_euler_yxz_quat(vec3 angles, versor dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in y z x order (pitch yaw roll)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_yzx_quat(vec3 angles, versor dest) {
+glm_euler_yzx_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_yzx_quat_lh(angles, dest);
 #else
@@ -547,13 +547,13 @@ glm_euler_yzx_quat(vec3 angles, versor dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in z x y order (yaw roll pitch)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_zxy_quat(vec3 angles, versor dest) {
+glm_euler_zxy_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_zxy_quat_lh(angles, dest);
 #else
@@ -564,13 +564,13 @@ glm_euler_zxy_quat(vec3 angles, versor dest) {
 /*!
  * @brief creates NEW quaternion using rotation angles and does
  *        rotations in z y x order (yaw pitch roll)
- * 
+ *
  * @param[in]   angles angles x y z (radians)
  * @param[out]  dest   quaternion
  */
 CGLM_INLINE
 void
-glm_euler_zyx_quat(vec3 angles, versor dest) {
+glm_euler_zyx_quat(const vec3 angles, versor dest) {
 #ifdef CGLM_FORCE_LEFT_HANDED
   glm_euler_zyx_quat_lh(angles, dest);
 #else

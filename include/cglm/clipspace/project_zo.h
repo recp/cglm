@@ -41,7 +41,7 @@
  */
 CGLM_INLINE
 void
-glm_unprojecti_zo(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+glm_unprojecti_zo(const vec3 pos, CGLM_IN(mat4) invMat, const vec4 vp, vec3 dest) {
   vec4 v;
 
   v[0] = 2.0f * (pos[0] - vp[0]) / vp[2] - 1.0f;
@@ -68,7 +68,7 @@ glm_unprojecti_zo(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
  */
 CGLM_INLINE
 void
-glm_project_zo(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glm_project_zo(const vec3 pos, CGLM_IN(mat4) m, const vec4 vp, vec3 dest) {
   CGLM_ALIGN(16) vec4 pos4;
 
   glm_vec4(pos, 1.0f, pos4);
@@ -77,7 +77,7 @@ glm_project_zo(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
   glm_vec4_scale(pos4, 1.0f / pos4[3], pos4); /* pos = pos / pos.w */
 
   dest[2] = pos4[2];
-  
+
   glm_vec4_scale(pos4, 0.5f, pos4);
   glm_vec4_adds(pos4,  0.5f, pos4);
 
@@ -99,7 +99,7 @@ glm_project_zo(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
  */
 CGLM_INLINE
 float
-glm_project_z_zo(vec3 v, mat4 m) {
+glm_project_z_zo(const vec3 v, CGLM_IN(mat4) m) {
   float z, w;
 
   z = m[0][2] * v[0] + m[1][2] * v[1] + m[2][2] * v[2] + m[3][2];

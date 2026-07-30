@@ -25,27 +25,27 @@
    CGLM_INLINE void glm_perspective_resize_lh_zo(float aspect, mat4 proj)
    CGLM_INLINE void glm_persp_move_far_lh_zo(mat4 proj,
                                              float deltaFar)
-   CGLM_INLINE void glm_persp_decomp_lh_zo(mat4 proj,
+   CGLM_INLINE void glm_persp_decomp_lh_zo(CGLM_IN(mat4) proj,
                                            float * __restrict nearZ,
                                            float * __restrict farZ,
                                            float * __restrict top,
                                            float * __restrict bottom,
                                            float * __restrict left,
                                            float * __restrict right)
-  CGLM_INLINE void glm_persp_decompv_lh_zo(mat4 proj,
+  CGLM_INLINE void glm_persp_decompv_lh_zo(CGLM_IN(mat4) proj,
                                            float dest[6])
-  CGLM_INLINE void glm_persp_decomp_x_lh_zo(mat4 proj,
+  CGLM_INLINE void glm_persp_decomp_x_lh_zo(CGLM_IN(mat4) proj,
                                             float * __restrict left,
                                             float * __restrict right)
-  CGLM_INLINE void glm_persp_decomp_y_lh_zo(mat4 proj,
+  CGLM_INLINE void glm_persp_decomp_y_lh_zo(CGLM_IN(mat4) proj,
                                             float * __restrict top,
                                             float * __restrict bottom)
-  CGLM_INLINE void glm_persp_decomp_z_lh_zo(mat4 proj,
+  CGLM_INLINE void glm_persp_decomp_z_lh_zo(CGLM_IN(mat4) proj,
                                             float * __restrict nearZ,
                                             float * __restrict farZ)
-  CGLM_INLINE void glm_persp_decomp_far_lh_zo(mat4 proj, float * __restrict farZ)
-  CGLM_INLINE void glm_persp_decomp_near_lh_zo(mat4 proj, float * __restrict nearZ)
-  CGLM_INLINE void glm_persp_sizes_lh_zo(mat4 proj, float fovy, vec4 dest)
+  CGLM_INLINE void glm_persp_decomp_far_lh_zo(CGLM_IN(mat4) proj, float * __restrict farZ)
+  CGLM_INLINE void glm_persp_decomp_near_lh_zo(CGLM_IN(mat4) proj, float * __restrict nearZ)
+  CGLM_INLINE void glm_persp_sizes_lh_zo(CGLM_IN(mat4) proj, float fovy, vec4 dest)
  */
 
 #ifndef cglm_persp_lh_zo_h
@@ -223,7 +223,7 @@ glm_perspective_resize_lh_zo(float aspect, mat4 proj) {
 
 /*!
  * @brief decomposes frustum values of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *
  * @param[in]  proj    perspective projection matrix
@@ -236,7 +236,7 @@ glm_perspective_resize_lh_zo(float aspect, mat4 proj) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp_lh_zo(mat4 proj,
+glm_persp_decomp_lh_zo(CGLM_IN(mat4) proj,
                     float * __restrict nearZ, float * __restrict farZ,
                     float * __restrict top,     float * __restrict bottom,
                     float * __restrict left,    float * __restrict right) {
@@ -266,7 +266,7 @@ glm_persp_decomp_lh_zo(mat4 proj,
 
 /*!
  * @brief decomposes frustum values of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *        this makes easy to get all values at once
  *
@@ -275,7 +275,7 @@ glm_persp_decomp_lh_zo(mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decompv_lh_zo(mat4 proj, float dest[6]) {
+glm_persp_decompv_lh_zo(CGLM_IN(mat4) proj, float dest[6]) {
   glm_persp_decomp_lh_zo(proj, &dest[0], &dest[1], &dest[2],
                                &dest[3], &dest[4], &dest[5]);
 }
@@ -290,7 +290,7 @@ glm_persp_decompv_lh_zo(mat4 proj, float dest[6]) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp_x_lh_zo(mat4 proj,
+glm_persp_decomp_x_lh_zo(CGLM_IN(mat4) proj,
                          float * __restrict left,
                          float * __restrict right) {
   float nearZ, m20, m00;
@@ -305,7 +305,7 @@ glm_persp_decomp_x_lh_zo(mat4 proj,
 
 /*!
  * @brief decomposes top and bottom values of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *        y stands for y axis (top / bottom axis)
  *
@@ -315,7 +315,7 @@ glm_persp_decomp_x_lh_zo(mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_y_lh_zo(mat4 proj,
+glm_persp_decomp_y_lh_zo(CGLM_IN(mat4) proj,
                          float * __restrict top,
                          float * __restrict bottom) {
   float nearZ, m21, m11;
@@ -330,7 +330,7 @@ glm_persp_decomp_y_lh_zo(mat4 proj,
 
 /*!
  * @brief decomposes near and far values of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *        z stands for z axis (near / far axis)
  *
@@ -340,7 +340,7 @@ glm_persp_decomp_y_lh_zo(mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_z_lh_zo(mat4 proj,
+glm_persp_decomp_z_lh_zo(CGLM_IN(mat4) proj,
                          float * __restrict nearZ,
                          float * __restrict farZ) {
   float m32, m22;
@@ -354,7 +354,7 @@ glm_persp_decomp_z_lh_zo(mat4 proj,
 
 /*!
  * @brief decomposes far value of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *
  * @param[in]  proj   perspective projection matrix
@@ -362,13 +362,13 @@ glm_persp_decomp_z_lh_zo(mat4 proj,
  */
 CGLM_INLINE
 void
-glm_persp_decomp_far_lh_zo(mat4 proj, float * __restrict farZ) {
+glm_persp_decomp_far_lh_zo(CGLM_IN(mat4) proj, float * __restrict farZ) {
   *farZ = proj[3][2] / (-proj[2][2] + 1.0f);
 }
 
 /*!
  * @brief decomposes near value of perspective projection
- *        with angle values with a left-hand coordinate system and a 
+ *        with angle values with a left-hand coordinate system and a
  *        clip-space of [0, 1].
  *
  * @param[in]  proj    perspective projection matrix
@@ -376,7 +376,7 @@ glm_persp_decomp_far_lh_zo(mat4 proj, float * __restrict farZ) {
  */
 CGLM_INLINE
 void
-glm_persp_decomp_near_lh_zo(mat4 proj, float * __restrict nearZ) {
+glm_persp_decomp_near_lh_zo(CGLM_IN(mat4) proj, float * __restrict nearZ) {
   *nearZ = proj[3][2] / -proj[2][2];
 }
 
@@ -391,7 +391,7 @@ glm_persp_decomp_near_lh_zo(mat4 proj, float * __restrict nearZ) {
  */
 CGLM_INLINE
 void
-glm_persp_sizes_lh_zo(mat4 proj, float fovy, vec4 dest) {
+glm_persp_sizes_lh_zo(CGLM_IN(mat4) proj, float fovy, vec4 dest) {
   float t, a, nearZ, farZ;
 
   t = 2.0f * tanf(fovy * 0.5f);
@@ -416,7 +416,7 @@ glm_persp_sizes_lh_zo(mat4 proj, float fovy, vec4 dest) {
  */
 CGLM_INLINE
 float
-glm_persp_fovy_lh_zo(mat4 proj) {
+glm_persp_fovy_lh_zo(CGLM_IN(mat4) proj) {
   return glm_persp_fovy(proj);
 }
 
@@ -428,7 +428,7 @@ glm_persp_fovy_lh_zo(mat4 proj) {
  */
 CGLM_INLINE
 float
-glm_persp_aspect_lh_zo(mat4 proj) {
+glm_persp_aspect_lh_zo(CGLM_IN(mat4) proj) {
   return glm_persp_aspect(proj);
 }
 
