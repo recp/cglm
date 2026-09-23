@@ -168,7 +168,7 @@ glms_aabb2d_(sizev)(vec2s aabb[2]) {
 CGLM_INLINE
 float
 glms_aabb2d_(radius)(vec2s aabb[2]) {
-  return glms_aabb2d_(size)(aabb) * 0.5f;
+  return glms_aabb2d_(diag)(aabb) * 0.5f;
 }
 
 /*!
