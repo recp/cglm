@@ -10,18 +10,18 @@
 
 CGLM_EXPORT
 void
-glmc_lookat_rh_no(vec3 eye, vec3 center, vec3 up, mat4 dest) {
+glmc_lookat_rh_no(const vec3 eye, const vec3 center, const vec3 up, mat4 dest) {
   glm_lookat_rh_no(eye, center, up, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_look_rh_no(vec3 eye, vec3 dir, vec3 up, mat4 dest) {
+glmc_look_rh_no(const vec3 eye, const vec3 dir, const vec3 up, mat4 dest) {
   glm_look_rh_no(eye, dir, up, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_look_anyup_rh_no(vec3 eye, vec3 dir, mat4 dest) {
+glmc_look_anyup_rh_no(const vec3 eye, const vec3 dir, mat4 dest) {
   glm_look_anyup_rh_no(eye, dir, dest);
 }

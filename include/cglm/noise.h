@@ -295,7 +295,7 @@
  */
 CGLM_INLINE
 float
-glm_perlin_vec4(vec4 point) {
+glm_perlin_vec4(const vec4 point) {
   /* Integer part of p for indexing */
   vec4 Pi0;
   glm_vec4_floor(point, Pi0); /* Pi0 = floor(point); */
@@ -505,7 +505,7 @@ glm_perlin_vec4(vec4 point) {
  */
 CGLM_INLINE
 float
-glm_perlin_vec3(vec3 point) {
+glm_perlin_vec3(const vec3 point) {
   /* Integer part of p for indexing */
   vec3 Pi0;
   glm_vec3_floor(point, Pi0); /* Pi0 = floor(point); */
@@ -632,7 +632,7 @@ glm_perlin_vec3(vec3 point) {
  */
 CGLM_INLINE
 float
-glm_perlin_vec2(vec2 point) {
+glm_perlin_vec2(const vec2 point) {
 
   /* Integer part of p for indexing */
   /* Pi = floor(vec4(point.x, point.y, point.x, point.y)) + vec4(0.0, 0.0, 1.0, 1.0); */

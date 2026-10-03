@@ -22,25 +22,25 @@ glmc_aabb2d_zero(vec2 aabb[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_copy(vec2 aabb[2], vec2 dest[2]);
+glmc_aabb2d_copy(CGLM_CONST vec2 aabb[2], vec2 dest[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]);
+glmc_aabb2d_transform(CGLM_CONST vec2 aabb[2], CGLM_CONST mat3 m, vec2 dest[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_merge(vec2 aabb1[2], vec2 aabb2[2], vec2 dest[2]);
+glmc_aabb2d_merge(CGLM_CONST vec2 aabb1[2], CGLM_CONST vec2 aabb2[2], vec2 dest[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]);
+glmc_aabb2d_crop(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 cropAabb[2], vec2 dest[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_crop_until(vec2 aabb[2],
-                     vec2 cropAabb[2],
-                     vec2 clampAabb[2],
+glmc_aabb2d_crop_until(CGLM_CONST vec2 aabb[2],
+                     CGLM_CONST vec2 cropAabb[2],
+                     CGLM_CONST vec2 clampAabb[2],
                      vec2 dest[2]);
 
 CGLM_EXPORT
@@ -49,39 +49,39 @@ glmc_aabb2d_invalidate(vec2 aabb[2]);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_isvalid(vec2 aabb[2]);
+glmc_aabb2d_isvalid(CGLM_CONST vec2 aabb[2]);
 
 CGLM_EXPORT
 float
-glmc_aabb2d_diag(vec2 aabb[2]);
+glmc_aabb2d_diag(CGLM_CONST vec2 aabb[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_sizev(vec2 aabb[2], vec2 dest);
+glmc_aabb2d_sizev(CGLM_CONST vec2 aabb[2], vec2 dest);
 
 CGLM_EXPORT
 float
-glmc_aabb2d_radius(vec2 aabb[2]);
+glmc_aabb2d_radius(CGLM_CONST vec2 aabb[2]);
 
 CGLM_EXPORT
 void
-glmc_aabb2d_center(vec2 aabb[2], vec2 dest);
+glmc_aabb2d_center(CGLM_CONST vec2 aabb[2], vec2 dest);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_aabb(vec2 aabb[2], vec2 other[2]);
+glmc_aabb2d_aabb(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 other[2]);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_point(vec2 aabb[2], vec2 point);
+glmc_aabb2d_point(CGLM_CONST vec2 aabb[2], const vec2 point);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_contains(vec2 aabb[2], vec2 other[2]);
+glmc_aabb2d_contains(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 other[2]);
 
 CGLM_EXPORT
 bool
-glmc_aabb2d_circle(vec2 aabb[2], vec3 s);
+glmc_aabb2d_circle(CGLM_CONST vec2 aabb[2], const vec3 s);
 
 #ifdef __cplusplus
 }

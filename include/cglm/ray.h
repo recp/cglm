@@ -7,18 +7,18 @@
 
 /*
  Functions:
-   CGLM_INLINE bool glm_ray_triangle(vec3   origin,
-                                     vec3   direction,
-                                     vec3   v0,
-                                     vec3   v1,
-                                     vec3   v2,
+   CGLM_INLINE bool glm_ray_triangle(const vec3 origin,
+                                     const vec3 direction,
+                                     const vec3 v0,
+                                     const vec3 v1,
+                                     const vec3 v2,
                                      float *d);
- CGLM_INLINE bool glm_ray_sphere(vec3 origin,
-                                 vec3 dir,
-                                 vec4 s,
+ CGLM_INLINE bool glm_ray_sphere(const vec3 origin,
+                                 const vec3 dir,
+                                 const vec4 s,
                                  float * __restrict t1,
                                  float * __restrict t2)
- CGLM_INLINE void glm_ray_at(vec3 orig, vec3 dir, float t, vec3 point);
+ CGLM_INLINE void glm_ray_at(const vec3 orig, const vec3 dir, float t, vec3 point);
 */
 
 #ifndef cglm_ray_h
@@ -39,11 +39,11 @@
  */
 CGLM_INLINE
 bool
-glm_ray_triangle(vec3   origin,
-                 vec3   direction,
-                 vec3   v0,
-                 vec3   v1,
-                 vec3   v2,
+glm_ray_triangle(const vec3 origin,
+                 const vec3 direction,
+                 const vec3 v0,
+                 const vec3 v1,
+                 const vec3 v2,
                  float *d) {
   vec3        edge1, edge2, p, t, q;
   float       det, inv_det, u, v, dist;
@@ -92,18 +92,18 @@ glm_ray_triangle(vec3   origin,
  *   intersections are within a desired segment of the ray
  *
  * @param[in]  origin ray origin
- * @param[out] dir    normalized ray direction
+ * @param[in]  dir    normalized ray direction
  * @param[in]  s      sphere  [center.x, center.y, center.z, radii]
- * @param[in]  t1     near point1 (closer to origin)
- * @param[in]  t2     far point2 (farther from origin)
+ * @param[out] t1     near point1 (closer to origin)
+ * @param[out] t2     far point2 (farther from origin)
  *
  * @returns whether there is intersection
  */
 CGLM_INLINE
 bool 
-glm_ray_sphere(vec3 origin,
-               vec3 dir,
-               vec4 s,
+glm_ray_sphere(const vec3 origin,
+               const vec3 dir,
+               const vec4 s,
                float * __restrict t1,
                float * __restrict t2) {
   vec3  dp;
@@ -165,7 +165,7 @@ glm_ray_sphere(vec3 origin,
  */
 CGLM_INLINE
 void
-glm_ray_at(vec3 orig, vec3 dir, float t, vec3 point) {
+glm_ray_at(const vec3 orig, const vec3 dir, float t, vec3 point) {
   vec3 dst;
   glm_vec3_scale(dir, t, dst);
   glm_vec3_add(orig, dst, point);

@@ -32,7 +32,7 @@ glm_mat4_scale_avx(mat4 m, float s) {
 /* TODO: this must be tested and compared to SSE version, may be slower!!! */
 CGLM_INLINE
 void
-glm_mat4_transp_avx(mat4 m, mat4 dest) {
+glm_mat4_transp_avx(CGLM_CONST mat4 m, mat4 dest) {
   __m256 y0, y1, y2, y3;
 
   y0 = glmm_load256(m[0]);                   /* h g f e d c b a */
@@ -56,7 +56,7 @@ glm_mat4_transp_avx(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_avx(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_avx(CGLM_CONST mat4 m1, CGLM_CONST mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   __m256  y0, y1, y2, y3, y4, y5, y6, y7, y8, y9, y10, y11, y12, y13;

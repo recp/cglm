@@ -10,19 +10,19 @@
 
 CGLM_EXPORT
 void
-glmc_translate2d_make(mat3 m, vec2 v) {
+glmc_translate2d_make(mat3 m, const vec2 v) {
   glm_translate2d_make(m, v);
 }
 
 CGLM_EXPORT
 void
-glmc_translate2d_to(mat3 m, vec2 v, mat3 dest) {
+glmc_translate2d_to(CGLM_CONST mat3 m, const vec2 v, mat3 dest) {
   glm_translate2d_to(m, v, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_translate2d(mat3 m, vec2 v) {
+glmc_translate2d(mat3 m, const vec2 v) {
   glm_translate2d(m, v);
 }
 
@@ -40,19 +40,19 @@ glmc_translate2d_y(mat3 m, float to) {
 
 CGLM_EXPORT
 void
-glmc_scale2d_to(mat3 m, vec2 v, mat3 dest) {
+glmc_scale2d_to(CGLM_CONST mat3 m, const vec2 v, mat3 dest) {
   glm_scale2d_to(m, v, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_scale2d_make(mat3 m, vec2 v) {
+glmc_scale2d_make(mat3 m, const vec2 v) {
   glm_scale2d_make(m, v);
 }
 
 CGLM_EXPORT
 void
-glmc_scale2d(mat3 m, vec2 v) {
+glmc_scale2d(mat3 m, const vec2 v) {
   glm_scale2d(m, v);
 }
 
@@ -76,6 +76,6 @@ glmc_rotate2d(mat3 m, float angle) {
 
 CGLM_EXPORT
 void
-glmc_rotate2d_to(mat3 m, float angle, mat3 dest) {
+glmc_rotate2d_to(CGLM_CONST mat3 m, float angle, mat3 dest) {
   glm_rotate2d_to(m, angle, dest);
 }

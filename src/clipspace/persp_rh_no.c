@@ -48,7 +48,7 @@ glmc_persp_move_far_rh_no(mat4 proj, float deltaFar) {
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_rh_no(mat4 proj,
+glmc_persp_decomp_rh_no(CGLM_CONST mat4 proj,
                         float * __restrict nearZ, float * __restrict farZ,
                         float * __restrict top,   float * __restrict bottom,
                         float * __restrict left,  float * __restrict right) {
@@ -57,13 +57,13 @@ glmc_persp_decomp_rh_no(mat4 proj,
 
 CGLM_EXPORT
 void
-glmc_persp_decompv_rh_no(mat4 proj, float dest[6]) {
+glmc_persp_decompv_rh_no(CGLM_CONST mat4 proj, float dest[6]) {
   glm_persp_decompv_rh_no(proj, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_x_rh_no(mat4 proj,
+glmc_persp_decomp_x_rh_no(CGLM_CONST mat4 proj,
                           float * __restrict left,
                           float * __restrict right) {
   glm_persp_decomp_x_rh_no(proj, left, right);
@@ -71,7 +71,7 @@ glmc_persp_decomp_x_rh_no(mat4 proj,
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_y_rh_no(mat4 proj,
+glmc_persp_decomp_y_rh_no(CGLM_CONST mat4 proj,
                           float * __restrict top,
                           float * __restrict bottom) {
   glm_persp_decomp_y_rh_no(proj, top, bottom);
@@ -79,7 +79,7 @@ glmc_persp_decomp_y_rh_no(mat4 proj,
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_z_rh_no(mat4 proj,
+glmc_persp_decomp_z_rh_no(CGLM_CONST mat4 proj,
                           float * __restrict nearZ,
                           float * __restrict farZ) {
   glm_persp_decomp_z_rh_no(proj, nearZ, farZ);
@@ -87,30 +87,30 @@ glmc_persp_decomp_z_rh_no(mat4 proj,
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_far_rh_no(mat4 proj, float * __restrict farZ) {
+glmc_persp_decomp_far_rh_no(CGLM_CONST mat4 proj, float * __restrict farZ) {
   glm_persp_decomp_far_rh_no(proj, farZ);
 }
 
 CGLM_EXPORT
 void
-glmc_persp_decomp_near_rh_no(mat4 proj, float * __restrict nearZ) {
+glmc_persp_decomp_near_rh_no(CGLM_CONST mat4 proj, float * __restrict nearZ) {
   glm_persp_decomp_near_rh_no(proj, nearZ);
 }
 
 CGLM_EXPORT
 void
-glmc_persp_sizes_rh_no(mat4 proj, float fovy, vec4 dest) {
+glmc_persp_sizes_rh_no(CGLM_CONST mat4 proj, float fovy, vec4 dest) {
   glm_persp_sizes_rh_no(proj, fovy, dest);
 }
 
 CGLM_EXPORT
 float
-glmc_persp_fovy_rh_no(mat4 proj) {
+glmc_persp_fovy_rh_no(CGLM_CONST mat4 proj) {
   return glm_persp_fovy_rh_no(proj);
 }
 
 CGLM_EXPORT
 float
-glmc_persp_aspect_rh_no(mat4 proj) {
+glmc_persp_aspect_rh_no(CGLM_CONST mat4 proj) {
   return glm_persp_aspect_rh_no(proj);
 }

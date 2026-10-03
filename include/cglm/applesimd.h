@@ -22,7 +22,7 @@
  */
 CGLM_INLINE
 simd_float4x4
-glm_mat4_applesimd(mat4 m) {
+glm_mat4_applesimd(CGLM_CONST mat4 m) {
   simd_float4x4 t;
 
   t.columns[0][0] = m[0][0];
@@ -54,7 +54,7 @@ glm_mat4_applesimd(mat4 m) {
 */
 CGLM_INLINE
 simd_float3x3
-glm_mat3_applesimd(mat3 m) {
+glm_mat3_applesimd(CGLM_CONST mat3 m) {
   simd_float3x3 t;
 
   t.columns[0][0] = m[0][0];
@@ -78,7 +78,7 @@ glm_mat3_applesimd(mat3 m) {
 */
 CGLM_INLINE
 simd_float4
-glm_vec4_applesimd(vec4 v) {
+glm_vec4_applesimd(const vec4 v) {
   return (simd_float4){v[0], v[1], v[2], v[3]};
 }
 
@@ -88,7 +88,7 @@ glm_vec4_applesimd(vec4 v) {
 */
 CGLM_INLINE
 simd_float3
-glm_vec3_applesimd(vec3 v) {
+glm_vec3_applesimd(const vec3 v) {
   return (simd_float3){v[0], v[1], v[2]};
 }
 

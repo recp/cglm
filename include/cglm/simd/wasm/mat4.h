@@ -28,7 +28,7 @@ glm_mat4_scale_wasm(mat4 m, float s) {
 
 CGLM_INLINE
 void
-glm_mat4_transp_wasm(mat4 m, mat4 dest) {
+glm_mat4_transp_wasm(CGLM_CONST mat4 m, mat4 dest) {
   glmm_128 r0, r1, r2, r3, tmp0, tmp1, tmp2, tmp3;
 
   r0 = glmm_load(m[0]);
@@ -58,7 +58,7 @@ glm_mat4_transp_wasm(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_wasm(CGLM_CONST mat4 m1, CGLM_CONST mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -100,7 +100,7 @@ glm_mat4_mul_wasm(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mulv_wasm(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv_wasm(CGLM_CONST mat4 m, const vec4 v, vec4 dest) {
   glmm_128 x0, x1, m0, m1, m2, m3, v0, v1, v2, v3;
 
   m0 = glmm_load(m[0]);
@@ -124,7 +124,7 @@ glm_mat4_mulv_wasm(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_INLINE
 float
-glm_mat4_det_wasm(mat4 mat) {
+glm_mat4_det_wasm(CGLM_CONST mat4 mat) {
   glmm_128 r0, r1, r2, r3, x0, x1, x2;
 
   /* 127 <- 0, [square] det(A) = det(At) */
@@ -172,7 +172,7 @@ glm_mat4_det_wasm(mat4 mat) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_fast_wasm(mat4 mat, mat4 dest) {
+glm_mat4_inv_fast_wasm(CGLM_CONST mat4 mat, mat4 dest) {
   glmm_128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,
@@ -313,7 +313,7 @@ glm_mat4_inv_fast_wasm(mat4 mat, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_wasm(mat4 mat, mat4 dest) {
+glm_mat4_inv_wasm(CGLM_CONST mat4 mat, mat4 dest) {
   glmm_128 r0, r1, r2, r3,
          v0, v1, v2, v3,
          t0, t1, t2, t3, t4, t5,

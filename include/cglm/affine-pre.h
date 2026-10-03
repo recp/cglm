@@ -10,18 +10,18 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_translate_to(mat4 m, vec3 v, mat4 dest);
-   CGLM_INLINE void glm_translate(mat4 m, vec3 v);
+   CGLM_INLINE void glm_translate_to(CGLM_CONST mat4 m, const vec3 v, mat4 dest);
+   CGLM_INLINE void glm_translate(mat4 m, const vec3 v);
    CGLM_INLINE void glm_translate_x(mat4 m, float to);
    CGLM_INLINE void glm_translate_y(mat4 m, float to);
    CGLM_INLINE void glm_translate_z(mat4 m, float to);
-   CGLM_INLINE void glm_rotate_x(mat4 m, float angle, mat4 dest);
-   CGLM_INLINE void glm_rotate_y(mat4 m, float angle, mat4 dest);
-   CGLM_INLINE void glm_rotate_z(mat4 m, float angle, mat4 dest);
-   CGLM_INLINE void glm_rotate(mat4 m, float angle, vec3 axis);
-   CGLM_INLINE void glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis);
-   CGLM_INLINE void glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis);
-   CGLM_INLINE void glm_spin(mat4 m, float angle, vec3 axis);
+   CGLM_INLINE void glm_rotate_x(CGLM_CONST mat4 m, float angle, mat4 dest);
+   CGLM_INLINE void glm_rotate_y(CGLM_CONST mat4 m, float angle, mat4 dest);
+   CGLM_INLINE void glm_rotate_z(CGLM_CONST mat4 m, float angle, mat4 dest);
+   CGLM_INLINE void glm_rotate(mat4 m, float angle, const vec3 axis);
+   CGLM_INLINE void glm_rotate_at(mat4 m, const vec3 pivot, float angle, const vec3 axis);
+   CGLM_INLINE void glm_rotate_atm(mat4 m, const vec3 pivot, float angle, const vec3 axis);
+   CGLM_INLINE void glm_spin(mat4 m, float angle, const vec3 axis);
  */
 
 #include "common.h"
@@ -40,7 +40,7 @@
  */
 CGLM_INLINE
 void
-glm_translate(mat4 m, vec3 v) {
+glm_translate(mat4 m, const vec3 v) {
 #if defined(CGLM_SIMD)
   glmm_128 m0, m1, m2, m3;
 
@@ -72,7 +72,7 @@ glm_translate(mat4 m, vec3 v) {
  */
 CGLM_INLINE
 void
-glm_translate_to(mat4 m, vec3 v, mat4 dest) {
+glm_translate_to(CGLM_CONST mat4 m, const vec3 v, mat4 dest) {
   glm_mat4_copy(m, dest);
   glm_translate(dest, v);
 }
@@ -141,7 +141,7 @@ glm_translate_z(mat4 m, float z) {
  */
 CGLM_INLINE
 void
-glm_rotate_x(mat4 m, float angle, mat4 dest) {
+glm_rotate_x(CGLM_CONST mat4 m, float angle, mat4 dest) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
@@ -166,7 +166,7 @@ glm_rotate_x(mat4 m, float angle, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_rotate_y(mat4 m, float angle, mat4 dest) {
+glm_rotate_y(CGLM_CONST mat4 m, float angle, mat4 dest) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
@@ -191,7 +191,7 @@ glm_rotate_y(mat4 m, float angle, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_rotate_z(mat4 m, float angle, mat4 dest) {
+glm_rotate_z(CGLM_CONST mat4 m, float angle, mat4 dest) {
   CGLM_ALIGN_MAT mat4 t = GLM_MAT4_IDENTITY_INIT;
   float c, s;
 
@@ -233,7 +233,7 @@ glm_rotate_z(mat4 m, float angle, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_rotate(mat4 m, float angle, vec3 axis) {
+glm_rotate(mat4 m, float angle, const vec3 axis) {
   CGLM_ALIGN_MAT mat4 rot;
   glm_rotate_make(rot, angle, axis);
   glm_mul_rot(m, rot, m);
@@ -250,7 +250,7 @@ glm_rotate(mat4 m, float angle, vec3 axis) {
  */
 CGLM_INLINE
 void
-glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
+glm_rotate_at(mat4 m, const vec3 pivot, float angle, const vec3 axis) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec3_negate_to(pivot, pivotInv);
@@ -275,7 +275,7 @@ glm_rotate_at(mat4 m, vec3 pivot, float angle, vec3 axis) {
  */
 CGLM_INLINE
 void
-glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
+glm_rotate_atm(mat4 m, const vec3 pivot, float angle, const vec3 axis) {
   CGLM_ALIGN(8) vec3 pivotInv;
 
   glm_vec3_negate_to(pivot, pivotInv);
@@ -295,7 +295,7 @@ glm_rotate_atm(mat4 m, vec3 pivot, float angle, vec3 axis) {
  */
 CGLM_INLINE
 void
-glm_spin(mat4 m, float angle, vec3 axis) {
+glm_spin(mat4 m, float angle, const vec3 axis) {
   CGLM_ALIGN_MAT mat4 rot;
   glm_rotate_make(rot, angle, axis);
   glm_mat4_mul(m, rot, m);

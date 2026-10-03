@@ -27,7 +27,7 @@ glm_mat4_scale_neon(mat4 m, float s) {
 
 CGLM_INLINE
 void
-glm_mat4_transp_neon(mat4 m, mat4 dest) {
+glm_mat4_transp_neon(CGLM_CONST mat4 m, mat4 dest) {
   float32x4x4_t vmat;
   
   vmat = vld4q_f32(m[0]);
@@ -40,7 +40,7 @@ glm_mat4_transp_neon(mat4 m, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
+glm_mat4_mul_neon(CGLM_CONST mat4 m1, CGLM_CONST mat4 m2, mat4 dest) {
   /* D = R * L (Column-Major) */
 
   glmm_128 l, r0, r1, r2, r3, v0, v1, v2, v3;
@@ -82,7 +82,7 @@ glm_mat4_mul_neon(mat4 m1, mat4 m2, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
+glm_mat4_mulv_neon(CGLM_CONST mat4 m, const vec4 v, vec4 dest) {
   float32x4_t l0, l1, l2, l3;
   float32x2_t vlo, vhi;
   
@@ -104,7 +104,7 @@ glm_mat4_mulv_neon(mat4 m, vec4 v, vec4 dest) {
 
 CGLM_INLINE
 float
-glm_mat4_det_neon(mat4 mat) {
+glm_mat4_det_neon(CGLM_CONST mat4 mat) {
   float32x4_t   r0, r1, r2, r3, x0, x1, x2;
   float32x2_t   ij, op, mn, kl, nn, mm, jj, ii, gh, ef, t12, t34;
   float32x4x2_t a1;
@@ -176,7 +176,7 @@ glm_mat4_det_neon(mat4 mat) {
 #if 0
 CGLM_INLINE
 void
-glm_mat4_inv_neon(mat4 mat, mat4 dest) {
+glm_mat4_inv_neon(CGLM_CONST mat4 mat, mat4 dest) {
   float32x4_t   r0, r1, r2, r3,
                 v0, v1, v2, v3,
                 t0, t1, t2, t3, t4, t5,
@@ -318,7 +318,7 @@ glm_mat4_inv_neon(mat4 mat, mat4 dest) {
 
 CGLM_INLINE
 void
-glm_mat4_inv_neon(mat4 mat, mat4 dest) {
+glm_mat4_inv_neon(CGLM_CONST mat4 mat, mat4 dest) {
   float32x4_t   r0, r1, r2, r3,
                 v0, v1, v2, v3, v4, v5,
                 t0, t1, t2;

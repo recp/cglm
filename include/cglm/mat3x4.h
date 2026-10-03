@@ -11,12 +11,12 @@
    GLM_MAT3X4_ZERO
 
  Functions:
-   CGLM_INLINE void glm_mat3x4_copy(mat3x4 src, mat3x4 dest);
+   CGLM_INLINE void glm_mat3x4_copy(CGLM_CONST mat3x4 src, mat3x4 dest);
    CGLM_INLINE void glm_mat3x4_zero(mat3x4 m);
    CGLM_INLINE void glm_mat3x4_make(const float * __restrict src, mat3x4 dest);
-   CGLM_INLINE void glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest);
-   CGLM_INLINE void glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest);
-   CGLM_INLINE void glm_mat3x4_transpose(mat3x4 src, mat4x3 dest);
+   CGLM_INLINE void glm_mat3x4_mul(CGLM_CONST mat3x4 m1, CGLM_CONST mat4x3 m2, mat4 dest);
+   CGLM_INLINE void glm_mat3x4_mulv(CGLM_CONST mat3x4 m, const vec3 v, vec4 dest);
+   CGLM_INLINE void glm_mat3x4_transpose(CGLM_CONST mat3x4 src, mat4x3 dest);
    CGLM_INLINE void glm_mat3x4_scale(mat3x4 m, float s);
  */
 
@@ -40,7 +40,7 @@
  */
 CGLM_INLINE
 void
-glm_mat3x4_copy(mat3x4 src, mat3x4 dest) {
+glm_mat3x4_copy(CGLM_CONST mat3x4 src, mat3x4 dest) {
   glm_vec4_ucopy(src[0], dest[0]);
   glm_vec4_ucopy(src[1], dest[1]);
   glm_vec4_ucopy(src[2], dest[2]);
@@ -96,7 +96,7 @@ glm_mat3x4_make(const float * __restrict src, mat3x4 dest) {
  */
 CGLM_INLINE
 void
-glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest) {
+glm_mat3x4_mul(CGLM_CONST mat3x4 m1, CGLM_CONST mat4x3 m2, mat4 dest) {
   float a00 = m1[0][0], a01 = m1[0][1], a02 = m1[0][2], a03 = m1[0][3],
         a10 = m1[1][0], a11 = m1[1][1], a12 = m1[1][2], a13 = m1[1][3],
         a20 = m1[2][0], a21 = m1[2][1], a22 = m1[2][2], a23 = m1[2][3],
@@ -136,7 +136,7 @@ glm_mat3x4_mul(mat3x4 m1, mat4x3 m2, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest) {
+glm_mat3x4_mulv(CGLM_CONST mat3x4 m, const vec3 v, vec4 dest) {
   float v0 = v[0], v1 = v[1], v2 = v[2];
 
   dest[0] = m[0][0] * v0 + m[1][0] * v1 + m[2][0] * v2;
@@ -153,7 +153,7 @@ glm_mat3x4_mulv(mat3x4 m, vec3 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_mat3x4_transpose(mat3x4 src, mat4x3 dest) {
+glm_mat3x4_transpose(CGLM_CONST mat3x4 src, mat4x3 dest) {
   dest[0][0] = src[0][0];  dest[0][1] = src[1][0];  dest[0][2] = src[2][0];
   dest[1][0] = src[0][1];  dest[1][1] = src[1][1];  dest[1][2] = src[2][1];
   dest[2][0] = src[0][2];  dest[2][1] = src[1][2];  dest[2][2] = src[2][2];

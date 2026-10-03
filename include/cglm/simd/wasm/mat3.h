@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat3_mul_wasm(mat3 m1, mat3 m2, mat3 dest) {
+glm_mat3_mul_wasm(CGLM_CONST mat3 m1, CGLM_CONST mat3 m2, mat3 dest) {
   glmm_128 l0, l1, l2, r0, r1, r2, x0, x1, x2, x3, x4, x5, x6, x7, x8, x9;
   
   l0 = wasm_v128_load(m1[0]);
