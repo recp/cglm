@@ -492,6 +492,50 @@ TEST_IMPL(GLM_PREFIX, rotate_atm) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(GLM_PREFIX, spin) {
+  mat4 m;
+  mat4 expected = {{ 0.0f, 1.0f, 0.0f, 0.0f},
+                   {-1.0f, 0.0f, 0.0f, 0.0f},
+                   { 0.0f, 0.0f, 1.0f, 0.0f},
+                   { 5.0f, 0.0f, 0.0f, 1.0f}};
+
+  glm_translate_make(m, (vec3){5.0f, 0.0f, 0.0f});
+  GLM(spin)(m, GLM_PI_2f, GLM_ZUP);
+  ASSERTIFY(test_assert_mat4_eq(m, expected));
+
+  TEST_SUCCESS
+}
+
+TEST_IMPL(GLM_PREFIX, spin_affine) {
+  mat4 m, original = {{0.0f, 2.0f, 0.0f, 0.0f},
+                      {-3.0f, 0.0f, 0.0f, 0.0f},
+                      {0.0f, 0.0f, 4.0f, 0.0f},
+                      {5.0f, -2.0f, 7.0f, 1.0f}};
+  mat4 expected = {{-3.0f, 0.0f, 0.0f, 0.0f},
+                   {0.0f, -2.0f, 0.0f, 0.0f},
+                   {0.0f, 0.0f, 4.0f, 0.0f},
+                   {5.0f, -2.0f, 7.0f, 1.0f}};
+  vec3 axis = {0.0f, 0.0f, 2.0f};
+
+  glm_mat4_copy(original, m);
+  GLM(spin)(m, GLM_PI_2f, axis);
+  ASSERTIFY(test_assert_mat4_eq(m, expected));
+  ASSERT(test_eq(axis[2], 2.0f))
+
+  GLM(spin)(m, -GLM_PI_2f, axis);
+  ASSERTIFY(test_assert_mat4_eq(m, original));
+
+  GLM(spin)(m, 0.0f, GLM_XUP);
+  ASSERTIFY(test_assert_mat4_eq(m, original));
+
+  glm_vec3_zero(m[3]);
+  glm_vec3_zero(expected[3]);
+  GLM(spin)(m, GLM_PI_2f, axis);
+  ASSERTIFY(test_assert_mat4_eq(m, expected));
+
+  TEST_SUCCESS
+}
+
 TEST_IMPL(GLM_PREFIX, decompose_scalev) {
   mat4 m1;
   vec3 s1;
