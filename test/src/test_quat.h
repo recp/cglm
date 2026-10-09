@@ -504,9 +504,10 @@ TEST_IMPL(GLM_PREFIX, quat_mul) {
 
 TEST_IMPL(GLM_PREFIX, quat_mat4) {
   mat4   m1, m2;
-  versor q1, q2, q3;
+  versor q1, q2, q3, scaled, original;
   vec3   axis1;
   vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  float  scales[] = {2.0f, 0.5f, -2.0f, -0.5f, 1e-10f, 1e10f};
   int    i;
 
   GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
@@ -543,14 +544,47 @@ TEST_IMPL(GLM_PREFIX, quat_mat4) {
     ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
   }
 
+
+  /* Scaling a quaternion must not change its rotation or mutate it. */
+  GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
+  GLM(rotate_make)(m2, GLM_PI_4f, axis2);
+  for (i = 0; i < (int)(sizeof(scales) / sizeof(scales[0])); i++) {
+    glm_vec4_scale(q1, scales[i], scaled);
+    glm_vec4_copy(scaled, original);
+    GLM(quat_mat4)(scaled, m1);
+    ASSERTIFY(test_assert_mat4_eq(m1, m2));
+    ASSERT(scaled[0] == original[0] && scaled[1] == original[1]);
+    ASSERT(scaled[2] == original[2] && scaled[3] == original[3]);
+  }
+
+  /* Issue #503: a non-unit half-turn about Z. */
+  glm_vec4_zero(scaled);
+  scaled[2] = 2.0f;
+  GLM(quat_mat4)(scaled, m1);
+  glm_mat4_identity(m2);
+  m2[0][0] = m2[1][1] = -1.0f;
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
+  /* Normalizing first avoids overflowing 2 / dot for tiny inputs. */
+  scaled[2] = 1e-20f;
+  GLM(quat_mat4)(scaled, m1);
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00002f));
+
+  /* Keep the existing identity fallback for a zero quaternion. */
+  glm_vec4_zero(scaled);
+  GLM(quat_mat4)(scaled, m1);
+  glm_mat4_identity(m2);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, quat_mat4t) {
   mat4   m1, m2;
-  versor q1, q2, q3;
+  versor q1, q2, q3, scaled, original;
   vec3   axis1;
   vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  float  scales[] = {2.0f, 0.5f, -2.0f, -0.5f, 1e-10f, 1e10f};
   int    i;
 
   GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
@@ -594,15 +628,52 @@ TEST_IMPL(GLM_PREFIX, quat_mat4t) {
     ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
   }
 
+
+  /* Scaling a quaternion must not change its rotation or mutate it. */
+  GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
+  GLM(rotate_make)(m2, GLM_PI_4f, axis2);
+  for (i = 0; i < (int)(sizeof(scales) / sizeof(scales[0])); i++) {
+    glm_vec4_scale(q1, scales[i], scaled);
+    glm_vec4_copy(scaled, original);
+    GLM(quat_mat4t)(scaled, m1);
+    glm_mat4_transpose(m1);
+    ASSERTIFY(test_assert_mat4_eq(m1, m2));
+    ASSERT(scaled[0] == original[0] && scaled[1] == original[1]);
+    ASSERT(scaled[2] == original[2] && scaled[3] == original[3]);
+  }
+
+  /* Issue #503: a non-unit half-turn about Z. */
+  glm_vec4_zero(scaled);
+  scaled[2] = 2.0f;
+  GLM(quat_mat4t)(scaled, m1);
+  glm_mat4_transpose(m1);
+  glm_mat4_identity(m2);
+  m2[0][0] = m2[1][1] = -1.0f;
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
+  /* Normalizing first avoids overflowing 2 / dot for tiny inputs. */
+  scaled[2] = 1e-20f;
+  GLM(quat_mat4t)(scaled, m1);
+  glm_mat4_transpose(m1);
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00002f));
+
+  /* Keep the existing identity fallback for a zero quaternion. */
+  glm_vec4_zero(scaled);
+  GLM(quat_mat4t)(scaled, m1);
+  glm_mat4_transpose(m1);
+  glm_mat4_identity(m2);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, quat_mat3) {
   mat4   m1, m2;
   mat3   m3;
-  versor q1, q2, q3;
+  versor q1, q2, q3, scaled, original;
   vec3   axis1;
   vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  float  scales[] = {2.0f, 0.5f, -2.0f, -0.5f, 1e-10f, 1e10f};
   int    i;
 
   GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
@@ -648,15 +719,56 @@ TEST_IMPL(GLM_PREFIX, quat_mat3) {
     ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
   }
 
+
+  /* Scaling a quaternion must not change its rotation or mutate it. */
+  GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
+  GLM(rotate_make)(m2, GLM_PI_4f, axis2);
+  for (i = 0; i < (int)(sizeof(scales) / sizeof(scales[0])); i++) {
+    glm_vec4_scale(q1, scales[i], scaled);
+    glm_vec4_copy(scaled, original);
+    GLM(quat_mat3)(scaled, m3);
+    glm_mat4_identity(m1);
+    glm_mat4_ins3(m3, m1);
+    ASSERTIFY(test_assert_mat4_eq(m1, m2));
+    ASSERT(scaled[0] == original[0] && scaled[1] == original[1]);
+    ASSERT(scaled[2] == original[2] && scaled[3] == original[3]);
+  }
+
+  /* Issue #503: a non-unit half-turn about Z. */
+  glm_vec4_zero(scaled);
+  scaled[2] = 2.0f;
+  GLM(quat_mat3)(scaled, m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  glm_mat4_identity(m2);
+  m2[0][0] = m2[1][1] = -1.0f;
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
+  /* Normalizing first avoids overflowing 2 / dot for tiny inputs. */
+  scaled[2] = 1e-20f;
+  GLM(quat_mat3)(scaled, m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00002f));
+
+  /* Keep the existing identity fallback for a zero quaternion. */
+  glm_vec4_zero(scaled);
+  GLM(quat_mat3)(scaled, m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  glm_mat4_identity(m2);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
   TEST_SUCCESS
 }
 
 TEST_IMPL(GLM_PREFIX, quat_mat3t) {
   mat4   m1, m2;
   mat3   m3;
-  versor q1, q2, q3;
+  versor q1, q2, q3, scaled, original;
   vec3   axis1;
   vec3   axis2 = {1.9f, 2.3f, 4.5f};
+  float  scales[] = {2.0f, 0.5f, -2.0f, -0.5f, 1e-10f, 1e10f};
   int    i;
 
   GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
@@ -705,6 +817,50 @@ TEST_IMPL(GLM_PREFIX, quat_mat3t) {
     /* almost equal */
     ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.000009f));
   }
+
+
+  /* Scaling a quaternion must not change its rotation or mutate it. */
+  GLM(quat)(q1, GLM_PI_4f, 1.9f, 2.3f, 4.5f);
+  GLM(rotate_make)(m2, GLM_PI_4f, axis2);
+  for (i = 0; i < (int)(sizeof(scales) / sizeof(scales[0])); i++) {
+    glm_vec4_scale(q1, scales[i], scaled);
+    glm_vec4_copy(scaled, original);
+    GLM(quat_mat3t)(scaled, m3);
+    glm_mat3_transpose(m3);
+    glm_mat4_identity(m1);
+    glm_mat4_ins3(m3, m1);
+    ASSERTIFY(test_assert_mat4_eq(m1, m2));
+    ASSERT(scaled[0] == original[0] && scaled[1] == original[1]);
+    ASSERT(scaled[2] == original[2] && scaled[3] == original[3]);
+  }
+
+  /* Issue #503: a non-unit half-turn about Z. */
+  glm_vec4_zero(scaled);
+  scaled[2] = 2.0f;
+  GLM(quat_mat3t)(scaled, m3);
+  glm_mat3_transpose(m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  glm_mat4_identity(m2);
+  m2[0][0] = m2[1][1] = -1.0f;
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
+  /* Normalizing first avoids overflowing 2 / dot for tiny inputs. */
+  scaled[2] = 1e-20f;
+  GLM(quat_mat3t)(scaled, m3);
+  glm_mat3_transpose(m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  ASSERTIFY(test_assert_mat4_eq2(m1, m2, 0.00002f));
+
+  /* Keep the existing identity fallback for a zero quaternion. */
+  glm_vec4_zero(scaled);
+  GLM(quat_mat3t)(scaled, m3);
+  glm_mat3_transpose(m3);
+  glm_mat4_identity(m1);
+  glm_mat4_ins3(m3, m1);
+  glm_mat4_identity(m2);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
 
   TEST_SUCCESS
 }
@@ -841,6 +997,12 @@ TEST_IMPL(GLM_PREFIX, quat_look) {
   
   glm_look(v1, (vec3){0.0f, 0.0f, 1.0f}, (vec3){0.0f, -1.0f, 0.0f}, m2);
 
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
+
+
+  /* A scaled orientation must yield the same camera view. */
+  glm_vec4_scale(q1, -2.0f, q1);
+  GLM(quat_look)(v1, q1, m1);
   ASSERTIFY(test_assert_mat4_eq(m1, m2));
 
   TEST_SUCCESS
@@ -1005,6 +1167,16 @@ TEST_IMPL(GLM_PREFIX, quat_rotate) {
   ASSERT(test_eq(v1[0],  0.0f))
   ASSERT(test_eq(v1[1],  0.0f))
   ASSERT(test_eq(v1[2],  1.0f))
+
+
+  /* Non-unit orientation must not add scaling to the transform. */
+  glm_mat4_identity(m1);
+  glm_mat4_identity(m2);
+  glm_quatv(q1, GLM_PI_2f, GLM_YUP);
+  glm_vec4_scale(q1, 2.0f, q1);
+  GLM(quat_rotate)(m1, q1, m1);
+  glm_rotate(m2, GLM_PI_2f, GLM_YUP);
+  ASSERTIFY(test_assert_mat4_eq(m1, m2));
 
   TEST_SUCCESS
 }
