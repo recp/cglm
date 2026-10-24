@@ -297,7 +297,7 @@ CGLM_INLINE
 void
 glm_spin(mat4 m, float angle, vec3 axis) {
   CGLM_ALIGN_MAT mat4 rot;
-  glm_rotate_atm(rot, m[3], angle, axis);
+  glm_rotate_make(rot, angle, axis);
   glm_mat4_mul(m, rot, m);
 }
 

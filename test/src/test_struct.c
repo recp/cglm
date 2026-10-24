@@ -169,3 +169,21 @@ TEST_IMPL(vec4s_zero_init) {
   test_assert_vec4_eq(vec4_zero.raw, vec4_zero_a);
   TEST_SUCCESS
 }
+
+TEST_IMPL(mat4s_spin) {
+  mat4s m, result;
+  mat4 expected = {{ 0.0f, 1.0f, 0.0f, 0.0f},
+                   {-1.0f, 0.0f, 0.0f, 0.0f},
+                   { 0.0f, 0.0f, 1.0f, 0.0f},
+                   { 5.0f, 0.0f, 0.0f, 1.0f}};
+
+  glm_translate_make(m.raw, (vec3){5.0f, 0.0f, 0.0f});
+  result = glms_spin(m, GLM_PI_2f, (vec3s){{0.0f, 0.0f, 1.0f}});
+  ASSERTIFY(test_assert_mat4_eq(result.raw, expected));
+  ASSERTIFY(test_assert_mat4_eq(m.raw, (mat4){{1.0f, 0.0f, 0.0f, 0.0f},
+                                           {0.0f, 1.0f, 0.0f, 0.0f},
+                                           {0.0f, 0.0f, 1.0f, 0.0f},
+                                           {5.0f, 0.0f, 0.0f, 1.0f}}));
+
+  TEST_SUCCESS
+}
