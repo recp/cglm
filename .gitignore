@@ -83,3 +83,6 @@ xcode/*
 .vscode
 .build
 *.swp
+.lastsession.vim
+.vimrc
+compile_commands.json
