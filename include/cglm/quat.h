@@ -482,22 +482,22 @@ glm_quat_mul(versor p, versor q, versor dest) {
 CGLM_INLINE
 void
 glm_quat_mat4(versor q, mat4 dest) {
+  CGLM_ALIGN(16) versor p;
   float w, x, y, z,
         xx, yy, zz,
         xy, yz, xz,
-        wx, wy, wz, norm, s;
+        wx, wy, wz;
 
-  norm = glm_quat_norm(q);
-  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+  glm_quat_normalize_to(q, p);
 
-  x = q[0];
-  y = q[1];
-  z = q[2];
-  w = q[3];
+  x = p[0];
+  y = p[1];
+  z = p[2];
+  w = p[3];
 
-  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
-  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
-  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
+  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
+  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -529,22 +529,22 @@ glm_quat_mat4(versor q, mat4 dest) {
 CGLM_INLINE
 void
 glm_quat_mat4t(versor q, mat4 dest) {
+  CGLM_ALIGN(16) versor p;
   float w, x, y, z,
         xx, yy, zz,
         xy, yz, xz,
-        wx, wy, wz, norm, s;
+        wx, wy, wz;
 
-  norm = glm_quat_norm(q);
-  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+  glm_quat_normalize_to(q, p);
 
-  x = q[0];
-  y = q[1];
-  z = q[2];
-  w = q[3];
+  x = p[0];
+  y = p[1];
+  z = p[2];
+  w = p[3];
 
-  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
-  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
-  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
+  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
+  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -576,22 +576,22 @@ glm_quat_mat4t(versor q, mat4 dest) {
 CGLM_INLINE
 void
 glm_quat_mat3(versor q, mat3 dest) {
+  CGLM_ALIGN(16) versor p;
   float w, x, y, z,
         xx, yy, zz,
         xy, yz, xz,
-        wx, wy, wz, norm, s;
+        wx, wy, wz;
 
-  norm = glm_quat_norm(q);
-  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+  glm_quat_normalize_to(q, p);
 
-  x = q[0];
-  y = q[1];
-  z = q[2];
-  w = q[3];
+  x = p[0];
+  y = p[1];
+  z = p[2];
+  w = p[3];
 
-  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
-  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
-  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
+  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
+  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -615,22 +615,22 @@ glm_quat_mat3(versor q, mat3 dest) {
 CGLM_INLINE
 void
 glm_quat_mat3t(versor q, mat3 dest) {
+  CGLM_ALIGN(16) versor p;
   float w, x, y, z,
         xx, yy, zz,
         xy, yz, xz,
-        wx, wy, wz, norm, s;
+        wx, wy, wz;
 
-  norm = glm_quat_norm(q);
-  s    = norm > 0.0f ? 2.0f / norm : 0.0f;
+  glm_quat_normalize_to(q, p);
 
-  x = q[0];
-  y = q[1];
-  z = q[2];
-  w = q[3];
+  x = p[0];
+  y = p[1];
+  z = p[2];
+  w = p[3];
 
-  xx = s * x * x;   xy = s * x * y;   wx = s * w * x;
-  yy = s * y * y;   yz = s * y * z;   wy = s * w * y;
-  zz = s * z * z;   xz = s * x * z;   wz = s * w * z;
+  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
+  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
+  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;

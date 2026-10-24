@@ -114,6 +114,27 @@ TEST_IMPL(quats_zero_init) {
   TEST_SUCCESS
 }
 
+TEST_IMPL(quats_mat_nonunit) {
+  versors q = {{0.0f, 0.0f, 2.0f, 0.0f}};
+  mat4s   m4;
+  mat3s   m3;
+  mat4    expected4 = GLM_MAT4_IDENTITY_INIT;
+  mat3    expected3 = GLM_MAT3_IDENTITY_INIT;
+
+  expected4[0][0] = expected4[1][1] = -1.0f;
+  expected3[0][0] = expected3[1][1] = -1.0f;
+
+  m4 = glms_quat_mat4(q);
+  ASSERTIFY(test_assert_mat4_eq(m4.raw, expected4));
+  m4 = glms_quat_mat4t(q);
+  ASSERTIFY(test_assert_mat4_eq(m4.raw, expected4));
+  m3 = glms_quat_mat3(q);
+  ASSERTIFY(test_assert_mat3_eq(m3.raw, expected3));
+  m3 = glms_quat_mat3t(q);
+  ASSERTIFY(test_assert_mat3_eq(m3.raw, expected3));
+  TEST_SUCCESS
+}
+
 TEST_IMPL(vec3s_one_init) {
   vec3s vec3_one   = GLMS_VEC3_ONE_INIT;
   vec3  vec3_one_a =  GLM_VEC3_ONE_INIT;
