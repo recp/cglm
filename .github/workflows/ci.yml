@@ -590,7 +590,9 @@ jobs:
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        cmake -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch == 'arm64' && 'ARM64' || 'ARM' }} `
+        # ARM32 requires a Windows SDK older than 26100
+        $platform = "${{ matrix.arch == 'arm64' && 'ARM64' || 'ARM,version=10.0.22621.0' }}"
+        cmake -B build -G "Visual Studio 17 2022" -A $platform `
           -DCMAKE_BUILD_TYPE=Release `
           -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
 
