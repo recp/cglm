@@ -10,11 +10,11 @@
 
 /*
  Functions:
-   CGLM_INLINE void glm_translated2d(mat3 m, vec2 v);
+   CGLM_INLINE void glm_translated2d(mat3 m, const vec2 v);
    CGLM_INLINE void glm_translated2d_x(mat3 m, float to);
    CGLM_INLINE void glm_translated2d_y(mat3 m, float to);
    CGLM_INLINE void glm_rotated2d(mat3 m, float angle);
-   CGLM_INLINE void glm_scaled2d(mat3 m, vec2 v);
+   CGLM_INLINE void glm_scaled2d(mat3 m, const vec2 v);
    CGLM_INLINE void glm_scaled2d_uni(mat3 m, float s);
  */
 
@@ -31,7 +31,7 @@
  */
 CGLM_INLINE
 void
-glm_translated2d(mat3 m, vec2 v) {
+glm_translated2d(mat3 m, const vec2 v) {
   glm_vec2_add(m[2], v, m[2]);
 }
 
@@ -99,7 +99,7 @@ glm_rotated2d(mat3 m, float angle) {
  */
 CGLM_INLINE
 void
-glm_scaled2d(mat3 m, vec2 v) {
+glm_scaled2d(mat3 m, const vec2 v) {
   m[0][0] *= v[0];
   m[1][0] *= v[0];
   m[2][0] *= v[0];

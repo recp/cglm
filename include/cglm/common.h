@@ -39,6 +39,13 @@
 #  define CGLM_INLINE static inline __attribute((always_inline))
 #endif
 
+/* const qualifier for multi-dimensional array parameters (matN, vecN[M]), only possible in C23 and C++ */
+#if defined(__cplusplus) || (defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202000L)
+#  define CGLM_CONST const
+#else
+#  define CGLM_CONST
+#endif
+
 #if defined(__GNUC__) || defined(__clang__)
 #  define CGLM_UNLIKELY(expr) __builtin_expect(!!(expr), 0)
 #  define CGLM_LIKELY(expr)   __builtin_expect(!!(expr), 1)

@@ -10,30 +10,30 @@
 
 CGLM_EXPORT
 void
-glmc_unprojecti(vec3 pos, mat4 invMat, vec4 vp, vec3 dest) {
+glmc_unprojecti(const vec3 pos, CGLM_CONST mat4 invMat, const vec4 vp, vec3 dest) {
   glm_unprojecti(pos, invMat, vp, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_unproject(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glmc_unproject(const vec3 pos, CGLM_CONST mat4 m, const vec4 vp, vec3 dest) {
   glm_unproject(pos, m, vp, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_project(vec3 pos, mat4 m, vec4 vp, vec3 dest) {
+glmc_project(const vec3 pos, CGLM_CONST mat4 m, const vec4 vp, vec3 dest) {
   glm_project(pos, m, vp, dest);
 }
 
 CGLM_EXPORT
 float
-glmc_project_z(vec3 pos, mat4 m) {
+glmc_project_z(const vec3 pos, CGLM_CONST mat4 m) {
   return glm_project_z(pos, m);
 }
 
 CGLM_EXPORT
 void
-glmc_pickmatrix(vec2 center, vec2 size, vec4 vp, mat4 dest) {
+glmc_pickmatrix(const vec2 center, const vec2 size, const vec4 vp, mat4 dest) {
   glm_pickmatrix(center, size, vp, dest);
 }

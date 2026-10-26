@@ -8,27 +8,27 @@
 /*
  Functions:
    CGLM_INLINE void  glm_vec2_fill(vec2 v, float val)
-   CGLM_INLINE bool  glm_vec2_eq(vec2 v, float val);
-   CGLM_INLINE bool  glm_vec2_eq_eps(vec2 v, float val);
-   CGLM_INLINE bool  glm_vec2_eq_all(vec2 v);
-   CGLM_INLINE bool  glm_vec2_eqv(vec2 a, vec2 b);
-   CGLM_INLINE bool  glm_vec2_eqv_eps(vec2 a, vec2 b);
-   CGLM_INLINE float glm_vec2_max(vec2 v);
-   CGLM_INLINE float glm_vec2_min(vec2 v);
-   CGLM_INLINE bool  glm_vec2_isnan(vec2 v);
-   CGLM_INLINE bool  glm_vec2_isinf(vec2 v);
-   CGLM_INLINE bool  glm_vec2_isvalid(vec2 v);
-   CGLM_INLINE void  glm_vec2_sign(vec2 v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_abs(vec2 v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_fract(vec2 v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_floor(vec2 v, vec2 dest);
-   CGLM_INLINE float glm_vec2_mods(vec2 v, float s, vec2 dest);
-   CGLM_INLINE float glm_vec2_steps(float edge, vec2 v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_stepr(vec2 edge, float v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_sqrt(vec2 v, vec2 dest);
-   CGLM_INLINE void  glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest)
-   CGLM_INLINE void  glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest)
-   CGLM_INLINE void  glm_vec2_complex_conjugate(vec2 a, vec2 dest)
+   CGLM_INLINE bool  glm_vec2_eq(const vec2 v, float val);
+   CGLM_INLINE bool  glm_vec2_eq_eps(const vec2 v, float val);
+   CGLM_INLINE bool  glm_vec2_eq_all(const vec2 v);
+   CGLM_INLINE bool  glm_vec2_eqv(const vec2 a, const vec2 b);
+   CGLM_INLINE bool  glm_vec2_eqv_eps(const vec2 a, const vec2 b);
+   CGLM_INLINE float glm_vec2_max(const vec2 v);
+   CGLM_INLINE float glm_vec2_min(const vec2 v);
+   CGLM_INLINE bool  glm_vec2_isnan(const vec2 v);
+   CGLM_INLINE bool  glm_vec2_isinf(const vec2 v);
+   CGLM_INLINE bool  glm_vec2_isvalid(const vec2 v);
+   CGLM_INLINE void  glm_vec2_sign(const vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_abs(const vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_fract(const vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_floor(const vec2 v, vec2 dest);
+   CGLM_INLINE float glm_vec2_mods(const vec2 v, float s, vec2 dest);
+   CGLM_INLINE float glm_vec2_steps(float edge, const vec2 x, vec2 dest);
+   CGLM_INLINE void  glm_vec2_stepr(const vec2 edge, float x, vec2 dest);
+   CGLM_INLINE void  glm_vec2_sqrt(const vec2 v, vec2 dest);
+   CGLM_INLINE void  glm_vec2_complex_mul(const vec2 a, const vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_complex_div(const vec2 a, const vec2 b, vec2 dest)
+   CGLM_INLINE void  glm_vec2_complex_conjugate(const vec2 a, vec2 dest)
  */
 
 #ifndef cglm_vec2_ext_h
@@ -57,7 +57,7 @@ glm_vec2_fill(vec2 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec2_eq(vec2 v, float val) {
+glm_vec2_eq(const vec2 v, float val) {
   return v[0] == val && v[0] == v[1];
 }
 
@@ -69,7 +69,7 @@ glm_vec2_eq(vec2 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec2_eq_eps(vec2 v, float val) {
+glm_vec2_eq_eps(const vec2 v, float val) {
   return fabsf(v[0] - val) <= GLM_FLT_EPSILON
          && fabsf(v[1] - val) <= GLM_FLT_EPSILON;
 }
@@ -81,7 +81,7 @@ glm_vec2_eq_eps(vec2 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec2_eq_all(vec2 v) {
+glm_vec2_eq_all(const vec2 v) {
   return glm_vec2_eq_eps(v, v[0]);
 }
 
@@ -93,7 +93,7 @@ glm_vec2_eq_all(vec2 v) {
  */
 CGLM_INLINE
 bool
-glm_vec2_eqv(vec2 a, vec2 b) {
+glm_vec2_eqv(const vec2 a, const vec2 b) {
   return a[0] == b[0] && a[1] == b[1];
 }
 
@@ -105,7 +105,7 @@ glm_vec2_eqv(vec2 a, vec2 b) {
  */
 CGLM_INLINE
 bool
-glm_vec2_eqv_eps(vec2 a, vec2 b) {
+glm_vec2_eqv_eps(const vec2 a, const vec2 b) {
   return fabsf(a[0] - b[0]) <= GLM_FLT_EPSILON
          && fabsf(a[1] - b[1]) <= GLM_FLT_EPSILON;
 }
@@ -117,7 +117,7 @@ glm_vec2_eqv_eps(vec2 a, vec2 b) {
  */
 CGLM_INLINE
 float
-glm_vec2_max(vec2 v) {
+glm_vec2_max(const vec2 v) {
   return glm_max(v[0], v[1]);
 }
 
@@ -128,7 +128,7 @@ glm_vec2_max(vec2 v) {
  */
 CGLM_INLINE
 float
-glm_vec2_min(vec2 v) {
+glm_vec2_min(const vec2 v) {
   return glm_min(v[0], v[1]);
 }
 
@@ -140,7 +140,7 @@ glm_vec2_min(vec2 v) {
  */
 CGLM_INLINE
 bool
-glm_vec2_isnan(vec2 v) {
+glm_vec2_isnan(const vec2 v) {
 #ifndef CGLM_FAST_MATH
   return isnan(v[0]) || isnan(v[1]);
 #else
@@ -157,7 +157,7 @@ glm_vec2_isnan(vec2 v) {
  */
 CGLM_INLINE
 bool
-glm_vec2_isinf(vec2 v) {
+glm_vec2_isinf(const vec2 v) {
 #ifndef CGLM_FAST_MATH
   return isinf(v[0]) || isinf(v[1]);
 #else
@@ -174,7 +174,7 @@ glm_vec2_isinf(vec2 v) {
  */
 CGLM_INLINE
 bool
-glm_vec2_isvalid(vec2 v) {
+glm_vec2_isvalid(const vec2 v) {
   return !glm_vec2_isnan(v) && !glm_vec2_isinf(v);
 }
 
@@ -187,7 +187,7 @@ glm_vec2_isvalid(vec2 v) {
  */
 CGLM_INLINE
 void
-glm_vec2_sign(vec2 v, vec2 dest) {
+glm_vec2_sign(const vec2 v, vec2 dest) {
   dest[0] = glm_signf(v[0]);
   dest[1] = glm_signf(v[1]);
 }
@@ -200,7 +200,7 @@ glm_vec2_sign(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_abs(vec2 v, vec2 dest) {
+glm_vec2_abs(const vec2 v, vec2 dest) {
   dest[0] = fabsf(v[0]);
   dest[1] = fabsf(v[1]);
 }
@@ -213,7 +213,7 @@ glm_vec2_abs(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_fract(vec2 v, vec2 dest) {
+glm_vec2_fract(const vec2 v, vec2 dest) {
   dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
 }
@@ -226,7 +226,7 @@ glm_vec2_fract(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_floor(vec2 v, vec2 dest) {
+glm_vec2_floor(const vec2 v, vec2 dest) {
   dest[0] = floorf(v[0]);
   dest[1] = floorf(v[1]);
 }
@@ -240,7 +240,7 @@ glm_vec2_floor(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_mods(vec2 v, float s, vec2 dest) {
+glm_vec2_mods(const vec2 v, float s, vec2 dest) {
   dest[0] = fmodf(v[0], s);
   dest[1] = fmodf(v[1], s);
 }
@@ -253,7 +253,7 @@ glm_vec2_mods(vec2 v, float s, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_sqrt(vec2 v, vec2 dest) {
+glm_vec2_sqrt(const vec2 v, vec2 dest) {
   dest[0] = sqrtf(v[0]);
   dest[1] = sqrtf(v[1]);
 }
@@ -267,7 +267,7 @@ glm_vec2_sqrt(vec2 v, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_complex_mul(const vec2 a, const vec2 b, vec2 dest) {
   float tr, ti;
   tr = a[0] * b[0] - a[1] * b[1];
   ti = a[0] * b[1] + a[1] * b[0];
@@ -285,7 +285,7 @@ glm_vec2_complex_mul(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_steps(float edge, vec2 x, vec2 dest) {
+glm_vec2_steps(float edge, const vec2 x, vec2 dest) {
   dest[0] = glm_step(edge, x[0]);
   dest[1] = glm_step(edge, x[1]);
 }
@@ -300,7 +300,7 @@ glm_vec2_steps(float edge, vec2 x, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_stepr(vec2 edge, float x, vec2 dest) {
+glm_vec2_stepr(const vec2 edge, float x, vec2 dest) {
   dest[0] = glm_step(edge[0], x);
   dest[1] = glm_step(edge[1], x);
 }
@@ -314,7 +314,7 @@ glm_vec2_stepr(vec2 edge, float x, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest) {
+glm_vec2_complex_div(const vec2 a, const vec2 b, vec2 dest) {
   float tr, ti;
   float const ibnorm2 = 1.0f / (b[0] * b[0] + b[1] * b[1]);
   tr = ibnorm2 * (a[0] * b[0] + a[1] * b[1]);
@@ -331,7 +331,7 @@ glm_vec2_complex_div(vec2 a, vec2 b, vec2 dest) {
  */
 CGLM_INLINE
 void
-glm_vec2_complex_conjugate(vec2 a, vec2 dest) {
+glm_vec2_complex_conjugate(const vec2 a, vec2 dest) {
   dest[0] =  a[0];
   dest[1] = -a[1];
 }

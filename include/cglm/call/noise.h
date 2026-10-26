@@ -15,15 +15,15 @@ extern "C" {
 
 CGLM_EXPORT
 float
-glmc_perlin_vec4(vec4 point);
+glmc_perlin_vec4(const vec4 point);
 
 CGLM_EXPORT
 float
-glmc_perlin_vec3(vec3 point);
+glmc_perlin_vec3(const vec3 point);
 
 CGLM_EXPORT
 float
-glmc_perlin_vec2(vec2 point);
+glmc_perlin_vec2(const vec2 point);
 
 #ifdef __cplusplus
 }

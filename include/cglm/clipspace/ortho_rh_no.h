@@ -11,11 +11,11 @@
                                     float bottom,  float top,
                                     float nearZ, float farZ,
                                     mat4  dest)
-   CGLM_INLINE void glm_ortho_aabb_rh_no(vec3 box[2], mat4 dest)
-   CGLM_INLINE void glm_ortho_aabb_p_rh_no(vec3 box[2],
+   CGLM_INLINE void glm_ortho_aabb_rh_no(CGLM_CONST vec3 box[2], mat4 dest)
+   CGLM_INLINE void glm_ortho_aabb_p_rh_no(CGLM_CONST vec3 box[2],
                                            float padding,
                                            mat4 dest)
-   CGLM_INLINE void glm_ortho_aabb_pz_rh_no(vec3 box[2],
+   CGLM_INLINE void glm_ortho_aabb_pz_rh_no(CGLM_CONST vec3 box[2],
                                             float padding,
                                             mat4 dest)
    CGLM_INLINE void glm_ortho_default_rh_no(float aspect,
@@ -80,7 +80,7 @@ glm_ortho_rh_no(float left,    float right,
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_rh_no(vec3 box[2], mat4 dest) {
+glm_ortho_aabb_rh_no(CGLM_CONST vec3 box[2], mat4 dest) {
   glm_ortho_rh_no(box[0][0],  box[1][0],
                   box[0][1],  box[1][1],
                  -box[1][2], -box[0][2],
@@ -100,7 +100,7 @@ glm_ortho_aabb_rh_no(vec3 box[2], mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_p_rh_no(vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_p_rh_no(CGLM_CONST vec3 box[2], float padding, mat4 dest) {
   glm_ortho_rh_no(box[0][0] - padding,    box[1][0] + padding,
                   box[0][1] - padding,    box[1][1] + padding,
                 -(box[1][2] + padding), -(box[0][2] - padding),
@@ -120,7 +120,7 @@ glm_ortho_aabb_p_rh_no(vec3 box[2], float padding, mat4 dest) {
  */
 CGLM_INLINE
 void
-glm_ortho_aabb_pz_rh_no(vec3 box[2], float padding, mat4 dest) {
+glm_ortho_aabb_pz_rh_no(CGLM_CONST vec3 box[2], float padding, mat4 dest) {
   glm_ortho_rh_no(box[0][0],              box[1][0],
                   box[0][1],              box[1][1],
                 -(box[1][2] + padding), -(box[0][2] - padding),

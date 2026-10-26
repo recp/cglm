@@ -22,15 +22,15 @@ glmc_ortho_rh_zo(float left,    float right,
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_rh_zo(vec3 box[2], mat4 dest);
+glmc_ortho_aabb_rh_zo(CGLM_CONST vec3 box[2], mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_p_rh_zo(vec3 box[2], float padding, mat4 dest);
+glmc_ortho_aabb_p_rh_zo(CGLM_CONST vec3 box[2], float padding, mat4 dest);
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_pz_rh_zo(vec3 box[2], float padding, mat4 dest);
+glmc_ortho_aabb_pz_rh_zo(CGLM_CONST vec3 box[2], float padding, mat4 dest);
 
 CGLM_EXPORT
 void

@@ -15,23 +15,23 @@ extern "C" {
 
 CGLM_EXPORT
 void
-glmc_frustum_planes(mat4 m, vec4 dest[6]);
+glmc_frustum_planes(CGLM_CONST mat4 m, vec4 dest[6]);
 
 CGLM_EXPORT
 void
-glmc_frustum_corners(mat4 invMat, vec4 dest[8]);
+glmc_frustum_corners(CGLM_CONST mat4 invMat, vec4 dest[8]);
 
 CGLM_EXPORT
 void
-glmc_frustum_center(vec4 corners[8], vec4 dest);
+glmc_frustum_center(CGLM_CONST vec4 corners[8], vec4 dest);
 
 CGLM_EXPORT
 void
-glmc_frustum_box(vec4 corners[8], mat4 m, vec3 box[2]);
+glmc_frustum_box(CGLM_CONST vec4 corners[8], CGLM_CONST mat4 m, vec3 box[2]);
 
 CGLM_EXPORT
 void
-glmc_frustum_corners_at(vec4  corners[8],
+glmc_frustum_corners_at(CGLM_CONST vec4 corners[8],
                         float splitDist,
                         float farDist,
                         vec4  planeCorners[4]);

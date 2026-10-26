@@ -35,7 +35,7 @@ glm_aabb2d_zero(vec2 aabb[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
+glm_aabb2d_copy(CGLM_CONST vec2 aabb[2], vec2 dest[2]) {
   glm_vec2_copy(aabb[0], dest[0]);
   glm_vec2_copy(aabb[1], dest[1]);
 }
@@ -49,7 +49,7 @@ glm_aabb2d_copy(vec2 aabb[2], vec2 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]) {
+glm_aabb2d_transform(CGLM_CONST vec2 aabb[2], CGLM_CONST mat3 m, vec2 dest[2]) {
   vec2 v[2], xa, xb, ya, yb;
 
   glm_vec2_scale(m[0], aabb[0][0], xa);
@@ -84,7 +84,7 @@ glm_aabb2d_transform(vec2 aabb[2], mat3 m, vec2 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_merge(vec2 aabb1[2], vec2 aabb2[2], vec2 dest[2]) {
+glm_aabb2d_merge(CGLM_CONST vec2 aabb1[2], CGLM_CONST vec2 aabb2[2], vec2 dest[2]) {
   dest[0][0] = glm_min(aabb1[0][0], aabb2[0][0]);
   dest[0][1] = glm_min(aabb1[0][1], aabb2[0][1]);
 
@@ -105,7 +105,7 @@ glm_aabb2d_merge(vec2 aabb1[2], vec2 aabb2[2], vec2 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
+glm_aabb2d_crop(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 cropAabb[2], vec2 dest[2]) {
   dest[0][0] = glm_max(aabb[0][0], cropAabb[0][0]);
   dest[0][1] = glm_max(aabb[0][1], cropAabb[0][1]);
 
@@ -127,9 +127,9 @@ glm_aabb2d_crop(vec2 aabb[2], vec2 cropAabb[2], vec2 dest[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_crop_until(vec2 aabb[2],
-                      vec2 cropAabb[2],
-                      vec2 clampAabb[2],
+glm_aabb2d_crop_until(CGLM_CONST vec2 aabb[2],
+                      CGLM_CONST vec2 cropAabb[2],
+                      CGLM_CONST vec2 clampAabb[2],
                       vec2 dest[2]) {
   glm_aabb2d_crop(aabb, cropAabb, dest);
   glm_aabb2d_merge(clampAabb, dest, dest);
@@ -154,7 +154,7 @@ glm_aabb2d_invalidate(vec2 aabb[2]) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_isvalid(vec2 aabb[2]) {
+glm_aabb2d_isvalid(CGLM_CONST vec2 aabb[2]) {
   return glm_vec2_max(aabb[0]) != FLT_MAX
          && glm_vec2_min(aabb[1]) != -FLT_MAX;
 }
@@ -166,7 +166,7 @@ glm_aabb2d_isvalid(vec2 aabb[2]) {
  */
 CGLM_INLINE
 float
-glm_aabb2d_diag(vec2 aabb[2]) {
+glm_aabb2d_diag(CGLM_CONST vec2 aabb[2]) {
   return glm_vec2_distance(aabb[0], aabb[1]);
 }
 
@@ -178,7 +178,7 @@ glm_aabb2d_diag(vec2 aabb[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_sizev(vec2 aabb[2], vec2 dest) {
+glm_aabb2d_sizev(CGLM_CONST vec2 aabb[2], vec2 dest) {
   glm_vec2_sub(aabb[1], aabb[0], dest); 
 }
 
@@ -189,7 +189,7 @@ glm_aabb2d_sizev(vec2 aabb[2], vec2 dest) {
  */
 CGLM_INLINE
 float
-glm_aabb2d_radius(vec2 aabb[2]) {
+glm_aabb2d_radius(CGLM_CONST vec2 aabb[2]) {
   return glm_aabb2d_diag(aabb) * 0.5f;
 }
 
@@ -201,7 +201,7 @@ glm_aabb2d_radius(vec2 aabb[2]) {
  */
 CGLM_INLINE
 void
-glm_aabb2d_center(vec2 aabb[2], vec2 dest) {
+glm_aabb2d_center(CGLM_CONST vec2 aabb[2], vec2 dest) {
   glm_vec2_center(aabb[0], aabb[1], dest);
 }
 
@@ -213,7 +213,7 @@ glm_aabb2d_center(vec2 aabb[2], vec2 dest) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_aabb(vec2 aabb[2], vec2 other[2]) {
+glm_aabb2d_aabb(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 other[2]) {
   return (aabb[0][0] <= other[1][0] && aabb[1][0] >= other[0][0])
       && (aabb[0][1] <= other[1][1] && aabb[1][1] >= other[0][1]);
 }
@@ -228,7 +228,7 @@ glm_aabb2d_aabb(vec2 aabb[2], vec2 other[2]) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_circle(vec2 aabb[2], vec3 c) {
+glm_aabb2d_circle(CGLM_CONST vec2 aabb[2], const vec3 c) {
   float dmin;
   int   a, b;
 
@@ -249,7 +249,7 @@ glm_aabb2d_circle(vec2 aabb[2], vec3 c) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_point(vec2 aabb[2], vec2 point) {
+glm_aabb2d_point(CGLM_CONST vec2 aabb[2], const vec2 point) {
   return (point[0] >= aabb[0][0] && point[0] <= aabb[1][0])
       && (point[1] >= aabb[0][1] && point[1] <= aabb[1][1]);
 }
@@ -262,7 +262,7 @@ glm_aabb2d_point(vec2 aabb[2], vec2 point) {
  */
 CGLM_INLINE
 bool
-glm_aabb2d_contains(vec2 aabb[2], vec2 other[2]) {
+glm_aabb2d_contains(CGLM_CONST vec2 aabb[2], CGLM_CONST vec2 other[2]) {
   return (aabb[0][0] <= other[0][0] && aabb[1][0] >= other[1][0])
       && (aabb[0][1] <= other[0][1] && aabb[1][1] >= other[1][1]);
 }

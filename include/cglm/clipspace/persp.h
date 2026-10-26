@@ -8,8 +8,8 @@
 /*
  Functions:
    CGLM_INLINE void  glm_persp_decomp_far(mat4 proj, float *farZ)
-   CGLM_INLINE float glm_persp_fovy(mat4 proj)
-   CGLM_INLINE float glm_persp_aspect(mat4 proj)
+   CGLM_INLINE float glm_persp_fovy(CGLM_CONST mat4 proj)
+   CGLM_INLINE float glm_persp_aspect(CGLM_CONST mat4 proj)
    CGLM_INLINE void  glm_persp_sizes(mat4 proj, float fovy, vec4 dest)
  */
 
@@ -30,7 +30,7 @@
  */
 CGLM_INLINE
 float
-glm_persp_fovy(mat4 proj) {
+glm_persp_fovy(CGLM_CONST mat4 proj) {
   return 2.0f * atanf(1.0f / proj[1][1]);
 }
 
@@ -41,7 +41,7 @@ glm_persp_fovy(mat4 proj) {
  */
 CGLM_INLINE
 float
-glm_persp_aspect(mat4 proj) {
+glm_persp_aspect(CGLM_CONST mat4 proj) {
   return proj[1][1] / proj[0][0];
 }
 

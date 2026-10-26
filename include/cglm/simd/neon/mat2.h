@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat2_mul_neon(mat2 m1, mat2 m2, mat2 dest) {
+glm_mat2_mul_neon(CGLM_CONST mat2 m1, CGLM_CONST mat2 m2, mat2 dest) {
   float32x4x2_t a1;
   glmm_128 x0,  x1, x2;
   float32x2_t   dc, ba;

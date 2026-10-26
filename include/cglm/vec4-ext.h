@@ -13,25 +13,25 @@
  Functions:
    CGLM_INLINE void  glm_vec4_broadcast(float val, vec4 d);
    CGLM_INLINE void  glm_vec4_fill(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq_eps(vec4 v, float val);
-   CGLM_INLINE bool  glm_vec4_eq_all(vec4 v);
-   CGLM_INLINE bool  glm_vec4_eqv(vec4 a, vec4 b);
-   CGLM_INLINE bool  glm_vec4_eqv_eps(vec4 a, vec4 b);
-   CGLM_INLINE float glm_vec4_max(vec4 v);
-   CGLM_INLINE float glm_vec4_min(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isnan(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isinf(vec4 v);
-   CGLM_INLINE bool  glm_vec4_isvalid(vec4 v);
-   CGLM_INLINE void  glm_vec4_sign(vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_abs(vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_fract(vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_floor(vec4 v, vec4 dest);
-   CGLM_INLINE float glm_vec4_mods(vec4 v, float s, vec4 dest);
-   CGLM_INLINE float glm_vec4_steps(float edge, vec4 v, vec4 dest);
-   CGLM_INLINE void  glm_vec4_stepr(vec4 edge, float v, vec4 dest);
-   CGLM_INLINE float glm_vec4_hadd(vec4 v);
-   CGLM_INLINE void  glm_vec4_sqrt(vec4 v, vec4 dest);
+   CGLM_INLINE bool  glm_vec4_eq(const vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_eps(const vec4 v, float val);
+   CGLM_INLINE bool  glm_vec4_eq_all(const vec4 v);
+   CGLM_INLINE bool  glm_vec4_eqv(const vec4 a, const vec4 b);
+   CGLM_INLINE bool  glm_vec4_eqv_eps(const vec4 a, const vec4 b);
+   CGLM_INLINE float glm_vec4_max(const vec4 v);
+   CGLM_INLINE float glm_vec4_min(const vec4 v);
+   CGLM_INLINE bool  glm_vec4_isnan(const vec4 v);
+   CGLM_INLINE bool  glm_vec4_isinf(const vec4 v);
+   CGLM_INLINE bool  glm_vec4_isvalid(const vec4 v);
+   CGLM_INLINE void  glm_vec4_sign(const vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_abs(const vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_fract(const vec4 v, vec4 dest);
+   CGLM_INLINE void  glm_vec4_floor(const vec4 v, vec4 dest);
+   CGLM_INLINE float glm_vec4_mods(const vec4 v, float s, vec4 dest);
+   CGLM_INLINE float glm_vec4_steps(float edge, const vec4 x, vec4 dest);
+   CGLM_INLINE void  glm_vec4_stepr(const vec4 edge, float x, vec4 dest);
+   CGLM_INLINE float glm_vec4_hadd(const vec4 v);
+   CGLM_INLINE void  glm_vec4_sqrt(const vec4 v, vec4 dest);
  */
 
 #ifndef cglm_vec4_ext_h
@@ -84,7 +84,7 @@ glm_vec4_fill(vec4 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eq(vec4 v, float val) {
+glm_vec4_eq(const vec4 v, float val) {
   return v[0] == val
          && v[0] == v[1]
          && v[0] == v[2]
@@ -99,7 +99,7 @@ glm_vec4_eq(vec4 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eq_eps(vec4 v, float val) {
+glm_vec4_eq_eps(const vec4 v, float val) {
   return fabsf(v[0] - val) <= GLM_FLT_EPSILON
          && fabsf(v[1] - val) <= GLM_FLT_EPSILON
          && fabsf(v[2] - val) <= GLM_FLT_EPSILON
@@ -113,7 +113,7 @@ glm_vec4_eq_eps(vec4 v, float val) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eq_all(vec4 v) {
+glm_vec4_eq_all(const vec4 v) {
   return glm_vec4_eq_eps(v, v[0]);
 }
 
@@ -125,7 +125,7 @@ glm_vec4_eq_all(vec4 v) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eqv(vec4 a, vec4 b) {
+glm_vec4_eqv(const vec4 a, const vec4 b) {
   return a[0] == b[0]
          && a[1] == b[1]
          && a[2] == b[2]
@@ -140,7 +140,7 @@ glm_vec4_eqv(vec4 a, vec4 b) {
  */
 CGLM_INLINE
 bool
-glm_vec4_eqv_eps(vec4 a, vec4 b) {
+glm_vec4_eqv_eps(const vec4 a, const vec4 b) {
   return fabsf(a[0] - b[0]) <= GLM_FLT_EPSILON
          && fabsf(a[1] - b[1]) <= GLM_FLT_EPSILON
          && fabsf(a[2] - b[2]) <= GLM_FLT_EPSILON
@@ -154,7 +154,7 @@ glm_vec4_eqv_eps(vec4 a, vec4 b) {
  */
 CGLM_INLINE
 float
-glm_vec4_max(vec4 v) {
+glm_vec4_max(const vec4 v) {
   float max;
 
   max = glm_vec3_max(v);
@@ -171,7 +171,7 @@ glm_vec4_max(vec4 v) {
  */
 CGLM_INLINE
 float
-glm_vec4_min(vec4 v) {
+glm_vec4_min(const vec4 v) {
   float min;
 
   min = glm_vec3_min(v);
@@ -189,7 +189,7 @@ glm_vec4_min(vec4 v) {
  */
 CGLM_INLINE
 bool
-glm_vec4_isnan(vec4 v) {
+glm_vec4_isnan(const vec4 v) {
 #ifndef CGLM_FAST_MATH
   return isnan(v[0]) || isnan(v[1]) || isnan(v[2]) || isnan(v[3]);
 #else
@@ -206,7 +206,7 @@ glm_vec4_isnan(vec4 v) {
  */
 CGLM_INLINE
 bool
-glm_vec4_isinf(vec4 v) {
+glm_vec4_isinf(const vec4 v) {
 #ifndef CGLM_FAST_MATH
   return isinf(v[0]) || isinf(v[1]) || isinf(v[2]) || isinf(v[3]);
 #else
@@ -223,7 +223,7 @@ glm_vec4_isinf(vec4 v) {
  */
 CGLM_INLINE
 bool
-glm_vec4_isvalid(vec4 v) {
+glm_vec4_isvalid(const vec4 v) {
   return !glm_vec4_isnan(v) && !glm_vec4_isinf(v);
 }
 
@@ -236,7 +236,7 @@ glm_vec4_isvalid(vec4 v) {
  */
 CGLM_INLINE
 void
-glm_vec4_sign(vec4 v, vec4 dest) {
+glm_vec4_sign(const vec4 v, vec4 dest) {
 #if defined( __SSE__ ) || defined( __SSE2__ )
   __m128 x0, x1, x2, x3, x4;
 
@@ -264,7 +264,7 @@ glm_vec4_sign(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_abs(vec4 v, vec4 dest) {
+glm_vec4_abs(const vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest, glmm_abs(glmm_load(v)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -287,7 +287,7 @@ glm_vec4_abs(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_fract(vec4 v, vec4 dest) {
+glm_vec4_fract(const vec4 v, vec4 dest) {
   dest[0] = fminf(v[0] - floorf(v[0]), 0.999999940395355224609375f);
   dest[1] = fminf(v[1] - floorf(v[1]), 0.999999940395355224609375f);
   dest[2] = fminf(v[2] - floorf(v[2]), 0.999999940395355224609375f);
@@ -302,7 +302,7 @@ glm_vec4_fract(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_floor(vec4 v, vec4 dest) {
+glm_vec4_floor(const vec4 v, vec4 dest) {
   dest[0] = floorf(v[0]);
   dest[1] = floorf(v[1]);
   dest[2] = floorf(v[2]);
@@ -318,7 +318,7 @@ glm_vec4_floor(vec4 v, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_mods(vec4 v, float s, vec4 dest) {
+glm_vec4_mods(const vec4 v, float s, vec4 dest) {
   dest[0] = fmodf(v[0], s);
   dest[1] = fmodf(v[1], s);
   dest[2] = fmodf(v[2], s);
@@ -335,7 +335,7 @@ glm_vec4_mods(vec4 v, float s, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_steps(float edge, vec4 x, vec4 dest) {
+glm_vec4_steps(float edge, const vec4 x, vec4 dest) {
   dest[0] = glm_step(edge, x[0]);
   dest[1] = glm_step(edge, x[1]);
   dest[2] = glm_step(edge, x[2]);
@@ -352,7 +352,7 @@ glm_vec4_steps(float edge, vec4 x, vec4 dest) {
  */
 CGLM_INLINE
 void
-glm_vec4_stepr(vec4 edge, float x, vec4 dest) {
+glm_vec4_stepr(const vec4 edge, float x, vec4 dest) {
   dest[0] = glm_step(edge[0], x);
   dest[1] = glm_step(edge[1], x);
   dest[2] = glm_step(edge[2], x);
@@ -368,7 +368,7 @@ glm_vec4_stepr(vec4 edge, float x, vec4 dest) {
  */
 CGLM_INLINE
 float
-glm_vec4_hadd(vec4 v) {
+glm_vec4_hadd(const vec4 v) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   return glmm_hadd(glmm_load(v));
 #elif defined( __SSE__ ) || defined( __SSE2__ )
@@ -386,7 +386,7 @@ glm_vec4_hadd(vec4 v) {
  */
 CGLM_INLINE
 void
-glm_vec4_sqrt(vec4 v, vec4 dest) {
+glm_vec4_sqrt(const vec4 v, vec4 dest) {
 #if defined(__wasm__) && defined(__wasm_simd128__)
   glmm_store(dest, wasm_f32x4_sqrt(glmm_load(v)));
 #elif defined( __SSE__ ) || defined( __SSE2__ )

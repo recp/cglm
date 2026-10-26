@@ -10,7 +10,7 @@
 
 CGLM_EXPORT
 void
-glmc_mat3_copy(mat3 mat, mat3 dest) {
+glmc_mat3_copy(CGLM_CONST mat3 mat, mat3 dest) {
   glm_mat3_copy(mat, dest);
 }
 
@@ -34,13 +34,13 @@ glmc_mat3_identity_array(mat3 * __restrict mat, size_t count) {
 
 CGLM_EXPORT
 void
-glmc_mat3_mul(mat3 m1, mat3 m2, mat3 dest) {
+glmc_mat3_mul(CGLM_CONST mat3 m1, CGLM_CONST mat3 m2, mat3 dest) {
   glm_mat3_mul(m1, m2, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_mat3_transpose_to(mat3 m, mat3 dest) {
+glmc_mat3_transpose_to(CGLM_CONST mat3 m, mat3 dest) {
   glm_mat3_transpose_to(m, dest);
 }
 
@@ -52,19 +52,19 @@ glmc_mat3_transpose(mat3 m) {
 
 CGLM_EXPORT
 void
-glmc_mat3_mulv(mat3 m, vec3 v, vec3 dest) {
+glmc_mat3_mulv(CGLM_CONST mat3 m, const vec3 v, vec3 dest) {
   glm_mat3_mulv(m, v, dest);
 }
 
 CGLM_EXPORT
 float
-glmc_mat3_trace(mat3 m) {
+glmc_mat3_trace(CGLM_CONST mat3 m) {
   return glm_mat3_trace(m);
 }
 
 CGLM_EXPORT
 void
-glmc_mat3_quat(mat3 m, versor dest) {
+glmc_mat3_quat(CGLM_CONST mat3 m, versor dest) {
   glm_mat3_quat(m, dest);
 }
 
@@ -76,13 +76,13 @@ glmc_mat3_scale(mat3 m, float s) {
 
 CGLM_EXPORT
 float
-glmc_mat3_det(mat3 mat) {
+glmc_mat3_det(CGLM_CONST mat3 mat) {
   return glm_mat3_det(mat);
 }
 
 CGLM_EXPORT
 void
-glmc_mat3_inv(mat3 mat, mat3 dest) {
+glmc_mat3_inv(CGLM_CONST mat3 mat, mat3 dest) {
   glm_mat3_inv(mat, dest);
 }
 
@@ -100,7 +100,7 @@ glmc_mat3_swap_row(mat3 mat, int row1, int row2) {
 
 CGLM_EXPORT
 float
-glmc_mat3_rmc(vec3 r, mat3 m, vec3 c) {
+glmc_mat3_rmc(const vec3 r, CGLM_CONST mat3 m, const vec3 c) {
   return glm_mat3_rmc(r, m, c);
 }
 

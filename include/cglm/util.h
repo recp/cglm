@@ -360,8 +360,8 @@ glm_percentc(float from, float to, float current) {
 /*!
 * @brief swap two float values
 *
-* @param[in]   a float value 1 (pointer)
-* @param[in]   b float value 2 (pointer)
+* @param[in, out]   a float value 1 (pointer)
+* @param[in, out]   b float value 2 (pointer)
 */
 CGLM_INLINE
 void

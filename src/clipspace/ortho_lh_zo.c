@@ -22,19 +22,19 @@ glmc_ortho_lh_zo(float left,    float right,
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_lh_zo(vec3 box[2], mat4 dest) {
+glmc_ortho_aabb_lh_zo(CGLM_CONST vec3 box[2], mat4 dest) {
   glm_ortho_aabb_lh_zo(box, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_p_lh_zo(vec3 box[2], float padding, mat4 dest) {
+glmc_ortho_aabb_p_lh_zo(CGLM_CONST vec3 box[2], float padding, mat4 dest) {
   glm_ortho_aabb_p_lh_zo(box, padding, dest);
 }
 
 CGLM_EXPORT
 void
-glmc_ortho_aabb_pz_lh_zo(vec3 box[2], float padding, mat4 dest) {
+glmc_ortho_aabb_pz_lh_zo(CGLM_CONST vec3 box[2], float padding, mat4 dest) {
   glm_ortho_aabb_pz_lh_zo(box, padding, dest);
 }
 

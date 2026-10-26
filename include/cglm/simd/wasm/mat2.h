@@ -14,7 +14,7 @@
 
 CGLM_INLINE
 void
-glm_mat2_mul_wasm(mat2 m1, mat2 m2, mat2 dest) {
+glm_mat2_mul_wasm(CGLM_CONST mat2 m1, CGLM_CONST mat2 m2, mat2 dest) {
   glmm_128 x0, x1, x2, x3, x4;
 
   x1 = glmm_load(m1[0]); /* d c b a */
@@ -40,7 +40,7 @@ glm_mat2_mul_wasm(mat2 m1, mat2 m2, mat2 dest) {
 
 CGLM_INLINE
 void
-glm_mat2_transp_wasm(mat2 m, mat2 dest) {
+glm_mat2_transp_wasm(CGLM_CONST mat2 m, mat2 dest) {
   /* d c b a */
   /* d b c a */
   glmm_store(dest[0], glmm_shuff1(glmm_load(m[0]), 3, 1, 2, 0));
