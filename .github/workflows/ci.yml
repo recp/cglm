@@ -15,20 +15,13 @@ jobs:
       matrix:
         include:
           # x86/x64 builds
-          - { os: macos-13, simd: none }
-          - { os: macos-13, simd: sse }
-          - { os: macos-13, simd: sse2 }
-          - { os: macos-13, simd: sse3 }
-          - { os: macos-13, simd: sse4 }
-          - { os: macos-13, simd: avx }
-          - { os: macos-13, simd: avx2 }
-          - { os: macos-14, simd: none }
-          - { os: macos-14, simd: sse }
-          - { os: macos-14, simd: sse2 }
-          - { os: macos-14, simd: sse3 }
-          - { os: macos-14, simd: sse4 }
-          - { os: macos-14, simd: avx }
-          - { os: macos-14, simd: avx2 }
+          - { os: macos-26-intel, simd: none }
+          - { os: macos-26-intel, simd: sse }
+          - { os: macos-26-intel, simd: sse2 }
+          - { os: macos-26-intel, simd: sse3 }
+          - { os: macos-26-intel, simd: sse4 }
+          - { os: macos-26-intel, simd: avx }
+          - { os: macos-26-intel, simd: avx2 }
           - { os: ubuntu-22.04, simd: none }
           - { os: ubuntu-22.04, simd: sse }
           - { os: ubuntu-22.04, simd: sse2 }
@@ -44,17 +37,18 @@ jobs:
           - { os: ubuntu-24.04, simd: avx }
           - { os: ubuntu-24.04, simd: avx2 }
           # ARM64 builds
-          - { os: ubuntu-latest-arm64, simd: neon }
+          - { os: macos-latest, simd: neon }
+          - { os: ubuntu-24.04-arm, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Install Autotools on macOS
       if: runner.os == 'macOS'
-      run: brew upgrade && brew install autoconf automake libtool
+      run: brew install autoconf automake libtool
 
     - name: Install Autotools on Ubuntu
-      if: matrix.os == 'ubuntu-22.04' || matrix.os == 'ubuntu-24.04'
+      if: runner.os == 'Linux'
       run: sudo apt-get install -y autoconf automake libtool
 
     - name: Set SIMD flags
@@ -91,7 +85,7 @@ jobs:
 
   build_cmake_ios:
     name: CMake / iOS
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
@@ -112,19 +106,19 @@ jobs:
 
   build_cmake_ubuntu:
     name: CMake / ${{ matrix.target.os }} / ${{ matrix.target.cc }} / ${{ matrix.target.arch }} / ${{ matrix.target.simd }}
-    runs-on: ${{ matrix.target.arch == 'arm64' && 'ubuntu-latest-arm64' || matrix.target.os }}
+    runs-on: ${{ matrix.target.os }}
     strategy:
       fail-fast: false
       matrix:
         target:
           # GCC 11 builds
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: none }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse2 }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse3 }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: sse4 }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx }
-          - { os: ubuntu-20.04, cc: gcc-11, arch: x64, simd: avx2 }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: gcc-11, arch: x64, simd: avx2 }
           # GCC 12 builds
           - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: none }
           - { os: ubuntu-22.04, cc: gcc-12, arch: x64, simd: sse }
@@ -142,13 +136,13 @@ jobs:
           - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx }
           - { os: ubuntu-24.04, cc: gcc-13, arch: x64, simd: avx2 }
           # Clang 12 builds
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: none }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse2 }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse3 }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: sse4 }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx }
-          - { os: ubuntu-20.04, cc: clang-12, arch: x64, simd: avx2 }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: none }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: sse }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: sse2 }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: sse3 }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: sse4 }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: avx }
+          - { os: ubuntu-22.04, cc: clang-12, arch: x64, simd: avx2 }
           # Clang 15 builds
           - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: none }
           - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: sse }
@@ -158,63 +152,61 @@ jobs:
           - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx }
           - { os: ubuntu-22.04, cc: clang-15, arch: x64, simd: avx2 }
           # ARM64 builds
-          - { os: ubuntu-latest, cc: gcc-12, arch: arm64, simd: neon }
-          - { os: ubuntu-latest, cc: gcc-13, arch: arm64, simd: neon }
+          - { os: ubuntu-24.04-arm, cc: gcc-12, arch: arm64, simd: neon }
+          - { os: ubuntu-24.04-arm, cc: gcc-13, arch: arm64, simd: neon }
           # ARMv7 builds
-          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: neon }
-          - { os: ubuntu-latest-arm64, cc: gcc-12, arch: armv7, simd: none }
+          - { os: ubuntu-24.04, cc: arm-linux-gnueabihf-gcc-12, arch: armv7, simd: neon }
+          - { os: ubuntu-24.04, cc: arm-linux-gnueabihf-gcc-12, arch: armv7, simd: none }
 
     steps:
     - uses: actions/checkout@v4
 
-    - name: Add Ubuntu Toolchain PPA
-      if: matrix.target.os == 'ubuntu-20.04'
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y software-properties-common
-        sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-        sudo apt-get update
-
     - name: Install Compiler and Ninja
       run: |
-        sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
+        sudo apt-get update
+        if [ "${{ matrix.target.arch }}" = "armv7" ]; then
+          sudo apt-get install -y gcc-12-arm-linux-gnueabihf qemu-user ninja-build
+        else
+          sudo apt-get install -y ${{ matrix.target.cc }} ninja-build
+        fi
 
     - name: Set SIMD flags
       run: |
-        if [ "${{ matrix.simd }}" == "none" ]; then
+        if [ "${{ matrix.target.simd }}" == "none" ]; then
           export CFLAGS=""
-        elif [ "${{ matrix.simd }}" == "sse" ]; then
+        elif [ "${{ matrix.target.simd }}" == "sse" ]; then
           export CFLAGS="-msse"
-        elif [ "${{ matrix.simd }}" == "sse2" ]; then
+        elif [ "${{ matrix.target.simd }}" == "sse2" ]; then
           export CFLAGS="-msse2"
-        elif [ "${{ matrix.simd }}" == "sse3" ]; then
+        elif [ "${{ matrix.target.simd }}" == "sse3" ]; then
           export CFLAGS="-msse3"
-        elif [ "${{ matrix.simd }}" == "sse4" ]; then
+        elif [ "${{ matrix.target.simd }}" == "sse4" ]; then
           export CFLAGS="-msse4"
-        elif [ "${{ matrix.simd }}" == "avx" ]; then
+        elif [ "${{ matrix.target.simd }}" == "avx" ]; then
           export CFLAGS="-mavx"
-        elif [ "${{ matrix.simd }}" == "avx2" ]; then
+        elif [ "${{ matrix.target.simd }}" == "avx2" ]; then
           export CFLAGS="-mavx2"
-        elif [ "${{ matrix.simd }}" == "neon" ]; then
+        elif [ "${{ matrix.target.simd }}" == "neon" ]; then
           export CFLAGS="-mfpu=neon"
         fi
 
     - name: Configure CMake
       run: |
         if [ "${{ matrix.target.arch }}" == "armv7" ]; then
-          # Build for ARMv7
-          neon_flags=""
-          if [ "${{ matrix.simd }}" == "neon" ]; then
+          # cross-compile ARMv7 and run its tests with QEMU
+          neon_flags="-mfpu=vfpv3-d16 -mfloat-abi=hard"
+          if [ "${{ matrix.target.simd }}" == "neon" ]; then
             neon_flags="-mfpu=neon -mfloat-abi=hard"
           fi
           cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=arm \
             -DCMAKE_C_COMPILER=${{ matrix.target.cc }} \
-            -DCMAKE_C_FLAGS="$CFLAGS -m32 -march=armv7-a ${neon_flags}" \
+            -DCMAKE_C_FLAGS="-march=armv7-a ${neon_flags}" \
             -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
         elif [ "${{ matrix.target.arch }}" == "arm64" ]; then
           # Build for ARM64 (AArch64)
           neon_flags=""
-          if [ "${{ matrix.simd }}" == "neon" ]; then
+          if [ "${{ matrix.target.simd }}" == "neon" ]; then
             neon_flags="+simd" # Enable SIMD/NEON features on ARM64
           else
             neon_flags="+nosimd" # Explicitly disable SIMD/NEON
@@ -236,7 +228,12 @@ jobs:
 
     - name: Test
       working-directory: build
-      run: ./tests
+      run: |
+        if [ "${{ matrix.target.arch }}" = "armv7" ]; then
+          qemu-arm -L /usr/arm-linux-gnueabihf ./tests
+        else
+          ./tests
+        fi
 
   build_cmake_macos:
     name: CMake / ${{ matrix.os }}
@@ -244,14 +241,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14]
+        os: [macos-26-intel, macos-latest]
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Install Ninja
       if: runner.os == 'macOS'
-      run: brew upgrade && brew install ninja
+      run: brew install ninja
 
     - name: Configure CMake
       run: |
@@ -277,20 +274,13 @@ jobs:
       matrix:
         include:
           # x86/x64 builds
-          - { os: macos-13, simd: none }
-          - { os: macos-13, simd: sse }
-          - { os: macos-13, simd: sse2 }
-          - { os: macos-13, simd: sse3 }
-          - { os: macos-13, simd: sse4 }
-          - { os: macos-13, simd: avx }
-          - { os: macos-13, simd: avx2 }
-          - { os: macos-14, simd: none }
-          - { os: macos-14, simd: sse }
-          - { os: macos-14, simd: sse2 }
-          - { os: macos-14, simd: sse3 }
-          - { os: macos-14, simd: sse4 }
-          - { os: macos-14, simd: avx }
-          - { os: macos-14, simd: avx2 }
+          - { os: macos-26-intel, simd: none }
+          - { os: macos-26-intel, simd: sse }
+          - { os: macos-26-intel, simd: sse2 }
+          - { os: macos-26-intel, simd: sse3 }
+          - { os: macos-26-intel, simd: sse4 }
+          - { os: macos-26-intel, simd: avx }
+          - { os: macos-26-intel, simd: avx2 }
           - { os: windows-2022, simd: none }
           - { os: windows-2022, simd: sse }
           - { os: windows-2022, simd: sse2 }
@@ -299,14 +289,14 @@ jobs:
           - { os: windows-2022, simd: avx }
           - { os: windows-2022, simd: avx2 }
           # ARM64 builds
-          - { os: macos-14-arm64, simd: neon }
+          - { os: macos-latest, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Install Ninja on macOS
       if: runner.os == 'macOS'
-      run: brew upgrade && brew install ninja
+      run: brew install ninja
 
     - name: Set SIMD flags (Windows)
       if: runner.os == 'Windows'
@@ -380,19 +370,19 @@ jobs:
 
   build_meson:
     name: Meson / ${{ matrix.os }} / ${{ matrix.simd }}
-    runs-on: ${{ contains(matrix.os, 'arm64') && 'ubuntu-latest-arm64' || matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         include:
           # x86/x64 builds
-          - { os: macos-14, simd: none }
-          - { os: macos-14, simd: sse }
-          - { os: macos-14, simd: sse2 }
-          - { os: macos-14, simd: sse3 }
-          - { os: macos-14, simd: sse4 }
-          - { os: macos-14, simd: avx }
-          - { os: macos-14, simd: avx2 }
+          - { os: macos-26-intel, simd: none }
+          - { os: macos-26-intel, simd: sse }
+          - { os: macos-26-intel, simd: sse2 }
+          - { os: macos-26-intel, simd: sse3 }
+          - { os: macos-26-intel, simd: sse4 }
+          - { os: macos-26-intel, simd: avx }
+          - { os: macos-26-intel, simd: avx2 }
           - { os: ubuntu-22.04, simd: none }
           - { os: ubuntu-22.04, simd: sse }
           - { os: ubuntu-22.04, simd: sse2 }
@@ -415,7 +405,8 @@ jobs:
           - { os: windows-2022, simd: avx }
           - { os: windows-2022, simd: avx2 }
           # ARM64 builds
-          - { os: ubuntu-latest-arm64, simd: neon }
+          - { os: macos-latest, simd: neon }
+          - { os: ubuntu-24.04-arm, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
@@ -554,12 +545,12 @@ jobs:
       run: sphinx-build -W --keep-going source build
 
   build_swift:
-    name: Swift ${{ matrix.swift }} / ${{ matrix.os }}
+    name: Swift / ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, macos-14, ubuntu-22.04]
+        os: [macos-26-intel, macos-latest, ubuntu-22.04]
 
     # This has no test yet.
     steps:
@@ -575,71 +566,62 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          # Linux ARM builds
-          - os: ubuntu-latest-arm64
-            arch: arm64
-            simd: neon
-          - os: ubuntu-latest-arm64
-            arch: armv7
-            simd: neon
-          - os: ubuntu-latest-arm64
-            arch: armv7
-            simd: none
-          # Windows ARM builds
-          - os: windows-latest-arm64
-            arch: arm64
-            simd: neon
-          - os: windows-latest-arm64
-            arch: arm
-            simd: neon
-          - os: windows-latest-arm64
-            arch: arm
-            simd: none
+          # native ARM64 and cross-compiled ARMv7 builds
+          - { os: ubuntu-24.04-arm, arch: arm64, simd: neon }
+          - { os: ubuntu-24.04-arm, arch: armv7, simd: neon }
+          - { os: ubuntu-24.04-arm, arch: armv7, simd: none }
+          # Windows ARM builds are cross-compiled on x64 runners
+          - { os: windows-2022, arch: arm64, simd: neon }
+          - { os: windows-2022, arch: arm, simd: neon }
 
     steps:
     - uses: actions/checkout@v4
+
+    - name: Install Linux build tools
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y ninja-build
+        if [ "${{ matrix.arch }}" = "armv7" ]; then
+          sudo apt-get install -y gcc-arm-linux-gnueabihf qemu-user
+        fi
 
     - name: Configure CMake (Windows)
       if: runner.os == 'Windows'
       shell: pwsh
       run: |
-        $flags = ""
-        if ("${{ matrix.arch }}" -eq "arm") {
-          $flags = "-m32 -march=armv7-a"
-          if ("${{ matrix.simd }}" -eq "neon") {
-            $flags += " -mfpu=neon"
-          }
-        }
-        elseif ("${{ matrix.simd }}" -eq "neon") {
-          $flags = "-march=armv8-a+simd"
-        }
-        
         cmake -B build -G "Visual Studio 17 2022" -A ${{ matrix.arch == 'arm64' && 'ARM64' || 'ARM' }} `
           -DCMAKE_BUILD_TYPE=Release `
-          -DCMAKE_C_FLAGS="$flags" `
           -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
 
     - name: Configure CMake (Unix)
-      if: runner.os != 'Windows'
+      if: runner.os == 'Linux'
       shell: bash
       run: |
-        flags=""
         if [ "${{ matrix.arch }}" = "armv7" ]; then
-          flags="-m32 -march=armv7-a"
+          flags="-march=armv7-a -mfpu=vfpv3-d16 -mfloat-abi=hard"
           if [ "${{ matrix.simd }}" = "neon" ]; then
-            flags="$flags -mfpu=neon -mfloat-abi=hard"
+            flags="-march=armv7-a -mfpu=neon -mfloat-abi=hard"
           fi
-        elif [ "${{ matrix.simd }}" = "neon" ]; then
-          flags="-march=armv8-a+simd"
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_SYSTEM_NAME=Linux -DCMAKE_SYSTEM_PROCESSOR=arm \
+            -DCMAKE_C_COMPILER=arm-linux-gnueabihf-gcc \
+            -DCMAKE_C_FLAGS="$flags" \
+            -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
+        else
+          cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
+            -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
         fi
-        
-        cmake -B build -GNinja -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_C_FLAGS="$flags" \
-          -DCGLM_STATIC=ON -DCGLM_USE_TEST=ON
 
     - name: Build
-      run: cmake --build build
+      run: cmake --build build --config Release
 
-    - name: Test
+    - name: Test (Linux)
+      if: runner.os == 'Linux'
       working-directory: build
-      run: ./tests
+      run: |
+        if [ "${{ matrix.arch }}" = "armv7" ]; then
+          qemu-arm -L /usr/arm-linux-gnueabihf ./tests
+        else
+          ./tests
+        fi

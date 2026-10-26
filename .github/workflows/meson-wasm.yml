@@ -29,9 +29,9 @@ jobs:
       run: |
         cat << EOF > ${{github.workspace}}/meson_cross_emsdk.txt
         [binaries]
-        c = '`which emcc`'
-        cpp = '`which em++`'
-        ar = '`which emar`'
+        c = '$(command -v emcc)'
+        cpp = '$(command -v em++)'
+        ar = '$(command -v emar)'
         
         [built-in options]
         
@@ -50,7 +50,7 @@ jobs:
         EOF
         cat ${{github.workspace}}/meson_cross_emsdk.txt
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
     
     - name: Install meson
       run: |
