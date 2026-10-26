@@ -241,6 +241,15 @@ TEST_IMPL(GLM_PREFIX, quat_normalize_to) {
   GLM(quat_normalize_to)(v1, v2);
   ASSERTIFY(test_assert_quat_eq_identity(v2))
 
+  /* tiny nonzero inputs must remain rotations on armv7 neon. */
+  v1[2] = 1e-20f;
+  GLM(quat_normalize_to)(v1, v2);
+  ASSERT(test_eq(v2[0], 0.0f))
+  ASSERT(test_eq(v2[1], 0.0f))
+  ASSERT(test_eq(v2[2], 1.0f))
+  ASSERT(test_eq(v2[3], 0.0f))
+  ASSERT(v1[2] == 1e-20f)
+
   TEST_SUCCESS
 }
 
@@ -268,6 +277,15 @@ TEST_IMPL(GLM_PREFIX, quat_normalize) {
   glm_vec4_zero(v1);
   GLM(quat_normalize)(v1);
   ASSERTIFY(test_assert_quat_eq_identity(v1))
+
+  /* cover the in-place path for the same tiny rotation. */
+  glm_vec4_zero(v1);
+  v1[2] = 1e-20f;
+  GLM(quat_normalize)(v1);
+  ASSERT(test_eq(v1[0], 0.0f))
+  ASSERT(test_eq(v1[1], 0.0f))
+  ASSERT(test_eq(v1[2], 1.0f))
+  ASSERT(test_eq(v1[3], 0.0f))
 
   TEST_SUCCESS
 }

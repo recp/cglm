@@ -277,6 +277,13 @@ glm_quat_normalize_to(const versor q, versor dest) {
 
   dot = glm_vec4_norm2(q);
 
+#  if defined(CGLM_NEON_FP) && !CGLM_ARM64
+  if (dot == 0.0f) {
+    /* armv7 neon flushes subnormal squared norms to zero */
+    dot = (q[0] * q[0] + q[1] * q[1]) + (q[2] * q[2] + q[3] * q[3]);
+  }
+#  endif
+
   if (dot <= 0.0f) {
     glm_quat_identity(dest);
     return;
