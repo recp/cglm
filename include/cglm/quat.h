@@ -482,7 +482,7 @@ CGLM_INLINE
 void
 glm_quat_mat4(const versor q, mat4 dest) {
   CGLM_ALIGN(16) versor p;
-  float w, x, y, z,
+  float x, y, z,
         xx, yy, zz,
         xy, yz, xz,
         wx, wy, wz;
@@ -492,11 +492,12 @@ glm_quat_mat4(const versor q, mat4 dest) {
   x = p[0];
   y = p[1];
   z = p[2];
-  w = p[3];
 
-  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
-  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
-  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+  glm_vec4_scale(p, 2.0f, p);
+
+  xx = p[0] * x;   xy = p[0] * y;   wx = p[3] * x;
+  yy = p[1] * y;   yz = p[1] * z;   wy = p[3] * y;
+  zz = p[2] * z;   xz = p[0] * z;   wz = p[3] * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -529,7 +530,7 @@ CGLM_INLINE
 void
 glm_quat_mat4t(const versor q, mat4 dest) {
   CGLM_ALIGN(16) versor p;
-  float w, x, y, z,
+  float x, y, z,
         xx, yy, zz,
         xy, yz, xz,
         wx, wy, wz;
@@ -539,11 +540,12 @@ glm_quat_mat4t(const versor q, mat4 dest) {
   x = p[0];
   y = p[1];
   z = p[2];
-  w = p[3];
 
-  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
-  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
-  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+  glm_vec4_scale(p, 2.0f, p);
+
+  xx = p[0] * x;   xy = p[0] * y;   wx = p[3] * x;
+  yy = p[1] * y;   yz = p[1] * z;   wy = p[3] * y;
+  zz = p[2] * z;   xz = p[0] * z;   wz = p[3] * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -576,7 +578,7 @@ CGLM_INLINE
 void
 glm_quat_mat3(const versor q, mat3 dest) {
   CGLM_ALIGN(16) versor p;
-  float w, x, y, z,
+  float x, y, z,
         xx, yy, zz,
         xy, yz, xz,
         wx, wy, wz;
@@ -586,11 +588,12 @@ glm_quat_mat3(const versor q, mat3 dest) {
   x = p[0];
   y = p[1];
   z = p[2];
-  w = p[3];
 
-  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
-  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
-  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+  glm_vec4_scale(p, 2.0f, p);
+
+  xx = p[0] * x;   xy = p[0] * y;   wx = p[3] * x;
+  yy = p[1] * y;   yz = p[1] * z;   wy = p[3] * y;
+  zz = p[2] * z;   xz = p[0] * z;   wz = p[3] * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
@@ -615,7 +618,7 @@ CGLM_INLINE
 void
 glm_quat_mat3t(const versor q, mat3 dest) {
   CGLM_ALIGN(16) versor p;
-  float w, x, y, z,
+  float x, y, z,
         xx, yy, zz,
         xy, yz, xz,
         wx, wy, wz;
@@ -625,11 +628,12 @@ glm_quat_mat3t(const versor q, mat3 dest) {
   x = p[0];
   y = p[1];
   z = p[2];
-  w = p[3];
 
-  xx = 2.0f * x * x;   xy = 2.0f * x * y;   wx = 2.0f * w * x;
-  yy = 2.0f * y * y;   yz = 2.0f * y * z;   wy = 2.0f * w * y;
-  zz = 2.0f * z * z;   xz = 2.0f * x * z;   wz = 2.0f * w * z;
+  glm_vec4_scale(p, 2.0f, p);
+
+  xx = p[0] * x;   xy = p[0] * y;   wx = p[3] * x;
+  yy = p[1] * y;   yz = p[1] * z;   wy = p[3] * y;
+  zz = p[2] * z;   xz = p[0] * z;   wz = p[3] * z;
 
   dest[0][0] = 1.0f - yy - zz;
   dest[1][1] = 1.0f - xx - zz;
